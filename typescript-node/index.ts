@@ -1,4 +1,3 @@
-import { RequestListener } from 'http'
 import fetch from 'node-fetch'
 import {HttpError, MiroApi, MiroEndpoints} from './api'
 
@@ -27,6 +26,8 @@ interface TokenResponse {
     refresh_token?: string,
     token_type: 'bearer'
 }
+
+type MiddlewareArgs = [req: {url?: string|undefined, headers: {host?: string|undefined}}, ...rest: any]
 
 export default class MiroAuth {
     clientId: string;
@@ -57,12 +58,13 @@ export default class MiroAuth {
         return authorizeUrl.toString()
     }
 
-    middleware(middleware: RequestListener): RequestListener {
-        return async (req, res) => {
+    middleware(middleware: (...args: MiddlewareArgs) => void) {
+        return async (...args: MiddlewareArgs) => {
             try {
-                await this.exchangeCodeForAccessToken(`http://${req.headers['host']}${req.url}`)
+                const url = `http://${args[0].headers.host}${args[0].url}`
+                await this.exchangeCodeForAccessToken(url)
             } finally {
-                return middleware(req, res)
+                return middleware(...args)
             }
         }
     }
@@ -73,15 +75,11 @@ export default class MiroAuth {
         tokenUrl.search = new URLSearchParams(params).toString()
         const response = await fetch(tokenUrl.toString(), {method: 'post'})
 
-        console.log(response)
-
         if (!response.ok) {
             throw new HttpError(response, {}, response.status)
         }
 
         const body: TokenResponse = await response.json()
-
-        console.log(response.body)
 
         this.storage.write({
             accessToken: body.access_token,
@@ -97,7 +95,6 @@ export default class MiroAuth {
         let code = urlOrCode
         try {
             const url = new URL(urlOrCode)
-            console.log(url)
             code = url.searchParams.get('code') || ''
         } catch (err) {
             // can't parse url, assume code is passed as argument
