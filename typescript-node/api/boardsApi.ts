@@ -40,7 +40,7 @@ export interface BoardsApiMethods {
     updateBoard(boardId: string, boardChanges: BoardChanges, ): Promise<{ response: Response; body: BoardWithLinks;  }>
 }
 
-export function BoardsApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardsApiMethods {
+export function BoardsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardsApiMethods {
     return {
         /**
          * Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a><br/>
@@ -78,7 +78,7 @@ const options = {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(boardChanges, "BoardChanges"))
             }
@@ -130,7 +130,7 @@ const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(boardChanges, "BoardChanges"))
             }
@@ -188,7 +188,7 @@ const options = {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -268,7 +268,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -325,7 +325,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -388,7 +388,7 @@ const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(boardChanges, "BoardChanges"))
             }

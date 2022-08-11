@@ -4,7 +4,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "pregenerate": "rm -rf tmp",
     "generate": "openapi-generator-cli generate -i '../miro-openapi-files/openapi/merged.json' -o typescript-node -g typescript-node -t template -p npmName=miro-api && cd typescript-node && npm i && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

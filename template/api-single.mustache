@@ -31,7 +31,7 @@ export interface {{classname}}Methods {
     {{/operation}}
 }
 
-export function {{classname}} (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): {{classname}}Methods {
+export function {{classname}} (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): {{classname}}Methods {
     return {
     {{#operation}}
         /**
@@ -82,7 +82,7 @@ const options = {
                 method: '{{httpMethod}}',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 {{#bodyParam}}
                 body: JSON.stringify(ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}"))

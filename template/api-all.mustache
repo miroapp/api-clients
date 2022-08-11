@@ -24,7 +24,7 @@ export type MiroEndpoints =
     {{#operations}}{{ classname }}Methods{{/operations}}{{^-last}} & {{/-last}}
     {{/apis}}
 
-export function MiroApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): MiroEndpoints {
+export function MiroApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): MiroEndpoints {
     return {
         {{#apis}}
         {{#operations}}...{{ classname }}(accessToken, basePath, logger){{/operations}},

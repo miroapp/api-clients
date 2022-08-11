@@ -35,7 +35,7 @@ export interface ItemsApiMethods {
     updateItemPositionOrParent(boardId: string, itemId: string, genericItemUpdate: GenericItemUpdate, ): Promise<{ response: Response; body: GenericItem;  }>
 }
 
-export function ItemsApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): ItemsApiMethods {
+export function ItemsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): ItemsApiMethods {
     return {
         /**
          * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
@@ -76,7 +76,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -146,7 +146,7 @@ const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(genericItemUpdate, "GenericItemUpdate"))
             }

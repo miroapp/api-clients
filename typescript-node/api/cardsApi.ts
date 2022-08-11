@@ -38,7 +38,7 @@ export interface CardsApiMethods {
     updateCardItem(boardId: string, itemId: string, cardUpdateRequest: CardUpdateRequest, ): Promise<{ response: Response; body: CardItem;  }>
 }
 
-export function CardsApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): CardsApiMethods {
+export function CardsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): CardsApiMethods {
     return {
         /**
          * Adds a card item to a board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
@@ -78,7 +78,7 @@ const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(cardCreateRequest, "CardCreateRequest"))
             }
@@ -143,7 +143,7 @@ const options = {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -207,7 +207,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -277,7 +277,7 @@ const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(cardUpdateRequest, "CardUpdateRequest"))
             }

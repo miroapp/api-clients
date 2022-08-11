@@ -39,7 +39,7 @@ export interface TeamMembersApiApiMethods {
     enterpriseUpdateTeamMember(orgId: string, teamId: string, memberId: string, teamMemberChanges: TeamMemberChanges, ): Promise<{ response: Response; body: TeamMember;  }>
 }
 
-export function TeamMembersApiApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): TeamMembersApiApiMethods {
+export function TeamMembersApiApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TeamMembersApiApiMethods {
     return {
         /**
          * Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
@@ -87,7 +87,7 @@ const options = {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -158,7 +158,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -237,7 +237,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -307,7 +307,7 @@ const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(teamMemberInvite, "TeamMemberInvite"))
             }
@@ -385,7 +385,7 @@ const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(teamMemberChanges, "TeamMemberChanges"))
             }

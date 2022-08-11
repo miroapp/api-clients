@@ -38,7 +38,7 @@ export interface ImagesApiMethods {
     updateImageItemUsingUrl(boardId: string, itemId: string, imageUpdateRequest: ImageUpdateRequest, ): Promise<{ response: Response; body: ImageItem;  }>
 }
 
-export function ImagesApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): ImagesApiMethods {
+export function ImagesApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): ImagesApiMethods {
     return {
         /**
          * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
@@ -78,7 +78,7 @@ const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(imageCreateRequest, "ImageCreateRequest"))
             }
@@ -143,7 +143,7 @@ const options = {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -207,7 +207,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -277,7 +277,7 @@ const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(imageUpdateRequest, "ImageUpdateRequest"))
             }

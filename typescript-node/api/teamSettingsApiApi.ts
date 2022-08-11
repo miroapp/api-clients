@@ -35,7 +35,7 @@ export interface TeamSettingsApiApiMethods {
     enterpriseUpdateTeamSettings(teamId: string, teamSettingsChanges: TeamSettingsChanges, ): Promise<{ response: Response; body: TeamSettings;  }>
 }
 
-export function TeamSettingsApiApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): TeamSettingsApiApiMethods {
+export function TeamSettingsApiApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TeamSettingsApiApiMethods {
     return {
         /**
          * Retrieves default team settings of an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
@@ -69,7 +69,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -126,7 +126,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -189,7 +189,7 @@ const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(teamSettingsChanges, "TeamSettingsChanges"))
             }

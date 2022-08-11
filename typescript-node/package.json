@@ -6,8 +6,8 @@
         "type": "git",
         "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
     },
-    "main": "dist/api.js",
-    "types": "dist/api.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
         "clean": "rm -Rf node_modules/ *.js",
         "build": "tsc && typedoc api.ts",

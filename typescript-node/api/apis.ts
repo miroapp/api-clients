@@ -80,7 +80,7 @@ export type MiroEndpoints =
     TextsApiMethods & 
     UserApiMethods
 
-export function MiroApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): MiroEndpoints {
+export function MiroApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): MiroEndpoints {
     return {
         ...AppCardsApi(accessToken, basePath, logger),
         ...BoardClassificationBoardLevelApi(accessToken, basePath, logger),

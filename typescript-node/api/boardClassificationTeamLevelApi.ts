@@ -37,7 +37,7 @@ export interface BoardClassificationTeamLevelApiMethods {
     enterpriseDataclassificationTeamSettingsSet(orgId: string, teamId: string, updateTeamSettingsRequest: UpdateTeamSettingsRequest, ): Promise<{ response: Response; body: DataClassificationTeamSettings;  }>
 }
 
-export function BoardClassificationTeamLevelApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardClassificationTeamLevelApiMethods {
+export function BoardClassificationTeamLevelApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardClassificationTeamLevelApiMethods {
     return {
         /**
          * Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
@@ -84,7 +84,7 @@ const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(updateBoardsDataClassificationLabelRequest, "UpdateBoardsDataClassificationLabelRequest"))
             }
@@ -149,7 +149,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -219,7 +219,7 @@ const options = {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(updateTeamSettingsRequest, "UpdateTeamSettingsRequest"))
             }

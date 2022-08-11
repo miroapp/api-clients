@@ -34,7 +34,7 @@ export interface BoardClassificationBoardLevelApiMethods {
     enterpriseDataclassificationBoardSet(orgId: string, teamId: string, boardId: string, dataClassificationLabelId: DataClassificationLabelId, ): Promise<{ response: Response; body: BoardDataClassificationLabel;  }>
 }
 
-export function BoardClassificationBoardLevelApi (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardClassificationBoardLevelApiMethods {
+export function BoardClassificationBoardLevelApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardClassificationBoardLevelApiMethods {
     return {
         /**
          * Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
@@ -82,7 +82,7 @@ const options = {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
             }
 
@@ -159,7 +159,7 @@ const options = {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${accessToken}`
+                    'Authorization': `Bearer ${typeof accessToken === 'function' ? await accessToken() : accessToken}`
                 },
                 body: JSON.stringify(ObjectSerializer.serialize(dataClassificationLabelId, "DataClassificationLabelId"))
             }
