@@ -7,6 +7,8 @@
         "declaration": true,
         "lib": ["es2021"],
         "outDir": "dist",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
         "typeRoots": [
             "node_modules/@types"
         ]

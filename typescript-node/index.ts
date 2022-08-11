@@ -1,3 +1,5 @@
+import assert from 'assert'
+import fs from 'fs'
 import fetch from 'node-fetch'
 import {HttpError, MiroApi, MiroEndpoints} from './api'
 
@@ -29,6 +31,34 @@ interface TokenResponse {
 
 type MiddlewareArgs = [req: {url?: string|undefined, headers: {host?: string|undefined}}, ...rest: any]
 
+const defaultStorage = {
+    async read() {
+        try {
+            return JSON.parse(fs.readFileSync('./state.json', 'utf8'))
+        } catch(err) {
+            return undefined
+        }
+    },
+    write(state: State) {
+        fs.writeFileSync('./state.json', JSON.stringify(state))
+    }
+}
+
+interface Opts {
+    clientId?: string,
+    clientSecret?: string,
+    redirectUrl?: string,
+    storage?: Storage,
+    teamId?: string
+}
+
+const defaultOpts: Opts = {
+    clientId: process.env.MIRO_CLIENT_ID,
+    clientSecret: process.env.MIRO_CLIENT_SECRET,
+    redirectUrl: process.env.MIRO_REDIRECT_URL,
+    storage: defaultStorage,
+}
+
 export default class MiroAuth {
     clientId: string;
     clientSecret: string;
@@ -37,13 +67,21 @@ export default class MiroAuth {
     teamId?: string;
     api: MiroEndpoints;
 
-    constructor(clientId: string, clientSecret: string, redirectUrl: string, storage: Storage, teamId?: string) {
-        this.clientId = clientId
-        this.clientSecret = clientSecret
-        this.redirectUrl = redirectUrl
-        this.storage = storage
-        this.teamId = teamId
+    constructor(options: Opts = defaultOpts) {
+        const opts = Object.assign({}, defaultOpts, options)
+        this.clientId = opts.clientId || '',
+        this.clientSecret = opts.clientSecret || '',
+        this.redirectUrl = opts.redirectUrl || '',
+        this.storage = opts.storage || defaultStorage
+        this.teamId = opts.teamId
         this.api = MiroApi(async () => await this.getAccessToken())
+
+        assert(this.clientId, 'MIRO_CLIENT_ID is required')
+        assert(this.clientSecret, 'MIRO_CLIENT_SECRET is required')
+        assert(this.redirectUrl, 'MIRO_REDIRECT_URL is required')
+        if (this.storage === defaultStorage) {
+            console.warn('Default storage is not recommended, consider using a custom storage implementation')
+        }
     }
 
     getAuthUrl(state?: string): string {
@@ -58,14 +96,14 @@ export default class MiroAuth {
         return authorizeUrl.toString()
     }
 
-    middleware(middleware: (...args: MiddlewareArgs) => void) {
+    middleware<T>(middleware: (...args: MiddlewareArgs) => Awaitable<T>) {
         return async (...args: MiddlewareArgs) => {
             try {
                 const url = `http://${args[0].headers.host}${args[0].url}`
                 await this.exchangeCodeForAccessToken(url)
             } finally {
-                return middleware(...args)
             }
+            return await middleware(...args)
         }
     }
 
