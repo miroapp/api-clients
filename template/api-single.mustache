@@ -1,6 +1,6 @@
 {{>licenseInfo}}
 
-import localVarRequest from 'request';
+import fetch, {Response} from 'node-fetch';
 import * as http from 'http';
 
 /* tslint:disable:no-unused-locals */
@@ -8,12 +8,9 @@ import * as http from 'http';
 import { {{classname}} } from '{{filename}}';
 {{/imports}}
 
-import { ObjectSerializer, Authentication, VoidAuth, Interceptor } from '../model/models';
-{{#hasAuthMethods}}
-import { HttpBasicAuth, HttpBearerAuth, ApiKeyAuth, OAuth } from '../model/models';
-{{/hasAuthMethods}}
+import { ObjectSerializer } from '../model/models';
 
-import { HttpError, RequestFile } from './apis';
+import { HttpError } from './apis';
 
 let defaultBasePath = '{{{basePath}}}';
 
@@ -28,7 +25,13 @@ let defaultBasePath = '{{{basePath}}}';
 */
 {{/description}}
 
-export function {{classname}} (accessToken: string) {
+export interface {{classname}}Methods {
+    {{#operation}}
+    {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/allParams}}): Promise<{ response: Response; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }>
+    {{/operation}}
+}
+
+export function {{classname}} (accessToken: string, basePath: string = defaultBasePath, logger?: (...thing: any) => void): {{classname}}Methods {
     return {
     {{#operation}}
         /**
@@ -40,10 +43,10 @@ export function {{classname}} (accessToken: string) {
          * @param {{paramName}} {{description}}
          {{/allParams}}
          */
-        {{nickname}}: async function ({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/allParams}}) : Promise<{ response: http.IncomingMessage; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }> {
-            const localVarPath = defaultBasePath + '{{{path}}}'{{#pathParams}}
-                .replace('{{{baseName}}}', encodeURIComponent(String({{paramName}}))){{/pathParams}};
-            let localVarQueryParameters: Record<string, unknown> = {};
+        {{nickname}}: async function ({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/allParams}}) : Promise<{ response: Response; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }> {
+            const localVarPath = '{{{path}}}'{{#pathParams}}
+                .replace('{' + '{{baseName}}' + '}', encodeURIComponent(String({{paramName}}))){{/pathParams}};
+            let localVarQueryParameters = new URLSearchParams();
             let localVarHeaderParams: Record<string, string> = {}
     {{#hasProduces}}
             const produces = [{{#produces}}'{{{mediaType}}}'{{^-last}}, {{/-last}}{{/produces}}];
@@ -66,42 +69,51 @@ export function {{classname}} (accessToken: string) {
     {{/allParams}}
     {{#queryParams}}
             if ({{paramName}} !== undefined) {
-                localVarQueryParameters['{{baseName}}'] = ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}");
+                localVarQueryParameters.append('{{baseName}}', ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}"));
             }
 
     {{/queryParams}}
 
-            let localVarRequestOptions: localVarRequest.Options = {
+            const resource = new URL(localVarPath, basePath)
+            resource.search = localVarQueryParameters.toString()
+
+
+const options = {
                 method: '{{httpMethod}}',
-                qs: localVarQueryParameters,
-                uri: localVarPath,
-                json: true,
                 headers: {
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${accessToken}`
                 },
-    {{#bodyParam}}
-                body: ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}")
-    {{/bodyParam}}
-            };
+                {{#bodyParam}}
+                body: JSON.stringify(ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}"))
+                {{/bodyParam}}
+            }
 
-            return new Promise<{ response: http.IncomingMessage; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }>((resolve, reject) => {
-                localVarRequest(localVarRequestOptions, (error, response, body) => {
-                    if (error) {
-                        reject(error);
-                        return
-                    }
+            if (typeof logger === 'function') logger('FETCH', resource.toString(), options)
 
-                    if (response.statusCode && response.statusCode >= 200 && response.statusCode <= 299) {
-                        {{#returnType}}
-                        body = ObjectSerializer.deserialize(body, "{{{.}}}");
-                        {{/returnType}}
-                        resolve({ response: response, body: body });
-                        return
-                    }
+            const response = await fetch(resource, options)
 
-                    reject(new HttpError(response, body, response.statusCode));
-                });
-            });
+            if (typeof logger === 'function') logger('RESPONSE', response)
+
+            let bodyAsJson: unknown
+            try {
+                bodyAsJson = await response.json()
+            } catch (err) {
+                // Body doesn't have valid json
+            }
+
+            if (!response.ok) {
+                throw new HttpError(response, bodyAsJson, response.status)
+            }
+
+            {{#returnType}}
+            const body = ObjectSerializer.deserialize(bodyAsJson, "{{{.}}}");
+            {{/returnType}}
+            {{^returnType}}
+            const body = bodyAsJson
+            {{/returnType}}
+
+            return({response, body})
         },
     {{/operation}}
     }
