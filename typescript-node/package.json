@@ -4,13 +4,13 @@
     "description": "NodeJS client for miro-api",
     "repository": {
         "type": "git",
-        "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
+        "url": "https://github.com/miroapp/api-clients.git"
     },
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
         "clean": "rm -Rf node_modules/ *.js",
-        "build": "tsc && typedoc api.ts index.ts",
+        "build": "tsc && typedoc api.ts index.ts --gitRevision main",
         "test": "npm run build && node dist/client.js"
     },
     "author": "Miro",
