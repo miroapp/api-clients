@@ -44,6 +44,13 @@ export class Miro {
     }
 
     /**
+    * Checks if the given user id already has token stored
+    */
+    async isAuthorized(userId: ExternalUserId): Promise<boolean> {
+        return !!(await this.storage.read(userId))
+    }
+
+    /**
     * Returns a URL that user should be redirected to in order to authorize the application
     */
     getAuthUrl(state?: string): string {
