@@ -55,30 +55,31 @@ export class HttpError extends Error {
 
 let defaultBasePath = 'https://api.miro.com';
 
-export type MiroEndpoints =
-    AppCardsApiMethods & 
-    BoardClassificationBoardLevelApiMethods & 
-    BoardClassificationOrganizationLevelApiMethods & 
-    BoardClassificationTeamLevelApiMethods & 
-    BoardMembersApiMethods & 
-    BoardsApiMethods & 
-    CardsApiMethods & 
-    ConnectorsApiMethods & 
-    DocumentsApiMethods & 
-    EmbedsApiMethods & 
-    FramesApiMethods & 
-    GroupApiMethods & 
-    ImagesApiMethods & 
-    ItemsApiMethods & 
-    OrganizationsApiMethods & 
-    ShapesApiMethods & 
-    StickyNotesApiMethods & 
-    TagsApiMethods & 
-    TeamMembersApiApiMethods & 
-    TeamSettingsApiApiMethods & 
-    TeamsApiApiMethods & 
-    TextsApiMethods & 
-    UserApiMethods
+export interface MiroEndpoints extends
+    AppCardsApiMethods, 
+        BoardClassificationBoardLevelApiMethods, 
+        BoardClassificationOrganizationLevelApiMethods, 
+        BoardClassificationTeamLevelApiMethods, 
+        BoardMembersApiMethods, 
+        BoardsApiMethods, 
+        CardsApiMethods, 
+        ConnectorsApiMethods, 
+        DocumentsApiMethods, 
+        EmbedsApiMethods, 
+        FramesApiMethods, 
+        GroupApiMethods, 
+        ImagesApiMethods, 
+        ItemsApiMethods, 
+        OrganizationsApiMethods, 
+        ShapesApiMethods, 
+        StickyNotesApiMethods, 
+        TagsApiMethods, 
+        TeamMembersApiApiMethods, 
+        TeamSettingsApiApiMethods, 
+        TeamsApiApiMethods, 
+        TextsApiMethods, 
+        UserApiMethods
+     {}
 
 export function MiroApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): MiroEndpoints {
     return {

@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 
 /**
 * Contains information about the style of a card item, such as the card theme. For information about the JSON properties, see [Style](https://developers.miro.com/reference/style).

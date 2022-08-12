@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { UpdateUserRequestOperationsInner } from './updateUserRequestOperationsInner';
 
 export class UpdateUserRequest {

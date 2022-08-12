@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 
 /**
 * Contains shape item data, such as the content or shape type of the shape. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).

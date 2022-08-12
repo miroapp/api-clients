@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 
 /**
 * Contains the current user\'s board membership details. The current user could be different from the board owner.

@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { CreatedBy } from './createdBy';
 import { FrameData } from './frameData';
 import { FrameStyle } from './frameStyle';

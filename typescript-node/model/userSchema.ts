@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { UserSchemaEmailsInner } from './userSchemaEmailsInner';
 import { UserSchemaGroupsInner } from './userSchemaGroupsInner';
 import { UserSchemaMeta } from './userSchemaMeta';

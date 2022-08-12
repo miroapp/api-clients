@@ -19,10 +19,10 @@ export class HttpError extends Error {
 
 let defaultBasePath = '{{{basePath}}}';
 
-export type MiroEndpoints =
+export interface MiroEndpoints extends
     {{#apis}}
-    {{#operations}}{{ classname }}Methods{{/operations}}{{^-last}} & {{/-last}}
-    {{/apis}}
+    {{#operations}}{{ classname }}Methods{{/operations}}{{^-last}}, {{/-last}}
+    {{/apis}} {}
 
 export function MiroApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): MiroEndpoints {
     return {

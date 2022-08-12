@@ -3,69 +3,23 @@ import fs from 'fs'
 import fetch from 'node-fetch'
 import {HttpError, MiroApi, MiroEndpoints} from './api'
 
+
 const defaultBasePath = 'https://api.miro.com'
 
-export interface State {
-    userId: string,
-    accessToken: string,
-    refreshToken?: string,
-    tokenExpiresAt?: string,
-}
-
-type Awaitable<T> = Promise<T> | T
-
-export interface Storage {
-    read(userId: string|number): Promise<State|undefined>
-    write(userId: string|number, state: State): Awaitable<void>
-}
-
-interface TokenResponse {
-    user_id: string,
-    scope: string,
-    expires_in?: number,
-    team_id: string,
-    access_token: string,
-    refresh_token?: string,
-    token_type: 'bearer'
-}
-
-type MiddlewareArgs = [req: {url?: string|undefined, headers: {host?: string|undefined}}, ...rest: any]
-
-const defaultStorage = {
-    async read(userId: string|number) {
-        try {
-            return JSON.parse(fs.readFileSync(`./state-${userId}.json`, 'utf8'))
-        } catch(err) {
-            return undefined
-        }
-    },
-    write(userId: string|number, state: State) {
-        fs.writeFileSync(`./state-${userId}.json`, JSON.stringify(state))
-    }
-}
-
-interface Opts {
-    clientId?: string,
-    clientSecret?: string,
-    redirectUrl?: string,
-    storage?: Storage,
-    teamId?: string
-}
-
-const defaultOpts: Opts = {
-    clientId: process.env.MIRO_CLIENT_ID,
-    clientSecret: process.env.MIRO_CLIENT_SECRET,
-    redirectUrl: process.env.MIRO_REDIRECT_URL,
-    storage: defaultStorage,
-}
-
-export default class MiroAuth {
+export class Miro {
     clientId: string;
     clientSecret: string;
     redirectUrl: string;
     storage: Storage;
     teamId?: string;
 
+    /**
+    * Initializes the Miro API with the given client id and client secret
+    * All options are optional and will fallback to environment variables
+    * clientId: MIRO_CLIENT_ID
+    * clientSecret: MIRO_CLIENT_SECRET
+    * redirectUrl: MIRO_REDIRECT_URL
+    */
     constructor(options: Opts = defaultOpts) {
         const opts = Object.assign({}, defaultOpts, options)
         this.clientId = opts.clientId || '',
@@ -82,10 +36,16 @@ export default class MiroAuth {
         }
     }
 
-    api(userId: string|number): MiroEndpoints {
+    /**
+    * Returns an instance of the Miro API for the given user id
+    */
+    api(userId: ExternalUserId): MiroEndpoints {
         return MiroApi(async () => await this.getAccessToken(userId))
     }
 
+    /**
+    * Returns a URL that user should be redirected to in order to authorize the application
+    */
     getAuthUrl(state?: string): string {
         const authorizeUrl = new URL('/oauth/authorize', defaultBasePath.replace('api.', ''))
         authorizeUrl.search = new URLSearchParams({
@@ -98,12 +58,41 @@ export default class MiroAuth {
         return authorizeUrl.toString()
     }
 
-    async handleRequest(userId: string|number, ...args: MiddlewareArgs): Promise<void> {
+    /**
+    * Parse request to extract authorization code and get access token
+    *
+    * @see {@link index.Miro.exchangeCodeForAccessToken}
+    */
+    async handleAuthorizationCodeRequest(userId: ExternalUserId, ...args: MiddlewareArgs): Promise<void> {
         const url = `http://${args[0].headers.host}${args[0].url}`
         await this.exchangeCodeForAccessToken(userId, url)
     }
 
-    private async getToken(userId: string|number, params: {[key: string]: string}): Promise<string> {
+    /**
+    * Exchanges the authorization code for an access token by calling the token endpoint
+    * It will store the token information in storage for later reuse
+    */
+    async exchangeCodeForAccessToken(userId: ExternalUserId, urlOrCode: string): Promise<string> {
+        let code = urlOrCode
+        try {
+            const url = new URL(urlOrCode)
+            code = url.searchParams.get('code') || ''
+        } catch (err) {
+            // can't parse url, assume code is passed as argument
+        }
+        if (!code) {
+            throw new Error('No code provided')
+        }
+        return await this.getToken(userId, {
+            code: code,
+            client_id: this.clientId,
+            client_secret: this.clientSecret,
+            redirect_uri: this.redirectUrl,
+            grant_type: 'authorization_code'
+        })
+    }
+
+    private async getToken(userId: ExternalUserId, params: {[key: string]: string}): Promise<string> {
 
         const tokenUrl = new URL('/v1/oauth/token', defaultBasePath)
         tokenUrl.search = new URLSearchParams(params).toString()
@@ -125,27 +114,7 @@ export default class MiroAuth {
         return body.access_token
     }
 
-    async exchangeCodeForAccessToken(userId: string|number, urlOrCode: string): Promise<string> {
-        let code = urlOrCode
-        try {
-            const url = new URL(urlOrCode)
-            code = url.searchParams.get('code') || ''
-        } catch (err) {
-            // can't parse url, assume code is passed as argument
-        }
-        if (!code) {
-            throw new Error('No code provided')
-        }
-        return await this.getToken(userId, {
-            code: code,
-            client_id: this.clientId,
-            client_secret: this.clientSecret,
-            redirect_uri: this.redirectUrl,
-            grant_type: 'authorization_code'
-        })
-    }
-
-    private async refreshAccessToken(userId: string|number, refresh_token: string): Promise<string> {
+    private async refreshAccessToken(userId: ExternalUserId, refresh_token: string): Promise<string> {
         return await this.getToken(userId, {
             client_id: this.clientId,
             client_secret: this.clientSecret,
@@ -154,7 +123,7 @@ export default class MiroAuth {
         })
     }
 
-    private async getAccessToken (userId: string|number): Promise<string> {
+    private async getAccessToken (userId: ExternalUserId): Promise<string> {
         const state = await this.storage.read(userId)
         if (!state || !state.accessToken) {
             throw new Error('No access token stored, run exchangeCodeForAccessToken() first')
@@ -166,3 +135,62 @@ export default class MiroAuth {
         return state.accessToken
     }
 }
+
+export type ExternalUserId = string|number
+
+export interface State {
+    userId: string,
+    accessToken: string,
+    refreshToken?: string,
+    tokenExpiresAt?: string,
+}
+
+export type Awaitable<T> = Promise<T> | T
+
+export interface Storage {
+    read(userId: ExternalUserId): Promise<State|undefined>
+    write(userId: ExternalUserId, state: State): Awaitable<void>
+}
+
+interface TokenResponse {
+    user_id: string,
+    scope: string,
+    expires_in?: number,
+    team_id: string,
+    access_token: string,
+    refresh_token?: string,
+    token_type: 'bearer'
+}
+
+type MiddlewareArgs = [req: {url?: string|undefined, headers: {host?: string|undefined}}, ...rest: any]
+
+const defaultStorage = {
+    async read(userId: ExternalUserId) {
+        try {
+            return JSON.parse(fs.readFileSync(`./state-${userId}.json`, 'utf8'))
+        } catch(err) {
+            return undefined
+        }
+    },
+    write(userId: ExternalUserId, state: State) {
+        fs.writeFileSync(`./state-${userId}.json`, JSON.stringify(state))
+    }
+}
+
+export interface Opts {
+    clientId?: string,
+    clientSecret?: string,
+    redirectUrl?: string,
+    storage?: Storage,
+    teamId?: string
+}
+
+const defaultOpts: Opts = {
+    clientId: process.env.MIRO_CLIENT_ID,
+    clientSecret: process.env.MIRO_CLIENT_SECRET,
+    redirectUrl: process.env.MIRO_REDIRECT_URL,
+    storage: defaultStorage,
+}
+
+export default Miro
+export {MiroApi, MiroEndpoints} from './api'

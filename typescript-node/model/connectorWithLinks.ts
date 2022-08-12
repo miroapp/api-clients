@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { Caption } from './caption';
 import { ConnectorStyle } from './connectorStyle';
 import { CreatedBy } from './createdBy';

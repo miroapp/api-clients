@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 
 /**
 * Contains location information about the item, such as its x coordinate, y coordinate, and theorigin of the x and y coordinates.

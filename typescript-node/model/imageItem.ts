@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { CreatedBy } from './createdBy';
 import { Geometry } from './geometry';
 import { ImageData } from './imageData';

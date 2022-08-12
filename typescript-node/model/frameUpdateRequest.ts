@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { FrameChanges } from './frameChanges';
 import { FrameStyle } from './frameStyle';
 import { GeometryNoRotation } from './geometryNoRotation';

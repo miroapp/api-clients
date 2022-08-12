@@ -10,7 +10,7 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "clean": "rm -Rf node_modules/ *.js",
-        "build": "tsc && typedoc api.ts",
+        "build": "tsc && typedoc api.ts index.ts",
         "test": "npm run build && node dist/client.js"
     },
     "author": "Miro",

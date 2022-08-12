@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { ListResponse } from './listResponse';
 import { UserListResponseAllOf } from './userListResponseAllOf';
 import { UserSchema } from './userSchema';

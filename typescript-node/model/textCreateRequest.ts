@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { Parent } from './parent';
 import { PositionChange } from './positionChange';
 import { TextData } from './textData';

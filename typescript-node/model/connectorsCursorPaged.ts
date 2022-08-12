@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { ConnectorWithLinks } from './connectorWithLinks';
 import { PageLinks } from './pageLinks';
 

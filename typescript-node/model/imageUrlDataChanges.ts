@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 
 /**
 * For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).

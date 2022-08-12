@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { GroupSchema } from './groupSchema';
 
 export class GroupListResponseAllOf {

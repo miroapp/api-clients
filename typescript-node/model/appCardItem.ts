@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { AppCardData } from './appCardData';
 import { AppCardStyle } from './appCardStyle';
 import { CreatedBy } from './createdBy';

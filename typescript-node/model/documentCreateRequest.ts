@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { DocumentUrlData } from './documentUrlData';
 import { FixedRatioGeometry } from './fixedRatioGeometry';
 import { Parent } from './parent';

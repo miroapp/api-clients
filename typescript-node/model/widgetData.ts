@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { AppCardData } from './appCardData';
 import { CardData } from './cardData';
 import { CustomField } from './customField';

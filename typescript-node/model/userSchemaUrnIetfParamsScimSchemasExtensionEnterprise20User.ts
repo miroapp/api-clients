@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { UserSchemaUrnIetfParamsScimSchemasExtensionEnterprise20UserManager } from './userSchemaUrnIetfParamsScimSchemasExtensionEnterprise20UserManager';
 
 export class UserSchemaUrnIetfParamsScimSchemasExtensionEnterprise20User {

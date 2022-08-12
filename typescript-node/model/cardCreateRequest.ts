@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { CardData } from './cardData';
 import { CardStyle } from './cardStyle';
 import { Geometry } from './geometry';

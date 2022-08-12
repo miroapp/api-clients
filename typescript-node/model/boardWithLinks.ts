@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { BoardLinks } from './boardLinks';
 import { BoardMember } from './boardMember';
 import { BoardPolicy } from './boardPolicy';

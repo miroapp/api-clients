@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 
 /**
 * Contains card item data, such as the title, description, due date, or assignee ID. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).

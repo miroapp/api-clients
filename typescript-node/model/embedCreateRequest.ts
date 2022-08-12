@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { EmbedUrlData } from './embedUrlData';
 import { FixedRatioNoRotationGeometry } from './fixedRatioNoRotationGeometry';
 import { Parent } from './parent';

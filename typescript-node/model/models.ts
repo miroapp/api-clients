@@ -176,7 +176,6 @@ export interface RequestDetailedFile {
     }
 }
 
-export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile;
 
 
 import { AppCardCreateRequest } from './appCardCreateRequest';

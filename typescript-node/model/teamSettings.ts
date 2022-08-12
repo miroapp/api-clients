@@ -10,7 +10,6 @@
  * Do not edit the class manually.
  */
 
-import { RequestFile } from './models';
 import { TeamAccountDiscoverySettings } from './teamAccountDiscoverySettings';
 import { TeamCollaborationSettings } from './teamCollaborationSettings';
 import { TeamCopyAccessLevelSettings } from './teamCopyAccessLevelSettings';
