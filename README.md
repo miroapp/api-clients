@@ -7,3 +7,7 @@ Currently the only available client is [Node.JS client](./typescript-node) writt
 yarn
 yarn run generate
 ```
+
+API clients are generated using `@openapitools/openapi-generator-cli`.
+
+They are generated based on the API specifications from `miro-openapi-files` repository. The specifications should all be merged into a single JSON or YAML spec. Each endpoint should have a unique `operationId` as client method names are derived from that.
