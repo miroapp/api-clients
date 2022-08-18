@@ -18,9 +18,12 @@ fastify.get('/auth/miro/callback', async (req, reply) => {
 })
 
 fastify.get('/', async () => {
-  const response = await miro.api('some_user_id').getBoards()
-  if (!response.body.data) throw { statusCode: 404, message: 'No boards found' }
-  return response.body.data[0].viewLink;
+  const api = miro.highlevel('some_user_id')
+  const boards = await api.getBoards()
+  const board = boards[0]
+  const items = await board.getItems()
+  const item = items[0]
+  return await item.getTags()
 })
 
 ;(async () => await fastify.listen({port: 4000}))()

@@ -2,6 +2,7 @@ import assert from 'assert'
 import fs from 'fs'
 import fetch from 'node-fetch'
 import {HttpError, MiroApi, MiroEndpoints} from './api'
+import {Miro as Models} from './highlevel'
 
 
 const defaultBasePath = 'https://api.miro.com'
@@ -41,6 +42,13 @@ export class Miro {
     */
     api(userId: ExternalUserId): MiroEndpoints {
         return MiroApi(async () => await this.getAccessToken(userId))
+    }
+
+    /**
+    * Returns an instance of the highlevel Miro API for the given user id
+    */
+    highlevel(userId: ExternalUserId): Models {
+        return new Models(MiroApi(async () => await this.getAccessToken(userId)), [], {})
     }
 
     /**
