@@ -1,5 +1,7 @@
 import { MiroEndpoints } from "./api";
 
+import { Organization as BaseOrganization } from "./model/organization";
+import { Team as BaseTeam } from "./model/team";
 import { Board as BaseBoard } from "./model/board";
 import { BoardMember as BaseBoardMember } from "./model/boardMember";
 import { GenericItem as BaseItem } from "./model/genericItem";
@@ -15,7 +17,8 @@ import { TextItem as BaseTextItem } from "./model/textItem";
 import { ConnectorWithLinks as BaseConnector } from "./model/connectorWithLinks";
 import { Tag as BaseTag } from "./model/tag";
 
-type GetRest0<Method extends (p1: any, ...rest: any[]) => any> = [];
+type GetRest0<Method extends (p1: any, ...rest: any[]) => any> =
+  Method extends (...rest: infer Rest) => any ? Rest : never;
 
 type GetRest1<Method extends (p1: any, ...rest: any[]) => any> =
   Method extends (p1: any, ...rest: infer Rest) => any ? Rest : never;
@@ -45,6 +48,275 @@ export class Api extends Object {
   /** {@inheritDoc api!MiroEndpoints.getBoards} */
   async getBoards(...rest: GetRest0<MiroEndpoints["getBoards"]>) {
     const result = (await this._api.getBoards(...this.pathParams, ...rest))
+      .body;
+    return result.data
+      ? result.data.map((result) => {
+          return new Board(this._api, [`${result.id}`], result);
+        })
+      : [];
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetOrganization} */
+  async getOrganization(
+    ...rest: GetRest0<MiroEndpoints["enterpriseGetOrganization"]>
+  ) {
+    const result = (
+      await this._api.enterpriseGetOrganization(...this.pathParams, ...rest)
+    ).body;
+
+    return new Organization(this._api, [`${result.id}`], result);
+  }
+}
+
+export class Organization extends BaseOrganization {
+  private _api: MiroEndpoints;
+  private pathParams: [string];
+
+  constructor(
+    api: MiroEndpoints,
+    pathParams: [string],
+    rest: BaseOrganization
+  ) {
+    super();
+    this._api = api;
+    this.pathParams = pathParams;
+    Object.assign(this, rest);
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseCreateTeam} */
+  async createTeam(...rest: GetRest1<MiroEndpoints["enterpriseCreateTeam"]>) {
+    const result = (
+      await this._api.enterpriseCreateTeam(...this.pathParams, ...rest)
+    ).body;
+
+    return new Team(this._api, [this.pathParams[0], `${result.id}`], result);
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationOrganizationSettingsGet} */
+  async getDataClassification(
+    ...rest: GetRest1<
+      MiroEndpoints["enterpriseDataclassificationOrganizationSettingsGet"]
+    >
+  ) {
+    (
+      await this._api.enterpriseDataclassificationOrganizationSettingsGet(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetDefaultTeamSettings} */
+  async getDefaultTeamSettings(
+    ...rest: GetRest1<MiroEndpoints["enterpriseGetDefaultTeamSettings"]>
+  ) {
+    (
+      await this._api.enterpriseGetDefaultTeamSettings(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetOrganizationMember} */
+  async getOrganizationMember(
+    ...rest: GetRest1<MiroEndpoints["enterpriseGetOrganizationMember"]>
+  ) {
+    (
+      await this._api.enterpriseGetOrganizationMember(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetOrganizationMembers} */
+  async getOrganizationMembers(
+    ...rest: GetRest1<MiroEndpoints["enterpriseGetOrganizationMembers"]>
+  ) {
+    (
+      await this._api.enterpriseGetOrganizationMembers(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetTeam} */
+  async getTeam(...rest: GetRest1<MiroEndpoints["enterpriseGetTeam"]>) {
+    const result = (
+      await this._api.enterpriseGetTeam(...this.pathParams, ...rest)
+    ).body;
+
+    return new Team(this._api, [this.pathParams[0], `${result.id}`], result);
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetTeams} */
+  async getTeams(...rest: GetRest1<MiroEndpoints["enterpriseGetTeams"]>) {
+    const result = (
+      await this._api.enterpriseGetTeams(...this.pathParams, ...rest)
+    ).body;
+    return result
+      ? result.map((result) => {
+          return new Team(
+            this._api,
+            [this.pathParams[0], `${result.id}`],
+            result
+          );
+        })
+      : [];
+  }
+}
+
+export class Team extends BaseTeam {
+  private _api: MiroEndpoints;
+  private pathParams: [string, string];
+
+  constructor(
+    api: MiroEndpoints,
+    pathParams: [string, string],
+    rest: BaseTeam
+  ) {
+    super();
+    this._api = api;
+    this.pathParams = pathParams;
+    Object.assign(this, rest);
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseDeleteTeam} */
+  async deleteTeam(...rest: GetRest2<MiroEndpoints["enterpriseDeleteTeam"]>) {
+    (await this._api.enterpriseDeleteTeam(...this.pathParams, ...rest)).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseDeleteTeamMember} */
+  async deleteTeamMember(
+    ...rest: GetRest2<MiroEndpoints["enterpriseDeleteTeamMember"]>
+  ) {
+    (await this._api.enterpriseDeleteTeamMember(...this.pathParams, ...rest))
+      .body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationBoardGet} */
+  async getBoardDataClassification(
+    ...rest: GetRest2<MiroEndpoints["enterpriseDataclassificationBoardGet"]>
+  ) {
+    (
+      await this._api.enterpriseDataclassificationBoardGet(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationBoardSet} */
+  async setBoardDataClassification(
+    ...rest: GetRest2<MiroEndpoints["enterpriseDataclassificationBoardSet"]>
+  ) {
+    (
+      await this._api.enterpriseDataclassificationBoardSet(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationTeamBoardsBulk} */
+  async setBoardDataClassificationBulk(
+    ...rest: GetRest2<
+      MiroEndpoints["enterpriseDataclassificationTeamBoardsBulk"]
+    >
+  ) {
+    (
+      await this._api.enterpriseDataclassificationTeamBoardsBulk(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationTeamSettingsGet} */
+  async getDataClassification(
+    ...rest: GetRest2<
+      MiroEndpoints["enterpriseDataclassificationTeamSettingsGet"]
+    >
+  ) {
+    (
+      await this._api.enterpriseDataclassificationTeamSettingsGet(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationTeamSettingsSet} */
+  async setDataClassification(
+    ...rest: GetRest2<
+      MiroEndpoints["enterpriseDataclassificationTeamSettingsSet"]
+    >
+  ) {
+    (
+      await this._api.enterpriseDataclassificationTeamSettingsSet(
+        ...this.pathParams,
+        ...rest
+      )
+    ).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseInviteTeamMember} */
+  async inviteTeamMember(
+    ...rest: GetRest2<MiroEndpoints["enterpriseInviteTeamMember"]>
+  ) {
+    (await this._api.enterpriseInviteTeamMember(...this.pathParams, ...rest))
+      .body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetTeamMember} */
+  async getTeamMember(
+    ...rest: GetRest2<MiroEndpoints["enterpriseGetTeamMember"]>
+  ) {
+    (await this._api.enterpriseGetTeamMember(...this.pathParams, ...rest)).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetTeamMembers} */
+  async getTeamMembers(
+    ...rest: GetRest2<MiroEndpoints["enterpriseGetTeamMembers"]>
+  ) {
+    (await this._api.enterpriseGetTeamMembers(...this.pathParams, ...rest))
+      .body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseUpdateTeamMember} */
+  async updateTeamMember(
+    ...rest: GetRest2<MiroEndpoints["enterpriseUpdateTeamMember"]>
+  ) {
+    (await this._api.enterpriseUpdateTeamMember(...this.pathParams, ...rest))
+      .body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseUpdateTeam} */
+  async updateTeam(...rest: GetRest2<MiroEndpoints["enterpriseUpdateTeam"]>) {
+    (await this._api.enterpriseUpdateTeam(...this.pathParams, ...rest)).body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseGetTeamSettings} */
+  async getTeamSettings(
+    ...rest: GetRest1<MiroEndpoints["enterpriseGetTeamSettings"]>
+  ) {
+    (await this._api.enterpriseGetTeamSettings(this.pathParams[1], ...rest))
+      .body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseUpdateTeamSettings} */
+  async updateTeamSettings(
+    ...rest: GetRest1<MiroEndpoints["enterpriseUpdateTeamSettings"]>
+  ) {
+    (await this._api.enterpriseUpdateTeamSettings(this.pathParams[1], ...rest))
+      .body;
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.getBoards} */
+  async getBoards(...rest: GetRest1<MiroEndpoints["getBoards"]>) {
+    const result = (await this._api.getBoards(this.pathParams[1], ...rest))
       .body;
     return result.data
       ? result.data.map((result) => {

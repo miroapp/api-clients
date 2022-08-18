@@ -6,7 +6,13 @@ interface Models {
             name: string,
             path: string
         },
-        methods: Array<string|{method: string, alias?: string, returns?: keyof Models, paginated?: string}>
+        methods: Array<string|{
+            method: string,
+            alias?: string,
+            returns?: keyof Models,
+            paginated?: string | true,
+            oneId?: boolean
+        }>
     }
 }
 
@@ -15,7 +21,55 @@ const models: Models  = {
         props: [],
         methods: [
             'createBoard',
-            {method: 'getBoards', returns: 'Board', paginated: 'data'}
+            {method: 'getBoards', returns: 'Board', paginated: 'data'},
+            {method: 'enterpriseGetOrganization', alias: 'getOrganization', returns: 'Organization'},
+        ]
+    },
+
+    Organization: {
+        props: ['orgId'],
+        extendedModel: {
+            name: 'Organization',
+            path: 'model/organization'
+        },
+        methods: [
+            {method: 'enterpriseCreateTeam', alias: 'createTeam', returns: 'Team'},
+            {method: 'enterpriseDataclassificationOrganizationSettingsGet', alias: 'getDataClassification'},
+
+            {method: 'enterpriseGetDefaultTeamSettings', alias: 'getDefaultTeamSettings'},
+            {method: 'enterpriseGetOrganizationMember', alias: 'getOrganizationMember'},
+            {method: 'enterpriseGetOrganizationMembers', alias: 'getOrganizationMembers'},
+            {method: 'enterpriseGetTeam', alias: 'getTeam', returns: 'Team'},
+            {method: 'enterpriseGetTeams', alias: 'getTeams', returns: 'Team', paginated: true},
+
+        ]
+    },
+    Team: {
+        props: ['orgId', 'teamId'],
+        extendedModel: {
+            name: 'Team',
+            path: 'model/team'
+        },
+        methods: [
+            {method: 'enterpriseDeleteTeam', alias: 'deleteTeam'},
+            {method: 'enterpriseDeleteTeamMember', alias: 'deleteTeamMember'},
+            {method: 'enterpriseDataclassificationBoardGet', alias: 'getBoardDataClassification'},
+            {method: 'enterpriseDataclassificationBoardSet', alias: 'setBoardDataClassification'},
+            {method: 'enterpriseDataclassificationTeamBoardsBulk', alias: 'setBoardDataClassificationBulk'},
+
+            {method: 'enterpriseDataclassificationTeamSettingsGet', alias: 'getDataClassification'},
+            {method: 'enterpriseDataclassificationTeamSettingsSet', alias: 'setDataClassification'},
+
+            {method: 'enterpriseInviteTeamMember', alias: 'inviteTeamMember'},
+            {method: 'enterpriseGetTeamMember', alias: 'getTeamMember'},
+            {method: 'enterpriseGetTeamMembers', alias: 'getTeamMembers'},
+            {method: 'enterpriseUpdateTeamMember', alias: 'updateTeamMember'},
+
+            {method: 'enterpriseUpdateTeam', alias: 'updateTeam'},
+
+            {method: 'enterpriseGetTeamSettings', alias: 'getTeamSettings', oneId: true},
+            {method: 'enterpriseUpdateTeamSettings', alias: 'updateTeamSettings', oneId: true},
+            {method: 'getBoards', returns: 'Board', paginated: 'data', oneId: true},
         ]
     },
 
@@ -253,21 +307,23 @@ ${Object.keys(models).map(name => {
 }
 
 type GetRest0<
-Method extends (p1: any, ...rest: any[]) => any,
-> = []
+    Method extends (p1: any, ...rest: any[]) => any,
+> = Method extends (...rest: infer Rest) => any
+    ? Rest
+    : never
 
 
 type GetRest1<
-Method extends (p1: any, ...rest: any[]) => any,
+    Method extends (p1: any, ...rest: any[]) => any,
 > = Method extends (p1: any, ...rest: infer Rest) => any
-? Rest
-: never
+    ? Rest
+    : never
 
 type GetRest2<
 Method extends (p1: any, p2: any, ...rest: any[]) => any,
 > = Method extends (p1: any, p2: any, ...rest: infer Rest) => any
-? Rest
-: never
+    ? Rest
+    : never
 
 `)
 
@@ -294,13 +350,15 @@ export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object' } 
 
     const returnsModel = m.returns || (m.method.startsWith('get') || m.method.startsWith('create') ? m.method.replace(/^(create|get)/, '') : undefined);
 
-    const body = `(await this._api.${m.method}(...this.pathParams, ...rest)).body`
+    const body = `(await this._api.${m.method}(${m.oneId ? `this.pathParams[${model.props.length-1}]` : '...this.pathParams'}, ...rest)).body`
+
+    const paginatedData = m.paginated === true ? 'result' : `result.${m.paginated}`
 
     return `
     /** {@inheritDoc api!MiroEndpoints.${m.method}} */
-    async ${m.alias || m.method}(...rest: GetRest${model.props.length}<MiroEndpoints['${m.method}']>) {
+    async ${m.alias || m.method}(...rest: GetRest${m.oneId ? 1 : model.props.length}<MiroEndpoints['${m.method}']>) {
         ${returnsModel ? `const result = ${body}` : body}
-        ${m.paginated ? `return result.${m.paginated} ? result.${m.paginated}.map(result => { ` : ''}
+        ${m.paginated ? `return ${paginatedData} ? ${paginatedData}.map(result => { ` : ''}
         ${returnsModel ? `return new ${returnsModel} (
             this._api,
             [${models[returnsModel].props.map((_, i, {length}) => i === length - 1 ? '`${result.id}`': `this.pathParams[${i}]`)}],

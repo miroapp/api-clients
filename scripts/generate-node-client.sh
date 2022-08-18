@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-PATH="./node_modules/.bin:${PATH}"
-
 spec_file=spec.json
 
 scripts/fetch-spec.mjs > "$spec_file"
