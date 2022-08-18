@@ -23,7 +23,7 @@ type GetRest1<Method extends (p1: any, ...rest: any[]) => any> =
 type GetRest2<Method extends (p1: any, p2: any, ...rest: any[]) => any> =
   Method extends (p1: any, p2: any, ...rest: infer Rest) => any ? Rest : never;
 
-export class Miro extends Object {
+export class Api extends Object {
   private _api: MiroEndpoints;
   pathParams: [];
 

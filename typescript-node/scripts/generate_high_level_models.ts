@@ -11,7 +11,7 @@ interface Models {
 }
 
 const models: Models  = {
-    Miro: {
+    Api: {
         props: [],
         methods: [
             'createBoard',
