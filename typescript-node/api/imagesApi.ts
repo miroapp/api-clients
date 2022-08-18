@@ -32,20 +32,39 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface ImagesApiMethods {
+    /**
+     * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Create image item using URL
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+     * @param imageCreateRequest 
+     */
     createImageItemUsingUrl(boardId: string, imageCreateRequest: ImageCreateRequest, ): Promise<{ response: Response; body: ImageItem;  }>
+    /**
+     * Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+     * @summary Delete image item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+     */
     deleteImageItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get image item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+     */
     getImageItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: ImageItem;  }>
+    /**
+     * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Update image item using URL
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+     * @param imageUpdateRequest 
+     */
     updateImageItemUsingUrl(boardId: string, itemId: string, imageUpdateRequest: ImageUpdateRequest, ): Promise<{ response: Response; body: ImageItem;  }>
 }
 
 export function ImagesApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): ImagesApiMethods {
     return {
-        /**
-         * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Create image item using URL
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
-         * @param imageCreateRequest 
-         */
         createImageItemUsingUrl: async function (boardId: string, imageCreateRequest: ImageCreateRequest, ) : Promise<{ response: Response; body: ImageItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/images'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -104,12 +123,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
-         * @summary Delete image item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
-         */
         deleteImageItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -168,12 +181,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get image item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
-         */
         getImageItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: ImageItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -232,13 +239,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Update image item using URL
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
-         * @param imageUpdateRequest 
-         */
         updateImageItemUsingUrl: async function (boardId: string, itemId: string, imageUpdateRequest: ImageUpdateRequest, ) : Promise<{ response: Response; body: ImageItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))

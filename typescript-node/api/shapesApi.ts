@@ -32,20 +32,39 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface ShapesApiMethods {
+    /**
+     * Adds a shape item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Create shape item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+     * @param shapeCreateRequest 
+     */
     createShapeItem(boardId: string, shapeCreateRequest: ShapeCreateRequest, ): Promise<{ response: Response; body: ShapeItem;  }>
+    /**
+     * Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+     * @summary Delete shape item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+     */
     deleteShapeItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get shape item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+     */
     getShapeItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: ShapeItem;  }>
+    /**
+     * Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Update shape item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+     * @param shapeUpdateRequest 
+     */
     updateShapeItem(boardId: string, itemId: string, shapeUpdateRequest: ShapeUpdateRequest, ): Promise<{ response: Response; body: ShapeItem;  }>
 }
 
 export function ShapesApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): ShapesApiMethods {
     return {
-        /**
-         * Adds a shape item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Create shape item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
-         * @param shapeCreateRequest 
-         */
         createShapeItem: async function (boardId: string, shapeCreateRequest: ShapeCreateRequest, ) : Promise<{ response: Response; body: ShapeItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/shapes'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -104,12 +123,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
-         * @summary Delete shape item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
-         */
         deleteShapeItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/shapes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -168,12 +181,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get shape item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
-         */
         getShapeItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: ShapeItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/shapes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -232,13 +239,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Update shape item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
-         * @param shapeUpdateRequest 
-         */
         updateShapeItem: async function (boardId: string, itemId: string, shapeUpdateRequest: ShapeUpdateRequest, ) : Promise<{ response: Response; body: ShapeItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/shapes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))

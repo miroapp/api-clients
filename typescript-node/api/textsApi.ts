@@ -32,20 +32,39 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface TextsApiMethods {
+    /**
+     * Adds a text item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Create text item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+     * @param textCreateRequest 
+     */
     createTextItem(boardId: string, textCreateRequest: TextCreateRequest, ): Promise<{ response: Response; body: TextItem;  }>
+    /**
+     * Deletes a text item from the board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+     * @summary Delete text item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+     */
     deleteTextItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves information for a specific text item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get text item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+     */
     getTextItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: TextItem;  }>
+    /**
+     * Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Update text item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+     * @param textUpdateRequest 
+     */
     updateTextItem(boardId: string, itemId: string, textUpdateRequest: TextUpdateRequest, ): Promise<{ response: Response; body: TextItem;  }>
 }
 
 export function TextsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TextsApiMethods {
     return {
-        /**
-         * Adds a text item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Create text item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
-         * @param textCreateRequest 
-         */
         createTextItem: async function (boardId: string, textCreateRequest: TextCreateRequest, ) : Promise<{ response: Response; body: TextItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/texts'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -104,12 +123,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Deletes a text item from the board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
-         * @summary Delete text item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
-         */
         deleteTextItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/texts/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -168,12 +181,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information for a specific text item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get text item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
-         */
         getTextItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: TextItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/texts/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -232,13 +239,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Update text item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
-         * @param textUpdateRequest 
-         */
         updateTextItem: async function (boardId: string, itemId: string, textUpdateRequest: TextUpdateRequest, ) : Promise<{ response: Response; body: TextItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/texts/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))

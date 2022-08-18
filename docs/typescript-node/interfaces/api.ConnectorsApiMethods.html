@@ -42,80 +42,116 @@
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="createConnector.createConnector-1">create<wbr/>Connector<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, connectorCreationData<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorCreationData-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorCreationData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#createConnector.createConnector-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Adds a connector to a board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 2</a><br/></p>
+
+<h3>Summary</h3><p>Create connector</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> for which you want to create the connector.</p>
+</div></li>
 <li>
 <h5>connectorCreationData: <a href="../classes/api.ConnectorCreationData-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorCreationData</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L36">api/connectorsApi.ts:36</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L42">api/connectorsApi.ts:42</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="deleteConnector" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>delete<wbr/>Connector</span><a href="#deleteConnector" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="deleteConnector.deleteConnector-1">delete<wbr/>Connector<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, connectorId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#deleteConnector.deleteConnector-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Deletes the specified connector from the board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 3</a><br/></p>
+
+<h3>Summary</h3><p>Delete connector</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> from which you want to delete the connector.</p>
+</div></li>
 <li>
-<h5>connectorId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>connectorId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-connector-model">Unique identifier (ID) of the connector</a> that you want to delete.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L37">api/connectorsApi.ts:37</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L49">api/connectorsApi.ts:49</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="getConnector" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Connector</span><a href="#getConnector" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="getConnector.getConnector-1">get<wbr/>Connector<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, connectorId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getConnector.getConnector-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves information for a specific connector on a board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Get specific connector</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> from which you want to retrieve a specific connector.</p>
+</div></li>
 <li>
-<h5>connectorId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>connectorId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-connector-model">Unique identifier (ID) of the connector</a> that you want to retrieve.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L38">api/connectorsApi.ts:38</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L56">api/connectorsApi.ts:56</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="getConnectors" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Connectors</span><a href="#getConnectors" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="getConnectors.getConnectors-1">get<wbr/>Connectors<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, cursor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorsCursorPaged.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorsCursorPaged</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getConnectors.getConnectors-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves a list of connectors for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the <code>cursor</code> parameter equal to the <code>cursor</code> value you received in the response of the previous request. For example, if you set the <code>limit</code> query parameter to <code>10</code> and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let&#39;s say the cursor parameter value returned in the response is <code>foo</code>. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to <code>foo</code>.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 2</a><br/></p>
+
+<h3>Summary</h3><p>Get connectors</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> from which you want to retrieve a list of connectors.</p>
+</div></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> limit: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> cursor: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorsCursorPaged.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorsCursorPaged</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L39">api/connectorsApi.ts:39</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L64">api/connectorsApi.ts:64</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="updateConnector" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>update<wbr/>Connector</span><a href="#updateConnector" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="updateConnector.updateConnector-1">update<wbr/>Connector<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, connectorId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, connectorChangesData<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorChangesData-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorChangesData</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#updateConnector.updateConnector-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates a connector on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 2</a><br/></p>
+
+<h3>Summary</h3><p>Update connector</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> for which you want to update the connector.</p>
+</div></li>
 <li>
-<h5>connectorId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>connectorId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-connector-model">Unique identifier (ID) of the connector</a> that you want to update.</p>
+</div></li>
 <li>
 <h5>connectorChangesData: <a href="../classes/api.ConnectorChangesData-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorChangesData</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ConnectorWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">ConnectorWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L40">api/connectorsApi.ts:40</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/connectorsApi.ts#L72">api/connectorsApi.ts:72</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

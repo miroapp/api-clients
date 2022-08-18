@@ -35,26 +35,79 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface TagsApiMethods {
+    /**
+     * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Attach tag to item
+     * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item that you want to add a tag to.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) to which you want to add a tag.
+     * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) you want to add to the item.
+     */
     attachTagToItem(boardIdPlatformTags: string, itemId: string, tagId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Creates a tag on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Create tag
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the tag.
+     * @param tagCreateRequest 
+     */
     createTag(boardId: string, tagCreateRequest: TagCreateRequest, ): Promise<{ response: Response; body: TagWithLinks;  }>
+    /**
+     * Deletes the specified tag from the board. The tag is also removed from all cards and sticky notes on the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Delete tag
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to delete a specific tag.
+     * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to delete.
+     */
     deleteTag(boardId: string, tagId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get items by tag
+     * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to retrieve a specific tag.
+     * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to retrieve.
+     * @param limit 
+     * @param offset 
+     */
     getItemsByTag(boardIdPlatformTags: string, tagId: string, limit?: string, offset?: string, ): Promise<{ response: Response; body: ItemPagedResponse;  }>
+    /**
+     * Retrieves information for a specific tag.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get tag
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to retrieve a specific tag.
+     * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to retrieve.
+     */
     getTag(boardId: string, tagId: string, ): Promise<{ response: Response; body: TagWithLinks;  }>
+    /**
+     * Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get tags from board
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) whose tags you want to retrieve.
+     * @param limit 
+     * @param offset 
+     */
     getTagsFromBoard(boardId: string, limit?: string, offset?: string, ): Promise<{ response: Response; body: TagsPagedResponse;  }>
+    /**
+     * Retrieves all the tags from the specified item.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get tags from item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item whose tags you want to retrieve.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) whose tags you want to retrieve.
+     */
     getTagsFromItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: GetTagsResponse;  }>
+    /**
+     * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Remove tag from item
+     * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item that you want to remove a tag from.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to remove the tag from.
+     * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to remove from the item.
+     */
     removeTagFromItem(boardIdPlatformTags: string, itemId: string, tagId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Updates a tag based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Update tag
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update a specific tag.
+     * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to update.
+     * @param tagUpdateRequest 
+     */
     updateTag(boardId: string, tagId: string, tagUpdateRequest: TagUpdateRequest, ): Promise<{ response: Response; body: TagWithLinks;  }>
 }
 
 export function TagsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TagsApiMethods {
     return {
-        /**
-         * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Attach tag to item
-         * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item that you want to add a tag to.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) to which you want to add a tag.
-         * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) you want to add to the item.
-         */
         attachTagToItem: async function (boardIdPlatformTags: string, itemId: string, tagId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
                 .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
@@ -122,12 +175,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Creates a tag on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Create tag
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the tag.
-         * @param tagCreateRequest 
-         */
         createTag: async function (boardId: string, tagCreateRequest: TagCreateRequest, ) : Promise<{ response: Response; body: TagWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -186,12 +233,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Deletes the specified tag from the board. The tag is also removed from all cards and sticky notes on the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Delete tag
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to delete a specific tag.
-         * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to delete.
-         */
         deleteTag: async function (boardId: string, tagId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags/{tag_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -250,14 +291,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get items by tag
-         * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to retrieve a specific tag.
-         * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to retrieve.
-         * @param limit 
-         * @param offset 
-         */
         getItemsByTag: async function (boardIdPlatformTags: string, tagId: string, limit?: string, offset?: string, ) : Promise<{ response: Response; body: ItemPagedResponse;  }> {
             const localVarPath = '/v2/boards/{board_id_PlatformTags}/items'
                 .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)));
@@ -327,12 +360,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information for a specific tag.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get tag
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to retrieve a specific tag.
-         * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to retrieve.
-         */
         getTag: async function (boardId: string, tagId: string, ) : Promise<{ response: Response; body: TagWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags/{tag_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -391,13 +418,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get tags from board
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) whose tags you want to retrieve.
-         * @param limit 
-         * @param offset 
-         */
         getTagsFromBoard: async function (boardId: string, limit?: string, offset?: string, ) : Promise<{ response: Response; body: TagsPagedResponse;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -458,12 +478,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves all the tags from the specified item.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get tags from item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item whose tags you want to retrieve.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) whose tags you want to retrieve.
-         */
         getTagsFromItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: GetTagsResponse;  }> {
             const localVarPath = '/v2/boards/{board_id}/items/{item_id}/tags'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -522,13 +536,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Remove tag from item
-         * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item that you want to remove a tag from.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to remove the tag from.
-         * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to remove from the item.
-         */
         removeTagFromItem: async function (boardIdPlatformTags: string, itemId: string, tagId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
                 .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
@@ -596,13 +603,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates a tag based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Update tag
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update a specific tag.
-         * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to update.
-         * @param tagUpdateRequest 
-         */
         updateTag: async function (boardId: string, tagId: string, tagUpdateRequest: TagUpdateRequest, ) : Promise<{ response: Response; body: TagWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags/{tag_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))

@@ -40,50 +40,74 @@
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="enterpriseDataclassificationTeamBoardsBulk.enterpriseDataclassificationTeamBoardsBulk-1">enterprise<wbr/>Dataclassification<wbr/>Team<wbr/>Boards<wbr/>Bulk<span class="tsd-signature-symbol">(</span>orgId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, teamId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, updateBoardsDataClassificationLabelRequest<span class="tsd-signature-symbol">: </span><a href="../classes/api.UpdateBoardsDataClassificationLabelRequest.html" class="tsd-signature-type" data-tsd-kind="Class">UpdateBoardsDataClassificationLabelRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.UpdateBoardsDataClassificationLabel.html" class="tsd-signature-type" data-tsd-kind="Class">UpdateBoardsDataClassificationLabel</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#enterpriseDataclassificationTeamBoardsBulk.enterpriseDataclassificationTeamBoardsBulk-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for &lt;a target=&quot;blank&quot; href=&quot;/reference/api-reference#enterprise-plan&quot;&gt;Enterprise plan</a> users.</p></p>
+
+<h3>Summary</h3><p>Bulk update boards classification</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>orgId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>orgId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the organization</p>
+</div></li>
 <li>
-<h5>teamId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>teamId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the team</p>
+</div></li>
 <li>
 <h5>updateBoardsDataClassificationLabelRequest: <a href="../classes/api.UpdateBoardsDataClassificationLabelRequest.html" class="tsd-signature-type" data-tsd-kind="Class">UpdateBoardsDataClassificationLabelRequest</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.UpdateBoardsDataClassificationLabel.html" class="tsd-signature-type" data-tsd-kind="Class">UpdateBoardsDataClassificationLabel</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardClassificationTeamLevelApi.ts#L35">api/boardClassificationTeamLevelApi.ts:35</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardClassificationTeamLevelApi.ts#L42">api/boardClassificationTeamLevelApi.ts:42</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="enterpriseDataclassificationTeamSettingsGet" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enterprise<wbr/>Dataclassification<wbr/>Team<wbr/>Settings<wbr/>Get</span><a href="#enterpriseDataclassificationTeamSettingsGet" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="enterpriseDataclassificationTeamSettingsGet.enterpriseDataclassificationTeamSettingsGet-1">enterprise<wbr/>Dataclassification<wbr/>Team<wbr/>Settings<wbr/>Get<span class="tsd-signature-symbol">(</span>orgId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, teamId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.DataClassificationTeamSettings.html" class="tsd-signature-type" data-tsd-kind="Class">DataClassificationTeamSettings</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#enterpriseDataclassificationTeamSettingsGet.enterpriseDataclassificationTeamSettingsGet-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;organizations:teams:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for &lt;a target=&quot;blank&quot; href=&quot;/reference/api-reference#enterprise-plan&quot;&gt;Enterprise plan</a> users.</p></p>
+
+<h3>Summary</h3><p>Get team settings</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>orgId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>orgId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the organization</p>
+</div></li>
 <li>
-<h5>teamId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>teamId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the team</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.DataClassificationTeamSettings.html" class="tsd-signature-type" data-tsd-kind="Class">DataClassificationTeamSettings</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardClassificationTeamLevelApi.ts#L36">api/boardClassificationTeamLevelApi.ts:36</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardClassificationTeamLevelApi.ts#L49">api/boardClassificationTeamLevelApi.ts:49</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="enterpriseDataclassificationTeamSettingsSet" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enterprise<wbr/>Dataclassification<wbr/>Team<wbr/>Settings<wbr/>Set</span><a href="#enterpriseDataclassificationTeamSettingsSet" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="enterpriseDataclassificationTeamSettingsSet.enterpriseDataclassificationTeamSettingsSet-1">enterprise<wbr/>Dataclassification<wbr/>Team<wbr/>Settings<wbr/>Set<span class="tsd-signature-symbol">(</span>orgId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, teamId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, updateTeamSettingsRequest<span class="tsd-signature-symbol">: </span><a href="../classes/api.UpdateTeamSettingsRequest.html" class="tsd-signature-type" data-tsd-kind="Class">UpdateTeamSettingsRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.DataClassificationTeamSettings.html" class="tsd-signature-type" data-tsd-kind="Class">DataClassificationTeamSettings</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#enterpriseDataclassificationTeamSettingsSet.enterpriseDataclassificationTeamSettingsSet-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates board classification settings for an existing team.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;organizations:teams:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for &lt;a target=&quot;blank&quot; href=&quot;/reference/api-reference#enterprise-plan&quot;&gt;Enterprise plan</a> users.</p></p>
+
+<h3>Summary</h3><p>Update team settings</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>orgId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>orgId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the organization</p>
+</div></li>
 <li>
-<h5>teamId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>teamId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the team</p>
+</div></li>
 <li>
 <h5>updateTeamSettingsRequest: <a href="../classes/api.UpdateTeamSettingsRequest.html" class="tsd-signature-type" data-tsd-kind="Class">UpdateTeamSettingsRequest</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.DataClassificationTeamSettings.html" class="tsd-signature-type" data-tsd-kind="Class">DataClassificationTeamSettings</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardClassificationTeamLevelApi.ts#L37">api/boardClassificationTeamLevelApi.ts:37</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardClassificationTeamLevelApi.ts#L57">api/boardClassificationTeamLevelApi.ts:57</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

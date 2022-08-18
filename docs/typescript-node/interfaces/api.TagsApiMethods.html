@@ -46,148 +46,220 @@
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="attachTagToItem.attachTagToItem-1">attach<wbr/>Tag<wbr/>To<wbr/>Item<span class="tsd-signature-symbol">(</span>boardIdPlatformTags<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, itemId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tagId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#attachTagToItem.attachTagToItem-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Attach tag to item</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardIdPlatformTags: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardIdPlatformTags: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> with the item that you want to add a tag to.</p>
+</div></li>
 <li>
-<h5>itemId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>itemId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-item-model">Unique identifier (ID) of the item</a> to which you want to add a tag.</p>
+</div></li>
 <li>
-<h5>tagId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>tagId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-tag-data-model">Unique identifier (ID) of the tag</a> you want to add to the item.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L38">api/tagsApi.ts:38</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L45">api/tagsApi.ts:45</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="createTag" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>create<wbr/>Tag</span><a href="#createTag" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="createTag.createTag-1">create<wbr/>Tag<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tagCreateRequest<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagCreateRequest-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagCreateRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#createTag.createTag-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Creates a tag on a board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Create tag</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> where you want to create the tag.</p>
+</div></li>
 <li>
 <h5>tagCreateRequest: <a href="../classes/api.TagCreateRequest-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagCreateRequest</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L39">api/tagsApi.ts:39</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L52">api/tagsApi.ts:52</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="deleteTag" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>delete<wbr/>Tag</span><a href="#deleteTag" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="deleteTag.deleteTag-1">delete<wbr/>Tag<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tagId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#deleteTag.deleteTag-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Deletes the specified tag from the board. The tag is also removed from all cards and sticky notes on the board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Delete tag</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> where you want to delete a specific tag.</p>
+</div></li>
 <li>
-<h5>tagId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>tagId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-tag-data-model">Unique identifier (ID) of the tag</a> that you want to delete.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L40">api/tagsApi.ts:40</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L59">api/tagsApi.ts:59</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="getItemsByTag" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Items<wbr/>By<wbr/>Tag</span><a href="#getItemsByTag" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="getItemsByTag.getItemsByTag-1">get<wbr/>Items<wbr/>By<wbr/>Tag<span class="tsd-signature-symbol">(</span>boardIdPlatformTags<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tagId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ItemPagedResponse.html" class="tsd-signature-type" data-tsd-kind="Class">ItemPagedResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getItemsByTag.getItemsByTag-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Get items by tag</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardIdPlatformTags: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardIdPlatformTags: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> where you want to retrieve a specific tag.</p>
+</div></li>
 <li>
-<h5>tagId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>tagId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-tag-data-model">Unique identifier (ID) of the tag</a> that you want to retrieve.</p>
+</div></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> limit: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> offset: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.ItemPagedResponse.html" class="tsd-signature-type" data-tsd-kind="Class">ItemPagedResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L41">api/tagsApi.ts:41</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L68">api/tagsApi.ts:68</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="getTag" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Tag</span><a href="#getTag" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="getTag.getTag-1">get<wbr/>Tag<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tagId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getTag.getTag-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves information for a specific tag.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Get tag</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> where you want to retrieve a specific tag.</p>
+</div></li>
 <li>
-<h5>tagId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>tagId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-tag-data-model">Unique identifier (ID) of the tag</a> that you want to retrieve.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L42">api/tagsApi.ts:42</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L75">api/tagsApi.ts:75</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="getTagsFromBoard" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Tags<wbr/>From<wbr/>Board</span><a href="#getTagsFromBoard" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="getTagsFromBoard.getTagsFromBoard-1">get<wbr/>Tags<wbr/>From<wbr/>Board<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagsPagedResponse.html" class="tsd-signature-type" data-tsd-kind="Class">TagsPagedResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getTagsFromBoard.getTagsFromBoard-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Get tags from board</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> whose tags you want to retrieve.</p>
+</div></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> limit: <span class="tsd-signature-type">string</span></h5></li>
 <li>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> offset: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagsPagedResponse.html" class="tsd-signature-type" data-tsd-kind="Class">TagsPagedResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L43">api/tagsApi.ts:43</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L83">api/tagsApi.ts:83</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="getTagsFromItem" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Tags<wbr/>From<wbr/>Item</span><a href="#getTagsFromItem" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="getTagsFromItem.getTagsFromItem-1">get<wbr/>Tags<wbr/>From<wbr/>Item<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, itemId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.GetTagsResponse.html" class="tsd-signature-type" data-tsd-kind="Class">GetTagsResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getTagsFromItem.getTagsFromItem-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves all the tags from the specified item.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Get tags from item</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> with the item whose tags you want to retrieve.</p>
+</div></li>
 <li>
-<h5>itemId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>itemId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-item-model">Unique identifier (ID) of the item</a> whose tags you want to retrieve.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.GetTagsResponse.html" class="tsd-signature-type" data-tsd-kind="Class">GetTagsResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L44">api/tagsApi.ts:44</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L90">api/tagsApi.ts:90</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="removeTagFromItem" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove<wbr/>Tag<wbr/>From<wbr/>Item</span><a href="#removeTagFromItem" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="removeTagFromItem.removeTagFromItem-1">remove<wbr/>Tag<wbr/>From<wbr/>Item<span class="tsd-signature-symbol">(</span>boardIdPlatformTags<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, itemId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tagId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#removeTagFromItem.removeTagFromItem-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Remove tag from item</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardIdPlatformTags: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardIdPlatformTags: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> with the item that you want to remove a tag from.</p>
+</div></li>
 <li>
-<h5>itemId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>itemId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-item-model">Unique identifier (ID) of the item</a> that you want to remove the tag from.</p>
+</div></li>
 <li>
-<h5>tagId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>tagId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-tag-data-model">Unique identifier (ID) of the tag</a> that you want to remove from the item.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L45">api/tagsApi.ts:45</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L98">api/tagsApi.ts:98</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="updateTag" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>update<wbr/>Tag</span><a href="#updateTag" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="updateTag.updateTag-1">update<wbr/>Tag<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tagId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, tagUpdateRequest<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagUpdateRequest-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagUpdateRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#updateTag.updateTag-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates a tag based on the data properties provided in the request body.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Update tag</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> where you want to update a specific tag.</p>
+</div></li>
 <li>
-<h5>tagId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>tagId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-tag-data-model">Unique identifier (ID) of the tag</a> that you want to update.</p>
+</div></li>
 <li>
 <h5>tagUpdateRequest: <a href="../classes/api.TagUpdateRequest-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagUpdateRequest</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TagWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">TagWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L46">api/tagsApi.ts:46</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/tagsApi.ts#L106">api/tagsApi.ts:106</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

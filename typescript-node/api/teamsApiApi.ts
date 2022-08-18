@@ -31,21 +31,48 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface TeamsApiApiMethods {
+    /**
+     * Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+     * @summary Create team
+     * @param orgId The id of an Organization.
+     * @param createTeamRequest 
+     */
     enterpriseCreateTeam(orgId: string, createTeamRequest: CreateTeamRequest, ): Promise<{ response: Response; body: Team;  }>
+    /**
+     * Deletes an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+     * @summary Delete team
+     * @param orgId The id of an Organization.
+     * @param teamId The id of a Team.
+     */
     enterpriseDeleteTeam(orgId: string, teamId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+     * @summary Get team
+     * @param orgId The id of an Organization.
+     * @param teamId The id of a Team.
+     */
     enterpriseGetTeam(orgId: string, teamId: string, ): Promise<{ response: Response; body: Team;  }>
+    /**
+     * Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+     * @summary List teams
+     * @param orgId The id of an Organization.
+     * @param limit Limit of teams in result list
+     * @param cursor Team id that will be used to find team next to this id in the sorted list
+     * @param filterQuery Filtering query
+     */
     enterpriseGetTeams(orgId: string, limit?: number, cursor?: string, filterQuery?: string, ): Promise<{ response: Response; body: Array<Team>;  }>
+    /**
+     * Updates an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+     * @summary Update team
+     * @param orgId The id of an Organization.
+     * @param teamId The id of a Team.
+     * @param teamChanges 
+     */
     enterpriseUpdateTeam(orgId: string, teamId: string, teamChanges: TeamChanges, ): Promise<{ response: Response; body: Team;  }>
 }
 
 export function TeamsApiApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TeamsApiApiMethods {
     return {
-        /**
-         * Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
-         * @summary Create team
-         * @param orgId The id of an Organization.
-         * @param createTeamRequest 
-         */
         enterpriseCreateTeam: async function (orgId: string, createTeamRequest: CreateTeamRequest, ) : Promise<{ response: Response; body: Team;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)));
@@ -104,12 +131,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Deletes an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
-         * @summary Delete team
-         * @param orgId The id of an Organization.
-         * @param teamId The id of a Team.
-         */
         enterpriseDeleteTeam: async function (orgId: string, teamId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
@@ -168,12 +189,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
-         * @summary Get team
-         * @param orgId The id of an Organization.
-         * @param teamId The id of a Team.
-         */
         enterpriseGetTeam: async function (orgId: string, teamId: string, ) : Promise<{ response: Response; body: Team;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
@@ -232,14 +247,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
-         * @summary List teams
-         * @param orgId The id of an Organization.
-         * @param limit Limit of teams in result list
-         * @param cursor Team id that will be used to find team next to this id in the sorted list
-         * @param filterQuery Filtering query
-         */
         enterpriseGetTeams: async function (orgId: string, limit?: number, cursor?: string, filterQuery?: string, ) : Promise<{ response: Response; body: Array<Team>;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)));
@@ -304,13 +311,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
-         * @summary Update team
-         * @param orgId The id of an Organization.
-         * @param teamId The id of a Team.
-         * @param teamChanges 
-         */
         enterpriseUpdateTeam: async function (orgId: string, teamId: string, teamChanges: TeamChanges, ) : Promise<{ response: Response; body: Team;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))

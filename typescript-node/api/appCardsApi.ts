@@ -32,20 +32,39 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface AppCardsApiMethods {
+    /**
+     * Adds an app card item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Create app card item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+     * @param appCardCreateRequest 
+     */
     createAppCardItem(boardId: string, appCardCreateRequest: AppCardCreateRequest, ): Promise<{ response: Response; body: AppCardItem;  }>
+    /**
+     * Deletes an app card item from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+     * @summary Delete app card item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete an item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+     */
     deleteAppCardItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves information for a specific app card item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get app card item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+     */
     getAppCardItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: AppCardItem;  }>
+    /**
+     * Updates an app card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Update app card item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+     * @param appCardUpdateRequest 
+     */
     updateAppCardItem(boardId: string, itemId: string, appCardUpdateRequest: AppCardUpdateRequest, ): Promise<{ response: Response; body: AppCardItem;  }>
 }
 
 export function AppCardsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): AppCardsApiMethods {
     return {
-        /**
-         * Adds an app card item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Create app card item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
-         * @param appCardCreateRequest 
-         */
         createAppCardItem: async function (boardId: string, appCardCreateRequest: AppCardCreateRequest, ) : Promise<{ response: Response; body: AppCardItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/app_cards'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -104,12 +123,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Deletes an app card item from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
-         * @summary Delete app card item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete an item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
-         */
         deleteAppCardItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/app_cards/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -168,12 +181,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information for a specific app card item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get app card item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
-         */
         getAppCardItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: AppCardItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/app_cards/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -232,13 +239,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates an app card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Update app card item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
-         * @param appCardUpdateRequest 
-         */
         updateAppCardItem: async function (boardId: string, itemId: string, appCardUpdateRequest: AppCardUpdateRequest, ) : Promise<{ response: Response; body: AppCardItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/app_cards/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))

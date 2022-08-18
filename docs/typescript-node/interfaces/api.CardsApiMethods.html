@@ -41,63 +41,93 @@
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="createCardItem.createCardItem-1">create<wbr/>Card<wbr/>Item<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, cardCreateRequest<span class="tsd-signature-symbol">: </span><a href="../classes/api.CardCreateRequest.html" class="tsd-signature-type" data-tsd-kind="Class">CardCreateRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.CardItem.html" class="tsd-signature-type" data-tsd-kind="Class">CardItem</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#createCardItem.createCardItem-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Adds a card item to a board<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 2</a><br/></p>
+
+<h3>Summary</h3><p>Create card item</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> where you want to create the item.</p>
+</div></li>
 <li>
 <h5>cardCreateRequest: <a href="../classes/api.CardCreateRequest.html" class="tsd-signature-type" data-tsd-kind="Class">CardCreateRequest</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.CardItem.html" class="tsd-signature-type" data-tsd-kind="Class">CardItem</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/cardsApi.ts#L35">api/cardsApi.ts:35</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/cardsApi.ts#L41">api/cardsApi.ts:41</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="deleteCardItem" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>delete<wbr/>Card<wbr/>Item</span><a href="#deleteCardItem" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="deleteCardItem.deleteCardItem-1">delete<wbr/>Card<wbr/>Item<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, itemId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#deleteCardItem.deleteCardItem-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Deletes a card item from the board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 3</a><br/></p>
+
+<h3>Summary</h3><p>Delete card item</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> from which you want to delete the item.</p>
+</div></li>
 <li>
-<h5>itemId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>itemId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-item-model">Unique identifier (ID) of the item</a> that you want to delete.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/cardsApi.ts#L36">api/cardsApi.ts:36</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/cardsApi.ts#L48">api/cardsApi.ts:48</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="getCardItem" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Card<wbr/>Item</span><a href="#getCardItem" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="getCardItem.getCardItem-1">get<wbr/>Card<wbr/>Item<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, itemId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.CardItem.html" class="tsd-signature-type" data-tsd-kind="Class">CardItem</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getCardItem.getCardItem-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves information for a specific card item on a board<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
+
+<h3>Summary</h3><p>Get card item</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> from which you want to retrieve a specific item.</p>
+</div></li>
 <li>
-<h5>itemId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>itemId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-item-model">Unique identifier (ID) of the item</a> that you want to retrieve.</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.CardItem.html" class="tsd-signature-type" data-tsd-kind="Class">CardItem</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/cardsApi.ts#L37">api/cardsApi.ts:37</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/cardsApi.ts#L55">api/cardsApi.ts:55</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="updateCardItem" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>update<wbr/>Card<wbr/>Item</span><a href="#updateCardItem" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="updateCardItem.updateCardItem-1">update<wbr/>Card<wbr/>Item<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, itemId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, cardUpdateRequest<span class="tsd-signature-symbol">: </span><a href="../classes/api.CardUpdateRequest.html" class="tsd-signature-type" data-tsd-kind="Class">CardUpdateRequest</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.CardItem.html" class="tsd-signature-type" data-tsd-kind="Class">CardItem</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#updateCardItem.updateCardItem-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Updates a card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:write</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 2</a><br/></p>
+
+<h3>Summary</h3><p>Update card item</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>boardId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>boardId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> where you want to update the item.</p>
+</div></li>
 <li>
-<h5>itemId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>itemId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/rest-api-item-model">Unique identifier (ID) of the item</a> that you want to update.</p>
+</div></li>
 <li>
 <h5>cardUpdateRequest: <a href="../classes/api.CardUpdateRequest.html" class="tsd-signature-type" data-tsd-kind="Class">CardUpdateRequest</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.CardItem.html" class="tsd-signature-type" data-tsd-kind="Class">CardItem</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/cardsApi.ts#L38">api/cardsApi.ts:38</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/cardsApi.ts#L63">api/cardsApi.ts:63</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

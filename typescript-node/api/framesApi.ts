@@ -32,20 +32,39 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface FramesApiMethods {
+    /**
+     * Adds a frame to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Create frame
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create a frame.
+     * @param frameCreateRequest 
+     */
     createFrameItem(boardId: string, frameCreateRequest: FrameCreateRequest, ): Promise<{ response: Response; body: FrameItem;  }>
+    /**
+     * Deletes a frame from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+     * @summary Delete frame
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the frame.
+     * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+     */
     deleteFrameItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves information for a specific frame on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get frame
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that contains the frame that you want to retrieve
+     * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+     */
     getFrameItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: FrameItem;  }>
+    /**
+     * Updates a frame on a board based on the data, style, or geometry properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Update frame
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the frame.
+     * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+     * @param frameUpdateRequest 
+     */
     updateFrameItem(boardId: string, itemId: string, frameUpdateRequest: FrameUpdateRequest, ): Promise<{ response: Response; body: FrameItem;  }>
 }
 
 export function FramesApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): FramesApiMethods {
     return {
-        /**
-         * Adds a frame to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Create frame
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create a frame.
-         * @param frameCreateRequest 
-         */
         createFrameItem: async function (boardId: string, frameCreateRequest: FrameCreateRequest, ) : Promise<{ response: Response; body: FrameItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/frames'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -104,12 +123,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Deletes a frame from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
-         * @summary Delete frame
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the frame.
-         * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
-         */
         deleteFrameItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/frames/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -168,12 +181,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information for a specific frame on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get frame
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that contains the frame that you want to retrieve
-         * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
-         */
         getFrameItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: FrameItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/frames/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -232,13 +239,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates a frame on a board based on the data, style, or geometry properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Update frame
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the frame.
-         * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
-         * @param frameUpdateRequest 
-         */
         updateFrameItem: async function (boardId: string, itemId: string, frameUpdateRequest: FrameUpdateRequest, ) : Promise<{ response: Response; body: FrameItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/frames/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))

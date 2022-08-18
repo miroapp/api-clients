@@ -32,21 +32,51 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface ItemsApiMethods {
+    /**
+     * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+     * @summary Delete item
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+     */
     deleteItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Get items on board
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) for which you want to retrieve the list of available items.
+     * @param limit 
+     * @param type 
+     * @param cursor 
+     */
     getItems(boardId: string, limit?: string, type?: string, cursor?: string, ): Promise<{ response: Response; body: GenericItemCursorPaged;  }>
+    /**
+     * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Get items within frame
+     * @param boardIdPlatformContainers [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that contains the frame for which you want to retrieve the list of available items.
+     * @param parentItemId ID of the frame for which you want to retrieve the list of available items.
+     * @param limit 
+     * @param type 
+     * @param cursor 
+     */
     getItemsWithinFrame(boardIdPlatformContainers: string, parentItemId: string, limit?: string, type?: string, cursor?: string, ): Promise<{ response: Response; body: GenericItemCursorPaged;  }>
+    /**
+     * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get specific item on board
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+     */
     getSpecificItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: GenericItem;  }>
+    /**
+     * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Update item position or parent
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+     * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+     * @param genericItemUpdate 
+     */
     updateItemPositionOrParent(boardId: string, itemId: string, genericItemUpdate: GenericItemUpdate, ): Promise<{ response: Response; body: GenericItem;  }>
 }
 
 export function ItemsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): ItemsApiMethods {
     return {
-        /**
-         * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
-         * @summary Delete item
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
-         */
         deleteItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -105,14 +135,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Get items on board
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) for which you want to retrieve the list of available items.
-         * @param limit 
-         * @param type 
-         * @param cursor 
-         */
         getItems: async function (boardId: string, limit?: string, type?: string, cursor?: string, ) : Promise<{ response: Response; body: GenericItemCursorPaged;  }> {
             const localVarPath = '/v2/boards/{board_id}/items'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -177,15 +199,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Get items within frame
-         * @param boardIdPlatformContainers [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that contains the frame for which you want to retrieve the list of available items.
-         * @param parentItemId ID of the frame for which you want to retrieve the list of available items.
-         * @param limit 
-         * @param type 
-         * @param cursor 
-         */
         getItemsWithinFrame: async function (boardIdPlatformContainers: string, parentItemId: string, limit?: string, type?: string, cursor?: string, ) : Promise<{ response: Response; body: GenericItemCursorPaged;  }> {
             const localVarPath = '/v2/boards/{board_id_PlatformContainers}/items'
                 .replace('{' + 'board_id_PlatformContainers' + '}', encodeURIComponent(String(boardIdPlatformContainers)));
@@ -259,12 +272,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get specific item on board
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
-         */
         getSpecificItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: GenericItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -323,13 +330,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Update item position or parent
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
-         * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
-         * @param genericItemUpdate 
-         */
         updateItemPositionOrParent: async function (boardId: string, itemId: string, genericItemUpdate: GenericItemUpdate, ) : Promise<{ response: Response; body: GenericItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))

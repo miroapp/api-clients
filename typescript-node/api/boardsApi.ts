@@ -32,22 +32,53 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface BoardsApiMethods {
+    /**
+     * Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a><br/>
+     * @summary Copy board
+     * @param copyFrom [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to copy.
+     * @param boardChanges 
+     */
     copyBoard(copyFrom: string, boardChanges?: BoardChanges, ): Promise<{ response: Response; body: BoardWithLinks;  }>
+    /**
+     * Creates a board with the specified name and sharing policies.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+     * @summary Create board
+     * @param boardChanges 
+     */
     createBoard(boardChanges?: BoardChanges, ): Promise<{ response: Response; body: BoardWithLinks;  }>
+    /**
+     * 
+     * @summary Delete board
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to delete.
+     */
     deleteBoard(boardId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Retrieves a list of boards that match the search criteria provided in the request. If you are an Enterprise customer and a Company Admin, you can retrieve all boards, including all private boards (boards that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins. Note that you only get results instantaneously when you filter by `team_id`. If you use any other filter,  you need to give a few seconds for the indexing of newly created boards before retrieving boards.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get boards
+     * @param teamId 
+     * @param query 
+     * @param owner 
+     * @param limit 
+     * @param offset 
+     * @param sort 
+     */
     getBoards(teamId?: string, query?: string, owner?: string, limit?: string, offset?: string, sort?: 'default' | 'last_modified' | 'last_opened' | 'last_created' | 'alphabetically', ): Promise<{ response: Response; body: BoardsPagedResponse;  }>
+    /**
+     * Retrieves information about a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get specific board
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to retrieve.
+     */
     getSpecificBoard(boardId: string, ): Promise<{ response: Response; body: BoardWithLinks;  }>
+    /**
+     * 
+     * @summary Update board
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to update.
+     * @param boardChanges 
+     */
     updateBoard(boardId: string, boardChanges: BoardChanges, ): Promise<{ response: Response; body: BoardWithLinks;  }>
 }
 
 export function BoardsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardsApiMethods {
     return {
-        /**
-         * Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a><br/>
-         * @summary Copy board
-         * @param copyFrom [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to copy.
-         * @param boardChanges 
-         */
         copyBoard: async function (copyFrom: string, boardChanges?: BoardChanges, ) : Promise<{ response: Response; body: BoardWithLinks;  }> {
             const localVarPath = '/v2/boards';
             let localVarQueryParameters = new URLSearchParams();
@@ -104,11 +135,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Creates a board with the specified name and sharing policies.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
-         * @summary Create board
-         * @param boardChanges 
-         */
         createBoard: async function (boardChanges?: BoardChanges, ) : Promise<{ response: Response; body: BoardWithLinks;  }> {
             const localVarPath = '/v2/boards';
             let localVarQueryParameters = new URLSearchParams();
@@ -156,11 +182,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * 
-         * @summary Delete board
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to delete.
-         */
         deleteBoard: async function (boardId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -213,16 +234,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves a list of boards that match the search criteria provided in the request. If you are an Enterprise customer and a Company Admin, you can retrieve all boards, including all private boards (boards that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins. Note that you only get results instantaneously when you filter by `team_id`. If you use any other filter,  you need to give a few seconds for the indexing of newly created boards before retrieving boards.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get boards
-         * @param teamId 
-         * @param query 
-         * @param owner 
-         * @param limit 
-         * @param offset 
-         * @param sort 
-         */
         getBoards: async function (teamId?: string, query?: string, owner?: string, limit?: string, offset?: string, sort?: 'default' | 'last_modified' | 'last_opened' | 'last_created' | 'alphabetically', ) : Promise<{ response: Response; body: BoardsPagedResponse;  }> {
             const localVarPath = '/v2/boards';
             let localVarQueryParameters = new URLSearchParams();
@@ -293,11 +304,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information about a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get specific board
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to retrieve.
-         */
         getSpecificBoard: async function (boardId: string, ) : Promise<{ response: Response; body: BoardWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -350,12 +356,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * 
-         * @summary Update board
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to update.
-         * @param boardChanges 
-         */
         updateBoard: async function (boardId: string, boardChanges: BoardChanges, ) : Promise<{ response: Response; body: BoardWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));

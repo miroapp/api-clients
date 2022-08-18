@@ -40,44 +40,66 @@
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="enterpriseGetOrganization.enterpriseGetOrganization-1">enterprise<wbr/>Get<wbr/>Organization<span class="tsd-signature-symbol">(</span>orgId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.Organization-1.html" class="tsd-signature-type" data-tsd-kind="Class">Organization</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#enterpriseGetOrganization.enterpriseGetOrganization-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves organization information.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;organizations:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for &lt;a target=&quot;blank&quot; href=&quot;/reference/api-reference#enterprise-plan&quot;&gt;Enterprise plan</a> users.</p></p>
+
+<h3>Summary</h3><p>Get organization info</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>orgId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>orgId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the organization</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.Organization-1.html" class="tsd-signature-type" data-tsd-kind="Class">Organization</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/organizationsApi.ts#L35">api/organizationsApi.ts:35</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/organizationsApi.ts#L40">api/organizationsApi.ts:40</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="enterpriseGetOrganizationMember" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enterprise<wbr/>Get<wbr/>Organization<wbr/>Member</span><a href="#enterpriseGetOrganizationMember" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="enterpriseGetOrganizationMember.enterpriseGetOrganizationMember-1">enterprise<wbr/>Get<wbr/>Organization<wbr/>Member<span class="tsd-signature-symbol">(</span>orgId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, memberId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.OrganizationMember-1.html" class="tsd-signature-type" data-tsd-kind="Class">OrganizationMember</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#enterpriseGetOrganizationMember.enterpriseGetOrganizationMember-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;organizations:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for &lt;a target=&quot;blank&quot; href=&quot;/reference/api-reference#enterprise-plan&quot;&gt;Enterprise plan</a> users.</p></p>
+
+<h3>Summary</h3><p>Get organization member</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>orgId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>orgId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the organization</p>
+</div></li>
 <li>
-<h5>memberId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5>memberId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the organization member</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.OrganizationMember-1.html" class="tsd-signature-type" data-tsd-kind="Class">OrganizationMember</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/organizationsApi.ts#L36">api/organizationsApi.ts:36</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/organizationsApi.ts#L47">api/organizationsApi.ts:47</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="enterpriseGetOrganizationMembers" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enterprise<wbr/>Get<wbr/>Organization<wbr/>Members</span><a href="#enterpriseGetOrganizationMembers" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
 <li class="tsd-signature tsd-anchor-link" id="enterpriseGetOrganizationMembers.enterpriseGetOrganizationMembers-1">enterprise<wbr/>Get<wbr/>Organization<wbr/>Members<span class="tsd-signature-symbol">(</span>orgId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, query<span class="tsd-signature-symbol">: </span><a href="../classes/api.OrganizationMembersSearchQuery.html" class="tsd-signature-type" data-tsd-kind="Class">OrganizationMembersSearchQuery</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.EnterpriseGetOrganizationMembers200Response.html" class="tsd-signature-type" data-tsd-kind="Class">EnterpriseGetOrganizationMembers200Response</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#enterpriseGetOrganizationMembers.enterpriseGetOrganizationMembers-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;organizations:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for &lt;a target=&quot;blank&quot; href=&quot;/reference/api-reference#enterprise-plan&quot;&gt;Enterprise plan</a> users.</p></p>
+
+<h3>Summary</h3><p>Get organization members</p>
+</div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5>orgId: <span class="tsd-signature-type">string</span></h5></li>
+<h5>orgId: <span class="tsd-signature-type">string</span></h5>
+<div class="tsd-comment tsd-typography"><p>id of the organization</p>
+</div></li>
 <li>
-<h5>query: <a href="../classes/api.OrganizationMembersSearchQuery.html" class="tsd-signature-type" data-tsd-kind="Class">OrganizationMembersSearchQuery</a></h5></li></ul></div>
+<h5>query: <a href="../classes/api.OrganizationMembersSearchQuery.html" class="tsd-signature-type" data-tsd-kind="Class">OrganizationMembersSearchQuery</a></h5>
+<div class="tsd-comment tsd-typography"><p>query to be used for organization members retrieval</p>
+</div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.EnterpriseGetOrganizationMembers200Response.html" class="tsd-signature-type" data-tsd-kind="Class">EnterpriseGetOrganizationMembers200Response</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/organizationsApi.ts#L37">api/organizationsApi.ts:37</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/organizationsApi.ts#L54">api/organizationsApi.ts:54</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">

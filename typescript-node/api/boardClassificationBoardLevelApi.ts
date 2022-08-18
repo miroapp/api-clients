@@ -30,19 +30,27 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface BoardClassificationBoardLevelApiMethods {
+    /**
+     * Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+     * @summary Get board classification
+     * @param orgId id of the organization
+     * @param teamId id of the team
+     * @param boardId Unique identifier of the board that you want to retrieve.
+     */
     enterpriseDataclassificationBoardGet(orgId: string, teamId: string, boardId: string, ): Promise<{ response: Response; body: BoardDataClassificationLabel;  }>
+    /**
+     * Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+     * @summary Update board classification
+     * @param orgId id of the organization
+     * @param teamId id of the team
+     * @param boardId Unique identifier of the board that you want to update.
+     * @param dataClassificationLabelId 
+     */
     enterpriseDataclassificationBoardSet(orgId: string, teamId: string, boardId: string, dataClassificationLabelId: DataClassificationLabelId, ): Promise<{ response: Response; body: BoardDataClassificationLabel;  }>
 }
 
 export function BoardClassificationBoardLevelApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardClassificationBoardLevelApiMethods {
     return {
-        /**
-         * Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
-         * @summary Get board classification
-         * @param orgId id of the organization
-         * @param teamId id of the team
-         * @param boardId Unique identifier of the board that you want to retrieve.
-         */
         enterpriseDataclassificationBoardGet: async function (orgId: string, teamId: string, boardId: string, ) : Promise<{ response: Response; body: BoardDataClassificationLabel;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
@@ -107,14 +115,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
-         * @summary Update board classification
-         * @param orgId id of the organization
-         * @param teamId id of the team
-         * @param boardId Unique identifier of the board that you want to update.
-         * @param dataClassificationLabelId 
-         */
         enterpriseDataclassificationBoardSet: async function (orgId: string, teamId: string, boardId: string, dataClassificationLabelId: DataClassificationLabelId, ) : Promise<{ response: Response; body: BoardDataClassificationLabel;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))

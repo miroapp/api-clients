@@ -34,22 +34,47 @@ let defaultBasePath = 'https://api.miro.com';
 
 
 export interface BoardMembersApiMethods {
+    /**
+     * Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get all board members
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
+     * @param limit 
+     * @param offset 
+     */
     getBoardMembers(boardId: string, limit?: string, offset?: string, ): Promise<{ response: Response; body: BoardMembersPagedResponse;  }>
+    /**
+     * Retrieves information for a board member.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+     * @summary Get specific board member
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
+     * @param boardMemberId Unique identifier (ID) of the board member whose role you want to retrieve.
+     */
     getSpecificBoardMember(boardId: string, boardMemberId: string, ): Promise<{ response: Response; body: BoardMemberWithLinks;  }>
+    /**
+     * Removes a board member from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Remove board member
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete an item.
+     * @param boardMemberId Unique identifier (ID) of the board member whose role you want to delete.
+     */
     removeBoardMember(boardId: string, boardMemberId: string, ): Promise<{ response: Response; body: object;  }>
+    /**
+     * Shares the board and Invites new members to collaborate on a board by sending an invitation email. Depending on the board\'s [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy), there might be various scenarios where membership in the team is required in order to share the board with a user. For more information on sharing policy and different scenarios, see [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy).<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+     * @summary Share board
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
+     * @param boardMembersInvite 
+     */
     shareBoard(boardId: string, boardMembersInvite: BoardMembersInvite, ): Promise<{ response: Response; body: InvitationResult;  }>
+    /**
+     * Updates the role of a board member.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+     * @summary Update board member
+     * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) for which you want to update the role of the board member.
+     * @param boardMemberId Unique identifier (ID) of the board member whose role you want to update.
+     * @param boardMemberChanges 
+     */
     updateBoardMember(boardId: string, boardMemberId: string, boardMemberChanges: BoardMemberChanges, ): Promise<{ response: Response; body: BoardMemberWithLinks;  }>
 }
 
 export function BoardMembersApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardMembersApiMethods {
     return {
-        /**
-         * Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get all board members
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
-         * @param limit 
-         * @param offset 
-         */
         getBoardMembers: async function (boardId: string, limit?: string, offset?: string, ) : Promise<{ response: Response; body: BoardMembersPagedResponse;  }> {
             const localVarPath = '/v2/boards/{board_id}/members'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -110,12 +135,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Retrieves information for a board member.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
-         * @summary Get specific board member
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
-         * @param boardMemberId Unique identifier (ID) of the board member whose role you want to retrieve.
-         */
         getSpecificBoardMember: async function (boardId: string, boardMemberId: string, ) : Promise<{ response: Response; body: BoardMemberWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/members/{board_member_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -174,12 +193,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Removes a board member from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Remove board member
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete an item.
-         * @param boardMemberId Unique identifier (ID) of the board member whose role you want to delete.
-         */
         removeBoardMember: async function (boardId: string, boardMemberId: string, ) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/members/{board_member_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -238,12 +251,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Shares the board and Invites new members to collaborate on a board by sending an invitation email. Depending on the board\'s [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy), there might be various scenarios where membership in the team is required in order to share the board with a user. For more information on sharing policy and different scenarios, see [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy).<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
-         * @summary Share board
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
-         * @param boardMembersInvite 
-         */
         shareBoard: async function (boardId: string, boardMembersInvite: BoardMembersInvite, ) : Promise<{ response: Response; body: InvitationResult;  }> {
             const localVarPath = '/v2/boards/{board_id}/members'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
@@ -302,13 +309,6 @@ const options = {
 
             return({response, body})
         },
-        /**
-         * Updates the role of a board member.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
-         * @summary Update board member
-         * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) for which you want to update the role of the board member.
-         * @param boardMemberId Unique identifier (ID) of the board member whose role you want to update.
-         * @param boardMemberChanges 
-         */
         updateBoardMember: async function (boardId: string, boardMemberId: string, boardMemberChanges: BoardMemberChanges, ) : Promise<{ response: Response; body: BoardMemberWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/members/{board_member_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))

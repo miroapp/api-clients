@@ -297,6 +297,7 @@ export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object' } 
     const body = `(await this._api.${m.method}(...this.pathParams, ...rest)).body`
 
     return `
+    /** {@inheritDoc api!MiroEndpoints.${m.method}} */
     async ${m.alias || m.method}(...rest: GetRest${model.props.length}<MiroEndpoints['${m.method}']>) {
         ${returnsModel ? `const result = ${body}` : body}
         ${m.paginated ? `return result.${m.paginated} ? result.${m.paginated}.map(result => { ` : ''}
