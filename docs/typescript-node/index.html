@@ -14,12 +14,34 @@
 <a href="#using-miro-client" id="using-miro-client" style="color: inherit; text-decoration: none;">
   <h3>Using Miro client</h3>
 </a>
-<p>Miro class is a wrapper that handles authorization and per-user access token management. It requires a storage provider for the token information.</p>
+<p>Miro class is a wrapper that handles authorization and per-user access token management.</p>
+<p>To instantiate the client call the Miro instance:</p>
+<pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">Miro</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;miro-node&#39;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">miro</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Miro</span><span class="hl-1">()</span>
+</code></pre>
+<p>By default client will load the app configuration from environment variables: <code>MIRO_CLIENT_ID</code>, <code>MIRO_CLIENT_SECRET</code>, <code>MIRO_REDIRECT_URL</code>. They can also be provided by passing the options object to the constrictor.</p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">miro</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Miro</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-2">clientId:</span><span class="hl-1"> </span><span class="hl-3">&#39;your_app_id&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">clientSecret:</span><span class="hl-1"> </span><span class="hl-3">&#39;your_app_secret&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">redirectUrl:</span><span class="hl-1"> </span><span class="hl-3">&#39;https://foo.bar/miro_return_url&#39;</span><br/><span class="hl-1">})</span>
+</code></pre>
+<p>The client has all methods that are needed to complete Miro authorization flows and make API calls:</p>
+<ol>
+<li>Check if current user has authorized the app: <code>miro.isAuthorized(&#39;some_user_id&#39;)</code></li>
+<li>Request user to authorize the app by redirecting them to: <code>miro.getAuthUrl()</code></li>
+<li>Exchange users authorization code for a token in the return url&#39;s request handler: <code>await miro.exchangeCodeForAccessToken(&#39;some_user_id&#39;, &#39;https://foo.bar/miro_return_url?code=12345&#39;)</code></li>
+<li>Use the API as a specific user: <code>await miro.api(&#39;some_user_id&#39;).getBoards()</code></li>
+</ol>
+<p>Most methods (<code>isAuthorized</code>, <code>exchangeCodeForAccessToken</code>, <code>api</code>) take <code>user_id</code> as a first paramters. This is the ID of the user in your app. The one that is currently logged in. It can be either a string or a number.</p>
+<p>In order to persist user&#39;s access and refresh tokens client library requires a persistent storage. By default it uses filesystem to store this state. For production deployments we recommend using a custom implementation backed by a database. It can be passed as an option to Miro contructor:</p>
+<pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">miro</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Miro</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-2">storage:</span><span class="hl-1"> </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">CustomMiroStorage</span><span class="hl-1">()</span><br/><span class="hl-1">})</span>
+</code></pre>
+<p>Storage should implement the following interface:</p>
+<pre><code class="language-typescript"><span class="hl-0">export</span><span class="hl-1"> </span><span class="hl-4">interface</span><span class="hl-1"> </span><span class="hl-7">Storage</span><span class="hl-1"> {</span><br/><span class="hl-1">    </span><span class="hl-6">read</span><span class="hl-1">(</span><span class="hl-2">userId</span><span class="hl-1">: </span><span class="hl-7">ExternalUserId</span><span class="hl-1">): </span><span class="hl-7">Promise</span><span class="hl-1">&lt;</span><span class="hl-7">State</span><span class="hl-1">|</span><span class="hl-7">undefined</span><span class="hl-1">&gt;</span><br/><span class="hl-1">    </span><span class="hl-6">write</span><span class="hl-1">(</span><span class="hl-2">userId</span><span class="hl-1">: </span><span class="hl-7">ExternalUserId</span><span class="hl-1">, </span><span class="hl-2">state</span><span class="hl-1">: </span><span class="hl-7">State</span><span class="hl-1">): </span><span class="hl-7">Awaitable</span><span class="hl-1">&lt;</span><span class="hl-7">void</span><span class="hl-1">&gt;</span><br/><span class="hl-1">}</span>
+</code></pre>
+<p>The client will automatically refresh access tokens if it is going to expire soon.</p>
 <p>See <a href="./examples/fastify.ts">the example usage</a> with <em>fastify</em> web framework.</p>
 
 <a href="#using-miroapi-directly" id="using-miroapi-directly" style="color: inherit; text-decoration: none;">
   <h3>Using MiroApi directly</h3>
 </a>
+<p>Besides the high level stateful Miro client the library also exposes a stateless low level client:</p>
 <pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> {</span><span class="hl-2">MiroApi</span><span class="hl-1">} </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;./index.ts&#39;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">api</span><span class="hl-1"> = </span><span class="hl-6">MiroApi</span><span class="hl-1">(</span><span class="hl-3">&#39;ACCESS_TOKEN&#39;</span><span class="hl-1">)</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">boards</span><span class="hl-1"> = </span><span class="hl-0">await</span><span class="hl-1"> </span><span class="hl-2">api</span><span class="hl-1">.</span><span class="hl-6">getBoards</span><span class="hl-1">()</span>
 </code></pre>
 </div></div>
@@ -48,6 +70,7 @@
 <ul>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.AppCardData.html">App<wbr/>Card<wbr/>Data</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.AppCardDataChanges.html">App<wbr/>Card<wbr/>Data<wbr/>Changes</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.AppCardDataPlatformTags.html">App<wbr/>Card<wbr/>Data<wbr/>Platform<wbr/>Tags</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.BoardMember.html">Board<wbr/>Member</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.BoardMemberChanges.html">Board<wbr/>Member<wbr/>Changes</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.BoardMemberWithLinks.html">Board<wbr/>Member<wbr/>With<wbr/>Links</a></li>
@@ -61,20 +84,29 @@
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.ConnectorStyle.html">Connector<wbr/>Style</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.ConnectorWithLinks.html">Connector<wbr/>With<wbr/>Links</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.CustomField.html">Custom<wbr/>Field</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.CustomFieldPlatformTags.html">Custom<wbr/>Field<wbr/>Platform<wbr/>Tags</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.EmbedData.html">Embed<wbr/>Data</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.EmbedDataPlatformTags.html">Embed<wbr/>Data<wbr/>Platform<wbr/>Tags</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.EmbedUrlData.html">Embed<wbr/>Url<wbr/>Data</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.EmbedUrlDataChanges.html">Embed<wbr/>Url<wbr/>Data<wbr/>Changes</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.FrameChanges.html">Frame<wbr/>Changes</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.FrameData.html">Frame<wbr/>Data</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.FrameDataPlatformContainers.html">Frame<wbr/>Data<wbr/>Platform<wbr/>Containers</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.FrameDataPlatformTags.html">Frame<wbr/>Data<wbr/>Platform<wbr/>Tags</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.ItemConnectionChangesData.html">Item<wbr/>Connection<wbr/>Changes<wbr/>Data</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.ItemConnectionCreationData.html">Item<wbr/>Connection<wbr/>Creation<wbr/>Data</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.Organization.html">Organization</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.OrganizationMember.html">Organization<wbr/>Member</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.Position.html">Position</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.PositionChange.html">Position<wbr/>Change</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.PositionChangePlatformContainers.html">Position<wbr/>Change<wbr/>Platform<wbr/>Containers</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.PositionPlatformContainers.html">Position<wbr/>Platform<wbr/>Containers</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.PositionPlatformTags.html">Position<wbr/>Platform<wbr/>Tags</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.ShapeData.html">Shape<wbr/>Data</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.ShapeDataPlatformTags.html">Shape<wbr/>Data<wbr/>Platform<wbr/>Tags</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.ShapeStyle.html">Shape<wbr/>Style</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.StickyNoteData.html">Sticky<wbr/>Note<wbr/>Data</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.StickyNoteDataPlatformTags.html">Sticky<wbr/>Note<wbr/>Data<wbr/>Platform<wbr/>Tags</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.StickyNoteStyle.html">Sticky<wbr/>Note<wbr/>Style</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.Tag.html">Tag</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.TagCreateRequest.html">Tag<wbr/>Create<wbr/>Request</a></li>
@@ -92,9 +124,8 @@
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.TeamSharingPolicySettings.html">Team<wbr/>Sharing<wbr/>Policy<wbr/>Settings</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.TeamSharingPolicySettingsChanges.html">Team<wbr/>Sharing<wbr/>Policy<wbr/>Settings<wbr/>Changes</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.TextStyle.html">Text<wbr/>Style</a></li>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.UserSchema.html">User<wbr/>Schema</a></li>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.UserSchemaRolesInner.html">User<wbr/>Schema<wbr/>Roles<wbr/>Inner</a></li>
-<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.WidgetData.html">Widget<wbr/>Data</a></li></ul></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.WidgetData.html">Widget<wbr/>Data</a></li>
+<li class="tsd-kind-namespace tsd-parent-kind-module"><a href="modules/api.WidgetDataPlatformTags.html">Widget<wbr/>Data<wbr/>Platform<wbr/>Tags</a></li></ul></li>
 <li class="tsd-kind-module"><a href="modules/index.html">index</a></li></ul></li></ul></div></details></nav></div></div>
 <div class="container tsd-generator">
 <p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>

@@ -1,6 +1,7 @@
 export * from './appCardCreateRequest';
 export * from './appCardData';
 export * from './appCardDataChanges';
+export * from './appCardDataPlatformTags';
 export * from './appCardItem';
 export * from './appCardStyle';
 export * from './appCardUpdateRequest';
@@ -23,6 +24,7 @@ export * from './boardsPagedResponse';
 export * from './caption';
 export * from './cardCreateRequest';
 export * from './cardData';
+export * from './cardDataPlatformTags';
 export * from './cardItem';
 export * from './cardStyle';
 export * from './cardUpdateRequest';
@@ -31,87 +33,102 @@ export * from './connectorCreationData';
 export * from './connectorStyle';
 export * from './connectorWithLinks';
 export * from './connectorsCursorPaged';
-export * from './createGroupRequest';
 export * from './createPictureRequest';
 export * from './createTeamRequest';
 export * from './createdBy';
+export * from './createdByPlatformContainers';
 export * from './customField';
-export * from './customSimpleSearchResultsGroupResource';
-export * from './customSimpleSearchResultsUserResource';
+export * from './customFieldPlatformTags';
 export * from './dataClassificationLabel';
 export * from './dataClassificationLabelId';
 export * from './dataClassificationOrganizationSettings';
 export * from './dataClassificationTeamSettings';
 export * from './documentCreateRequest';
 export * from './documentData';
+export * from './documentDataPlatformTags';
 export * from './documentItem';
 export * from './documentUpdateRequest';
 export * from './documentUrlData';
 export * from './documentUrlDataChanges';
 export * from './embedCreateRequest';
 export * from './embedData';
+export * from './embedDataPlatformTags';
 export * from './embedItem';
 export * from './embedUpdateRequest';
 export * from './embedUrlData';
 export * from './embedUrlDataChanges';
 export * from './enterpriseGetOrganizationMembers200Response';
-export * from './errorResponse';
 export * from './fixedRatioGeometry';
 export * from './fixedRatioNoRotationGeometry';
 export * from './frameChanges';
 export * from './frameCreateRequest';
 export * from './frameData';
+export * from './frameDataPlatformContainers';
+export * from './frameDataPlatformTags';
 export * from './frameItem';
 export * from './frameStyle';
 export * from './frameUpdateRequest';
 export * from './genericItem';
 export * from './genericItemCursorPaged';
+export * from './genericItemCursorPagedPlatformContainers';
 export * from './genericItemUpdate';
 export * from './geometry';
 export * from './geometryNoRotation';
+export * from './geometryPlatformContainers';
+export * from './geometryPlatformTags';
 export * from './getBoards400Response';
 export * from './getTagsResponse';
-export * from './groupListResponse';
-export * from './groupListResponseAllOf';
-export * from './groupMember';
-export * from './groupSchema';
-export * from './groupSchemaMeta';
 export * from './imageCreateRequest';
 export * from './imageData';
+export * from './imageDataPlatformTags';
 export * from './imageItem';
 export * from './imageUpdateRequest';
 export * from './imageUrlData';
 export * from './imageUrlDataChanges';
 export * from './invitationError';
+export * from './invitationErrorReason';
+export * from './invitationErrorReasonStackTraceInner';
+export * from './invitationErrorReasonSuppressedInner';
 export * from './invitationResult';
 export * from './itemConnectionChangesData';
 export * from './itemConnectionCreationData';
 export * from './itemConnectionWithLinks';
 export * from './itemPagedResponse';
-export * from './listResponse';
-export * from './meta';
 export * from './modifiedBy';
+export * from './modifiedByPlatformContainers';
 export * from './organization';
 export * from './organizationMember';
 export * from './organizationMembersSearchByEmailsResponse';
 export * from './organizationMembersSearchQuery';
 export * from './organizationMembersSearchResponse';
 export * from './pageLinks';
+export * from './pageLinksPlatformContainers';
+export * from './pageLinksPlatformExperimentalFeatures';
+export * from './pageLinksPlatformTags';
 export * from './parent';
 export * from './parentLinksEnvelope';
+export * from './parentLinksEnvelopePlatformContainers';
+export * from './parentPlatformContainers';
 export * from './picture';
 export * from './position';
 export * from './positionChange';
+export * from './positionChangePlatformContainers';
+export * from './positionPlatformContainers';
+export * from './positionPlatformTags';
 export * from './relativeOffset';
-export * from './scimResource';
 export * from './selfLink';
+export * from './selfLinkPlatformContainers';
+export * from './selfLinkPlatformExperimentalFeatures';
+export * from './selfLinkPlatformTags';
 export * from './shapeCreateRequest';
 export * from './shapeData';
+export * from './shapeDataPlatformTags';
 export * from './shapeItem';
 export * from './shapeStyle';
 export * from './shapeUpdateRequest';
 export * from './stickyNoteCreateRequest';
 export * from './stickyNoteData';
+export * from './stickyNoteDataPlatformTags';
 export * from './stickyNoteItem';
 export * from './stickyNoteStyle';
 export * from './stickyNoteUpdateRequest';
@@ -139,31 +156,19 @@ export * from './teamSharingPolicySettings';
 export * from './teamSharingPolicySettingsChanges';
 export * from './textCreateRequest';
 export * from './textData';
+export * from './textDataPlatformTags';
 export * from './textItem';
 export * from './textStyle';
 export * from './textUpdateRequest';
 export * from './updateBoardsDataClassificationLabel';
 export * from './updateBoardsDataClassificationLabelRequest';
-export * from './updateGroupRequest';
-export * from './updateGroupRequestOperationsInner';
 export * from './updateTeamSettingsRequest';
-export * from './updateUserRequest';
-export * from './updateUserRequestOperationsInner';
 export * from './userId';
 export * from './userInfoShort';
-export * from './userListResponse';
-export * from './userListResponseAllOf';
-export * from './userSchema';
-export * from './userSchemaEmailsInner';
-export * from './userSchemaGroupsInner';
-export * from './userSchemaMeta';
-export * from './userSchemaName';
-export * from './userSchemaPhotosInner';
-export * from './userSchemaRolesInner';
-export * from './userSchemaUrnIetfParamsScimSchemasExtensionEnterprise20User';
-export * from './userSchemaUrnIetfParamsScimSchemasExtensionEnterprise20UserManager';
 export * from './widgetData';
+export * from './widgetDataPlatformTags';
 export * from './widgetLinks';
+export * from './widgetLinksPlatformContainers';
 export * from './widthOnlyAdjustableGeometry';
 
 import * as fs from 'fs';
@@ -181,6 +186,7 @@ export interface RequestDetailedFile {
 import { AppCardCreateRequest } from './appCardCreateRequest';
 import { AppCardData } from './appCardData';
 import { AppCardDataChanges } from './appCardDataChanges';
+import { AppCardDataPlatformTags } from './appCardDataPlatformTags';
 import { AppCardItem } from './appCardItem';
 import { AppCardStyle } from './appCardStyle';
 import { AppCardUpdateRequest } from './appCardUpdateRequest';
@@ -203,6 +209,7 @@ import { BoardsPagedResponse } from './boardsPagedResponse';
 import { Caption } from './caption';
 import { CardCreateRequest } from './cardCreateRequest';
 import { CardData } from './cardData';
+import { CardDataPlatformTags } from './cardDataPlatformTags';
 import { CardItem } from './cardItem';
 import { CardStyle } from './cardStyle';
 import { CardUpdateRequest } from './cardUpdateRequest';
@@ -211,87 +218,102 @@ import { ConnectorCreationData } from './connectorCreationData';
 import { ConnectorStyle } from './connectorStyle';
 import { ConnectorWithLinks } from './connectorWithLinks';
 import { ConnectorsCursorPaged } from './connectorsCursorPaged';
-import { CreateGroupRequest } from './createGroupRequest';
 import { CreatePictureRequest } from './createPictureRequest';
 import { CreateTeamRequest } from './createTeamRequest';
 import { CreatedBy } from './createdBy';
+import { CreatedByPlatformContainers } from './createdByPlatformContainers';
 import { CustomField } from './customField';
-import { CustomSimpleSearchResultsGroupResource } from './customSimpleSearchResultsGroupResource';
-import { CustomSimpleSearchResultsUserResource } from './customSimpleSearchResultsUserResource';
+import { CustomFieldPlatformTags } from './customFieldPlatformTags';
 import { DataClassificationLabel } from './dataClassificationLabel';
 import { DataClassificationLabelId } from './dataClassificationLabelId';
 import { DataClassificationOrganizationSettings } from './dataClassificationOrganizationSettings';
 import { DataClassificationTeamSettings } from './dataClassificationTeamSettings';
 import { DocumentCreateRequest } from './documentCreateRequest';
 import { DocumentData } from './documentData';
+import { DocumentDataPlatformTags } from './documentDataPlatformTags';
 import { DocumentItem } from './documentItem';
 import { DocumentUpdateRequest } from './documentUpdateRequest';
 import { DocumentUrlData } from './documentUrlData';
 import { DocumentUrlDataChanges } from './documentUrlDataChanges';
 import { EmbedCreateRequest } from './embedCreateRequest';
 import { EmbedData } from './embedData';
+import { EmbedDataPlatformTags } from './embedDataPlatformTags';
 import { EmbedItem } from './embedItem';
 import { EmbedUpdateRequest } from './embedUpdateRequest';
 import { EmbedUrlData } from './embedUrlData';
 import { EmbedUrlDataChanges } from './embedUrlDataChanges';
 import { EnterpriseGetOrganizationMembers200Response } from './enterpriseGetOrganizationMembers200Response';
-import { ErrorResponse } from './errorResponse';
 import { FixedRatioGeometry } from './fixedRatioGeometry';
 import { FixedRatioNoRotationGeometry } from './fixedRatioNoRotationGeometry';
 import { FrameChanges } from './frameChanges';
 import { FrameCreateRequest } from './frameCreateRequest';
 import { FrameData } from './frameData';
+import { FrameDataPlatformContainers } from './frameDataPlatformContainers';
+import { FrameDataPlatformTags } from './frameDataPlatformTags';
 import { FrameItem } from './frameItem';
 import { FrameStyle } from './frameStyle';
 import { FrameUpdateRequest } from './frameUpdateRequest';
 import { GenericItem } from './genericItem';
 import { GenericItemCursorPaged } from './genericItemCursorPaged';
+import { GenericItemCursorPagedPlatformContainers } from './genericItemCursorPagedPlatformContainers';
 import { GenericItemUpdate } from './genericItemUpdate';
 import { Geometry } from './geometry';
 import { GeometryNoRotation } from './geometryNoRotation';
+import { GeometryPlatformContainers } from './geometryPlatformContainers';
+import { GeometryPlatformTags } from './geometryPlatformTags';
 import { GetBoards400Response } from './getBoards400Response';
 import { GetTagsResponse } from './getTagsResponse';
-import { GroupListResponse } from './groupListResponse';
-import { GroupListResponseAllOf } from './groupListResponseAllOf';
-import { GroupMember } from './groupMember';
-import { GroupSchema } from './groupSchema';
-import { GroupSchemaMeta } from './groupSchemaMeta';
 import { ImageCreateRequest } from './imageCreateRequest';
 import { ImageData } from './imageData';
+import { ImageDataPlatformTags } from './imageDataPlatformTags';
 import { ImageItem } from './imageItem';
 import { ImageUpdateRequest } from './imageUpdateRequest';
 import { ImageUrlData } from './imageUrlData';
 import { ImageUrlDataChanges } from './imageUrlDataChanges';
 import { InvitationError } from './invitationError';
+import { InvitationErrorReason } from './invitationErrorReason';
+import { InvitationErrorReasonStackTraceInner } from './invitationErrorReasonStackTraceInner';
+import { InvitationErrorReasonSuppressedInner } from './invitationErrorReasonSuppressedInner';
 import { InvitationResult } from './invitationResult';
 import { ItemConnectionChangesData } from './itemConnectionChangesData';
 import { ItemConnectionCreationData } from './itemConnectionCreationData';
 import { ItemConnectionWithLinks } from './itemConnectionWithLinks';
 import { ItemPagedResponse } from './itemPagedResponse';
-import { ListResponse } from './listResponse';
-import { Meta } from './meta';
 import { ModifiedBy } from './modifiedBy';
+import { ModifiedByPlatformContainers } from './modifiedByPlatformContainers';
 import { Organization } from './organization';
 import { OrganizationMember } from './organizationMember';
 import { OrganizationMembersSearchByEmailsResponse } from './organizationMembersSearchByEmailsResponse';
 import { OrganizationMembersSearchQuery } from './organizationMembersSearchQuery';
 import { OrganizationMembersSearchResponse } from './organizationMembersSearchResponse';
 import { PageLinks } from './pageLinks';
+import { PageLinksPlatformContainers } from './pageLinksPlatformContainers';
+import { PageLinksPlatformExperimentalFeatures } from './pageLinksPlatformExperimentalFeatures';
+import { PageLinksPlatformTags } from './pageLinksPlatformTags';
 import { Parent } from './parent';
 import { ParentLinksEnvelope } from './parentLinksEnvelope';
+import { ParentLinksEnvelopePlatformContainers } from './parentLinksEnvelopePlatformContainers';
+import { ParentPlatformContainers } from './parentPlatformContainers';
 import { Picture } from './picture';
 import { Position } from './position';
 import { PositionChange } from './positionChange';
+import { PositionChangePlatformContainers } from './positionChangePlatformContainers';
+import { PositionPlatformContainers } from './positionPlatformContainers';
+import { PositionPlatformTags } from './positionPlatformTags';
 import { RelativeOffset } from './relativeOffset';
-import { ScimResource } from './scimResource';
 import { SelfLink } from './selfLink';
+import { SelfLinkPlatformContainers } from './selfLinkPlatformContainers';
+import { SelfLinkPlatformExperimentalFeatures } from './selfLinkPlatformExperimentalFeatures';
+import { SelfLinkPlatformTags } from './selfLinkPlatformTags';
 import { ShapeCreateRequest } from './shapeCreateRequest';
 import { ShapeData } from './shapeData';
+import { ShapeDataPlatformTags } from './shapeDataPlatformTags';
 import { ShapeItem } from './shapeItem';
 import { ShapeStyle } from './shapeStyle';
 import { ShapeUpdateRequest } from './shapeUpdateRequest';
 import { StickyNoteCreateRequest } from './stickyNoteCreateRequest';
 import { StickyNoteData } from './stickyNoteData';
+import { StickyNoteDataPlatformTags } from './stickyNoteDataPlatformTags';
 import { StickyNoteItem } from './stickyNoteItem';
 import { StickyNoteStyle } from './stickyNoteStyle';
 import { StickyNoteUpdateRequest } from './stickyNoteUpdateRequest';
@@ -319,31 +341,19 @@ import { TeamSharingPolicySettings } from './teamSharingPolicySettings';
 import { TeamSharingPolicySettingsChanges } from './teamSharingPolicySettingsChanges';
 import { TextCreateRequest } from './textCreateRequest';
 import { TextData } from './textData';
+import { TextDataPlatformTags } from './textDataPlatformTags';
 import { TextItem } from './textItem';
 import { TextStyle } from './textStyle';
 import { TextUpdateRequest } from './textUpdateRequest';
 import { UpdateBoardsDataClassificationLabel } from './updateBoardsDataClassificationLabel';
 import { UpdateBoardsDataClassificationLabelRequest } from './updateBoardsDataClassificationLabelRequest';
-import { UpdateGroupRequest } from './updateGroupRequest';
-import { UpdateGroupRequestOperationsInner } from './updateGroupRequestOperationsInner';
 import { UpdateTeamSettingsRequest } from './updateTeamSettingsRequest';
-import { UpdateUserRequest } from './updateUserRequest';
-import { UpdateUserRequestOperationsInner } from './updateUserRequestOperationsInner';
 import { UserId } from './userId';
 import { UserInfoShort } from './userInfoShort';
-import { UserListResponse } from './userListResponse';
-import { UserListResponseAllOf } from './userListResponseAllOf';
-import { UserSchema } from './userSchema';
-import { UserSchemaEmailsInner } from './userSchemaEmailsInner';
-import { UserSchemaGroupsInner } from './userSchemaGroupsInner';
-import { UserSchemaMeta } from './userSchemaMeta';
-import { UserSchemaName } from './userSchemaName';
-import { UserSchemaPhotosInner } from './userSchemaPhotosInner';
-import { UserSchemaRolesInner } from './userSchemaRolesInner';
-import { UserSchemaUrnIetfParamsScimSchemasExtensionEnterprise20User } from './userSchemaUrnIetfParamsScimSchemasExtensionEnterprise20User';
-import { UserSchemaUrnIetfParamsScimSchemasExtensionEnterprise20UserManager } from './userSchemaUrnIetfParamsScimSchemasExtensionEnterprise20UserManager';
 import { WidgetData } from './widgetData';
+import { WidgetDataPlatformTags } from './widgetDataPlatformTags';
 import { WidgetLinks } from './widgetLinks';
+import { WidgetLinksPlatformContainers } from './widgetLinksPlatformContainers';
 import { WidthOnlyAdjustableGeometry } from './widthOnlyAdjustableGeometry';
 
 /* tslint:disable:no-unused-variable */
@@ -361,6 +371,7 @@ let primitives = [
 let enumsMap: {[index: string]: any} = {
         "AppCardData.StatusEnum": AppCardData.StatusEnum,
         "AppCardDataChanges.StatusEnum": AppCardDataChanges.StatusEnum,
+        "AppCardDataPlatformTags.StatusEnum": AppCardDataPlatformTags.StatusEnum,
         "BoardMember.RoleEnum": BoardMember.RoleEnum,
         "BoardMemberChanges.RoleEnum": BoardMemberChanges.RoleEnum,
         "BoardMemberWithLinks.RoleEnum": BoardMemberWithLinks.RoleEnum,
@@ -385,13 +396,19 @@ let enumsMap: {[index: string]: any} = {
         "ConnectorStyle.TextOrientationEnum": ConnectorStyle.TextOrientationEnum,
         "ConnectorWithLinks.ShapeEnum": ConnectorWithLinks.ShapeEnum,
         "CustomField.IconShapeEnum": CustomField.IconShapeEnum,
+        "CustomFieldPlatformTags.IconShapeEnum": CustomFieldPlatformTags.IconShapeEnum,
         "EmbedData.ModeEnum": EmbedData.ModeEnum,
+        "EmbedDataPlatformTags.ModeEnum": EmbedDataPlatformTags.ModeEnum,
         "EmbedUrlData.ModeEnum": EmbedUrlData.ModeEnum,
         "EmbedUrlDataChanges.ModeEnum": EmbedUrlDataChanges.ModeEnum,
         "FrameChanges.FormatEnum": FrameChanges.FormatEnum,
         "FrameChanges.TypeEnum": FrameChanges.TypeEnum,
         "FrameData.FormatEnum": FrameData.FormatEnum,
         "FrameData.TypeEnum": FrameData.TypeEnum,
+        "FrameDataPlatformContainers.FormatEnum": FrameDataPlatformContainers.FormatEnum,
+        "FrameDataPlatformContainers.TypeEnum": FrameDataPlatformContainers.TypeEnum,
+        "FrameDataPlatformTags.FormatEnum": FrameDataPlatformTags.FormatEnum,
+        "FrameDataPlatformTags.TypeEnum": FrameDataPlatformTags.TypeEnum,
         "ItemConnectionChangesData.SnapToEnum": ItemConnectionChangesData.SnapToEnum,
         "ItemConnectionCreationData.SnapToEnum": ItemConnectionCreationData.SnapToEnum,
         "Organization.PlanEnum": Organization.PlanEnum,
@@ -400,12 +417,19 @@ let enumsMap: {[index: string]: any} = {
         "Position.OriginEnum": Position.OriginEnum,
         "Position.RelativeToEnum": Position.RelativeToEnum,
         "PositionChange.OriginEnum": PositionChange.OriginEnum,
+        "PositionChangePlatformContainers.OriginEnum": PositionChangePlatformContainers.OriginEnum,
+        "PositionPlatformContainers.OriginEnum": PositionPlatformContainers.OriginEnum,
+        "PositionPlatformContainers.RelativeToEnum": PositionPlatformContainers.RelativeToEnum,
+        "PositionPlatformTags.OriginEnum": PositionPlatformTags.OriginEnum,
+        "PositionPlatformTags.RelativeToEnum": PositionPlatformTags.RelativeToEnum,
         "ShapeData.ShapeEnum": ShapeData.ShapeEnum,
+        "ShapeDataPlatformTags.ShapeEnum": ShapeDataPlatformTags.ShapeEnum,
         "ShapeStyle.BorderStyleEnum": ShapeStyle.BorderStyleEnum,
         "ShapeStyle.FontFamilyEnum": ShapeStyle.FontFamilyEnum,
         "ShapeStyle.TextAlignEnum": ShapeStyle.TextAlignEnum,
         "ShapeStyle.TextAlignVerticalEnum": ShapeStyle.TextAlignVerticalEnum,
         "StickyNoteData.ShapeEnum": StickyNoteData.ShapeEnum,
+        "StickyNoteDataPlatformTags.ShapeEnum": StickyNoteDataPlatformTags.ShapeEnum,
         "StickyNoteStyle.FillColorEnum": StickyNoteStyle.FillColorEnum,
         "StickyNoteStyle.TextAlignEnum": StickyNoteStyle.TextAlignEnum,
         "StickyNoteStyle.TextAlignVerticalEnum": StickyNoteStyle.TextAlignVerticalEnum,
@@ -446,20 +470,23 @@ let enumsMap: {[index: string]: any} = {
         "TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum": TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum,
         "TextStyle.FontFamilyEnum": TextStyle.FontFamilyEnum,
         "TextStyle.TextAlignEnum": TextStyle.TextAlignEnum,
-        "UserSchema.UserTypeEnum": UserSchema.UserTypeEnum,
-        "UserSchemaRolesInner.DisplayEnum": UserSchemaRolesInner.DisplayEnum,
-        "UserSchemaRolesInner.ValueEnum": UserSchemaRolesInner.ValueEnum,
         "WidgetData.ModeEnum": WidgetData.ModeEnum,
         "WidgetData.StatusEnum": WidgetData.StatusEnum,
         "WidgetData.ShapeEnum": WidgetData.ShapeEnum,
         "WidgetData.FormatEnum": WidgetData.FormatEnum,
         "WidgetData.TypeEnum": WidgetData.TypeEnum,
+        "WidgetDataPlatformTags.ModeEnum": WidgetDataPlatformTags.ModeEnum,
+        "WidgetDataPlatformTags.StatusEnum": WidgetDataPlatformTags.StatusEnum,
+        "WidgetDataPlatformTags.ShapeEnum": WidgetDataPlatformTags.ShapeEnum,
+        "WidgetDataPlatformTags.FormatEnum": WidgetDataPlatformTags.FormatEnum,
+        "WidgetDataPlatformTags.TypeEnum": WidgetDataPlatformTags.TypeEnum,
 }
 
 let typeMap: {[index: string]: any} = {
     "AppCardCreateRequest": AppCardCreateRequest,
     "AppCardData": AppCardData,
     "AppCardDataChanges": AppCardDataChanges,
+    "AppCardDataPlatformTags": AppCardDataPlatformTags,
     "AppCardItem": AppCardItem,
     "AppCardStyle": AppCardStyle,
     "AppCardUpdateRequest": AppCardUpdateRequest,
@@ -482,6 +509,7 @@ let typeMap: {[index: string]: any} = {
     "Caption": Caption,
     "CardCreateRequest": CardCreateRequest,
     "CardData": CardData,
+    "CardDataPlatformTags": CardDataPlatformTags,
     "CardItem": CardItem,
     "CardStyle": CardStyle,
     "CardUpdateRequest": CardUpdateRequest,
@@ -490,87 +518,102 @@ let typeMap: {[index: string]: any} = {
     "ConnectorStyle": ConnectorStyle,
     "ConnectorWithLinks": ConnectorWithLinks,
     "ConnectorsCursorPaged": ConnectorsCursorPaged,
-    "CreateGroupRequest": CreateGroupRequest,
     "CreatePictureRequest": CreatePictureRequest,
     "CreateTeamRequest": CreateTeamRequest,
     "CreatedBy": CreatedBy,
+    "CreatedByPlatformContainers": CreatedByPlatformContainers,
     "CustomField": CustomField,
-    "CustomSimpleSearchResultsGroupResource": CustomSimpleSearchResultsGroupResource,
-    "CustomSimpleSearchResultsUserResource": CustomSimpleSearchResultsUserResource,
+    "CustomFieldPlatformTags": CustomFieldPlatformTags,
     "DataClassificationLabel": DataClassificationLabel,
     "DataClassificationLabelId": DataClassificationLabelId,
     "DataClassificationOrganizationSettings": DataClassificationOrganizationSettings,
     "DataClassificationTeamSettings": DataClassificationTeamSettings,
     "DocumentCreateRequest": DocumentCreateRequest,
     "DocumentData": DocumentData,
+    "DocumentDataPlatformTags": DocumentDataPlatformTags,
     "DocumentItem": DocumentItem,
     "DocumentUpdateRequest": DocumentUpdateRequest,
     "DocumentUrlData": DocumentUrlData,
     "DocumentUrlDataChanges": DocumentUrlDataChanges,
     "EmbedCreateRequest": EmbedCreateRequest,
     "EmbedData": EmbedData,
+    "EmbedDataPlatformTags": EmbedDataPlatformTags,
     "EmbedItem": EmbedItem,
     "EmbedUpdateRequest": EmbedUpdateRequest,
     "EmbedUrlData": EmbedUrlData,
     "EmbedUrlDataChanges": EmbedUrlDataChanges,
     "EnterpriseGetOrganizationMembers200Response": EnterpriseGetOrganizationMembers200Response,
-    "ErrorResponse": ErrorResponse,
     "FixedRatioGeometry": FixedRatioGeometry,
     "FixedRatioNoRotationGeometry": FixedRatioNoRotationGeometry,
     "FrameChanges": FrameChanges,
     "FrameCreateRequest": FrameCreateRequest,
     "FrameData": FrameData,
+    "FrameDataPlatformContainers": FrameDataPlatformContainers,
+    "FrameDataPlatformTags": FrameDataPlatformTags,
     "FrameItem": FrameItem,
     "FrameStyle": FrameStyle,
     "FrameUpdateRequest": FrameUpdateRequest,
     "GenericItem": GenericItem,
     "GenericItemCursorPaged": GenericItemCursorPaged,
+    "GenericItemCursorPagedPlatformContainers": GenericItemCursorPagedPlatformContainers,
     "GenericItemUpdate": GenericItemUpdate,
     "Geometry": Geometry,
     "GeometryNoRotation": GeometryNoRotation,
+    "GeometryPlatformContainers": GeometryPlatformContainers,
+    "GeometryPlatformTags": GeometryPlatformTags,
     "GetBoards400Response": GetBoards400Response,
     "GetTagsResponse": GetTagsResponse,
-    "GroupListResponse": GroupListResponse,
-    "GroupListResponseAllOf": GroupListResponseAllOf,
-    "GroupMember": GroupMember,
-    "GroupSchema": GroupSchema,
-    "GroupSchemaMeta": GroupSchemaMeta,
     "ImageCreateRequest": ImageCreateRequest,
     "ImageData": ImageData,
+    "ImageDataPlatformTags": ImageDataPlatformTags,
     "ImageItem": ImageItem,
     "ImageUpdateRequest": ImageUpdateRequest,
     "ImageUrlData": ImageUrlData,
     "ImageUrlDataChanges": ImageUrlDataChanges,
     "InvitationError": InvitationError,
+    "InvitationErrorReason": InvitationErrorReason,
+    "InvitationErrorReasonStackTraceInner": InvitationErrorReasonStackTraceInner,
+    "InvitationErrorReasonSuppressedInner": InvitationErrorReasonSuppressedInner,
     "InvitationResult": InvitationResult,
     "ItemConnectionChangesData": ItemConnectionChangesData,
     "ItemConnectionCreationData": ItemConnectionCreationData,
     "ItemConnectionWithLinks": ItemConnectionWithLinks,
     "ItemPagedResponse": ItemPagedResponse,
-    "ListResponse": ListResponse,
-    "Meta": Meta,
     "ModifiedBy": ModifiedBy,
+    "ModifiedByPlatformContainers": ModifiedByPlatformContainers,
     "Organization": Organization,
     "OrganizationMember": OrganizationMember,
     "OrganizationMembersSearchByEmailsResponse": OrganizationMembersSearchByEmailsResponse,
     "OrganizationMembersSearchQuery": OrganizationMembersSearchQuery,
     "OrganizationMembersSearchResponse": OrganizationMembersSearchResponse,
     "PageLinks": PageLinks,
+    "PageLinksPlatformContainers": PageLinksPlatformContainers,
+    "PageLinksPlatformExperimentalFeatures": PageLinksPlatformExperimentalFeatures,
+    "PageLinksPlatformTags": PageLinksPlatformTags,
     "Parent": Parent,
     "ParentLinksEnvelope": ParentLinksEnvelope,
+    "ParentLinksEnvelopePlatformContainers": ParentLinksEnvelopePlatformContainers,
+    "ParentPlatformContainers": ParentPlatformContainers,
     "Picture": Picture,
     "Position": Position,
     "PositionChange": PositionChange,
+    "PositionChangePlatformContainers": PositionChangePlatformContainers,
+    "PositionPlatformContainers": PositionPlatformContainers,
+    "PositionPlatformTags": PositionPlatformTags,
     "RelativeOffset": RelativeOffset,
-    "ScimResource": ScimResource,
     "SelfLink": SelfLink,
+    "SelfLinkPlatformContainers": SelfLinkPlatformContainers,
+    "SelfLinkPlatformExperimentalFeatures": SelfLinkPlatformExperimentalFeatures,
+    "SelfLinkPlatformTags": SelfLinkPlatformTags,
     "ShapeCreateRequest": ShapeCreateRequest,
     "ShapeData": ShapeData,
+    "ShapeDataPlatformTags": ShapeDataPlatformTags,
     "ShapeItem": ShapeItem,
     "ShapeStyle": ShapeStyle,
     "ShapeUpdateRequest": ShapeUpdateRequest,
     "StickyNoteCreateRequest": StickyNoteCreateRequest,
     "StickyNoteData": StickyNoteData,
+    "StickyNoteDataPlatformTags": StickyNoteDataPlatformTags,
     "StickyNoteItem": StickyNoteItem,
     "StickyNoteStyle": StickyNoteStyle,
     "StickyNoteUpdateRequest": StickyNoteUpdateRequest,
@@ -598,31 +641,19 @@ let typeMap: {[index: string]: any} = {
     "TeamSharingPolicySettingsChanges": TeamSharingPolicySettingsChanges,
     "TextCreateRequest": TextCreateRequest,
     "TextData": TextData,
+    "TextDataPlatformTags": TextDataPlatformTags,
     "TextItem": TextItem,
     "TextStyle": TextStyle,
     "TextUpdateRequest": TextUpdateRequest,
     "UpdateBoardsDataClassificationLabel": UpdateBoardsDataClassificationLabel,
     "UpdateBoardsDataClassificationLabelRequest": UpdateBoardsDataClassificationLabelRequest,
-    "UpdateGroupRequest": UpdateGroupRequest,
-    "UpdateGroupRequestOperationsInner": UpdateGroupRequestOperationsInner,
     "UpdateTeamSettingsRequest": UpdateTeamSettingsRequest,
-    "UpdateUserRequest": UpdateUserRequest,
-    "UpdateUserRequestOperationsInner": UpdateUserRequestOperationsInner,
     "UserId": UserId,
     "UserInfoShort": UserInfoShort,
-    "UserListResponse": UserListResponse,
-    "UserListResponseAllOf": UserListResponseAllOf,
-    "UserSchema": UserSchema,
-    "UserSchemaEmailsInner": UserSchemaEmailsInner,
-    "UserSchemaGroupsInner": UserSchemaGroupsInner,
-    "UserSchemaMeta": UserSchemaMeta,
-    "UserSchemaName": UserSchemaName,
-    "UserSchemaPhotosInner": UserSchemaPhotosInner,
-    "UserSchemaRolesInner": UserSchemaRolesInner,
-    "UserSchemaUrnIetfParamsScimSchemasExtensionEnterprise20User": UserSchemaUrnIetfParamsScimSchemasExtensionEnterprise20User,
-    "UserSchemaUrnIetfParamsScimSchemasExtensionEnterprise20UserManager": UserSchemaUrnIetfParamsScimSchemasExtensionEnterprise20UserManager,
     "WidgetData": WidgetData,
+    "WidgetDataPlatformTags": WidgetDataPlatformTags,
     "WidgetLinks": WidgetLinks,
+    "WidgetLinksPlatformContainers": WidgetLinksPlatformContainers,
     "WidthOnlyAdjustableGeometry": WidthOnlyAdjustableGeometry,
 }
 

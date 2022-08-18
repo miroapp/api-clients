@@ -1,17 +1,21 @@
 #!/usr/bin/env node
+import isEqual from 'lodash/isEqual.js'
 
 import fetch from 'node-fetch'
 
 const apis = [
   'https://api.miro.com/api-docs/platform',
   'https://api.miro.com/api-docs/platform-containers',
+  'https://api.miro.com/api-docs/platform-experimental',
   'https://api.miro.com/api-docs/platform-tags',
   'https://api.miro.com/api-docs/enterprise',
-  'https://miro.com/api/v1/scim/openapi.json',
 ]
 
 async function getSpec(url) {
   const response = await fetch(url)
+  if (response.status > 299) {
+    throw new Error(`Failed to fetch ${url}: ${await response.text()}`)
+  }
   const spec = await response.json()
 
   // some specs are double encoded so we need to JSON.parse again
@@ -23,21 +27,49 @@ async function getSpec(url) {
 
 const specs = await Promise.all(apis.map(getSpec))
 
-// console.log(specs)
+function mergeWithoutConflict (first, second) {
+  for (const key of Object.keys(first)) {
+    if (second[key] && !isEqual(first[key], second[key])) throw new Error('Conflict: ' + key)
+  }
+  return {
+    ...first,
+    ...second
+  }
+}
 
 const mergedSpec = specs.reduce((acc, spec) => {
+  const specTitle = spec.info?.title?.replaceAll(' ', '')
+  const specSchemasDef = spec.components?.schemas || {}
+
+  let specPathsDef = spec.paths
+
+  for (const key of Object.keys(specSchemasDef)) {
+    const existingDefinition = acc.components.schemas[key]
+    delete acc.components.schemas[key]
+    let newSchema = specSchemasDef[key]
+    let newKey = key
+    if (existingDefinition && isEqual(existingDefinition, newSchema)) {
+      newKey = `${key}${specTitle}`
+      specPathsDef = JSON.parse(JSON.stringify(specPathsDef).replaceAll(`"#/components/schemas/${key}"`, `"#/components/schemas/${newKey}"`))
+    }
+    acc.components.schemas[newKey] = newSchema
+  }
+
+  for (const key of Object.keys(spec.paths)) {
+    if (acc.paths[key]) {
+      const newKey = key.replace('boards/{board_id', 'boards/{board_id_' + specTitle)
+      const pathConfig = JSON.parse(JSON.stringify(spec.paths[key]).replaceAll('board_id', 'board_id_' + specTitle))
+      delete spec.paths[key]
+      spec.paths[newKey] = pathConfig
+    }
+  }
+
   return {
     ...acc,
-    paths: {
-      ...acc.paths,
-      ...spec.paths,
-    },
+    paths: mergeWithoutConflict(acc.paths, spec.paths),
     components: {
       ...acc.components,
-      schemas: {
-        ...acc.components.schemas,
-        ...(spec.components?.schemas || {}),
-      }
+      schemas: mergeWithoutConflict(acc.components.schemas, specSchemasDef)
     },
   }
 }, {
@@ -48,6 +80,7 @@ const mergedSpec = specs.reduce((acc, spec) => {
       version: '0.1'
     },
     servers: [ { url: 'https://api.miro.com/' } ],
+    paths: {},
     components: {
       schemas: {},
       securitySchemes: {

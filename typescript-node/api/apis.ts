@@ -20,8 +20,6 @@ import { EmbedsApi, EmbedsApiMethods } from './embedsApi';
 export { EmbedsApiMethods } from './embedsApi';
 import { FramesApi, FramesApiMethods } from './framesApi';
 export { FramesApiMethods } from './framesApi';
-import { GroupApi, GroupApiMethods } from './groupApi';
-export { GroupApiMethods } from './groupApi';
 import { ImagesApi, ImagesApiMethods } from './imagesApi';
 export { ImagesApiMethods } from './imagesApi';
 import { ItemsApi, ItemsApiMethods } from './itemsApi';
@@ -42,8 +40,6 @@ import { TeamsApiApi, TeamsApiApiMethods } from './teamsApiApi';
 export { TeamsApiApiMethods } from './teamsApiApi';
 import { TextsApi, TextsApiMethods } from './textsApi';
 export { TextsApiMethods } from './textsApi';
-import { UserApi, UserApiMethods } from './userApi';
-export { UserApiMethods } from './userApi';
 import {Response} from 'node-fetch';
 
 export class HttpError extends Error {
@@ -67,7 +63,6 @@ export interface MiroEndpoints extends
         DocumentsApiMethods, 
         EmbedsApiMethods, 
         FramesApiMethods, 
-        GroupApiMethods, 
         ImagesApiMethods, 
         ItemsApiMethods, 
         OrganizationsApiMethods, 
@@ -77,8 +72,7 @@ export interface MiroEndpoints extends
         TeamMembersApiApiMethods, 
         TeamSettingsApiApiMethods, 
         TeamsApiApiMethods, 
-        TextsApiMethods, 
-        UserApiMethods
+        TextsApiMethods
      {}
 
 export function MiroApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): MiroEndpoints {
@@ -94,7 +88,6 @@ export function MiroApi (accessToken: string|(() => Promise<string>), basePath: 
         ...DocumentsApi(accessToken, basePath, logger),
         ...EmbedsApi(accessToken, basePath, logger),
         ...FramesApi(accessToken, basePath, logger),
-        ...GroupApi(accessToken, basePath, logger),
         ...ImagesApi(accessToken, basePath, logger),
         ...ItemsApi(accessToken, basePath, logger),
         ...OrganizationsApi(accessToken, basePath, logger),
@@ -105,6 +98,5 @@ export function MiroApi (accessToken: string|(() => Promise<string>), basePath: 
         ...TeamSettingsApiApi(accessToken, basePath, logger),
         ...TeamsApiApi(accessToken, basePath, logger),
         ...TextsApi(accessToken, basePath, logger),
-        ...UserApi(accessToken, basePath, logger),
     }
 }

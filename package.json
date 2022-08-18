@@ -4,13 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "generate": "openapi-generator-cli generate -i '../miro-openapi-files/openapi/merged.json' -o typescript-node -g typescript-node -t template -p npmName=miro-api && cd typescript-node && npm i && npm run build",
-    "postgenerate": "rm -rf ./docs; for docs in ./*/docs; do mkdir -p \"./docs/\"; mv \"$docs\" \"./docs/${docs/\\/docs/}\"; done",
+    "generate": "scripts/generate-node-client.sh",
+    "postgenerate": "scripts/move_docs.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@openapitools/openapi-generator-cli": "^2.5.1"
+    "@openapitools/openapi-generator-cli": "^2.5.1",
+    "lodash": "^4.17.21",
+    "prettier": "^2.7.1",
+    "tsx": "^3.8.2"
   }
 }

@@ -1,6 +1,6 @@
 {
     "name": "miro-api",
-    "version": "v2.0",
+    "version": "0.1",
     "description": "NodeJS client for miro-api",
     "repository": {
         "type": "git",
