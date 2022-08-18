@@ -29,8 +29,10 @@ export class Position {
     */
     'y'?: number = 0;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "origin",
@@ -53,6 +55,7 @@ export class Position {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return Position.attributeTypeMap;
     }

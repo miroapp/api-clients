@@ -22,8 +22,10 @@ export class ParentLinksEnvelope {
     'id'?: number;
     'links'?: SelfLink;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "id",
@@ -36,6 +38,7 @@ export class ParentLinksEnvelope {
             "type": "SelfLink"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ParentLinksEnvelope.attributeTypeMap;
     }

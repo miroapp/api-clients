@@ -28,8 +28,10 @@ export class StickyNoteStyle {
     */
     'textAlignVertical'?: StickyNoteStyle.TextAlignVerticalEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "fillColor",
@@ -47,6 +49,7 @@ export class StickyNoteStyle {
             "type": "StickyNoteStyle.TextAlignVerticalEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return StickyNoteStyle.attributeTypeMap;
     }

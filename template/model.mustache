@@ -22,13 +22,16 @@ export class {{classname}} {{#parent}}extends {{{.}}} {{/parent}}{
 {{/vars}}
 
     {{#discriminator}}
+    /** @ignore */
     static discriminator: string | undefined = "{{discriminatorName}}";
     {{/discriminator}}
     {{^discriminator}}
+    /** @ignore */
     static discriminator: string | undefined = undefined;
     {{/discriminator}}
 
     {{^isArray}}
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {{#vars}}
         {
@@ -40,6 +43,7 @@ export class {{classname}} {{#parent}}extends {{{.}}} {{/parent}}{
         {{/vars}}
     ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         {{#parent}}
         return super.getAttributeTypeMap().concat({{classname}}.attributeTypeMap);

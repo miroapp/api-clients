@@ -23,8 +23,10 @@ export class TeamSettingsChanges {
     'teamInvitationSettings'?: TeamInvitationSettingsChanges;
     'teamSharingPolicySettings'?: TeamSharingPolicySettingsChanges;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "teamAccountDiscoverySettings",
@@ -52,6 +54,7 @@ export class TeamSettingsChanges {
             "type": "TeamSharingPolicySettingsChanges"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamSettingsChanges.attributeTypeMap;
     }

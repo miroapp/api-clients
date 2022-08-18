@@ -17,8 +17,10 @@ export class DocumentData {
     */
     'title'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "title",
@@ -26,6 +28,7 @@ export class DocumentData {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return DocumentData.attributeTypeMap;
     }

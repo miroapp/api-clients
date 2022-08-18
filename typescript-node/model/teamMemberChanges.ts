@@ -17,8 +17,10 @@ export class TeamMemberChanges {
     */
     'role'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "role",
@@ -26,6 +28,7 @@ export class TeamMemberChanges {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamMemberChanges.attributeTypeMap;
     }

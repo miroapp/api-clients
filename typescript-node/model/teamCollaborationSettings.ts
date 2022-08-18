@@ -20,8 +20,10 @@ export class TeamCollaborationSettings {
     */
     'coOwnerRole'?: TeamCollaborationSettings.CoOwnerRoleEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "coOwnerRole",
@@ -29,6 +31,7 @@ export class TeamCollaborationSettings {
             "type": "TeamCollaborationSettings.CoOwnerRoleEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamCollaborationSettings.attributeTypeMap;
     }

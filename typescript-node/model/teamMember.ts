@@ -42,8 +42,10 @@ export class TeamMember {
     */
     'userRole'?: TeamMember.UserRoleEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "createdAt",
@@ -86,6 +88,7 @@ export class TeamMember {
             "type": "TeamMember.UserRoleEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamMember.attributeTypeMap;
     }

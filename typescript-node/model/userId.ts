@@ -14,8 +14,10 @@
 export class UserId {
     'value'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "value",
@@ -23,6 +25,7 @@ export class UserId {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return UserId.attributeTypeMap;
     }

@@ -40,8 +40,10 @@ export class DataClassificationLabel {
     */
     'orderNumber'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "color",
@@ -74,6 +76,7 @@ export class DataClassificationLabel {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return DataClassificationLabel.attributeTypeMap;
     }

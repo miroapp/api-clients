@@ -24,8 +24,10 @@ export class ConnectorChangesData {
     'captions'?: Array<Caption>;
     'style'?: ConnectorStyle;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "startItem",
@@ -53,6 +55,7 @@ export class ConnectorChangesData {
             "type": "ConnectorStyle"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ConnectorChangesData.attributeTypeMap;
     }

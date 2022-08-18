@@ -17,8 +17,10 @@ export class UpdateBoardsDataClassificationLabel {
     */
     'numberUpdatedBoards'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "numberUpdatedBoards",
@@ -26,6 +28,7 @@ export class UpdateBoardsDataClassificationLabel {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return UpdateBoardsDataClassificationLabel.attributeTypeMap;
     }

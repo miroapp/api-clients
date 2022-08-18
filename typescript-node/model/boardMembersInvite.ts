@@ -25,8 +25,10 @@ export class BoardMembersInvite {
     */
     'message'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "emails",
@@ -44,6 +46,7 @@ export class BoardMembersInvite {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return BoardMembersInvite.attributeTypeMap;
     }

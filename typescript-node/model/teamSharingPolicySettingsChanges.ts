@@ -60,8 +60,10 @@ export class TeamSharingPolicySettingsChanges {
     */
     'whiteListedDomains'?: Array<string>;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "createAssetAccessLevel",
@@ -119,6 +121,7 @@ export class TeamSharingPolicySettingsChanges {
             "type": "Array<string>"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamSharingPolicySettingsChanges.attributeTypeMap;
     }

@@ -19,8 +19,10 @@ export class EnterpriseGetOrganizationMembers200Response {
     'limit'?: number;
     'size'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "cursor",
@@ -43,6 +45,7 @@ export class EnterpriseGetOrganizationMembers200Response {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return EnterpriseGetOrganizationMembers200Response.attributeTypeMap;
     }

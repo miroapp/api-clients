@@ -20,8 +20,10 @@ export class Parent {
     */
     'id'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "id",
@@ -29,6 +31,7 @@ export class Parent {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return Parent.attributeTypeMap;
     }

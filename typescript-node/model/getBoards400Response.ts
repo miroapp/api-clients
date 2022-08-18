@@ -32,8 +32,10 @@ export class GetBoards400Response {
     */
     'type'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "code",
@@ -56,6 +58,7 @@ export class GetBoards400Response {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return GetBoards400Response.attributeTypeMap;
     }

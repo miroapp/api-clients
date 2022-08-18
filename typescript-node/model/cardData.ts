@@ -32,8 +32,10 @@ export class CardData {
     */
     'title'?: string = 'sample card item';
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "assigneeId",
@@ -56,6 +58,7 @@ export class CardData {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return CardData.attributeTypeMap;
     }

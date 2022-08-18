@@ -17,8 +17,10 @@ export class TeamMemberInvite {
     */
     'userEmail'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "userEmail",
@@ -26,6 +28,7 @@ export class TeamMemberInvite {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamMemberInvite.attributeTypeMap;
     }

@@ -21,8 +21,10 @@ export class DataClassificationTeamSettings {
     */
     'enabled'?: boolean;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "defaultLabelId",
@@ -35,6 +37,7 @@ export class DataClassificationTeamSettings {
             "type": "boolean"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return DataClassificationTeamSettings.attributeTypeMap;
     }

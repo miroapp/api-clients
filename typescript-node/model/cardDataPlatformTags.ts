@@ -32,8 +32,10 @@ export class CardDataPlatformTags {
     */
     'title'?: string = 'sample card item';
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "assigneeId",
@@ -56,6 +58,7 @@ export class CardDataPlatformTags {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return CardDataPlatformTags.attributeTypeMap;
     }

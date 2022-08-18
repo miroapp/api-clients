@@ -60,8 +60,10 @@ export class ShapeStyle {
     */
     'textAlignVertical'?: ShapeStyle.TextAlignVerticalEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "borderColor",
@@ -119,6 +121,7 @@ export class ShapeStyle {
             "type": "ShapeStyle.TextAlignVerticalEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ShapeStyle.attributeTypeMap;
     }

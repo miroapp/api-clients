@@ -28,8 +28,10 @@ export class FixedRatioGeometry {
     */
     'width'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "height",
@@ -47,6 +49,7 @@ export class FixedRatioGeometry {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return FixedRatioGeometry.attributeTypeMap;
     }

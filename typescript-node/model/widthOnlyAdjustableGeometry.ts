@@ -24,8 +24,10 @@ export class WidthOnlyAdjustableGeometry {
     */
     'width'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "rotation",
@@ -38,6 +40,7 @@ export class WidthOnlyAdjustableGeometry {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return WidthOnlyAdjustableGeometry.attributeTypeMap;
     }

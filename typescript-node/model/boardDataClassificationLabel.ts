@@ -29,8 +29,10 @@ export class BoardDataClassificationLabel {
     */
     'name'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "color",
@@ -53,6 +55,7 @@ export class BoardDataClassificationLabel {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return BoardDataClassificationLabel.attributeTypeMap;
     }

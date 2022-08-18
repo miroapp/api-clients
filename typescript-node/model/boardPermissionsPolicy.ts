@@ -28,8 +28,10 @@ export class BoardPermissionsPolicy {
     */
     'sharingAccess'?: BoardPermissionsPolicy.SharingAccessEnum = BoardPermissionsPolicy.SharingAccessEnum.TeamMembersWithEditingRights;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "collaborationToolsStartAccess",
@@ -47,6 +49,7 @@ export class BoardPermissionsPolicy {
             "type": "BoardPermissionsPolicy.SharingAccessEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return BoardPermissionsPolicy.attributeTypeMap;
     }

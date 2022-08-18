@@ -22,8 +22,10 @@ export class DataClassificationOrganizationSettings {
     */
     'labels'?: Array<DataClassificationLabel>;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "enabled",
@@ -36,6 +38,7 @@ export class DataClassificationOrganizationSettings {
             "type": "Array<DataClassificationLabel>"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return DataClassificationOrganizationSettings.attributeTypeMap;
     }

@@ -36,8 +36,10 @@ export class PageLinksPlatformExperimentalFeatures {
     */
     'self'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "first",
@@ -65,6 +67,7 @@ export class PageLinksPlatformExperimentalFeatures {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return PageLinksPlatformExperimentalFeatures.attributeTypeMap;
     }

@@ -21,8 +21,10 @@ export class OrganizationMembersSearchResponse {
     'limit'?: number;
     'size'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "cursor",
@@ -45,6 +47,7 @@ export class OrganizationMembersSearchResponse {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return OrganizationMembersSearchResponse.attributeTypeMap;
     }

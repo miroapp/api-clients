@@ -48,8 +48,10 @@ export class ConnectorStyle {
     */
     'textOrientation'?: ConnectorStyle.TextOrientationEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "color",
@@ -92,6 +94,7 @@ export class ConnectorStyle {
             "type": "ConnectorStyle.TextOrientationEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ConnectorStyle.attributeTypeMap;
     }

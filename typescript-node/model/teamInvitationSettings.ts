@@ -24,8 +24,10 @@ export class TeamInvitationSettings {
     */
     'whoCanInvite'?: TeamInvitationSettings.WhoCanInviteEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "inviteExternalUsers",
@@ -38,6 +40,7 @@ export class TeamInvitationSettings {
             "type": "TeamInvitationSettings.WhoCanInviteEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamInvitationSettings.attributeTypeMap;
     }

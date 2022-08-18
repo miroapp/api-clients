@@ -15,8 +15,10 @@ import { Tag } from './tag';
 export class GetTagsResponse {
     'tags'?: Array<Tag>;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "tags",
@@ -24,6 +26,7 @@ export class GetTagsResponse {
             "type": "Array<Tag>"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return GetTagsResponse.attributeTypeMap;
     }

@@ -30,8 +30,10 @@ export class Organization {
     'plan'?: Organization.PlanEnum;
     'type'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "fullLicensesPurchased",
@@ -59,6 +61,7 @@ export class Organization {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return Organization.attributeTypeMap;
     }

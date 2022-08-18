@@ -32,8 +32,10 @@ export class TeamSettings {
     'teamSharingPolicySettings'?: TeamSharingPolicySettings;
     'type'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "organizationId",
@@ -76,6 +78,7 @@ export class TeamSettings {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamSettings.attributeTypeMap;
     }

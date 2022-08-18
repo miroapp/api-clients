@@ -24,8 +24,10 @@ export class ImageUrlData {
     */
     'url': string = 'https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png';
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "title",
@@ -38,6 +40,7 @@ export class ImageUrlData {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ImageUrlData.attributeTypeMap;
     }

@@ -20,8 +20,10 @@ export class TextDataPlatformTags {
     */
     'content': string = 'Hello';
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "content",
@@ -29,6 +31,7 @@ export class TextDataPlatformTags {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TextDataPlatformTags.attributeTypeMap;
     }

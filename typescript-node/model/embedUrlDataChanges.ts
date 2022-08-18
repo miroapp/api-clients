@@ -28,8 +28,10 @@ export class EmbedUrlDataChanges {
     */
     'url'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "mode",
@@ -47,6 +49,7 @@ export class EmbedUrlDataChanges {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return EmbedUrlDataChanges.attributeTypeMap;
     }

@@ -24,8 +24,10 @@ export class ShapeData {
     */
     'shape'?: ShapeData.ShapeEnum = ShapeData.ShapeEnum.Rectangle;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "content",
@@ -38,6 +40,7 @@ export class ShapeData {
             "type": "ShapeData.ShapeEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ShapeData.attributeTypeMap;
     }

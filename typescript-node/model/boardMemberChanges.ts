@@ -17,8 +17,10 @@ export class BoardMemberChanges {
     */
     'role'?: BoardMemberChanges.RoleEnum = BoardMemberChanges.RoleEnum.Commenter;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "role",
@@ -26,6 +28,7 @@ export class BoardMemberChanges {
             "type": "BoardMemberChanges.RoleEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return BoardMemberChanges.attributeTypeMap;
     }

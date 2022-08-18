@@ -21,8 +21,10 @@ export class DocumentUpdateRequest {
     'geometry'?: FixedRatioGeometry;
     'parent'?: Parent;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -45,6 +47,7 @@ export class DocumentUpdateRequest {
             "type": "Parent"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return DocumentUpdateRequest.attributeTypeMap;
     }

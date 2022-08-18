@@ -24,8 +24,10 @@ export class TeamCopyAccessLevelSettings {
     */
     'copyAccessLevelLimitation'?: TeamCopyAccessLevelSettings.CopyAccessLevelLimitationEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "copyAccessLevel",
@@ -38,6 +40,7 @@ export class TeamCopyAccessLevelSettings {
             "type": "TeamCopyAccessLevelSettings.CopyAccessLevelLimitationEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamCopyAccessLevelSettings.attributeTypeMap;
     }

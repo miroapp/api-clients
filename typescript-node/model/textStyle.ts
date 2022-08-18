@@ -40,8 +40,10 @@ export class TextStyle {
     */
     'textAlign'?: TextStyle.TextAlignEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "color",
@@ -74,6 +76,7 @@ export class TextStyle {
             "type": "TextStyle.TextAlignEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TextStyle.attributeTypeMap;
     }

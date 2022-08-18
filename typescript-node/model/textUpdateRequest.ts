@@ -23,8 +23,10 @@ export class TextUpdateRequest {
     'geometry'?: WidthOnlyAdjustableGeometry;
     'parent'?: Parent;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -52,6 +54,7 @@ export class TextUpdateRequest {
             "type": "Parent"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TextUpdateRequest.attributeTypeMap;
     }

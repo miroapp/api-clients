@@ -17,8 +17,10 @@ export class GenericItemUpdate {
     'parent'?: Parent;
     'position'?: PositionChange;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "parent",
@@ -31,6 +33,7 @@ export class GenericItemUpdate {
             "type": "PositionChange"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return GenericItemUpdate.attributeTypeMap;
     }

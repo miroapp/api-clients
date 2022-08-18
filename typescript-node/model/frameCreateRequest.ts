@@ -21,8 +21,10 @@ export class FrameCreateRequest {
     'position'?: PositionChange;
     'geometry'?: GeometryNoRotation;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -45,6 +47,7 @@ export class FrameCreateRequest {
             "type": "GeometryNoRotation"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return FrameCreateRequest.attributeTypeMap;
     }

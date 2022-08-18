@@ -37,8 +37,10 @@ export class ItemPagedResponse {
     'total'?: number;
     'type'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -76,6 +78,7 @@ export class ItemPagedResponse {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ItemPagedResponse.attributeTypeMap;
     }

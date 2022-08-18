@@ -21,8 +21,10 @@ export class DocumentCreateRequest {
     'geometry'?: FixedRatioGeometry;
     'parent'?: Parent;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -45,6 +47,7 @@ export class DocumentCreateRequest {
             "type": "Parent"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return DocumentCreateRequest.attributeTypeMap;
     }

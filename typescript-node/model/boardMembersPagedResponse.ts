@@ -37,8 +37,10 @@ export class BoardMembersPagedResponse {
     'links'?: PageLinks;
     'type'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -76,6 +78,7 @@ export class BoardMembersPagedResponse {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return BoardMembersPagedResponse.attributeTypeMap;
     }

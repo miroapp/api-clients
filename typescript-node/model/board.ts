@@ -56,8 +56,10 @@ export class Board {
     */
     'viewLink'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "createdAt",
@@ -130,6 +132,7 @@ export class Board {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return Board.attributeTypeMap;
     }

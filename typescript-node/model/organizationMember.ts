@@ -45,8 +45,10 @@ export class OrganizationMember {
     'role'?: OrganizationMember.RoleEnum;
     'type'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "active",
@@ -89,6 +91,7 @@ export class OrganizationMember {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return OrganizationMember.attributeTypeMap;
     }

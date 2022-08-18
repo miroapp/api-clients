@@ -20,8 +20,10 @@ export class TeamAccountDiscoverySettings {
     */
     'accountDiscovery'?: TeamAccountDiscoverySettings.AccountDiscoveryEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "accountDiscovery",
@@ -29,6 +31,7 @@ export class TeamAccountDiscoverySettings {
             "type": "TeamAccountDiscoverySettings.AccountDiscoveryEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TeamAccountDiscoverySettings.attributeTypeMap;
     }

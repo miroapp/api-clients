@@ -19,8 +19,10 @@ export class CreateTeamRequest {
     'name'?: string;
     'picture'?: CreatePictureRequest;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "name",
@@ -33,6 +35,7 @@ export class CreateTeamRequest {
             "type": "CreatePictureRequest"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return CreateTeamRequest.attributeTypeMap;
     }

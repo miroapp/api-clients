@@ -24,8 +24,10 @@ export class WidgetLinks {
     */
     'self'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "related",
@@ -38,6 +40,7 @@ export class WidgetLinks {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return WidgetLinks.attributeTypeMap;
     }

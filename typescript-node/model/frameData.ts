@@ -28,8 +28,10 @@ export class FrameData {
     */
     'type'?: FrameData.TypeEnum = FrameData.TypeEnum.Freeform;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "format",
@@ -47,6 +49,7 @@ export class FrameData {
             "type": "FrameData.TypeEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return FrameData.attributeTypeMap;
     }

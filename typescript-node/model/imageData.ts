@@ -17,8 +17,10 @@ export class ImageData {
     */
     'title'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "title",
@@ -26,6 +28,7 @@ export class ImageData {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ImageData.attributeTypeMap;
     }

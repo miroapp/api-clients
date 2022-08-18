@@ -23,8 +23,10 @@ export class AppCardCreateRequest {
     'geometry'?: Geometry;
     'parent'?: Parent;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -52,6 +54,7 @@ export class AppCardCreateRequest {
             "type": "Parent"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return AppCardCreateRequest.attributeTypeMap;
     }

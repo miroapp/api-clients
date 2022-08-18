@@ -17,6 +17,7 @@ import { OrganizationMember } from './organizationMember';
 */
 export class OrganizationMembersSearchByEmailsResponse extends Array<OrganizationMember> {
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
 }

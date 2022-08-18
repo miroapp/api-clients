@@ -24,8 +24,10 @@ export class WidgetLinksPlatformContainers {
     */
     'self'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "related",
@@ -38,6 +40,7 @@ export class WidgetLinksPlatformContainers {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return WidgetLinksPlatformContainers.attributeTypeMap;
     }

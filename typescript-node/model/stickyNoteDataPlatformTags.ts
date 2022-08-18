@@ -24,8 +24,10 @@ export class StickyNoteDataPlatformTags {
     */
     'shape'?: StickyNoteDataPlatformTags.ShapeEnum = StickyNoteDataPlatformTags.ShapeEnum.Square;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "content",
@@ -38,6 +40,7 @@ export class StickyNoteDataPlatformTags {
             "type": "StickyNoteDataPlatformTags.ShapeEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return StickyNoteDataPlatformTags.attributeTypeMap;
     }

@@ -33,8 +33,10 @@ export class AppCardDataChanges {
     */
     'title'?: string = 'sample app card item';
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "description",
@@ -57,6 +59,7 @@ export class AppCardDataChanges {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return AppCardDataChanges.attributeTypeMap;
     }

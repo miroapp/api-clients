@@ -33,8 +33,10 @@ export class ConnectorsCursorPaged {
     'size'?: number;
     'total'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "cursor",
@@ -67,6 +69,7 @@ export class ConnectorsCursorPaged {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ConnectorsCursorPaged.attributeTypeMap;
     }

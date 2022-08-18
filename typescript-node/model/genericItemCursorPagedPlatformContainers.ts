@@ -33,8 +33,10 @@ export class GenericItemCursorPagedPlatformContainers {
     'limit'?: number;
     'links'?: PageLinks;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -67,6 +69,7 @@ export class GenericItemCursorPagedPlatformContainers {
             "type": "PageLinks"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return GenericItemCursorPagedPlatformContainers.attributeTypeMap;
     }

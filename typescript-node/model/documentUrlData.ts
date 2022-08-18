@@ -24,8 +24,10 @@ export class DocumentUrlData {
     */
     'url': string = 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf';
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "title",
@@ -38,6 +40,7 @@ export class DocumentUrlData {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return DocumentUrlData.attributeTypeMap;
     }

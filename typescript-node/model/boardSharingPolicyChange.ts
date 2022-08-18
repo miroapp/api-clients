@@ -32,8 +32,10 @@ export class BoardSharingPolicyChange {
     */
     'teamAccess'?: BoardSharingPolicyChange.TeamAccessEnum = BoardSharingPolicyChange.TeamAccessEnum.Private;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "access",
@@ -56,6 +58,7 @@ export class BoardSharingPolicyChange {
             "type": "BoardSharingPolicyChange.TeamAccessEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return BoardSharingPolicyChange.attributeTypeMap;
     }

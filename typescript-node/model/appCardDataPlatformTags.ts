@@ -37,8 +37,10 @@ export class AppCardDataPlatformTags {
     */
     'title'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "description",
@@ -66,6 +68,7 @@ export class AppCardDataPlatformTags {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return AppCardDataPlatformTags.attributeTypeMap;
     }

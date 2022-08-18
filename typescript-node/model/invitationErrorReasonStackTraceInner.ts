@@ -21,8 +21,10 @@ export class InvitationErrorReasonStackTraceInner {
     'moduleVersion'?: string;
     'nativeMethod'?: boolean;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "classLoaderName",
@@ -65,6 +67,7 @@ export class InvitationErrorReasonStackTraceInner {
             "type": "boolean"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return InvitationErrorReasonStackTraceInner.attributeTypeMap;
     }

@@ -20,8 +20,10 @@ export class BoardPolicy {
     'permissionsPolicy'?: BoardPermissionsPolicy;
     'sharingPolicy'?: BoardSharingPolicy;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "permissionsPolicy",
@@ -34,6 +36,7 @@ export class BoardPolicy {
             "type": "BoardSharingPolicy"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return BoardPolicy.attributeTypeMap;
     }

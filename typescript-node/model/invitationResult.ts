@@ -17,8 +17,10 @@ export class InvitationResult {
     'failed'?: Array<InvitationError>;
     'successful'?: Array<UserId>;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "failed",
@@ -31,6 +33,7 @@ export class InvitationResult {
             "type": "Array<UserId>"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return InvitationResult.attributeTypeMap;
     }

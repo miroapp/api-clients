@@ -24,8 +24,10 @@ export class GeometryNoRotation {
     */
     'width'?: number;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "height",
@@ -38,6 +40,7 @@ export class GeometryNoRotation {
             "type": "number"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return GeometryNoRotation.attributeTypeMap;
     }

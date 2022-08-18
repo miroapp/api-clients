@@ -23,8 +23,10 @@ export class ItemConnectionCreationData {
     */
     'snapTo'?: ItemConnectionCreationData.SnapToEnum;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "id",
@@ -42,6 +44,7 @@ export class ItemConnectionCreationData {
             "type": "ItemConnectionCreationData.SnapToEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ItemConnectionCreationData.attributeTypeMap;
     }

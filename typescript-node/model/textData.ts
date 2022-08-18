@@ -20,8 +20,10 @@ export class TextData {
     */
     'content': string = 'Hello';
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "content",
@@ -29,6 +31,7 @@ export class TextData {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return TextData.attributeTypeMap;
     }

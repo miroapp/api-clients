@@ -17,8 +17,10 @@ export class DataClassificationLabelId {
     */
     'labelId'?: string;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "labelId",
@@ -26,6 +28,7 @@ export class DataClassificationLabelId {
             "type": "string"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return DataClassificationLabelId.attributeTypeMap;
     }

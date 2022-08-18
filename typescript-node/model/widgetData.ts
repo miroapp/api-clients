@@ -94,8 +94,10 @@ export class WidgetData {
     */
     'type'?: WidgetData.TypeEnum = WidgetData.TypeEnum.Freeform;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "content",
@@ -183,6 +185,7 @@ export class WidgetData {
             "type": "WidgetData.TypeEnum"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return WidgetData.attributeTypeMap;
     }

@@ -21,8 +21,10 @@ export class UpdateTeamSettingsRequest {
     */
     'enabled'?: boolean;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "defaultLabelId",
@@ -35,6 +37,7 @@ export class UpdateTeamSettingsRequest {
             "type": "boolean"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return UpdateTeamSettingsRequest.attributeTypeMap;
     }

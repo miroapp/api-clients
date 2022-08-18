@@ -17,8 +17,10 @@ export class InvitationErrorReasonSuppressedInner {
     'message'?: string;
     'stackTrace'?: Array<InvitationErrorReasonStackTraceInner>;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "localizedMessage",
@@ -36,6 +38,7 @@ export class InvitationErrorReasonSuppressedInner {
             "type": "Array<InvitationErrorReasonStackTraceInner>"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return InvitationErrorReasonSuppressedInner.attributeTypeMap;
     }

@@ -24,8 +24,10 @@ export class ItemConnectionWithLinks {
     'links'?: SelfLink;
     'position'?: RelativeOffset;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "id",
@@ -43,6 +45,7 @@ export class ItemConnectionWithLinks {
             "type": "RelativeOffset"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return ItemConnectionWithLinks.attributeTypeMap;
     }

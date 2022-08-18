@@ -23,8 +23,10 @@ export class CardUpdateRequest {
     'geometry'?: Geometry;
     'parent'?: Parent;
 
+    /** @ignore */
     static discriminator: string | undefined = undefined;
 
+    /** @ignore */
     static attributeTypeMap: Array<{name: string, baseName: string, type: string}> = [
         {
             "name": "data",
@@ -52,6 +54,7 @@ export class CardUpdateRequest {
             "type": "Parent"
         }    ];
 
+    /** @ignore */
     static getAttributeTypeMap() {
         return CardUpdateRequest.attributeTypeMap;
     }
