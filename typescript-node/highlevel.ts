@@ -25,7 +25,7 @@ type GetRest2<Method extends (p1: any, p2: any, ...rest: any[]) => any> =
 
 export class Api extends Object {
   private _api: MiroEndpoints;
-  pathParams: [];
+  private pathParams: [];
 
   constructor(api: MiroEndpoints, pathParams: [], rest: object) {
     super();
@@ -54,7 +54,7 @@ export class Api extends Object {
 
 export class Board extends BaseBoard {
   private _api: MiroEndpoints;
-  pathParams: [string];
+  private pathParams: [string];
 
   constructor(api: MiroEndpoints, pathParams: [string], rest: BaseBoard) {
     super();
@@ -437,7 +437,7 @@ export class Board extends BaseBoard {
 
 export class BoardMember extends BaseBoardMember {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -457,7 +457,7 @@ export class BoardMember extends BaseBoardMember {
 
 export class Item extends BaseItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -507,7 +507,7 @@ export class Item extends BaseItem {
 
 export class AppCardItem extends BaseAppCardItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -558,7 +558,7 @@ export class AppCardItem extends BaseAppCardItem {
 
 export class CardItem extends BaseCardItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -605,7 +605,7 @@ export class CardItem extends BaseCardItem {
 
 export class DocumentItem extends BaseDocumentItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -657,7 +657,7 @@ export class DocumentItem extends BaseDocumentItem {
 
 export class EmbedItem extends BaseEmbedItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -704,7 +704,7 @@ export class EmbedItem extends BaseEmbedItem {
 
 export class FrameItem extends BaseFrameItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -751,7 +751,7 @@ export class FrameItem extends BaseFrameItem {
 
 export class ImageItem extends BaseImageItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -800,7 +800,7 @@ export class ImageItem extends BaseImageItem {
 
 export class ShapeItem extends BaseShapeItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -847,7 +847,7 @@ export class ShapeItem extends BaseShapeItem {
 
 export class StickyNoteItem extends BaseStickyNoteItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -898,7 +898,7 @@ export class StickyNoteItem extends BaseStickyNoteItem {
 
 export class TextItem extends BaseTextItem {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -945,7 +945,7 @@ export class TextItem extends BaseTextItem {
 
 export class Connector extends BaseConnector {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(
     api: MiroEndpoints,
@@ -969,7 +969,7 @@ export class Connector extends BaseConnector {
 
 export class Tag extends BaseTag {
   private _api: MiroEndpoints;
-  pathParams: [string, string];
+  private pathParams: [string, string];
 
   constructor(api: MiroEndpoints, pathParams: [string, string], rest: BaseTag) {
     super();

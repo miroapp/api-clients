@@ -280,7 +280,7 @@ for (const name of Object.keys(models)) {
 
 export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object' } {
     private _api: MiroEndpoints
-    pathParams: ${pathParams}
+    private pathParams: ${pathParams}
 
     constructor(api: MiroEndpoints, pathParams: ${pathParams}, rest: ${model.extendedModel ? `Base${name}` : 'object' }) {
         super()
