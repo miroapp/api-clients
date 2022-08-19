@@ -1,7 +1,12 @@
 import { MiroEndpoints } from "./api";
 
 import { Organization as BaseOrganization } from "./model/organization";
+import { OrganizationMember as BaseOrganizationMember } from "./model/organizationMember";
 import { Team as BaseTeam } from "./model/team";
+import { BoardDataClassificationLabel as BaseBoardDataClassification } from "./model/boardDataClassificationLabel";
+import { DataClassificationOrganizationSettings as BaseDataClassification } from "./model/dataClassificationOrganizationSettings";
+import { TeamMember as BaseTeamMember } from "./model/teamMember";
+import { TeamSettings as BaseTeamSettings } from "./model/teamSettings";
 import { Board as BaseBoard } from "./model/board";
 import { BoardMember as BaseBoardMember } from "./model/boardMember";
 import { GenericItem as BaseItem } from "./model/genericItem";
@@ -26,6 +31,12 @@ type GetRest1<Method extends (p1: any, ...rest: any[]) => any> =
 type GetRest2<Method extends (p1: any, p2: any, ...rest: any[]) => any> =
   Method extends (p1: any, p2: any, ...rest: infer Rest) => any ? Rest : never;
 
+type GetRest3<
+  Method extends (p1: any, p2: any, p3: any, ...rest: any[]) => any
+> = Method extends (p1: any, p2: any, p3: any, ...rest: infer Rest) => any
+  ? Rest
+  : never;
+
 export class Api extends Object {
   private _api: MiroEndpoints;
   private pathParams: [];
@@ -42,7 +53,7 @@ export class Api extends Object {
     const result = (await this._api.createBoard(...this.pathParams, ...rest))
       .body;
 
-    return new Board(this._api, [`${result.id}`], result);
+    return new Board(this._api, [`${result["id"]}`], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.getBoards} */
@@ -51,7 +62,7 @@ export class Api extends Object {
       .body;
     return result.data
       ? result.data.map((result) => {
-          return new Board(this._api, [`${result.id}`], result);
+          return new Board(this._api, [`${result["id"]}`], result);
         })
       : [];
   }
@@ -64,7 +75,7 @@ export class Api extends Object {
       await this._api.enterpriseGetOrganization(...this.pathParams, ...rest)
     ).body;
 
-    return new Organization(this._api, [`${result.id}`], result);
+    return new Organization(this._api, [`${result["id"]}`], result);
   }
 }
 
@@ -89,7 +100,7 @@ export class Organization extends BaseOrganization {
       await this._api.enterpriseCreateTeam(...this.pathParams, ...rest)
     ).body;
 
-    return new Team(this._api, [this.pathParams[0], `${result.id}`], result);
+    return new Team(this._api, [this.pathParams[0], `${result["id"]}`], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationOrganizationSettingsGet} */
@@ -98,48 +109,67 @@ export class Organization extends BaseOrganization {
       MiroEndpoints["enterpriseDataclassificationOrganizationSettingsGet"]
     >
   ) {
-    (
+    const result = (
       await this._api.enterpriseDataclassificationOrganizationSettingsGet(
         ...this.pathParams,
         ...rest
       )
     ).body;
+
+    return new DataClassification(this._api, [], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseGetDefaultTeamSettings} */
   async getDefaultTeamSettings(
     ...rest: GetRest1<MiroEndpoints["enterpriseGetDefaultTeamSettings"]>
   ) {
-    (
+    const result = (
       await this._api.enterpriseGetDefaultTeamSettings(
         ...this.pathParams,
         ...rest
       )
     ).body;
+
+    return new TeamSettings(this._api, [], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseGetOrganizationMember} */
   async getOrganizationMember(
     ...rest: GetRest1<MiroEndpoints["enterpriseGetOrganizationMember"]>
   ) {
-    (
+    const result = (
       await this._api.enterpriseGetOrganizationMember(
         ...this.pathParams,
         ...rest
       )
     ).body;
+
+    return new OrganizationMember(
+      this._api,
+      [this.pathParams[0], `${result["id"]}`],
+      result
+    );
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseGetOrganizationMembers} */
   async getOrganizationMembers(
     ...rest: GetRest1<MiroEndpoints["enterpriseGetOrganizationMembers"]>
   ) {
-    (
+    const result = (
       await this._api.enterpriseGetOrganizationMembers(
         ...this.pathParams,
         ...rest
       )
     ).body;
+    return result.data
+      ? result.data.map((result) => {
+          return new OrganizationMember(
+            this._api,
+            [this.pathParams[0], `${result["id"]}`],
+            result
+          );
+        })
+      : [];
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseGetTeam} */
@@ -148,7 +178,7 @@ export class Organization extends BaseOrganization {
       await this._api.enterpriseGetTeam(...this.pathParams, ...rest)
     ).body;
 
-    return new Team(this._api, [this.pathParams[0], `${result.id}`], result);
+    return new Team(this._api, [this.pathParams[0], `${result["id"]}`], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseGetTeams} */
@@ -160,11 +190,27 @@ export class Organization extends BaseOrganization {
       ? result.map((result) => {
           return new Team(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
       : [];
+  }
+}
+
+export class OrganizationMember extends BaseOrganizationMember {
+  private _api: MiroEndpoints;
+  private pathParams: [string, string];
+
+  constructor(
+    api: MiroEndpoints,
+    pathParams: [string, string],
+    rest: BaseOrganizationMember
+  ) {
+    super();
+    this._api = api;
+    this.pathParams = pathParams;
+    Object.assign(this, rest);
   }
 }
 
@@ -200,12 +246,14 @@ export class Team extends BaseTeam {
   async getBoardDataClassification(
     ...rest: GetRest2<MiroEndpoints["enterpriseDataclassificationBoardGet"]>
   ) {
-    (
+    const result = (
       await this._api.enterpriseDataclassificationBoardGet(
         ...this.pathParams,
         ...rest
       )
     ).body;
+
+    return new BoardDataClassification(this._api, [], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationBoardSet} */
@@ -240,12 +288,14 @@ export class Team extends BaseTeam {
       MiroEndpoints["enterpriseDataclassificationTeamSettingsGet"]
     >
   ) {
-    (
+    const result = (
       await this._api.enterpriseDataclassificationTeamSettingsGet(
         ...this.pathParams,
         ...rest
       )
     ).body;
+
+    return new DataClassification(this._api, [], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseDataclassificationTeamSettingsSet} */
@@ -274,23 +324,33 @@ export class Team extends BaseTeam {
   async getTeamMember(
     ...rest: GetRest2<MiroEndpoints["enterpriseGetTeamMember"]>
   ) {
-    (await this._api.enterpriseGetTeamMember(...this.pathParams, ...rest)).body;
+    const result = (
+      await this._api.enterpriseGetTeamMember(...this.pathParams, ...rest)
+    ).body;
+
+    return new TeamMember(
+      this._api,
+      [this.pathParams[0], this.pathParams[1], `${result["memberId"]}`],
+      result
+    );
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseGetTeamMembers} */
   async getTeamMembers(
     ...rest: GetRest2<MiroEndpoints["enterpriseGetTeamMembers"]>
   ) {
-    (await this._api.enterpriseGetTeamMembers(...this.pathParams, ...rest))
-      .body;
-  }
-
-  /** {@inheritDoc api!MiroEndpoints.enterpriseUpdateTeamMember} */
-  async updateTeamMember(
-    ...rest: GetRest2<MiroEndpoints["enterpriseUpdateTeamMember"]>
-  ) {
-    (await this._api.enterpriseUpdateTeamMember(...this.pathParams, ...rest))
-      .body;
+    const result = (
+      await this._api.enterpriseGetTeamMembers(...this.pathParams, ...rest)
+    ).body;
+    return result
+      ? result.map((result) => {
+          return new TeamMember(
+            this._api,
+            [this.pathParams[0], this.pathParams[1], `${result["memberId"]}`],
+            result
+          );
+        })
+      : [];
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseUpdateTeam} */
@@ -302,8 +362,11 @@ export class Team extends BaseTeam {
   async getTeamSettings(
     ...rest: GetRest1<MiroEndpoints["enterpriseGetTeamSettings"]>
   ) {
-    (await this._api.enterpriseGetTeamSettings(this.pathParams[1], ...rest))
-      .body;
+    const result = (
+      await this._api.enterpriseGetTeamSettings(this.pathParams[1], ...rest)
+    ).body;
+
+    return new TeamSettings(this._api, [], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.enterpriseUpdateTeamSettings} */
@@ -320,9 +383,75 @@ export class Team extends BaseTeam {
       .body;
     return result.data
       ? result.data.map((result) => {
-          return new Board(this._api, [`${result.id}`], result);
+          return new Board(this._api, [`${result["id"]}`], result);
         })
       : [];
+  }
+}
+
+export class BoardDataClassification extends BaseBoardDataClassification {
+  private _api: MiroEndpoints;
+  private pathParams: [];
+
+  constructor(
+    api: MiroEndpoints,
+    pathParams: [],
+    rest: BaseBoardDataClassification
+  ) {
+    super();
+    this._api = api;
+    this.pathParams = pathParams;
+    Object.assign(this, rest);
+  }
+}
+
+export class DataClassification extends BaseDataClassification {
+  private _api: MiroEndpoints;
+  private pathParams: [];
+
+  constructor(
+    api: MiroEndpoints,
+    pathParams: [],
+    rest: BaseDataClassification
+  ) {
+    super();
+    this._api = api;
+    this.pathParams = pathParams;
+    Object.assign(this, rest);
+  }
+}
+
+export class TeamMember extends BaseTeamMember {
+  private _api: MiroEndpoints;
+  private pathParams: [string, string, string];
+
+  constructor(
+    api: MiroEndpoints,
+    pathParams: [string, string, string],
+    rest: BaseTeamMember
+  ) {
+    super();
+    this._api = api;
+    this.pathParams = pathParams;
+    Object.assign(this, rest);
+  }
+
+  /** {@inheritDoc api!MiroEndpoints.enterpriseUpdateTeamMember} */
+  async update(...rest: GetRest3<MiroEndpoints["enterpriseUpdateTeamMember"]>) {
+    (await this._api.enterpriseUpdateTeamMember(...this.pathParams, ...rest))
+      .body;
+  }
+}
+
+export class TeamSettings extends BaseTeamSettings {
+  private _api: MiroEndpoints;
+  private pathParams: [];
+
+  constructor(api: MiroEndpoints, pathParams: [], rest: BaseTeamSettings) {
+    super();
+    this._api = api;
+    this.pathParams = pathParams;
+    Object.assign(this, rest);
   }
 }
 
@@ -347,7 +476,7 @@ export class Board extends BaseBoard {
 
     return new AppCardItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -359,7 +488,7 @@ export class Board extends BaseBoard {
 
     return new CardItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -372,7 +501,7 @@ export class Board extends BaseBoard {
 
     return new Connector(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -387,7 +516,7 @@ export class Board extends BaseBoard {
 
     return new DocumentItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -400,7 +529,7 @@ export class Board extends BaseBoard {
 
     return new EmbedItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -413,7 +542,7 @@ export class Board extends BaseBoard {
 
     return new FrameItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -428,7 +557,7 @@ export class Board extends BaseBoard {
 
     return new ImageItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -441,7 +570,7 @@ export class Board extends BaseBoard {
 
     return new ShapeItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -456,7 +585,7 @@ export class Board extends BaseBoard {
 
     return new StickyNoteItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -466,7 +595,7 @@ export class Board extends BaseBoard {
     const result = (await this._api.createTag(...this.pathParams, ...rest))
       .body;
 
-    return new Tag(this._api, [this.pathParams[0], `${result.id}`], result);
+    return new Tag(this._api, [this.pathParams[0], `${result["id"]}`], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.createTextItem} */
@@ -476,7 +605,7 @@ export class Board extends BaseBoard {
 
     return new TextItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -490,7 +619,7 @@ export class Board extends BaseBoard {
       ? result.data.map((result) => {
           return new BoardMember(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -504,7 +633,7 @@ export class Board extends BaseBoard {
 
     return new AppCardItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -516,7 +645,7 @@ export class Board extends BaseBoard {
 
     return new CardItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -528,7 +657,7 @@ export class Board extends BaseBoard {
 
     return new Connector(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -541,7 +670,7 @@ export class Board extends BaseBoard {
       ? result.data.map((result) => {
           return new Connector(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -556,7 +685,7 @@ export class Board extends BaseBoard {
 
     return new DocumentItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -568,7 +697,7 @@ export class Board extends BaseBoard {
 
     return new EmbedItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -580,7 +709,7 @@ export class Board extends BaseBoard {
 
     return new FrameItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -592,7 +721,7 @@ export class Board extends BaseBoard {
 
     return new ImageItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -604,7 +733,7 @@ export class Board extends BaseBoard {
 
     return new ShapeItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -617,7 +746,7 @@ export class Board extends BaseBoard {
 
     return new BoardMember(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -628,7 +757,7 @@ export class Board extends BaseBoard {
       await this._api.getSpecificItem(...this.pathParams, ...rest)
     ).body;
 
-    return new Item(this._api, [this.pathParams[0], `${result.id}`], result);
+    return new Item(this._api, [this.pathParams[0], `${result["id"]}`], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.getStickyNoteItem} */
@@ -641,7 +770,7 @@ export class Board extends BaseBoard {
 
     return new StickyNoteItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -650,7 +779,7 @@ export class Board extends BaseBoard {
   async getTag(...rest: GetRest1<MiroEndpoints["getTag"]>) {
     const result = (await this._api.getTag(...this.pathParams, ...rest)).body;
 
-    return new Tag(this._api, [this.pathParams[0], `${result.id}`], result);
+    return new Tag(this._api, [this.pathParams[0], `${result["id"]}`], result);
   }
 
   /** {@inheritDoc api!MiroEndpoints.getTagsFromBoard} */
@@ -662,7 +791,7 @@ export class Board extends BaseBoard {
       ? result.data.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -676,7 +805,7 @@ export class Board extends BaseBoard {
 
     return new TextItem(
       this._api,
-      [this.pathParams[0], `${result.id}`],
+      [this.pathParams[0], `${result["id"]}`],
       result
     );
   }
@@ -688,7 +817,7 @@ export class Board extends BaseBoard {
       ? result.data.map((result) => {
           return new Item(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -706,7 +835,7 @@ export class Board extends BaseBoard {
       ? result.data.map((result) => {
           return new Item(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -781,15 +910,13 @@ export class Item extends BaseItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateItemPositionOrParent} */
-  async updateItemPositionOrParent(
-    ...rest: GetRest2<MiroEndpoints["updateItemPositionOrParent"]>
-  ) {
+  async update(...rest: GetRest2<MiroEndpoints["updateItemPositionOrParent"]>) {
     (await this._api.updateItemPositionOrParent(...this.pathParams, ...rest))
       .body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteItem} */
-  async deleteItem(...rest: GetRest2<MiroEndpoints["deleteItem"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteItem"]>) {
     (await this._api.deleteItem(...this.pathParams, ...rest)).body;
   }
 
@@ -802,7 +929,7 @@ export class Item extends BaseItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -843,9 +970,7 @@ export class AppCardItem extends BaseAppCardItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteAppCardItem} */
-  async deleteAppCardItem(
-    ...rest: GetRest2<MiroEndpoints["deleteAppCardItem"]>
-  ) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteAppCardItem"]>) {
     (await this._api.deleteAppCardItem(...this.pathParams, ...rest)).body;
   }
 
@@ -858,7 +983,7 @@ export class AppCardItem extends BaseAppCardItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -892,12 +1017,12 @@ export class CardItem extends BaseCardItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateCardItem} */
-  async updateCardItem(...rest: GetRest2<MiroEndpoints["updateCardItem"]>) {
+  async update(...rest: GetRest2<MiroEndpoints["updateCardItem"]>) {
     (await this._api.updateCardItem(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteCardItem} */
-  async deleteCardItem(...rest: GetRest2<MiroEndpoints["deleteCardItem"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteCardItem"]>) {
     (await this._api.deleteCardItem(...this.pathParams, ...rest)).body;
   }
 
@@ -910,7 +1035,7 @@ export class CardItem extends BaseCardItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -944,17 +1069,13 @@ export class DocumentItem extends BaseDocumentItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateDocumentItemUsingUrl} */
-  async updateDocumentItem(
-    ...rest: GetRest2<MiroEndpoints["updateDocumentItemUsingUrl"]>
-  ) {
+  async update(...rest: GetRest2<MiroEndpoints["updateDocumentItemUsingUrl"]>) {
     (await this._api.updateDocumentItemUsingUrl(...this.pathParams, ...rest))
       .body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteDocumentItem} */
-  async deleteDocumentItem(
-    ...rest: GetRest2<MiroEndpoints["deleteDocumentItem"]>
-  ) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteDocumentItem"]>) {
     (await this._api.deleteDocumentItem(...this.pathParams, ...rest)).body;
   }
 
@@ -967,7 +1088,7 @@ export class DocumentItem extends BaseDocumentItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -1001,12 +1122,12 @@ export class EmbedItem extends BaseEmbedItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateEmbedItem} */
-  async updateEmbedItem(...rest: GetRest2<MiroEndpoints["updateEmbedItem"]>) {
+  async update(...rest: GetRest2<MiroEndpoints["updateEmbedItem"]>) {
     (await this._api.updateEmbedItem(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteEmbedItem} */
-  async deleteEmbedItem(...rest: GetRest2<MiroEndpoints["deleteEmbedItem"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteEmbedItem"]>) {
     (await this._api.deleteEmbedItem(...this.pathParams, ...rest)).body;
   }
 
@@ -1019,7 +1140,7 @@ export class EmbedItem extends BaseEmbedItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -1053,12 +1174,12 @@ export class FrameItem extends BaseFrameItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateFrameItem} */
-  async updateFrameItem(...rest: GetRest2<MiroEndpoints["updateFrameItem"]>) {
+  async update(...rest: GetRest2<MiroEndpoints["updateFrameItem"]>) {
     (await this._api.updateFrameItem(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteFrameItem} */
-  async deleteFrameItem(...rest: GetRest2<MiroEndpoints["deleteFrameItem"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteFrameItem"]>) {
     (await this._api.deleteFrameItem(...this.pathParams, ...rest)).body;
   }
 
@@ -1071,7 +1192,7 @@ export class FrameItem extends BaseFrameItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -1105,14 +1226,12 @@ export class ImageItem extends BaseImageItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateImageItemUsingUrl} */
-  async updateImageItem(
-    ...rest: GetRest2<MiroEndpoints["updateImageItemUsingUrl"]>
-  ) {
+  async update(...rest: GetRest2<MiroEndpoints["updateImageItemUsingUrl"]>) {
     (await this._api.updateImageItemUsingUrl(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteImageItem} */
-  async deleteImageItem(...rest: GetRest2<MiroEndpoints["deleteImageItem"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteImageItem"]>) {
     (await this._api.deleteImageItem(...this.pathParams, ...rest)).body;
   }
 
@@ -1125,7 +1244,7 @@ export class ImageItem extends BaseImageItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -1159,12 +1278,12 @@ export class ShapeItem extends BaseShapeItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateShapeItem} */
-  async updateShapeItem(...rest: GetRest2<MiroEndpoints["updateShapeItem"]>) {
+  async update(...rest: GetRest2<MiroEndpoints["updateShapeItem"]>) {
     (await this._api.updateShapeItem(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteShapeItem} */
-  async deleteShapeItem(...rest: GetRest2<MiroEndpoints["deleteShapeItem"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteShapeItem"]>) {
     (await this._api.deleteShapeItem(...this.pathParams, ...rest)).body;
   }
 
@@ -1177,7 +1296,7 @@ export class ShapeItem extends BaseShapeItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -1211,16 +1330,12 @@ export class StickyNoteItem extends BaseStickyNoteItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateStickyNoteItem} */
-  async updateStickyNoteItem(
-    ...rest: GetRest2<MiroEndpoints["updateStickyNoteItem"]>
-  ) {
+  async update(...rest: GetRest2<MiroEndpoints["updateStickyNoteItem"]>) {
     (await this._api.updateStickyNoteItem(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteStickyNoteItem} */
-  async deleteStickyNoteItem(
-    ...rest: GetRest2<MiroEndpoints["deleteStickyNoteItem"]>
-  ) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteStickyNoteItem"]>) {
     (await this._api.deleteStickyNoteItem(...this.pathParams, ...rest)).body;
   }
 
@@ -1233,7 +1348,7 @@ export class StickyNoteItem extends BaseStickyNoteItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -1267,12 +1382,12 @@ export class TextItem extends BaseTextItem {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateTextItem} */
-  async updateTextItem(...rest: GetRest2<MiroEndpoints["updateTextItem"]>) {
+  async update(...rest: GetRest2<MiroEndpoints["updateTextItem"]>) {
     (await this._api.updateTextItem(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteTextItem} */
-  async deleteTextItem(...rest: GetRest2<MiroEndpoints["deleteTextItem"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteTextItem"]>) {
     (await this._api.deleteTextItem(...this.pathParams, ...rest)).body;
   }
 
@@ -1285,7 +1400,7 @@ export class TextItem extends BaseTextItem {
       ? result.tags.map((result) => {
           return new Tag(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })
@@ -1319,12 +1434,12 @@ export class Connector extends BaseConnector {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateConnector} */
-  async updateConnector(...rest: GetRest2<MiroEndpoints["updateConnector"]>) {
+  async update(...rest: GetRest2<MiroEndpoints["updateConnector"]>) {
     (await this._api.updateConnector(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteConnector} */
-  async deleteConnector(...rest: GetRest2<MiroEndpoints["deleteConnector"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteConnector"]>) {
     (await this._api.deleteConnector(...this.pathParams, ...rest)).body;
   }
 }
@@ -1341,12 +1456,12 @@ export class Tag extends BaseTag {
   }
 
   /** {@inheritDoc api!MiroEndpoints.updateTag} */
-  async updateTag(...rest: GetRest2<MiroEndpoints["updateTag"]>) {
+  async update(...rest: GetRest2<MiroEndpoints["updateTag"]>) {
     (await this._api.updateTag(...this.pathParams, ...rest)).body;
   }
 
   /** {@inheritDoc api!MiroEndpoints.deleteTag} */
-  async deleteTag(...rest: GetRest2<MiroEndpoints["deleteTag"]>) {
+  async delete(...rest: GetRest2<MiroEndpoints["deleteTag"]>) {
     (await this._api.deleteTag(...this.pathParams, ...rest)).body;
   }
 
@@ -1358,7 +1473,7 @@ export class Tag extends BaseTag {
       ? result.data.map((result) => {
           return new Item(
             this._api,
-            [this.pathParams[0], `${result.id}`],
+            [this.pathParams[0], `${result["id"]}`],
             result
           );
         })

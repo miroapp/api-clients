@@ -1,6 +1,7 @@
 
 interface Models {
     [key: string]: {
+        id?: string,
         props: string[],
         extendedModel?: {
             name: string,
@@ -36,14 +37,24 @@ const models: Models  = {
             {method: 'enterpriseCreateTeam', alias: 'createTeam', returns: 'Team'},
             {method: 'enterpriseDataclassificationOrganizationSettingsGet', alias: 'getDataClassification'},
 
-            {method: 'enterpriseGetDefaultTeamSettings', alias: 'getDefaultTeamSettings'},
+            {method: 'enterpriseGetDefaultTeamSettings', alias: 'getDefaultTeamSettings', returns: 'TeamSettings'},
             {method: 'enterpriseGetOrganizationMember', alias: 'getOrganizationMember'},
-            {method: 'enterpriseGetOrganizationMembers', alias: 'getOrganizationMembers'},
+            {method: 'enterpriseGetOrganizationMembers', alias: 'getOrganizationMembers', returns: 'OrganizationMember', paginated: 'data'},
             {method: 'enterpriseGetTeam', alias: 'getTeam', returns: 'Team'},
             {method: 'enterpriseGetTeams', alias: 'getTeams', returns: 'Team', paginated: true},
 
         ]
     },
+
+    OrganizationMember: {
+        props: ['orgId', 'userId'],
+        extendedModel: {
+            name: 'OrganizationMember',
+            path: 'model/organizationMember'
+        },
+        methods: []
+    },
+
     Team: {
         props: ['orgId', 'teamId'],
         extendedModel: {
@@ -62,8 +73,7 @@ const models: Models  = {
 
             {method: 'enterpriseInviteTeamMember', alias: 'inviteTeamMember'},
             {method: 'enterpriseGetTeamMember', alias: 'getTeamMember'},
-            {method: 'enterpriseGetTeamMembers', alias: 'getTeamMembers'},
-            {method: 'enterpriseUpdateTeamMember', alias: 'updateTeamMember'},
+            {method: 'enterpriseGetTeamMembers', alias: 'getTeamMembers', returns: 'TeamMember', paginated: true},
 
             {method: 'enterpriseUpdateTeam', alias: 'updateTeam'},
 
@@ -71,6 +81,45 @@ const models: Models  = {
             {method: 'enterpriseUpdateTeamSettings', alias: 'updateTeamSettings', oneId: true},
             {method: 'getBoards', returns: 'Board', paginated: 'data', oneId: true},
         ]
+    },
+
+    BoardDataClassification: {
+        props: [],
+        extendedModel: {
+            name: 'BoardDataClassificationLabel',
+            path: 'model/boardDataClassificationLabel'
+        },
+        methods: []
+    },
+
+    DataClassification: {
+        props: [],
+        extendedModel: {
+            name: 'DataClassificationOrganizationSettings',
+            path: 'model/dataClassificationOrganizationSettings'
+        },
+        methods: []
+    },
+
+    TeamMember: {
+        id: 'memberId',
+        props: ['orgId', 'teamId', 'memberId'],
+        extendedModel: {
+            name: 'TeamMember',
+            path: 'model/teamMember'
+        },
+        methods: [
+            {method: 'enterpriseUpdateTeamMember', alias: 'update'},
+        ]
+    },
+
+    TeamSettings: {
+        props: [],
+        extendedModel: {
+            name: 'TeamSettings',
+            path: 'model/teamSettings'
+        },
+        methods: []
     },
 
     Board: {
@@ -137,8 +186,8 @@ const models: Models  = {
             path: 'model/genericItem'
         },
         methods: [
-            'updateItemPositionOrParent',
-            'deleteItem',
+            {method: 'updateItemPositionOrParent', alias: 'update'},
+            {method: 'deleteItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -152,7 +201,7 @@ const models: Models  = {
         },
         methods: [
             'updateAppCardItem',
-            'deleteAppCardItem',
+            {method: 'deleteAppCardItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -165,8 +214,8 @@ const models: Models  = {
             path: 'model/cardItem'
         },
         methods: [
-            'updateCardItem',
-            'deleteCardItem',
+            {method: 'updateCardItem', alias: 'update'},
+            {method: 'deleteCardItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -179,8 +228,8 @@ const models: Models  = {
             path: 'model/documentItem'
         },
         methods: [
-            {method: 'updateDocumentItemUsingUrl', alias: 'updateDocumentItem'},
-            'deleteDocumentItem',
+            {method: 'updateDocumentItemUsingUrl', alias: 'update'},
+            {method: 'deleteDocumentItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -193,8 +242,8 @@ const models: Models  = {
             path: 'model/embedItem'
         },
         methods: [
-            'updateEmbedItem',
-            'deleteEmbedItem',
+            {method: 'updateEmbedItem', alias: 'update'},
+            {method: 'deleteEmbedItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -207,8 +256,8 @@ const models: Models  = {
             path: 'model/frameItem'
         },
         methods: [
-            'updateFrameItem',
-            'deleteFrameItem',
+            {method: 'updateFrameItem', alias: 'update'},
+            {method: 'deleteFrameItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -221,8 +270,8 @@ const models: Models  = {
             path: 'model/imageItem'
         },
         methods: [
-            {method: 'updateImageItemUsingUrl', alias: 'updateImageItem'},
-            'deleteImageItem',
+            {method: 'updateImageItemUsingUrl', alias: 'update'},
+            {method: 'deleteImageItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -235,8 +284,8 @@ const models: Models  = {
             path: 'model/shapeItem'
         },
         methods: [
-            'updateShapeItem',
-            'deleteShapeItem',
+            {method: 'updateShapeItem', alias: 'update'},
+            {method: 'deleteShapeItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -249,8 +298,8 @@ const models: Models  = {
             path: 'model/stickyNoteItem'
         },
         methods: [
-            'updateStickyNoteItem',
-            'deleteStickyNoteItem',
+            {method: 'updateStickyNoteItem', alias: 'update'},
+            {method: 'deleteStickyNoteItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -263,8 +312,8 @@ const models: Models  = {
             path: 'model/textItem'
         },
         methods: [
-            'updateTextItem',
-            'deleteTextItem',
+            {method: 'updateTextItem', alias: 'update'},
+            {method: 'deleteTextItem', alias: 'delete'},
             {method: 'getTagsFromItem', alias: 'getTags', returns: 'Tag', paginated: 'tags'},
             {method: 'removeTagFromItem', alias: 'removeTag'},
             {method: 'attachTagToItem', alias: 'attachTag'},
@@ -277,8 +326,8 @@ const models: Models  = {
             path: 'model/connectorWithLinks'
         },
         methods: [
-            'updateConnector',
-            'deleteConnector',
+            {method: 'updateConnector', alias: 'update'},
+            {method: 'deleteConnector', alias: 'delete'},
         ]
     },
     Tag: {
@@ -288,8 +337,8 @@ const models: Models  = {
             path: 'model/tag'
         },
         methods: [
-            'updateTag',
-            'deleteTag',
+            {method: 'updateTag', alias: 'update'},
+            {method: 'deleteTag', alias: 'delete'},
             {method: 'getItemsByTag', returns: 'Item', paginated: 'data'}
         ]
     }
@@ -325,6 +374,12 @@ Method extends (p1: any, p2: any, ...rest: any[]) => any,
     ? Rest
     : never
 
+type GetRest3<
+Method extends (p1: any, p2: any, p3: any, ...rest: any[]) => any,
+> = Method extends (p1: any, p2: any, p3: any, ...rest: infer Rest) => any
+    ? Rest
+    : never
+
 `)
 
 for (const name of Object.keys(models)) {
@@ -347,21 +402,24 @@ export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object' } 
 
     ${model.methods.map(methodConfig => {
     const m = typeof methodConfig === 'string' ? {method: methodConfig} : methodConfig;
+    const name = m.alias || m.method;
 
-    const returnsModel = m.returns || (m.method.startsWith('get') || m.method.startsWith('create') ? m.method.replace(/^(create|get)/, '') : undefined);
+    const returnsModel = m.returns || (name.startsWith('get') || name.startsWith('create') ? name.replace(/^(create|get)/, '') : undefined);
 
     const body = `(await this._api.${m.method}(${m.oneId ? `this.pathParams[${model.props.length-1}]` : '...this.pathParams'}, ...rest)).body`
 
     const paginatedData = m.paginated === true ? 'result' : `result.${m.paginated}`
 
+    if (returnsModel && !models[returnsModel]) throw new Error('Undefined model ' + returnsModel)
+
     return `
     /** {@inheritDoc api!MiroEndpoints.${m.method}} */
-    async ${m.alias || m.method}(...rest: GetRest${m.oneId ? 1 : model.props.length}<MiroEndpoints['${m.method}']>) {
+    async ${name}(...rest: GetRest${m.oneId ? 1 : model.props.length}<MiroEndpoints['${m.method}']>) {
         ${returnsModel ? `const result = ${body}` : body}
         ${m.paginated ? `return ${paginatedData} ? ${paginatedData}.map(result => { ` : ''}
         ${returnsModel ? `return new ${returnsModel} (
             this._api,
-            [${models[returnsModel].props.map((_, i, {length}) => i === length - 1 ? '`${result.id}`': `this.pathParams[${i}]`)}],
+            [${models[returnsModel].props.map((_, i, {length}) => i === length - 1 ? `\`\${result['${models[returnsModel].id || "id"}']}\``: `this.pathParams[${i}]`)}],
             result
         )` : '' }
         ${m.paginated ? '}) : []' : ''}
