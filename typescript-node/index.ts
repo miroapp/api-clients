@@ -50,7 +50,7 @@ export class Miro {
     /**
     * Returns an instance of the highlevel Miro API for the given user id
     */
-    highlevel(userId: ExternalUserId): Models {
+    as(userId: ExternalUserId): Models {
         return new Models(this.api(userId), [], {})
     }
 
