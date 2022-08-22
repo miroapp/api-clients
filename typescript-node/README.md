@@ -1,3 +1,5 @@
+# WIP: This client is still a work in progress, anything may change at any time
+
 ### Using Miro authentication wrapper
 
 Miro class is a wrapper that handles authorization and per-user access token management.
