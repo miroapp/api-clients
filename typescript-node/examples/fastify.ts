@@ -1,4 +1,4 @@
-import Miro from '../index'
+import Miro from '@mirohq/miro-node'
 import Fastify from 'fastify'
 
 const fastify = Fastify()
