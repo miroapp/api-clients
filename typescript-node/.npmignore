@@ -1,0 +1,17 @@
+/api
+/model
+/examples
+/nested-model
+
+scripts/
+test/
+
+.openapi*
+
+*.sh
+*.json
+*.tgz
+
+/*.ts
+
+*lock
