@@ -41,7 +41,7 @@ export class Miro {
     }
 
     /**
-    * Returns an instance of the Miro API for the given user id
+    * Returns an instance of the low level Miro API for the given user id
     */
     api(userId: ExternalUserId): MiroEndpoints {
         return MiroApi(async () => await this.getAccessToken(userId), undefined, this.debug)
