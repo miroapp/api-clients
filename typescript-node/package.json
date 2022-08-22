@@ -1,7 +1,11 @@
 {
-    "name": "miro-api",
+    "name": "@mirohq/miro-node",
     "version": "0.1",
-    "description": "NodeJS client for miro-api",
+    "private": true,
+    "publishConfig": {
+        "access": "restricted"
+    },
+    "description": "NodeJS client for Miro's REST API",
     "repository": {
         "type": "git",
         "url": "https://github.com/miroapp/api-clients.git"
@@ -10,7 +14,7 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "clean": "rm -Rf node_modules/ *.js",
-        "build": "tsc && typedoc api.ts index.ts nested-model/* --gitRevision main --theme typedoc-theme-oxide",
+        "build": "tsc && typedoc api.ts index.ts nested-model/* --gitRevision main",
         "test": "npm run build && node dist/client.js"
     },
     "author": "Miro",

@@ -3,7 +3,7 @@ set -euo pipefail
 
 rm -rf typescript-node/{api,model}
 
-openapi-generator-cli generate -i "spec.json" -o typescript-node -g typescript-node -t template -p npmName=miro-api
+openapi-generator-cli generate -i 'spec.json' -o 'typescript-node' -g 'typescript-node' -t 'template' -p 'npmName=@mirohq/miro-node'
 
 cd typescript-node
 

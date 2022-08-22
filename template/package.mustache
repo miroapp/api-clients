@@ -1,7 +1,11 @@
 {
     "name": "{{npmName}}",
     "version": "{{npmVersion}}",
-    "description": "NodeJS client for {{npmName}}",
+    "private": true,
+    "publishConfig": {
+        "access": "restricted"
+    },
+    "description": "NodeJS client for Miro's REST API",
     "repository": {
         "type": "git",
         "url": "https://{{gitHost}}/miroapp/api-clients.git"

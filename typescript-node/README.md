@@ -1,11 +1,11 @@
-### Using Miro client
+### Using Miro authentication wrapper
 
 Miro class is a wrapper that handles authorization and per-user access token management.
 
 To instantiate the client call the Miro instance:
 
 ```typescript
-import Miro from 'miro-node'
+import Miro from '@mirohq/miro-node'
 
 const miro = new Miro()
 ```
