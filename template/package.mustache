@@ -10,7 +10,7 @@
     "types": "dist/index.d.ts",
     "scripts": {
         "clean": "rm -Rf node_modules/ *.js",
-        "build": "tsc && typedoc api.ts index.ts highlevel.ts --gitRevision main",
+        "build": "tsc && typedoc api.ts index.ts nested-model/* --gitRevision main",
         "test": "npm run build && node dist/client.js"
     },
     "author": "Miro",

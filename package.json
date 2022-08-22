@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "update-spec": "scripts/fetch-spec.mjs > spec.json",
     "generate": "scripts/generate-node-client.sh",
     "postgenerate": "scripts/move_docs.sh",
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -38,7 +38,8 @@ export interface ItemsApiMethods {
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
      */
-    deleteItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Get items on board
@@ -47,7 +48,20 @@ export interface ItemsApiMethods {
      * @param type 
      * @param cursor 
      */
-    getItems(boardId: string, limit?: string, type?: string, cursor?: string, ): Promise<{ response: Response; body: GenericItemCursorPaged;  }>
+    getItems(boardId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+type?: string,
+ 
+
+
+cursor?: string,
+ },  
+): Promise<{ response: Response; body: GenericItemCursorPaged;  }>
     /**
      * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Get items within frame
@@ -57,14 +71,28 @@ export interface ItemsApiMethods {
      * @param type 
      * @param cursor 
      */
-    getItemsWithinFrame(boardIdPlatformContainers: string, parentItemId: string, limit?: string, type?: string, cursor?: string, ): Promise<{ response: Response; body: GenericItemCursorPaged;  }>
+    getItemsWithinFrame(boardIdPlatformContainers: string, parentItemId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+type?: string,
+ 
+
+
+cursor?: string,
+ },  
+): Promise<{ response: Response; body: GenericItemCursorPaged;  }>
     /**
      * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get specific item on board
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
      */
-    getSpecificItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: GenericItem;  }>
+    getSpecificItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: GenericItem;  }>
     /**
      * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update item position or parent
@@ -72,12 +100,18 @@ export interface ItemsApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
      * @param genericItemUpdate 
      */
-    updateItemPositionOrParent(boardId: string, itemId: string, genericItemUpdate: GenericItemUpdate, ): Promise<{ response: Response; body: GenericItem;  }>
+    updateItemPositionOrParent(boardId: string, itemId: string, genericItemUpdate: GenericItemUpdate, 
+): Promise<{ response: Response; body: GenericItem;  }>
 }
 
 export function ItemsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): ItemsApiMethods {
     return {
-        deleteItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -100,6 +134,7 @@ export function ItemsApi (accessToken: string|(() => Promise<string>), basePath:
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling deleteItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -127,6 +162,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -135,7 +172,24 @@ const options = {
 
             return({response, body})
         },
-        getItems: async function (boardId: string, limit?: string, type?: string, cursor?: string, ) : Promise<{ response: Response; body: GenericItemCursorPaged;  }> {
+
+        /*
+        */
+
+        getItems: async function (boardId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+type?: string,
+ 
+
+
+cursor?: string,
+ },  
+) : Promise<{ response: Response; body: GenericItemCursorPaged;  }> {
             const localVarPath = '/v2/boards/{board_id}/items'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -153,16 +207,23 @@ const options = {
                 throw new Error('Required parameter boardId was null or undefined when calling getItems.');
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, "string"));
+
+
+
+            if (query?.limit !== undefined) {
+                localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, "string"));
             }
 
-            if (type !== undefined) {
-                localVarQueryParameters.append('type', ObjectSerializer.serialize(type, "string"));
+
+
+            if (query?.type !== undefined) {
+                localVarQueryParameters.append('type', ObjectSerializer.serialize(query?.type, "string"));
             }
 
-            if (cursor !== undefined) {
-                localVarQueryParameters.append('cursor', ObjectSerializer.serialize(cursor, "string"));
+
+
+            if (query?.cursor !== undefined) {
+                localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, "string"));
             }
 
 
@@ -191,6 +252,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -199,7 +262,24 @@ const options = {
 
             return({response, body})
         },
-        getItemsWithinFrame: async function (boardIdPlatformContainers: string, parentItemId: string, limit?: string, type?: string, cursor?: string, ) : Promise<{ response: Response; body: GenericItemCursorPaged;  }> {
+
+        /*
+        */
+
+        getItemsWithinFrame: async function (boardIdPlatformContainers: string, parentItemId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+type?: string,
+ 
+
+
+cursor?: string,
+ },  
+) : Promise<{ response: Response; body: GenericItemCursorPaged;  }> {
             const localVarPath = '/v2/boards/{board_id_PlatformContainers}/items'
                 .replace('{' + 'board_id_PlatformContainers' + '}', encodeURIComponent(String(boardIdPlatformContainers)));
             let localVarQueryParameters = new URLSearchParams();
@@ -217,25 +297,34 @@ const options = {
                 throw new Error('Required parameter boardIdPlatformContainers was null or undefined when calling getItemsWithinFrame.');
             }
 
-            // verify required parameter 'parentItemId' is not null or undefined
-            if (parentItemId === null || parentItemId === undefined) {
-                throw new Error('Required parameter parentItemId was null or undefined when calling getItemsWithinFrame.');
-            }
+
+
+                // verify required parameter 'parentItemId' is not null or undefined
+                if (parentItemId === null || parentItemId === undefined) {
+                    throw new Error('Required parameter parentItemId was null or undefined when calling getItemsWithinFrame.');
+                }
+
 
             if (parentItemId !== undefined) {
                 localVarQueryParameters.append('parent_item_id', ObjectSerializer.serialize(parentItemId, "string"));
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, "string"));
+
+
+            if (query?.limit !== undefined) {
+                localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, "string"));
             }
 
-            if (type !== undefined) {
-                localVarQueryParameters.append('type', ObjectSerializer.serialize(type, "string"));
+
+
+            if (query?.type !== undefined) {
+                localVarQueryParameters.append('type', ObjectSerializer.serialize(query?.type, "string"));
             }
 
-            if (cursor !== undefined) {
-                localVarQueryParameters.append('cursor', ObjectSerializer.serialize(cursor, "string"));
+
+
+            if (query?.cursor !== undefined) {
+                localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, "string"));
             }
 
 
@@ -264,6 +353,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -272,7 +363,12 @@ const options = {
 
             return({response, body})
         },
-        getSpecificItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: GenericItem;  }> {
+
+        /*
+        */
+
+        getSpecificItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: GenericItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -297,6 +393,7 @@ const options = {
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -322,6 +419,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -330,7 +429,12 @@ const options = {
 
             return({response, body})
         },
-        updateItemPositionOrParent: async function (boardId: string, itemId: string, genericItemUpdate: GenericItemUpdate, ) : Promise<{ response: Response; body: GenericItem;  }> {
+
+        /*
+        */
+
+        updateItemPositionOrParent: async function (boardId: string, itemId: string, genericItemUpdate: GenericItemUpdate, 
+) : Promise<{ response: Response; body: GenericItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -354,10 +458,6 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling updateItemPositionOrParent.');
             }
 
-            // verify required parameter 'genericItemUpdate' is not null or undefined
-            if (genericItemUpdate === null || genericItemUpdate === undefined) {
-                throw new Error('Required parameter genericItemUpdate was null or undefined when calling updateItemPositionOrParent.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -385,6 +485,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

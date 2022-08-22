@@ -40,7 +40,7 @@
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="getBoardMembers" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Board<wbr/>Members</span><a href="#getBoardMembers" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" id="icon-anchor-a"></path><path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" id="icon-anchor-b"></path><path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" id="icon-anchor-c"></path></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-<li class="tsd-signature tsd-anchor-link" id="getBoardMembers.getBoardMembers-1">get<wbr/>Board<wbr/>Members<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.BoardMembersPagedResponse.html" class="tsd-signature-type" data-tsd-kind="Class">BoardMembersPagedResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getBoardMembers.getBoardMembers-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="getBoardMembers.getBoardMembers-1">get<wbr/>Board<wbr/>Members<span class="tsd-signature-symbol">(</span>boardId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, query<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.BoardMembersPagedResponse.html" class="tsd-signature-type" data-tsd-kind="Class">BoardMembersPagedResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#getBoardMembers.getBoardMembers-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;boards:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 1</a><br/></p>
 
@@ -54,9 +54,12 @@
 <div class="tsd-comment tsd-typography"><p><a href="https://developers.miro.com/reference/board-model">Unique identifier (ID) of the board</a> to which the board member belongs.</p>
 </div></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> limit: <span class="tsd-signature-type">string</span></h5></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> offset: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> query: <span class="tsd-signature-symbol">{ </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span></h5>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> offset<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.BoardMembersPagedResponse.html" class="tsd-signature-type" data-tsd-kind="Class">BoardMembersPagedResponse</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
 <li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L44">api/boardMembersApi.ts:44</a></li></ul></aside></li></ul></section>
@@ -82,7 +85,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.BoardMemberWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">BoardMemberWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L51">api/boardMembersApi.ts:51</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L60">api/boardMembersApi.ts:60</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="removeBoardMember" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>remove<wbr/>Board<wbr/>Member</span><a href="#removeBoardMember" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
@@ -105,7 +108,7 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L58">api/boardMembersApi.ts:58</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L68">api/boardMembersApi.ts:68</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="shareBoard" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>share<wbr/>Board</span><a href="#shareBoard" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
@@ -126,7 +129,7 @@
 <h5>boardMembersInvite: <a href="../classes/api.BoardMembersInvite-1.html" class="tsd-signature-type" data-tsd-kind="Class">BoardMembersInvite</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.InvitationResult.html" class="tsd-signature-type" data-tsd-kind="Class">InvitationResult</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L65">api/boardMembersApi.ts:65</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L76">api/boardMembersApi.ts:76</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="updateBoardMember" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>update<wbr/>Board<wbr/>Member</span><a href="#updateBoardMember" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
@@ -151,7 +154,7 @@
 <h5>boardMemberChanges: <a href="../classes/api.BoardMemberChanges-1.html" class="tsd-signature-type" data-tsd-kind="Class">BoardMemberChanges</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.BoardMemberWithLinks-1.html" class="tsd-signature-type" data-tsd-kind="Class">BoardMemberWithLinks</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L73">api/boardMembersApi.ts:73</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/boardMembersApi.ts#L85">api/boardMembersApi.ts:85</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -233,8 +236,10 @@
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="../modules/api.TextStyle.html">Text<wbr/>Style</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="../modules/api.WidgetData.html">Widget<wbr/>Data</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="../modules/api.WidgetDataPlatformTags.html">Widget<wbr/>Data<wbr/>Platform<wbr/>Tags</a></li></ul></li>
-<li class="tsd-kind-module"><a href="../modules/highlevel.html">highlevel</a></li>
-<li class="tsd-kind-module"><a href="../modules/index.html">index</a></li></ul></li></ul></div></details></nav>
+<li class="tsd-kind-module"><a href="../modules/index.html">index</a></li>
+<li class="tsd-kind-module"><a href="../modules/nested_model.html">nested-<wbr/>model</a></li>
+<li class="tsd-kind-module"><a href="../modules/nested_model_Team.html">nested-<wbr/>model/<wbr/>Team</a></li>
+<li class="tsd-kind-module"><a href="../modules/nested_model_definition.html">nested-<wbr/>model/definition</a></li></ul></li></ul></div></details></nav>
 <nav class="tsd-navigation secondary menu-sticky">
 <ul>
 <li class="current tsd-kind-interface tsd-parent-kind-module"><a href="api.BoardMembersApiMethods.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-256-path"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)" id="icon-256-text"></path></svg><span>Board<wbr/>Members<wbr/>Api<wbr/>Methods</span></a>

@@ -2,7 +2,7 @@ import assert from 'assert'
 import fs from 'fs'
 import fetch from 'node-fetch'
 import {HttpError, MiroApi, MiroEndpoints} from './api'
-import {Api as Models} from './highlevel'
+import {Api as Models} from './nested-model/index'
 
 
 const defaultBasePath = 'https://api.miro.com'
@@ -13,6 +13,7 @@ export class Miro {
     redirectUrl: string;
     storage: Storage;
     teamId?: string;
+    debug?: (l: any) => void;
 
     /**
     * Initializes the Miro API with the given client id and client secret
@@ -20,6 +21,7 @@ export class Miro {
     * clientId: MIRO_CLIENT_ID
     * clientSecret: MIRO_CLIENT_SECRET
     * redirectUrl: MIRO_REDIRECT_URL
+    * debug: MIRO_DEBUG
     */
     constructor(options: Opts = defaultOpts) {
         const opts = Object.assign({}, defaultOpts, options)
@@ -28,6 +30,7 @@ export class Miro {
         this.redirectUrl = opts.redirectUrl || '',
         this.storage = opts.storage || defaultStorage
         this.teamId = opts.teamId
+        this.debug = opts.debug
 
         assert(this.clientId, 'MIRO_CLIENT_ID is required')
         assert(this.clientSecret, 'MIRO_CLIENT_SECRET is required')
@@ -41,14 +44,14 @@ export class Miro {
     * Returns an instance of the Miro API for the given user id
     */
     api(userId: ExternalUserId): MiroEndpoints {
-        return MiroApi(async () => await this.getAccessToken(userId))
+        return MiroApi(async () => await this.getAccessToken(userId), undefined, this.debug)
     }
 
     /**
     * Returns an instance of the highlevel Miro API for the given user id
     */
     highlevel(userId: ExternalUserId): Models {
-        return new Models(MiroApi(async () => await this.getAccessToken(userId)), [], {})
+        return new Models(this.api(userId), [], {})
     }
 
     /**
@@ -198,6 +201,7 @@ export interface Opts {
     redirectUrl?: string,
     storage?: Storage,
     teamId?: string
+    debug?: (l: any) => void,
 }
 
 const defaultOpts: Opts = {
@@ -205,6 +209,7 @@ const defaultOpts: Opts = {
     clientSecret: process.env.MIRO_CLIENT_SECRET,
     redirectUrl: process.env.MIRO_REDIRECT_URL,
     storage: defaultStorage,
+    debug: process.env.MIRO_DEBUG ? console.log : undefined
 }
 
 export default Miro

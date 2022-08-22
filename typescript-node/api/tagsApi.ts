@@ -42,21 +42,24 @@ export interface TagsApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) to which you want to add a tag.
      * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) you want to add to the item.
      */
-    attachTagToItem(boardIdPlatformTags: string, itemId: string, tagId: string, ): Promise<{ response: Response; body: object;  }>
+    attachTagToItem(boardIdPlatformTags: string, itemId: string, tagId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Creates a tag on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Create tag
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the tag.
      * @param tagCreateRequest 
      */
-    createTag(boardId: string, tagCreateRequest: TagCreateRequest, ): Promise<{ response: Response; body: TagWithLinks;  }>
+    createTag(boardId: string, tagCreateRequest: TagCreateRequest, 
+): Promise<{ response: Response; body: TagWithLinks;  }>
     /**
      * Deletes the specified tag from the board. The tag is also removed from all cards and sticky notes on the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Delete tag
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to delete a specific tag.
      * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to delete.
      */
-    deleteTag(boardId: string, tagId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteTag(boardId: string, tagId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get items by tag
@@ -65,14 +68,24 @@ export interface TagsApiMethods {
      * @param limit 
      * @param offset 
      */
-    getItemsByTag(boardIdPlatformTags: string, tagId: string, limit?: string, offset?: string, ): Promise<{ response: Response; body: ItemPagedResponse;  }>
+    getItemsByTag(boardIdPlatformTags: string, tagId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+offset?: string,
+ },  
+): Promise<{ response: Response; body: ItemPagedResponse;  }>
     /**
      * Retrieves information for a specific tag.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get tag
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to retrieve a specific tag.
      * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to retrieve.
      */
-    getTag(boardId: string, tagId: string, ): Promise<{ response: Response; body: TagWithLinks;  }>
+    getTag(boardId: string, tagId: string, 
+): Promise<{ response: Response; body: TagWithLinks;  }>
     /**
      * Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get tags from board
@@ -80,14 +93,24 @@ export interface TagsApiMethods {
      * @param limit 
      * @param offset 
      */
-    getTagsFromBoard(boardId: string, limit?: string, offset?: string, ): Promise<{ response: Response; body: TagsPagedResponse;  }>
+    getTagsFromBoard(boardId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+offset?: string,
+ },  
+): Promise<{ response: Response; body: TagsPagedResponse;  }>
     /**
      * Retrieves all the tags from the specified item.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get tags from item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item whose tags you want to retrieve.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) whose tags you want to retrieve.
      */
-    getTagsFromItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: GetTagsResponse;  }>
+    getTagsFromItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: GetTagsResponse;  }>
     /**
      * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Remove tag from item
@@ -95,7 +118,8 @@ export interface TagsApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to remove the tag from.
      * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to remove from the item.
      */
-    removeTagFromItem(boardIdPlatformTags: string, itemId: string, tagId: string, ): Promise<{ response: Response; body: object;  }>
+    removeTagFromItem(boardIdPlatformTags: string, itemId: string, tagId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Updates a tag based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Update tag
@@ -103,12 +127,18 @@ export interface TagsApiMethods {
      * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to update.
      * @param tagUpdateRequest 
      */
-    updateTag(boardId: string, tagId: string, tagUpdateRequest: TagUpdateRequest, ): Promise<{ response: Response; body: TagWithLinks;  }>
+    updateTag(boardId: string, tagId: string, tagUpdateRequest: TagUpdateRequest, 
+): Promise<{ response: Response; body: TagWithLinks;  }>
 }
 
 export function TagsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TagsApiMethods {
     return {
-        attachTagToItem: async function (boardIdPlatformTags: string, itemId: string, tagId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        attachTagToItem: async function (boardIdPlatformTags: string, itemId: string, tagId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
                 .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -132,10 +162,13 @@ export function TagsApi (accessToken: string|(() => Promise<string>), basePath: 
                 throw new Error('Required parameter itemId was null or undefined when calling attachTagToItem.');
             }
 
-            // verify required parameter 'tagId' is not null or undefined
-            if (tagId === null || tagId === undefined) {
-                throw new Error('Required parameter tagId was null or undefined when calling attachTagToItem.');
-            }
+
+
+                // verify required parameter 'tagId' is not null or undefined
+                if (tagId === null || tagId === undefined) {
+                    throw new Error('Required parameter tagId was null or undefined when calling attachTagToItem.');
+                }
+
 
             if (tagId !== undefined) {
                 localVarQueryParameters.append('tag_id', ObjectSerializer.serialize(tagId, "string"));
@@ -167,6 +200,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -175,7 +210,12 @@ const options = {
 
             return({response, body})
         },
-        createTag: async function (boardId: string, tagCreateRequest: TagCreateRequest, ) : Promise<{ response: Response; body: TagWithLinks;  }> {
+
+        /*
+        */
+
+        createTag: async function (boardId: string, tagCreateRequest: TagCreateRequest, 
+) : Promise<{ response: Response; body: TagWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -193,10 +233,6 @@ const options = {
                 throw new Error('Required parameter boardId was null or undefined when calling createTag.');
             }
 
-            // verify required parameter 'tagCreateRequest' is not null or undefined
-            if (tagCreateRequest === null || tagCreateRequest === undefined) {
-                throw new Error('Required parameter tagCreateRequest was null or undefined when calling createTag.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -225,6 +261,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -233,7 +271,12 @@ const options = {
 
             return({response, body})
         },
-        deleteTag: async function (boardId: string, tagId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteTag: async function (boardId: string, tagId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags/{tag_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'tag_id' + '}', encodeURIComponent(String(tagId)));
@@ -258,6 +301,7 @@ const options = {
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -283,6 +327,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -291,7 +337,20 @@ const options = {
 
             return({response, body})
         },
-        getItemsByTag: async function (boardIdPlatformTags: string, tagId: string, limit?: string, offset?: string, ) : Promise<{ response: Response; body: ItemPagedResponse;  }> {
+
+        /*
+        */
+
+        getItemsByTag: async function (boardIdPlatformTags: string, tagId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+offset?: string,
+ },  
+) : Promise<{ response: Response; body: ItemPagedResponse;  }> {
             const localVarPath = '/v2/boards/{board_id_PlatformTags}/items'
                 .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)));
             let localVarQueryParameters = new URLSearchParams();
@@ -309,18 +368,25 @@ const options = {
                 throw new Error('Required parameter boardIdPlatformTags was null or undefined when calling getItemsByTag.');
             }
 
-            // verify required parameter 'tagId' is not null or undefined
-            if (tagId === null || tagId === undefined) {
-                throw new Error('Required parameter tagId was null or undefined when calling getItemsByTag.');
+
+
+
+            if (query?.limit !== undefined) {
+                localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, "string"));
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, "string"));
+
+
+            if (query?.offset !== undefined) {
+                localVarQueryParameters.append('offset', ObjectSerializer.serialize(query?.offset, "string"));
             }
 
-            if (offset !== undefined) {
-                localVarQueryParameters.append('offset', ObjectSerializer.serialize(offset, "string"));
-            }
+
+                // verify required parameter 'tagId' is not null or undefined
+                if (tagId === null || tagId === undefined) {
+                    throw new Error('Required parameter tagId was null or undefined when calling getItemsByTag.');
+                }
+
 
             if (tagId !== undefined) {
                 localVarQueryParameters.append('tag_id', ObjectSerializer.serialize(tagId, "string"));
@@ -352,6 +418,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -360,7 +428,12 @@ const options = {
 
             return({response, body})
         },
-        getTag: async function (boardId: string, tagId: string, ) : Promise<{ response: Response; body: TagWithLinks;  }> {
+
+        /*
+        */
+
+        getTag: async function (boardId: string, tagId: string, 
+) : Promise<{ response: Response; body: TagWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags/{tag_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'tag_id' + '}', encodeURIComponent(String(tagId)));
@@ -385,6 +458,7 @@ const options = {
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -410,6 +484,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -418,7 +494,20 @@ const options = {
 
             return({response, body})
         },
-        getTagsFromBoard: async function (boardId: string, limit?: string, offset?: string, ) : Promise<{ response: Response; body: TagsPagedResponse;  }> {
+
+        /*
+        */
+
+        getTagsFromBoard: async function (boardId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+offset?: string,
+ },  
+) : Promise<{ response: Response; body: TagsPagedResponse;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -436,12 +525,17 @@ const options = {
                 throw new Error('Required parameter boardId was null or undefined when calling getTagsFromBoard.');
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, "string"));
+
+
+
+            if (query?.limit !== undefined) {
+                localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, "string"));
             }
 
-            if (offset !== undefined) {
-                localVarQueryParameters.append('offset', ObjectSerializer.serialize(offset, "string"));
+
+
+            if (query?.offset !== undefined) {
+                localVarQueryParameters.append('offset', ObjectSerializer.serialize(query?.offset, "string"));
             }
 
 
@@ -470,6 +564,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -478,7 +574,12 @@ const options = {
 
             return({response, body})
         },
-        getTagsFromItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: GetTagsResponse;  }> {
+
+        /*
+        */
+
+        getTagsFromItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: GetTagsResponse;  }> {
             const localVarPath = '/v2/boards/{board_id}/items/{item_id}/tags'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -503,6 +604,7 @@ const options = {
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -528,6 +630,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -536,7 +640,12 @@ const options = {
 
             return({response, body})
         },
-        removeTagFromItem: async function (boardIdPlatformTags: string, itemId: string, tagId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        removeTagFromItem: async function (boardIdPlatformTags: string, itemId: string, tagId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
                 .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -560,10 +669,13 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling removeTagFromItem.');
             }
 
-            // verify required parameter 'tagId' is not null or undefined
-            if (tagId === null || tagId === undefined) {
-                throw new Error('Required parameter tagId was null or undefined when calling removeTagFromItem.');
-            }
+
+
+                // verify required parameter 'tagId' is not null or undefined
+                if (tagId === null || tagId === undefined) {
+                    throw new Error('Required parameter tagId was null or undefined when calling removeTagFromItem.');
+                }
+
 
             if (tagId !== undefined) {
                 localVarQueryParameters.append('tag_id', ObjectSerializer.serialize(tagId, "string"));
@@ -595,6 +707,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -603,7 +717,12 @@ const options = {
 
             return({response, body})
         },
-        updateTag: async function (boardId: string, tagId: string, tagUpdateRequest: TagUpdateRequest, ) : Promise<{ response: Response; body: TagWithLinks;  }> {
+
+        /*
+        */
+
+        updateTag: async function (boardId: string, tagId: string, tagUpdateRequest: TagUpdateRequest, 
+) : Promise<{ response: Response; body: TagWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/tags/{tag_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'tag_id' + '}', encodeURIComponent(String(tagId)));
@@ -627,10 +746,6 @@ const options = {
                 throw new Error('Required parameter tagId was null or undefined when calling updateTag.');
             }
 
-            // verify required parameter 'tagUpdateRequest' is not null or undefined
-            if (tagUpdateRequest === null || tagUpdateRequest === undefined) {
-                throw new Error('Required parameter tagUpdateRequest was null or undefined when calling updateTag.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -658,6 +773,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

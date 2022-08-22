@@ -37,7 +37,8 @@ export interface BoardClassificationBoardLevelApiMethods {
      * @param teamId id of the team
      * @param boardId Unique identifier of the board that you want to retrieve.
      */
-    enterpriseDataclassificationBoardGet(orgId: string, teamId: string, boardId: string, ): Promise<{ response: Response; body: BoardDataClassificationLabel;  }>
+    enterpriseDataclassificationBoardGet(orgId: string, teamId: string, boardId: string, 
+): Promise<{ response: Response; body: BoardDataClassificationLabel;  }>
     /**
      * Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Update board classification
@@ -46,12 +47,18 @@ export interface BoardClassificationBoardLevelApiMethods {
      * @param boardId Unique identifier of the board that you want to update.
      * @param dataClassificationLabelId 
      */
-    enterpriseDataclassificationBoardSet(orgId: string, teamId: string, boardId: string, dataClassificationLabelId: DataClassificationLabelId, ): Promise<{ response: Response; body: BoardDataClassificationLabel;  }>
+    enterpriseDataclassificationBoardSet(orgId: string, teamId: string, boardId: string, dataClassificationLabelId: DataClassificationLabelId, 
+): Promise<{ response: Response; body: BoardDataClassificationLabel;  }>
 }
 
 export function BoardClassificationBoardLevelApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardClassificationBoardLevelApiMethods {
     return {
-        enterpriseDataclassificationBoardGet: async function (orgId: string, teamId: string, boardId: string, ) : Promise<{ response: Response; body: BoardDataClassificationLabel;  }> {
+
+        /*
+        */
+
+        enterpriseDataclassificationBoardGet: async function (orgId: string, teamId: string, boardId: string, 
+) : Promise<{ response: Response; body: BoardDataClassificationLabel;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -82,6 +89,7 @@ export function BoardClassificationBoardLevelApi (accessToken: string|(() => Pro
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -107,6 +115,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -115,7 +125,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseDataclassificationBoardSet: async function (orgId: string, teamId: string, boardId: string, dataClassificationLabelId: DataClassificationLabelId, ) : Promise<{ response: Response; body: BoardDataClassificationLabel;  }> {
+
+        /*
+        */
+
+        enterpriseDataclassificationBoardSet: async function (orgId: string, teamId: string, boardId: string, dataClassificationLabelId: DataClassificationLabelId, 
+) : Promise<{ response: Response; body: BoardDataClassificationLabel;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -145,10 +160,6 @@ const options = {
                 throw new Error('Required parameter boardId was null or undefined when calling enterpriseDataclassificationBoardSet.');
             }
 
-            // verify required parameter 'dataClassificationLabelId' is not null or undefined
-            if (dataClassificationLabelId === null || dataClassificationLabelId === undefined) {
-                throw new Error('Required parameter dataClassificationLabelId was null or undefined when calling enterpriseDataclassificationBoardSet.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -176,6 +187,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

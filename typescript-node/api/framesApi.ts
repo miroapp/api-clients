@@ -38,21 +38,24 @@ export interface FramesApiMethods {
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create a frame.
      * @param frameCreateRequest 
      */
-    createFrameItem(boardId: string, frameCreateRequest: FrameCreateRequest, ): Promise<{ response: Response; body: FrameItem;  }>
+    createFrameItem(boardId: string, frameCreateRequest: FrameCreateRequest, 
+): Promise<{ response: Response; body: FrameItem;  }>
     /**
      * Deletes a frame from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
      * @summary Delete frame
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the frame.
      * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
      */
-    deleteFrameItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteFrameItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves information for a specific frame on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get frame
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that contains the frame that you want to retrieve
      * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
      */
-    getFrameItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: FrameItem;  }>
+    getFrameItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: FrameItem;  }>
     /**
      * Updates a frame on a board based on the data, style, or geometry properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update frame
@@ -60,12 +63,18 @@ export interface FramesApiMethods {
      * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
      * @param frameUpdateRequest 
      */
-    updateFrameItem(boardId: string, itemId: string, frameUpdateRequest: FrameUpdateRequest, ): Promise<{ response: Response; body: FrameItem;  }>
+    updateFrameItem(boardId: string, itemId: string, frameUpdateRequest: FrameUpdateRequest, 
+): Promise<{ response: Response; body: FrameItem;  }>
 }
 
 export function FramesApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): FramesApiMethods {
     return {
-        createFrameItem: async function (boardId: string, frameCreateRequest: FrameCreateRequest, ) : Promise<{ response: Response; body: FrameItem;  }> {
+
+        /*
+        */
+
+        createFrameItem: async function (boardId: string, frameCreateRequest: FrameCreateRequest, 
+) : Promise<{ response: Response; body: FrameItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/frames'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -83,10 +92,6 @@ export function FramesApi (accessToken: string|(() => Promise<string>), basePath
                 throw new Error('Required parameter boardId was null or undefined when calling createFrameItem.');
             }
 
-            // verify required parameter 'frameCreateRequest' is not null or undefined
-            if (frameCreateRequest === null || frameCreateRequest === undefined) {
-                throw new Error('Required parameter frameCreateRequest was null or undefined when calling createFrameItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -115,6 +120,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -123,7 +130,12 @@ const options = {
 
             return({response, body})
         },
-        deleteFrameItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteFrameItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/frames/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -146,6 +158,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling deleteFrameItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -173,6 +186,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -181,7 +196,12 @@ const options = {
 
             return({response, body})
         },
-        getFrameItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: FrameItem;  }> {
+
+        /*
+        */
+
+        getFrameItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: FrameItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/frames/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -204,6 +224,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling getFrameItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -231,6 +252,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -239,7 +262,12 @@ const options = {
 
             return({response, body})
         },
-        updateFrameItem: async function (boardId: string, itemId: string, frameUpdateRequest: FrameUpdateRequest, ) : Promise<{ response: Response; body: FrameItem;  }> {
+
+        /*
+        */
+
+        updateFrameItem: async function (boardId: string, itemId: string, frameUpdateRequest: FrameUpdateRequest, 
+) : Promise<{ response: Response; body: FrameItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/frames/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -263,10 +291,6 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling updateFrameItem.');
             }
 
-            // verify required parameter 'frameUpdateRequest' is not null or undefined
-            if (frameUpdateRequest === null || frameUpdateRequest === undefined) {
-                throw new Error('Required parameter frameUpdateRequest was null or undefined when calling updateFrameItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -294,6 +318,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

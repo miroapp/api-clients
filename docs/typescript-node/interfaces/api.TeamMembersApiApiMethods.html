@@ -90,11 +90,11 @@
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TeamMember-1.html" class="tsd-signature-type" data-tsd-kind="Class">TeamMember</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/teamMembersApiApi.ts#L50">api/teamMembersApiApi.ts:50</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/teamMembersApiApi.ts#L51">api/teamMembersApiApi.ts:51</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="enterpriseGetTeamMembers" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enterprise<wbr/>Get<wbr/>Team<wbr/>Members</span><a href="#enterpriseGetTeamMembers" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
-<li class="tsd-signature tsd-anchor-link" id="enterpriseGetTeamMembers.enterpriseGetTeamMembers-1">enterprise<wbr/>Get<wbr/>Team<wbr/>Members<span class="tsd-signature-symbol">(</span>orgId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, teamId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, cursor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, filterQuery<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TeamMember-1.html" class="tsd-signature-type" data-tsd-kind="Class">TeamMember</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#enterpriseGetTeamMembers.enterpriseGetTeamMembers-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="enterpriseGetTeamMembers.enterpriseGetTeamMembers-1">enterprise<wbr/>Get<wbr/>Team<wbr/>Members<span class="tsd-signature-symbol">(</span>orgId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, teamId<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, query<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-symbol">{ </span>cursor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>filterQuery<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TeamMember-1.html" class="tsd-signature-type" data-tsd-kind="Class">TeamMember</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span><a href="#enterpriseGetTeamMembers.enterpriseGetTeamMembers-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
 <div class="tsd-comment tsd-typography"><p>Retrieves team members by cursor.<br/><h3>Required scope</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/scopes&quot;&gt;organizations:teams:read</a> <br/><h3>Rate limiting</h3> &lt;a target=&quot;blank&quot; href=&quot;/reference/ratelimiting&quot;&gt;Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for &lt;a target=&quot;blank&quot; href=&quot;/reference/api-reference#enterprise-plan&quot;&gt;Enterprise plan</a> users.</p></p>
 
@@ -112,20 +112,17 @@
 <div class="tsd-comment tsd-typography"><p>The id of a Team.</p>
 </div></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> limit: <span class="tsd-signature-type">number</span></h5>
-<div class="tsd-comment tsd-typography"><p>Limit for the number of team members returned in the result list.</p>
-</div></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> cursor: <span class="tsd-signature-type">string</span></h5>
-<div class="tsd-comment tsd-typography"><p>The ID of the team member used as the reference for pagination. To retrieve the first portion of the collection don&amp;#39;t pass a cursor value. To retrieve the next portion of the collection, set the &#x60;cursor&#x60; parameter value to the ID of the last team member you received in the response of the previous request.</p>
-</div></li>
-<li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> filterQuery: <span class="tsd-signature-type">string</span></h5>
-<div class="tsd-comment tsd-typography"><p>Filtering query</p>
-</div></li></ul></div>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> query: <span class="tsd-signature-symbol">{ </span>cursor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>filterQuery<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> }</span></h5>
+<ul class="tsd-parameters">
+<li class="tsd-parameter">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> cursor<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> filter<wbr/>Query<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li>
+<li class="tsd-parameter">
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> limit<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TeamMember-1.html" class="tsd-signature-type" data-tsd-kind="Class">TeamMember</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/teamMembersApiApi.ts#L60">api/teamMembersApiApi.ts:60</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/teamMembersApiApi.ts#L62">api/teamMembersApiApi.ts:62</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="enterpriseInviteTeamMember" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enterprise<wbr/>Invite<wbr/>Team<wbr/>Member</span><a href="#enterpriseInviteTeamMember" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
@@ -150,7 +147,7 @@
 <h5>teamMemberInvite: <a href="../classes/api.TeamMemberInvite.html" class="tsd-signature-type" data-tsd-kind="Class">TeamMemberInvite</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.InvitationResult.html" class="tsd-signature-type" data-tsd-kind="Class">InvitationResult</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/teamMembersApiApi.ts#L68">api/teamMembersApiApi.ts:68</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/teamMembersApiApi.ts#L83">api/teamMembersApiApi.ts:83</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface"><a id="enterpriseUpdateTeamMember" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>enterprise<wbr/>Update<wbr/>Team<wbr/>Member</span><a href="#enterpriseUpdateTeamMember" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface">
@@ -179,7 +176,7 @@
 <h5>teamMemberChanges: <a href="../classes/api.TeamMemberChanges.html" class="tsd-signature-type" data-tsd-kind="Class">TeamMemberChanges</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">{ </span>body<span class="tsd-signature-symbol">: </span><a href="../classes/api.TeamMember-1.html" class="tsd-signature-type" data-tsd-kind="Class">TeamMember</a><span class="tsd-signature-symbol">; </span>response<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Response</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/teamMembersApiApi.ts#L77">api/teamMembersApiApi.ts:77</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/api/teamMembersApiApi.ts#L93">api/teamMembersApiApi.ts:93</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -261,8 +258,10 @@
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="../modules/api.TextStyle.html">Text<wbr/>Style</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="../modules/api.WidgetData.html">Widget<wbr/>Data</a></li>
 <li class="tsd-kind-namespace tsd-parent-kind-module"><a href="../modules/api.WidgetDataPlatformTags.html">Widget<wbr/>Data<wbr/>Platform<wbr/>Tags</a></li></ul></li>
-<li class="tsd-kind-module"><a href="../modules/highlevel.html">highlevel</a></li>
-<li class="tsd-kind-module"><a href="../modules/index.html">index</a></li></ul></li></ul></div></details></nav>
+<li class="tsd-kind-module"><a href="../modules/index.html">index</a></li>
+<li class="tsd-kind-module"><a href="../modules/nested_model.html">nested-<wbr/>model</a></li>
+<li class="tsd-kind-module"><a href="../modules/nested_model_Team.html">nested-<wbr/>model/<wbr/>Team</a></li>
+<li class="tsd-kind-module"><a href="../modules/nested_model_definition.html">nested-<wbr/>model/definition</a></li></ul></li></ul></div></details></nav>
 <nav class="tsd-navigation secondary menu-sticky">
 <ul>
 <li class="current tsd-kind-interface tsd-parent-kind-module"><a href="api.TeamMembersApiApiMethods.html" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6" id="icon-256-path"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)" id="icon-256-text"></path></svg><span>Team<wbr/>Members<wbr/>Api<wbr/>Api<wbr/>Methods</span></a>

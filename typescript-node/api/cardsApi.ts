@@ -38,21 +38,24 @@ export interface CardsApiMethods {
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
      * @param cardCreateRequest 
      */
-    createCardItem(boardId: string, cardCreateRequest: CardCreateRequest, ): Promise<{ response: Response; body: CardItem;  }>
+    createCardItem(boardId: string, cardCreateRequest: CardCreateRequest, 
+): Promise<{ response: Response; body: CardItem;  }>
     /**
      * Deletes a card item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
      * @summary Delete card item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
      */
-    deleteCardItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteCardItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves information for a specific card item on a board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get card item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
      */
-    getCardItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: CardItem;  }>
+    getCardItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: CardItem;  }>
     /**
      * Updates a card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update card item
@@ -60,12 +63,18 @@ export interface CardsApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
      * @param cardUpdateRequest 
      */
-    updateCardItem(boardId: string, itemId: string, cardUpdateRequest: CardUpdateRequest, ): Promise<{ response: Response; body: CardItem;  }>
+    updateCardItem(boardId: string, itemId: string, cardUpdateRequest: CardUpdateRequest, 
+): Promise<{ response: Response; body: CardItem;  }>
 }
 
 export function CardsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): CardsApiMethods {
     return {
-        createCardItem: async function (boardId: string, cardCreateRequest: CardCreateRequest, ) : Promise<{ response: Response; body: CardItem;  }> {
+
+        /*
+        */
+
+        createCardItem: async function (boardId: string, cardCreateRequest: CardCreateRequest, 
+) : Promise<{ response: Response; body: CardItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/cards'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -83,10 +92,6 @@ export function CardsApi (accessToken: string|(() => Promise<string>), basePath:
                 throw new Error('Required parameter boardId was null or undefined when calling createCardItem.');
             }
 
-            // verify required parameter 'cardCreateRequest' is not null or undefined
-            if (cardCreateRequest === null || cardCreateRequest === undefined) {
-                throw new Error('Required parameter cardCreateRequest was null or undefined when calling createCardItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -115,6 +120,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -123,7 +130,12 @@ const options = {
 
             return({response, body})
         },
-        deleteCardItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteCardItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/cards/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -146,6 +158,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling deleteCardItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -173,6 +186,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -181,7 +196,12 @@ const options = {
 
             return({response, body})
         },
-        getCardItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: CardItem;  }> {
+
+        /*
+        */
+
+        getCardItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: CardItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/cards/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -204,6 +224,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling getCardItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -231,6 +252,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -239,7 +262,12 @@ const options = {
 
             return({response, body})
         },
-        updateCardItem: async function (boardId: string, itemId: string, cardUpdateRequest: CardUpdateRequest, ) : Promise<{ response: Response; body: CardItem;  }> {
+
+        /*
+        */
+
+        updateCardItem: async function (boardId: string, itemId: string, cardUpdateRequest: CardUpdateRequest, 
+) : Promise<{ response: Response; body: CardItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/cards/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -263,10 +291,6 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling updateCardItem.');
             }
 
-            // verify required parameter 'cardUpdateRequest' is not null or undefined
-            if (cardUpdateRequest === null || cardUpdateRequest === undefined) {
-                throw new Error('Required parameter cardUpdateRequest was null or undefined when calling updateCardItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -294,6 +318,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

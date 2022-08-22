@@ -38,21 +38,24 @@ export interface ShapesApiMethods {
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
      * @param shapeCreateRequest 
      */
-    createShapeItem(boardId: string, shapeCreateRequest: ShapeCreateRequest, ): Promise<{ response: Response; body: ShapeItem;  }>
+    createShapeItem(boardId: string, shapeCreateRequest: ShapeCreateRequest, 
+): Promise<{ response: Response; body: ShapeItem;  }>
     /**
      * Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
      * @summary Delete shape item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
      */
-    deleteShapeItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteShapeItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get shape item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
      */
-    getShapeItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: ShapeItem;  }>
+    getShapeItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: ShapeItem;  }>
     /**
      * Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update shape item
@@ -60,12 +63,18 @@ export interface ShapesApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
      * @param shapeUpdateRequest 
      */
-    updateShapeItem(boardId: string, itemId: string, shapeUpdateRequest: ShapeUpdateRequest, ): Promise<{ response: Response; body: ShapeItem;  }>
+    updateShapeItem(boardId: string, itemId: string, shapeUpdateRequest: ShapeUpdateRequest, 
+): Promise<{ response: Response; body: ShapeItem;  }>
 }
 
 export function ShapesApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): ShapesApiMethods {
     return {
-        createShapeItem: async function (boardId: string, shapeCreateRequest: ShapeCreateRequest, ) : Promise<{ response: Response; body: ShapeItem;  }> {
+
+        /*
+        */
+
+        createShapeItem: async function (boardId: string, shapeCreateRequest: ShapeCreateRequest, 
+) : Promise<{ response: Response; body: ShapeItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/shapes'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -83,10 +92,6 @@ export function ShapesApi (accessToken: string|(() => Promise<string>), basePath
                 throw new Error('Required parameter boardId was null or undefined when calling createShapeItem.');
             }
 
-            // verify required parameter 'shapeCreateRequest' is not null or undefined
-            if (shapeCreateRequest === null || shapeCreateRequest === undefined) {
-                throw new Error('Required parameter shapeCreateRequest was null or undefined when calling createShapeItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -115,6 +120,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -123,7 +130,12 @@ const options = {
 
             return({response, body})
         },
-        deleteShapeItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteShapeItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/shapes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -146,6 +158,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling deleteShapeItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -173,6 +186,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -181,7 +196,12 @@ const options = {
 
             return({response, body})
         },
-        getShapeItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: ShapeItem;  }> {
+
+        /*
+        */
+
+        getShapeItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: ShapeItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/shapes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -204,6 +224,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling getShapeItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -231,6 +252,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -239,7 +262,12 @@ const options = {
 
             return({response, body})
         },
-        updateShapeItem: async function (boardId: string, itemId: string, shapeUpdateRequest: ShapeUpdateRequest, ) : Promise<{ response: Response; body: ShapeItem;  }> {
+
+        /*
+        */
+
+        updateShapeItem: async function (boardId: string, itemId: string, shapeUpdateRequest: ShapeUpdateRequest, 
+) : Promise<{ response: Response; body: ShapeItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/shapes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -263,10 +291,6 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling updateShapeItem.');
             }
 
-            // verify required parameter 'shapeUpdateRequest' is not null or undefined
-            if (shapeUpdateRequest === null || shapeUpdateRequest === undefined) {
-                throw new Error('Required parameter shapeUpdateRequest was null or undefined when calling updateShapeItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -294,6 +318,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

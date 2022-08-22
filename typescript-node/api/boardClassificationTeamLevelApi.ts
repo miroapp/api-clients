@@ -39,14 +39,16 @@ export interface BoardClassificationTeamLevelApiMethods {
      * @param teamId id of the team
      * @param updateBoardsDataClassificationLabelRequest 
      */
-    enterpriseDataclassificationTeamBoardsBulk(orgId: string, teamId: string, updateBoardsDataClassificationLabelRequest: UpdateBoardsDataClassificationLabelRequest, ): Promise<{ response: Response; body: UpdateBoardsDataClassificationLabel;  }>
+    enterpriseDataclassificationTeamBoardsBulk(orgId: string, teamId: string, updateBoardsDataClassificationLabelRequest: UpdateBoardsDataClassificationLabelRequest, 
+): Promise<{ response: Response; body: UpdateBoardsDataClassificationLabel;  }>
     /**
      * Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Get team settings
      * @param orgId id of the organization
      * @param teamId id of the team
      */
-    enterpriseDataclassificationTeamSettingsGet(orgId: string, teamId: string, ): Promise<{ response: Response; body: DataClassificationTeamSettings;  }>
+    enterpriseDataclassificationTeamSettingsGet(orgId: string, teamId: string, 
+): Promise<{ response: Response; body: DataClassificationTeamSettings;  }>
     /**
      * Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Update team settings
@@ -54,12 +56,18 @@ export interface BoardClassificationTeamLevelApiMethods {
      * @param teamId id of the team
      * @param updateTeamSettingsRequest 
      */
-    enterpriseDataclassificationTeamSettingsSet(orgId: string, teamId: string, updateTeamSettingsRequest: UpdateTeamSettingsRequest, ): Promise<{ response: Response; body: DataClassificationTeamSettings;  }>
+    enterpriseDataclassificationTeamSettingsSet(orgId: string, teamId: string, updateTeamSettingsRequest: UpdateTeamSettingsRequest, 
+): Promise<{ response: Response; body: DataClassificationTeamSettings;  }>
 }
 
 export function BoardClassificationTeamLevelApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardClassificationTeamLevelApiMethods {
     return {
-        enterpriseDataclassificationTeamBoardsBulk: async function (orgId: string, teamId: string, updateBoardsDataClassificationLabelRequest: UpdateBoardsDataClassificationLabelRequest, ) : Promise<{ response: Response; body: UpdateBoardsDataClassificationLabel;  }> {
+
+        /*
+        */
+
+        enterpriseDataclassificationTeamBoardsBulk: async function (orgId: string, teamId: string, updateBoardsDataClassificationLabelRequest: UpdateBoardsDataClassificationLabelRequest, 
+) : Promise<{ response: Response; body: UpdateBoardsDataClassificationLabel;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/data-classification'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)));
@@ -83,10 +91,6 @@ export function BoardClassificationTeamLevelApi (accessToken: string|(() => Prom
                 throw new Error('Required parameter teamId was null or undefined when calling enterpriseDataclassificationTeamBoardsBulk.');
             }
 
-            // verify required parameter 'updateBoardsDataClassificationLabelRequest' is not null or undefined
-            if (updateBoardsDataClassificationLabelRequest === null || updateBoardsDataClassificationLabelRequest === undefined) {
-                throw new Error('Required parameter updateBoardsDataClassificationLabelRequest was null or undefined when calling enterpriseDataclassificationTeamBoardsBulk.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -115,6 +119,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -123,7 +129,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseDataclassificationTeamSettingsGet: async function (orgId: string, teamId: string, ) : Promise<{ response: Response; body: DataClassificationTeamSettings;  }> {
+
+        /*
+        */
+
+        enterpriseDataclassificationTeamSettingsGet: async function (orgId: string, teamId: string, 
+) : Promise<{ response: Response; body: DataClassificationTeamSettings;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/data-classification-settings'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)));
@@ -146,6 +157,7 @@ const options = {
             if (teamId === null || teamId === undefined) {
                 throw new Error('Required parameter teamId was null or undefined when calling enterpriseDataclassificationTeamSettingsGet.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -173,6 +185,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -181,7 +195,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseDataclassificationTeamSettingsSet: async function (orgId: string, teamId: string, updateTeamSettingsRequest: UpdateTeamSettingsRequest, ) : Promise<{ response: Response; body: DataClassificationTeamSettings;  }> {
+
+        /*
+        */
+
+        enterpriseDataclassificationTeamSettingsSet: async function (orgId: string, teamId: string, updateTeamSettingsRequest: UpdateTeamSettingsRequest, 
+) : Promise<{ response: Response; body: DataClassificationTeamSettings;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/data-classification-settings'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)));
@@ -205,10 +224,6 @@ const options = {
                 throw new Error('Required parameter teamId was null or undefined when calling enterpriseDataclassificationTeamSettingsSet.');
             }
 
-            // verify required parameter 'updateTeamSettingsRequest' is not null or undefined
-            if (updateTeamSettingsRequest === null || updateTeamSettingsRequest === undefined) {
-                throw new Error('Required parameter updateTeamSettingsRequest was null or undefined when calling enterpriseDataclassificationTeamSettingsSet.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -236,6 +251,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

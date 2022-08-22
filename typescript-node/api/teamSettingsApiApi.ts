@@ -35,25 +35,33 @@ export interface TeamSettingsApiApiMethods {
      * @summary Get default team settings
      * @param orgId The id of an Organization.
      */
-    enterpriseGetDefaultTeamSettings(orgId: string, ): Promise<{ response: Response; body: TeamSettings;  }>
+    enterpriseGetDefaultTeamSettings(orgId: string, 
+): Promise<{ response: Response; body: TeamSettings;  }>
     /**
      * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Get team settings
      * @param teamId The id of a Team.
      */
-    enterpriseGetTeamSettings(teamId: string, ): Promise<{ response: Response; body: TeamSettings;  }>
+    enterpriseGetTeamSettings(teamId: string, 
+): Promise<{ response: Response; body: TeamSettings;  }>
     /**
      * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Update team settings
      * @param teamId The id of a Team.
      * @param teamSettingsChanges 
      */
-    enterpriseUpdateTeamSettings(teamId: string, teamSettingsChanges: TeamSettingsChanges, ): Promise<{ response: Response; body: TeamSettings;  }>
+    enterpriseUpdateTeamSettings(teamId: string, teamSettingsChanges: TeamSettingsChanges, 
+): Promise<{ response: Response; body: TeamSettings;  }>
 }
 
 export function TeamSettingsApiApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TeamSettingsApiApiMethods {
     return {
-        enterpriseGetDefaultTeamSettings: async function (orgId: string, ) : Promise<{ response: Response; body: TeamSettings;  }> {
+
+        /*
+        */
+
+        enterpriseGetDefaultTeamSettings: async function (orgId: string, 
+) : Promise<{ response: Response; body: TeamSettings;  }> {
             const localVarPath = '/v2/orgs/{org_id}/default_teams_settings'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -72,6 +80,7 @@ export function TeamSettingsApiApi (accessToken: string|(() => Promise<string>),
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -97,6 +106,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -105,7 +116,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseGetTeamSettings: async function (teamId: string, ) : Promise<{ response: Response; body: TeamSettings;  }> {
+
+        /*
+        */
+
+        enterpriseGetTeamSettings: async function (teamId: string, 
+) : Promise<{ response: Response; body: TeamSettings;  }> {
             const localVarPath = '/v2/teams_settings/{team_id}'
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -124,6 +140,7 @@ const options = {
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -149,6 +166,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -157,7 +176,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseUpdateTeamSettings: async function (teamId: string, teamSettingsChanges: TeamSettingsChanges, ) : Promise<{ response: Response; body: TeamSettings;  }> {
+
+        /*
+        */
+
+        enterpriseUpdateTeamSettings: async function (teamId: string, teamSettingsChanges: TeamSettingsChanges, 
+) : Promise<{ response: Response; body: TeamSettings;  }> {
             const localVarPath = '/v2/teams_settings/{team_id}'
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -175,10 +199,6 @@ const options = {
                 throw new Error('Required parameter teamId was null or undefined when calling enterpriseUpdateTeamSettings.');
             }
 
-            // verify required parameter 'teamSettingsChanges' is not null or undefined
-            if (teamSettingsChanges === null || teamSettingsChanges === undefined) {
-                throw new Error('Required parameter teamSettingsChanges was null or undefined when calling enterpriseUpdateTeamSettings.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -206,6 +226,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

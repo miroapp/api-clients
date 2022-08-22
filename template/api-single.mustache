@@ -36,14 +36,30 @@ export interface {{classname}}Methods {
      * @param {{paramName}} {{description}}
      {{/allParams}}
      */
-    {{nickname}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/allParams}}): Promise<{ response: Response; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }>
+    {{nickname}}({{#requiredParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/requiredParams}}
+        {{#optionalParams}}
+{{^isBodyParam}}{{#-first}} query?: { {{/-first}}{{/isBodyParam}}
+{{#isBodyParam}}{{^-first}} }, {{/-first}} {{/isBodyParam}}
+{{paramName}}?: {{{dataType}}},
+{{#isQueryParam}}{{#-last}} }, {{/-last}} {{/isQueryParam}}
+{{/optionalParams}}): Promise<{ response: Response; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }>
     {{/operation}}
 }
 
 export function {{classname}} (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): {{classname}}Methods {
     return {
     {{#operation}}
-        {{nickname}}: async function ({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/allParams}}) : Promise<{ response: Response; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }> {
+
+        /*
+        */
+
+        {{nickname}}: async function ({{#requiredParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/requiredParams}}
+        {{#optionalParams}}
+{{^isBodyParam}}{{#-first}} query?: { {{/-first}}{{/isBodyParam}}
+{{#isBodyParam}}{{^-first}} }, {{/-first}} {{/isBodyParam}}
+{{paramName}}?: {{{dataType}}},
+{{#isQueryParam}}{{#-last}} }, {{/-last}} {{/isQueryParam}}
+{{/optionalParams}}) : Promise<{ response: Response; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }> {
             const localVarPath = '{{{path}}}'{{#pathParams}}
                 .replace('{' + '{{baseName}}' + '}', encodeURIComponent(String({{paramName}}))){{/pathParams}};
             let localVarQueryParameters = new URLSearchParams();
@@ -58,7 +74,7 @@ export function {{classname}} (accessToken: string|(() => Promise<string>), base
             }
     {{/hasProduces}}
 
-    {{#allParams}}
+    {{#pathParams}}
     {{#required}}
             // verify required parameter '{{paramName}}' is not null or undefined
             if ({{paramName}} === null || {{paramName}} === undefined) {
@@ -66,10 +82,20 @@ export function {{classname}} (accessToken: string|(() => Promise<string>), base
             }
 
     {{/required}}
-    {{/allParams}}
+    {{/pathParams}}
+
     {{#queryParams}}
-            if ({{paramName}} !== undefined) {
-                localVarQueryParameters.append('{{baseName}}', ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}"));
+
+        {{#required}}
+                // verify required parameter '{{paramName}}' is not null or undefined
+                if ({{paramName}} === null || {{paramName}} === undefined) {
+                    throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
+                }
+
+        {{/required}}
+
+            if ({{^required}}query?.{{/required}}{{paramName}} !== undefined) {
+                localVarQueryParameters.append('{{baseName}}', ObjectSerializer.serialize({{^required}}query?.{{/required}}{{paramName}}, "{{{dataType}}}"));
             }
 
     {{/queryParams}}
@@ -101,6 +127,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

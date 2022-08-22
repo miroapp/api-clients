@@ -37,26 +37,34 @@ export interface OrganizationsApiMethods {
      * @summary Get organization info
      * @param orgId id of the organization
      */
-    enterpriseGetOrganization(orgId: string, ): Promise<{ response: Response; body: Organization;  }>
+    enterpriseGetOrganization(orgId: string, 
+): Promise<{ response: Response; body: Organization;  }>
     /**
      * Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Get organization member
      * @param orgId id of the organization
      * @param memberId id of the organization member
      */
-    enterpriseGetOrganizationMember(orgId: string, memberId: string, ): Promise<{ response: Response; body: OrganizationMember;  }>
+    enterpriseGetOrganizationMember(orgId: string, memberId: string, 
+): Promise<{ response: Response; body: OrganizationMember;  }>
     /**
      * Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Get organization members
      * @param orgId id of the organization
      * @param query query to be used for organization members retrieval
      */
-    enterpriseGetOrganizationMembers(orgId: string, query: OrganizationMembersSearchQuery, ): Promise<{ response: Response; body: EnterpriseGetOrganizationMembers200Response;  }>
+    enterpriseGetOrganizationMembers(orgId: string, query: OrganizationMembersSearchQuery, 
+): Promise<{ response: Response; body: EnterpriseGetOrganizationMembers200Response;  }>
 }
 
 export function OrganizationsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): OrganizationsApiMethods {
     return {
-        enterpriseGetOrganization: async function (orgId: string, ) : Promise<{ response: Response; body: Organization;  }> {
+
+        /*
+        */
+
+        enterpriseGetOrganization: async function (orgId: string, 
+) : Promise<{ response: Response; body: Organization;  }> {
             const localVarPath = '/v2/orgs/{org_id}'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -73,6 +81,7 @@ export function OrganizationsApi (accessToken: string|(() => Promise<string>), b
             if (orgId === null || orgId === undefined) {
                 throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetOrganization.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -100,6 +109,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -108,7 +119,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseGetOrganizationMember: async function (orgId: string, memberId: string, ) : Promise<{ response: Response; body: OrganizationMember;  }> {
+
+        /*
+        */
+
+        enterpriseGetOrganizationMember: async function (orgId: string, memberId: string, 
+) : Promise<{ response: Response; body: OrganizationMember;  }> {
             const localVarPath = '/v2/orgs/{org_id}/members/{member_id}'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'member_id' + '}', encodeURIComponent(String(memberId)));
@@ -133,6 +149,7 @@ const options = {
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -158,6 +175,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -166,7 +185,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseGetOrganizationMembers: async function (orgId: string, query: OrganizationMembersSearchQuery, ) : Promise<{ response: Response; body: EnterpriseGetOrganizationMembers200Response;  }> {
+
+        /*
+        */
+
+        enterpriseGetOrganizationMembers: async function (orgId: string, query: OrganizationMembersSearchQuery, 
+) : Promise<{ response: Response; body: EnterpriseGetOrganizationMembers200Response;  }> {
             const localVarPath = '/v2/orgs/{org_id}/members'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -184,10 +208,13 @@ const options = {
                 throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetOrganizationMembers.');
             }
 
-            // verify required parameter 'query' is not null or undefined
-            if (query === null || query === undefined) {
-                throw new Error('Required parameter query was null or undefined when calling enterpriseGetOrganizationMembers.');
-            }
+
+
+                // verify required parameter 'query' is not null or undefined
+                if (query === null || query === undefined) {
+                    throw new Error('Required parameter query was null or undefined when calling enterpriseGetOrganizationMembers.');
+                }
+
 
             if (query !== undefined) {
                 localVarQueryParameters.append('query', ObjectSerializer.serialize(query, "OrganizationMembersSearchQuery"));
@@ -218,6 +245,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

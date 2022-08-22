@@ -38,21 +38,24 @@ export interface StickyNotesApiMethods {
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
      * @param stickyNoteCreateRequest 
      */
-    createStickyNoteItem(boardId: string, stickyNoteCreateRequest: StickyNoteCreateRequest, ): Promise<{ response: Response; body: StickyNoteItem;  }>
+    createStickyNoteItem(boardId: string, stickyNoteCreateRequest: StickyNoteCreateRequest, 
+): Promise<{ response: Response; body: StickyNoteItem;  }>
     /**
      * Deletes a sticky note item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
      * @summary Delete sticky note item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
      */
-    deleteStickyNoteItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteStickyNoteItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves information for a specific sticky note item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get sticky note item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
      */
-    getStickyNoteItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: StickyNoteItem;  }>
+    getStickyNoteItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: StickyNoteItem;  }>
     /**
      * Updates a sticky note item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update sticky note item
@@ -60,12 +63,18 @@ export interface StickyNotesApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
      * @param stickyNoteUpdateRequest 
      */
-    updateStickyNoteItem(boardId: string, itemId: string, stickyNoteUpdateRequest: StickyNoteUpdateRequest, ): Promise<{ response: Response; body: StickyNoteItem;  }>
+    updateStickyNoteItem(boardId: string, itemId: string, stickyNoteUpdateRequest: StickyNoteUpdateRequest, 
+): Promise<{ response: Response; body: StickyNoteItem;  }>
 }
 
 export function StickyNotesApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): StickyNotesApiMethods {
     return {
-        createStickyNoteItem: async function (boardId: string, stickyNoteCreateRequest: StickyNoteCreateRequest, ) : Promise<{ response: Response; body: StickyNoteItem;  }> {
+
+        /*
+        */
+
+        createStickyNoteItem: async function (boardId: string, stickyNoteCreateRequest: StickyNoteCreateRequest, 
+) : Promise<{ response: Response; body: StickyNoteItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/sticky_notes'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -83,10 +92,6 @@ export function StickyNotesApi (accessToken: string|(() => Promise<string>), bas
                 throw new Error('Required parameter boardId was null or undefined when calling createStickyNoteItem.');
             }
 
-            // verify required parameter 'stickyNoteCreateRequest' is not null or undefined
-            if (stickyNoteCreateRequest === null || stickyNoteCreateRequest === undefined) {
-                throw new Error('Required parameter stickyNoteCreateRequest was null or undefined when calling createStickyNoteItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -115,6 +120,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -123,7 +130,12 @@ const options = {
 
             return({response, body})
         },
-        deleteStickyNoteItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteStickyNoteItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/sticky_notes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -146,6 +158,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling deleteStickyNoteItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -173,6 +186,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -181,7 +196,12 @@ const options = {
 
             return({response, body})
         },
-        getStickyNoteItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: StickyNoteItem;  }> {
+
+        /*
+        */
+
+        getStickyNoteItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: StickyNoteItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/sticky_notes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -204,6 +224,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling getStickyNoteItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -231,6 +252,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -239,7 +262,12 @@ const options = {
 
             return({response, body})
         },
-        updateStickyNoteItem: async function (boardId: string, itemId: string, stickyNoteUpdateRequest: StickyNoteUpdateRequest, ) : Promise<{ response: Response; body: StickyNoteItem;  }> {
+
+        /*
+        */
+
+        updateStickyNoteItem: async function (boardId: string, itemId: string, stickyNoteUpdateRequest: StickyNoteUpdateRequest, 
+) : Promise<{ response: Response; body: StickyNoteItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/sticky_notes/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -263,10 +291,6 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling updateStickyNoteItem.');
             }
 
-            // verify required parameter 'stickyNoteUpdateRequest' is not null or undefined
-            if (stickyNoteUpdateRequest === null || stickyNoteUpdateRequest === undefined) {
-                throw new Error('Required parameter stickyNoteUpdateRequest was null or undefined when calling updateStickyNoteItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -294,6 +318,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

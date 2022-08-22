@@ -37,21 +37,24 @@ export interface TeamsApiApiMethods {
      * @param orgId The id of an Organization.
      * @param createTeamRequest 
      */
-    enterpriseCreateTeam(orgId: string, createTeamRequest: CreateTeamRequest, ): Promise<{ response: Response; body: Team;  }>
+    enterpriseCreateTeam(orgId: string, createTeamRequest: CreateTeamRequest, 
+): Promise<{ response: Response; body: Team;  }>
     /**
      * Deletes an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Delete team
      * @param orgId The id of an Organization.
      * @param teamId The id of a Team.
      */
-    enterpriseDeleteTeam(orgId: string, teamId: string, ): Promise<{ response: Response; body: object;  }>
+    enterpriseDeleteTeam(orgId: string, teamId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Get team
      * @param orgId The id of an Organization.
      * @param teamId The id of a Team.
      */
-    enterpriseGetTeam(orgId: string, teamId: string, ): Promise<{ response: Response; body: Team;  }>
+    enterpriseGetTeam(orgId: string, teamId: string, 
+): Promise<{ response: Response; body: Team;  }>
     /**
      * Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary List teams
@@ -60,7 +63,20 @@ export interface TeamsApiApiMethods {
      * @param cursor Team id that will be used to find team next to this id in the sorted list
      * @param filterQuery Filtering query
      */
-    enterpriseGetTeams(orgId: string, limit?: number, cursor?: string, filterQuery?: string, ): Promise<{ response: Response; body: Array<Team>;  }>
+    enterpriseGetTeams(orgId: string, 
+ query?: { 
+
+limit?: number,
+ 
+
+
+cursor?: string,
+ 
+
+
+filterQuery?: string,
+ },  
+): Promise<{ response: Response; body: Array<Team>;  }>
     /**
      * Updates an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
      * @summary Update team
@@ -68,12 +84,18 @@ export interface TeamsApiApiMethods {
      * @param teamId The id of a Team.
      * @param teamChanges 
      */
-    enterpriseUpdateTeam(orgId: string, teamId: string, teamChanges: TeamChanges, ): Promise<{ response: Response; body: Team;  }>
+    enterpriseUpdateTeam(orgId: string, teamId: string, teamChanges: TeamChanges, 
+): Promise<{ response: Response; body: Team;  }>
 }
 
 export function TeamsApiApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TeamsApiApiMethods {
     return {
-        enterpriseCreateTeam: async function (orgId: string, createTeamRequest: CreateTeamRequest, ) : Promise<{ response: Response; body: Team;  }> {
+
+        /*
+        */
+
+        enterpriseCreateTeam: async function (orgId: string, createTeamRequest: CreateTeamRequest, 
+) : Promise<{ response: Response; body: Team;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -91,10 +113,6 @@ export function TeamsApiApi (accessToken: string|(() => Promise<string>), basePa
                 throw new Error('Required parameter orgId was null or undefined when calling enterpriseCreateTeam.');
             }
 
-            // verify required parameter 'createTeamRequest' is not null or undefined
-            if (createTeamRequest === null || createTeamRequest === undefined) {
-                throw new Error('Required parameter createTeamRequest was null or undefined when calling enterpriseCreateTeam.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -123,6 +141,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -131,7 +151,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseDeleteTeam: async function (orgId: string, teamId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        enterpriseDeleteTeam: async function (orgId: string, teamId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)));
@@ -154,6 +179,7 @@ const options = {
             if (teamId === null || teamId === undefined) {
                 throw new Error('Required parameter teamId was null or undefined when calling enterpriseDeleteTeam.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -181,6 +207,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -189,7 +217,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseGetTeam: async function (orgId: string, teamId: string, ) : Promise<{ response: Response; body: Team;  }> {
+
+        /*
+        */
+
+        enterpriseGetTeam: async function (orgId: string, teamId: string, 
+) : Promise<{ response: Response; body: Team;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)));
@@ -214,6 +247,7 @@ const options = {
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -239,6 +273,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -247,7 +283,24 @@ const options = {
 
             return({response, body})
         },
-        enterpriseGetTeams: async function (orgId: string, limit?: number, cursor?: string, filterQuery?: string, ) : Promise<{ response: Response; body: Array<Team>;  }> {
+
+        /*
+        */
+
+        enterpriseGetTeams: async function (orgId: string, 
+ query?: { 
+
+limit?: number,
+ 
+
+
+cursor?: string,
+ 
+
+
+filterQuery?: string,
+ },  
+) : Promise<{ response: Response; body: Array<Team>;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -265,16 +318,23 @@ const options = {
                 throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetTeams.');
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, "number"));
+
+
+
+            if (query?.limit !== undefined) {
+                localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, "number"));
             }
 
-            if (cursor !== undefined) {
-                localVarQueryParameters.append('cursor', ObjectSerializer.serialize(cursor, "string"));
+
+
+            if (query?.cursor !== undefined) {
+                localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, "string"));
             }
 
-            if (filterQuery !== undefined) {
-                localVarQueryParameters.append('filterQuery', ObjectSerializer.serialize(filterQuery, "string"));
+
+
+            if (query?.filterQuery !== undefined) {
+                localVarQueryParameters.append('filterQuery', ObjectSerializer.serialize(query?.filterQuery, "string"));
             }
 
 
@@ -303,6 +363,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -311,7 +373,12 @@ const options = {
 
             return({response, body})
         },
-        enterpriseUpdateTeam: async function (orgId: string, teamId: string, teamChanges: TeamChanges, ) : Promise<{ response: Response; body: Team;  }> {
+
+        /*
+        */
+
+        enterpriseUpdateTeam: async function (orgId: string, teamId: string, teamChanges: TeamChanges, 
+) : Promise<{ response: Response; body: Team;  }> {
             const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
                 .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)));
@@ -335,10 +402,6 @@ const options = {
                 throw new Error('Required parameter teamId was null or undefined when calling enterpriseUpdateTeam.');
             }
 
-            // verify required parameter 'teamChanges' is not null or undefined
-            if (teamChanges === null || teamChanges === undefined) {
-                throw new Error('Required parameter teamChanges was null or undefined when calling enterpriseUpdateTeam.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -366,6 +429,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

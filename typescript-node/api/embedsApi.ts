@@ -38,21 +38,24 @@ export interface EmbedsApiMethods {
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
      * @param embedCreateRequest 
      */
-    createEmbedItem(boardId: string, embedCreateRequest: EmbedCreateRequest, ): Promise<{ response: Response; body: EmbedItem;  }>
+    createEmbedItem(boardId: string, embedCreateRequest: EmbedCreateRequest, 
+): Promise<{ response: Response; body: EmbedItem;  }>
     /**
      * Deletes an embed item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
      * @summary Delete embed item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
      */
-    deleteEmbedItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteEmbedItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves information for a specific embed item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get embed item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
      */
-    getEmbedItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: EmbedItem;  }>
+    getEmbedItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: EmbedItem;  }>
     /**
      * Updates an embed item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update embed item
@@ -60,12 +63,18 @@ export interface EmbedsApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
      * @param embedUpdateRequest 
      */
-    updateEmbedItem(boardId: string, itemId: string, embedUpdateRequest: EmbedUpdateRequest, ): Promise<{ response: Response; body: EmbedItem;  }>
+    updateEmbedItem(boardId: string, itemId: string, embedUpdateRequest: EmbedUpdateRequest, 
+): Promise<{ response: Response; body: EmbedItem;  }>
 }
 
 export function EmbedsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): EmbedsApiMethods {
     return {
-        createEmbedItem: async function (boardId: string, embedCreateRequest: EmbedCreateRequest, ) : Promise<{ response: Response; body: EmbedItem;  }> {
+
+        /*
+        */
+
+        createEmbedItem: async function (boardId: string, embedCreateRequest: EmbedCreateRequest, 
+) : Promise<{ response: Response; body: EmbedItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/embeds'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -83,10 +92,6 @@ export function EmbedsApi (accessToken: string|(() => Promise<string>), basePath
                 throw new Error('Required parameter boardId was null or undefined when calling createEmbedItem.');
             }
 
-            // verify required parameter 'embedCreateRequest' is not null or undefined
-            if (embedCreateRequest === null || embedCreateRequest === undefined) {
-                throw new Error('Required parameter embedCreateRequest was null or undefined when calling createEmbedItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -115,6 +120,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -123,7 +130,12 @@ const options = {
 
             return({response, body})
         },
-        deleteEmbedItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteEmbedItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/embeds/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -146,6 +158,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling deleteEmbedItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -173,6 +186,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -181,7 +196,12 @@ const options = {
 
             return({response, body})
         },
-        getEmbedItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: EmbedItem;  }> {
+
+        /*
+        */
+
+        getEmbedItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: EmbedItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/embeds/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -204,6 +224,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling getEmbedItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -231,6 +252,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -239,7 +262,12 @@ const options = {
 
             return({response, body})
         },
-        updateEmbedItem: async function (boardId: string, itemId: string, embedUpdateRequest: EmbedUpdateRequest, ) : Promise<{ response: Response; body: EmbedItem;  }> {
+
+        /*
+        */
+
+        updateEmbedItem: async function (boardId: string, itemId: string, embedUpdateRequest: EmbedUpdateRequest, 
+) : Promise<{ response: Response; body: EmbedItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/embeds/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -263,10 +291,6 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling updateEmbedItem.');
             }
 
-            // verify required parameter 'embedUpdateRequest' is not null or undefined
-            if (embedUpdateRequest === null || embedUpdateRequest === undefined) {
-                throw new Error('Required parameter embedUpdateRequest was null or undefined when calling updateEmbedItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -294,6 +318,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

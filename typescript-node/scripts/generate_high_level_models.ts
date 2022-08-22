@@ -1,20 +1,38 @@
 
+interface Model {
+    id?: string,
+    props: string[],
+    extendedModel?: {
+        name: string,
+        path: string
+    },
+    methods: Array<string|{
+        method: string,
+        alias?: string,
+        returns?: keyof Models,
+        paginated?: string | true,
+        oneId?: boolean
+    }>
+}
+
+interface NormalizedModel {
+    id: string,
+    props: string[],
+    extendedModel?: {
+        name: string,
+        path: string
+    },
+    methods: Array<{
+        method: string,
+        alias: string,
+        returns: keyof Models | undefined,
+        paginated?: string | true,
+        oneId: boolean
+    }>
+}
+
 interface Models {
-    [key: string]: {
-        id?: string,
-        props: string[],
-        extendedModel?: {
-            name: string,
-            path: string
-        },
-        methods: Array<string|{
-            method: string,
-            alias?: string,
-            returns?: keyof Models,
-            paginated?: string | true,
-            oneId?: boolean
-        }>
-    }
+    [key: string]: Model
 }
 
 const models: Models  = {
@@ -344,6 +362,35 @@ const models: Models  = {
     }
 }
 
+function deriveReturnTypeFromName (name: string) {
+    return name.startsWith('get') || name.startsWith('create') ? name.replace(/^(create|get)/, '') : undefined
+}
+
+function normalizeTheModel (model: Model): NormalizedModel {
+    return {
+        id: model.id || 'id',
+        props: model.props || [],
+        extendedModel: model.extendedModel ? {
+            name: model.extendedModel ? `Base${model.extendedModel.name}` : 'Object',
+            path: model.extendedModel.path,
+        } : undefined,
+        methods: model.methods.map(methodConfig => {
+            const method = typeof methodConfig === 'string' ? {method: methodConfig} : methodConfig;
+            const alias = method.alias || method.method
+            const returns = method.returns || deriveReturnTypeFromName(alias)
+            if (returns && !models[returns]) throw new Error('Undefined model ' + returns)
+
+            return {
+                method: method.method,
+                alias,
+                returns,
+                paginated: method.paginated,
+                oneId: !!method.oneId
+            }
+        })
+    }
+}
+
 
 
 console.log(`
@@ -354,36 +401,10 @@ ${Object.keys(models).map(name => {
     return `import { ${extendedModel.name} as Base${name}}  from './${extendedModel.path}';`
 }).join('\n')
 }
-
-type GetRest0<
-    Method extends (p1: any, ...rest: any[]) => any,
-> = Method extends (...rest: infer Rest) => any
-    ? Rest
-    : never
-
-
-type GetRest1<
-    Method extends (p1: any, ...rest: any[]) => any,
-> = Method extends (p1: any, ...rest: infer Rest) => any
-    ? Rest
-    : never
-
-type GetRest2<
-Method extends (p1: any, p2: any, ...rest: any[]) => any,
-> = Method extends (p1: any, p2: any, ...rest: infer Rest) => any
-    ? Rest
-    : never
-
-type GetRest3<
-Method extends (p1: any, p2: any, p3: any, ...rest: any[]) => any,
-> = Method extends (p1: any, p2: any, p3: any, ...rest: infer Rest) => any
-    ? Rest
-    : never
-
 `)
 
 for (const name of Object.keys(models)) {
-    const model = models[name];
+    const model = normalizeTheModel(models[name]);
 
     const pathParams = '[' + model.props.map(_ => `string`).join(', ') + ']'
 
@@ -393,39 +414,82 @@ export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object' } 
     private _api: MiroEndpoints
     private pathParams: ${pathParams}
 
-    constructor(api: MiroEndpoints, pathParams: ${pathParams}, rest: ${model.extendedModel ? `Base${name}` : 'object' }) {
+    constructor(api: MiroEndpoints, pathParams: ${pathParams}, model: ${model.extendedModel ? `Base${name}` : 'object' }) {
         super()
         this._api = api
         this.pathParams = pathParams
-        Object.assign(this, rest)
+        Object.assign(this, model)
     }
 
-    ${model.methods.map(methodConfig => {
-    const m = typeof methodConfig === 'string' ? {method: methodConfig} : methodConfig;
-    const name = m.alias || m.method;
+${model.methods.map(m => {
 
-    const returnsModel = m.returns || (name.startsWith('get') || name.startsWith('create') ? name.replace(/^(create|get)/, '') : undefined);
-
-    const body = `(await this._api.${m.method}(${m.oneId ? `this.pathParams[${model.props.length-1}]` : '...this.pathParams'}, ...rest)).body`
-
-    const paginatedData = m.paginated === true ? 'result' : `result.${m.paginated}`
-
-    if (returnsModel && !models[returnsModel]) throw new Error('Undefined model ' + returnsModel)
+    const returns = m.returns
 
     return `
     /** {@inheritDoc api!MiroEndpoints.${m.method}} */
-    async ${name}(...rest: GetRest${m.oneId ? 1 : model.props.length}<MiroEndpoints['${m.method}']>) {
-        ${returnsModel ? `const result = ${body}` : body}
-        ${m.paginated ? `return ${paginatedData} ? ${paginatedData}.map(result => { ` : ''}
-        ${returnsModel ? `return new ${returnsModel} (
-            this._api,
-            [${models[returnsModel].props.map((_, i, {length}) => i === length - 1 ? `\`\${result['${models[returnsModel].id || "id"}']}\``: `this.pathParams[${i}]`)}],
-            result
-        )` : '' }
-        ${m.paginated ? '}) : []' : ''}
+    async ${m.alias}(...args: GetArguments${m.oneId ? 1 : model.props.length}<MiroEndpoints['${m.method}']>): Promise<${returns ? returns : 'void'}${m.paginated ? '[]' : '' }> {
+        ${renderFunctionBody(m, model)}
     }
-    `}).join('\n')}
-}
 
+`}).join('\n')}
+
+}
 `)
 }
+
+function renderFunctionBody (m: NormalizedModel['methods'][number], model: NormalizedModel) {
+    const apiCall = `await this._api.${m.method}(${m.oneId ? `this.pathParams[${model.props.length-1}]` : '...this.pathParams'}, ...args)`
+    const returns = m.returns
+    if (!returns) return apiCall
+
+    const paginatedData = m.paginated === true ? 'result' : `result.${m.paginated}`
+
+    return `
+        const result = (${apiCall}).body;
+
+        ${m.paginated ? `return ${paginatedData} ? ${paginatedData}.map(result => { ` : ''}
+        return new ${returns} (
+            this._api,
+            [${models[returns].props.map((_, i, {length}) =>
+                i === length - 1
+                ? `toString(result.${normalizeTheModel(models[returns]).id})`
+                : `this.pathParams[${i}]`
+            )}],
+            result
+        )
+        ${m.paginated ? '}) : []' : ''}
+`
+}
+
+console.log(`
+
+function toString(id: number | string | undefined) {
+    return id ? id.toString() : ''
+}
+
+type GetArguments0<
+    Method extends (p1: any, ...args: any[]) => any,
+> = Method extends (...args: infer Args) => any
+    ? Args
+    : never
+
+
+type GetArguments1<
+    Method extends (p1: any, ...args: any[]) => any,
+> = Method extends (p1: any, ...args: infer Args) => any
+    ? Args
+    : never
+
+type GetArguments2<
+Method extends (p1: any, p2: any, ...args: any[]) => any,
+> = Method extends (p1: any, p2: any, ...args: infer Args) => any
+    ? Args
+    : never
+
+type GetArguments3<
+Method extends (p1: any, p2: any, p3: any, ...args: any[]) => any,
+> = Method extends (p1: any, p2: any, p3: any, ...args: infer Args) => any
+    ? Args
+    : never
+
+`)

@@ -38,21 +38,24 @@ export interface ImagesApiMethods {
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
      * @param imageCreateRequest 
      */
-    createImageItemUsingUrl(boardId: string, imageCreateRequest: ImageCreateRequest, ): Promise<{ response: Response; body: ImageItem;  }>
+    createImageItemUsingUrl(boardId: string, imageCreateRequest: ImageCreateRequest, 
+): Promise<{ response: Response; body: ImageItem;  }>
     /**
      * Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
      * @summary Delete image item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
      */
-    deleteImageItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteImageItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get image item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
      */
-    getImageItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: ImageItem;  }>
+    getImageItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: ImageItem;  }>
     /**
      * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update image item using URL
@@ -60,12 +63,18 @@ export interface ImagesApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
      * @param imageUpdateRequest 
      */
-    updateImageItemUsingUrl(boardId: string, itemId: string, imageUpdateRequest: ImageUpdateRequest, ): Promise<{ response: Response; body: ImageItem;  }>
+    updateImageItemUsingUrl(boardId: string, itemId: string, imageUpdateRequest: ImageUpdateRequest, 
+): Promise<{ response: Response; body: ImageItem;  }>
 }
 
 export function ImagesApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): ImagesApiMethods {
     return {
-        createImageItemUsingUrl: async function (boardId: string, imageCreateRequest: ImageCreateRequest, ) : Promise<{ response: Response; body: ImageItem;  }> {
+
+        /*
+        */
+
+        createImageItemUsingUrl: async function (boardId: string, imageCreateRequest: ImageCreateRequest, 
+) : Promise<{ response: Response; body: ImageItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/images'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -83,10 +92,6 @@ export function ImagesApi (accessToken: string|(() => Promise<string>), basePath
                 throw new Error('Required parameter boardId was null or undefined when calling createImageItemUsingUrl.');
             }
 
-            // verify required parameter 'imageCreateRequest' is not null or undefined
-            if (imageCreateRequest === null || imageCreateRequest === undefined) {
-                throw new Error('Required parameter imageCreateRequest was null or undefined when calling createImageItemUsingUrl.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -115,6 +120,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -123,7 +130,12 @@ const options = {
 
             return({response, body})
         },
-        deleteImageItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteImageItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -146,6 +158,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling deleteImageItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -173,6 +186,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -181,7 +196,12 @@ const options = {
 
             return({response, body})
         },
-        getImageItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: ImageItem;  }> {
+
+        /*
+        */
+
+        getImageItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: ImageItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -204,6 +224,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling getImageItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -231,6 +252,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -239,7 +262,12 @@ const options = {
 
             return({response, body})
         },
-        updateImageItemUsingUrl: async function (boardId: string, itemId: string, imageUpdateRequest: ImageUpdateRequest, ) : Promise<{ response: Response; body: ImageItem;  }> {
+
+        /*
+        */
+
+        updateImageItemUsingUrl: async function (boardId: string, itemId: string, imageUpdateRequest: ImageUpdateRequest, 
+) : Promise<{ response: Response; body: ImageItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -263,10 +291,6 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling updateImageItemUsingUrl.');
             }
 
-            // verify required parameter 'imageUpdateRequest' is not null or undefined
-            if (imageUpdateRequest === null || imageUpdateRequest === undefined) {
-                throw new Error('Required parameter imageUpdateRequest was null or undefined when calling updateImageItemUsingUrl.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -294,6 +318,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

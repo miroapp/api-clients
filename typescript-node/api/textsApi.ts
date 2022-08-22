@@ -38,21 +38,24 @@ export interface TextsApiMethods {
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
      * @param textCreateRequest 
      */
-    createTextItem(boardId: string, textCreateRequest: TextCreateRequest, ): Promise<{ response: Response; body: TextItem;  }>
+    createTextItem(boardId: string, textCreateRequest: TextCreateRequest, 
+): Promise<{ response: Response; body: TextItem;  }>
     /**
      * Deletes a text item from the board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
      * @summary Delete text item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
      */
-    deleteTextItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: object;  }>
+    deleteTextItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Retrieves information for a specific text item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get text item
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
      */
-    getTextItem(boardId: string, itemId: string, ): Promise<{ response: Response; body: TextItem;  }>
+    getTextItem(boardId: string, itemId: string, 
+): Promise<{ response: Response; body: TextItem;  }>
     /**
      * Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update text item
@@ -60,12 +63,18 @@ export interface TextsApiMethods {
      * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
      * @param textUpdateRequest 
      */
-    updateTextItem(boardId: string, itemId: string, textUpdateRequest: TextUpdateRequest, ): Promise<{ response: Response; body: TextItem;  }>
+    updateTextItem(boardId: string, itemId: string, textUpdateRequest: TextUpdateRequest, 
+): Promise<{ response: Response; body: TextItem;  }>
 }
 
 export function TextsApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): TextsApiMethods {
     return {
-        createTextItem: async function (boardId: string, textCreateRequest: TextCreateRequest, ) : Promise<{ response: Response; body: TextItem;  }> {
+
+        /*
+        */
+
+        createTextItem: async function (boardId: string, textCreateRequest: TextCreateRequest, 
+) : Promise<{ response: Response; body: TextItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/texts'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -83,10 +92,6 @@ export function TextsApi (accessToken: string|(() => Promise<string>), basePath:
                 throw new Error('Required parameter boardId was null or undefined when calling createTextItem.');
             }
 
-            // verify required parameter 'textCreateRequest' is not null or undefined
-            if (textCreateRequest === null || textCreateRequest === undefined) {
-                throw new Error('Required parameter textCreateRequest was null or undefined when calling createTextItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -115,6 +120,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -123,7 +130,12 @@ const options = {
 
             return({response, body})
         },
-        deleteTextItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        deleteTextItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/texts/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -146,6 +158,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling deleteTextItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -173,6 +186,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -181,7 +196,12 @@ const options = {
 
             return({response, body})
         },
-        getTextItem: async function (boardId: string, itemId: string, ) : Promise<{ response: Response; body: TextItem;  }> {
+
+        /*
+        */
+
+        getTextItem: async function (boardId: string, itemId: string, 
+) : Promise<{ response: Response; body: TextItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/texts/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -204,6 +224,7 @@ const options = {
             if (itemId === null || itemId === undefined) {
                 throw new Error('Required parameter itemId was null or undefined when calling getTextItem.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -231,6 +252,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -239,7 +262,12 @@ const options = {
 
             return({response, body})
         },
-        updateTextItem: async function (boardId: string, itemId: string, textUpdateRequest: TextUpdateRequest, ) : Promise<{ response: Response; body: TextItem;  }> {
+
+        /*
+        */
+
+        updateTextItem: async function (boardId: string, itemId: string, textUpdateRequest: TextUpdateRequest, 
+) : Promise<{ response: Response; body: TextItem;  }> {
             const localVarPath = '/v2/boards/{board_id}/texts/{item_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)));
@@ -263,10 +291,6 @@ const options = {
                 throw new Error('Required parameter itemId was null or undefined when calling updateTextItem.');
             }
 
-            // verify required parameter 'textUpdateRequest' is not null or undefined
-            if (textUpdateRequest === null || textUpdateRequest === undefined) {
-                throw new Error('Required parameter textUpdateRequest was null or undefined when calling updateTextItem.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -294,6 +318,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

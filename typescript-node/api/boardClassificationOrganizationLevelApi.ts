@@ -34,12 +34,18 @@ export interface BoardClassificationOrganizationLevelApiMethods {
      * @summary Get organization settings
      * @param orgId id of the organization
      */
-    enterpriseDataclassificationOrganizationSettingsGet(orgId: string, ): Promise<{ response: Response; body: DataClassificationOrganizationSettings;  }>
+    enterpriseDataclassificationOrganizationSettingsGet(orgId: string, 
+): Promise<{ response: Response; body: DataClassificationOrganizationSettings;  }>
 }
 
 export function BoardClassificationOrganizationLevelApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardClassificationOrganizationLevelApiMethods {
     return {
-        enterpriseDataclassificationOrganizationSettingsGet: async function (orgId: string, ) : Promise<{ response: Response; body: DataClassificationOrganizationSettings;  }> {
+
+        /*
+        */
+
+        enterpriseDataclassificationOrganizationSettingsGet: async function (orgId: string, 
+) : Promise<{ response: Response; body: DataClassificationOrganizationSettings;  }> {
             const localVarPath = '/v2/orgs/{org_id}/data-classification-settings'
                 .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -56,6 +62,7 @@ export function BoardClassificationOrganizationLevelApi (accessToken: string|(()
             if (orgId === null || orgId === undefined) {
                 throw new Error('Required parameter orgId was null or undefined when calling enterpriseDataclassificationOrganizationSettingsGet.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -82,6 +89,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)

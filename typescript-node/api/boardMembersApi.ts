@@ -41,28 +41,40 @@ export interface BoardMembersApiMethods {
      * @param limit 
      * @param offset 
      */
-    getBoardMembers(boardId: string, limit?: string, offset?: string, ): Promise<{ response: Response; body: BoardMembersPagedResponse;  }>
+    getBoardMembers(boardId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+offset?: string,
+ },  
+): Promise<{ response: Response; body: BoardMembersPagedResponse;  }>
     /**
      * Retrieves information for a board member.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
      * @summary Get specific board member
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
      * @param boardMemberId Unique identifier (ID) of the board member whose role you want to retrieve.
      */
-    getSpecificBoardMember(boardId: string, boardMemberId: string, ): Promise<{ response: Response; body: BoardMemberWithLinks;  }>
+    getSpecificBoardMember(boardId: string, boardMemberId: string, 
+): Promise<{ response: Response; body: BoardMemberWithLinks;  }>
     /**
      * Removes a board member from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Remove board member
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete an item.
      * @param boardMemberId Unique identifier (ID) of the board member whose role you want to delete.
      */
-    removeBoardMember(boardId: string, boardMemberId: string, ): Promise<{ response: Response; body: object;  }>
+    removeBoardMember(boardId: string, boardMemberId: string, 
+): Promise<{ response: Response; body: object;  }>
     /**
      * Shares the board and Invites new members to collaborate on a board by sending an invitation email. Depending on the board\'s [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy), there might be various scenarios where membership in the team is required in order to share the board with a user. For more information on sharing policy and different scenarios, see [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy).<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
      * @summary Share board
      * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
      * @param boardMembersInvite 
      */
-    shareBoard(boardId: string, boardMembersInvite: BoardMembersInvite, ): Promise<{ response: Response; body: InvitationResult;  }>
+    shareBoard(boardId: string, boardMembersInvite: BoardMembersInvite, 
+): Promise<{ response: Response; body: InvitationResult;  }>
     /**
      * Updates the role of a board member.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
      * @summary Update board member
@@ -70,12 +82,26 @@ export interface BoardMembersApiMethods {
      * @param boardMemberId Unique identifier (ID) of the board member whose role you want to update.
      * @param boardMemberChanges 
      */
-    updateBoardMember(boardId: string, boardMemberId: string, boardMemberChanges: BoardMemberChanges, ): Promise<{ response: Response; body: BoardMemberWithLinks;  }>
+    updateBoardMember(boardId: string, boardMemberId: string, boardMemberChanges: BoardMemberChanges, 
+): Promise<{ response: Response; body: BoardMemberWithLinks;  }>
 }
 
 export function BoardMembersApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): BoardMembersApiMethods {
     return {
-        getBoardMembers: async function (boardId: string, limit?: string, offset?: string, ) : Promise<{ response: Response; body: BoardMembersPagedResponse;  }> {
+
+        /*
+        */
+
+        getBoardMembers: async function (boardId: string, 
+ query?: { 
+
+limit?: string,
+ 
+
+
+offset?: string,
+ },  
+) : Promise<{ response: Response; body: BoardMembersPagedResponse;  }> {
             const localVarPath = '/v2/boards/{board_id}/members'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -93,12 +119,17 @@ export function BoardMembersApi (accessToken: string|(() => Promise<string>), ba
                 throw new Error('Required parameter boardId was null or undefined when calling getBoardMembers.');
             }
 
-            if (limit !== undefined) {
-                localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, "string"));
+
+
+
+            if (query?.limit !== undefined) {
+                localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, "string"));
             }
 
-            if (offset !== undefined) {
-                localVarQueryParameters.append('offset', ObjectSerializer.serialize(offset, "string"));
+
+
+            if (query?.offset !== undefined) {
+                localVarQueryParameters.append('offset', ObjectSerializer.serialize(query?.offset, "string"));
             }
 
 
@@ -127,6 +158,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -135,7 +168,12 @@ const options = {
 
             return({response, body})
         },
-        getSpecificBoardMember: async function (boardId: string, boardMemberId: string, ) : Promise<{ response: Response; body: BoardMemberWithLinks;  }> {
+
+        /*
+        */
+
+        getSpecificBoardMember: async function (boardId: string, boardMemberId: string, 
+) : Promise<{ response: Response; body: BoardMemberWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/members/{board_member_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'board_member_id' + '}', encodeURIComponent(String(boardMemberId)));
@@ -160,6 +198,7 @@ const options = {
             }
 
 
+
             const resource = new URL(localVarPath, basePath)
             resource.search = localVarQueryParameters.toString()
 
@@ -185,6 +224,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -193,7 +234,12 @@ const options = {
 
             return({response, body})
         },
-        removeBoardMember: async function (boardId: string, boardMemberId: string, ) : Promise<{ response: Response; body: object;  }> {
+
+        /*
+        */
+
+        removeBoardMember: async function (boardId: string, boardMemberId: string, 
+) : Promise<{ response: Response; body: object;  }> {
             const localVarPath = '/v2/boards/{board_id}/members/{board_member_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'board_member_id' + '}', encodeURIComponent(String(boardMemberId)));
@@ -216,6 +262,7 @@ const options = {
             if (boardMemberId === null || boardMemberId === undefined) {
                 throw new Error('Required parameter boardMemberId was null or undefined when calling removeBoardMember.');
             }
+
 
 
             const resource = new URL(localVarPath, basePath)
@@ -243,6 +290,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -251,7 +300,12 @@ const options = {
 
             return({response, body})
         },
-        shareBoard: async function (boardId: string, boardMembersInvite: BoardMembersInvite, ) : Promise<{ response: Response; body: InvitationResult;  }> {
+
+        /*
+        */
+
+        shareBoard: async function (boardId: string, boardMembersInvite: BoardMembersInvite, 
+) : Promise<{ response: Response; body: InvitationResult;  }> {
             const localVarPath = '/v2/boards/{board_id}/members'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)));
             let localVarQueryParameters = new URLSearchParams();
@@ -269,10 +323,6 @@ const options = {
                 throw new Error('Required parameter boardId was null or undefined when calling shareBoard.');
             }
 
-            // verify required parameter 'boardMembersInvite' is not null or undefined
-            if (boardMembersInvite === null || boardMembersInvite === undefined) {
-                throw new Error('Required parameter boardMembersInvite was null or undefined when calling shareBoard.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -301,6 +351,8 @@ const options = {
                 // Body doesn't have valid json
             }
 
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
+
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
             }
@@ -309,7 +361,12 @@ const options = {
 
             return({response, body})
         },
-        updateBoardMember: async function (boardId: string, boardMemberId: string, boardMemberChanges: BoardMemberChanges, ) : Promise<{ response: Response; body: BoardMemberWithLinks;  }> {
+
+        /*
+        */
+
+        updateBoardMember: async function (boardId: string, boardMemberId: string, boardMemberChanges: BoardMemberChanges, 
+) : Promise<{ response: Response; body: BoardMemberWithLinks;  }> {
             const localVarPath = '/v2/boards/{board_id}/members/{board_member_id}'
                 .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
                 .replace('{' + 'board_member_id' + '}', encodeURIComponent(String(boardMemberId)));
@@ -333,10 +390,6 @@ const options = {
                 throw new Error('Required parameter boardMemberId was null or undefined when calling updateBoardMember.');
             }
 
-            // verify required parameter 'boardMemberChanges' is not null or undefined
-            if (boardMemberChanges === null || boardMemberChanges === undefined) {
-                throw new Error('Required parameter boardMemberChanges was null or undefined when calling updateBoardMember.');
-            }
 
 
             const resource = new URL(localVarPath, basePath)
@@ -364,6 +417,8 @@ const options = {
             } catch (err) {
                 // Body doesn't have valid json
             }
+
+            if (typeof logger === 'function' && bodyAsJson) logger('BODY', bodyAsJson)
 
             if (!response.ok) {
                 throw new HttpError(response, bodyAsJson, response.status)
