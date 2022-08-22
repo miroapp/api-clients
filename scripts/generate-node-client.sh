@@ -10,4 +10,4 @@ cd typescript-node
 tsx scripts/generate_nested_models.ts | prettier --parser typescript >| nested-model/index.ts
 
 yarn
-npm run build
+yarn build
