@@ -1,4 +1,3 @@
-.gitignore
 api.ts
 api/apis.ts
 api/appCardsApi.ts
@@ -22,7 +21,6 @@ api/teamMembersApiApi.ts
 api/teamSettingsApiApi.ts
 api/teamsApiApi.ts
 api/textsApi.ts
-git_push.sh
 model/appCardCreateRequest.ts
 model/appCardData.ts
 model/appCardDataChanges.ts
@@ -196,5 +194,4 @@ model/widgetDataPlatformTags.ts
 model/widgetLinks.ts
 model/widgetLinksPlatformContainers.ts
 model/widthOnlyAdjustableGeometry.ts
-package.json
 tsconfig.json
