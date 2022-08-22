@@ -1,5 +1,5 @@
 ```mermaid
-graph TD;
+graph LR;
 Api-->|createBoard| Board
 Api-->|getBoards| Board
 Api-->|getOrganization| Organization

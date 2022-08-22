@@ -1,7 +1,7 @@
 import {normalizeTheModel, models} from '../nested-model/definition'
 
 console.log('```mermaid')
-console.log('graph TD;')
+console.log('graph LR;')
 
 for (const name of Object.keys(models)) {
     const model = normalizeTheModel(models[name]);
