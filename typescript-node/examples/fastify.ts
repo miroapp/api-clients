@@ -18,7 +18,7 @@ fastify.get('/auth/miro/callback', async (req, reply) => {
 })
 
 fastify.get('/', async () => {
-  const api = miro.highlevel('some_user_id')
+  const api = miro.as('some_user_id')
   const boards = await api.getBoards()
   const board = boards[0]
   const items = await board.getItems()
