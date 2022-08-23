@@ -98,7 +98,6 @@ export * from './modifiedBy';
 export * from './modifiedByPlatformContainers';
 export * from './organization';
 export * from './organizationMember';
-export * from './organizationMembersSearchByEmailsResponse';
 export * from './organizationMembersSearchQuery';
 export * from './organizationMembersSearchResponse';
 export * from './pageLinks';
@@ -283,7 +282,6 @@ import { ModifiedBy } from './modifiedBy';
 import { ModifiedByPlatformContainers } from './modifiedByPlatformContainers';
 import { Organization } from './organization';
 import { OrganizationMember } from './organizationMember';
-import { OrganizationMembersSearchByEmailsResponse } from './organizationMembersSearchByEmailsResponse';
 import { OrganizationMembersSearchQuery } from './organizationMembersSearchQuery';
 import { OrganizationMembersSearchResponse } from './organizationMembersSearchResponse';
 import { PageLinks } from './pageLinks';
@@ -583,7 +581,6 @@ let typeMap: {[index: string]: any} = {
     "ModifiedByPlatformContainers": ModifiedByPlatformContainers,
     "Organization": Organization,
     "OrganizationMember": OrganizationMember,
-    "OrganizationMembersSearchByEmailsResponse": OrganizationMembersSearchByEmailsResponse,
     "OrganizationMembersSearchQuery": OrganizationMembersSearchQuery,
     "OrganizationMembersSearchResponse": OrganizationMembersSearchResponse,
     "PageLinks": PageLinks,

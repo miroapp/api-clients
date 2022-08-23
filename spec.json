@@ -15062,11 +15062,6 @@
       },
       "OrganizationMembersSearchByEmailsResponse": {
         "type": "array",
-        "properties": {
-          "empty": {
-            "type": "boolean"
-          }
-        },
         "description": "Response for search organization members by user emails",
         "items": {
           "$ref": "#/components/schemas/OrganizationMember"
