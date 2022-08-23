@@ -14,17 +14,19 @@
 <a href="#wip-this-client-is-still-a-work-in-progress-anything-may-change-at-any-time" id="wip-this-client-is-still-a-work-in-progress-anything-may-change-at-any-time" style="color: inherit; text-decoration: none;">
   <h1>WIP: This client is still a work in progress, anything may change at any time</h1>
 </a>
+<p>Reference docs: <a href="https://miroapp.github.io/api-clients/typescript-node/classes/index.Miro.html">https://miroapp.github.io/api-clients/typescript-node/classes/index.Miro.html</a></p>
 
 <a href="#using-miro-authentication-wrapper" id="using-miro-authentication-wrapper" style="color: inherit; text-decoration: none;">
   <h3>Using Miro authentication wrapper</h3>
 </a>
 <p>Miro class is a wrapper that handles authorization and per-user access token management.</p>
-<p>To instantiate the client call the Miro instance:</p>
+<p>To start using the client create a new instance:</p>
 <pre><code class="language-typescript"><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">Miro</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&#39;@mirohq/miro-node&#39;</span><br/><br/><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">miro</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Miro</span><span class="hl-1">()</span>
 </code></pre>
-<p>By default client will load the app configuration from environment variables: <code>MIRO_CLIENT_ID</code>, <code>MIRO_CLIENT_SECRET</code>, <code>MIRO_REDIRECT_URL</code>. They can also be provided by passing the options object to the constrictor.</p>
+<p>By default client will load the app configuration from environment variables: <code>MIRO_CLIENT_ID</code>, <code>MIRO_CLIENT_SECRET</code>, <code>MIRO_REDIRECT_URL</code>. They can also be provided by passing the options object to the iconstructor.</p>
 <pre><code class="language-typescript"><span class="hl-4">const</span><span class="hl-1"> </span><span class="hl-5">miro</span><span class="hl-1"> = </span><span class="hl-4">new</span><span class="hl-1"> </span><span class="hl-6">Miro</span><span class="hl-1">({</span><br/><span class="hl-1">    </span><span class="hl-2">clientId:</span><span class="hl-1"> </span><span class="hl-3">&#39;your_app_id&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">clientSecret:</span><span class="hl-1"> </span><span class="hl-3">&#39;your_app_secret&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-2">redirectUrl:</span><span class="hl-1"> </span><span class="hl-3">&#39;https://foo.bar/miro_return_url&#39;</span><br/><span class="hl-1">})</span>
 </code></pre>
+<p>Other options are documented in the <a href="https://miroapp.github.io/api-clients/typescript-node/interfaces/index.Opts.html">reference</a>.</p>
 <p>The client has all methods that are needed to complete Miro authorization flows and make API calls:</p>
 <ol>
 <li>Check if current user has authorized the app: <code>miro.isAuthorized(&#39;some_user_id&#39;)</code></li>

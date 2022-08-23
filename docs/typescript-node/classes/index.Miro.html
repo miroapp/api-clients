@@ -33,10 +33,9 @@
 <h3 class="tsd-index-heading">Properties</h3>
 <div class="tsd-index-list"><a href="index.Miro.html#clientId" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><rect fill="var(--color-icon-background)" stroke="#FF984D" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12" id="icon-1024-path"></rect><path d="M9.354 16V7.24H12.174C12.99 7.24 13.638 7.476 14.118 7.948C14.606 8.412 14.85 9.036 14.85 9.82C14.85 10.604 14.606 11.232 14.118 11.704C13.638 12.168 12.99 12.4 12.174 12.4H10.434V16H9.354ZM10.434 11.428H12.174C12.646 11.428 13.022 11.284 13.302 10.996C13.59 10.7 13.734 10.308 13.734 9.82C13.734 9.324 13.59 8.932 13.302 8.644C13.022 8.356 12.646 8.212 12.174 8.212H10.434V11.428Z" fill="var(--color-text)" id="icon-1024-text"></path></svg><span>client<wbr/>Id</span></a>
 <a href="index.Miro.html#clientSecret" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>client<wbr/>Secret</span></a>
-<a href="index.Miro.html#debug" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>debug?</span></a>
+<a href="index.Miro.html#logger" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>logger?</span></a>
 <a href="index.Miro.html#redirectUrl" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>redirect<wbr/>Url</span></a>
 <a href="index.Miro.html#storage" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>storage</span></a>
-<a href="index.Miro.html#teamId" class="tsd-index-link tsd-kind-property tsd-parent-kind-class"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg><span>team<wbr/>Id?</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Methods</h3>
@@ -62,7 +61,7 @@ All options are optional and will fallback to environment variables
 clientId: MIRO_CLIENT_ID
 clientSecret: MIRO_CLIENT_SECRET
 redirectUrl: MIRO_REDIRECT_URL
-debug: MIRO_DEBUG</p>
+logger: MIRO_DEBUG</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
@@ -71,7 +70,7 @@ debug: MIRO_DEBUG</p>
 <h5>options: <a href="../interfaces/index.Opts.html" class="tsd-signature-type" data-tsd-kind="Interface">Opts</a><span class="tsd-signature-symbol"> = defaultOpts</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="index.Miro.html" class="tsd-signature-type" data-tsd-kind="Class">Miro</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L26">index.ts:26</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L25">index.ts:25</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="clientId" class="tsd-anchor"></a>
@@ -84,9 +83,9 @@ debug: MIRO_DEBUG</p>
 <div class="tsd-signature">client<wbr/>Secret<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
 <ul>
 <li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L12">index.ts:12</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="debug" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>debug</span><a href="#debug" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">debug<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>l<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></div>
+<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="logger" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>logger</span><a href="#logger" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
+<div class="tsd-signature">logger<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>l<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span></div>
 <div class="tsd-type-declaration">
 <h4>Type declaration</h4>
 <ul class="tsd-parameters">
@@ -101,7 +100,7 @@ debug: MIRO_DEBUG</p>
 <h5>l: <span class="tsd-signature-type">any</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L16">index.ts:16</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L15">index.ts:15</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="redirectUrl" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>redirect<wbr/>Url</span><a href="#redirectUrl" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">redirect<wbr/>Url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
@@ -111,12 +110,7 @@ debug: MIRO_DEBUG</p>
 <h3 class="tsd-anchor-link"><span>storage</span><a href="#storage" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <div class="tsd-signature">storage<span class="tsd-signature-symbol">:</span> <a href="../interfaces/index.Storage.html" class="tsd-signature-type" data-tsd-kind="Interface">Storage</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L14">index.ts:14</a></li></ul></aside></section>
-<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class"><a id="teamId" class="tsd-anchor"></a>
-<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagOptional">Optional</code> <span>team<wbr/>Id</span><a href="#teamId" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
-<div class="tsd-signature">team<wbr/>Id<span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div><aside class="tsd-sources">
-<ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L15">index.ts:15</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L14">index.ts:14</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="api" class="tsd-anchor"></a>
@@ -133,7 +127,7 @@ debug: MIRO_DEBUG</p>
 <h5>userId: <a href="../types/index.ExternalUserId.html" class="tsd-signature-type" data-tsd-kind="Type alias">ExternalUserId</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/api.MiroEndpoints.html" class="tsd-signature-type" data-tsd-kind="Interface">MiroEndpoints</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L46">index.ts:46</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L44">index.ts:44</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="as" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>as</span><a href="#as" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -148,7 +142,7 @@ debug: MIRO_DEBUG</p>
 <h5>userId: <a href="../types/index.ExternalUserId.html" class="tsd-signature-type" data-tsd-kind="Type alias">ExternalUserId</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="nested_model.Api.html" class="tsd-signature-type" data-tsd-kind="Class">Api</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L53">index.ts:53</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L51">index.ts:51</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="exchangeCodeForAccessToken" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>exchange<wbr/>Code<wbr/>For<wbr/>Access<wbr/>Token</span><a href="#exchangeCodeForAccessToken" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -166,7 +160,7 @@ It will store the token information in storage for later reuse</p>
 <h5>urlOrCode: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L93">index.ts:93</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L91">index.ts:91</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="getAccessToken" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>get<wbr/>Access<wbr/>Token</span><a href="#getAccessToken" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -179,22 +173,24 @@ It will store the token information in storage for later reuse</p>
 <h5>userId: <a href="../types/index.ExternalUserId.html" class="tsd-signature-type" data-tsd-kind="Type alias">ExternalUserId</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L144">index.ts:144</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L142">index.ts:142</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="getAuthUrl" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>get<wbr/>Auth<wbr/>Url</span><a href="#getAuthUrl" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-<li class="tsd-signature tsd-anchor-link" id="getAuthUrl.getAuthUrl-1">get<wbr/>Auth<wbr/>Url<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#getAuthUrl.getAuthUrl-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
+<li class="tsd-signature tsd-anchor-link" id="getAuthUrl.getAuthUrl-1">get<wbr/>Auth<wbr/>Url<span class="tsd-signature-symbol">(</span>state<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, teamId<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><a href="#getAuthUrl.getAuthUrl-1" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></li>
 <li class="tsd-description">
-<div class="tsd-comment tsd-typography"><p>Returns a URL that user should be redirected to in order to authorize the application</p>
+<div class="tsd-comment tsd-typography"><p>Returns a URL that user should be redirected to in order to authorize the application, accepts an optional state argument and a teamId that will be used as a default</p>
 </div>
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> state: <span class="tsd-signature-type">string</span></h5></li></ul></div>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> state: <span class="tsd-signature-type">string</span></h5></li>
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> teamId: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L67">index.ts:67</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L65">index.ts:65</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="getToken" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>get<wbr/>Token</span><a href="#getToken" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -212,7 +208,7 @@ It will store the token information in storage for later reuse</p>
 <h5><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L113">index.ts:113</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L111">index.ts:111</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="handleAuthorizationCodeRequest" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>handle<wbr/>Authorization<wbr/>Code<wbr/>Request</span><a href="#handleAuthorizationCodeRequest" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -231,7 +227,7 @@ It will store the token information in storage for later reuse</p>
 <h5><code class="tsd-tag ts-flagRest">Rest</code> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-symbol">[</span>req<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>headers<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>host<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">; </span>url<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">...</span>rest<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L84">index.ts:84</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L82">index.ts:82</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class"><a id="isAuthorized" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>is<wbr/>Authorized</span><a href="#isAuthorized" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -246,7 +242,7 @@ It will store the token information in storage for later reuse</p>
 <h5>userId: <a href="../types/index.ExternalUserId.html" class="tsd-signature-type" data-tsd-kind="Type alias">ExternalUserId</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L60">index.ts:60</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L58">index.ts:58</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private"><a id="refreshAccessToken" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>refresh<wbr/>Access<wbr/>Token</span><a href="#refreshAccessToken" aria-label="Permalink" class="tsd-anchor-icon"><svg class="icon icon-tabler icon-tabler-link" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><use href="#icon-anchor-a"></use><use href="#icon-anchor-b"></use><use href="#icon-anchor-c"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
@@ -261,7 +257,7 @@ It will store the token information in storage for later reuse</p>
 <h5>refresh_token: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L135">index.ts:135</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/miroapp/api-clients/blob/main/typescript-node/index.ts#L133">index.ts:133</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 <div class="tsd-navigation settings">
 <details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
@@ -354,10 +350,9 @@ It will store the token information in storage for later reuse</p>
 <li class="tsd-kind-constructor tsd-parent-kind-class"><a href="index.Miro.html#constructor" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-512-path"></use><use href="#icon-512-text"></use></svg>constructor</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="index.Miro.html#clientId" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>client<wbr/>Id</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="index.Miro.html#clientSecret" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>client<wbr/>Secret</a></li>
-<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.Miro.html#debug" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>debug?</a></li>
+<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.Miro.html#logger" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>logger?</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="index.Miro.html#redirectUrl" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>redirect<wbr/>Url</a></li>
 <li class="tsd-kind-property tsd-parent-kind-class"><a href="index.Miro.html#storage" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>storage</a></li>
-<li class="tsd-kind-property tsd-parent-kind-class"><a href="index.Miro.html#teamId" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-1024-path"></use><use href="#icon-1024-text"></use></svg>team<wbr/>Id?</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="index.Miro.html#api" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>api</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="index.Miro.html#as" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>as</a></li>
 <li class="tsd-kind-method tsd-parent-kind-class"><a href="index.Miro.html#exchangeCodeForAccessToken" class="tsd-index-link"><svg class="tsd-kind-icon" width="24" height="24" viewBox="0 0 24 24"><use href="#icon-2048-path"></use><use href="#icon-2048-text"></use></svg>exchange<wbr/>Code<wbr/>For<wbr/>Access<wbr/>Token</a></li>
