@@ -1,4 +1,4 @@
-export interface Model {
+export interface SimpleModel {
     id?: string,
     props: string[],
     extendedModel?: {
@@ -8,13 +8,13 @@ export interface Model {
     methods: Array<string|{
         method: string,
         alias?: string,
-        returns?: keyof Models,
+        returns?: ModelName,
         paginated?: string | true,
         topLevelCall?: boolean
     }>
 }
 
-export interface NormalizedModel {
+export interface Model {
     id: string,
     props: string[],
     extendedModel?: {
@@ -24,7 +24,7 @@ export interface NormalizedModel {
     methods: Array<{
         method: string,
         alias: string,
-        returns: keyof Models | undefined,
+        returns: ModelName | undefined,
         paginated?: string | true,
         topLevelCall: boolean
     }>
@@ -34,19 +34,20 @@ function deriveReturnTypeFromName (name: string) {
     return name.startsWith('get') || name.startsWith('create') ? name.replace(/^(create|get)/, '') : undefined
 }
 
-export function normalizeTheModel (model: Model): NormalizedModel {
+function isCorrectModelName (n: string|undefined): n is ModelName|undefined {
+    return n === undefined || MODELS[n]
+}
+
+export function normalizeTheModel (model: SimpleModel): Model {
     return {
         id: model.id || 'id',
         props: model.props || [],
-        extendedModel: model.extendedModel ? {
-            name: model.extendedModel ? `Base${model.extendedModel.name}` : 'Object',
-            path: model.extendedModel.path,
-        } : undefined,
+        extendedModel: model.extendedModel,
         methods: model.methods.map(methodConfig => {
             const method = typeof methodConfig === 'string' ? {method: methodConfig} : methodConfig;
             const alias = method.alias || method.method
             const returns = method.returns || deriveReturnTypeFromName(alias)
-            if (returns && !models[returns]) throw new Error('Undefined model ' + returns)
+            if (!isCorrectModelName(returns)) throw new Error('Undefined model ' + returns)
 
             return {
                 method: method.method,
@@ -59,11 +60,9 @@ export function normalizeTheModel (model: Model): NormalizedModel {
     }
 }
 
-export interface Models {
-    [key: string]: Model
-}
+type ModelName = keyof typeof MODELS
 
-export const models: Models  = {
+const MODELS = {
     Api: {
         props: [],
         methods: [
@@ -388,4 +387,12 @@ export const models: Models  = {
         ]
     }
 }
+export type Models = Record<ModelName, Model>
 
+export function getModels () {
+    const normalModels: Record<string, Model> = {}
+    for (const name of Object.keys(MODELS)) {
+        normalModels[name] = normalizeTheModel(MODELS[name])
+    }
+    return normalModels
+}
