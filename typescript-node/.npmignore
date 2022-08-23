@@ -6,11 +6,14 @@
 scripts/
 test/
 
+docs
+
 .openapi*
 
 *.sh
 *.json
 *.tgz
+
 
 /*.ts
 
