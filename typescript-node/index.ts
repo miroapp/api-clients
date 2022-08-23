@@ -12,8 +12,7 @@ export class Miro {
     clientSecret: string;
     redirectUrl: string;
     storage: Storage;
-    teamId?: string;
-    debug?: (l: any) => void;
+    logger?: (l: any) => void;
 
     /**
     * Initializes the Miro API with the given client id and client secret
@@ -21,7 +20,7 @@ export class Miro {
     * clientId: MIRO_CLIENT_ID
     * clientSecret: MIRO_CLIENT_SECRET
     * redirectUrl: MIRO_REDIRECT_URL
-    * debug: MIRO_DEBUG
+    * logger: MIRO_DEBUG
     */
     constructor(options: Opts = defaultOpts) {
         const opts = Object.assign({}, defaultOpts, options)
@@ -29,8 +28,7 @@ export class Miro {
         this.clientSecret = opts.clientSecret || '',
         this.redirectUrl = opts.redirectUrl || '',
         this.storage = opts.storage || defaultStorage
-        this.teamId = opts.teamId
-        this.debug = opts.debug
+        this.logger = opts.logger
 
         assert(this.clientId, 'MIRO_CLIENT_ID is required')
         assert(this.clientSecret, 'MIRO_CLIENT_SECRET is required')
@@ -44,7 +42,7 @@ export class Miro {
     * Returns an instance of the low level Miro API for the given user id
     */
     api(userId: ExternalUserId): MiroEndpoints {
-        return MiroApi(async () => await this.getAccessToken(userId), undefined, this.debug)
+        return MiroApi(async () => await this.getAccessToken(userId), undefined, this.logger)
     }
 
     /**
@@ -62,15 +60,15 @@ export class Miro {
     }
 
     /**
-    * Returns a URL that user should be redirected to in order to authorize the application
+    * Returns a URL that user should be redirected to in order to authorize the application, accepts an optional state argument and a teamId that will be used as a default
     */
-    getAuthUrl(state?: string): string {
+    getAuthUrl(state?: string, teamId?: string): string {
         const authorizeUrl = new URL('/oauth/authorize', defaultBasePath.replace('api.', ''))
         authorizeUrl.search = new URLSearchParams({
             response_type: 'code',
             client_id: this.clientId,
             redirect_uri: this.redirectUrl,
-            team_id: this.teamId || '',
+            team_id: teamId || '',
             state: state || ''
         }).toString()
         return authorizeUrl.toString()
@@ -196,12 +194,20 @@ const defaultStorage = {
 }
 
 export interface Opts {
+    /** App Client id. Defaults to MIRO_CLIENT_ID environment variable */
     clientId?: string,
+
+    /** App Client secret. Defaults to MIRO_CLIENT_SECRET environment variable */
     clientSecret?: string,
+
+    /** App redirect URL, should match the one configued in the Miro App settings page. Defaults to MIRO_REDIRECT_URL environment variable */
     redirectUrl?: string,
+
+    /** Implementation of storage to use for access and refresh tokens */
     storage?: Storage,
-    teamId?: string
-    debug?: (l: any) => void,
+
+    /** Function to use as a logger. if MIRO_DEBUG environment variable is set then console.log will be used here */
+    logger?: (l: any) => void,
 }
 
 const defaultOpts: Opts = {
@@ -209,7 +215,7 @@ const defaultOpts: Opts = {
     clientSecret: process.env.MIRO_CLIENT_SECRET,
     redirectUrl: process.env.MIRO_REDIRECT_URL,
     storage: defaultStorage,
-    debug: process.env.MIRO_DEBUG ? console.log : undefined
+    logger: process.env.MIRO_DEBUG ? console.log : undefined
 }
 
 export default Miro

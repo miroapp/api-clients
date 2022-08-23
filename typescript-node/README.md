@@ -6,7 +6,7 @@ Reference docs: https://miroapp.github.io/api-clients/typescript-node/classes/in
 
 Miro class is a wrapper that handles authorization and per-user access token management.
 
-To instantiate the client call the Miro instance:
+To start using the client create a new instance:
 
 ```typescript
 import { Miro } from '@mirohq/miro-node'
@@ -14,7 +14,7 @@ import { Miro } from '@mirohq/miro-node'
 const miro = new Miro()
 ```
 
-By default client will load the app configuration from environment variables: `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET`, `MIRO_REDIRECT_URL`. They can also be provided by passing the options object to the constrictor.
+By default client will load the app configuration from environment variables: `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET`, `MIRO_REDIRECT_URL`. They can also be provided by passing the options object to the iconstructor.
 
 ```typescript
 const miro = new Miro({
@@ -23,6 +23,8 @@ const miro = new Miro({
     redirectUrl: 'https://foo.bar/miro_return_url'
 })
 ```
+
+Other options are documented in the [reference](https://miroapp.github.io/api-clients/typescript-node/interfaces/index.Opts.html).
 
 The client has all methods that are needed to complete Miro authorization flows and make API calls:
 
