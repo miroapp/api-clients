@@ -1,11 +1,12 @@
-name: Test
+name: Test the generator
 
 on:
   push:
     branches:
-      - $default-branch
+      - main
+  workflow_dispatch:
   pull_request:
-    branches: [ $default-branch ]
+    branches: [ main ]
 
 jobs:
   build:
