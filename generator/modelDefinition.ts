@@ -105,7 +105,7 @@ export const models: Models  = {
         props: ['orgId', 'teamId'],
         extendedModel: {
             name: 'Team',
-            path: '../nested-model/team'
+            path: '../nested-model/Team'
         },
         methods: [
             {method: 'enterpriseDeleteTeam', alias: 'deleteTeam'},
