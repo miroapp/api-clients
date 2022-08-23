@@ -1,4 +1,12 @@
 import { MiroEndpoints } from "../api";
+import {
+  GetParameters0,
+  GetParameters1,
+  GetParameters2,
+  GetParameters3,
+  KeepBase,
+  toString,
+} from "./helpers";
 
 import { Organization as BaseOrganization } from "./../model/organization";
 import { OrganizationMember as BaseOrganizationMember } from "./../model/organizationMember";
@@ -1736,28 +1744,3 @@ export class Tag extends BaseTag {
       : [];
   }
 }
-
-function toString(id: number | string | undefined) {
-  return id ? id.toString() : "";
-}
-
-type GetParameters0<Method extends (p1: any, ...rest: any[]) => any> =
-  Method extends (...rest: infer Rest) => any ? Rest : never;
-
-type GetParameters1<Method extends (p1: any, ...rest: any[]) => any> =
-  Method extends (p1: any, ...rest: infer Rest) => any ? Rest : never;
-
-type GetParameters2<Method extends (p1: any, p2: any, ...rest: any[]) => any> =
-  Method extends (p1: any, p2: any, ...rest: infer Rest) => any ? Rest : never;
-
-type GetParameters3<
-  Method extends (p1: any, p2: any, p3: any, ...rest: any[]) => any
-> = Method extends (p1: any, p2: any, p3: any, ...rest: infer Rest) => any
-  ? Rest
-  : never;
-
-export type KeepBase<T> = {
-  [P in keyof Omit<T, "_api" | "_headParams"> as T[P] extends Function
-    ? never
-    : P]: T[P];
-};
