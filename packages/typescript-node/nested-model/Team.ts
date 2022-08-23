@@ -6,7 +6,7 @@ export abstract class Team extends BaseTeam {
     abstract _headParams: [string, string]
 
     /** {@inheritDoc api!MiroEndpoints.getBoards} */
-    getBoards (query: Parameters<MiroEndpoints['getBoards']>[0] ) {
+    getBoards (query: Omit<Parameters<MiroEndpoints['getBoards']>[0], 'teamId'> ) {
         return this._api.getBoards({...query, teamId: this._headParams[1]})
     }
 }
