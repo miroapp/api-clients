@@ -2,7 +2,9 @@
 set -euo pipefail
 
 rm -rf ./docs
-for docs in ./*/docs; do
+
+for docs in ./packages/*/docs; do
     mkdir -p ./docs
-    mv "$docs" "./docs/${docs/\/docs/}"
+    newdir=$(basename "$(dirname "$docs")")
+    mv "$docs" "./docs/$newdir"
 done

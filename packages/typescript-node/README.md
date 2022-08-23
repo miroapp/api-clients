@@ -60,8 +60,6 @@ See [the example usage](./examples/fastify.ts) with _fastify_ web framework.
 
 `.as(userId: string)` method returns the instance of the [Api](https://miroapp.github.io/api-clients/typescript-node/classes/nested_model.Api.html) class. This instance provides methods to create and get the list of `Board` models which then provides methods to get `Item` model and so forth.
 
-See [MODELS.md](./MODELS.md) file for the complete model hierarchy.
-
 ### Using lowlevel MiroApi directly
 
 Besides the high level stateful Miro client the library also exposes a stateless low level client:

@@ -1,4 +1,4 @@
-import {NormalizedModel, normalizeTheModel, models} from '../nested-model/definition'
+import {NormalizedModel, normalizeTheModel, models} from './modelDefinition'
 
 function renderModel(name: string, model: NormalizedModel): string {
     return (`

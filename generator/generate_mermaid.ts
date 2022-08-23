@@ -1,4 +1,4 @@
-import {normalizeTheModel, models} from '../nested-model/definition'
+import {normalizeTheModel, models} from './modelDefinition'
 
 console.log('```mermaid')
 console.log('graph LR;')
