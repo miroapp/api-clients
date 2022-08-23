@@ -10,7 +10,7 @@ import {
 
 import { Organization as BaseOrganization } from "./../model/organization";
 import { OrganizationMember as BaseOrganizationMember } from "./../model/organizationMember";
-import { Team as BaseTeam } from "./../nested-model/team";
+import { Team as BaseTeam } from "./../nested-model/Team";
 import { BoardDataClassificationLabel as BaseBoardDataClassification } from "./../model/boardDataClassificationLabel";
 import { DataClassificationOrganizationSettings as BaseDataClassification } from "./../model/dataClassificationOrganizationSettings";
 import { TeamMember as BaseTeamMember } from "./../model/teamMember";
