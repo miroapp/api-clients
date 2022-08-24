@@ -25,3 +25,4 @@
 .gitignore
 package.json
 git_push.sh
+tsconfig.json
