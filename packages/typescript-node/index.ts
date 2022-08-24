@@ -1,5 +1,6 @@
 import assert from 'assert'
 import fs from 'fs'
+import { SearchSource } from 'jest'
 import fetch from 'node-fetch'
 import {HttpError, MiroApi, MiroEndpoints} from './api'
 import {Api as Models} from './nested-model/index'
@@ -22,8 +23,8 @@ export class Miro {
     * redirectUrl: MIRO_REDIRECT_URL
     * logger: MIRO_DEBUG
     */
-    constructor(options: Opts = defaultOpts) {
-        const opts = Object.assign({}, defaultOpts, options)
+    constructor(options?: Opts) {
+        const opts = Object.assign(getDefaultOpts(), options)
         this.clientId = opts.clientId || '',
         this.clientSecret = opts.clientSecret || '',
         this.redirectUrl = opts.redirectUrl || '',
@@ -90,11 +91,12 @@ export class Miro {
     */
     async exchangeCodeForAccessToken(userId: ExternalUserId, urlOrCode: string): Promise<string> {
         let code = urlOrCode
-        try {
-            const url = new URL(urlOrCode)
-            code = url.searchParams.get('code') || ''
-        } catch (err) {
-            // can't parse url, assume code is passed as argument
+        if (urlOrCode.indexOf('?') >= 0) {
+            const params = new URLSearchParams(urlOrCode.match(/\?.*/)?.[0])
+            const codeInParams = params.get('code')
+            if (codeInParams) {
+                code = codeInParams
+            }
         }
         if (!code) {
             throw new Error('No code provided')
@@ -108,7 +110,7 @@ export class Miro {
         })
     }
 
-    private async getToken(userId: ExternalUserId, params: {[key: string]: string}): Promise<string> {
+    async getToken(userId: ExternalUserId, params: {[key: string]: string}): Promise<string> {
 
         const tokenUrl = new URL('/v1/oauth/token', defaultBasePath)
         tokenUrl.search = new URLSearchParams(params).toString()
@@ -139,7 +141,7 @@ export class Miro {
         })
     }
 
-    private async getAccessToken (userId: ExternalUserId): Promise<string> {
+    async getAccessToken (userId: ExternalUserId): Promise<string> {
         const state = await this.storage.read(userId)
         if (!state || !state.accessToken) {
             throw new Error('No access token stored, run exchangeCodeForAccessToken() first')
@@ -210,12 +212,14 @@ export interface Opts {
     logger?: (l: any) => void,
 }
 
-const defaultOpts: Opts = {
-    clientId: process.env.MIRO_CLIENT_ID,
-    clientSecret: process.env.MIRO_CLIENT_SECRET,
-    redirectUrl: process.env.MIRO_REDIRECT_URL,
-    storage: defaultStorage,
-    logger: process.env.MIRO_DEBUG ? console.log : undefined
+function getDefaultOpts () {
+    return {
+        clientId: process.env.MIRO_CLIENT_ID,
+        clientSecret: process.env.MIRO_CLIENT_SECRET,
+        redirectUrl: process.env.MIRO_REDIRECT_URL,
+        storage: defaultStorage,
+        logger: process.env.MIRO_DEBUG ? console.log : undefined
+    }
 }
 
 export default Miro
