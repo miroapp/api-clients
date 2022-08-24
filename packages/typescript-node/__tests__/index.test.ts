@@ -1,5 +1,5 @@
-import { log } from 'console'
 import { Miro, Opts, State, Storage } from '../index'
+import { Api } from '../nested-model'
 
 describe('Entrypoint test', () => {
 
@@ -115,7 +115,6 @@ describe('Entrypoint test', () => {
             const miro = testMiro({
                 storage: {
                     read: async () => {
-                        console.log('call');
                         return {userId: '123', accessToken: 'access', refreshToken: 'refresh', tokenExpiresAt: '2022-08-08T08:08:08.000Z'}
                     },
                     write: () => {}
@@ -131,6 +130,12 @@ describe('Entrypoint test', () => {
                 grant_type: 'refresh_token'
             })
             expect(response).toEqual('newToken')
+        })
+    })
+
+    describe('as', () => {
+        it('returns the api instance', () => {
+            expect(testMiro().as('123')).toBeInstanceOf(Api)
         })
     })
 
