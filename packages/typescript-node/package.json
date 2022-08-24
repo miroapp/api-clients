@@ -12,7 +12,7 @@
         "clean": "rm -Rf node_modules/ *.js",
         "build": "tsc",
         "docs": "typedoc api.ts index.ts nested-model/* --gitRevision main",
-        "test": "npm run build && node dist/client.js"
+        "test": "jest"
     },
     "author": "Miro",
     "license": "MIT",
