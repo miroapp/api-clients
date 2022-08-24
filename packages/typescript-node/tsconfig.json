@@ -15,6 +15,7 @@
     },
     "exclude": [
         "dist",
+        "__tests__",
         "examples",
         "node_modules"
     ]
