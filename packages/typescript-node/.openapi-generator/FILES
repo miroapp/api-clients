@@ -193,4 +193,3 @@ model/widgetDataPlatformTags.ts
 model/widgetLinks.ts
 model/widgetLinksPlatformContainers.ts
 model/widthOnlyAdjustableGeometry.ts
-tsconfig.json
