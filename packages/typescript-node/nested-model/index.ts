@@ -8,6 +8,7 @@ import {
   toString,
 } from "./helpers";
 
+import { Api as BaseApi } from "./../nested-model/Api";
 import { Organization as BaseOrganization } from "./../model/organization";
 import { OrganizationMember as BaseOrganizationMember } from "./../model/organizationMember";
 import { Team as BaseTeam } from "./../nested-model/Team";
@@ -30,7 +31,7 @@ import { TextItem as BaseTextItem } from "./../model/textItem";
 import { ConnectorWithLinks as BaseConnector } from "./../model/connectorWithLinks";
 import { Tag as BaseTag } from "./../model/tag";
 
-export class Api extends Object {
+export class Api extends BaseApi {
   /** @hidden */
   _api: MiroEndpoints;
   /** @hidden */
@@ -39,7 +40,7 @@ export class Api extends Object {
   constructor(
     api: MiroEndpoints,
     headParams: Api["_headParams"],
-    rest: object
+    rest: KeepBase<BaseApi>
   ) {
     super();
     this._api = api;

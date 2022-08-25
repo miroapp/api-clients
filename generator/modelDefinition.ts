@@ -65,6 +65,10 @@ type ModelName = keyof typeof MODELS
 const MODELS = {
     Api: {
         props: [],
+        extendedModel: {
+            name: 'Api',
+            path: '../nested-model/Api'
+        },
         methods: [
             'createBoard',
             {method: 'getBoards', returns: 'Board', paginated: 'data'},
