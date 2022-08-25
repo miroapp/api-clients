@@ -1,6 +1,6 @@
 {
     "name": "@mirohq/miro-node",
-    "version": "0.0.1-alpha.2",
+    "version": "0.0.1-alpha.3",
     "description": "NodeJS client for Miro's REST API",
     "repository": {
         "type": "git",

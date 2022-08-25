@@ -1,6 +1,6 @@
 # WIP: This client is still a work in progress, anything may change at any time
 
-Reference docs: https://miroapp.github.io/api-clients/typescript-node/classes/index.Miro.html
+Reference documentation: https://miroapp.github.io/api-clients/classes/index.Miro.html
 
 ### Using Miro authentication wrapper
 
