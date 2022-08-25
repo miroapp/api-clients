@@ -18,7 +18,7 @@ jobs:
       - run: yarn
 
       - run: yarn build
-        working-directory: typescript-node
+        working-directory: packages/typescript-node
 
       # This step will look at version in package.json, compare it to NPM version and
       # if the versions are different it will publish the package
