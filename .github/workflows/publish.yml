@@ -31,4 +31,3 @@ jobs:
         with:
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
           package: packages/typescript-node/package.json
-          dry-run: true
