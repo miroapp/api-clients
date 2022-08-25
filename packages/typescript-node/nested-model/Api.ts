@@ -1,15 +1,15 @@
 import {Board} from './index'
-import {MiroEndpoints} from '../api'
+import {MiroApi} from '../api'
 
 export abstract class Api {
-  abstract _api: MiroEndpoints
+  abstract _api: MiroApi
   abstract _headParams: []
 
   /**
    * Get all boards matching the search query
    * Returns an iterator which will automatically paginate and fetch all available boards
    */
-  async *getAllBoards(query?: Omit<Parameters<MiroEndpoints['getBoards']>[0], 'offset'>): AsyncGenerator<Board, void> {
+  async *getAllBoards(query?: Omit<Parameters<MiroApi['getBoards']>[0], 'offset'>): AsyncGenerator<Board, void> {
     let currentOffset = 0
     while (true) {
       const response = (

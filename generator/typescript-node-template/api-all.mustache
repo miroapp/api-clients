@@ -1,28 +1,103 @@
+import fetch, {Response} from 'node-fetch';
+
 {{#apiInfo}}
 {{#apis}}
-{{#operations}}
-import { {{ classname }}, {{ classname }}Methods } from './{{ classFilename }}';
-export { {{ classname }}Methods } from './{{ classFilename }}';
-{{/operations}}
-{{#withInterfaces}}
-// export * from './{{ classFilename }}Interface'
-{{/withInterfaces}}
+
+{{#imports}}
+import { {{classname}} } from '{{filename}}';
+{{/imports}}
+
 {{/apis}}
-import fetch, {Response} from 'node-fetch';
+
+import { ObjectSerializer } from '../model/models';
 
 let defaultBasePath = '{{{basePath}}}';
 
-export interface MiroEndpoints extends
-    {{#apis}}
-    {{#operations}}{{ classname }}Methods{{/operations}}{{^-last}}, {{/-last}}
-    {{/apis}} {}
+export type Logger = (...thing: any) => void
 
-export function MiroApi (accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: (...thing: any) => void): MiroEndpoints {
-    return {
-        {{#apis}}
-        {{#operations}}...{{ classname }}(accessToken, basePath, logger){{/operations}},
-        {{/apis}}
+export class MiroApi {
+
+    accessToken: string|(() => Promise<string>)
+    basePath: string
+    logger?: Logger
+
+    constructor(accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: Logger) {
+        this.accessToken = accessToken
+        this.basePath = basePath
+        this.logger = logger
     }
+
+{{#apis}}
+{{#operations}}
+
+    {{#operation}}
+
+        async {{nickname}} ({{#requiredParams}}{{paramName}}: {{{dataType}}}, {{/requiredParams}}
+        {{#optionalParams}}
+{{^isBodyParam}}{{#-first}} query?: { {{/-first}}{{/isBodyParam}}
+{{#isBodyParam}}{{^-first}} }, {{/-first}} {{/isBodyParam}}
+{{paramName}}?: {{{dataType}}},
+{{#isQueryParam}}{{#-last}} }, {{/-last}} {{/isQueryParam}}
+{{/optionalParams}}) : Promise<{ response: Response; {{#returnType}}body: {{{.}}}; {{/returnType}}{{^returnType}}body?: any; {{/returnType}} }> {
+        const localVarPath = '{{{path}}}'{{#pathParams}}
+            .replace('{' + '{{baseName}}' + '}', encodeURIComponent(String({{paramName}}))){{/pathParams}};
+        let localVarQueryParameters = new URLSearchParams();
+{{#pathParams}}
+{{#required}}
+        // verify required parameter '{{paramName}}' is not null or undefined
+        if ({{paramName}} === null || {{paramName}} === undefined) {
+            throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
+        }
+{{/required}}
+{{/pathParams}}
+
+{{#queryParams}}
+
+    {{#required}}
+            // verify required parameter '{{paramName}}' is not null or undefined
+            if ({{paramName}} === null || {{paramName}} === undefined) {
+                throw new Error('Required parameter {{paramName}} was null or undefined when calling {{nickname}}.');
+            }
+
+    {{/required}}
+
+        if ({{^required}}query?.{{/required}}{{paramName}} !== undefined) {
+            localVarQueryParameters.append('{{baseName}}', ObjectSerializer.serialize({{^required}}query?.{{/required}}{{paramName}}, "{{{dataType}}}"));
+        }
+
+{{/queryParams}}
+
+        const resource = new URL(localVarPath, this.basePath)
+        resource.search = localVarQueryParameters.toString()
+
+        const {response, bodyAsJson} = await makeJsonRequest(
+            typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+            '{{httpMethod}}',
+            resource,
+            {{#bodyParam}}
+            JSON.stringify(ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}")),
+            {{/bodyParam}}
+            {{^bodyParam}}
+            undefined,
+            {{/bodyParam}}
+
+            this.logger
+        )
+
+
+        {{#returnType}}
+        const body = ObjectSerializer.deserialize(bodyAsJson, "{{{.}}}");
+        {{/returnType}}
+        {{^returnType}}
+        const body = bodyAsJson
+        {{/returnType}}
+
+        return {response, body}
+    }
+    {{/operation}}
+{{/operations}}
+{{/apis}}
+
 }
 
 export class HttpError extends Error {

@@ -1,8 +1,7 @@
 import assert from 'assert'
 import fs from 'fs'
-import {SearchSource} from 'jest'
 import fetch from 'node-fetch'
-import {HttpError, MiroApi, MiroEndpoints} from './api'
+import {HttpError, MiroApi} from './api'
 import {Api as Models} from './nested-model/index'
 
 const defaultBasePath = 'https://api.miro.com'
@@ -41,8 +40,8 @@ export class Miro {
   /**
    * Returns an instance of the low level Miro API for the given user id
    */
-  api(userId: ExternalUserId): MiroEndpoints {
-    return MiroApi(async () => await this.getAccessToken(userId), undefined, this.logger)
+  api(userId: ExternalUserId): MiroApi {
+    return new MiroApi(async () => await this.getAccessToken(userId), undefined, this.logger)
   }
 
   /**
@@ -221,4 +220,4 @@ function getDefaultOpts() {
 }
 
 export default Miro
-export {MiroApi, MiroEndpoints} from './api'
+export {MiroApi} from './api'

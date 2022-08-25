@@ -72,4 +72,4 @@ const api = MiroApi('ACCESS_TOKEN')
 const boards = await api.getBoards()
 ```
 
-See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroEndpoints.html) for a full list of methods.
+See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroApi.html) for a full list of methods.

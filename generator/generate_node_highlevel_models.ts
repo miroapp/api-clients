@@ -6,11 +6,11 @@ export function run(models: Record<string, Model>) {
 
 export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object'} {
     /** @hidden */
-    _api: MiroEndpoints
+    _api: MiroApi
     /** @hidden */
     _headParams: [${model.props.map((_) => `string`).join(', ')}]
 
-    constructor(api: MiroEndpoints, headParams: ${name}['_headParams'], rest: ${
+    constructor(api: MiroApi, headParams: ${name}['_headParams'], rest: ${
       model.extendedModel ? `KeepBase<Base${name}>` : 'object'
     }) {
         super()
@@ -24,8 +24,8 @@ ${model.methods
     const returns = m.returns
 
     return `
-    /** {@inheritDoc api!MiroEndpoints.${m.method}} */
-    async ${m.alias}(...rest: GetParameters${m.topLevelCall ? 1 : model.props.length}<MiroEndpoints['${
+    /** {@inheritDoc api!MiroApi.${m.method}} */
+    async ${m.alias}(...rest: GetParameters${m.topLevelCall ? 1 : model.props.length}<MiroApi['${
       m.method
     }']>): Promise<${returns ? returns : 'void'}${m.paginated ? '[]' : ''}> {
         ${renderFunctionBody(m, model)}
@@ -78,7 +78,7 @@ ${model.methods
 
   function renderImports() {
     return `
-import { MiroEndpoints } from '../api'
+import { MiroApi } from '../api'
 import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase, toString } from "./helpers";
 
 ${Object.keys(models)
