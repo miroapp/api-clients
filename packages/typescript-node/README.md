@@ -24,7 +24,7 @@ const miro = new Miro({
 })
 ```
 
-Other options are documented in the [reference](https://miroapp.github.io/api-clients/typescript-node/interfaces/index.Opts.html).
+Other options are documented in the [reference](https://miroapp.github.io/api-clients/interfaces/index.Opts.html).
 
 The client has all methods that are needed to complete Miro authorization flows and make API calls:
 
@@ -58,7 +58,7 @@ See [the example usage](./examples/fastify.ts) with _fastify_ web framework.
 
 ### API Methods & Models
 
-`.as(userId: string)` method returns the instance of the [Api](https://miroapp.github.io/api-clients/typescript-node/classes/nested_model.Api.html) class. This instance provides methods to create and get the list of `Board` models which then provides methods to get `Item` model and so forth.
+`.as(userId: string)` method returns the instance of the [Api](https://miroapp.github.io/api-clients/classes/nested_model.Api.html) class. This instance provides methods to create and get the list of `Board` models which then provides methods to get `Item` model and so forth.
 
 ### Using lowlevel MiroApi directly
 
@@ -72,4 +72,4 @@ const api = MiroApi('ACCESS_TOKEN')
 const boards = await api.getBoards()
 ```
 
-See the [documentation](https://miroapp.github.io/api-clients/typescript-node/interfaces/api.MiroEndpoints.html) for a full list of methods.
+See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroEndpoints.html) for a full list of methods.

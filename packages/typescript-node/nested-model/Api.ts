@@ -1,14 +1,13 @@
-import { Team as BaseTeam } from '../model/team'
 import { Board } from './index'
 import { MiroEndpoints } from '../api'
 
-export abstract class Api extends BaseTeam {
+export abstract class Api {
     abstract _api: MiroEndpoints
     abstract _headParams: []
 
     /**
     * Get all boards matching the search query
-    * Returns an iterator which will automatically fetch next page from the API
+    * Returns an iterator which will automatically paginate and fetch all available boards
     */
     async *getAllBoards (query?: Omit<Parameters<MiroEndpoints['getBoards']>[0], 'offset'> ): AsyncGenerator<Board, void> {
         let currentOffset = 0
