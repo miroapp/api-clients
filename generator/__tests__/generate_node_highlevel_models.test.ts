@@ -1,23 +1,25 @@
-import { run } from '../../generator/generate_node_highlevel_models'
+import {run} from '../../generator/generate_node_highlevel_models'
 import prettier from 'prettier'
 
 function format(code: string) {
-    return prettier.format(code, {parser: 'typescript'})
+  return prettier.format(code, {parser: 'typescript'})
 }
 
 function expectSameCode(expected: string, received: string) {
-    expect(format(expected)).toEqual(format(received))
+  expect(format(expected)).toEqual(format(received))
 }
 
 describe('generate_node_highlevel_models', () => {
-    it('should generate a simple model', () => {
-        expectSameCode(run({
-            'Hello': {
-                id: 'id',
-                props: [],
-                methods: []
-            }
-        }), `
+  it('should generate a simple model', () => {
+    expectSameCode(
+      run({
+        Hello: {
+          id: 'id',
+          props: [],
+          methods: [],
+        },
+      }),
+      `
 import { MiroEndpoints } from '../api'
 import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase, toString } from "./helpers";
 
@@ -34,24 +36,32 @@ export class Hello extends Object {
         Object.assign(this, rest)
     }
 }
-`)
-    })
+`,
+    )
+  })
 
-    it('should correctly generate a model with a getItem method', () => {
-        expectSameCode(run({
-            'Hello': {
-                id: 'id',
-                props: [],
-                methods: [
-                    {method: 'getSomeItem', alias: 'getItem', returns: 'Item', topLevelCall: false}
-                ]
+  it('should correctly generate a model with a getItem method', () => {
+    expectSameCode(
+      run({
+        Hello: {
+          id: 'id',
+          props: [],
+          methods: [
+            {
+              method: 'getSomeItem',
+              alias: 'getItem',
+              returns: 'Item',
+              topLevelCall: false,
             },
-            'Item': {
-                id: 'itemId',
-                props: [],
-                methods: []
-            }
-        }), `
+          ],
+        },
+        Item: {
+          id: 'itemId',
+          props: [],
+          methods: [],
+        },
+      }),
+      `
 
 import { MiroEndpoints } from '../api'
 import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase, toString } from "./helpers";
@@ -97,7 +107,7 @@ export class Item extends Object {
     Object.assign(this, rest);
   }
 }
-`)
-    })
+`,
+    )
+  })
 })
-

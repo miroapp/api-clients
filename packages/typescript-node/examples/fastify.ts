@@ -25,5 +25,4 @@ fastify.get('/', async () => {
   const item = items[0]
   return await item.getTags()
 })
-
 ;(async () => await fastify.listen({port: 4000}))()

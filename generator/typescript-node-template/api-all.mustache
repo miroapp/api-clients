@@ -8,14 +8,7 @@ export { {{ classname }}Methods } from './{{ classFilename }}';
 // export * from './{{ classFilename }}Interface'
 {{/withInterfaces}}
 {{/apis}}
-import {Response} from 'node-fetch';
-
-export class HttpError extends Error {
-    constructor (public response: Response, public body: any, public statusCode?: number) {
-        super('HTTP request failed');
-        this.name = 'HttpError';
-    }
-}
+import fetch, {Response} from 'node-fetch';
 
 let defaultBasePath = '{{{basePath}}}';
 
@@ -31,4 +24,47 @@ export function MiroApi (accessToken: string|(() => Promise<string>), basePath: 
         {{/apis}}
     }
 }
+
+export class HttpError extends Error {
+    constructor (public response: Response, public body: any, public statusCode?: number) {
+        super('HTTP request failed');
+        this.name = 'HttpError';
+    }
+}
+
+export async function makeJsonRequest(token: string, method: string, url: URL, body?: string, logger?: (...thing: any) => void) {
+    const options = {
+        method,
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body
+    }
+
+    const hasLogger = typeof logger === 'function'
+
+    if (hasLogger) logger('FETCH', url.toString(), options)
+
+    const response = await fetch(url, options)
+
+    if (hasLogger) logger('RESPONSE', response)
+
+    let bodyAsJson: unknown
+    try {
+        bodyAsJson = await response.json()
+    } catch (err) {
+        // Body doesn't have valid json
+    }
+
+    if (hasLogger && bodyAsJson) logger('BODY', bodyAsJson)
+
+    if (!response.ok) {
+        throw new HttpError(response, bodyAsJson, response.status)
+    }
+
+    return {bodyAsJson, response}
+}
+
 {{/apiInfo}}

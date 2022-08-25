@@ -1,18 +1,17 @@
-import { Model, getModels } from "./modelDefinition";
+import {Model, getModels} from './modelDefinition'
 
 export function run(models: Record<string, Model>) {
-
   function renderModel(name: string, model: Model): string {
     return `
 
-export class ${name} extends ${model.extendedModel ? `Base${name}` : "Object"} {
+export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object'} {
     /** @hidden */
     _api: MiroEndpoints
     /** @hidden */
-    _headParams: [${model.props.map((_) => `string`).join(", ")}]
+    _headParams: [${model.props.map((_) => `string`).join(', ')}]
 
     constructor(api: MiroEndpoints, headParams: ${name}['_headParams'], rest: ${
-      model.extendedModel ? `KeepBase<Base${name}>` : "object"
+      model.extendedModel ? `KeepBase<Base${name}>` : 'object'
     }) {
         super()
         this._api = api
@@ -22,70 +21,59 @@ export class ${name} extends ${model.extendedModel ? `Base${name}` : "Object"} {
 
 ${model.methods
   .map((m) => {
-    const returns = m.returns;
+    const returns = m.returns
 
     return `
     /** {@inheritDoc api!MiroEndpoints.${m.method}} */
-    async ${m.alias}(...rest: GetParameters${
-      m.topLevelCall ? 1 : model.props.length
-    }<MiroEndpoints['${m.method}']>): Promise<${returns ? returns : "void"}${
-      m.paginated ? "[]" : ""
-    }> {
+    async ${m.alias}(...rest: GetParameters${m.topLevelCall ? 1 : model.props.length}<MiroEndpoints['${
+      m.method
+    }']>): Promise<${returns ? returns : 'void'}${m.paginated ? '[]' : ''}> {
         ${renderFunctionBody(m, model)}
     }
-`;
+`
   })
-  .join("\n")}
+  .join('\n')}
 
 }
-`;
+`
   }
 
-  function renderApiCall(m: Model["methods"][number], model: Model) {
+  function renderApiCall(m: Model['methods'][number], model: Model) {
     return `await this._api.${m.method}(${
-      m.topLevelCall
-        ? `this._headParams[${model.props.length - 1}]`
-        : "...this._headParams"
-    }, ...rest)`;
+      m.topLevelCall ? `this._headParams[${model.props.length - 1}]` : '...this._headParams'
+    }, ...rest)`
   }
 
-  function renderFunctionBody(m: Model["methods"][number], model: Model) {
-    const apiCall = renderApiCall(m, model);
-    const returns = m.returns;
-    if (!returns) return apiCall;
+  function renderFunctionBody(m: Model['methods'][number], model: Model) {
+    const apiCall = renderApiCall(m, model)
+    const returns = m.returns
+    if (!returns) return apiCall
 
-    const paginatedData =
-      m.paginated === true ? "result" : `result.${m.paginated}`;
+    const paginatedData = m.paginated === true ? 'result' : `result.${m.paginated}`
 
-    const returnModel = models[returns];
+    const returnModel = models[returns]
 
     return `
         const result = (${apiCall}).body;
 
-        ${
-          m.paginated
-            ? `return ${paginatedData} ? ${paginatedData}.map(result => { `
-            : ""
-        }
+        ${m.paginated ? `return ${paginatedData} ? ${paginatedData}.map(result => { ` : ''}
 
         ${renderReturnValue(returns, returnModel)}
 
-        ${m.paginated ? "}) : []" : ""}
-`;
+        ${m.paginated ? '}) : []' : ''}
+`
   }
 
   function renderReturnValue(returns: string | number, returnModel: Model) {
     return `
         return new ${returns} (
             this._api,
-            [${returnModel.props.map((_, i, { length }) =>
-              i === length - 1
-                ? `toString(result.${returnModel.id})`
-                : `this._headParams[${i}]`
+            [${returnModel.props.map((_, i, {length}) =>
+              i === length - 1 ? `toString(result.${returnModel.id})` : `this._headParams[${i}]`,
             )}],
             result
         )
-`;
+`
   }
 
   function renderImports() {
@@ -95,25 +83,25 @@ import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBas
 
 ${Object.keys(models)
   .map((name) => {
-    const extendedModel = models[name].extendedModel;
-    if (!extendedModel) return "";
-    return `import { ${extendedModel.name} as Base${name}}  from './${extendedModel.path}';`;
+    const extendedModel = models[name].extendedModel
+    if (!extendedModel) return ''
+    return `import { ${extendedModel.name} as Base${name}}  from './${extendedModel.path}';`
   })
-  .join("\n")}
-`;
+  .join('\n')}
+`
   }
 
-  let code = renderImports();
+  let code = renderImports()
 
   for (const name of Object.keys(models)) {
-    const model = models[name];
+    const model = models[name]
 
-    code += renderModel(name, model);
+    code += renderModel(name, model)
   }
 
-  return code;
+  return code
 }
 
 if (process.argv[1] === __filename) {
-  console.log(run(getModels()));
+  console.log(run(getModels()))
 }

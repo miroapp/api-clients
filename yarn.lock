@@ -618,6 +618,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@mirohq/prettier-config@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@mirohq/prettier-config/-/prettier-config-2.0.0.tgz#8790cc27a6f2b6c29702d80b20701157fed7fae7"
+  integrity sha512-gVNvr/FBmVQEhJzgGHl1HkmxsZ4f0npIOWTBeFLOo4e2A7Zum70oCtiAWEW+930eGlRyCKMa3DM5XgFyZY9ncg==
+
 "@nestjs/common@8.4.4":
   version "8.4.4"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-8.4.4.tgz#0914c6c0540b5a344c7c8fd6072faa1a49af1158"

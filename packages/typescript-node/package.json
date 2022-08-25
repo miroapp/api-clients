@@ -1,38 +1,38 @@
 {
-    "name": "@mirohq/miro-node",
-    "version": "0.0.1-alpha.4",
-    "description": "NodeJS client for Miro's REST API",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/miroapp/api-clients.git"
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
-    "scripts": {
-        "clean": "rm -Rf node_modules/ *.js",
-        "build": "tsc",
-        "docs": "typedoc api.ts index.ts nested-model/* --gitRevision main",
-        "test": "jest"
-    },
-    "author": "Miro",
-    "license": "MIT",
-    "dependencies": {
-        "node-fetch": "^2.6.7",
-        "typedoc": "^0.23.10"
-    },
-    "devDependencies": {
-        "@types/jest": "^28.1.8",
-        "@types/node": "^12",
-        "@types/node-fetch": "^2.6.2",
-        "jest": "^28.1.3",
-        "typescript": "^4.0"
-    },
-    "jest": {
-        "transform": {
-            "^.+\\.tsx?$": "esbuild-jest"
-        }
+  "name": "@mirohq/miro-node",
+  "version": "0.0.1-alpha.4",
+  "description": "NodeJS client for Miro's REST API",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/miroapp/api-clients.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rm -Rf node_modules/ *.js",
+    "build": "tsc",
+    "docs": "typedoc api.ts index.ts nested-model/* --gitRevision main",
+    "test": "jest"
+  },
+  "author": "Miro",
+  "license": "MIT",
+  "dependencies": {
+    "node-fetch": "^2.6.7",
+    "typedoc": "^0.23.10"
+  },
+  "devDependencies": {
+    "@types/jest": "^28.1.8",
+    "@types/node": "^12",
+    "@types/node-fetch": "^2.6.2",
+    "jest": "^28.1.3",
+    "typescript": "^4.0"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "esbuild-jest"
     }
+  }
 }

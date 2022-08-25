@@ -36,20 +36,20 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      
+
       # generate code
       - run: yarn
       - run: yarn generate
-      
+
       # generate docs
       - run: yarn docs
         working-directory: packages/typescript-node
-        
+
       # upload and deploy docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: 'packages/typescript-node/docs/'
+          path: "packages/typescript-node/docs/"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1

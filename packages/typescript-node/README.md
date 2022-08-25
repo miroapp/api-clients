@@ -9,7 +9,7 @@ Miro class is a wrapper that handles authorization and per-user access token man
 To start using the client create a new instance:
 
 ```typescript
-import { Miro } from '@mirohq/miro-node'
+import {Miro} from '@mirohq/miro-node'
 
 const miro = new Miro()
 ```
@@ -18,9 +18,9 @@ By default client will load the app configuration from environment variables: `M
 
 ```typescript
 const miro = new Miro({
-    clientId: 'your_app_id',
-    clientSecret: 'your_app_secret',
-    redirectUrl: 'https://foo.bar/miro_return_url'
+  clientId: 'your_app_id',
+  clientSecret: 'your_app_secret',
+  redirectUrl: 'https://foo.bar/miro_return_url',
 })
 ```
 
@@ -28,10 +28,10 @@ Other options are documented in the [reference](https://miroapp.github.io/api-cl
 
 The client has all methods that are needed to complete Miro authorization flows and make API calls:
 
-1) Check if current user has authorized the app: ```miro.isAuthorized('some_user_id')```
-2) Request user to authorize the app by redirecting them to: ```miro.getAuthUrl()```
-3) Exchange users authorization code for a token in the return url's request handler: ```await miro.exchangeCodeForAccessToken('some_user_id', 'https://foo.bar/miro_return_url?code=12345')```
-4) Use the API as a specific user: `await miro.as('some_user_id').getBoards()`
+1. Check if current user has authorized the app: `miro.isAuthorized('some_user_id')`
+2. Request user to authorize the app by redirecting them to: `miro.getAuthUrl()`
+3. Exchange users authorization code for a token in the return url's request handler: `await miro.exchangeCodeForAccessToken('some_user_id', 'https://foo.bar/miro_return_url?code=12345')`
+4. Use the API as a specific user: `await miro.as('some_user_id').getBoards()`
 
 Most methods (`isAuthorized`, `exchangeCodeForAccessToken`, `api`) take `user_id` as a first paramters. This is the ID of the user in your app. The one that is currently logged in. It can be either a string or a number.
 
@@ -39,7 +39,7 @@ In order to persist user's access and refresh tokens client library requires a p
 
 ```typescript
 const miro = new Miro({
-    storage: new CustomMiroStorage()
+  storage: new CustomMiroStorage(),
 })
 ```
 
@@ -47,8 +47,8 @@ Storage should implement the following interface:
 
 ```typescript
 export interface Storage {
-    read(userId: ExternalUserId): Promise<State|undefined>
-    write(userId: ExternalUserId, state: State): Awaitable<void>
+  read(userId: ExternalUserId): Promise<State | undefined>
+  write(userId: ExternalUserId, state: State): Awaitable<void>
 }
 ```
 
@@ -65,7 +65,7 @@ See [the example usage](./examples/fastify.ts) with _fastify_ web framework.
 Besides the high level stateful Miro client the library also exposes a stateless low level client:
 
 ```typescript
-import { MiroApi } from './index.ts'
+import {MiroApi} from './index.ts'
 
 const api = MiroApi('ACCESS_TOKEN')
 

@@ -1,22 +1,15 @@
 {
-    "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2021",
-        "strict": true,
-        "moduleResolution": "node",
-        "declaration": true,
-        "lib": ["es2021"],
-        "outDir": "dist",
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
-        "typeRoots": [
-            "node_modules/@types"
-        ]
-    },
-    "exclude": [
-        "dist",
-        "__tests__",
-        "examples",
-        "node_modules"
-    ]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2021",
+    "strict": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "lib": ["es2021"],
+    "outDir": "dist",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "typeRoots": ["node_modules/@types"]
+  },
+  "exclude": ["dist", "__tests__", "examples", "node_modules"]
 }
