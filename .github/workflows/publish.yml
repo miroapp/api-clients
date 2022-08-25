@@ -5,6 +5,7 @@ on:
     branches:
       - main
     paths:
+      - .github/workflows/publish.yml
       - packages/typescript-node/package.json
 
 jobs:
@@ -15,7 +16,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
+
       - run: yarn
+        working-directory: packages/typescript-node
 
       - run: yarn build
         working-directory: packages/typescript-node
