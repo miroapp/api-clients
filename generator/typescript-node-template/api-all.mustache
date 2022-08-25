@@ -32,6 +32,15 @@ export class MiroApi {
 
     {{#operation}}
 
+        /**
+         * {{&notes}}
+         {{#summary}}
+         * @summary {{&summary}}
+         {{/summary}}
+         {{#allParams}}
+         * @param {{paramName}} {{description}}
+         {{/allParams}}
+         */
         async {{nickname}} ({{#requiredParams}}{{paramName}}: {{{dataType}}}, {{/requiredParams}}
         {{#optionalParams}}
 {{^isBodyParam}}{{#-first}} query?: { {{/-first}}{{/isBodyParam}}

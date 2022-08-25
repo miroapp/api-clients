@@ -106,6 +106,12 @@ export class MiroApi {
     this.logger = logger
   }
 
+  /**
+   * Adds an app card item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create app card item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+   * @param appCardCreateRequest
+   */
   async createAppCardItem(
     boardId: string,
     appCardCreateRequest: AppCardCreateRequest,
@@ -137,6 +143,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes an app card item from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete app card item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete an item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteAppCardItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/app_cards/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -168,6 +180,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific app card item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get app card item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getAppCardItem(boardId: string, itemId: string): Promise<{response: Response; body: AppCardItem}> {
     const localVarPath = '/v2/boards/{board_id}/app_cards/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -199,6 +217,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates an app card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update app card item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param appCardUpdateRequest
+   */
   async updateAppCardItem(
     boardId: string,
     itemId: string,
@@ -234,6 +259,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get board classification
+   * @param orgId id of the organization
+   * @param teamId id of the team
+   * @param boardId Unique identifier of the board that you want to retrieve.
+   */
   async enterpriseDataclassificationBoardGet(
     orgId: string,
     teamId: string,
@@ -280,6 +312,14 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Update board classification
+   * @param orgId id of the organization
+   * @param teamId id of the team
+   * @param boardId Unique identifier of the board that you want to update.
+   * @param dataClassificationLabelId
+   */
   async enterpriseDataclassificationBoardSet(
     orgId: string,
     teamId: string,
@@ -327,6 +367,11 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves board classification settings for an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get organization settings
+   * @param orgId id of the organization
+   */
   async enterpriseDataclassificationOrganizationSettingsGet(
     orgId: string,
   ): Promise<{response: Response; body: DataClassificationOrganizationSettings}> {
@@ -359,6 +404,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Bulk update boards classification
+   * @param orgId id of the organization
+   * @param teamId id of the team
+   * @param updateBoardsDataClassificationLabelRequest
+   */
   async enterpriseDataclassificationTeamBoardsBulk(
     orgId: string,
     teamId: string,
@@ -403,6 +455,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get team settings
+   * @param orgId id of the organization
+   * @param teamId id of the team
+   */
   async enterpriseDataclassificationTeamSettingsGet(
     orgId: string,
     teamId: string,
@@ -441,6 +499,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Update team settings
+   * @param orgId id of the organization
+   * @param teamId id of the team
+   * @param updateTeamSettingsRequest
+   */
   async enterpriseDataclassificationTeamSettingsSet(
     orgId: string,
     teamId: string,
@@ -480,6 +545,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get all board members
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
+   * @param limit
+   * @param offset
+   */
   async getBoardMembers(
     boardId: string,
     query?: {
@@ -523,6 +595,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a board member.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get specific board member
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
+   * @param boardMemberId Unique identifier (ID) of the board member whose role you want to retrieve.
+   */
   async getSpecificBoardMember(
     boardId: string,
     boardMemberId: string,
@@ -557,6 +635,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Removes a board member from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Remove board member
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete an item.
+   * @param boardMemberId Unique identifier (ID) of the board member whose role you want to delete.
+   */
   async removeBoardMember(boardId: string, boardMemberId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/members/{board_member_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -588,6 +672,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Shares the board and Invites new members to collaborate on a board by sending an invitation email. Depending on the board\'s [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy), there might be various scenarios where membership in the team is required in order to share the board with a user. For more information on sharing policy and different scenarios, see [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy).<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Share board
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) to which the board member belongs.
+   * @param boardMembersInvite
+   */
   async shareBoard(
     boardId: string,
     boardMembersInvite: BoardMembersInvite,
@@ -619,6 +709,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates the role of a board member.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update board member
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) for which you want to update the role of the board member.
+   * @param boardMemberId Unique identifier (ID) of the board member whose role you want to update.
+   * @param boardMemberChanges
+   */
   async updateBoardMember(
     boardId: string,
     boardMemberId: string,
@@ -654,6 +751,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a><br/>
+   * @summary Copy board
+   * @param copyFrom [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to copy.
+   * @param boardChanges
+   */
   async copyBoard(
     copyFrom: string,
 
@@ -688,6 +791,11 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Creates a board with the specified name and sharing policies.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Create board
+   * @param boardChanges
+   */
   async createBoard(boardChanges?: BoardChanges): Promise<{response: Response; body: BoardWithLinks}> {
     const localVarPath = '/v2/boards'
     let localVarQueryParameters = new URLSearchParams()
@@ -709,6 +817,11 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   *
+   * @summary Delete board
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to delete.
+   */
   async deleteBoard(boardId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}'.replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
     let localVarQueryParameters = new URLSearchParams()
@@ -734,6 +847,16 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves a list of boards that match the search criteria provided in the request. If you are an Enterprise customer and a Company Admin, you can retrieve all boards, including all private boards (boards that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins. Note that you only get results instantaneously when you filter by `team_id`. If you use any other filter,  you need to give a few seconds for the indexing of newly created boards before retrieving boards.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get boards
+   * @param teamId
+   * @param query
+   * @param owner
+   * @param limit
+   * @param offset
+   * @param sort
+   */
   async getBoards(query?: {
     teamId?: string
 
@@ -797,6 +920,11 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information about a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get specific board
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to retrieve.
+   */
   async getSpecificBoard(boardId: string): Promise<{response: Response; body: BoardWithLinks}> {
     const localVarPath = '/v2/boards/{board_id}'.replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
     let localVarQueryParameters = new URLSearchParams()
@@ -822,6 +950,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   *
+   * @summary Update board
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to update.
+   * @param boardChanges
+   */
   async updateBoard(boardId: string, boardChanges: BoardChanges): Promise<{response: Response; body: BoardWithLinks}> {
     const localVarPath = '/v2/boards/{board_id}'.replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
     let localVarQueryParameters = new URLSearchParams()
@@ -847,6 +981,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds a card item to a board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create card item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+   * @param cardCreateRequest
+   */
   async createCardItem(
     boardId: string,
     cardCreateRequest: CardCreateRequest,
@@ -878,6 +1018,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes a card item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete card item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteCardItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/cards/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -909,6 +1055,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific card item on a board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get card item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getCardItem(boardId: string, itemId: string): Promise<{response: Response; body: CardItem}> {
     const localVarPath = '/v2/boards/{board_id}/cards/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -940,6 +1092,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates a card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update card item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param cardUpdateRequest
+   */
   async updateCardItem(
     boardId: string,
     itemId: string,
@@ -975,6 +1134,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds a connector to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create connector
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) for which you want to create the connector.
+   * @param connectorCreationData
+   */
   async createConnector(
     boardId: string,
     connectorCreationData: ConnectorCreationData,
@@ -1006,6 +1171,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes the specified connector from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete connector
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the connector.
+   * @param connectorId [Unique identifier (ID) of the connector](https://developers.miro.com/reference/rest-api-connector-model) that you want to delete.
+   */
   async deleteConnector(boardId: string, connectorId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2-experimental/boards/{board_id}/connectors/{connector_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1037,6 +1208,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific connector on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get specific connector
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific connector.
+   * @param connectorId [Unique identifier (ID) of the connector](https://developers.miro.com/reference/rest-api-connector-model) that you want to retrieve.
+   */
   async getConnector(boardId: string, connectorId: string): Promise<{response: Response; body: ConnectorWithLinks}> {
     const localVarPath = '/v2-experimental/boards/{board_id}/connectors/{connector_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1068,6 +1245,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves a list of connectors for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Get connectors
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a list of connectors.
+   * @param limit
+   * @param cursor
+   */
   async getConnectors(
     boardId: string,
     query?: {
@@ -1111,6 +1295,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates a connector on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update connector
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) for which you want to update the connector.
+   * @param connectorId [Unique identifier (ID) of the connector](https://developers.miro.com/reference/rest-api-connector-model) that you want to update.
+   * @param connectorChangesData
+   */
   async updateConnector(
     boardId: string,
     connectorId: string,
@@ -1146,6 +1337,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create document item using URL
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+   * @param documentCreateRequest
+   */
   async createDocumentItemUsingUrl(
     boardId: string,
     documentCreateRequest: DocumentCreateRequest,
@@ -1177,6 +1374,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete document item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteDocumentItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1208,6 +1411,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific document item on a board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get document item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getDocumentItem(boardId: string, itemId: string): Promise<{response: Response; body: DocumentItem}> {
     const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1239,6 +1448,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update document item using URL
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param documentUpdateRequest
+   */
   async updateDocumentItemUsingUrl(
     boardId: string,
     itemId: string,
@@ -1274,6 +1490,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds an embed item containing external content to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create embed item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+   * @param embedCreateRequest
+   */
   async createEmbedItem(
     boardId: string,
     embedCreateRequest: EmbedCreateRequest,
@@ -1305,6 +1527,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes an embed item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete embed item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteEmbedItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/embeds/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1336,6 +1564,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific embed item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get embed item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getEmbedItem(boardId: string, itemId: string): Promise<{response: Response; body: EmbedItem}> {
     const localVarPath = '/v2/boards/{board_id}/embeds/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1367,6 +1601,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates an embed item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update embed item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param embedUpdateRequest
+   */
   async updateEmbedItem(
     boardId: string,
     itemId: string,
@@ -1402,6 +1643,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds a frame to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create frame
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create a frame.
+   * @param frameCreateRequest
+   */
   async createFrameItem(
     boardId: string,
     frameCreateRequest: FrameCreateRequest,
@@ -1433,6 +1680,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes a frame from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete frame
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the frame.
+   * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteFrameItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/frames/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1464,6 +1717,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific frame on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get frame
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that contains the frame that you want to retrieve
+   * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getFrameItem(boardId: string, itemId: string): Promise<{response: Response; body: FrameItem}> {
     const localVarPath = '/v2/boards/{board_id}/frames/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1495,6 +1754,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates a frame on a board based on the data, style, or geometry properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update frame
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the frame.
+   * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param frameUpdateRequest
+   */
   async updateFrameItem(
     boardId: string,
     itemId: string,
@@ -1530,6 +1796,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create image item using URL
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+   * @param imageCreateRequest
+   */
   async createImageItemUsingUrl(
     boardId: string,
     imageCreateRequest: ImageCreateRequest,
@@ -1561,6 +1833,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete image item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteImageItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1592,6 +1870,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get image item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getImageItem(boardId: string, itemId: string): Promise<{response: Response; body: ImageItem}> {
     const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1623,6 +1907,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update image item using URL
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param imageUpdateRequest
+   */
   async updateImageItemUsingUrl(
     boardId: string,
     itemId: string,
@@ -1658,6 +1949,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1689,6 +1986,14 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Get items on board
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) for which you want to retrieve the list of available items.
+   * @param limit
+   * @param type
+   * @param cursor
+   */
   async getItems(
     boardId: string,
     query?: {
@@ -1738,6 +2043,15 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Get items within frame
+   * @param boardIdPlatformContainers [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that contains the frame for which you want to retrieve the list of available items.
+   * @param parentItemId ID of the frame for which you want to retrieve the list of available items.
+   * @param limit
+   * @param type
+   * @param cursor
+   */
   async getItemsWithinFrame(
     boardIdPlatformContainers: string,
     parentItemId: string,
@@ -1799,6 +2113,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get specific item on board
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getSpecificItem(boardId: string, itemId: string): Promise<{response: Response; body: GenericItem}> {
     const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -1830,6 +2150,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update item position or parent
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param genericItemUpdate
+   */
   async updateItemPositionOrParent(
     boardId: string,
     itemId: string,
@@ -1865,6 +2192,11 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves organization information.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get organization info
+   * @param orgId id of the organization
+   */
   async enterpriseGetOrganization(orgId: string): Promise<{response: Response; body: Organization}> {
     const localVarPath = '/v2/orgs/{org_id}'.replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
     let localVarQueryParameters = new URLSearchParams()
@@ -1890,6 +2222,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get organization member
+   * @param orgId id of the organization
+   * @param memberId id of the organization member
+   */
   async enterpriseGetOrganizationMember(
     orgId: string,
     memberId: string,
@@ -1924,6 +2262,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get organization members
+   * @param orgId id of the organization
+   * @param query query to be used for organization members retrieval
+   */
   async enterpriseGetOrganizationMembers(
     orgId: string,
     query: OrganizationMembersSearchQuery,
@@ -1961,6 +2305,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds a shape item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create shape item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+   * @param shapeCreateRequest
+   */
   async createShapeItem(
     boardId: string,
     shapeCreateRequest: ShapeCreateRequest,
@@ -1992,6 +2342,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete shape item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteShapeItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/shapes/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -2023,6 +2379,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get shape item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getShapeItem(boardId: string, itemId: string): Promise<{response: Response; body: ShapeItem}> {
     const localVarPath = '/v2/boards/{board_id}/shapes/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -2054,6 +2416,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update shape item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param shapeUpdateRequest
+   */
   async updateShapeItem(
     boardId: string,
     itemId: string,
@@ -2089,6 +2458,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds a sticky note item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create sticky note item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+   * @param stickyNoteCreateRequest
+   */
   async createStickyNoteItem(
     boardId: string,
     stickyNoteCreateRequest: StickyNoteCreateRequest,
@@ -2120,6 +2495,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes a sticky note item from the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete sticky note item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteStickyNoteItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/sticky_notes/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -2151,6 +2532,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific sticky note item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get sticky note item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getStickyNoteItem(boardId: string, itemId: string): Promise<{response: Response; body: StickyNoteItem}> {
     const localVarPath = '/v2/boards/{board_id}/sticky_notes/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -2182,6 +2569,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates a sticky note item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update sticky note item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param stickyNoteUpdateRequest
+   */
   async updateStickyNoteItem(
     boardId: string,
     itemId: string,
@@ -2217,6 +2611,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Attach tag to item
+   * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item that you want to add a tag to.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) to which you want to add a tag.
+   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) you want to add to the item.
+   */
   async attachTagToItem(
     boardIdPlatformTags: string,
     itemId: string,
@@ -2261,6 +2662,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Creates a tag on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Create tag
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the tag.
+   * @param tagCreateRequest
+   */
   async createTag(
     boardId: string,
     tagCreateRequest: TagCreateRequest,
@@ -2292,6 +2699,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes the specified tag from the board. The tag is also removed from all cards and sticky notes on the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Delete tag
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to delete a specific tag.
+   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to delete.
+   */
   async deleteTag(boardId: string, tagId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/tags/{tag_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -2323,6 +2736,14 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get items by tag
+   * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to retrieve a specific tag.
+   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to retrieve.
+   * @param limit
+   * @param offset
+   */
   async getItemsByTag(
     boardIdPlatformTags: string,
     tagId: string,
@@ -2376,6 +2797,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific tag.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get tag
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to retrieve a specific tag.
+   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to retrieve.
+   */
   async getTag(boardId: string, tagId: string): Promise<{response: Response; body: TagWithLinks}> {
     const localVarPath = '/v2/boards/{board_id}/tags/{tag_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -2407,6 +2834,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get tags from board
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) whose tags you want to retrieve.
+   * @param limit
+   * @param offset
+   */
   async getTagsFromBoard(
     boardId: string,
     query?: {
@@ -2450,6 +2884,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves all the tags from the specified item.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get tags from item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item whose tags you want to retrieve.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) whose tags you want to retrieve.
+   */
   async getTagsFromItem(boardId: string, itemId: string): Promise<{response: Response; body: GetTagsResponse}> {
     const localVarPath = '/v2/boards/{board_id}/items/{item_id}/tags'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -2481,6 +2921,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Remove tag from item
+   * @param boardIdPlatformTags [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with the item that you want to remove a tag from.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to remove the tag from.
+   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to remove from the item.
+   */
   async removeTagFromItem(
     boardIdPlatformTags: string,
     itemId: string,
@@ -2525,6 +2972,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates a tag based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Update tag
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update a specific tag.
+   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to update.
+   * @param tagUpdateRequest
+   */
   async updateTag(
     boardId: string,
     tagId: string,
@@ -2560,6 +3014,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Delete team member from team
+   * @param orgId The id of an Organization.
+   * @param teamId The id of a Team.
+   * @param memberId The id of a Team member.
+   */
   async enterpriseDeleteTeamMember(
     orgId: string,
     teamId: string,
@@ -2600,6 +3061,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves team member by id.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get team member
+   * @param orgId The id of an Organization.
+   * @param teamId The id of a Team.
+   * @param memberId The id of a Team member.
+   */
   async enterpriseGetTeamMember(
     orgId: string,
     teamId: string,
@@ -2640,6 +3108,15 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves team members by cursor.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary List team members
+   * @param orgId The id of an Organization.
+   * @param teamId The id of a Team.
+   * @param limit Limit for the number of team members returned in the result list.
+   * @param cursor The ID of the team member used as the reference for pagination. To retrieve the first portion of the collection don\&#39;t pass a cursor value. To retrieve the next portion of the collection, set the &#x60;cursor&#x60; parameter value to the ID of the last team member you received in the response of the previous request.
+   * @param filterQuery Filtering query
+   */
   async enterpriseGetTeamMembers(
     orgId: string,
     teamId: string,
@@ -2693,6 +3170,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Invites a new member to an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Invite team members
+   * @param orgId The id of an Organization.
+   * @param teamId The id of a Team.
+   * @param teamMemberInvite
+   */
   async enterpriseInviteTeamMember(
     orgId: string,
     teamId: string,
@@ -2728,6 +3212,14 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates team member role in team by id.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Update team member
+   * @param orgId The id of an Organization.
+   * @param teamId The id of a Team.
+   * @param memberId The id of a Team member.
+   * @param teamMemberChanges
+   */
   async enterpriseUpdateTeamMember(
     orgId: string,
     teamId: string,
@@ -2769,6 +3261,11 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves default team settings of an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get default team settings
+   * @param orgId The id of an Organization.
+   */
   async enterpriseGetDefaultTeamSettings(orgId: string): Promise<{response: Response; body: TeamSettings}> {
     const localVarPath = '/v2/orgs/{org_id}/default_teams_settings'.replace(
       '{' + 'org_id' + '}',
@@ -2797,6 +3294,11 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get team settings
+   * @param teamId The id of a Team.
+   */
   async enterpriseGetTeamSettings(teamId: string): Promise<{response: Response; body: TeamSettings}> {
     const localVarPath = '/v2/teams_settings/{team_id}'.replace(
       '{' + 'team_id' + '}',
@@ -2825,6 +3327,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Update team settings
+   * @param teamId The id of a Team.
+   * @param teamSettingsChanges
+   */
   async enterpriseUpdateTeamSettings(
     teamId: string,
     teamSettingsChanges: TeamSettingsChanges,
@@ -2856,6 +3364,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Create team
+   * @param orgId The id of an Organization.
+   * @param createTeamRequest
+   */
   async enterpriseCreateTeam(
     orgId: string,
     createTeamRequest: CreateTeamRequest,
@@ -2884,6 +3398,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Delete team
+   * @param orgId The id of an Organization.
+   * @param teamId The id of a Team.
+   */
   async enterpriseDeleteTeam(orgId: string, teamId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
@@ -2915,6 +3435,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Get team
+   * @param orgId The id of an Organization.
+   * @param teamId The id of a Team.
+   */
   async enterpriseGetTeam(orgId: string, teamId: string): Promise<{response: Response; body: Team}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
@@ -2946,6 +3472,14 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary List teams
+   * @param orgId The id of an Organization.
+   * @param limit Limit of teams in result list
+   * @param cursor Team id that will be used to find team next to this id in the sorted list
+   * @param filterQuery Filtering query
+   */
   async enterpriseGetTeams(
     orgId: string,
     query?: {
@@ -2992,6 +3526,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates an existing team.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=\"blank\" href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
+   * @summary Update team
+   * @param orgId The id of an Organization.
+   * @param teamId The id of a Team.
+   * @param teamChanges
+   */
   async enterpriseUpdateTeam(
     orgId: string,
     teamId: string,
@@ -3027,6 +3568,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Adds a text item to a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Create text item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
+   * @param textCreateRequest
+   */
   async createTextItem(
     boardId: string,
     textCreateRequest: TextCreateRequest,
@@ -3058,6 +3605,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Deletes a text item from the board<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 3</a><br/>
+   * @summary Delete text item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to delete the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to delete.
+   */
   async deleteTextItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
     const localVarPath = '/v2/boards/{board_id}/texts/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -3089,6 +3642,12 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Retrieves information for a specific text item on a board.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:read</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 1</a><br/>
+   * @summary Get text item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) from which you want to retrieve a specific item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getTextItem(boardId: string, itemId: string): Promise<{response: Response; body: TextItem}> {
     const localVarPath = '/v2/boards/{board_id}/texts/{item_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
@@ -3120,6 +3679,13 @@ export class MiroApi {
     return {response, body}
   }
 
+  /**
+   * Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=\"blank\" href=\"/reference/scopes\">boards:write</a> <br/><h3>Rate limiting</h3> <a target=\"blank\" href=\"/reference/ratelimiting\">Level 2</a><br/>
+   * @summary Update text item
+   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to update the item.
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to update.
+   * @param textUpdateRequest
+   */
   async updateTextItem(
     boardId: string,
     itemId: string,
