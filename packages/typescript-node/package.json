@@ -6,6 +6,9 @@
         "type": "git",
         "url": "https://github.com/miroapp/api-clients.git"
     },
+    "publishConfig": {
+        "access": "public"
+    },
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
