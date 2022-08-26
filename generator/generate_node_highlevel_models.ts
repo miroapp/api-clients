@@ -10,13 +10,13 @@ export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object'} {
     /** @hidden */
     _headParams: [${model.props.map((_) => `string`).join(', ')}]
 
-    constructor(api: MiroApi, headParams: ${name}['_headParams'], rest: ${
+    constructor(api: MiroApi, headParams: ${name}['_headParams'], props: ${
       model.extendedModel ? `KeepBase<Base${name}>` : 'object'
     }) {
         super()
         this._api = api
         this._headParams = headParams
-        Object.assign(this, rest)
+        Object.assign(this, props)
     }
 
     ${renderMethods(models[model.inherits], model.props)}
@@ -34,7 +34,7 @@ export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object'} {
 
         return `
 /** {@inheritDoc api!MiroApi.${m.method}} */
-async ${m.alias}(...rest: GetParameters${m.topLevelCall ? 1 : props.length}<MiroApi['${m.method}']>): Promise<${
+async ${m.alias}(...args: GetParameters${m.topLevelCall ? 1 : props.length}<MiroApi['${m.method}']>): Promise<${
           returns ? returns : 'void'
         }${m.paginated ? '[]' : ''}> {
 ${renderFunctionBody(m, props)}
@@ -47,7 +47,7 @@ ${renderFunctionBody(m, props)}
   function renderApiCall(m: Model['methods'][number], props: string[]) {
     return `await this._api.${m.method}(${
       m.topLevelCall ? `this._headParams[${props.length - 1}]` : '...this._headParams'
-    }, ...rest)`
+    }, ...args)`
   }
 
   function renderFunctionBody(m: Model['methods'][number], props: string[]) {
@@ -74,7 +74,7 @@ ${renderFunctionBody(m, props)}
     return returnModel.props
       .map((_, i, {length}) => {
         if (i === length - 1) return `toString(result.${returnModel.id})`
-        return !props[i] ? `rest[${i}]` : `this._headParams[${i}]`
+        return !props[i] ? `args[${i}]` : `this._headParams[${i}]`
       })
       .join(',')
   }
