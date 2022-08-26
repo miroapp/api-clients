@@ -7,6 +7,7 @@ const MODELS = {
     },
     methods: [
       'createBoard',
+      {method: 'getSpecificBoard', alias: 'getBoard'},
       {method: 'getBoards', returns: 'Board', paginated: 'data'},
       {
         method: 'enterpriseGetOrganization',

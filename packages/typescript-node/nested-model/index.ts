@@ -44,6 +44,13 @@ export class Api extends BaseApi {
     return new Board(this._api, [toString(result.id)], result)
   }
 
+  /** {@inheritDoc api!MiroApi.getSpecificBoard} */
+  async getBoard(...rest: GetParameters0<MiroApi['getSpecificBoard']>): Promise<Board> {
+    const result = (await this._api.getSpecificBoard(...this._headParams, ...rest)).body
+
+    return new Board(this._api, [toString(result.id)], result)
+  }
+
   /** {@inheritDoc api!MiroApi.getBoards} */
   async getBoards(...rest: GetParameters0<MiroApi['getBoards']>): Promise<Board[]> {
     const result = (await this._api.getBoards(...this._headParams, ...rest)).body
