@@ -3,7 +3,7 @@ const MODELS = {
     props: [],
     extendedModel: {
       name: 'Api',
-      path: '../nested-model/Api',
+      path: '../highlevel/Api',
     },
     inherits: 'Board',
     methods: [
@@ -69,7 +69,7 @@ const MODELS = {
     props: ['orgId', 'teamId'],
     extendedModel: {
       name: 'Team',
-      path: '../nested-model/Team',
+      path: '../highlevel/Team',
     },
     methods: [
       {method: 'enterpriseDeleteTeam', alias: 'deleteTeam'},
@@ -161,7 +161,7 @@ const MODELS = {
     props: ['id'],
     extendedModel: {
       name: 'Board',
-      path: '../nested-model/Board',
+      path: '../highlevel/Board',
     },
     methods: [
       'createAppCardItem',

@@ -1,5 +1,5 @@
 {
-  "entryPoints": ["api.ts", "index.ts", "nested-model/*"],
+  "entryPoints": ["api.ts", "index.ts", "highlevel/*"],
   "gitRevision": "main",
   "markedOptions": {
     "baseUrl": "https://developers.miro.com/"

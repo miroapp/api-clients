@@ -1,5 +1,5 @@
 import {Miro, Opts, State, Storage} from '../index'
-import {Api} from '../nested-model'
+import {Api} from '../highlevel'
 
 describe('Entrypoint test', () => {
   describe('constructor', () => {

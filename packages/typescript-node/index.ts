@@ -2,7 +2,7 @@ import assert from 'assert'
 import fs from 'fs'
 import fetch from 'node-fetch'
 import {HttpError, MiroApi} from './api'
-import {Api as Models} from './nested-model/index'
+import {Api as Models} from './highlevel/index'
 
 const defaultBasePath = 'https://api.miro.com'
 
