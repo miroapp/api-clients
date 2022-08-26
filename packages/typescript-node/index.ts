@@ -222,7 +222,7 @@ function getDefaultOpts() {
 import {Api as HighlevelApi} from './highlevel/index'
 
 export class MiroApi extends HighlevelApi {
-  constructor (accessToken: string | (() => Promise<string>), basePath: string = defaultBasePath, logger?: Logger) {
+  constructor(accessToken: string | (() => Promise<string>), basePath: string = defaultBasePath, logger?: Logger) {
     super(new MiroLowlevelApi(accessToken, basePath, logger), [], {})
   }
 }
