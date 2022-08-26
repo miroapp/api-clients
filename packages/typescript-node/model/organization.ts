@@ -78,5 +78,6 @@ export namespace Organization {
     IntegrationOrg = <any>'INTEGRATION_ORG',
     Professional2022 = <any>'PROFESSIONAL_2022',
     EduTeamOrg = <any>'EDU_TEAM_ORG',
+    FreeTeamOrg = <any>'FREE_TEAM_ORG',
   }
 }

@@ -101,6 +101,7 @@ model/modifiedBy.ts
 model/modifiedByPlatformContainers.ts
 model/organization.ts
 model/organizationMember.ts
+model/organizationMembersSearchByEmailsResponse.ts
 model/organizationMembersSearchQuery.ts
 model/organizationMembersSearchResponse.ts
 model/pageLinks.ts
