@@ -20,8 +20,9 @@ export class MiroApi {
     accessToken: string|(() => Promise<string>)
     basePath: string
     logger?: Logger
+    clientId?: string
 
-    constructor(accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: Logger) {
+    constructor(accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: Logger, clientId?: string) {
         this.accessToken = accessToken
         this.basePath = basePath
         this.logger = logger
@@ -90,7 +91,8 @@ export class MiroApi {
             undefined,
             {{/bodyParam}}
 
-            this.logger
+            this.logger,
+            this.clientId
         )
 
 
@@ -116,11 +118,12 @@ export class HttpError extends Error {
     }
 }
 
-export async function makeJsonRequest(token: string, method: string, url: URL, body?: string, logger?: (...thing: any) => void) {
+export async function makeJsonRequest(token: string, method: string, url: URL, body?: string, logger?: (...thing: any) => void, appId: string = process.env.MIRO_CLIENT_ID || "unknown") {
     const options = {
         method,
         headers: {
             'Content-Type': 'application/json',
+            'User-Agent': 'miro-node:{{npmVersion}} app_id:${appId}',
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`
         },

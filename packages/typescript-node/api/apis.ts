@@ -99,8 +99,14 @@ export class MiroApi {
   accessToken: string | (() => Promise<string>)
   basePath: string
   logger?: Logger
+  clientId?: string
 
-  constructor(accessToken: string | (() => Promise<string>), basePath: string = defaultBasePath, logger?: Logger) {
+  constructor(
+    accessToken: string | (() => Promise<string>),
+    basePath: string = defaultBasePath,
+    logger?: Logger,
+    clientId?: string,
+  ) {
     this.accessToken = accessToken
     this.basePath = basePath
     this.logger = logger
@@ -136,6 +142,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(appCardCreateRequest, 'AppCardCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'AppCardItem')
@@ -173,6 +180,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -210,6 +218,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'AppCardItem')
@@ -252,6 +261,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(appCardUpdateRequest, 'AppCardUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'AppCardItem')
@@ -305,6 +315,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardDataClassificationLabel')
@@ -360,6 +371,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(dataClassificationLabelId, 'DataClassificationLabelId')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardDataClassificationLabel')
@@ -397,6 +409,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'DataClassificationOrganizationSettings')
@@ -448,6 +461,7 @@ export class MiroApi {
       ),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'UpdateBoardsDataClassificationLabel')
@@ -492,6 +506,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'DataClassificationTeamSettings')
@@ -538,6 +553,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(updateTeamSettingsRequest, 'UpdateTeamSettingsRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'DataClassificationTeamSettings')
@@ -588,6 +604,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardMembersPagedResponse')
@@ -628,6 +645,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardMemberWithLinks')
@@ -665,6 +683,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -702,6 +721,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(boardMembersInvite, 'BoardMembersInvite')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'InvitationResult')
@@ -744,6 +764,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(boardMemberChanges, 'BoardMemberChanges')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardMemberWithLinks')
@@ -784,6 +805,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(boardChanges, 'BoardChanges')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinks')
@@ -810,6 +832,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(boardChanges, 'BoardChanges')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinks')
@@ -840,6 +863,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -913,6 +937,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardsPagedResponse')
@@ -943,6 +968,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinks')
@@ -974,6 +1000,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(boardChanges, 'BoardChanges')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinks')
@@ -1011,6 +1038,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(cardCreateRequest, 'CardCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'CardItem')
@@ -1048,6 +1076,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -1085,6 +1114,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'CardItem')
@@ -1127,6 +1157,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(cardUpdateRequest, 'CardUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'CardItem')
@@ -1164,6 +1195,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(connectorCreationData, 'ConnectorCreationData')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ConnectorWithLinks')
@@ -1201,6 +1233,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -1238,6 +1271,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ConnectorWithLinks')
@@ -1288,6 +1322,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ConnectorsCursorPaged')
@@ -1330,6 +1365,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(connectorChangesData, 'ConnectorChangesData')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ConnectorWithLinks')
@@ -1367,6 +1403,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(documentCreateRequest, 'DocumentCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
@@ -1404,6 +1441,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -1441,6 +1479,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
@@ -1483,6 +1522,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(documentUpdateRequest, 'DocumentUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
@@ -1520,6 +1560,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(embedCreateRequest, 'EmbedCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'EmbedItem')
@@ -1557,6 +1598,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -1594,6 +1636,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'EmbedItem')
@@ -1636,6 +1679,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(embedUpdateRequest, 'EmbedUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'EmbedItem')
@@ -1673,6 +1717,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(frameCreateRequest, 'FrameCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'FrameItem')
@@ -1710,6 +1755,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -1747,6 +1793,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'FrameItem')
@@ -1789,6 +1836,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(frameUpdateRequest, 'FrameUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'FrameItem')
@@ -1826,6 +1874,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(imageCreateRequest, 'ImageCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
@@ -1863,6 +1912,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -1900,6 +1950,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
@@ -1942,6 +1993,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(imageUpdateRequest, 'ImageUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
@@ -1979,6 +2031,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -2036,6 +2089,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItemCursorPaged')
@@ -2106,6 +2160,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItemCursorPaged')
@@ -2143,6 +2198,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItem')
@@ -2185,6 +2241,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(genericItemUpdate, 'GenericItemUpdate')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItem')
@@ -2215,6 +2272,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'Organization')
@@ -2255,6 +2313,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'OrganizationMember')
@@ -2298,6 +2357,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'EnterpriseGetOrganizationMembers200Response')
@@ -2335,6 +2395,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(shapeCreateRequest, 'ShapeCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ShapeItem')
@@ -2372,6 +2433,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -2409,6 +2471,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ShapeItem')
@@ -2451,6 +2514,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(shapeUpdateRequest, 'ShapeUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ShapeItem')
@@ -2488,6 +2552,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(stickyNoteCreateRequest, 'StickyNoteCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'StickyNoteItem')
@@ -2525,6 +2590,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -2562,6 +2628,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'StickyNoteItem')
@@ -2604,6 +2671,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(stickyNoteUpdateRequest, 'StickyNoteUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'StickyNoteItem')
@@ -2655,6 +2723,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -2692,6 +2761,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(tagCreateRequest, 'TagCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TagWithLinks')
@@ -2729,6 +2799,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -2790,6 +2861,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ItemPagedResponse')
@@ -2827,6 +2899,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TagWithLinks')
@@ -2877,6 +2950,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TagsPagedResponse')
@@ -2914,6 +2988,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'GetTagsResponse')
@@ -2965,6 +3040,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -3007,6 +3083,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(tagUpdateRequest, 'TagUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TagWithLinks')
@@ -3054,6 +3131,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -3101,6 +3179,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamMember')
@@ -3163,6 +3242,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'Array<TeamMember>')
@@ -3205,6 +3285,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(teamMemberInvite, 'TeamMemberInvite')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'InvitationResult')
@@ -3254,6 +3335,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(teamMemberChanges, 'TeamMemberChanges')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamMember')
@@ -3287,6 +3369,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamSettings')
@@ -3320,6 +3403,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamSettings')
@@ -3357,6 +3441,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(teamSettingsChanges, 'TeamSettingsChanges')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamSettings')
@@ -3391,6 +3476,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(createTeamRequest, 'CreateTeamRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'Team')
@@ -3428,6 +3514,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -3465,6 +3552,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'Team')
@@ -3519,6 +3607,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'Array<Team>')
@@ -3561,6 +3650,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(teamChanges, 'TeamChanges')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'Team')
@@ -3598,6 +3688,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(textCreateRequest, 'TextCreateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TextItem')
@@ -3635,6 +3726,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
@@ -3672,6 +3764,7 @@ export class MiroApi {
       undefined,
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TextItem')
@@ -3714,6 +3807,7 @@ export class MiroApi {
       JSON.stringify(ObjectSerializer.serialize(textUpdateRequest, 'TextUpdateRequest')),
 
       this.logger,
+      this.clientId,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TextItem')
@@ -3735,11 +3829,13 @@ export async function makeJsonRequest(
   url: URL,
   body?: string,
   logger?: (...thing: any) => void,
+  appId: string = process.env.MIRO_CLIENT_ID || 'unknown',
 ) {
   const options = {
     method,
     headers: {
       'Content-Type': 'application/json',
+      'User-Agent': 'miro-node:0.0.1-alpha.6 app_id:${appId}',
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
