@@ -29,11 +29,11 @@ export class Hello extends Object {
     /** @hidden */
     _headParams: []
 
-    constructor(api: MiroApi, headParams: Hello['_headParams'], rest: object) {
+    constructor(api: MiroApi, headParams: Hello['_headParams'], props: object) {
         super()
         this._api = api
         this._headParams = headParams
-        Object.assign(this, rest)
+        Object.assign(this, props)
     }
 }
 `,
@@ -72,18 +72,18 @@ export class Hello extends Object {
   /** @hidden */
   _headParams: []
 
-  constructor(api: MiroApi, headParams: Hello['_headParams'], rest: object) {
+  constructor(api: MiroApi, headParams: Hello['_headParams'], props: object) {
     super()
     this._api = api
     this._headParams = headParams
-    Object.assign(this, rest)
+    Object.assign(this, props)
   }
 
   /** {@inheritDoc api!MiroApi.getSomeItem} */
   async getItem(
-    ...rest: GetParameters0<MiroApi["getSomeItem"]>
+    ...args: GetParameters0<MiroApi["getSomeItem"]>
   ): Promise<Item> {
-    const result = (await this._api.getSomeItem(...this._headParams, ...rest))
+    const result = (await this._api.getSomeItem(...this._headParams, ...args))
       .body;
 
     return new Item(this._api, [], result);
@@ -99,12 +99,12 @@ export class Item extends Object {
   constructor(
     api: MiroApi,
     headParams: Item["_headParams"],
-    rest: object
+    props: object
   ) {
     super();
     this._api = api;
     this._headParams = headParams;
-    Object.assign(this, rest);
+    Object.assign(this, props);
   }
 }
 `,
