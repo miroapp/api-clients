@@ -5,6 +5,7 @@ const MODELS = {
       name: 'Api',
       path: '../nested-model/Api',
     },
+    inherits: 'Board',
     methods: [
       'createBoard',
       {method: 'getSpecificBoard', alias: 'getBoard'},
@@ -456,6 +457,7 @@ export interface SimpleModel {
     name: string
     path: string
   }
+  inherits?: ModelName
   methods: Array<
     | string
     | {
@@ -475,6 +477,7 @@ export interface Model {
     name: string
     path: string
   }
+  inherits?: ModelName
   methods: Array<{
     method: string
     alias: string
@@ -497,6 +500,7 @@ export function normalizeTheModel(model: SimpleModel): Model {
     id: model.id || 'id',
     props: model.props || [],
     extendedModel: model.extendedModel,
+    inherits: model.inherits,
     methods: model.methods.map((methodConfig) => {
       const method = typeof methodConfig === 'string' ? {method: methodConfig} : methodConfig
       const alias = method.alias || method.method

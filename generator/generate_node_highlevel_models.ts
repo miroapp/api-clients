@@ -19,33 +19,39 @@ export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object'} {
         Object.assign(this, rest)
     }
 
-${model.methods
-  .map((m) => {
-    const returns = m.returns
+    ${renderMethods(models[model.inherits], model.props)}
 
-    return `
-    /** {@inheritDoc api!MiroApi.${m.method}} */
-    async ${m.alias}(...rest: GetParameters${m.topLevelCall ? 1 : model.props.length}<MiroApi['${
-      m.method
-    }']>): Promise<${returns ? returns : 'void'}${m.paginated ? '[]' : ''}> {
-        ${renderFunctionBody(m, model)}
-    }
-`
-  })
-  .join('\n')}
-
+    ${renderMethods(model, model.props)}
 }
 `
   }
 
-  function renderApiCall(m: Model['methods'][number], model: Model) {
+  function renderMethods(model?: Model, props?: string[]) {
+    if (!model) return ''
+    return model.methods
+      .map((m) => {
+        const returns = m.returns
+
+        return `
+/** {@inheritDoc api!MiroApi.${m.method}} */
+async ${m.alias}(...rest: GetParameters${m.topLevelCall ? 1 : props.length}<MiroApi['${m.method}']>): Promise<${
+          returns ? returns : 'void'
+        }${m.paginated ? '[]' : ''}> {
+${renderFunctionBody(m, props)}
+}
+`
+      })
+      .join('\n')
+  }
+
+  function renderApiCall(m: Model['methods'][number], props: string[]) {
     return `await this._api.${m.method}(${
-      m.topLevelCall ? `this._headParams[${model.props.length - 1}]` : '...this._headParams'
+      m.topLevelCall ? `this._headParams[${props.length - 1}]` : '...this._headParams'
     }, ...rest)`
   }
 
-  function renderFunctionBody(m: Model['methods'][number], model: Model) {
-    const apiCall = renderApiCall(m, model)
+  function renderFunctionBody(m: Model['methods'][number], props: string[]) {
+    const apiCall = renderApiCall(m, props)
     const returns = m.returns
     if (!returns) return apiCall
 
@@ -58,19 +64,26 @@ ${model.methods
 
         ${m.paginated ? `return ${paginatedData} ? ${paginatedData}.map(result => { ` : ''}
 
-        ${renderReturnValue(returns, returnModel)}
+        ${renderReturnValue(returns, returnModel, props)}
 
         ${m.paginated ? '}) : []' : ''}
 `
   }
 
-  function renderReturnValue(returns: string | number, returnModel: Model) {
+  function renderModelContructorArgs(returnModel: Model, props: string[]): string {
+    return returnModel.props
+      .map((_, i, {length}) => {
+        if (i === length - 1) return `toString(result.${returnModel.id})`
+        return !props[i] ? `rest[${i}]` : `this._headParams[${i}]`
+      })
+      .join(',')
+  }
+
+  function renderReturnValue(returns: string | number, returnModel: Model, props: string[]) {
     return `
         return new ${returns} (
             this._api,
-            [${returnModel.props.map((_, i, {length}) =>
-              i === length - 1 ? `toString(result.${returnModel.id})` : `this._headParams[${i}]`,
-            )}],
+            [${renderModelContructorArgs(returnModel, props)}],
             result
         )
 `
