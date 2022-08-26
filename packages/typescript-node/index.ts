@@ -1,7 +1,7 @@
 import assert from 'assert'
 import fs from 'fs'
 import fetch from 'node-fetch'
-import {HttpError, MiroApi} from './api'
+import {HttpError, Logger, MiroApi as MiroLowlevelApi} from './api'
 import {Api as Models} from './highlevel/index'
 
 const defaultBasePath = 'https://api.miro.com'
@@ -40,8 +40,8 @@ export class Miro {
   /**
    * Returns an instance of the low level Miro API for the given user id
    */
-  api(userId: ExternalUserId): MiroApi {
-    return new MiroApi(async () => await this.getAccessToken(userId), undefined, this.logger)
+  api(userId: ExternalUserId): MiroLowlevelApi {
+    return new MiroLowlevelApi(async () => await this.getAccessToken(userId), undefined, this.logger)
   }
 
   /**
@@ -219,5 +219,14 @@ function getDefaultOpts() {
   }
 }
 
+import {Api as HighlevelApi} from './highlevel/index'
+
+export class MiroApi extends HighlevelApi {
+  constructor (accessToken: string | (() => Promise<string>), basePath: string = defaultBasePath, logger?: Logger) {
+    super(new MiroLowlevelApi(accessToken, basePath, logger), [], {})
+  }
+}
+
+export {MiroApi as MiroLowlevelApi} from './api'
+
 export default Miro
-export {MiroApi} from './api'
