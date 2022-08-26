@@ -161,7 +161,7 @@ const MODELS = {
     props: ['id'],
     extendedModel: {
       name: 'Board',
-      path: '../model/board',
+      path: '../nested-model/Board',
     },
     methods: [
       'createAppCardItem',

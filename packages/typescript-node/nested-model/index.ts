@@ -9,7 +9,7 @@ import {BoardDataClassificationLabel as BaseBoardDataClassification} from './../
 import {DataClassificationOrganizationSettings as BaseDataClassification} from './../model/dataClassificationOrganizationSettings'
 import {TeamMember as BaseTeamMember} from './../model/teamMember'
 import {TeamSettings as BaseTeamSettings} from './../model/teamSettings'
-import {Board as BaseBoard} from './../model/board'
+import {Board as BaseBoard} from './../nested-model/Board'
 import {BoardMember as BaseBoardMember} from './../model/boardMember'
 import {GenericItem as BaseItem} from './../model/genericItem'
 import {AppCardItem as BaseAppCardItem} from './../model/appCardItem'
