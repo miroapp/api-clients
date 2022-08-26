@@ -68,14 +68,14 @@ for await (const board of api.getAllBoards()) {
 }
 ```
 
-### Using lowlevel MiroApi directly
+### Using stateless MiroApi directly
 
 Besides the high level stateful Miro client the library also exposes a stateless low level client:
 
 ```typescript
 import {MiroApi} from './index.ts'
 
-const api = MiroApi('ACCESS_TOKEN')
+const api = new MiroApi('ACCESS_TOKEN')
 
 const boards = await api.getBoards()
 ```
