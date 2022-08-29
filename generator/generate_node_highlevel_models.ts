@@ -2,18 +2,19 @@ import {Model, getModels} from './modelDefinition'
 
 export function run(models: Record<string, Model>) {
   function renderModel(name: string, model: Model): string {
+    const isLocal = !model.extendedModel?.path
+    const extendedModelName = model.extendedModel?.path ? `Base${name}` : model.extendedModel.name
+
     return `
 
-export class ${name} extends ${model.extendedModel ? `Base${name}` : 'Object'} {
+export class ${name} extends ${extendedModelName} {
     /** @hidden */
     _api: MiroApi
     /** @hidden */
     _headParams: [${model.props.map((_) => `string`).join(', ')}]
 
-    constructor(api: MiroApi, headParams: ${name}['_headParams'], props: ${
-      model.extendedModel ? `KeepBase<Base${name}>` : 'object'
-    }) {
-        super()
+    constructor(api: MiroApi, headParams: ${name}['_headParams'], props: ${`KeepBase<${extendedModelName}>`}) {
+        super(${isLocal ? 'api, headParams, props' : ''})
         this._api = api
         this._headParams = headParams
         Object.assign(this, props)
@@ -97,7 +98,7 @@ import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBas
 ${Object.keys(models)
   .map((name) => {
     const extendedModel = models[name].extendedModel
-    if (!extendedModel) return ''
+    if (!extendedModel?.path) return ''
     return `import { ${extendedModel.name} as Base${name}}  from './${extendedModel.path}';`
   })
   .join('\n')}

@@ -17,8 +17,9 @@ export class PositionPlatformTags {
   /**
    * Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported. Possible values: `center`
    */
-  'origin'?: PositionPlatformTags.OriginEnum = PositionPlatformTags.OriginEnum.Center
-  'relativeTo'?: PositionPlatformTags.RelativeToEnum
+  'origin'?: string | typeof PositionPlatformTags.OriginEnum[keyof typeof PositionPlatformTags.OriginEnum] =
+    PositionPlatformTags.OriginEnum.Center
+  'relativeTo'?: string | typeof PositionPlatformTags.RelativeToEnum[keyof typeof PositionPlatformTags.RelativeToEnum]
   /**
    * X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. The center point of the board has `x: 0` and `y: 0` coordinates.
    */
@@ -62,11 +63,11 @@ export class PositionPlatformTags {
 }
 
 export namespace PositionPlatformTags {
-  export enum OriginEnum {
-    Center = <any>'center',
-  }
-  export enum RelativeToEnum {
-    CanvasCenter = <any>'canvas_center',
-    ParentTopLeft = <any>'parent_top_left',
-  }
+  export const OriginEnum = {
+    Center: 'center',
+  } as const
+  export const RelativeToEnum = {
+    CanvasCenter: 'canvas_center',
+    ParentTopLeft: 'parent_top_left',
+  } as const
 }

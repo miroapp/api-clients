@@ -1,3 +1,5 @@
+import {WidgetData} from '../model/widgetData'
+
 /** @hidden */
 export function toString(id: number | string | undefined) {
   return id ? id.toString() : ''
@@ -37,6 +39,10 @@ export type GetParameters3<Method extends (p1: any, p2: any, p3: any, ...rest: a
   ? Rest
   : never
 
-export type KeepBase<T> = {
-  [P in keyof Omit<T, '_api' | '_headParams'> as T[P] extends Function ? never : P]: T[P]
-}
+type DeepPartial<T> = T extends object
+  ? {
+      [P in keyof T]?: T[P] extends string ? string : DeepPartial<T[P]>
+    }
+  : T
+
+export type KeepBase<T> = DeepPartial<T>

@@ -44,7 +44,7 @@ export class WidgetDataPlatformTags {
   /**
    * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board. Possible values: `inline`, `modal`
    */
-  'mode'?: WidgetDataPlatformTags.ModeEnum
+  'mode'?: string | typeof WidgetDataPlatformTags.ModeEnum[keyof typeof WidgetDataPlatformTags.ModeEnum]
   /**
    * Name of the content\'s provider.
    */
@@ -80,19 +80,22 @@ export class WidgetDataPlatformTags {
   /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`. Possible values: `disconnected`, `connected`, `disabled`
    */
-  'status'?: WidgetDataPlatformTags.StatusEnum
+  'status'?: string | typeof WidgetDataPlatformTags.StatusEnum[keyof typeof WidgetDataPlatformTags.StatusEnum]
   /**
    * Defines the geometric shape of the sticky note and aspect ratio for its dimensions. Possible values: `square`, `rectangle`
    */
-  'shape'?: WidgetDataPlatformTags.ShapeEnum = WidgetDataPlatformTags.ShapeEnum.Square
+  'shape'?: string | typeof WidgetDataPlatformTags.ShapeEnum[keyof typeof WidgetDataPlatformTags.ShapeEnum] =
+    WidgetDataPlatformTags.ShapeEnum.Square
   /**
    * Only custom frames are supported at the moment. Possible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`
    */
-  'format'?: WidgetDataPlatformTags.FormatEnum = WidgetDataPlatformTags.FormatEnum.Custom
+  'format'?: string | typeof WidgetDataPlatformTags.FormatEnum[keyof typeof WidgetDataPlatformTags.FormatEnum] =
+    WidgetDataPlatformTags.FormatEnum.Custom
   /**
    * Only free form frames are supported at the moment. Possible values: `freeform`, `heap`, `grid`, `rows`, `columns`
    */
-  'type'?: WidgetDataPlatformTags.TypeEnum = WidgetDataPlatformTags.TypeEnum.Freeform
+  'type'?: string | typeof WidgetDataPlatformTags.TypeEnum[keyof typeof WidgetDataPlatformTags.TypeEnum] =
+    WidgetDataPlatformTags.TypeEnum.Freeform
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -193,35 +196,35 @@ export class WidgetDataPlatformTags {
 }
 
 export namespace WidgetDataPlatformTags {
-  export enum ModeEnum {
-    Inline = <any>'inline',
-    Modal = <any>'modal',
-  }
-  export enum StatusEnum {
-    Disconnected = <any>'disconnected',
-    Connected = <any>'connected',
-    Disabled = <any>'disabled',
-  }
-  export enum ShapeEnum {
-    Square = <any>'square',
-    Rectangle = <any>'rectangle',
-  }
-  export enum FormatEnum {
-    Custom = <any>'custom',
-    Desktop = <any>'desktop',
-    Phone = <any>'phone',
-    Tablet = <any>'tablet',
-    A4 = <any>'a4',
-    Letter = <any>'letter',
-    Ratio1x1 = <any>'ratio_1x1',
-    Ratio4x3 = <any>'ratio_4x3',
-    Ratio16x9 = <any>'ratio_16x9',
-  }
-  export enum TypeEnum {
-    Freeform = <any>'freeform',
-    Heap = <any>'heap',
-    Grid = <any>'grid',
-    Rows = <any>'rows',
-    Columns = <any>'columns',
-  }
+  export const ModeEnum = {
+    Inline: 'inline',
+    Modal: 'modal',
+  } as const
+  export const StatusEnum = {
+    Disconnected: 'disconnected',
+    Connected: 'connected',
+    Disabled: 'disabled',
+  } as const
+  export const ShapeEnum = {
+    Square: 'square',
+    Rectangle: 'rectangle',
+  } as const
+  export const FormatEnum = {
+    Custom: 'custom',
+    Desktop: 'desktop',
+    Phone: 'phone',
+    Tablet: 'tablet',
+    A4: 'a4',
+    Letter: 'letter',
+    Ratio1x1: 'ratio_1x1',
+    Ratio4x3: 'ratio_4x3',
+    Ratio16x9: 'ratio_16x9',
+  } as const
+  export const TypeEnum = {
+    Freeform: 'freeform',
+    Heap: 'heap',
+    Grid: 'grid',
+    Rows: 'rows',
+    Columns: 'columns',
+  } as const
 }

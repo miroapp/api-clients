@@ -17,11 +17,15 @@ export class TeamCopyAccessLevelSettings {
   /**
    *  * \"anyone\":       Anyone with the board access can copy board content on newly created boards. * \"team_members\": Team members can copy board content on newly created boards. * \"team_editors\": Team members with editing rights can copy board content on newly created boards. * \"board_owner\":  Board owners only can copy board content on newly created boards.
    */
-  'copyAccessLevel'?: TeamCopyAccessLevelSettings.CopyAccessLevelEnum
+  'copyAccessLevel'?:
+    | string
+    | typeof TeamCopyAccessLevelSettings.CopyAccessLevelEnum[keyof typeof TeamCopyAccessLevelSettings.CopyAccessLevelEnum]
   /**
    *  * \"anyone\":       Team members and users outside team can be given permission to copy board content. * \"team_members\": Only team members can be given permission to copy board content.
    */
-  'copyAccessLevelLimitation'?: TeamCopyAccessLevelSettings.CopyAccessLevelLimitationEnum
+  'copyAccessLevelLimitation'?:
+    | string
+    | typeof TeamCopyAccessLevelSettings.CopyAccessLevelLimitationEnum[keyof typeof TeamCopyAccessLevelSettings.CopyAccessLevelLimitationEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -47,14 +51,14 @@ export class TeamCopyAccessLevelSettings {
 }
 
 export namespace TeamCopyAccessLevelSettings {
-  export enum CopyAccessLevelEnum {
-    Anyone = <any>'anyone',
-    TeamMembers = <any>'team_members',
-    TeamEditors = <any>'team_editors',
-    BoardOwner = <any>'board_owner',
-  }
-  export enum CopyAccessLevelLimitationEnum {
-    Anyone = <any>'anyone',
-    TeamMembers = <any>'team_members',
-  }
+  export const CopyAccessLevelEnum = {
+    Anyone: 'anyone',
+    TeamMembers: 'team_members',
+    TeamEditors: 'team_editors',
+    BoardOwner: 'board_owner',
+  } as const
+  export const CopyAccessLevelLimitationEnum = {
+    Anyone: 'anyone',
+    TeamMembers: 'team_members',
+  } as const
 }

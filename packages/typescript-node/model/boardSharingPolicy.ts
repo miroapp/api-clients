@@ -17,20 +17,25 @@ export class BoardSharingPolicy {
   /**
    * Defines the public-level access to the board. Possible values: `private`, `view`, `edit`, `comment`
    */
-  'access'?: BoardSharingPolicy.AccessEnum
+  'access'?: string | typeof BoardSharingPolicy.AccessEnum[keyof typeof BoardSharingPolicy.AccessEnum]
   /**
    * Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`, `no_access`
    */
-  'inviteToAccountAndBoardLinkAccess'?: BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum =
+  'inviteToAccountAndBoardLinkAccess'?:
+    | string
+    | typeof BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum[keyof typeof BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum] =
     BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum.NoAccess
   /**
    * Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value. Possible values: `private`, `view`, `comment`, `edit`
    */
-  'organizationAccess'?: BoardSharingPolicy.OrganizationAccessEnum = BoardSharingPolicy.OrganizationAccessEnum.Private
+  'organizationAccess'?:
+    | string
+    | typeof BoardSharingPolicy.OrganizationAccessEnum[keyof typeof BoardSharingPolicy.OrganizationAccessEnum] =
+    BoardSharingPolicy.OrganizationAccessEnum.Private
   /**
    * Defines the team-level access to the board. Possible values: `private`, `view`, `comment`, `edit`
    */
-  'teamAccess'?: BoardSharingPolicy.TeamAccessEnum
+  'teamAccess'?: string | typeof BoardSharingPolicy.TeamAccessEnum[keyof typeof BoardSharingPolicy.TeamAccessEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -66,31 +71,31 @@ export class BoardSharingPolicy {
 }
 
 export namespace BoardSharingPolicy {
-  export enum AccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-    Edit = <any>'edit',
-    Comment = <any>'comment',
-  }
-  export enum InviteToAccountAndBoardLinkAccessEnum {
-    Viewer = <any>'viewer',
-    Commenter = <any>'commenter',
-    Editor = <any>'editor',
-    Coowner = <any>'coowner',
-    Owner = <any>'owner',
-    Guest = <any>'guest',
-    NoAccess = <any>'no_access',
-  }
-  export enum OrganizationAccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-    Comment = <any>'comment',
-    Edit = <any>'edit',
-  }
-  export enum TeamAccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-    Comment = <any>'comment',
-    Edit = <any>'edit',
-  }
+  export const AccessEnum = {
+    Private: 'private',
+    View: 'view',
+    Edit: 'edit',
+    Comment: 'comment',
+  } as const
+  export const InviteToAccountAndBoardLinkAccessEnum = {
+    Viewer: 'viewer',
+    Commenter: 'commenter',
+    Editor: 'editor',
+    Coowner: 'coowner',
+    Owner: 'owner',
+    Guest: 'guest',
+    NoAccess: 'no_access',
+  } as const
+  export const OrganizationAccessEnum = {
+    Private: 'private',
+    View: 'view',
+    Comment: 'comment',
+    Edit: 'edit',
+  } as const
+  export const TeamAccessEnum = {
+    Private: 'private',
+    View: 'view',
+    Comment: 'comment',
+    Edit: 'edit',
+  } as const
 }

@@ -14,7 +14,8 @@ export class TagUpdateRequest {
   /**
    * [Fill color for the tag](https://developers.miro.com/reference/rest-api-tag-data-model) Possible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`
    */
-  'fillColor'?: TagUpdateRequest.FillColorEnum = TagUpdateRequest.FillColorEnum.Red
+  'fillColor'?: string | typeof TagUpdateRequest.FillColorEnum[keyof typeof TagUpdateRequest.FillColorEnum] =
+    TagUpdateRequest.FillColorEnum.Red
   /**
    * [Text of the tag](https://developers.miro.com/reference/rest-api-tag-data-model)
    */
@@ -44,18 +45,18 @@ export class TagUpdateRequest {
 }
 
 export namespace TagUpdateRequest {
-  export enum FillColorEnum {
-    Red = <any>'red',
-    LightGreen = <any>'light_green',
-    Cyan = <any>'cyan',
-    Yellow = <any>'yellow',
-    Magenta = <any>'magenta',
-    Green = <any>'green',
-    Blue = <any>'blue',
-    Gray = <any>'gray',
-    Violet = <any>'violet',
-    DarkGreen = <any>'dark_green',
-    DarkBlue = <any>'dark_blue',
-    Black = <any>'black',
-  }
+  export const FillColorEnum = {
+    Red: 'red',
+    LightGreen: 'light_green',
+    Cyan: 'cyan',
+    Yellow: 'yellow',
+    Magenta: 'magenta',
+    Green: 'green',
+    Blue: 'blue',
+    Gray: 'gray',
+    Violet: 'violet',
+    DarkGreen: 'dark_green',
+    DarkBlue: 'dark_blue',
+    Black: 'black',
+  } as const
 }

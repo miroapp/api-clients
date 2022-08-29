@@ -45,7 +45,8 @@ export class ConnectorWithLinks {
   /**
    * The path type of the connector line, defines curvature. Default: curved. Possible values: `straight`, `elbowed`, `curved`
    */
-  'shape'?: ConnectorWithLinks.ShapeEnum = ConnectorWithLinks.ShapeEnum.Curved
+  'shape'?: string | typeof ConnectorWithLinks.ShapeEnum[keyof typeof ConnectorWithLinks.ShapeEnum] =
+    ConnectorWithLinks.ShapeEnum.Curved
   'startItem'?: ItemConnectionWithLinks
   'style'?: ConnectorStyle
   /**
@@ -132,9 +133,9 @@ export class ConnectorWithLinks {
 }
 
 export namespace ConnectorWithLinks {
-  export enum ShapeEnum {
-    Straight = <any>'straight',
-    Elbowed = <any>'elbowed',
-    Curved = <any>'curved',
-  }
+  export const ShapeEnum = {
+    Straight: 'straight',
+    Elbowed: 'elbowed',
+    Curved: 'curved',
+  } as const
 }

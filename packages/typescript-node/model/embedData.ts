@@ -26,7 +26,7 @@ export class EmbedData {
   /**
    * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board. Possible values: `inline`, `modal`
    */
-  'mode'?: EmbedData.ModeEnum
+  'mode'?: string | typeof EmbedData.ModeEnum[keyof typeof EmbedData.ModeEnum]
   /**
    * Name of the content\'s provider.
    */
@@ -98,8 +98,8 @@ export class EmbedData {
 }
 
 export namespace EmbedData {
-  export enum ModeEnum {
-    Inline = <any>'inline',
-    Modal = <any>'modal',
-  }
+  export const ModeEnum = {
+    Inline: 'inline',
+    Modal: 'modal',
+  } as const
 }

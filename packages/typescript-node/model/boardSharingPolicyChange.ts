@@ -17,21 +17,29 @@ export class BoardSharingPolicyChange {
   /**
    * Defines the public-level access to the board. Possible values: `private`, `view`, `edit`, `comment`
    */
-  'access'?: BoardSharingPolicyChange.AccessEnum = BoardSharingPolicyChange.AccessEnum.Private
+  'access'?: string | typeof BoardSharingPolicyChange.AccessEnum[keyof typeof BoardSharingPolicyChange.AccessEnum] =
+    BoardSharingPolicyChange.AccessEnum.Private
   /**
    * Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access` regardless of the value that you assign for this parameter. Possible values: `viewer`, `commenter`, `editor`, `no_access`
    */
-  'inviteToAccountAndBoardLinkAccess'?: BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum =
+  'inviteToAccountAndBoardLinkAccess'?:
+    | string
+    | typeof BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum[keyof typeof BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum] =
     BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum.NoAccess
   /**
    * Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value. Possible values: `private`, `view`, `comment`, `edit`
    */
-  'organizationAccess'?: BoardSharingPolicyChange.OrganizationAccessEnum =
+  'organizationAccess'?:
+    | string
+    | typeof BoardSharingPolicyChange.OrganizationAccessEnum[keyof typeof BoardSharingPolicyChange.OrganizationAccessEnum] =
     BoardSharingPolicyChange.OrganizationAccessEnum.Private
   /**
    * Defines the team-level access to the board. Possible values: `private`, `view`, `comment`, `edit`
    */
-  'teamAccess'?: BoardSharingPolicyChange.TeamAccessEnum = BoardSharingPolicyChange.TeamAccessEnum.Private
+  'teamAccess'?:
+    | string
+    | typeof BoardSharingPolicyChange.TeamAccessEnum[keyof typeof BoardSharingPolicyChange.TeamAccessEnum] =
+    BoardSharingPolicyChange.TeamAccessEnum.Private
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -67,28 +75,28 @@ export class BoardSharingPolicyChange {
 }
 
 export namespace BoardSharingPolicyChange {
-  export enum AccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-    Edit = <any>'edit',
-    Comment = <any>'comment',
-  }
-  export enum InviteToAccountAndBoardLinkAccessEnum {
-    Viewer = <any>'viewer',
-    Commenter = <any>'commenter',
-    Editor = <any>'editor',
-    NoAccess = <any>'no_access',
-  }
-  export enum OrganizationAccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-    Comment = <any>'comment',
-    Edit = <any>'edit',
-  }
-  export enum TeamAccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-    Comment = <any>'comment',
-    Edit = <any>'edit',
-  }
+  export const AccessEnum = {
+    Private: 'private',
+    View: 'view',
+    Edit: 'edit',
+    Comment: 'comment',
+  } as const
+  export const InviteToAccountAndBoardLinkAccessEnum = {
+    Viewer: 'viewer',
+    Commenter: 'commenter',
+    Editor: 'editor',
+    NoAccess: 'no_access',
+  } as const
+  export const OrganizationAccessEnum = {
+    Private: 'private',
+    View: 'view',
+    Comment: 'comment',
+    Edit: 'edit',
+  } as const
+  export const TeamAccessEnum = {
+    Private: 'private',
+    View: 'view',
+    Comment: 'comment',
+    Edit: 'edit',
+  } as const
 }

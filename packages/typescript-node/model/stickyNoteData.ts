@@ -21,7 +21,8 @@ export class StickyNoteData {
   /**
    * Defines the geometric shape of the sticky note and aspect ratio for its dimensions. Possible values: `square`, `rectangle`
    */
-  'shape'?: StickyNoteData.ShapeEnum = StickyNoteData.ShapeEnum.Square
+  'shape'?: string | typeof StickyNoteData.ShapeEnum[keyof typeof StickyNoteData.ShapeEnum] =
+    StickyNoteData.ShapeEnum.Square
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -47,8 +48,8 @@ export class StickyNoteData {
 }
 
 export namespace StickyNoteData {
-  export enum ShapeEnum {
-    Square = <any>'square',
-    Rectangle = <any>'rectangle',
-  }
+  export const ShapeEnum = {
+    Square: 'square',
+    Rectangle: 'rectangle',
+  } as const
 }

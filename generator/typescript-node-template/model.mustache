@@ -18,7 +18,7 @@ export class {{classname}} {{#parent}}extends {{{.}}} {{/parent}}{
     * {{{.}}}
     */
 {{/description}}
-    '{{name}}'{{^required}}?{{/required}}: {{#isEnum}}{{{datatypeWithEnum}}}{{/isEnum}}{{^isEnum}}{{{dataType}}}{{#isNullable}} | null{{/isNullable}}{{/isEnum}}{{#defaultValue}} = {{#isEnum}}{{classname}}.{{/isEnum}}{{{.}}}{{/defaultValue}};
+    '{{name}}'{{^required}}?{{/required}}: {{#isEnum}}string | typeof {{{datatypeWithEnum}}}[keyof typeof {{{datatypeWithEnum}}}]{{/isEnum}}{{^isEnum}}{{{dataType}}}{{#isNullable}} | null{{/isNullable}}{{/isEnum}}{{#defaultValue}} = {{#isEnum}}{{classname}}.{{/isEnum}}{{{.}}}{{/defaultValue}};
 {{/vars}}
 
     {{#discriminator}}
@@ -59,13 +59,13 @@ export class {{classname}} {{#parent}}extends {{{.}}} {{/parent}}{
 export namespace {{classname}} {
 {{#vars}}
 {{#isEnum}}
-    export enum {{enumName}} {
+    export const {{enumName}} = {
         {{#allowableValues}}
         {{#enumVars}}
-        {{name}} = <any> {{{value}}}{{^-last}},{{/-last}}
+        {{name}}: {{{value}}}{{^-last}},{{/-last}}
         {{/enumVars}}
         {{/allowableValues}}
-    }
+    } as const
 {{/isEnum}}
 {{/vars}}
 }

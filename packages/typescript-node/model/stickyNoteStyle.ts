@@ -17,15 +17,17 @@ export class StickyNoteStyle {
   /**
    * Fill color for the sticky note. Default: `light_yellow`. Possible values: `gray`, `light_yellow`, `yellow`, `orange`, `light_green`, `green`, `dark_green`, `cyan`, `light_pink`, `pink`, `violet`, `red`, `light_blue`, `blue`, `dark_blue`, `black`
    */
-  'fillColor'?: StickyNoteStyle.FillColorEnum
+  'fillColor'?: string | typeof StickyNoteStyle.FillColorEnum[keyof typeof StickyNoteStyle.FillColorEnum]
   /**
    * Defines how the sticky note text is horizontally aligned. Default: `center`. Possible values: `left`, `right`, `center`
    */
-  'textAlign'?: StickyNoteStyle.TextAlignEnum
+  'textAlign'?: string | typeof StickyNoteStyle.TextAlignEnum[keyof typeof StickyNoteStyle.TextAlignEnum]
   /**
    * Defines how the sticky note text is vertically aligned. Default: `top`. Possible values: `top`, `middle`, `bottom`
    */
-  'textAlignVertical'?: StickyNoteStyle.TextAlignVerticalEnum
+  'textAlignVertical'?:
+    | string
+    | typeof StickyNoteStyle.TextAlignVerticalEnum[keyof typeof StickyNoteStyle.TextAlignVerticalEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -56,32 +58,32 @@ export class StickyNoteStyle {
 }
 
 export namespace StickyNoteStyle {
-  export enum FillColorEnum {
-    Gray = <any>'gray',
-    LightYellow = <any>'light_yellow',
-    Yellow = <any>'yellow',
-    Orange = <any>'orange',
-    LightGreen = <any>'light_green',
-    Green = <any>'green',
-    DarkGreen = <any>'dark_green',
-    Cyan = <any>'cyan',
-    LightPink = <any>'light_pink',
-    Pink = <any>'pink',
-    Violet = <any>'violet',
-    Red = <any>'red',
-    LightBlue = <any>'light_blue',
-    Blue = <any>'blue',
-    DarkBlue = <any>'dark_blue',
-    Black = <any>'black',
-  }
-  export enum TextAlignEnum {
-    Left = <any>'left',
-    Right = <any>'right',
-    Center = <any>'center',
-  }
-  export enum TextAlignVerticalEnum {
-    Top = <any>'top',
-    Middle = <any>'middle',
-    Bottom = <any>'bottom',
-  }
+  export const FillColorEnum = {
+    Gray: 'gray',
+    LightYellow: 'light_yellow',
+    Yellow: 'yellow',
+    Orange: 'orange',
+    LightGreen: 'light_green',
+    Green: 'green',
+    DarkGreen: 'dark_green',
+    Cyan: 'cyan',
+    LightPink: 'light_pink',
+    Pink: 'pink',
+    Violet: 'violet',
+    Red: 'red',
+    LightBlue: 'light_blue',
+    Blue: 'blue',
+    DarkBlue: 'dark_blue',
+    Black: 'black',
+  } as const
+  export const TextAlignEnum = {
+    Left: 'left',
+    Right: 'right',
+    Center: 'center',
+  } as const
+  export const TextAlignVerticalEnum = {
+    Top: 'top',
+    Middle: 'middle',
+    Bottom: 'bottom',
+  } as const
 }

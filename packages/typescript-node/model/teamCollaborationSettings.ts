@@ -17,7 +17,9 @@ export class TeamCollaborationSettings {
   /**
    *  * \"enabled\": Enable Co-owner role on boards and projects * \"disabled\": Disabled Co-owner role on boards and projects
    */
-  'coOwnerRole'?: TeamCollaborationSettings.CoOwnerRoleEnum
+  'coOwnerRole'?:
+    | string
+    | typeof TeamCollaborationSettings.CoOwnerRoleEnum[keyof typeof TeamCollaborationSettings.CoOwnerRoleEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,8 +40,8 @@ export class TeamCollaborationSettings {
 }
 
 export namespace TeamCollaborationSettings {
-  export enum CoOwnerRoleEnum {
-    Enabled = <any>'enabled',
-    Disabled = <any>'disabled',
-  }
+  export const CoOwnerRoleEnum = {
+    Enabled: 'enabled',
+    Disabled: 'disabled',
+  } as const
 }

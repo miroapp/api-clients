@@ -39,7 +39,7 @@ export class TeamMember {
   /**
    *      * \"non_team\":   External user, non-team user.     * \"member\":     Team member with full member permissions.     * \"admin\":      Admin of a team. Team member with permission to manage team.     * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
    */
-  'userRole'?: TeamMember.UserRoleEnum
+  'userRole'?: string | typeof TeamMember.UserRoleEnum[keyof typeof TeamMember.UserRoleEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -95,10 +95,10 @@ export class TeamMember {
 }
 
 export namespace TeamMember {
-  export enum UserRoleEnum {
-    NonTeam = <any>'non_team',
-    Member = <any>'member',
-    Admin = <any>'admin',
-    TeamGuest = <any>'team_guest',
-  }
+  export const UserRoleEnum = {
+    NonTeam: 'non_team',
+    Member: 'member',
+    Admin: 'admin',
+    TeamGuest: 'team_guest',
+  } as const
 }

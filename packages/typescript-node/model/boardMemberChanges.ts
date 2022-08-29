@@ -14,7 +14,8 @@ export class BoardMemberChanges {
   /**
    * Role of the board member. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`
    */
-  'role'?: BoardMemberChanges.RoleEnum = BoardMemberChanges.RoleEnum.Commenter
+  'role'?: string | typeof BoardMemberChanges.RoleEnum[keyof typeof BoardMemberChanges.RoleEnum] =
+    BoardMemberChanges.RoleEnum.Commenter
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -35,12 +36,12 @@ export class BoardMemberChanges {
 }
 
 export namespace BoardMemberChanges {
-  export enum RoleEnum {
-    Viewer = <any>'viewer',
-    Commenter = <any>'commenter',
-    Editor = <any>'editor',
-    Coowner = <any>'coowner',
-    Owner = <any>'owner',
-    Guest = <any>'guest',
-  }
+  export const RoleEnum = {
+    Viewer: 'viewer',
+    Commenter: 'commenter',
+    Editor: 'editor',
+    Coowner: 'coowner',
+    Owner: 'owner',
+    Guest: 'guest',
+  } as const
 }

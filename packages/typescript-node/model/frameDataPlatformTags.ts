@@ -17,7 +17,8 @@ export class FrameDataPlatformTags {
   /**
    * Only custom frames are supported at the moment. Possible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`
    */
-  'format'?: FrameDataPlatformTags.FormatEnum = FrameDataPlatformTags.FormatEnum.Custom
+  'format'?: string | typeof FrameDataPlatformTags.FormatEnum[keyof typeof FrameDataPlatformTags.FormatEnum] =
+    FrameDataPlatformTags.FormatEnum.Custom
   /**
    * Title of the frame. This title appears at the top of the frame.
    */
@@ -25,7 +26,8 @@ export class FrameDataPlatformTags {
   /**
    * Only free form frames are supported at the moment. Possible values: `freeform`, `heap`, `grid`, `rows`, `columns`
    */
-  'type'?: FrameDataPlatformTags.TypeEnum = FrameDataPlatformTags.TypeEnum.Freeform
+  'type'?: string | typeof FrameDataPlatformTags.TypeEnum[keyof typeof FrameDataPlatformTags.TypeEnum] =
+    FrameDataPlatformTags.TypeEnum.Freeform
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -56,22 +58,22 @@ export class FrameDataPlatformTags {
 }
 
 export namespace FrameDataPlatformTags {
-  export enum FormatEnum {
-    Custom = <any>'custom',
-    Desktop = <any>'desktop',
-    Phone = <any>'phone',
-    Tablet = <any>'tablet',
-    A4 = <any>'a4',
-    Letter = <any>'letter',
-    Ratio1x1 = <any>'ratio_1x1',
-    Ratio4x3 = <any>'ratio_4x3',
-    Ratio16x9 = <any>'ratio_16x9',
-  }
-  export enum TypeEnum {
-    Freeform = <any>'freeform',
-    Heap = <any>'heap',
-    Grid = <any>'grid',
-    Rows = <any>'rows',
-    Columns = <any>'columns',
-  }
+  export const FormatEnum = {
+    Custom: 'custom',
+    Desktop: 'desktop',
+    Phone: 'phone',
+    Tablet: 'tablet',
+    A4: 'a4',
+    Letter: 'letter',
+    Ratio1x1: 'ratio_1x1',
+    Ratio4x3: 'ratio_4x3',
+    Ratio16x9: 'ratio_16x9',
+  } as const
+  export const TypeEnum = {
+    Freeform: 'freeform',
+    Heap: 'heap',
+    Grid: 'grid',
+    Rows: 'rows',
+    Columns: 'columns',
+  } as const
 }

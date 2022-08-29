@@ -26,7 +26,7 @@ export class EmbedDataPlatformTags {
   /**
    * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board. Possible values: `inline`, `modal`
    */
-  'mode'?: EmbedDataPlatformTags.ModeEnum
+  'mode'?: string | typeof EmbedDataPlatformTags.ModeEnum[keyof typeof EmbedDataPlatformTags.ModeEnum]
   /**
    * Name of the content\'s provider.
    */
@@ -98,8 +98,8 @@ export class EmbedDataPlatformTags {
 }
 
 export namespace EmbedDataPlatformTags {
-  export enum ModeEnum {
-    Inline = <any>'inline',
-    Modal = <any>'modal',
-  }
+  export const ModeEnum = {
+    Inline: 'inline',
+    Modal: 'modal',
+  } as const
 }

@@ -24,7 +24,7 @@ export class TagWithLinks {
   /**
    * Background color of the tag. Possible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`
    */
-  'fillColor'?: TagWithLinks.FillColorEnum
+  'fillColor'?: string | typeof TagWithLinks.FillColorEnum[keyof typeof TagWithLinks.FillColorEnum]
   'links'?: SelfLink
   /**
    * Type of the object that is returned. In this case, type returns `tag`.
@@ -70,18 +70,18 @@ export class TagWithLinks {
 }
 
 export namespace TagWithLinks {
-  export enum FillColorEnum {
-    Red = <any>'red',
-    LightGreen = <any>'light_green',
-    Cyan = <any>'cyan',
-    Yellow = <any>'yellow',
-    Magenta = <any>'magenta',
-    Green = <any>'green',
-    Blue = <any>'blue',
-    Gray = <any>'gray',
-    Violet = <any>'violet',
-    DarkGreen = <any>'dark_green',
-    DarkBlue = <any>'dark_blue',
-    Black = <any>'black',
-  }
+  export const FillColorEnum = {
+    Red: 'red',
+    LightGreen: 'light_green',
+    Cyan: 'cyan',
+    Yellow: 'yellow',
+    Magenta: 'magenta',
+    Green: 'green',
+    Blue: 'blue',
+    Gray: 'gray',
+    Violet: 'violet',
+    DarkGreen: 'dark_green',
+    DarkBlue: 'dark_blue',
+    Black: 'black',
+  } as const
 }

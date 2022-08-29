@@ -21,7 +21,8 @@ export class CustomField {
   /**
    * The shape of the icon on the preview field. Possible values: `round`, `square`
    */
-  'iconShape'?: CustomField.IconShapeEnum = CustomField.IconShapeEnum.Round
+  'iconShape'?: string | typeof CustomField.IconShapeEnum[keyof typeof CustomField.IconShapeEnum] =
+    CustomField.IconShapeEnum.Round
   /**
    * A valid URL pointing to an image available online. The transport protocol must be HTTPS. Possible image file formats: JPG/JPEG, PNG, SVG.
    */
@@ -83,8 +84,8 @@ export class CustomField {
 }
 
 export namespace CustomField {
-  export enum IconShapeEnum {
-    Round = <any>'round',
-    Square = <any>'square',
-  }
+  export const IconShapeEnum = {
+    Round: 'round',
+    Square: 'square',
+  } as const
 }

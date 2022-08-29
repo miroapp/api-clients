@@ -21,7 +21,8 @@ export class ShapeDataPlatformTags {
   /**
    * Defines the geometric shape of the item when it is rendered on the board. Possible values: `rectangle`, `round_rectangle`, `circle`, `triangle`, `rhombus`, `parallelogram`, `trapezoid`, `pentagon`, `hexagon`, `octagon`, `wedge_round_rectangle_callout`, `star`, `flow_chart_predefined_process`, `cloud`, `cross`, `can`, `right_arrow`, `left_arrow`, `left_right_arrow`, `left_brace`, `right_brace`
    */
-  'shape'?: ShapeDataPlatformTags.ShapeEnum = ShapeDataPlatformTags.ShapeEnum.Rectangle
+  'shape'?: string | typeof ShapeDataPlatformTags.ShapeEnum[keyof typeof ShapeDataPlatformTags.ShapeEnum] =
+    ShapeDataPlatformTags.ShapeEnum.Rectangle
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -47,27 +48,27 @@ export class ShapeDataPlatformTags {
 }
 
 export namespace ShapeDataPlatformTags {
-  export enum ShapeEnum {
-    Rectangle = <any>'rectangle',
-    RoundRectangle = <any>'round_rectangle',
-    Circle = <any>'circle',
-    Triangle = <any>'triangle',
-    Rhombus = <any>'rhombus',
-    Parallelogram = <any>'parallelogram',
-    Trapezoid = <any>'trapezoid',
-    Pentagon = <any>'pentagon',
-    Hexagon = <any>'hexagon',
-    Octagon = <any>'octagon',
-    WedgeRoundRectangleCallout = <any>'wedge_round_rectangle_callout',
-    Star = <any>'star',
-    FlowChartPredefinedProcess = <any>'flow_chart_predefined_process',
-    Cloud = <any>'cloud',
-    Cross = <any>'cross',
-    Can = <any>'can',
-    RightArrow = <any>'right_arrow',
-    LeftArrow = <any>'left_arrow',
-    LeftRightArrow = <any>'left_right_arrow',
-    LeftBrace = <any>'left_brace',
-    RightBrace = <any>'right_brace',
-  }
+  export const ShapeEnum = {
+    Rectangle: 'rectangle',
+    RoundRectangle: 'round_rectangle',
+    Circle: 'circle',
+    Triangle: 'triangle',
+    Rhombus: 'rhombus',
+    Parallelogram: 'parallelogram',
+    Trapezoid: 'trapezoid',
+    Pentagon: 'pentagon',
+    Hexagon: 'hexagon',
+    Octagon: 'octagon',
+    WedgeRoundRectangleCallout: 'wedge_round_rectangle_callout',
+    Star: 'star',
+    FlowChartPredefinedProcess: 'flow_chart_predefined_process',
+    Cloud: 'cloud',
+    Cross: 'cross',
+    Can: 'can',
+    RightArrow: 'right_arrow',
+    LeftArrow: 'left_arrow',
+    LeftRightArrow: 'left_right_arrow',
+    LeftBrace: 'left_brace',
+    RightBrace: 'right_brace',
+  } as const
 }

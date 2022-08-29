@@ -26,7 +26,7 @@ export class Organization {
   /**
    * Organization plan type
    */
-  'plan'?: Organization.PlanEnum
+  'plan'?: string | typeof Organization.PlanEnum[keyof typeof Organization.PlanEnum]
   'type'?: string
 
   /** @ignore */
@@ -68,16 +68,16 @@ export class Organization {
 }
 
 export namespace Organization {
-  export enum PlanEnum {
-    Unknown = <any>'UNKNOWN',
-    Company = <any>'COMPANY',
-    Consultant = <any>'CONSULTANT',
-    ConsultantSlf = <any>'CONSULTANT_SLF',
-    Business = <any>'BUSINESS',
-    PaidTeamOrg = <any>'PAID_TEAM_ORG',
-    IntegrationOrg = <any>'INTEGRATION_ORG',
-    Professional2022 = <any>'PROFESSIONAL_2022',
-    EduTeamOrg = <any>'EDU_TEAM_ORG',
-    FreeTeamOrg = <any>'FREE_TEAM_ORG',
-  }
+  export const PlanEnum = {
+    Unknown: 'UNKNOWN',
+    Company: 'COMPANY',
+    Consultant: 'CONSULTANT',
+    ConsultantSlf: 'CONSULTANT_SLF',
+    Business: 'BUSINESS',
+    PaidTeamOrg: 'PAID_TEAM_ORG',
+    IntegrationOrg: 'INTEGRATION_ORG',
+    Professional2022: 'PROFESSIONAL_2022',
+    EduTeamOrg: 'EDU_TEAM_ORG',
+    FreeTeamOrg: 'FREE_TEAM_ORG',
+  } as const
 }

@@ -27,7 +27,8 @@ export class AppCardDataChanges {
   /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`. Possible values: `disconnected`, `connected`, `disabled`
    */
-  'status'?: AppCardDataChanges.StatusEnum = AppCardDataChanges.StatusEnum.Disconnected
+  'status'?: string | typeof AppCardDataChanges.StatusEnum[keyof typeof AppCardDataChanges.StatusEnum] =
+    AppCardDataChanges.StatusEnum.Disconnected
   /**
    * A short text header to identify the app card.
    */
@@ -67,9 +68,9 @@ export class AppCardDataChanges {
 }
 
 export namespace AppCardDataChanges {
-  export enum StatusEnum {
-    Disconnected = <any>'disconnected',
-    Connected = <any>'connected',
-    Disabled = <any>'disabled',
-  }
+  export const StatusEnum = {
+    Disconnected: 'disconnected',
+    Connected: 'connected',
+    Disabled: 'disabled',
+  } as const
 }

@@ -69,7 +69,7 @@ const MODELS = {
     props: ['orgId', 'teamId'],
     extendedModel: {
       name: 'Team',
-      path: '../highlevel/Team',
+      path: 'Team',
     },
     methods: [
       {method: 'enterpriseDeleteTeam', alias: 'deleteTeam'},
@@ -161,7 +161,7 @@ const MODELS = {
     props: ['id'],
     extendedModel: {
       name: 'Board',
-      path: '../highlevel/Board',
+      path: 'Board',
     },
     methods: [
       'createAppCardItem',
@@ -218,6 +218,7 @@ const MODELS = {
       {method: 'removeTagFromItem', alias: 'removeTag'},
     ],
   },
+
   BoardMember: {
     props: ['boardId', 'id'],
     extendedModel: {
@@ -226,11 +227,12 @@ const MODELS = {
     },
     methods: [{method: 'updateBoardMember', alias: 'update'}],
   },
+
   Item: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'GenericItem',
-      path: '../model/genericItem',
+      name: 'Item',
+      path: 'Item',
     },
     methods: [
       {method: 'updateItemPositionOrParent', alias: 'update'},
@@ -245,11 +247,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   AppCardItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'AppCardItem',
-      path: '../model/appCardItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateAppCardItem', alias: 'update'},
@@ -264,11 +266,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   CardItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'CardItem',
-      path: '../model/cardItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateCardItem', alias: 'update'},
@@ -283,11 +285,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   DocumentItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'DocumentItem',
-      path: '../model/documentItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateDocumentItemUsingUrl', alias: 'update'},
@@ -302,11 +304,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   EmbedItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'EmbedItem',
-      path: '../model/embedItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateEmbedItem', alias: 'update'},
@@ -321,11 +323,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   FrameItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'FrameItem',
-      path: '../model/frameItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateFrameItem', alias: 'update'},
@@ -340,11 +342,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   ImageItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'ImageItem',
-      path: '../model/imageItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateImageItemUsingUrl', alias: 'update'},
@@ -359,11 +361,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   ShapeItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'ShapeItem',
-      path: '../model/shapeItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateShapeItem', alias: 'update'},
@@ -378,11 +380,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   StickyNoteItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'StickyNoteItem',
-      path: '../model/stickyNoteItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateStickyNoteItem', alias: 'update'},
@@ -397,11 +399,11 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   TextItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'TextItem',
-      path: '../model/textItem',
+      name: 'Item',
     },
     methods: [
       {method: 'updateTextItem', alias: 'update'},
@@ -416,6 +418,7 @@ const MODELS = {
       {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
+
   Connector: {
     props: ['boardId', 'id'],
     extendedModel: {
@@ -427,6 +430,7 @@ const MODELS = {
       {method: 'deleteConnector', alias: 'delete'},
     ],
   },
+
   Tag: {
     props: ['boardId', 'id'],
     extendedModel: {

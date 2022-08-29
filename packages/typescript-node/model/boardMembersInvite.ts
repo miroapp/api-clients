@@ -18,7 +18,8 @@ export class BoardMembersInvite {
   /**
    * Role of the board member. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`
    */
-  'role'?: BoardMembersInvite.RoleEnum = BoardMembersInvite.RoleEnum.Commenter
+  'role'?: string | typeof BoardMembersInvite.RoleEnum[keyof typeof BoardMembersInvite.RoleEnum] =
+    BoardMembersInvite.RoleEnum.Commenter
   /**
    * The message that will be sent in the invitation email.
    */
@@ -53,12 +54,12 @@ export class BoardMembersInvite {
 }
 
 export namespace BoardMembersInvite {
-  export enum RoleEnum {
-    Viewer = <any>'viewer',
-    Commenter = <any>'commenter',
-    Editor = <any>'editor',
-    Coowner = <any>'coowner',
-    Owner = <any>'owner',
-    Guest = <any>'guest',
-  }
+  export const RoleEnum = {
+    Viewer: 'viewer',
+    Commenter: 'commenter',
+    Editor: 'editor',
+    Coowner: 'coowner',
+    Owner: 'owner',
+    Guest: 'guest',
+  } as const
 }

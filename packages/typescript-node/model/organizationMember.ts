@@ -33,7 +33,7 @@ export class OrganizationMember {
   /**
    * Name of the current user license in the organization
    */
-  'license'?: OrganizationMember.LicenseEnum
+  'license'?: string | typeof OrganizationMember.LicenseEnum[keyof typeof OrganizationMember.LicenseEnum]
   /**
    * Time when the license was assigned to the user
    */
@@ -41,7 +41,7 @@ export class OrganizationMember {
   /**
    * Name of the user role in the organization
    */
-  'role'?: OrganizationMember.RoleEnum
+  'role'?: string | typeof OrganizationMember.RoleEnum[keyof typeof OrganizationMember.RoleEnum]
   'type'?: string
 
   /** @ignore */
@@ -98,19 +98,19 @@ export class OrganizationMember {
 }
 
 export namespace OrganizationMember {
-  export enum LicenseEnum {
-    Unknown = <any>'UNKNOWN',
-    Full = <any>'FULL',
-    Occasional = <any>'OCCASIONAL',
-    Free = <any>'FREE',
-    FreeRestricted = <any>'FREE_RESTRICTED',
-    FullTrial = <any>'FULL_TRIAL',
-  }
-  export enum RoleEnum {
-    Unknown = <any>'UNKNOWN',
-    OrganizationInternalAdmin = <any>'ORGANIZATION_INTERNAL_ADMIN',
-    OrganizationInternalUser = <any>'ORGANIZATION_INTERNAL_USER',
-    OrganizationExternalUser = <any>'ORGANIZATION_EXTERNAL_USER',
-    OrganizationTeamGuestUser = <any>'ORGANIZATION_TEAM_GUEST_USER',
-  }
+  export const LicenseEnum = {
+    Unknown: 'UNKNOWN',
+    Full: 'FULL',
+    Occasional: 'OCCASIONAL',
+    Free: 'FREE',
+    FreeRestricted: 'FREE_RESTRICTED',
+    FullTrial: 'FULL_TRIAL',
+  } as const
+  export const RoleEnum = {
+    Unknown: 'UNKNOWN',
+    OrganizationInternalAdmin: 'ORGANIZATION_INTERNAL_ADMIN',
+    OrganizationInternalUser: 'ORGANIZATION_INTERNAL_USER',
+    OrganizationExternalUser: 'ORGANIZATION_EXTERNAL_USER',
+    OrganizationTeamGuestUser: 'ORGANIZATION_TEAM_GUEST_USER',
+  } as const
 }

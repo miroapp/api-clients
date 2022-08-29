@@ -17,39 +17,57 @@ export class TeamSharingPolicySettingsChanges {
   /**
    * Set who can create assets in a team
    */
-  'createAssetAccessLevel'?: TeamSharingPolicySettingsChanges.CreateAssetAccessLevelEnum
+  'createAssetAccessLevel'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.CreateAssetAccessLevelEnum[keyof typeof TeamSharingPolicySettingsChanges.CreateAssetAccessLevelEnum]
   /**
    *  Default board access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view * \"comment\": Anyone in the team can comment * \"edit\":    Anyone in the team can edit
    */
-  'defaultBoardAccess'?: TeamSharingPolicySettingsChanges.DefaultBoardAccessEnum
+  'defaultBoardAccess'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.DefaultBoardAccessEnum[keyof typeof TeamSharingPolicySettingsChanges.DefaultBoardAccessEnum]
   /**
    *  Default organization access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view * \"comment\": Anyone in the team can comment * \"edit\":    Anyone in the team can edit
    */
-  'defaultOrganizationAccess'?: TeamSharingPolicySettingsChanges.DefaultOrganizationAccessEnum
+  'defaultOrganizationAccess'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.DefaultOrganizationAccessEnum[keyof typeof TeamSharingPolicySettingsChanges.DefaultOrganizationAccessEnum]
   /**
    *  Default project access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view
    */
-  'defaultProjectAccess'?: TeamSharingPolicySettingsChanges.DefaultProjectAccessEnum
+  'defaultProjectAccess'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.DefaultProjectAccessEnum[keyof typeof TeamSharingPolicySettingsChanges.DefaultProjectAccessEnum]
   /**
    *  * \"allowed\": Allow move board to team * \"not_allowed\": Not allow move board to team
    */
-  'moveBoardToAccount'?: TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum
+  'moveBoardToAccount'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum[keyof typeof TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum]
   /**
    *  * \"allowed\": Allow sharing on team * \"not_allowed\": Not allow sharing on team
    */
-  'sharingOnAccount'?: TeamSharingPolicySettingsChanges.SharingOnAccountEnum
+  'sharingOnAccount'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.SharingOnAccountEnum[keyof typeof TeamSharingPolicySettingsChanges.SharingOnAccountEnum]
   /**
    *  * \"allowed\": Allow sharing on organization * \"allowed_with_editing\": Allow sharing with editing on organization * \"not_allowed\": Not allow sharing on organization
    */
-  'sharingOnOrganization'?: TeamSharingPolicySettingsChanges.SharingOnOrganizationEnum
+  'sharingOnOrganization'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.SharingOnOrganizationEnum[keyof typeof TeamSharingPolicySettingsChanges.SharingOnOrganizationEnum]
   /**
    *  * \"allowed\": Allow sharing via public link * \"allowed_with_editing\": Allow sharing with editing via public link * \"not_allowed\": Not allow sharing via public link
    */
-  'sharingViaPublicLink'?: TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum
+  'sharingViaPublicLink'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum[keyof typeof TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum]
   /**
    *  * \"allowed\": Allow sharing with external users * \"not_allowed\": Not allow sharing with external users
    */
-  'sharingWithExternalUsers'?: TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum
+  'sharingWithExternalUsers'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum[keyof typeof TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum]
   /**
    * Enable whitelist domains
    */
@@ -128,47 +146,47 @@ export class TeamSharingPolicySettingsChanges {
 }
 
 export namespace TeamSharingPolicySettingsChanges {
-  export enum CreateAssetAccessLevelEnum {
-    CompanyAdmins = <any>'COMPANY_ADMINS',
-    Admins = <any>'ADMINS',
-    AllMembers = <any>'ALL_MEMBERS',
-  }
-  export enum DefaultBoardAccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-    Comment = <any>'comment',
-    Edit = <any>'edit',
-  }
-  export enum DefaultOrganizationAccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-    Comment = <any>'comment',
-    Edit = <any>'edit',
-  }
-  export enum DefaultProjectAccessEnum {
-    Private = <any>'private',
-    View = <any>'view',
-  }
-  export enum MoveBoardToAccountEnum {
-    Allowed = <any>'allowed',
-    NotAllowed = <any>'not_allowed',
-  }
-  export enum SharingOnAccountEnum {
-    Allowed = <any>'allowed',
-    NotAllowed = <any>'not_allowed',
-  }
-  export enum SharingOnOrganizationEnum {
-    Allowed = <any>'allowed',
-    AllowedWithEditing = <any>'allowed_with_editing',
-    NotAllowed = <any>'not_allowed',
-  }
-  export enum SharingViaPublicLinkEnum {
-    Allowed = <any>'allowed',
-    AllowedWithEditing = <any>'allowed_with_editing',
-    NotAllowed = <any>'not_allowed',
-  }
-  export enum SharingWithExternalUsersEnum {
-    Allowed = <any>'allowed',
-    NotAllowed = <any>'not_allowed',
-  }
+  export const CreateAssetAccessLevelEnum = {
+    CompanyAdmins: 'COMPANY_ADMINS',
+    Admins: 'ADMINS',
+    AllMembers: 'ALL_MEMBERS',
+  } as const
+  export const DefaultBoardAccessEnum = {
+    Private: 'private',
+    View: 'view',
+    Comment: 'comment',
+    Edit: 'edit',
+  } as const
+  export const DefaultOrganizationAccessEnum = {
+    Private: 'private',
+    View: 'view',
+    Comment: 'comment',
+    Edit: 'edit',
+  } as const
+  export const DefaultProjectAccessEnum = {
+    Private: 'private',
+    View: 'view',
+  } as const
+  export const MoveBoardToAccountEnum = {
+    Allowed: 'allowed',
+    NotAllowed: 'not_allowed',
+  } as const
+  export const SharingOnAccountEnum = {
+    Allowed: 'allowed',
+    NotAllowed: 'not_allowed',
+  } as const
+  export const SharingOnOrganizationEnum = {
+    Allowed: 'allowed',
+    AllowedWithEditing: 'allowed_with_editing',
+    NotAllowed: 'not_allowed',
+  } as const
+  export const SharingViaPublicLinkEnum = {
+    Allowed: 'allowed',
+    AllowedWithEditing: 'allowed_with_editing',
+    NotAllowed: 'not_allowed',
+  } as const
+  export const SharingWithExternalUsersEnum = {
+    Allowed: 'allowed',
+    NotAllowed: 'not_allowed',
+  } as const
 }

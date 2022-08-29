@@ -21,7 +21,7 @@ export class ConnectorStyle {
   /**
    * The decoration cap of the connector end, like an arrow or circle. Default: stealth. Possible values: `none`, `stealth`, `diamond`, `diamond_filled`, `oval`, `oval_filled`, `arrow`, `triangle`, `triangle_filled`, `erd_one`, `erd_many`, `erd_only_one`, `erd_zero_or_one`, `erd_one_or_many`, `erd_zero_or_many`
    */
-  'endStrokeCap'?: ConnectorStyle.EndStrokeCapEnum
+  'endStrokeCap'?: string | typeof ConnectorStyle.EndStrokeCapEnum[keyof typeof ConnectorStyle.EndStrokeCapEnum]
   /**
    * Defines the font size, in dp, for the captions on the connector. Default: 14
    */
@@ -29,7 +29,7 @@ export class ConnectorStyle {
   /**
    * The decoration cap of the connector end, like an arrow or circle. Default: none. Possible values: `none`, `stealth`, `diamond`, `diamond_filled`, `oval`, `oval_filled`, `arrow`, `triangle`, `triangle_filled`, `erd_one`, `erd_many`, `erd_only_one`, `erd_zero_or_one`, `erd_one_or_many`, `erd_zero_or_many`
    */
-  'startStrokeCap'?: ConnectorStyle.StartStrokeCapEnum
+  'startStrokeCap'?: string | typeof ConnectorStyle.StartStrokeCapEnum[keyof typeof ConnectorStyle.StartStrokeCapEnum]
   /**
    * Hex value of the color of the connector line. Default: #000000.
    */
@@ -37,7 +37,7 @@ export class ConnectorStyle {
   /**
    * The stroke pattern of the connector line. Default: normal. Possible values: `normal`, `dotted`, `dashed`
    */
-  'strokeStyle'?: ConnectorStyle.StrokeStyleEnum
+  'strokeStyle'?: string | typeof ConnectorStyle.StrokeStyleEnum[keyof typeof ConnectorStyle.StrokeStyleEnum]
   /**
    * The thickness of the connector line, in dp. Default: 1.0.
    */
@@ -45,7 +45,9 @@ export class ConnectorStyle {
   /**
    * The captions orientation relatively to the connector line curvature. Default: aligned. Possible values: `horizontal`, `aligned`
    */
-  'textOrientation'?: ConnectorStyle.TextOrientationEnum
+  'textOrientation'?:
+    | string
+    | typeof ConnectorStyle.TextOrientationEnum[keyof typeof ConnectorStyle.TextOrientationEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -101,47 +103,47 @@ export class ConnectorStyle {
 }
 
 export namespace ConnectorStyle {
-  export enum EndStrokeCapEnum {
-    None = <any>'none',
-    Stealth = <any>'stealth',
-    Diamond = <any>'diamond',
-    DiamondFilled = <any>'diamond_filled',
-    Oval = <any>'oval',
-    OvalFilled = <any>'oval_filled',
-    Arrow = <any>'arrow',
-    Triangle = <any>'triangle',
-    TriangleFilled = <any>'triangle_filled',
-    ErdOne = <any>'erd_one',
-    ErdMany = <any>'erd_many',
-    ErdOnlyOne = <any>'erd_only_one',
-    ErdZeroOrOne = <any>'erd_zero_or_one',
-    ErdOneOrMany = <any>'erd_one_or_many',
-    ErdZeroOrMany = <any>'erd_zero_or_many',
-  }
-  export enum StartStrokeCapEnum {
-    None = <any>'none',
-    Stealth = <any>'stealth',
-    Diamond = <any>'diamond',
-    DiamondFilled = <any>'diamond_filled',
-    Oval = <any>'oval',
-    OvalFilled = <any>'oval_filled',
-    Arrow = <any>'arrow',
-    Triangle = <any>'triangle',
-    TriangleFilled = <any>'triangle_filled',
-    ErdOne = <any>'erd_one',
-    ErdMany = <any>'erd_many',
-    ErdOnlyOne = <any>'erd_only_one',
-    ErdZeroOrOne = <any>'erd_zero_or_one',
-    ErdOneOrMany = <any>'erd_one_or_many',
-    ErdZeroOrMany = <any>'erd_zero_or_many',
-  }
-  export enum StrokeStyleEnum {
-    Normal = <any>'normal',
-    Dotted = <any>'dotted',
-    Dashed = <any>'dashed',
-  }
-  export enum TextOrientationEnum {
-    Horizontal = <any>'horizontal',
-    Aligned = <any>'aligned',
-  }
+  export const EndStrokeCapEnum = {
+    None: 'none',
+    Stealth: 'stealth',
+    Diamond: 'diamond',
+    DiamondFilled: 'diamond_filled',
+    Oval: 'oval',
+    OvalFilled: 'oval_filled',
+    Arrow: 'arrow',
+    Triangle: 'triangle',
+    TriangleFilled: 'triangle_filled',
+    ErdOne: 'erd_one',
+    ErdMany: 'erd_many',
+    ErdOnlyOne: 'erd_only_one',
+    ErdZeroOrOne: 'erd_zero_or_one',
+    ErdOneOrMany: 'erd_one_or_many',
+    ErdZeroOrMany: 'erd_zero_or_many',
+  } as const
+  export const StartStrokeCapEnum = {
+    None: 'none',
+    Stealth: 'stealth',
+    Diamond: 'diamond',
+    DiamondFilled: 'diamond_filled',
+    Oval: 'oval',
+    OvalFilled: 'oval_filled',
+    Arrow: 'arrow',
+    Triangle: 'triangle',
+    TriangleFilled: 'triangle_filled',
+    ErdOne: 'erd_one',
+    ErdMany: 'erd_many',
+    ErdOnlyOne: 'erd_only_one',
+    ErdZeroOrOne: 'erd_zero_or_one',
+    ErdOneOrMany: 'erd_one_or_many',
+    ErdZeroOrMany: 'erd_zero_or_many',
+  } as const
+  export const StrokeStyleEnum = {
+    Normal: 'normal',
+    Dotted: 'dotted',
+    Dashed: 'dashed',
+  } as const
+  export const TextOrientationEnum = {
+    Horizontal: 'horizontal',
+    Aligned: 'aligned',
+  } as const
 }

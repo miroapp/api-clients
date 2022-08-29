@@ -21,7 +21,7 @@ export class ItemConnectionCreationData {
   /**
    * The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default. Possible values: `auto`, `top`, `right`, `bottom`, `left`
    */
-  'snapTo'?: ItemConnectionCreationData.SnapToEnum
+  'snapTo'?: string | typeof ItemConnectionCreationData.SnapToEnum[keyof typeof ItemConnectionCreationData.SnapToEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -52,11 +52,11 @@ export class ItemConnectionCreationData {
 }
 
 export namespace ItemConnectionCreationData {
-  export enum SnapToEnum {
-    Auto = <any>'auto',
-    Top = <any>'top',
-    Right = <any>'right',
-    Bottom = <any>'bottom',
-    Left = <any>'left',
-  }
+  export const SnapToEnum = {
+    Auto: 'auto',
+    Top: 'top',
+    Right: 'right',
+    Bottom: 'bottom',
+    Left: 'left',
+  } as const
 }

@@ -21,7 +21,10 @@ export class CustomFieldPlatformTags {
   /**
    * The shape of the icon on the preview field. Possible values: `round`, `square`
    */
-  'iconShape'?: CustomFieldPlatformTags.IconShapeEnum = CustomFieldPlatformTags.IconShapeEnum.Round
+  'iconShape'?:
+    | string
+    | typeof CustomFieldPlatformTags.IconShapeEnum[keyof typeof CustomFieldPlatformTags.IconShapeEnum] =
+    CustomFieldPlatformTags.IconShapeEnum.Round
   /**
    * A valid URL pointing to an image available online. The transport protocol must be HTTPS. Possible image file formats: JPG/JPEG, PNG, SVG.
    */
@@ -83,8 +86,8 @@ export class CustomFieldPlatformTags {
 }
 
 export namespace CustomFieldPlatformTags {
-  export enum IconShapeEnum {
-    Round = <any>'round',
-    Square = <any>'square',
-  }
+  export const IconShapeEnum = {
+    Round: 'round',
+    Square: 'square',
+  } as const
 }

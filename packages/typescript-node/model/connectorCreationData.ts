@@ -20,7 +20,7 @@ export class ConnectorCreationData {
   /**
    * The path type of the connector line, defines curvature. Default: curved. Possible values: `straight`, `elbowed`, `curved`
    */
-  'shape'?: ConnectorCreationData.ShapeEnum
+  'shape'?: string | typeof ConnectorCreationData.ShapeEnum[keyof typeof ConnectorCreationData.ShapeEnum]
   'captions'?: Array<Caption>
   'style'?: ConnectorStyle
 
@@ -63,9 +63,9 @@ export class ConnectorCreationData {
 }
 
 export namespace ConnectorCreationData {
-  export enum ShapeEnum {
-    Straight = <any>'straight',
-    Elbowed = <any>'elbowed',
-    Curved = <any>'curved',
-  }
+  export const ShapeEnum = {
+    Straight: 'straight',
+    Elbowed: 'elbowed',
+    Curved: 'curved',
+  } as const
 }

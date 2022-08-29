@@ -25,7 +25,7 @@ export class BoardMember {
   /**
    * Role of the board member. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`
    */
-  'role'?: BoardMember.RoleEnum
+  'role'?: string | typeof BoardMember.RoleEnum[keyof typeof BoardMember.RoleEnum]
   /**
    * Type of the object that is returned. In this case, `type` returns `board_member`.
    */
@@ -65,12 +65,12 @@ export class BoardMember {
 }
 
 export namespace BoardMember {
-  export enum RoleEnum {
-    Viewer = <any>'viewer',
-    Commenter = <any>'commenter',
-    Editor = <any>'editor',
-    Coowner = <any>'coowner',
-    Owner = <any>'owner',
-    Guest = <any>'guest',
-  }
+  export const RoleEnum = {
+    Viewer: 'viewer',
+    Commenter: 'commenter',
+    Editor: 'editor',
+    Coowner: 'coowner',
+    Owner: 'owner',
+    Guest: 'guest',
+  } as const
 }

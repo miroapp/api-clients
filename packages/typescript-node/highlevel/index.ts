@@ -4,23 +4,15 @@ import {GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase
 import {Api as BaseApi} from './../highlevel/Api'
 import {Organization as BaseOrganization} from './../model/organization'
 import {OrganizationMember as BaseOrganizationMember} from './../model/organizationMember'
-import {Team as BaseTeam} from './../highlevel/Team'
+import {Team as BaseTeam} from './Team'
 import {BoardDataClassificationLabel as BaseBoardDataClassification} from './../model/boardDataClassificationLabel'
 import {DataClassificationOrganizationSettings as BaseDataClassification} from './../model/dataClassificationOrganizationSettings'
 import {TeamMember as BaseTeamMember} from './../model/teamMember'
 import {TeamSettings as BaseTeamSettings} from './../model/teamSettings'
-import {Board as BaseBoard} from './../highlevel/Board'
+import {Board as BaseBoard} from './Board'
 import {BoardMember as BaseBoardMember} from './../model/boardMember'
-import {GenericItem as BaseItem} from './../model/genericItem'
-import {AppCardItem as BaseAppCardItem} from './../model/appCardItem'
-import {CardItem as BaseCardItem} from './../model/cardItem'
-import {DocumentItem as BaseDocumentItem} from './../model/documentItem'
-import {EmbedItem as BaseEmbedItem} from './../model/embedItem'
-import {FrameItem as BaseFrameItem} from './../model/frameItem'
-import {ImageItem as BaseImageItem} from './../model/imageItem'
-import {ShapeItem as BaseShapeItem} from './../model/shapeItem'
-import {StickyNoteItem as BaseStickyNoteItem} from './../model/stickyNoteItem'
-import {TextItem as BaseTextItem} from './../model/textItem'
+import {Item as BaseItem} from './Item'
+
 import {ConnectorWithLinks as BaseConnector} from './../model/connectorWithLinks'
 import {Tag as BaseTag} from './../model/tag'
 
@@ -924,14 +916,14 @@ export class Item extends BaseItem {
   }
 }
 
-export class AppCardItem extends BaseAppCardItem {
+export class AppCardItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: AppCardItem['_headParams'], props: KeepBase<BaseAppCardItem>) {
-    super()
+  constructor(api: MiroApi, headParams: AppCardItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
@@ -969,14 +961,14 @@ export class AppCardItem extends BaseAppCardItem {
   }
 }
 
-export class CardItem extends BaseCardItem {
+export class CardItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: CardItem['_headParams'], props: KeepBase<BaseCardItem>) {
-    super()
+  constructor(api: MiroApi, headParams: CardItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
@@ -1014,14 +1006,14 @@ export class CardItem extends BaseCardItem {
   }
 }
 
-export class DocumentItem extends BaseDocumentItem {
+export class DocumentItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: DocumentItem['_headParams'], props: KeepBase<BaseDocumentItem>) {
-    super()
+  constructor(api: MiroApi, headParams: DocumentItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
@@ -1059,14 +1051,14 @@ export class DocumentItem extends BaseDocumentItem {
   }
 }
 
-export class EmbedItem extends BaseEmbedItem {
+export class EmbedItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: EmbedItem['_headParams'], props: KeepBase<BaseEmbedItem>) {
-    super()
+  constructor(api: MiroApi, headParams: EmbedItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
@@ -1104,14 +1096,14 @@ export class EmbedItem extends BaseEmbedItem {
   }
 }
 
-export class FrameItem extends BaseFrameItem {
+export class FrameItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: FrameItem['_headParams'], props: KeepBase<BaseFrameItem>) {
-    super()
+  constructor(api: MiroApi, headParams: FrameItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
@@ -1149,14 +1141,14 @@ export class FrameItem extends BaseFrameItem {
   }
 }
 
-export class ImageItem extends BaseImageItem {
+export class ImageItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: ImageItem['_headParams'], props: KeepBase<BaseImageItem>) {
-    super()
+  constructor(api: MiroApi, headParams: ImageItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
@@ -1194,14 +1186,14 @@ export class ImageItem extends BaseImageItem {
   }
 }
 
-export class ShapeItem extends BaseShapeItem {
+export class ShapeItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: ShapeItem['_headParams'], props: KeepBase<BaseShapeItem>) {
-    super()
+  constructor(api: MiroApi, headParams: ShapeItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
@@ -1239,14 +1231,14 @@ export class ShapeItem extends BaseShapeItem {
   }
 }
 
-export class StickyNoteItem extends BaseStickyNoteItem {
+export class StickyNoteItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: StickyNoteItem['_headParams'], props: KeepBase<BaseStickyNoteItem>) {
-    super()
+  constructor(api: MiroApi, headParams: StickyNoteItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
@@ -1284,14 +1276,14 @@ export class StickyNoteItem extends BaseStickyNoteItem {
   }
 }
 
-export class TextItem extends BaseTextItem {
+export class TextItem extends Item {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: TextItem['_headParams'], props: KeepBase<BaseTextItem>) {
-    super()
+  constructor(api: MiroApi, headParams: TextItem['_headParams'], props: KeepBase<Item>) {
+    super(api, headParams, props)
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)

@@ -17,7 +17,9 @@ export class TeamAccountDiscoverySettings {
   /**
    *  * \"hidden\":  Only invited users can see and access the team. * \"request\": Members of organization can find and request to join with admin approval. * \"join\":    Members of organization can find and join.
    */
-  'accountDiscovery'?: TeamAccountDiscoverySettings.AccountDiscoveryEnum
+  'accountDiscovery'?:
+    | string
+    | typeof TeamAccountDiscoverySettings.AccountDiscoveryEnum[keyof typeof TeamAccountDiscoverySettings.AccountDiscoveryEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,9 +40,9 @@ export class TeamAccountDiscoverySettings {
 }
 
 export namespace TeamAccountDiscoverySettings {
-  export enum AccountDiscoveryEnum {
-    Hidden = <any>'hidden',
-    Request = <any>'request',
-    Join = <any>'join',
-  }
+  export const AccountDiscoveryEnum = {
+    Hidden: 'hidden',
+    Request: 'request',
+    Join: 'join',
+  } as const
 }

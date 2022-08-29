@@ -29,7 +29,7 @@ export class TextStyle {
   /**
    * Font type for the text in the text item. Default: `arial`. Possible values: `arial`, `abril_fatface`, `bangers`, `eb_garamond`, `georgia`, `graduate`, `gravitas_one`, `fredoka_one`, `nixie_one`, `open_sans`, `permanent_marker`, `pt_sans`, `pt_sans_narrow`, `pt_serif`, `rammetto_one`, `roboto`, `roboto_condensed`, `roboto_slab`, `caveat`, `times_new_roman`, `titan_one`, `lemon_tuesday`, `roboto_mono`, `noto_sans`, `plex_sans`, `plex_serif`, `plex_mono`, `spoof`, `tiempos_text`
    */
-  'fontFamily'?: TextStyle.FontFamilyEnum
+  'fontFamily'?: string | typeof TextStyle.FontFamilyEnum[keyof typeof TextStyle.FontFamilyEnum]
   /**
    * Font size, in dp. Default: `14`.
    */
@@ -37,7 +37,7 @@ export class TextStyle {
   /**
    * Horizontal alignment for the item\'s content. Default: `center.` Possible values: `left`, `right`, `center`
    */
-  'textAlign'?: TextStyle.TextAlignEnum
+  'textAlign'?: string | typeof TextStyle.TextAlignEnum[keyof typeof TextStyle.TextAlignEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -83,40 +83,40 @@ export class TextStyle {
 }
 
 export namespace TextStyle {
-  export enum FontFamilyEnum {
-    Arial = <any>'arial',
-    AbrilFatface = <any>'abril_fatface',
-    Bangers = <any>'bangers',
-    EbGaramond = <any>'eb_garamond',
-    Georgia = <any>'georgia',
-    Graduate = <any>'graduate',
-    GravitasOne = <any>'gravitas_one',
-    FredokaOne = <any>'fredoka_one',
-    NixieOne = <any>'nixie_one',
-    OpenSans = <any>'open_sans',
-    PermanentMarker = <any>'permanent_marker',
-    PtSans = <any>'pt_sans',
-    PtSansNarrow = <any>'pt_sans_narrow',
-    PtSerif = <any>'pt_serif',
-    RammettoOne = <any>'rammetto_one',
-    Roboto = <any>'roboto',
-    RobotoCondensed = <any>'roboto_condensed',
-    RobotoSlab = <any>'roboto_slab',
-    Caveat = <any>'caveat',
-    TimesNewRoman = <any>'times_new_roman',
-    TitanOne = <any>'titan_one',
-    LemonTuesday = <any>'lemon_tuesday',
-    RobotoMono = <any>'roboto_mono',
-    NotoSans = <any>'noto_sans',
-    PlexSans = <any>'plex_sans',
-    PlexSerif = <any>'plex_serif',
-    PlexMono = <any>'plex_mono',
-    Spoof = <any>'spoof',
-    TiemposText = <any>'tiempos_text',
-  }
-  export enum TextAlignEnum {
-    Left = <any>'left',
-    Right = <any>'right',
-    Center = <any>'center',
-  }
+  export const FontFamilyEnum = {
+    Arial: 'arial',
+    AbrilFatface: 'abril_fatface',
+    Bangers: 'bangers',
+    EbGaramond: 'eb_garamond',
+    Georgia: 'georgia',
+    Graduate: 'graduate',
+    GravitasOne: 'gravitas_one',
+    FredokaOne: 'fredoka_one',
+    NixieOne: 'nixie_one',
+    OpenSans: 'open_sans',
+    PermanentMarker: 'permanent_marker',
+    PtSans: 'pt_sans',
+    PtSansNarrow: 'pt_sans_narrow',
+    PtSerif: 'pt_serif',
+    RammettoOne: 'rammetto_one',
+    Roboto: 'roboto',
+    RobotoCondensed: 'roboto_condensed',
+    RobotoSlab: 'roboto_slab',
+    Caveat: 'caveat',
+    TimesNewRoman: 'times_new_roman',
+    TitanOne: 'titan_one',
+    LemonTuesday: 'lemon_tuesday',
+    RobotoMono: 'roboto_mono',
+    NotoSans: 'noto_sans',
+    PlexSans: 'plex_sans',
+    PlexSerif: 'plex_serif',
+    PlexMono: 'plex_mono',
+    Spoof: 'spoof',
+    TiemposText: 'tiempos_text',
+  } as const
+  export const TextAlignEnum = {
+    Left: 'left',
+    Right: 'right',
+    Center: 'center',
+  } as const
 }

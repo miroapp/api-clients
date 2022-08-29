@@ -17,7 +17,8 @@ export class PositionChange {
   /**
    * Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported. Possible values: `center`
    */
-  'origin'?: PositionChange.OriginEnum = PositionChange.OriginEnum.Center
+  'origin'?: string | typeof PositionChange.OriginEnum[keyof typeof PositionChange.OriginEnum] =
+    PositionChange.OriginEnum.Center
   /**
    * X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. The center point of the board has `x: 0` and `y: 0` coordinates.
    */
@@ -56,7 +57,7 @@ export class PositionChange {
 }
 
 export namespace PositionChange {
-  export enum OriginEnum {
-    Center = <any>'center',
-  }
+  export const OriginEnum = {
+    Center: 'center',
+  } as const
 }

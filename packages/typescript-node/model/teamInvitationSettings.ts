@@ -17,11 +17,15 @@ export class TeamInvitationSettings {
   /**
    *  * \"allowed\": Allow non-team collaborators for team * \"not_allowed\": Not Allow non-team collaborators for team
    */
-  'inviteExternalUsers'?: TeamInvitationSettings.InviteExternalUsersEnum
+  'inviteExternalUsers'?:
+    | string
+    | typeof TeamInvitationSettings.InviteExternalUsersEnum[keyof typeof TeamInvitationSettings.InviteExternalUsersEnum]
   /**
    *  * \"only_org_admins\": Company admins only can invite * \"admins\":          Company admins and team admins can invite * \"all_members\":     All team members can invite
    */
-  'whoCanInvite'?: TeamInvitationSettings.WhoCanInviteEnum
+  'whoCanInvite'?:
+    | string
+    | typeof TeamInvitationSettings.WhoCanInviteEnum[keyof typeof TeamInvitationSettings.WhoCanInviteEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -47,13 +51,13 @@ export class TeamInvitationSettings {
 }
 
 export namespace TeamInvitationSettings {
-  export enum InviteExternalUsersEnum {
-    Allowed = <any>'allowed',
-    NotAllowed = <any>'not_allowed',
-  }
-  export enum WhoCanInviteEnum {
-    OnlyOrgAdmins = <any>'only_org_admins',
-    Admins = <any>'admins',
-    AllMembers = <any>'all_members',
-  }
+  export const InviteExternalUsersEnum = {
+    Allowed: 'allowed',
+    NotAllowed: 'not_allowed',
+  } as const
+  export const WhoCanInviteEnum = {
+    OnlyOrgAdmins: 'only_org_admins',
+    Admins: 'admins',
+    AllMembers: 'all_members',
+  } as const
 }

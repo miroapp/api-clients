@@ -17,7 +17,7 @@ export class FrameData {
   /**
    * Only custom frames are supported at the moment. Possible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`
    */
-  'format'?: FrameData.FormatEnum = FrameData.FormatEnum.Custom
+  'format'?: string | typeof FrameData.FormatEnum[keyof typeof FrameData.FormatEnum] = FrameData.FormatEnum.Custom
   /**
    * Title of the frame. This title appears at the top of the frame.
    */
@@ -25,7 +25,7 @@ export class FrameData {
   /**
    * Only free form frames are supported at the moment. Possible values: `freeform`, `heap`, `grid`, `rows`, `columns`
    */
-  'type'?: FrameData.TypeEnum = FrameData.TypeEnum.Freeform
+  'type'?: string | typeof FrameData.TypeEnum[keyof typeof FrameData.TypeEnum] = FrameData.TypeEnum.Freeform
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -56,22 +56,22 @@ export class FrameData {
 }
 
 export namespace FrameData {
-  export enum FormatEnum {
-    Custom = <any>'custom',
-    Desktop = <any>'desktop',
-    Phone = <any>'phone',
-    Tablet = <any>'tablet',
-    A4 = <any>'a4',
-    Letter = <any>'letter',
-    Ratio1x1 = <any>'ratio_1x1',
-    Ratio4x3 = <any>'ratio_4x3',
-    Ratio16x9 = <any>'ratio_16x9',
-  }
-  export enum TypeEnum {
-    Freeform = <any>'freeform',
-    Heap = <any>'heap',
-    Grid = <any>'grid',
-    Rows = <any>'rows',
-    Columns = <any>'columns',
-  }
+  export const FormatEnum = {
+    Custom: 'custom',
+    Desktop: 'desktop',
+    Phone: 'phone',
+    Tablet: 'tablet',
+    A4: 'a4',
+    Letter: 'letter',
+    Ratio1x1: 'ratio_1x1',
+    Ratio4x3: 'ratio_4x3',
+    Ratio16x9: 'ratio_16x9',
+  } as const
+  export const TypeEnum = {
+    Freeform: 'freeform',
+    Heap: 'heap',
+    Grid: 'grid',
+    Rows: 'rows',
+    Columns: 'columns',
+  } as const
 }

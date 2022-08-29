@@ -24,7 +24,7 @@ export class BoardMemberWithLinks {
   /**
    * Role of the board member. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`
    */
-  'role'?: BoardMemberWithLinks.RoleEnum
+  'role'?: string | typeof BoardMemberWithLinks.RoleEnum[keyof typeof BoardMemberWithLinks.RoleEnum]
   'links'?: SelfLink
   /**
    * Type of the object that is returned. In this case, `type` returns `board_member`.
@@ -70,12 +70,12 @@ export class BoardMemberWithLinks {
 }
 
 export namespace BoardMemberWithLinks {
-  export enum RoleEnum {
-    Viewer = <any>'viewer',
-    Commenter = <any>'commenter',
-    Editor = <any>'editor',
-    Coowner = <any>'coowner',
-    Owner = <any>'owner',
-    Guest = <any>'guest',
-  }
+  export const RoleEnum = {
+    Viewer: 'viewer',
+    Commenter: 'commenter',
+    Editor: 'editor',
+    Coowner: 'coowner',
+    Owner: 'owner',
+    Guest: 'guest',
+  } as const
 }

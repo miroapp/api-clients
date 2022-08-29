@@ -25,7 +25,7 @@ export class Caption {
   /**
    * The vertical position of the text on the connector. Default: middle Possible values: `top`, `middle`, `bottom`
    */
-  'textAlignVertical'?: Caption.TextAlignVerticalEnum
+  'textAlignVertical'?: string | typeof Caption.TextAlignVerticalEnum[keyof typeof Caption.TextAlignVerticalEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -56,9 +56,9 @@ export class Caption {
 }
 
 export namespace Caption {
-  export enum TextAlignVerticalEnum {
-    Top = <any>'top',
-    Middle = <any>'middle',
-    Bottom = <any>'bottom',
-  }
+  export const TextAlignVerticalEnum = {
+    Top: 'top',
+    Middle: 'middle',
+    Bottom: 'bottom',
+  } as const
 }

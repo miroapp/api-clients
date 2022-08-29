@@ -17,7 +17,8 @@ export class FrameChanges {
   /**
    * Only custom frames are supported at the moment. Possible values: `custom`
    */
-  'format'?: FrameChanges.FormatEnum = FrameChanges.FormatEnum.Custom
+  'format'?: string | typeof FrameChanges.FormatEnum[keyof typeof FrameChanges.FormatEnum] =
+    FrameChanges.FormatEnum.Custom
   /**
    * Title of the frame. This title appears at the top of the frame.
    */
@@ -25,7 +26,7 @@ export class FrameChanges {
   /**
    * Only free form frames are supported at the moment. Possible values: `freeform`
    */
-  'type'?: FrameChanges.TypeEnum = FrameChanges.TypeEnum.Freeform
+  'type'?: string | typeof FrameChanges.TypeEnum[keyof typeof FrameChanges.TypeEnum] = FrameChanges.TypeEnum.Freeform
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -56,10 +57,10 @@ export class FrameChanges {
 }
 
 export namespace FrameChanges {
-  export enum FormatEnum {
-    Custom = <any>'custom',
-  }
-  export enum TypeEnum {
-    Freeform = <any>'freeform',
-  }
+  export const FormatEnum = {
+    Custom: 'custom',
+  } as const
+  export const TypeEnum = {
+    Freeform: 'freeform',
+  } as const
 }
