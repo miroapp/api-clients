@@ -25,6 +25,7 @@ classDiagram
   FrameItem ..> Tag
   ImageItem ..> Tag
   Item ..> Tag
+  Item ..> Connector
   ShapeItem ..> Tag
   StickyNoteItem ..> Tag
   Tag ..> Item
@@ -101,28 +102,28 @@ classDiagram
 
   %% MUST
   class Board {
-    createAppCardItem() AppCardItem
-    createCardItem() CardItem
+    createAppCard() AppCardItem
+    createCard() CardItem
     createConnector() Connector
-    createDocumentItem() DocumentItem
-    createEmbedItem() EmbedItem
-    createFrameItem() FrameItem
-    createImageItem() ImageItem
-    createShapeItem() ShapeItem
-    createStickyNoteItem() StickyNoteItem
-    createTextItem() TextItem
-    getAppCardItem() AppCardItem
-    getCardItem() CardItem
+    createDocument() DocumentItem
+    createEmbed() EmbedItem
+    createFrame() FrameItem
+    createImage() ImageItem
+    createShape() ShapeItem
+    createStickyNote() StickyNoteItem
+    createText() TextItem
+    getAppCard() AppCardItem
+    getCard() CardItem
     getConnector() Connector
     getConnectors() Connector[]
-    getDocumentItem() DocumentItem
-    getEmbedItem() EmbedItem
-    getFrameItem() FrameItem
-    getImageItem() ImageItem
-    getShapeItem() ShapeItem
+    getDocument() DocumentItem
+    getEmbed() EmbedItem
+    getFrame() FrameItem
+    getImage() ImageItem
+    getShape() ShapeItem
+    getStickyNote() StickyNoteItem
+    getText() TextItem
     getItem() Item
-    getStickyNoteItem() StickyNoteItem
-    getTextItem() TextItem
     getItems() Item[]
   }
 
@@ -187,14 +188,14 @@ classDiagram
 
   %% NICE
   class FrameItem {
-    createAppCardItem() AppCardItem
-    createCardItem() CardItem
-    createDocumentItem() DocumentItem
-    createEmbedItem() EmbedItem
-    createImageItem() ImageItem
-    createShapeItem() ShapeItem
-    createStickyNoteItem() StickyNoteItem
-    createTextItem() TextItem
+    createAppCard() AppCardItem
+    createCard() CardItem
+    createDocument() DocumentItem
+    createEmbed() EmbedItem
+    createImage() ImageItem
+    createShape() ShapeItem
+    createStickyNote() StickyNoteItem
+    createText() TextItem
 
     getItems() Item[]
   }
@@ -225,6 +226,6 @@ classDiagram
   class Tag {
     update() void
     delete() void
-    getItemsByTag() Item[]
+    getItems() Item[]
   }
 ```
