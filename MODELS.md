@@ -117,10 +117,10 @@ classDiagram
     createAppCardItem() AppCardItem
     createCardItem() CardItem
     createConnector() Connector
-    createDocumentItemUsingUrl() DocumentItem
+    createDocumentItem() DocumentItem
     createEmbedItem() EmbedItem
     createFrameItem() FrameItem
-    createImageItemUsingUrl() ImageItem
+    createImageItem() ImageItem
     createShapeItem() ShapeItem
     createStickyNoteItem() StickyNoteItem
     createTextItem() TextItem
@@ -200,6 +200,15 @@ classDiagram
 
   %% NICE
   class FrameItem {
+    createAppCardItem() AppCardItem
+    createCardItem() CardItem
+    createDocumentItem() DocumentItem
+    createEmbedItem() EmbedItem
+    createImageItem() ImageItem
+    createShapeItem() ShapeItem
+    createStickyNoteItem() StickyNoteItem
+    createTextItem() TextItem
+
     getItemsWithinFrame() Item[]
   }
 
