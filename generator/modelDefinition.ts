@@ -252,7 +252,7 @@ const MODELS = {
       path: '../model/appCardItem',
     },
     methods: [
-      'updateAppCardItem',
+      {method: 'updateAppCardItem', alias: 'update'},
       {method: 'deleteAppCardItem', alias: 'delete'},
       {
         method: 'getTagsFromItem',

@@ -938,7 +938,7 @@ export class AppCardItem extends BaseAppCardItem {
   }
 
   /** {@inheritDoc api!MiroApi.updateAppCardItem} */
-  async updateAppCardItem(...args: GetParameters2<MiroApi['updateAppCardItem']>): Promise<void> {
+  async update(...args: GetParameters2<MiroApi['updateAppCardItem']>): Promise<void> {
     await this._api.updateAppCardItem(...this._headParams, ...args)
   }
 
