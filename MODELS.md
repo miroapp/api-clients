@@ -96,6 +96,7 @@ classDiagram
       getTags() Tag[]
       removeTag() void
       attachTag() void
+      connectTo() void
   }
   class CardItem {
       update() void
@@ -103,6 +104,7 @@ classDiagram
       getTags() Tag[]
       removeTag() void
       attachTag() void
+      connectTo() void
   }
   class DocumentItem {
       update() void
@@ -110,6 +112,7 @@ classDiagram
       getTags() Tag[]
       removeTag() void
       attachTag() void
+      connectTo() void
   }
   class EmbedItem {
       update() void
@@ -117,6 +120,7 @@ classDiagram
       getTags() Tag[]
       removeTag() void
       attachTag() void
+      connectTo() void
   }
   class FrameItem {
       update() void
@@ -131,6 +135,7 @@ classDiagram
       getTags() Tag[]
       removeTag() void
       attachTag() void
+      connectTo() void
   }
   class ShapeItem {
       update() void
@@ -138,6 +143,7 @@ classDiagram
       getTags() Tag[]
       removeTag() void
       attachTag() void
+      connectTo() void
   }
   class StickyNoteItem {
       update() void
@@ -145,6 +151,7 @@ classDiagram
       getTags() Tag[]
       removeTag() void
       attachTag() void
+      connectTo() void
   }
   class TextItem {
       update() void
@@ -152,6 +159,7 @@ classDiagram
       getTags() Tag[]
       removeTag() void
       attachTag() void
+      connectTo() void
   }
   class Connector {
       update() void
