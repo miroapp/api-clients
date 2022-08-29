@@ -1,65 +1,209 @@
 ```mermaid
-graph LR;
-Api-->|createBoard| Board
-Api-->|getBoards| Board
-Api-->|getOrganization| Organization
-Organization-->|createTeam| Team
-Organization-->|getDataClassification| DataClassification
-Organization-->|getDefaultTeamSettings| TeamSettings
-Organization-->|getOrganizationMember| OrganizationMember
-Organization-->|getOrganizationMembers| OrganizationMember
-Organization-->|getTeam| Team
-Organization-->|getTeams| Team
+classDiagram
+  direction TB
 
-Team-->|getBoardDataClassification| BoardDataClassification
-Team-->|getDataClassification| DataClassification
-Team-->|getTeamMember| TeamMember
-Team-->|getTeamMembers| TeamMember
-Team-->|getTeamSettings| TeamSettings
+  class Team {
+      getBoards() Board[]
+  }
+  class Board {
+      getAllItems() Item[]
+  }
+  class Api {
+      createBoard() Board
+      getBoard() Board
+      getBoards() Board[]
+      getOrganization() Organization
+      getAllBoards() Board[]
+  }
+  class Organization {
+      createTeam() Team
+      getDataClassification() DataClassification
+      getDefaultTeamSettings() TeamSettings
+      getOrganizationMember() OrganizationMember
+      getOrganizationMembers() OrganizationMember[]
+      getTeam() Team
+      getTeams() Team[]
+  }
+  class Team {
+      deleteTeam() void
+      deleteTeamMember() void
+      getBoardDataClassification() BoardDataClassification
+      setBoardDataClassification() void
+      setBoardDataClassificationBulk() void
+      getDataClassification() DataClassification
+      setDataClassification() void
+      inviteTeamMember() void
+      getTeamMember() TeamMember
+      getTeamMembers() TeamMember[]
+      updateTeam() void
+      getTeamSettings() TeamSettings
+      updateTeamSettings() void
+  }
+  class TeamMember {
+      update() void
+  }
+  class Board {
+      createAppCardItem() AppCardItem
+      createCardItem() CardItem
+      createConnector() Connector
+      createDocumentItemUsingUrl() DocumentItem
+      createEmbedItem() EmbedItem
+      createFrameItem() FrameItem
+      createImageItemUsingUrl() ImageItem
+      createShapeItem() ShapeItem
+      createStickyNoteItem() StickyNoteItem
+      createTag() Tag
+      createTextItem() TextItem
+      getMembers() BoardMember[]
+      getAppCardItem() AppCardItem
+      getCardItem() CardItem
+      getConnector() Connector
+      getConnectors() Connector[]
+      getDocumentItem() DocumentItem
+      getEmbedItem() EmbedItem
+      getFrameItem() FrameItem
+      getImageItem() ImageItem
+      getShapeItem() ShapeItem
+      getMember() BoardMember
+      getItem() Item
+      getStickyNoteItem() StickyNoteItem
+      getTag() Tag
+      getTags() Tag[]
+      getTextItem() TextItem
+      getItems() Item[]
+      getItemsWithinFrame() Item[]
+      copy() void
+      share() void
+      update() void
+      delete() void
+      removeMember() void
+      removeTag() void
+  }
+  class BoardMember {
+      update() void
+  }
+  class Item {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+      connectTo() void
+  }
+  class AppCardItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class CardItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class DocumentItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class EmbedItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class FrameItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class ImageItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class ShapeItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class StickyNoteItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class TextItem {
+      update() void
+      delete() void
+      getTags() Tag[]
+      removeTag() void
+      attachTag() void
+  }
+  class Connector {
+      update() void
+      delete() void
+  }
+  class Tag {
+      update() void
+      delete() void
+      getItemsByTag() Item[]
+  }
 
 
-
-
-Board-->|createAppCardItem| AppCardItem
-Board-->|createCardItem| CardItem
-Board-->|createConnector| Connector
-Board-->|createDocumentItemUsingUrl| DocumentItem
-Board-->|createEmbedItem| EmbedItem
-Board-->|createFrameItem| FrameItem
-Board-->|createImageItemUsingUrl| ImageItem
-Board-->|createShapeItem| ShapeItem
-Board-->|createStickyNoteItem| StickyNoteItem
-Board-->|createTag| Tag
-Board-->|createTextItem| TextItem
-Board-->|getMembers| BoardMember
-Board-->|getAppCardItem| AppCardItem
-Board-->|getCardItem| CardItem
-Board-->|getConnector| Connector
-Board-->|getConnectors| Connector
-Board-->|getDocumentItem| DocumentItem
-Board-->|getEmbedItem| EmbedItem
-Board-->|getFrameItem| FrameItem
-Board-->|getImageItem| ImageItem
-Board-->|getShapeItem| ShapeItem
-Board-->|getMember| BoardMember
-Board-->|getItem| Item
-Board-->|getStickyNoteItem| StickyNoteItem
-Board-->|getTag| Tag
-Board-->|getTags| Tag
-Board-->|getTextItem| TextItem
-Board-->|getItems| Item
-Board-->|getItemsWithinFrame| Item
-
-Item-->|getTags| Tag
-AppCardItem-->|getTags| Tag
-CardItem-->|getTags| Tag
-DocumentItem-->|getTags| Tag
-EmbedItem-->|getTags| Tag
-FrameItem-->|getTags| Tag
-ImageItem-->|getTags| Tag
-ShapeItem-->|getTags| Tag
-StickyNoteItem-->|getTags| Tag
-TextItem-->|getTags| Tag
-
-Tag-->|getItemsByTag| Item
+  Api ..> "*" Board
+  Api ..> "*" BoardMember
+  Api ..> "*" Connector
+  Api ..> "*" Item
+  Api ..> "*" Tag
+  Api ..> "1" AppCardItem
+  Api ..> "1" CardItem
+  Api ..> "1" DocumentItem
+  Api ..> "1" EmbedItem
+  Api ..> "1" FrameItem
+  Api ..> "1" ImageItem
+  Api ..> "1" Organization
+  Api ..> "1" ShapeItem
+  Api ..> "1" StickyNoteItem
+  Api ..> "1" TextItem
+  AppCardItem ..> "*" Tag
+  Board ..> "*" BoardMember
+  Board ..> "*" Connector
+  Board ..> "*" Item
+  Board ..> "*" Tag
+  Board ..> "1" AppCardItem
+  Board ..> "1" CardItem
+  Board ..> "1" DocumentItem
+  Board ..> "1" EmbedItem
+  Board ..> "1" FrameItem
+  Board ..> "1" ImageItem
+  Board ..> "1" ShapeItem
+  Board ..> "1" StickyNoteItem
+  Board ..> "1" TextItem
+  CardItem ..> "*" Tag
+  DocumentItem ..> "*" Tag
+  EmbedItem ..> "*" Tag
+  FrameItem ..> "*" Tag
+  ImageItem ..> "*" Tag
+  Item ..> "*" Tag
+  ShapeItem ..> "*" Tag
+  StickyNoteItem ..> "*" Tag
+  Tag ..> "*" Item
+  Team ..> "*" Board
+  Team ..> "*" TeamMember
+  TextItem ..> "*" Tag
+  Organization ..> "*" Team
 ```
