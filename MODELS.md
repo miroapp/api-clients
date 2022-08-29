@@ -2,47 +2,53 @@
 classDiagram
   direction TB
 
-  class Team {
-      getBoards() Board[]
-  }
-  class Board {
-      getAllItems() Item[]
-  }
   class Api {
+      %% MUST
       createBoard() Board
       getBoard() Board
       getBoards() Board[]
       getOrganization() Organization
+
+      %% NICE
       getAllBoards() Board[]
   }
   class Organization {
+      %% MUST
       createTeam() Team
+      getTeam() Team
+      getTeams() Team[]
+
+      %% NICE
       getDataClassification() DataClassification
       getDefaultTeamSettings() TeamSettings
       getOrganizationMember() OrganizationMember
       getOrganizationMembers() OrganizationMember[]
-      getTeam() Team
-      getTeams() Team[]
   }
   class Team {
+      %% MUST
+      updateTeam() void
+      getBoards() Board[]
+      inviteTeamMember() void
       deleteTeam() void
       deleteTeamMember() void
+      getTeamMember() TeamMember
+      getTeamMembers() TeamMember[]
+
+      %% NICE
       getBoardDataClassification() BoardDataClassification
       setBoardDataClassification() void
       setBoardDataClassificationBulk() void
       getDataClassification() DataClassification
       setDataClassification() void
-      inviteTeamMember() void
-      getTeamMember() TeamMember
-      getTeamMembers() TeamMember[]
-      updateTeam() void
       getTeamSettings() TeamSettings
       updateTeamSettings() void
   }
   class TeamMember {
+      %% NICE
       update() void
   }
   class Board {
+      %% MUST
       createAppCardItem() AppCardItem
       createCardItem() CardItem
       createConnector() Connector
@@ -52,9 +58,7 @@ classDiagram
       createImageItemUsingUrl() ImageItem
       createShapeItem() ShapeItem
       createStickyNoteItem() StickyNoteItem
-      createTag() Tag
       createTextItem() TextItem
-      getMembers() BoardMember[]
       getAppCardItem() AppCardItem
       getCardItem() CardItem
       getConnector() Connector
@@ -64,14 +68,21 @@ classDiagram
       getFrameItem() FrameItem
       getImageItem() ImageItem
       getShapeItem() ShapeItem
-      getMember() BoardMember
       getItem() Item
       getStickyNoteItem() StickyNoteItem
-      getTag() Tag
-      getTags() Tag[]
       getTextItem() TextItem
       getItems() Item[]
+
+      %% NICE
+      createTag() Tag
+      getTag() Tag
+      getTags() Tag[]
+      getAllTags() Tag[]
+      getAllItems() Item[]
+      getMember() BoardMember
       getItemsWithinFrame() Item[]
+      getMembers() BoardMember[]
+      getAllMembers() BoardMember[]
       copy() void
       share() void
       update() void
@@ -80,92 +91,135 @@ classDiagram
       removeTag() void
   }
   class BoardMember {
+      %% NICE
       update() void
   }
   class Item {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class AppCardItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class CardItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class DocumentItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class EmbedItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class FrameItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
+      getItemsWithinFrame() Item[]
       getTags() Tag[]
       removeTag() void
       attachTag() void
   }
   class ImageItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class ShapeItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class StickyNoteItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class TextItem {
+      %% MUST
       update() void
       delete() void
+
+      %% NICE
       getTags() Tag[]
       removeTag() void
       attachTag() void
       connectTo() void
+      getParent() Frame
   }
   class Connector {
+      %% MUST
       update() void
       delete() void
   }
   class Tag {
+      %% NICE
       update() void
       delete() void
       getItemsByTag() Item[]
