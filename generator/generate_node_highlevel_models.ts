@@ -2,8 +2,8 @@ import {Model, getModels} from './modelDefinition'
 
 export function run(models: Record<string, Model>) {
   function renderModel(name: string, model: Model): string {
-    const isLocal = !model.extendedModel?.path
-    const extendedModelName = model.extendedModel?.path ? `Base${name}` : model.extendedModel.name
+    const isLocal = model.extendedModel && !model.extendedModel.path
+    const extendedModelName = model.extendedModel?.path ? `Base${name}` : model.extendedModel?.name || 'Object'
 
     return `
 
@@ -13,7 +13,7 @@ export class ${name} extends ${extendedModelName} {
     /** @hidden */
     _headParams: [${model.props.map((_) => `string`).join(', ')}]
 
-    constructor(api: MiroApi, headParams: ${name}['_headParams'], props: ${`KeepBase<${extendedModelName}>`}) {
+    constructor(api: MiroApi, headParams: ${name}['_headParams'], props: KeepBase<${extendedModelName}>) {
         super(${isLocal ? 'api, headParams, props' : ''})
         this._api = api
         this._headParams = headParams

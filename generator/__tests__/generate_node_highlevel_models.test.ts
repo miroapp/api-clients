@@ -29,7 +29,7 @@ export class Hello extends Object {
     /** @hidden */
     _headParams: []
 
-    constructor(api: MiroApi, headParams: Hello['_headParams'], props: object) {
+    constructor(api: MiroApi, headParams: Hello['_headParams'], props: KeepBase<Object>) {
         super()
         this._api = api
         this._headParams = headParams
@@ -72,7 +72,7 @@ export class Hello extends Object {
   /** @hidden */
   _headParams: []
 
-  constructor(api: MiroApi, headParams: Hello['_headParams'], props: object) {
+  constructor(api: MiroApi, headParams: Hello['_headParams'], props: KeepBase<Object>) {
     super()
     this._api = api
     this._headParams = headParams
@@ -99,7 +99,7 @@ export class Item extends Object {
   constructor(
     api: MiroApi,
     headParams: Item["_headParams"],
-    props: object
+    props: KeepBase<Object>
   ) {
     super();
     this._api = api;
