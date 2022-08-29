@@ -2,227 +2,270 @@
 classDiagram
   direction TB
 
+  %% MUST
   class Api {
-      %% MUST
-      createBoard() Board
-      getBoard() Board
-      getBoards() Board[]
-      getOrganization() Organization
-
-      %% NICE
-      getAllBoards() Board[]
+    createBoard() Board
+    getBoard() Board
+    getBoards() Board[]
+    getOrganization() Organization
   }
+
+  %% NICE
+  class Api {
+    getAllBoards() Board[]
+  }
+  %% MUST
   class Organization {
-      %% MUST
-      createTeam() Team
-      getTeam() Team
-      getTeams() Team[]
-
-      %% NICE
-      getDataClassification() DataClassification
-      getDefaultTeamSettings() TeamSettings
-      getOrganizationMember() OrganizationMember
-      getOrganizationMembers() OrganizationMember[]
+    createTeam() Team
+    getTeam() Team
+    getTeams() Team[]
   }
+
+  %% NICE
+  class Organization {
+    getDataClassification() DataClassification
+    getDefaultTeamSettings() TeamSettings
+    getOrganizationMember() OrganizationMember
+    getOrganizationMembers() OrganizationMember[]
+  }
+  %% MUST
   class Team {
-      %% MUST
-      updateTeam() void
-      getBoards() Board[]
-      inviteTeamMember() void
-      deleteTeam() void
-      deleteTeamMember() void
-      getTeamMember() TeamMember
-      getTeamMembers() TeamMember[]
-
-      %% NICE
-      getBoardDataClassification() BoardDataClassification
-      setBoardDataClassification() void
-      setBoardDataClassificationBulk() void
-      getDataClassification() DataClassification
-      setDataClassification() void
-      getTeamSettings() TeamSettings
-      updateTeamSettings() void
+    updateTeam() void
+    getBoards() Board[]
+    inviteTeamMember() void
+    deleteTeam() void
+    deleteTeamMember() void
+    getTeamMember() TeamMember
+    getTeamMembers() TeamMember[]
   }
+
+  %% NICE
+  class Team {
+    getBoardDataClassification() BoardDataClassification
+    setBoardDataClassification() void
+    setBoardDataClassificationBulk() void
+    getDataClassification() DataClassification
+    setDataClassification() void
+    getTeamSettings() TeamSettings
+    updateTeamSettings() void
+  }
+
+  %% NICE
   class TeamMember {
-      %% NICE
-      update() void
+    update() void
   }
+
+  %% MUST
   class Board {
-      %% MUST
-      createAppCardItem() AppCardItem
-      createCardItem() CardItem
-      createConnector() Connector
-      createDocumentItemUsingUrl() DocumentItem
-      createEmbedItem() EmbedItem
-      createFrameItem() FrameItem
-      createImageItemUsingUrl() ImageItem
-      createShapeItem() ShapeItem
-      createStickyNoteItem() StickyNoteItem
-      createTextItem() TextItem
-      getAppCardItem() AppCardItem
-      getCardItem() CardItem
-      getConnector() Connector
-      getConnectors() Connector[]
-      getDocumentItem() DocumentItem
-      getEmbedItem() EmbedItem
-      getFrameItem() FrameItem
-      getImageItem() ImageItem
-      getShapeItem() ShapeItem
-      getItem() Item
-      getStickyNoteItem() StickyNoteItem
-      getTextItem() TextItem
-      getItems() Item[]
-
-      %% NICE
-      createTag() Tag
-      getTag() Tag
-      getTags() Tag[]
-      getAllTags() Tag[]
-      getAllItems() Item[]
-      getMember() BoardMember
-      getItemsWithinFrame() Item[]
-      getMembers() BoardMember[]
-      getAllMembers() BoardMember[]
-      copy() void
-      share() void
-      update() void
-      delete() void
-      removeMember() void
-      removeTag() void
+    createAppCardItem() AppCardItem
+    createCardItem() CardItem
+    createConnector() Connector
+    createDocumentItemUsingUrl() DocumentItem
+    createEmbedItem() EmbedItem
+    createFrameItem() FrameItem
+    createImageItemUsingUrl() ImageItem
+    createShapeItem() ShapeItem
+    createStickyNoteItem() StickyNoteItem
+    createTextItem() TextItem
+    getAppCardItem() AppCardItem
+    getCardItem() CardItem
+    getConnector() Connector
+    getConnectors() Connector[]
+    getDocumentItem() DocumentItem
+    getEmbedItem() EmbedItem
+    getFrameItem() FrameItem
+    getImageItem() ImageItem
+    getShapeItem() ShapeItem
+    getItem() Item
+    getStickyNoteItem() StickyNoteItem
+    getTextItem() TextItem
+    getItems() Item[]
   }
+
+  %% NICE
+  class Board {
+    createTag() Tag
+    getTag() Tag
+    getTags() Tag[]
+    getAllTags() Tag[]
+    getAllItems() Item[]
+    getMember() BoardMember
+    getItemsWithinFrame() Item[]
+    getMembers() BoardMember[]
+    getAllMembers() BoardMember[]
+    copy() void
+    share() void
+    update() void
+    delete() void
+    removeMember() void
+    removeTag() void
+  }
+
+  %% NICE
   class BoardMember {
-      %% NICE
-      update() void
+    update() void
   }
+
+  %% MUST
   class Item {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class Item {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
+  }
+
+  %% MUST
   class AppCardItem {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class AppCardItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
+  }
+
+  %% MUST
   class CardItem {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class CardItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
+  }
+
+  %% MUST
   class DocumentItem {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class DocumentItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
+  }
+
+  %% MUST
   class EmbedItem {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class EmbedItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
+  }
+
+  %% MUST
   class FrameItem {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getItemsWithinFrame() Item[]
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class FrameItem {
+    getItemsWithinFrame() Item[]
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+  }
+
+  %% MUST
   class ImageItem {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class ImageItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
+  }
+
+  %% MUST
   class ShapeItem {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class ShapeItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
+  }
+
+  %% MUST
   class StickyNoteItem {
-      %% MUST
-      update() void
-      delete() void
-
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+    update() void
+    delete() void
   }
+
+  %% NICE
+  class StickyNoteItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
+  }
+
   class TextItem {
-      %% MUST
-      update() void
-      delete() void
+    %% MUST
+    update() void
+    delete() void
+  }
 
-      %% NICE
-      getTags() Tag[]
-      removeTag() void
-      attachTag() void
-      connectTo() void
-      getParent() Frame
+  %% NICE
+  class TextItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
+    connectTo() void
+    getParent() Frame
   }
+
+  %% MUST
   class Connector {
-      %% MUST
-      update() void
-      delete() void
+    update() void
+    delete() void
   }
+
+  %% NICE
   class Tag {
-      %% NICE
-      update() void
-      delete() void
-      getItemsByTag() Item[]
+    update() void
+    delete() void
+    getItemsByTag() Item[]
   }
 
 
