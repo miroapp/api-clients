@@ -209,7 +209,7 @@ classDiagram
     createStickyNoteItem() StickyNoteItem
     createTextItem() TextItem
 
-    getItemsWithinFrame() Item[]
+    getItems() Item[]
   }
 
   %% MUST
