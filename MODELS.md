@@ -2,6 +2,61 @@
 classDiagram
   direction TB
 
+  %% Relationships
+  Api ..> Board
+  Api ..> BoardMember
+  Api ..> Connector
+  Api ..> Item
+  Api ..> Tag
+  Api ..> AppCardItem
+  Api ..> CardItem
+  Api ..> DocumentItem
+  Api ..> EmbedItem
+  Api ..> FrameItem
+  Api ..> ImageItem
+  Api ..> Organization
+  Api ..> ShapeItem
+  Api ..> StickyNoteItem
+  Api ..> TextItem
+  Board ..> BoardMember
+  Board ..> Connector
+  Board ..> Item
+  Board ..> Tag
+  Board ..> AppCardItem
+  Board ..> CardItem
+  Board ..> DocumentItem
+  Board ..> EmbedItem
+  Board ..> FrameItem
+  Board ..> ImageItem
+  Board ..> ShapeItem
+  Board ..> StickyNoteItem
+  Board ..> TextItem
+  AppCardItem ..> Tag
+  CardItem ..> Tag
+  DocumentItem ..> Tag
+  EmbedItem ..> Tag
+  FrameItem ..> Tag
+  ImageItem ..> Tag
+  Item ..> Tag
+  ShapeItem ..> Tag
+  StickyNoteItem ..> Tag
+  Tag ..> Item
+  Team ..> Board
+  Team ..> TeamMember
+  TextItem ..> Tag
+  Organization ..> Team
+
+  %% Items extend generic item
+  Item <|--  AppCardItem
+  Item <|--  CardItem
+  Item <|--  DocumentItem
+  Item <|--  EmbedItem
+  Item <|--  FrameItem
+  Item <|--  ImageItem
+  Item <|--  ShapeItem
+  Item <|--  StickyNoteItem
+  Item <|--  TextItem
+
   %% MUST
   class Api {
     createBoard() Board
@@ -125,136 +180,43 @@ classDiagram
 
   %% MUST
   class AppCardItem {
-    update() void
-    delete() void
-  }
-
-  %% NICE
-  class AppCardItem {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
-    connectTo() void
-    getParent() Frame
   }
 
   %% MUST
   class CardItem {
-    update() void
-    delete() void
-  }
-
-  %% NICE
-  class CardItem {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
-    connectTo() void
-    getParent() Frame
   }
 
   %% MUST
   class DocumentItem {
-    update() void
-    delete() void
-  }
-
-  %% NICE
-  class DocumentItem {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
-    connectTo() void
-    getParent() Frame
   }
 
   %% MUST
   class EmbedItem {
-    update() void
-    delete() void
-  }
-
-  %% NICE
-  class EmbedItem {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
-    connectTo() void
-    getParent() Frame
   }
 
   %% MUST
   class FrameItem {
-    update() void
-    delete() void
   }
 
   %% NICE
   class FrameItem {
     getItemsWithinFrame() Item[]
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
   }
 
   %% MUST
   class ImageItem {
-    update() void
-    delete() void
-  }
-
-  %% NICE
-  class ImageItem {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
-    connectTo() void
-    getParent() Frame
   }
 
   %% MUST
   class ShapeItem {
-    update() void
-    delete() void
-  }
-
-  %% NICE
-  class ShapeItem {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
-    connectTo() void
-    getParent() Frame
   }
 
   %% MUST
   class StickyNoteItem {
-    update() void
-    delete() void
   }
 
-  %% NICE
-  class StickyNoteItem {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
-    connectTo() void
-    getParent() Frame
-  }
-
+  %% MUST
   class TextItem {
-    %% MUST
-    update() void
-    delete() void
-  }
-
-  %% NICE
-  class TextItem {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
-    connectTo() void
-    getParent() Frame
   }
 
   %% MUST
@@ -269,48 +231,4 @@ classDiagram
     delete() void
     getItemsByTag() Item[]
   }
-
-
-  Api ..> "*" Board
-  Api ..> "*" BoardMember
-  Api ..> "*" Connector
-  Api ..> "*" Item
-  Api ..> "*" Tag
-  Api ..> "1" AppCardItem
-  Api ..> "1" CardItem
-  Api ..> "1" DocumentItem
-  Api ..> "1" EmbedItem
-  Api ..> "1" FrameItem
-  Api ..> "1" ImageItem
-  Api ..> "1" Organization
-  Api ..> "1" ShapeItem
-  Api ..> "1" StickyNoteItem
-  Api ..> "1" TextItem
-  AppCardItem ..> "*" Tag
-  Board ..> "*" BoardMember
-  Board ..> "*" Connector
-  Board ..> "*" Item
-  Board ..> "*" Tag
-  Board ..> "1" AppCardItem
-  Board ..> "1" CardItem
-  Board ..> "1" DocumentItem
-  Board ..> "1" EmbedItem
-  Board ..> "1" FrameItem
-  Board ..> "1" ImageItem
-  Board ..> "1" ShapeItem
-  Board ..> "1" StickyNoteItem
-  Board ..> "1" TextItem
-  CardItem ..> "*" Tag
-  DocumentItem ..> "*" Tag
-  EmbedItem ..> "*" Tag
-  FrameItem ..> "*" Tag
-  ImageItem ..> "*" Tag
-  Item ..> "*" Tag
-  ShapeItem ..> "*" Tag
-  StickyNoteItem ..> "*" Tag
-  Tag ..> "*" Item
-  Team ..> "*" Board
-  Team ..> "*" TeamMember
-  TextItem ..> "*" Tag
-  Organization ..> "*" Team
 ```
