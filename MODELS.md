@@ -4,20 +4,7 @@ classDiagram
 
   %% Relationships
   Api ..> Board
-  Api ..> BoardMember
-  Api ..> Connector
-  Api ..> Item
-  Api ..> Tag
-  Api ..> AppCardItem
-  Api ..> CardItem
-  Api ..> DocumentItem
-  Api ..> EmbedItem
-  Api ..> FrameItem
-  Api ..> ImageItem
   Api ..> Organization
-  Api ..> ShapeItem
-  Api ..> StickyNoteItem
-  Api ..> TextItem
   Board ..> BoardMember
   Board ..> Connector
   Board ..> Item
@@ -174,7 +161,7 @@ classDiagram
     getTags() Tag[]
     removeTag() void
     attachTag() void
-    connectTo() void
+    connectTo() Connector
     getParent() Frame
   }
 
