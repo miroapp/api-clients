@@ -327,7 +327,8 @@ const MODELS = {
   FrameItem: {
     props: ['boardId', 'id'],
     extendedModel: {
-      name: 'Item',
+      name: 'FrameItem',
+      path: '../model/frameItem',
     },
     methods: [
       {method: 'updateFrameItem', alias: 'update'},

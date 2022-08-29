@@ -13,6 +13,8 @@ import {Board as BaseBoard} from './Board'
 import {BoardMember as BaseBoardMember} from './../model/boardMember'
 import {Item as BaseItem} from './Item'
 
+import {FrameItem as BaseFrameItem} from './../model/frameItem'
+
 import {ConnectorWithLinks as BaseConnector} from './../model/connectorWithLinks'
 import {Tag as BaseTag} from './../model/tag'
 
@@ -1096,14 +1098,14 @@ export class EmbedItem extends Item {
   }
 }
 
-export class FrameItem extends Item {
+export class FrameItem extends BaseFrameItem {
   /** @hidden */
   _api: MiroApi
   /** @hidden */
   _headParams: [string, string]
 
-  constructor(api: MiroApi, headParams: FrameItem['_headParams'], props: KeepBase<Item>) {
-    super(api, headParams, props)
+  constructor(api: MiroApi, headParams: FrameItem['_headParams'], props: KeepBase<BaseFrameItem>) {
+    super()
     this._api = api
     this._headParams = headParams
     Object.assign(this, props)
