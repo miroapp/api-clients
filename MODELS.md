@@ -14,6 +14,7 @@ classDiagram
   class Api {
     getAllBoards() Board[]
   }
+
   %% MUST
   class Organization {
     createTeam() Team
@@ -28,6 +29,7 @@ classDiagram
     getOrganizationMember() OrganizationMember
     getOrganizationMembers() OrganizationMember[]
   }
+
   %% MUST
   class Team {
     updateTeam() void
