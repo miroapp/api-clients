@@ -1,22 +1,32 @@
-import {Model, getModels} from './modelDefinition'
+import {Model, getModels, ModelProps} from './modelDefinition'
 
 export function run(models: Record<string, Model>) {
   function renderModel(name: string, model: Model): string {
     const isLocal = model.extendedModel && !model.extendedModel.path
     const extendedModelName = model.extendedModel?.path ? `Base${name}` : model.extendedModel?.name || 'Object'
 
+    function mapProps(props: ModelProps) {
+      return props.map(({name, type}) => `${name}: ${type}`)
+    }
+
+    const constructorParams = [
+      {name: 'api', type: 'MiroApi'},
+      ...model.props,
+      {name: 'props', type: `KeepBase<${extendedModelName}>`},
+    ]
+
     return `
 
 export class ${name} extends ${extendedModelName} {
     /** @hidden */
     _api: MiroApi
-    /** @hidden */
-    _headParams: [${model.props.map((_) => `string`).join(', ')}]
 
-    constructor(api: MiroApi, headParams: ${name}['_headParams'], props: KeepBase<${extendedModelName}>) {
-        super(${isLocal ? 'api, headParams, props' : ''})
+    ${mapProps(model.props).join('\n')}
+
+    constructor(${mapProps(constructorParams).join(', ')}) {
+        super(${isLocal ? ['api', ...model.props.map(({name}) => name), 'props'].join(', ') : ''})
         this._api = api
-        this._headParams = headParams
+        ${model.props.map(({name}) => `this.${name} = ${name}`).join('\n')}
         Object.assign(this, props)
     }
 
@@ -27,65 +37,69 @@ export class ${name} extends ${extendedModelName} {
 `
   }
 
-  function renderMethods(model?: Model, props?: string[]) {
+  function renderMethods(model?: Model, props?: ModelProps) {
     if (!model) return ''
     return model.methods
-      .map((m) => {
-        const returns = m.returns
+      .map((method) => {
+        const returns = method.returns
 
         return `
-/** {@inheritDoc api!MiroApi.${m.method}} */
-async ${m.alias}(...args: GetParameters${m.topLevelCall ? 1 : props.length}<MiroApi['${m.method}']>): Promise<${
-          returns ? returns : 'void'
-        }${m.paginated ? '[]' : ''}> {
-${renderFunctionBody(m, props)}
+/** {@inheritDoc api!MiroApi.${method.method}} */
+async ${method.alias}(...parameters: GetParameters${method.topLevelCall ? 1 : props.length}<MiroApi['${
+          method.method
+        }']>): Promise<${returns ? returns : 'void'}${method.paginated ? '[]' : ''}> {
+${renderFunctionBody(method, props)}
 }
 `
       })
       .join('\n')
   }
 
-  function renderApiCall(m: Model['methods'][number], props: string[]) {
-    return `await this._api.${m.method}(${
-      m.topLevelCall ? `this._headParams[${props.length - 1}]` : '...this._headParams'
-    }, ...args)`
+  function renderApiCall(method: Model['methods'][number], props: ModelProps) {
+    const apiCallArguments = method.topLevelCall
+      ? [`this.${props[props.length - 1].name}?.toString() || ''`]
+      : props.map(({name}) => `this.${name}?.toString() || ''`)
+
+    apiCallArguments.push('...parameters')
+
+    return `await this._api.${method.method}(${apiCallArguments.join(',')})`
   }
 
-  function renderFunctionBody(m: Model['methods'][number], props: string[]) {
-    const apiCall = renderApiCall(m, props)
-    const returns = m.returns
-    if (!returns) return apiCall
+  function renderFunctionBody(method: Model['methods'][number], props: ModelProps) {
+    const apiCall = renderApiCall(method, props)
+    const returnClassName = method.returns
+    if (!returnClassName) return apiCall
 
-    const paginatedData = m.paginated === true ? 'result' : `result.${m.paginated}`
+    const paginatedData = typeof method.paginated === 'string' ? `result.${method.paginated}` : 'result'
 
-    const returnModel = models[returns]
+    const returnModel = models[returnClassName]
 
     return `
         const result = (${apiCall}).body;
 
-        ${m.paginated ? `return ${paginatedData} ? ${paginatedData}.map(result => { ` : ''}
+        ${method.paginated ? `return ${paginatedData} ? ${paginatedData}.map(result => { ` : ''}
 
-        ${renderReturnValue(returns, returnModel, props)}
+        ${renderReturnValue(returnClassName, returnModel, props)}
 
-        ${m.paginated ? '}) : []' : ''}
+        ${method.paginated ? '}) : []' : ''}
 `
   }
 
-  function renderModelContructorArgs(returnModel: Model, props: string[]): string {
-    return returnModel.props
-      .map((_, i, {length}) => {
-        if (i === length - 1) return `toString(result.${returnModel.id})`
-        return !props[i] ? `args[${i}]` : `this._headParams[${i}]`
-      })
-      .join(',')
+  function renderModelContructorArgs(model: Model, props: ModelProps): string {
+    return [
+      'this._api',
+      ...model.props.map((_, i, {length}) => {
+        if (i === length - 1) return `result.${model.id}`
+        return !props[i] ? `parameters[${i}]` : `this.${props[i].name}`
+      }),
+      'result',
+    ].join(',')
   }
 
-  function renderReturnValue(returns: string | number, returnModel: Model, props: string[]) {
+  function renderReturnValue(returns: string | number, model: Model, props: ModelProps) {
     return `
         return new ${returns} (
-            this._api,
-            [${renderModelContructorArgs(returnModel, props)}],
-            result
+            ${renderModelContructorArgs(model, props)}
         )
 `
   }

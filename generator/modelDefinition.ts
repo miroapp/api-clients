@@ -19,7 +19,7 @@ const MODELS = {
   },
 
   Organization: {
-    props: ['orgId'],
+    props: [{name: 'id', type: 'string|undefined'}],
     extendedModel: {
       name: 'Organization',
       path: '../model/organization',
@@ -57,7 +57,10 @@ const MODELS = {
   },
 
   OrganizationMember: {
-    props: ['orgId', 'userId'],
+    props: [
+      {name: 'orgId', type: 'string|undefined'},
+      {name: 'id', type: 'string|undefined'},
+    ],
     extendedModel: {
       name: 'OrganizationMember',
       path: '../model/organizationMember',
@@ -66,7 +69,10 @@ const MODELS = {
   },
 
   Team: {
-    props: ['orgId', 'teamId'],
+    props: [
+      {name: 'orgId', type: 'string|undefined'},
+      {name: 'teamId', type: 'number|undefined'},
+    ],
     extendedModel: {
       name: 'Team',
       path: 'Team',
@@ -140,7 +146,11 @@ const MODELS = {
 
   TeamMember: {
     id: 'memberId',
-    props: ['orgId', 'teamId', 'memberId'],
+    props: [
+      {name: 'orgId', type: 'string|undefined'},
+      {name: 'teamId', type: 'number|undefined'},
+      {name: 'memberId', type: 'number|undefined'},
+    ],
     extendedModel: {
       name: 'TeamMember',
       path: '../model/teamMember',
@@ -158,7 +168,7 @@ const MODELS = {
   },
 
   Board: {
-    props: ['id'],
+    props: [{name: 'id', type: 'string|undefined'}],
     extendedModel: {
       name: 'Board',
       path: 'Board',
@@ -220,7 +230,7 @@ const MODELS = {
   },
 
   BoardMember: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'BoardMember',
       path: '../model/boardMember',
@@ -229,7 +239,10 @@ const MODELS = {
   },
 
   Item: {
-    props: ['boardId', 'id'],
+    props: [
+      {name: 'boardId', type: 'string|undefined'},
+      {name: 'id', type: 'number|undefined'},
+    ],
     extendedModel: {
       name: 'Item',
       path: 'Item',
@@ -249,7 +262,7 @@ const MODELS = {
   },
 
   AppCardItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Item',
     },
@@ -268,7 +281,7 @@ const MODELS = {
   },
 
   CardItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Item',
     },
@@ -287,7 +300,7 @@ const MODELS = {
   },
 
   DocumentItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Item',
     },
@@ -306,7 +319,7 @@ const MODELS = {
   },
 
   EmbedItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Item',
     },
@@ -325,10 +338,10 @@ const MODELS = {
   },
 
   FrameItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'FrameItem',
-      path: '../model/frameItem',
+      path: 'FrameItem',
     },
     methods: [
       {method: 'updateFrameItem', alias: 'update'},
@@ -345,7 +358,7 @@ const MODELS = {
   },
 
   ImageItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Item',
     },
@@ -364,7 +377,7 @@ const MODELS = {
   },
 
   ShapeItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Item',
     },
@@ -383,7 +396,7 @@ const MODELS = {
   },
 
   StickyNoteItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Item',
     },
@@ -402,7 +415,7 @@ const MODELS = {
   },
 
   TextItem: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Item',
     },
@@ -421,7 +434,7 @@ const MODELS = {
   },
 
   Connector: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'string|undefined'}],
     extendedModel: {
       name: 'ConnectorWithLinks',
       path: '../model/connectorWithLinks',
@@ -433,7 +446,7 @@ const MODELS = {
   },
 
   Tag: {
-    props: ['boardId', 'id'],
+    props: ['boardId', {name: 'id', type: 'number|undefined'}],
     extendedModel: {
       name: 'Tag',
       path: '../model/tag',
@@ -457,7 +470,7 @@ export function getModels() {
 
 export interface SimpleModel {
   id?: string
-  props: string[]
+  props: Array<{name: string; type: string} | string>
   extendedModel?: {
     name: string
     path: string
@@ -475,9 +488,11 @@ export interface SimpleModel {
   >
 }
 
+export type ModelProps = Array<{type: string; name: string}>
+
 export interface Model {
   id: string
-  props: string[]
+  props: ModelProps
   extendedModel?: {
     name: string
     path: string
@@ -503,7 +518,7 @@ function isCorrectModelName(n: string | undefined): n is ModelName | undefined {
 export function normalizeTheModel(model: SimpleModel): Model {
   return {
     id: model.id || 'id',
-    props: model.props || [],
+    props: model.props.map((prop) => (typeof prop === 'string' ? {name: prop, type: 'string|undefined'} : prop)) || [],
     extendedModel: model.extendedModel,
     inherits: model.inherits,
     methods: model.methods.map((methodConfig) => {

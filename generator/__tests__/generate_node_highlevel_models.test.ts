@@ -26,13 +26,11 @@ import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBas
 export class Hello extends Object {
     /** @hidden */
     _api: MiroApi
-    /** @hidden */
-    _headParams: []
 
-    constructor(api: MiroApi, headParams: Hello['_headParams'], props: KeepBase<Object>) {
+    constructor(api: MiroApi, props: KeepBase<Object>) {
         super()
         this._api = api
-        this._headParams = headParams
+
         Object.assign(this, props)
     }
 }
@@ -45,7 +43,7 @@ export class Hello extends Object {
       run({
         Hello: {
           id: 'id',
-          props: [],
+          props: [{name: 'id', type: 'string'}],
           methods: [
             {
               method: 'getSomeItem',
@@ -69,41 +67,38 @@ import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBas
 export class Hello extends Object {
   /** @hidden */
   _api: MiroApi
-  /** @hidden */
-  _headParams: []
 
-  constructor(api: MiroApi, headParams: Hello['_headParams'], props: KeepBase<Object>) {
+  id: string
+
+  constructor(api: MiroApi, id: string, props: KeepBase<Object>) {
     super()
     this._api = api
-    this._headParams = headParams
+    this.id = id
     Object.assign(this, props)
   }
 
   /** {@inheritDoc api!MiroApi.getSomeItem} */
   async getItem(
-    ...args: GetParameters0<MiroApi["getSomeItem"]>
+    ...parameters: GetParameters1<MiroApi["getSomeItem"]>
   ): Promise<Item> {
-    const result = (await this._api.getSomeItem(...this._headParams, ...args))
+    const result = (await this._api.getSomeItem(this.id?.toString() || '', ...parameters))
       .body;
 
-    return new Item(this._api, [], result);
+    return new Item(this._api, result);
   }
 }
 
 export class Item extends Object {
   /** @hidden */
   _api: MiroApi;
-  /** @hidden */
-  _headParams: [];
 
   constructor(
     api: MiroApi,
-    headParams: Item["_headParams"],
     props: KeepBase<Object>
   ) {
     super();
     this._api = api;
-    this._headParams = headParams;
+
     Object.assign(this, props);
   }
 }

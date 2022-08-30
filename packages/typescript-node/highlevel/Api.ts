@@ -3,7 +3,6 @@ import {MiroApi} from '../api'
 
 export abstract class Api {
   abstract _api: MiroApi
-  abstract _headParams: []
 
   /**
    * Get all boards matching the search query
@@ -20,7 +19,7 @@ export abstract class Api {
       ).body
 
       for (const board of response.data || []) {
-        yield new Board(this._api, [board.id || ''], board)
+        yield new Board(this._api, board.id, board)
       }
 
       const responseOffset = response.offset || 0
