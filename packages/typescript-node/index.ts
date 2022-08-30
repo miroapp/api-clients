@@ -220,7 +220,7 @@ export class MiroApi extends HighlevelApi {
     logger?: Logger,
     clientId?: string,
   ) {
-    super(new MiroLowlevelApi(accessToken, basePath, logger, clientId), [], {})
+    super(new MiroLowlevelApi(accessToken, basePath, logger, clientId), {})
   }
 }
 
