@@ -58,9 +58,9 @@ See [the example usage](./examples/fastify.ts) with _fastify_ web framework.
 
 ### Methods & Models
 
-`.as(userId: string)` method returns the instance of the [Api](https://miroapp.github.io/api-clients/classes/nested_model.Api.html) class. This instance provides methods to create and get the list of `Board` models which then provides methods to get `Item` model and so forth.
+`.as(userId: string)` method returns the instance of the [Api](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class. This instance provides methods to create and get the list of `Board` models which then provides methods to get `Item` model and so forth.
 
-Client provides a few helper methods that make it easy to paginate over all resources. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/nested_model.Api.html#getAllBoards) method returns an async iterator that can be used to iterate over all available boards:
+Client provides a few helper methods that make it easy to paginate over all resources. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method returns an async iterator that can be used to iterate over all available boards:
 
 ```typescript
 for await (const board of api.getAllBoards()) {
