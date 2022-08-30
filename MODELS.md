@@ -39,7 +39,6 @@ classDiagram
   Item <|--  CardItem
   Item <|--  DocumentItem
   Item <|--  EmbedItem
-  Item <|--  FrameItem
   Item <|--  ImageItem
   Item <|--  ShapeItem
   Item <|--  StickyNoteItem
@@ -138,7 +137,7 @@ classDiagram
     getItemsWithinFrame() Item[]
     getMembers() BoardMember[]
     getAllMembers() BoardMember[]
-    copy() void
+    copy() Board
     share() void
     update() void
     delete() void
@@ -159,19 +158,21 @@ classDiagram
 
   %% NICE
   class Item {
-    getTags() Tag[]
-    removeTag() void
-    attachTag() void
     connectTo() Connector
-    getParent() Frame
   }
 
   %% MUST
   class AppCardItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
   }
 
   %% MUST
   class CardItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
   }
 
   %% MUST
@@ -210,6 +211,9 @@ classDiagram
 
   %% MUST
   class StickyNoteItem {
+    getTags() Tag[]
+    removeTag() void
+    attachTag() void
   }
 
   %% MUST
@@ -226,6 +230,6 @@ classDiagram
   class Tag {
     update() void
     delete() void
-    getItems() Item[]
+    getTaggedItems() Item[]
   }
 ```
