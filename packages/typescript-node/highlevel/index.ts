@@ -29,261 +29,6 @@ export class Api extends BaseApi {
     Object.assign(this, props)
   }
 
-  /** {@inheritDoc api!MiroApi.createAppCardItem} */
-  async createAppCardItem(...parameters: GetParameters0<MiroApi['createAppCardItem']>): Promise<AppCardItem> {
-    const result = (await this._api.createAppCardItem(...parameters)).body
-
-    return new AppCardItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createCardItem} */
-  async createCardItem(...parameters: GetParameters0<MiroApi['createCardItem']>): Promise<CardItem> {
-    const result = (await this._api.createCardItem(...parameters)).body
-
-    return new CardItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createConnector} */
-  async createConnector(...parameters: GetParameters0<MiroApi['createConnector']>): Promise<Connector> {
-    const result = (await this._api.createConnector(...parameters)).body
-
-    return new Connector(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createDocumentItemUsingUrl} */
-  async createDocumentItemUsingUrl(
-    ...parameters: GetParameters0<MiroApi['createDocumentItemUsingUrl']>
-  ): Promise<DocumentItem> {
-    const result = (await this._api.createDocumentItemUsingUrl(...parameters)).body
-
-    return new DocumentItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createEmbedItem} */
-  async createEmbedItem(...parameters: GetParameters0<MiroApi['createEmbedItem']>): Promise<EmbedItem> {
-    const result = (await this._api.createEmbedItem(...parameters)).body
-
-    return new EmbedItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createFrameItem} */
-  async createFrameItem(...parameters: GetParameters0<MiroApi['createFrameItem']>): Promise<FrameItem> {
-    const result = (await this._api.createFrameItem(...parameters)).body
-
-    return new FrameItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createImageItemUsingUrl} */
-  async createImageItemUsingUrl(...parameters: GetParameters0<MiroApi['createImageItemUsingUrl']>): Promise<ImageItem> {
-    const result = (await this._api.createImageItemUsingUrl(...parameters)).body
-
-    return new ImageItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createShapeItem} */
-  async createShapeItem(...parameters: GetParameters0<MiroApi['createShapeItem']>): Promise<ShapeItem> {
-    const result = (await this._api.createShapeItem(...parameters)).body
-
-    return new ShapeItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createStickyNoteItem} */
-  async createStickyNoteItem(...parameters: GetParameters0<MiroApi['createStickyNoteItem']>): Promise<StickyNoteItem> {
-    const result = (await this._api.createStickyNoteItem(...parameters)).body
-
-    return new StickyNoteItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createTag} */
-  async createTag(...parameters: GetParameters0<MiroApi['createTag']>): Promise<Tag> {
-    const result = (await this._api.createTag(...parameters)).body
-
-    return new Tag(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.createTextItem} */
-  async createTextItem(...parameters: GetParameters0<MiroApi['createTextItem']>): Promise<TextItem> {
-    const result = (await this._api.createTextItem(...parameters)).body
-
-    return new TextItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getBoardMembers} */
-  async getMembers(...parameters: GetParameters0<MiroApi['getBoardMembers']>): Promise<BoardMember[]> {
-    const result = (await this._api.getBoardMembers(...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new BoardMember(this._api, parameters[0], result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.getAppCardItem} */
-  async getAppCardItem(...parameters: GetParameters0<MiroApi['getAppCardItem']>): Promise<AppCardItem> {
-    const result = (await this._api.getAppCardItem(...parameters)).body
-
-    return new AppCardItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getCardItem} */
-  async getCardItem(...parameters: GetParameters0<MiroApi['getCardItem']>): Promise<CardItem> {
-    const result = (await this._api.getCardItem(...parameters)).body
-
-    return new CardItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getConnector} */
-  async getConnector(...parameters: GetParameters0<MiroApi['getConnector']>): Promise<Connector> {
-    const result = (await this._api.getConnector(...parameters)).body
-
-    return new Connector(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getConnectors} */
-  async getConnectors(...parameters: GetParameters0<MiroApi['getConnectors']>): Promise<Connector[]> {
-    const result = (await this._api.getConnectors(...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Connector(this._api, parameters[0], result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.getDocumentItem} */
-  async getDocumentItem(...parameters: GetParameters0<MiroApi['getDocumentItem']>): Promise<DocumentItem> {
-    const result = (await this._api.getDocumentItem(...parameters)).body
-
-    return new DocumentItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getEmbedItem} */
-  async getEmbedItem(...parameters: GetParameters0<MiroApi['getEmbedItem']>): Promise<EmbedItem> {
-    const result = (await this._api.getEmbedItem(...parameters)).body
-
-    return new EmbedItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getFrameItem} */
-  async getFrameItem(...parameters: GetParameters0<MiroApi['getFrameItem']>): Promise<FrameItem> {
-    const result = (await this._api.getFrameItem(...parameters)).body
-
-    return new FrameItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getImageItem} */
-  async getImageItem(...parameters: GetParameters0<MiroApi['getImageItem']>): Promise<ImageItem> {
-    const result = (await this._api.getImageItem(...parameters)).body
-
-    return new ImageItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getShapeItem} */
-  async getShapeItem(...parameters: GetParameters0<MiroApi['getShapeItem']>): Promise<ShapeItem> {
-    const result = (await this._api.getShapeItem(...parameters)).body
-
-    return new ShapeItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getSpecificBoardMember} */
-  async getMember(...parameters: GetParameters0<MiroApi['getSpecificBoardMember']>): Promise<BoardMember> {
-    const result = (await this._api.getSpecificBoardMember(...parameters)).body
-
-    return new BoardMember(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getSpecificItem} */
-  async getItem(...parameters: GetParameters0<MiroApi['getSpecificItem']>): Promise<Item> {
-    const result = (await this._api.getSpecificItem(...parameters)).body
-
-    return new Item(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getStickyNoteItem} */
-  async getStickyNoteItem(...parameters: GetParameters0<MiroApi['getStickyNoteItem']>): Promise<StickyNoteItem> {
-    const result = (await this._api.getStickyNoteItem(...parameters)).body
-
-    return new StickyNoteItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getTag} */
-  async getTag(...parameters: GetParameters0<MiroApi['getTag']>): Promise<Tag> {
-    const result = (await this._api.getTag(...parameters)).body
-
-    return new Tag(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getTagsFromBoard} */
-  async getTags(...parameters: GetParameters0<MiroApi['getTagsFromBoard']>): Promise<Tag[]> {
-    const result = (await this._api.getTagsFromBoard(...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Tag(this._api, parameters[0], result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.getTextItem} */
-  async getTextItem(...parameters: GetParameters0<MiroApi['getTextItem']>): Promise<TextItem> {
-    const result = (await this._api.getTextItem(...parameters)).body
-
-    return new TextItem(this._api, parameters[0], result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getItems} */
-  async getItems(...parameters: GetParameters0<MiroApi['getItems']>): Promise<Item[]> {
-    const result = (await this._api.getItems(...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Item(this._api, parameters[0], result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.getItemsWithinFrame} */
-  async getItemsWithinFrame(...parameters: GetParameters0<MiroApi['getItemsWithinFrame']>): Promise<Item[]> {
-    const result = (await this._api.getItemsWithinFrame(...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Item(this._api, parameters[0], result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.copyBoard} */
-  async copy(...parameters: GetParameters0<MiroApi['copyBoard']>): Promise<void> {
-    await this._api.copyBoard(...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.shareBoard} */
-  async share(...parameters: GetParameters0<MiroApi['shareBoard']>): Promise<void> {
-    await this._api.shareBoard(...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.updateBoard} */
-  async update(...parameters: GetParameters0<MiroApi['updateBoard']>): Promise<void> {
-    await this._api.updateBoard(...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.deleteBoard} */
-  async delete(...parameters: GetParameters0<MiroApi['deleteBoard']>): Promise<void> {
-    await this._api.deleteBoard(...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.removeBoardMember} */
-  async removeMember(...parameters: GetParameters0<MiroApi['removeBoardMember']>): Promise<void> {
-    await this._api.removeBoardMember(...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.removeTagFromItem} */
-  async removeTag(...parameters: GetParameters0<MiroApi['removeTagFromItem']>): Promise<void> {
-    await this._api.removeTagFromItem(...parameters)
-  }
-
   /** {@inheritDoc api!MiroApi.createBoard} */
   async createBoard(...parameters: GetParameters0<MiroApi['createBoard']>): Promise<Board> {
     const result = (await this._api.createBoard(...parameters)).body
@@ -877,8 +622,10 @@ export class Board extends BaseBoard {
   }
 
   /** {@inheritDoc api!MiroApi.copyBoard} */
-  async copy(...parameters: GetParameters1<MiroApi['copyBoard']>): Promise<void> {
-    await this._api.copyBoard(this.id?.toString() || '', ...parameters)
+  async copy(...parameters: GetParameters1<MiroApi['copyBoard']>): Promise<Board> {
+    const result = (await this._api.copyBoard(this.id?.toString() || '', ...parameters)).body
+
+    return new Board(this._api, result.id, result)
   }
 
   /** {@inheritDoc api!MiroApi.shareBoard} */
@@ -951,29 +698,6 @@ export class Item extends BaseItem {
   /** {@inheritDoc api!MiroApi.deleteItem} */
   async delete(...parameters: GetParameters2<MiroApi['deleteItem']>): Promise<void> {
     await this._api.deleteItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
-    const result = (
-      await this._api.getTagsFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-    ).body
-
-    return result.tags
-      ? result.tags.map((result) => {
-          return new Tag(this._api, this.boardId, result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.removeTagFromItem} */
-  async removeTag(...parameters: GetParameters2<MiroApi['removeTagFromItem']>): Promise<void> {
-    await this._api.removeTagFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.attachTagToItem} */
-  async attachTag(...parameters: GetParameters2<MiroApi['attachTagToItem']>): Promise<void> {
-    await this._api.attachTagToItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
   }
 }
 
@@ -1099,29 +823,6 @@ export class DocumentItem extends Item {
   async delete(...parameters: GetParameters2<MiroApi['deleteDocumentItem']>): Promise<void> {
     await this._api.deleteDocumentItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
   }
-
-  /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
-    const result = (
-      await this._api.getTagsFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-    ).body
-
-    return result.tags
-      ? result.tags.map((result) => {
-          return new Tag(this._api, this.boardId, result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.removeTagFromItem} */
-  async removeTag(...parameters: GetParameters2<MiroApi['removeTagFromItem']>): Promise<void> {
-    await this._api.removeTagFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.attachTagToItem} */
-  async attachTag(...parameters: GetParameters2<MiroApi['attachTagToItem']>): Promise<void> {
-    await this._api.attachTagToItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
 }
 
 export class EmbedItem extends Item {
@@ -1147,29 +848,6 @@ export class EmbedItem extends Item {
   /** {@inheritDoc api!MiroApi.deleteEmbedItem} */
   async delete(...parameters: GetParameters2<MiroApi['deleteEmbedItem']>): Promise<void> {
     await this._api.deleteEmbedItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
-    const result = (
-      await this._api.getTagsFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-    ).body
-
-    return result.tags
-      ? result.tags.map((result) => {
-          return new Tag(this._api, this.boardId, result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.removeTagFromItem} */
-  async removeTag(...parameters: GetParameters2<MiroApi['removeTagFromItem']>): Promise<void> {
-    await this._api.removeTagFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.attachTagToItem} */
-  async attachTag(...parameters: GetParameters2<MiroApi['attachTagToItem']>): Promise<void> {
-    await this._api.attachTagToItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
   }
 }
 
@@ -1197,29 +875,6 @@ export class FrameItem extends BaseFrameItem {
   async delete(...parameters: GetParameters2<MiroApi['deleteFrameItem']>): Promise<void> {
     await this._api.deleteFrameItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
   }
-
-  /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
-    const result = (
-      await this._api.getTagsFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-    ).body
-
-    return result.tags
-      ? result.tags.map((result) => {
-          return new Tag(this._api, this.boardId, result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.removeTagFromItem} */
-  async removeTag(...parameters: GetParameters2<MiroApi['removeTagFromItem']>): Promise<void> {
-    await this._api.removeTagFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.attachTagToItem} */
-  async attachTag(...parameters: GetParameters2<MiroApi['attachTagToItem']>): Promise<void> {
-    await this._api.attachTagToItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
 }
 
 export class ImageItem extends Item {
@@ -1246,29 +901,6 @@ export class ImageItem extends Item {
   async delete(...parameters: GetParameters2<MiroApi['deleteImageItem']>): Promise<void> {
     await this._api.deleteImageItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
   }
-
-  /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
-    const result = (
-      await this._api.getTagsFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-    ).body
-
-    return result.tags
-      ? result.tags.map((result) => {
-          return new Tag(this._api, this.boardId, result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.removeTagFromItem} */
-  async removeTag(...parameters: GetParameters2<MiroApi['removeTagFromItem']>): Promise<void> {
-    await this._api.removeTagFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.attachTagToItem} */
-  async attachTag(...parameters: GetParameters2<MiroApi['attachTagToItem']>): Promise<void> {
-    await this._api.attachTagToItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
 }
 
 export class ShapeItem extends Item {
@@ -1294,29 +926,6 @@ export class ShapeItem extends Item {
   /** {@inheritDoc api!MiroApi.deleteShapeItem} */
   async delete(...parameters: GetParameters2<MiroApi['deleteShapeItem']>): Promise<void> {
     await this._api.deleteShapeItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
-    const result = (
-      await this._api.getTagsFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-    ).body
-
-    return result.tags
-      ? result.tags.map((result) => {
-          return new Tag(this._api, this.boardId, result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.removeTagFromItem} */
-  async removeTag(...parameters: GetParameters2<MiroApi['removeTagFromItem']>): Promise<void> {
-    await this._api.removeTagFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.attachTagToItem} */
-  async attachTag(...parameters: GetParameters2<MiroApi['attachTagToItem']>): Promise<void> {
-    await this._api.attachTagToItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
   }
 }
 
@@ -1393,29 +1002,6 @@ export class TextItem extends Item {
   async delete(...parameters: GetParameters2<MiroApi['deleteTextItem']>): Promise<void> {
     await this._api.deleteTextItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
   }
-
-  /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
-    const result = (
-      await this._api.getTagsFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-    ).body
-
-    return result.tags
-      ? result.tags.map((result) => {
-          return new Tag(this._api, this.boardId, result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.removeTagFromItem} */
-  async removeTag(...parameters: GetParameters2<MiroApi['removeTagFromItem']>): Promise<void> {
-    await this._api.removeTagFromItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.attachTagToItem} */
-  async attachTag(...parameters: GetParameters2<MiroApi['attachTagToItem']>): Promise<void> {
-    await this._api.attachTagToItem(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
-  }
 }
 
 export class Connector extends BaseConnector {
@@ -1470,7 +1056,7 @@ export class Tag extends BaseTag {
   }
 
   /** {@inheritDoc api!MiroApi.getItemsByTag} */
-  async getItemsByTag(...parameters: GetParameters2<MiroApi['getItemsByTag']>): Promise<Item[]> {
+  async getTaggedItems(...parameters: GetParameters2<MiroApi['getItemsByTag']>): Promise<Item[]> {
     const result = (
       await this._api.getItemsByTag(this.boardId?.toString() || '', this.id?.toString() || '', ...parameters)
     ).body

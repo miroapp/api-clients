@@ -5,7 +5,6 @@ const MODELS = {
       name: 'Api',
       path: '../highlevel/Api',
     },
-    inherits: 'Board',
     methods: [
       'createBoard',
       {method: 'getSpecificBoard', alias: 'getBoard'},
@@ -219,7 +218,7 @@ const MODELS = {
       {method: 'getItems', returns: 'Item', paginated: 'data'},
       {method: 'getItemsWithinFrame', returns: 'Item', paginated: 'data'},
 
-      {method: 'copyBoard', alias: 'copy'},
+      {method: 'copyBoard', alias: 'copy', returns: 'Board'},
       {method: 'shareBoard', alias: 'share'},
       {method: 'updateBoard', alias: 'update'},
       {method: 'deleteBoard', alias: 'delete'},
@@ -250,14 +249,6 @@ const MODELS = {
     methods: [
       {method: 'updateItemPositionOrParent', alias: 'update'},
       {method: 'deleteItem', alias: 'delete'},
-      {
-        method: 'getTagsFromItem',
-        alias: 'getTags',
-        returns: 'Tag',
-        paginated: 'tags',
-      },
-      {method: 'removeTagFromItem', alias: 'removeTag'},
-      {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
 
@@ -307,14 +298,6 @@ const MODELS = {
     methods: [
       {method: 'updateDocumentItemUsingUrl', alias: 'update'},
       {method: 'deleteDocumentItem', alias: 'delete'},
-      {
-        method: 'getTagsFromItem',
-        alias: 'getTags',
-        returns: 'Tag',
-        paginated: 'tags',
-      },
-      {method: 'removeTagFromItem', alias: 'removeTag'},
-      {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
 
@@ -326,14 +309,6 @@ const MODELS = {
     methods: [
       {method: 'updateEmbedItem', alias: 'update'},
       {method: 'deleteEmbedItem', alias: 'delete'},
-      {
-        method: 'getTagsFromItem',
-        alias: 'getTags',
-        returns: 'Tag',
-        paginated: 'tags',
-      },
-      {method: 'removeTagFromItem', alias: 'removeTag'},
-      {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
 
@@ -346,14 +321,6 @@ const MODELS = {
     methods: [
       {method: 'updateFrameItem', alias: 'update'},
       {method: 'deleteFrameItem', alias: 'delete'},
-      {
-        method: 'getTagsFromItem',
-        alias: 'getTags',
-        returns: 'Tag',
-        paginated: 'tags',
-      },
-      {method: 'removeTagFromItem', alias: 'removeTag'},
-      {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
 
@@ -365,14 +332,6 @@ const MODELS = {
     methods: [
       {method: 'updateImageItemUsingUrl', alias: 'update'},
       {method: 'deleteImageItem', alias: 'delete'},
-      {
-        method: 'getTagsFromItem',
-        alias: 'getTags',
-        returns: 'Tag',
-        paginated: 'tags',
-      },
-      {method: 'removeTagFromItem', alias: 'removeTag'},
-      {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
 
@@ -384,14 +343,6 @@ const MODELS = {
     methods: [
       {method: 'updateShapeItem', alias: 'update'},
       {method: 'deleteShapeItem', alias: 'delete'},
-      {
-        method: 'getTagsFromItem',
-        alias: 'getTags',
-        returns: 'Tag',
-        paginated: 'tags',
-      },
-      {method: 'removeTagFromItem', alias: 'removeTag'},
-      {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
 
@@ -422,14 +373,6 @@ const MODELS = {
     methods: [
       {method: 'updateTextItem', alias: 'update'},
       {method: 'deleteTextItem', alias: 'delete'},
-      {
-        method: 'getTagsFromItem',
-        alias: 'getTags',
-        returns: 'Tag',
-        paginated: 'tags',
-      },
-      {method: 'removeTagFromItem', alias: 'removeTag'},
-      {method: 'attachTagToItem', alias: 'attachTag'},
     ],
   },
 
@@ -454,7 +397,7 @@ const MODELS = {
     methods: [
       {method: 'updateTag', alias: 'update'},
       {method: 'deleteTag', alias: 'delete'},
-      {method: 'getItemsByTag', returns: 'Item', paginated: 'data'},
+      {method: 'getItemsByTag', alias: 'getTaggedItems', returns: 'Item', paginated: 'data'},
     ],
   },
 }
