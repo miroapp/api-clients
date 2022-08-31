@@ -109,7 +109,7 @@ export class Miro {
       throw new HttpError(response, {}, response.status)
     }
 
-    const body: TokenResponse = await response.json()
+    const body = (await response.json()) as TokenResponse
 
     this.storage.write(userId, {
       accessToken: body.access_token,
