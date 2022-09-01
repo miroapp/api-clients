@@ -7,7 +7,7 @@
   "scripts": {
     "update-spec": "scripts/fetch-spec.mjs > spec.json",
     "generate": "scripts/generate-node-client.sh",
-    "test": "jest && ./test/generator_test.sh"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest && ./test/generator_test.sh"
   },
   "author": "",
   "license": "MIT",
@@ -25,9 +25,9 @@
     "esbuild-jest": "^0.5.0"
   },
   "jest": {
-    "testPathIgnorePatterns": ["/node_modules/", "/dist/"],
+    "extensionsToTreatAsEsm": [".ts"],
     "transform": {
-      "^.+\\.tsx?$": "esbuild-jest"
+      "^.+\\.tsx?$": ["esbuild-jest", {"format": "esm"}]
     }
   }
 }

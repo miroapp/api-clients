@@ -5,11 +5,11 @@
     "strict": true,
     "moduleResolution": "node",
     "declaration": true,
-    "lib": ["es2021"],
+    "lib": ["es2021", "dom"],
     "outDir": "dist",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "typeRoots": ["node_modules/@types"]
   },
-  "exclude": ["dist", "__tests__", "examples", "node_modules"]
+  "exclude": ["dist", "**/__tests__", "examples", "node_modules"]
 }

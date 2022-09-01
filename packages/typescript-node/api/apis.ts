@@ -3846,7 +3846,7 @@ export async function makeJsonRequest(
 
   if (hasLogger) logger('FETCH', url.toString(), options)
 
-  const response = await fetch(url, options)
+  const response = await fetch(url.toString(), options)
 
   if (hasLogger) logger('RESPONSE', response)
 

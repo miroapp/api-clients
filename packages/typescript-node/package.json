@@ -15,28 +15,31 @@
     "clean": "rm -Rf node_modules/ *.js",
     "build": "tsc",
     "docs": "typedoc",
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "author": "Miro",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.7",
+    "node-fetch": "^3.2.10",
     "typedoc": "^0.23.10"
   },
   "devDependencies": {
     "@types/jest": "^28.1.8",
     "@types/node": "^12",
-    "@types/node-fetch": "^2.6.2",
     "jest": "^28.1.3",
     "typescript": "^4.0"
   },
   "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
+    "extensionsToTreatAsEsm": [
+      ".ts"
     ],
     "transform": {
-      "^.+\\.tsx?$": "esbuild-jest"
+      "^.+\\.tsx?$": [
+        "esbuild-jest",
+        {
+          "format": "esm"
+        }
+      ]
     }
   }
 }

@@ -134,7 +134,7 @@ export async function makeJsonRequest(token: string, method: string, url: URL, b
 
     if (hasLogger) logger('FETCH', url.toString(), options)
 
-    const response = await fetch(url, options)
+    const response = await fetch(url.toString(), options)
 
     if (hasLogger) logger('RESPONSE', response)
 
