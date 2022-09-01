@@ -6,6 +6,10 @@ export abstract class Item extends GenericItem {
   abstract _api: MiroApi
   abstract boardId: string | undefined
 
+  /**
+   * Create a new connector between the current item and some other item
+   * @param {string} endItemId Item that the new connector will connect to
+   */
   async connectTo(endItemId: string | number): Promise<Connector> {
     const connector = (
       await this._api.createConnector(this.boardId?.toString() || '', {

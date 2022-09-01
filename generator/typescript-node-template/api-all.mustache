@@ -21,11 +21,20 @@ export class MiroApi {
     basePath: string
     logger?: Logger
     clientId?: string
+    httpTimeout?: number
 
-    constructor(accessToken: string|(() => Promise<string>), basePath: string = defaultBasePath, logger?: Logger, clientId?: string) {
+    constructor(
+        accessToken: string | (() => Promise<string>),
+        basePath: string = defaultBasePath,
+        logger?: Logger,
+        clientId?: string,
+        httpTimeout?: number,
+    ) {
         this.accessToken = accessToken
         this.basePath = basePath
         this.logger = logger
+        this.httpTimeout = httpTimeout
+        this.clientId = clientId
     }
 
 {{#apis}}
@@ -118,10 +127,10 @@ export class HttpError extends Error {
     }
 }
 
-export async function makeJsonRequest(token: string, method: string, url: URL, body?: string, logger?: (...thing: any) => void, appId: string = process.env.MIRO_CLIENT_ID || "unknown") {
+export async function makeJsonRequest(token: string, method: string, url: URL, body?: string, logger?: (...thing: any) => void, appId: string = process.env.MIRO_CLIENT_ID || "unknown", httpTimeout: number = 5000) {
 
     const timeoutAbortController = new AbortController()
-    const timeout = setTimeout(() => timeoutAbortController.abort(), 5000)
+    const timeout = setTimeout(() => timeoutAbortController.abort(), httpTimeout)
 
     const options = {
         method,
