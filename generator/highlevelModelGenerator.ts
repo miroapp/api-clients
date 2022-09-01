@@ -129,7 +129,3 @@ ${Object.keys(models)
 
   return code
 }
-
-if (process.argv[1] === __filename) {
-  console.log(run(getModels()))
-}
