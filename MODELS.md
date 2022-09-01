@@ -143,6 +143,7 @@ classDiagram
     delete() void
     removeMember() void
     removeTag() void
+    findItem() Item
   }
 
   %% NICE
@@ -231,5 +232,6 @@ classDiagram
     update() void
     delete() void
     getTaggedItems() Item[]
+    getAllTaggedItems() Item[]
   }
 ```
