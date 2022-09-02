@@ -18,6 +18,6 @@ jobs:
           node-version: 16
 
       - run: yarn
-      - run: yarn test:ci
+      - run: jest
 
         working-directory: packages/typescript-node/
