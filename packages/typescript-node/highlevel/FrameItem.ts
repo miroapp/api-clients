@@ -2,7 +2,16 @@ import {FrameItem as ModelFrameItem} from '../model/frameItem'
 import {MiroApi} from '../api'
 import {Item} from './index'
 
-export type WidgetTypes = "app_card" | "card" | "document" | "embed" | "frame" | "image" | "shape" | "sticky_note" | "text"
+export type WidgetTypes =
+  | 'app_card'
+  | 'card'
+  | 'document'
+  | 'embed'
+  | 'frame'
+  | 'image'
+  | 'shape'
+  | 'sticky_note'
+  | 'text'
 type Items = {
   limit?: string
   type?: WidgetTypes
@@ -21,7 +30,7 @@ export abstract class FrameItem extends ModelFrameItem {
 
     return {
       ...body,
-      data: body.data.map(item => new Item(this._api, this.boardId, item.id, item))
+      data: body.data.map((item) => new Item(this._api, this.boardId, item.id, item)),
     }
   }
 }
