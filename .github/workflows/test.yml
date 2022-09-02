@@ -32,7 +32,10 @@ jobs:
               ${{ runner.os }}-
           
 
-      - run: npm install
+      - name: Install dependencies
+        run: npm install
+
+      - name: run tests
       - run: npm run test
       - run: npm run test-generator
 
