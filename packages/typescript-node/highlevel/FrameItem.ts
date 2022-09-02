@@ -1,4 +1,4 @@
-import {FrameItem as BaseFrameItem} from '../model/frameItem'
+import {FrameItem as ModelFrameItem} from '../model/frameItem'
 import {MiroApi} from '../api'
 import {Item} from './index'
 
@@ -9,7 +9,7 @@ type Items = {
   cursor?: string
 }
 
-export abstract class FrameItem extends BaseFrameItem {
+export abstract class FrameItem extends ModelFrameItem {
   abstract _api: MiroApi
   abstract id: number
   abstract boardId: string
