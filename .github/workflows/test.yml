@@ -33,11 +33,11 @@ jobs:
           
 
       - name: Install dependencies
-        run: npm install
+        run: yarn
 
       - name: run tests
-        run: npm run test
+        run: yarn test
 
       - name: test generator
-        run: npm run test-generator
+        run: yarn test-generator
 
