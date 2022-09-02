@@ -18,6 +18,6 @@ jobs:
           node-version: 16
 
       - run: yarn
-      - run: yarn ci
+      - run: yarn test:ci
 
         working-directory: packages/typescript-node/
