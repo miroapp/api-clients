@@ -1,2 +1,7 @@
 node_modules
 docs
+.idea
+.DS_Store
+Thumbs.db
+*.lock
+/packages/**/coverage/
