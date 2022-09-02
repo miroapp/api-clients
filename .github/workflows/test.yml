@@ -41,4 +41,3 @@ jobs:
       - name: test generator
         run: npm run test-generator
 
-        working-directory: packages/typescript-node/
