@@ -36,7 +36,9 @@ jobs:
         run: npm install
 
       - name: run tests
-      - run: npm run test
-      - run: npm run test-generator
+        run: npm run test
+
+      - name: test generator
+        run: npm run test-generator
 
         working-directory: packages/typescript-node/
