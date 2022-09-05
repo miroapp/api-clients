@@ -7,7 +7,8 @@
   "scripts": {
     "update-spec": "scripts/fetch-spec.mjs > spec.json",
     "generate": "scripts/generate-node-client.sh",
-    "test": "jest && ./test/generator_test.sh"
+    "test-generator": "./test/generator_test.sh",
+    "test": "jest"
   },
   "author": "",
   "license": "MIT",
