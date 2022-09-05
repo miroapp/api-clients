@@ -1,5 +1,6 @@
 import {Miro, Opts, State, Storage} from '../index'
 import {Api} from '../highlevel'
+import {jest} from '@jest/globals'
 
 describe('Entrypoint test', () => {
   describe('constructor', () => {

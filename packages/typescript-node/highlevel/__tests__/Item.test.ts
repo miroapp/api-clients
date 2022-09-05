@@ -1,5 +1,6 @@
 import {MiroApi} from '../../api'
 import {Connector, Item} from '../index'
+import {jest} from '@jest/globals'
 
 describe('Item test', () => {
   describe('connectTo', () => {
