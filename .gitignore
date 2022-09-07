@@ -4,3 +4,7 @@ docs
 .DS_Store
 Thumbs.db
 /packages/**/coverage/
+.turbo
+build/**
+dist/**
+yarn-error.log

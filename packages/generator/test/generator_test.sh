@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-yarn generate
-
 # Check if there are uncommitted changes
 # git status -s = list changes, 1 changed file per line
 # git status -s | wc -l = Count number of lines, and thus changed files

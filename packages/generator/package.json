@@ -1,0 +1,15 @@
+{
+  "name": "generator",
+  "private": true,
+  "version": "0.0.1",
+  "author": "@mirohq",
+  "license": "MIT",
+  "scripts": {
+    "test:generator": "test/generator_test.sh",
+    "build": "./scripts/generate-node-client.sh",
+    "generate": "yarn build"
+  },
+  "dependencies": {
+    "@openapitools/openapi-generator-cli": "^2.5.1"
+  }
+}

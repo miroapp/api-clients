@@ -74,10 +74,13 @@ describe('Entrypoint test', () => {
 
     beforeEach(() => {
       storage = {
+        // @ts-ignore
         read: jest.fn(),
+        // @ts-ignore
         write: jest.fn(),
       }
       miro = testMiro({storage})
+      // @ts-ignore
       miro.getToken = jest.fn()
     })
 
