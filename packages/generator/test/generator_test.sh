@@ -16,6 +16,6 @@ if [[ $(git status -s | wc -l | tr -d ' ') != 0 ]]; then
     git status -s
     exit 1
 else
-  echo "all list well, all changes committed"
+  echo "all is well, all changes committed"
 fi
 
