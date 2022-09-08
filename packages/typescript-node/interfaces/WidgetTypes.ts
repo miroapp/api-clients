@@ -1,0 +1,10 @@
+export type WidgetTypes =
+  | 'app_card'
+  | 'card'
+  | 'document'
+  | 'embed'
+  | 'frame'
+  | 'image'
+  | 'shape'
+  | 'sticky_note'
+  | 'text'
