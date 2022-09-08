@@ -1,0 +1,9 @@
+{
+  "name": "fastify-example",
+  "version": "0.0.1",
+  "main": "fastify.js",
+  "type": "module",
+  "dependencies": {
+    "fastify": "^4.5.3"
+  }
+}

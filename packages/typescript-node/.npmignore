@@ -1,6 +1,6 @@
 /api
 /model
-/examples
+/apps/fastify/examples
 /nested-model
 
 scripts/
