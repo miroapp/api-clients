@@ -54,7 +54,7 @@ export interface Storage {
 
 The client will automatically refresh access tokens if it is going to expire soon.
 
-See [the example usage](./examples/fastify.ts) with _fastify_ web framework.
+See [the example usage](../../apps/fastify/fastify.js) with _fastify_ web framework.
 
 ### Methods & Models
 

@@ -11,5 +11,6 @@
     "esModuleInterop": true,
     "typeRoots": ["node_modules/@types"]
   },
-  "exclude": ["dist", "**/__tests__", "examples", "node_modules"]
+  "files": ["index.ts", "api.ts"],
+  "exclude": ["dist", "api", "model", "__tests__", ".turbo", ".openapi-generator", "node_modules"]
 }

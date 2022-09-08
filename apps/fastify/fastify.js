@@ -21,8 +21,7 @@ fastify.get('/', async () => {
   const api = miro.as('some_user_id')
   const boards = await api.getBoards()
   const board = boards[0]
-  const items = await board.getItems()
-  const item = items[0]
-  return await item.getTags()
+  const [item] = await board.getItems()
+  return item
 })
 ;(async () => await fastify.listen({port: 4000}))()
