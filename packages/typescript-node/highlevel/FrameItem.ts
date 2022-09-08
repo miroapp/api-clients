@@ -3,7 +3,7 @@ import {MiroApi} from '../api'
 import {Item} from './index'
 import type {WidgetTypes} from '../interfaces/WidgetTypes'
 
-type GetItemsProps = {
+type GetItemsParams = {
   limit?: string
   type?: WidgetTypes
   cursor?: string
@@ -14,8 +14,8 @@ export abstract class FrameItem extends ModelFrameItem {
   abstract id: number | undefined
   abstract boardId: string | undefined
 
-  async getItems(params?: GetItemsProps) {
-    const {body} = await this._api.getItemsWithinFrame(this.boardId || '', String(this.id), params)
+  async getItems(params?: GetItemsParams) {
+    const {body} = await this._api.getItemsWithinFrame(this.boardId || '', this.id?.toString() || '', params)
 
     if (!body.data) return body
 
