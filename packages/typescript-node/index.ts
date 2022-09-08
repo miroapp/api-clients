@@ -11,6 +11,7 @@ export class Miro {
   redirectUrl: string
   storage: Storage
   logger?: (l: any) => void
+  httpTimeout?: number
 
   /**
    * Initializes the Miro API with the given client id and client secret
@@ -22,11 +23,12 @@ export class Miro {
    */
   constructor(options?: Opts) {
     const opts = Object.assign(getDefaultOpts(), options)
-    ;(this.clientId = opts.clientId || ''),
-      (this.clientSecret = opts.clientSecret || ''),
-      (this.redirectUrl = opts.redirectUrl || ''),
-      (this.storage = opts.storage || defaultStorage)
+    this.clientId = opts.clientId || ''
+    this.clientSecret = opts.clientSecret || ''
+    this.redirectUrl = opts.redirectUrl || ''
+    this.storage = opts.storage || defaultStorage
     this.logger = opts.logger
+    this.httpTimeout = opts.httpTimeout
 
     assert(this.clientId, 'MIRO_CLIENT_ID is required')
     assert(this.clientSecret, 'MIRO_CLIENT_SECRET is required')
@@ -40,7 +42,13 @@ export class Miro {
    * Returns an instance of the highlevel Miro API for the given user id
    */
   as(userId: ExternalUserId): MiroApi {
-    return new MiroApi(async () => await this.getAccessToken(userId), undefined, this.logger, this.clientId)
+    return new MiroApi(
+      async () => await this.getAccessToken(userId),
+      undefined,
+      this.logger,
+      this.clientId,
+      this.httpTimeout,
+    )
   }
 
   /**
@@ -109,7 +117,7 @@ export class Miro {
       throw new HttpError(response, {}, response.status)
     }
 
-    const body: TokenResponse = await response.json()
+    const body = (await response.json()) as TokenResponse
 
     this.storage.write(userId, {
       accessToken: body.access_token,
@@ -199,6 +207,9 @@ export interface Opts {
 
   /** Function to use as a logger. if MIRO_DEBUG environment variable is set then console.log will be used here */
   logger?: (l: any) => void
+
+  /** Client will abort HTTP requests that last longer than this number of miliseconds. Default is 5000ms. */
+  httpTimeout?: number
 }
 
 function getDefaultOpts() {
@@ -219,8 +230,9 @@ export class MiroApi extends HighlevelApi {
     basePath: string = defaultBasePath,
     logger?: Logger,
     clientId?: string,
+    httpTimeout?: number,
   ) {
-    super(new MiroLowlevelApi(accessToken, basePath, logger, clientId), {})
+    super(new MiroLowlevelApi(accessToken, basePath, logger, clientId, httpTimeout), {})
   }
 }
 

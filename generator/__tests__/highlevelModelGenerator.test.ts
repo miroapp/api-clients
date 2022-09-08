@@ -1,4 +1,4 @@
-import {run} from '../../generator/generate_node_highlevel_models'
+import {run} from '../../generator/highlevelModelGenerator'
 import prettier from 'prettier'
 
 function format(code: string) {

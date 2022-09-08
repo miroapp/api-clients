@@ -100,16 +100,20 @@ export class MiroApi {
   basePath: string
   logger?: Logger
   clientId?: string
+  httpTimeout?: number
 
   constructor(
     accessToken: string | (() => Promise<string>),
     basePath: string = defaultBasePath,
     logger?: Logger,
     clientId?: string,
+    httpTimeout?: number,
   ) {
     this.accessToken = accessToken
     this.basePath = basePath
     this.logger = logger
+    this.httpTimeout = httpTimeout
+    this.clientId = clientId
   }
 
   /**
@@ -3830,7 +3834,11 @@ export async function makeJsonRequest(
   body?: string,
   logger?: (...thing: any) => void,
   appId: string = process.env.MIRO_CLIENT_ID || 'unknown',
+  httpTimeout: number = 5000,
 ) {
+  const timeoutAbortController = new AbortController()
+  const timeout = setTimeout(() => timeoutAbortController.abort(), httpTimeout)
+
   const options = {
     method,
     headers: {
@@ -3840,13 +3848,14 @@ export async function makeJsonRequest(
       Authorization: `Bearer ${token}`,
     },
     body,
+    signal: timeoutAbortController.signal,
   }
 
   const hasLogger = typeof logger === 'function'
 
   if (hasLogger) logger('FETCH', url.toString(), options)
 
-  const response = await fetch(url, options)
+  const response = await fetch(url.toString(), options)
 
   if (hasLogger) logger('RESPONSE', response)
 
