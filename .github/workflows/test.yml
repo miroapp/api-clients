@@ -39,5 +39,5 @@ jobs:
         run: yarn test
 
       - name: test generator
-        run: cd packages/generator && yarn test:generator
+        run: yarn workspace generator run test:generator
 
