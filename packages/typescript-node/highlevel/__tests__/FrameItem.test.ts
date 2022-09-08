@@ -1,5 +1,6 @@
 import {FrameItem, Item} from '../index'
 import {MiroApi} from '../../api'
+import {jest} from '@jest/globals'
 
 describe('FrameItem', () => {
   describe('getItems', () => {
