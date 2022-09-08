@@ -1,7 +1,11 @@
 {
+  "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["api.ts", "index.ts", "highlevel/*"],
   "gitRevision": "main",
   "markedOptions": {
     "baseUrl": "https://developers.miro.com/"
-  }
+  },
+  "entryPointStrategy": "expand",
+  "exclude": ["__tests__", "test", ".turbo", "../../node_modules/"],
+  "excludeExternals": true
 }
