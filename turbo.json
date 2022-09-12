@@ -9,6 +9,9 @@
     "build": {
       "dependsOn": ["generate", "^build"]
     },
+    "dev": {
+      "dependsOn": ["^dev"]
+    },
     "test": {
       "dependsOn": ["build"],
       "outputs": [],
