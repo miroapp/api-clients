@@ -1,0 +1,16 @@
+{
+  "name": "client-test-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Miro",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "@mirohq/miro-node": "0.0.1-alpha.8",
+    "express": "^4.18.1"
+  }
+}

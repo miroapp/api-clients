@@ -20,7 +20,7 @@
   "author": "Miro",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^3.2.10",
+    "node-fetch": "^2.6.1",
     "typedoc": "^0.23.10",
     "generator": "*"
   },
