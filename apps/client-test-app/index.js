@@ -23,29 +23,34 @@ app.get('/auth/miro/callback/', async (req, res) => {
   try {
     await miro.handleAuthorizationCodeRequest(USER_ID, req)
   } catch (e) {
-    console.log('handleAuthorizationCodeRequest failed:', e)
+    console.error(e)
   }
-
   res.redirect('/')
 })
 
 app.get('/', async (req, res) => {
-  const b = await miro.isAuthorized(USER_ID)
-  if (!b) {
+  if (!(await miro.isAuthorized(USER_ID))) {
     res.redirect('/login')
     return
   }
-  const api = miro.as(USER_ID)
-  const boards = await api.getBoards()
 
-  res.send(
-    'Your boards:' +
-      boards
-        .map((board) => {
-          return `<br><a href="${board.viewLink}">${board.name}</a>`
-        })
-        .join(''),
-  )
+  const api = miro.as(USER_ID)
+
+  let body = ''
+
+  body += await testHighLevelApi(api)
+
+  res.send(body)
 })
 
 app.listen(3000, () => console.log(`Listening on localhost, port 3000. http://localhost:3000`))
+
+const testHighLevelApi = async (api) => {
+  let response = '<h1>All boards: (fetched by <code>api.getAllBoards()</code>)</h1><ul>'
+  for await (const board of api.getAllBoards()) {
+    response += `<li><a href="${board.viewLink}">${board.name}</a></li>`
+  }
+  response += '</ul>'
+
+  return response
+}
