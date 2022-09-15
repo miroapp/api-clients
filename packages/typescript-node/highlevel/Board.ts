@@ -1,6 +1,6 @@
 import {Board as BaseBoard} from '../model/board'
 import {Item} from './index'
-import {GenericItemCursorPaged, MiroApi} from '../api'
+import {GenericItem, GenericItemCursorPaged, MiroApi} from '../api'
 
 export abstract class Board extends BaseBoard {
   abstract _api: MiroApi
@@ -25,5 +25,13 @@ export abstract class Board extends BaseBoard {
       if (!total || !size) return
       if (!cursor) return
     }
+  }
+
+  async getItem(itemId: string): Promise<Item> {
+    const response = await this._api.getSpecificItem(this.id?.toString() || '', itemId)
+
+    const item: GenericItem = response.body
+
+    return new Item(this._api, this.id?.toString() || '', item.id, item)
   }
 }
