@@ -1,4 +1,4 @@
-import {Miro, MiroApi, Opts, State, Storage} from '../index'
+import {defaultStorage, Miro, MiroApi, Opts, State, Storage} from '../index'
 import {Api} from '../highlevel'
 import {jest} from '@jest/globals'
 
@@ -171,6 +171,18 @@ describe('Entrypoint test', () => {
 
       expect(revokeToken).toBeCalledTimes(1)
       expect(miro.storage.write).toBeCalledWith(userId, undefined)
+    })
+  })
+
+  describe('defaultStorage', () => {
+    it('reads from a file and writes into a file', async () => {
+      const userId = '123'
+      const accessToken = 'token'
+      await defaultStorage.write(userId, {userId, accessToken})
+      expect(await defaultStorage.read(userId)).toEqual({userId, accessToken})
+
+      await defaultStorage.write(userId, undefined)
+      expect(await defaultStorage.read(userId)).toEqual(undefined)
     })
   })
 
