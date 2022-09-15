@@ -4,6 +4,13 @@ import {MiroApi} from '../api'
 export abstract class Api {
   abstract _api: MiroApi
 
+  /** {@inheritDoc api!MiroApi.revokeToken} */
+  async revokeToken(): Promise<void> {
+    await this._api.revokeToken(
+      typeof this._api.accessToken === 'function' ? await this._api.accessToken() : this._api.accessToken,
+    )
+  }
+
   /**
    * Get all boards matching the search query
    * Returns an iterator which will automatically paginate and fetch all available boards

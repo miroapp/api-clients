@@ -11,6 +11,32 @@
     }
   ],
   "paths": {
+    "/v1/oauth/revoke": {
+      "post": {
+        "summary": "Revoke token",
+        "description": "Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.",
+        "operationId": "revoke-token",
+        "parameters": [
+          {
+            "description": "Access token that you want to revoke",
+            "in": "query",
+            "name": "access_token",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Token revoked"
+          },
+          "400": {
+            "description": "Failed to revoke token"
+          }
+        }
+      }
+    },
     "/v2/boards": {
       "post": {
         "description": "Creates a board with the specified name and sharing policies.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
