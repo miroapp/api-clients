@@ -36,13 +36,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-
-      # generate code
       - run: yarn
-      - run: yarn generate
+        working-directory: packages/typescript-node
 
       # generate docs
-      - run: yarn docs
+      - run: yarn build:docs
         working-directory: packages/typescript-node
 
       # upload and deploy docs
