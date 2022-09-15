@@ -188,7 +188,7 @@ interface TokenResponse {
 
 type MiddlewareArgs = [req: {url?: string | undefined; headers: {host?: string | undefined}}, ...rest: any]
 
-const defaultStorage = {
+export const defaultStorage: Storage = {
   async read(userId: ExternalUserId) {
     try {
       return JSON.parse(fs.readFileSync(`./state-${userId}.json`, 'utf8'))
@@ -196,7 +196,7 @@ const defaultStorage = {
       return undefined
     }
   },
-  write(userId: ExternalUserId, state: State) {
+  async write(userId: ExternalUserId, state: State) {
     const filename = `./state-${userId}.json`
     if (state === undefined) return fs.unlinkSync(filename)
     fs.writeFileSync(filename, JSON.stringify(state))
