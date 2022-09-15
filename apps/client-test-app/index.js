@@ -10,6 +10,7 @@ const miro = new Miro({
 })
 const USER_ID = 3458764514451650476
 const TEST_BOARD_ID = 'uXjVPZcwwIY='
+const TEST_ITEM_ID = '3458764533355792545'
 
 app.get('/login', async (req, res) => {
   if (await miro.isAuthorized(USER_ID)) {
@@ -72,6 +73,20 @@ const testHighLevelBoard = async (api) => {
     response += '</ul>'
   }
   response += '</ul>'
+
+  // Test if board.getItem() is working
+  response += `<h1>board.getItem(${TEST_ITEM_ID})</h1>`
+  for await (const board of api.getAllBoards()) {
+    if (board.id !== TEST_BOARD_ID) continue
+    const item = await board.getItem(TEST_ITEM_ID)
+    response += `<ul>
+        <li>ID: <em>${item.id}</em></li>
+        <li>Type: <em>${item.type}</em></li>
+        <li>Text: <em>${item.data.content}</em></li>
+        <li>Geometry: <em>${JSON.stringify(item.geometry, null, 2)}</em></li>
+        <li>Modified at: <em>${new Date(item.modifiedAt)}</em></li>
+    </ul>`
+  }
 
   return response
 }
