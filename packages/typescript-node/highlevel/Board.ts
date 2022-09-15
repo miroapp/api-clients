@@ -9,14 +9,14 @@ export abstract class Board extends BaseBoard {
     let cursor: string | undefined = undefined
     while (true) {
       const response: GenericItemCursorPaged = (
-        await this._api.getItems(this.id?.toString() || '', {
+        await this._api.getItems(this.id, {
           ...query,
           cursor,
         })
       ).body
 
       for (const item of response.data || []) {
-        yield new Item(this._api, this.id?.toString() || '', item.id, item)
+        yield new Item(this._api, this.id, item.id, item)
       }
 
       cursor = response.cursor
@@ -28,10 +28,10 @@ export abstract class Board extends BaseBoard {
   }
 
   async getItem(itemId: string): Promise<Item> {
-    const response = await this._api.getSpecificItem(this.id?.toString() || '', itemId)
+    const response = await this._api.getSpecificItem(this.id, itemId)
 
     const item: GenericItem = response.body
 
-    return new Item(this._api, this.id?.toString() || '', item.id, item)
+    return new Item(this._api, this.id, item.id, item)
   }
 }

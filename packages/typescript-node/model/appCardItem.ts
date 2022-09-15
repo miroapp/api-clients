@@ -23,7 +23,7 @@ export class AppCardItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id'?: number
+  'id': number
   'data'?: AppCardData
   'style'?: AppCardStyle
   'position'?: Position
@@ -43,7 +43,7 @@ export class AppCardItem {
   /**
    * Type of item that is returned.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

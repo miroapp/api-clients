@@ -22,7 +22,7 @@ export class DocumentItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id'?: number
+  'id': number
   'data'?: DocumentData
   'position'?: Position
   'geometry'?: Geometry
@@ -41,7 +41,7 @@ export class DocumentItem {
   /**
    * Type of item that is returned.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

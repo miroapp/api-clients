@@ -11,11 +11,11 @@ type GetItemsParams = {
 
 export abstract class FrameItem extends ModelFrameItem {
   abstract _api: MiroApi
-  abstract id: number | undefined
-  abstract boardId: string | undefined
+  abstract id: number
+  abstract boardId: string
 
   async getItems(params?: GetItemsParams) {
-    const {body} = await this._api.getItemsWithinFrame(this.boardId || '', this.id?.toString() || '', params)
+    const {body} = await this._api.getItemsWithinFrame(this.boardId, this.id.toString(), params)
 
     if (!body.data) return body
 

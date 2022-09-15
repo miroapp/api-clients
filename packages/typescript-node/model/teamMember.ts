@@ -22,7 +22,7 @@ export class TeamMember {
   /**
    * Team member id
    */
-  'memberId'?: number
+  'memberId': number
   /**
    * Latest user role modification date
    */
@@ -34,12 +34,12 @@ export class TeamMember {
   /**
    * Team id
    */
-  'teamId'?: number
+  'teamId': number
   'type'?: string
   /**
    *      * \"non_team\":   External user, non-team user.     * \"member\":     Team member with full member permissions.     * \"admin\":      Admin of a team. Team member with permission to manage team.     * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
    */
-  'userRole'?: string | typeof TeamMember.UserRoleEnum[keyof typeof TeamMember.UserRoleEnum]
+  'userRole': string | typeof TeamMember.UserRoleEnum[keyof typeof TeamMember.UserRoleEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

@@ -31,7 +31,7 @@ export class ConnectorWithLinks {
   /**
    * Unique identifier (ID) of a connector.
    */
-  'id'?: string
+  'id': string
   /**
    * Indicates whether the connector is supported at the moment. If this parameter returns `false`, we do not support the connector at the moment. We do not allow updates for unsupported connectors and we might not return all data about the connector, such as intermediate points and connection points to the canvas.
    */

@@ -17,11 +17,11 @@ export class BoardMember {
   /**
    * Unique identifier (ID) of the user.
    */
-  'id'?: number
+  'id': number
   /**
    * Name of the user.
    */
-  'name'?: string
+  'name': string
   /**
    * Role of the board member. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`
    */
@@ -29,7 +29,7 @@ export class BoardMember {
   /**
    * Type of the object that is returned. In this case, `type` returns `board_member`.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
