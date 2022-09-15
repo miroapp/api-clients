@@ -28,15 +28,10 @@ export abstract class Board extends BaseBoard {
   }
 
   async getItem(itemId: string): Promise<Item> {
-    let response;
-    try {
-      response = await this._api.getSpecificItem(this.id?.toString() || '', itemId)
-    } catch (e) {
-      throw e
-    }
+    const response = await this._api.getSpecificItem(this.id?.toString() || '', itemId)
+
     const item: GenericItem = response.body
 
-    return new Item(this._api, this.id?.toString() || '', item.id, item);
-
+    return new Item(this._api, this.id?.toString() || '', item.id, item)
   }
 }
