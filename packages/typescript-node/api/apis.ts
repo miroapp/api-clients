@@ -1378,6 +1378,42 @@ export class MiroApi {
   }
 
   /**
+   * Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
+   * @summary Revoke token
+   * @param accessToken Access token that you want to revoke
+   */
+  async revokeToken(accessToken: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v1/oauth/revoke'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'accessToken' is not null or undefined
+    if (accessToken === null || accessToken === undefined) {
+      throw new Error('Required parameter accessToken was null or undefined when calling revokeToken.')
+    }
+
+    if (accessToken !== undefined) {
+      localVarQueryParameters.append('access_token', ObjectSerializer.serialize(accessToken, 'string'))
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      resource,
+      undefined,
+
+      this.logger,
+      this.clientId,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
    * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create document item using URL
    * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) where you want to create the item.
