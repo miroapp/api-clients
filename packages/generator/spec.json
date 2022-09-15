@@ -10758,6 +10758,7 @@
         "description": "For information about the JSON properties, see [Data](https://developers.miro.com/reference/data)."
       },
       "AppCardItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -10841,6 +10842,7 @@
         }
       },
       "Board": {
+        "required": ["description", "id", "name", "type"],
         "type": "object",
         "properties": {
           "createdAt": {
@@ -10944,6 +10946,7 @@
         "description": "Contains applicable links for the board."
       },
       "BoardMember": {
+        "required": ["id", "name", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -10982,6 +10985,7 @@
         }
       },
       "BoardMemberWithLinks": {
+        "required": ["id", "name", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -11186,6 +11190,7 @@
         "description": "Defines the public-level, organization-level, and team-level access for the board. The access level that a user gets depends on the highest level of access that results from considering the public-level, team-level, organization-level, and direct sharing access. For more information, see [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy)."
       },
       "BoardWithLinks": {
+        "required": ["description", "id", "name", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -11313,6 +11318,7 @@
         }
       },
       "CardItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -11414,6 +11420,7 @@
         }
       },
       "DocumentItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -11531,6 +11538,7 @@
         }
       },
       "EmbedItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -11704,6 +11712,7 @@
         }
       },
       "ImageItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -11825,6 +11834,7 @@
         }
       },
       "ShapeItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -12012,6 +12022,7 @@
         }
       },
       "StickyNoteItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -12143,6 +12154,7 @@
         }
       },
       "TextItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -12282,6 +12294,7 @@
         }
       },
       "UserInfoShort": {
+        "required": ["id", "name", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -12388,6 +12401,7 @@
         "description": "Contains frame item data, such as the title, frame type, or frame format. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data)."
       },
       "FrameItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -12967,6 +12981,7 @@
         "description": "Contains information about the style of a connector, such as the color or caption font size"
       },
       "ConnectorWithLinks": {
+        "required": ["id"],
         "type": "object",
         "properties": {
           "captions": {
@@ -13355,6 +13370,7 @@
         "description": "Contains frame item data, such as the title, frame type, or frame format. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data)."
       },
       "GenericItem": {
+        "required": ["id", "type"],
         "type": "object",
         "properties": {
           "createdAt": {
@@ -13629,6 +13645,7 @@
         "description": "Contains sticky note item data, such as the content or shape of the sticky note. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data)."
       },
       "Tag": {
+        "required": ["fillColor", "id", "title", "type"],
         "type": "object",
         "properties": {
           "fillColor": {
@@ -13731,6 +13748,7 @@
         }
       },
       "TagWithLinks": {
+        "required": ["fillColor", "id", "title", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -14525,6 +14543,7 @@
         }
       },
       "Organization": {
+        "required": ["fullLicensesPurchased", "id", "name", "plan"],
         "type": "object",
         "properties": {
           "fullLicensesPurchased": {
@@ -14565,6 +14584,7 @@
         }
       },
       "OrganizationMember": {
+        "required": ["active", "email", "id", "license", "role"],
         "type": "object",
         "properties": {
           "active": {
@@ -14722,6 +14742,7 @@
         "description": "Team picture"
       },
       "Team": {
+        "required": ["id", "name"],
         "type": "object",
         "properties": {
           "id": {
@@ -14865,6 +14886,7 @@
         "description": "Team invitation settings"
       },
       "TeamMember": {
+        "required": ["memberId", "teamId", "userRole"],
         "type": "object",
         "properties": {
           "createdAt": {
