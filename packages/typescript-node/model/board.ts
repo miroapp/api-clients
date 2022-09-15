@@ -29,11 +29,11 @@ export class Board {
   /**
    * Description of the board.
    */
-  'description'?: string
+  'description': string
   /**
    * Unique identifier (ID) of the board.
    */
-  'id'?: string
+  'id': string
   /**
    * Date and time when the board was last modified. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
@@ -42,7 +42,7 @@ export class Board {
   /**
    * Name of the board.
    */
-  'name'?: string
+  'name': string
   'owner'?: UserInfoShort
   'picture'?: Picture
   'policy'?: BoardPolicy
@@ -50,7 +50,7 @@ export class Board {
   /**
    * Type of the object that is returned. In this case, type returns `board`.
    */
-  'type'?: string
+  'type': string
   /**
    * URL to view the board.
    */

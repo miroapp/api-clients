@@ -21,15 +21,15 @@ export class BoardWithLinks {
   /**
    * Unique identifier (ID) of the board.
    */
-  'id'?: string
+  'id': string
   /**
    * Name of the board.
    */
-  'name'?: string
+  'name': string
   /**
    * Description of the board.
    */
-  'description'?: string
+  'description': string
   'team'?: Team
   'picture'?: Picture
   'policy'?: BoardPolicy
@@ -53,7 +53,7 @@ export class BoardWithLinks {
   /**
    * Type of the object that is returned. In this case, type returns `board`.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

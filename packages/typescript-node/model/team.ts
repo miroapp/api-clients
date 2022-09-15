@@ -16,11 +16,11 @@ export class Team {
   /**
    * Team id
    */
-  'id'?: number
+  'id': number
   /**
    * Team name
    */
-  'name'?: string
+  'name': string
   'picture'?: Picture
   'type'?: string
 

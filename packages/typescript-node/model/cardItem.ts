@@ -23,7 +23,7 @@ export class CardItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id'?: number
+  'id': number
   'data'?: CardData
   'style'?: CardStyle
   'position'?: Position
@@ -43,7 +43,7 @@ export class CardItem {
   /**
    * Type of item that is returned.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

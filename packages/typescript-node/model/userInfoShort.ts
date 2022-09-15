@@ -17,15 +17,15 @@ export class UserInfoShort {
   /**
    * Unique identifier (ID) of the user.
    */
-  'id'?: number
+  'id': number
   /**
    * Name of the user.
    */
-  'name'?: string
+  'name': string
   /**
    * Indicates the type of object returned. In this case, `type` returns `user`.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
