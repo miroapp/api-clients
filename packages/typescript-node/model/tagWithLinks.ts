@@ -16,20 +16,20 @@ export class TagWithLinks {
   /**
    * Unique identifier of the tag.
    */
-  'id'?: number
+  'id': number
   /**
    * Text of the tag
    */
-  'title'?: string
+  'title': string
   /**
    * Background color of the tag. Possible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`
    */
-  'fillColor'?: string | typeof TagWithLinks.FillColorEnum[keyof typeof TagWithLinks.FillColorEnum]
+  'fillColor': string | typeof TagWithLinks.FillColorEnum[keyof typeof TagWithLinks.FillColorEnum]
   'links'?: SelfLink
   /**
    * Type of the object that is returned. In this case, type returns `tag`.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

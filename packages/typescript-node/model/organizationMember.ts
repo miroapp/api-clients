@@ -17,15 +17,15 @@ export class OrganizationMember {
   /**
    * Flag is user active
    */
-  'active'?: boolean
+  'active': boolean
   /**
    * User email
    */
-  'email'?: string
+  'email': string
   /**
    * Id of the user
    */
-  'id'?: string
+  'id': string
   /**
    * Last time when the user was active
    */
@@ -33,7 +33,7 @@ export class OrganizationMember {
   /**
    * Name of the current user license in the organization
    */
-  'license'?: string | typeof OrganizationMember.LicenseEnum[keyof typeof OrganizationMember.LicenseEnum]
+  'license': string | typeof OrganizationMember.LicenseEnum[keyof typeof OrganizationMember.LicenseEnum]
   /**
    * Time when the license was assigned to the user
    */
@@ -41,7 +41,7 @@ export class OrganizationMember {
   /**
    * Name of the user role in the organization
    */
-  'role'?: string | typeof OrganizationMember.RoleEnum[keyof typeof OrganizationMember.RoleEnum]
+  'role': string | typeof OrganizationMember.RoleEnum[keyof typeof OrganizationMember.RoleEnum]
   'type'?: string
 
   /** @ignore */

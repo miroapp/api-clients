@@ -22,7 +22,7 @@ export class FrameItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id'?: number
+  'id': number
   'data'?: FrameData
   'style'?: FrameStyle
   'position'?: Position
@@ -41,7 +41,7 @@ export class FrameItem {
   /**
    * Type of item that is returned.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

@@ -22,7 +22,7 @@ export class EmbedItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id'?: number
+  'id': number
   'data'?: EmbedData
   'position'?: Position
   'geometry'?: Geometry
@@ -41,7 +41,7 @@ export class EmbedItem {
   /**
    * Type of item that is returned.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
