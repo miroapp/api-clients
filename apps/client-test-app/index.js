@@ -12,6 +12,7 @@ const USER_ID = 123
 const TEST_BOARD_ID = 'uXjVPZcwwIY='
 const TEST_ITEM_ID = '3458764533355792545'
 const TEST_FRAME_ID = '3458764533388333263'
+const TEST_TEAM_ID = '3458764515148204448'
 
 app.get('/login', async (req, res) => {
   if (await miro.isAuthorized(USER_ID)) {
@@ -130,5 +131,12 @@ const testHighLevelItem = async (api) => {
       break
     }
   }
+  return ''
 }
-const testHighLevelTeam = async (api) => ''
+const testHighLevelTeam = async (api) => {
+  /* TODO: api.getTeams() isnt working yet */
+  // for (const team of api.getTeams()) {
+  // console.log(team)
+  // }
+  return ''
+}
