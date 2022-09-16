@@ -1,5 +1,5 @@
 import {MiroApi} from '../../api'
-import {Connector, Item} from '../index'
+import {Connector, Item, StickyNoteItem} from '../index'
 import {jest} from '@jest/globals'
 
 describe('Item test', () => {
@@ -80,6 +80,15 @@ describe('Item test', () => {
       expect(api.createConnector).toBeCalledWith('boardId', expectedArguments)
 
       expect(connector).toBeInstanceOf(Connector)
+    })
+
+    it('returns a specific item based on a generic one', () => {
+      const api = new MiroApi('token')
+      const item = Item.fromGenericItem(api, 'boardId', {
+        id: 123,
+        type: 'sticky_note',
+      })
+      expect(item).toBeInstanceOf(StickyNoteItem)
     })
   })
 })
