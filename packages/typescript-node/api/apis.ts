@@ -3879,7 +3879,7 @@ export async function makeJsonRequest(
     method,
     headers: {
       'Content-Type': 'application/json',
-      'User-Agent': 'miro-node:0.0.1-alpha.8 app_id:${appId}',
+      'User-Agent': 'miro-node:0.0.1-alpha.9 app_id:${appId}',
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
