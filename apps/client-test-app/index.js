@@ -44,7 +44,7 @@ app.get('/', async (req, res) => {
   body += await testHighLevelApi(api.getAllBoards())
   body += await testHighLevelBoard(api)
   body += await testHighLevelFrameItem(api)
-  body += await testHighLevelItem(api)
+  await testHighLevelItem(api)
   body += await testHighLevelTeam(api)
 
   res.send(body)
@@ -118,5 +118,19 @@ const testHighLevelFrameItem = async (api) => {
 
   return response
 }
-const testHighLevelItem = async (api) => ''
+const testHighLevelItem = async (api) => {
+  for await (const board of api.getAllBoards()) {
+    if (board.id !== TEST_BOARD_ID) continue
+
+    let firstItemId
+    for await (const item of board.getAllItems()) {
+      if (!firstItemId) {
+        firstItemId = item.id
+        continue
+      }
+      await item.connectTo(firstItemId)
+      break
+    }
+  }
+}
 const testHighLevelTeam = async (api) => ''
