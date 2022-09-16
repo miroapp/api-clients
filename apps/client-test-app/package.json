@@ -13,5 +13,8 @@
     "@mirohq/miro-node": "0.0.1-alpha.8",
     "dotenv": "^16.0.2",
     "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@types/node-fetch": "^2.6.2"
   }
 }
