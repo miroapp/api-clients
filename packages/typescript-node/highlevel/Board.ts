@@ -1,5 +1,5 @@
 import {Board as BaseBoard} from '../model/board'
-import {BoardMember, Item} from './index'
+import {BoardMember, Item, Tag} from './index'
 import {BoardMembersPagedResponse, GenericItem, GenericItemCursorPaged, MiroApi} from '../api'
 
 export abstract class Board extends BaseBoard {
@@ -49,6 +49,35 @@ export abstract class Board extends BaseBoard {
 
       for (const item of response.data || []) {
         yield new BoardMember(this._api, this.id, item.id, item)
+      }
+
+      const responseOffset = response.offset || 0
+      const size = response.data?.length || 0
+      const total = response.total || 0
+
+      if (!total || !size) return
+      if (responseOffset + size >= total) return
+
+      currentOffset += size
+    }
+  }
+
+  /**
+   * Get all tags on the board
+   * Returns an iterator which will automatically paginate and fetch all available tags
+   */
+  async *getAllTags(query?: Omit<Parameters<MiroApi['getTagsFromBoard']>[1], 'offset'>): AsyncGenerator<Tag, void> {
+    let currentOffset = 0
+    while (true) {
+      const response = (
+        await this._api.getTagsFromBoard(this.id, {
+          ...query,
+          offset: currentOffset.toString(),
+        })
+      ).body
+
+      for (const item of response.data || []) {
+        yield new Tag(this._api, this.id, item.id, item)
       }
 
       const responseOffset = response.offset || 0
