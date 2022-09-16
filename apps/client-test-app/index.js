@@ -11,6 +11,7 @@ const miro = new Miro({
 const USER_ID = 123
 const TEST_BOARD_ID = 'uXjVPZcwwIY='
 const TEST_ITEM_ID = '3458764533355792545'
+const TEST_FRAME_ID = '3458764533388333263'
 
 app.get('/login', async (req, res) => {
   if (await miro.isAuthorized(USER_ID)) {
@@ -63,16 +64,15 @@ const testHighLevelApi = async (allBoards) => {
 }
 const testHighLevelBoard = async (api) => {
   // Test if board.getAllItems() is working
-  let response = `<h1>Board items</h1><ul>`
+  let response = `<h1>Board items</h1>`
   for await (const board of api.getAllBoards()) {
     if (board.id !== TEST_BOARD_ID) continue
-    response += `<li>${board.name} (${board.id})</li><ul>`
+    response += `<h2>${board.name} (${board.id})</h2><ul>`
     for await (const item of board.getAllItems()) {
       response += `<li>id: <em>${item.id}</em> / type: <em>${item.type}</em></li>`
     }
     response += '</ul>'
   }
-  response += '</ul>'
 
   // Test if board.getItem() is working
   response += `<h1>board.getItem(${TEST_ITEM_ID})</h1>`
@@ -90,6 +90,33 @@ const testHighLevelBoard = async (api) => {
 
   return response
 }
-const testHighLevelFrameItem = async (api) => ''
+function getAllFuncs(toCheck) {
+  const props = []
+  let obj = toCheck
+  do {
+    props.push(...Object.getOwnPropertyNames(obj))
+  } while ((obj = Object.getPrototypeOf(obj)))
+
+  return props.sort().filter((e, i, arr) => {
+    if (e !== arr[i + 1] && typeof toCheck[e] == 'function') return true
+  })
+}
+
+const testHighLevelFrameItem = async (api) => {
+  let response = ''
+
+  for await (const board of api.getAllBoards()) {
+    if (board.id !== TEST_BOARD_ID) continue
+    /*
+     * TODO:
+     *  We dont have a highlevel API yet that returns a frameItem class so we cant use FrameItem yet
+     *  */
+    const frameItem = await board.getFrameItem(TEST_FRAME_ID)
+    console.log(getAllFuncs(frameItem))
+    console.log(frameItem)
+  }
+
+  return response
+}
 const testHighLevelItem = async (api) => ''
 const testHighLevelTeam = async (api) => ''
