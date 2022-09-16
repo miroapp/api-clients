@@ -1,6 +1,7 @@
 import {Board as BaseBoard} from '../model/board'
 import {BoardMember, Connector, Item, Tag} from './index'
-import {BoardMembersPagedResponse, ConnectorsCursorPaged, GenericItem, GenericItemCursorPaged, MiroApi} from '../api'
+import {BoardMembersPagedResponse, GenericItem, ConnectorsCursorPaged, GenericItemCursorPaged, MiroApi} from '../api'
+import {AnyItem} from './Item'
 import {hasMoreData} from './helpers'
 
 /** @hidden */
@@ -11,7 +12,7 @@ export abstract class Board extends BaseBoard {
    * Get all items on the board
    * Returns an iterator which will automatically paginate and fetch all available items
    */
-  async *getAllItems(query?: Omit<Parameters<MiroApi['getItems']>[1], 'cursor'>): AsyncGenerator<Item, void> {
+  async *getAllItems(query?: Omit<Parameters<MiroApi['getItems']>[1], 'cursor'>): AsyncGenerator<AnyItem, void> {
     let cursor: string | undefined = undefined
     while (true) {
       const response: GenericItemCursorPaged = (
@@ -22,7 +23,7 @@ export abstract class Board extends BaseBoard {
       ).body
 
       for (const item of response.data || []) {
-        yield new Item(this._api, this.id, item.id, item)
+        yield Item.fromGenericItem(this._api, this.id, item)
       }
 
       cursor = response.cursor
@@ -110,11 +111,11 @@ export abstract class Board extends BaseBoard {
   }
 
   /** {@inheritDoc api/apis!MiroApi.getSpecificItem} */
-  async getItem(itemId: string): Promise<Item> {
+  async getItem(itemId: string): Promise<AnyItem> {
     const response = await this._api.getSpecificItem(this.id, itemId)
 
     const item: GenericItem = response.body
 
-    return new Item(this._api, this.id, item.id, item)
+    return Item.fromGenericItem(this._api, this.id, item)
   }
 }
