@@ -16,7 +16,7 @@ import {Item as BaseItem} from './Item'
 import {FrameItem as BaseFrameItem} from './FrameItem'
 
 import {ConnectorWithLinks as BaseConnector} from './../model/connectorWithLinks'
-import {Tag as BaseTag} from './../model/tag'
+import {Tag as BaseTag} from './Tag'
 
 export class Api extends BaseApi {
   /** @hidden */

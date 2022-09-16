@@ -379,7 +379,7 @@ const MODELS = {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
       name: 'Tag',
-      path: '../model/tag',
+      path: 'Tag',
     },
     methods: [
       {method: 'updateTag', alias: 'update'},
