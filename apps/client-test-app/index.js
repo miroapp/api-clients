@@ -112,8 +112,6 @@ const testHighLevelFrameItem = async (api) => {
      *  We dont have a highlevel API yet that returns a frameItem class so we cant use FrameItem yet
      *  */
     const frameItem = await board.getFrameItem(TEST_FRAME_ID)
-    console.log(getAllFuncs(frameItem))
-    console.log(frameItem)
   }
 
   return response
