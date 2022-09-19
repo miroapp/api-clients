@@ -23,7 +23,7 @@ export class ShapeItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id'?: number
+  'id': number
   'data'?: ShapeData
   'style'?: ShapeStyle
   'position'?: Position
@@ -43,7 +43,7 @@ export class ShapeItem {
   /**
    * Type of item that is returned.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

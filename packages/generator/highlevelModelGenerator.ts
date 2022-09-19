@@ -57,8 +57,8 @@ ${renderFunctionBody(method, props)}
 
   function renderApiCall(method: Model['methods'][number], props: ModelProps) {
     const apiCallArguments = method.topLevelCall
-      ? [`this.${props[props.length - 1].name}?.toString() || ''`]
-      : props.map(({name}) => `this.${name}?.toString() || ''`)
+      ? [`this.${props[props.length - 1].name}.toString()`]
+      : props.map(({name}) => `this.${name}.toString()`)
 
     apiCallArguments.push('...parameters')
 
@@ -107,7 +107,7 @@ ${renderFunctionBody(method, props)}
   function renderImports() {
     return `
 import { MiroApi } from '../api'
-import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase, toString } from "./helpers";
+import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase } from "./helpers";
 
 ${Object.keys(models)
   .map((name) => {

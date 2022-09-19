@@ -23,7 +23,7 @@ export class TextItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id'?: number
+  'id': number
   'data'?: TextData
   'style'?: TextStyle
   'position'?: Position
@@ -43,7 +43,7 @@ export class TextItem {
   /**
    * Type of item that is returned.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

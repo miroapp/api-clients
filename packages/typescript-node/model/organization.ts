@@ -14,19 +14,19 @@ export class Organization {
   /**
    * Purchased FULL licenses
    */
-  'fullLicensesPurchased'?: number
+  'fullLicensesPurchased': number
   /**
    * Id of the organization
    */
-  'id'?: string
+  'id': string
   /**
    * Name of the organization
    */
-  'name'?: string
+  'name': string
   /**
    * Organization plan type
    */
-  'plan'?: string | typeof Organization.PlanEnum[keyof typeof Organization.PlanEnum]
+  'plan': string | typeof Organization.PlanEnum[keyof typeof Organization.PlanEnum]
   'type'?: string
 
   /** @ignore */

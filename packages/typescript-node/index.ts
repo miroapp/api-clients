@@ -108,6 +108,15 @@ export class Miro {
     })
   }
 
+  /**
+   * Exchanges the authorization code for an access token by calling the token endpoint
+   * It will store the token information in storage for later reuse
+   */
+  async revokeToken(userId: ExternalUserId): Promise<void> {
+    await this.as(userId).revokeToken()
+    await this.storage.write(userId, undefined)
+  }
+
   async getToken(userId: ExternalUserId, params: {[key: string]: string}): Promise<string> {
     const tokenUrl = new URL('/v1/oauth/token', defaultBasePath)
     tokenUrl.search = new URLSearchParams(params).toString()
@@ -164,7 +173,7 @@ export type Awaitable<T> = Promise<T> | T
 
 export interface Storage {
   read(userId: ExternalUserId): Promise<State | undefined>
-  write(userId: ExternalUserId, state: State): Awaitable<void>
+  write(userId: ExternalUserId, state: State | undefined): Awaitable<void>
 }
 
 interface TokenResponse {
@@ -179,7 +188,7 @@ interface TokenResponse {
 
 type MiddlewareArgs = [req: {url?: string | undefined; headers: {host?: string | undefined}}, ...rest: any]
 
-const defaultStorage = {
+export const defaultStorage: Storage = {
   async read(userId: ExternalUserId) {
     try {
       return JSON.parse(fs.readFileSync(`./state-${userId}.json`, 'utf8'))
@@ -187,8 +196,10 @@ const defaultStorage = {
       return undefined
     }
   },
-  write(userId: ExternalUserId, state: State) {
-    fs.writeFileSync(`./state-${userId}.json`, JSON.stringify(state))
+  async write(userId: ExternalUserId, state: State) {
+    const filename = `./state-${userId}.json`
+    if (state === undefined) return fs.unlinkSync(filename)
+    fs.writeFileSync(filename, JSON.stringify(state))
   },
 }
 

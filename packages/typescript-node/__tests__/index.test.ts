@@ -1,4 +1,4 @@
-import {Miro, Opts, State, Storage} from '../index'
+import {defaultStorage, Miro, MiroApi, Opts, State, Storage} from '../index'
 import {Api} from '../highlevel'
 import {jest} from '@jest/globals'
 
@@ -159,6 +159,33 @@ describe('Entrypoint test', () => {
     })
   })
 
+  describe('revokeToken', () => {
+    it('calls the revokeToken method', async () => {
+      const userId = '123'
+      const miro = testMiroWithStored(userId, {userId, accessToken: 'token'})
+      const revokeToken = jest.fn()
+
+      // @ts-expect-error
+      miro.as = jest.fn((_: string) => ({revokeToken}))
+      await miro.revokeToken(userId)
+
+      expect(revokeToken).toBeCalledTimes(1)
+      expect(miro.storage.write).toBeCalledWith(userId, undefined)
+    })
+  })
+
+  describe('defaultStorage', () => {
+    it('reads from a file and writes into a file', async () => {
+      const userId = '123'
+      const accessToken = 'token'
+      await defaultStorage.write(userId, {userId, accessToken})
+      expect(await defaultStorage.read(userId)).toEqual({userId, accessToken})
+
+      await defaultStorage.write(userId, undefined)
+      expect(await defaultStorage.read(userId)).toEqual(undefined)
+    })
+  })
+
   function testMiro(opts?: Opts) {
     return new Miro({
       clientId: 'id',
@@ -166,7 +193,7 @@ describe('Entrypoint test', () => {
       redirectUrl: 'url',
       storage: {
         read: async () => undefined,
-        write: async () => {},
+        write: jest.fn(async () => {}),
       },
       ...opts,
     })
@@ -179,7 +206,7 @@ describe('Entrypoint test', () => {
       redirectUrl: '123',
       storage: {
         read: async (id) => (id === userId ? stored : undefined),
-        write: async () => {},
+        write: jest.fn(async () => {}),
       },
     })
   }

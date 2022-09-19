@@ -23,7 +23,7 @@ export class StickyNoteItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id'?: number
+  'id': number
   'data'?: StickyNoteData
   'style'?: StickyNoteStyle
   'position'?: Position
@@ -43,7 +43,7 @@ export class StickyNoteItem {
   /**
    * Type of item that is returned.
    */
-  'type'?: string
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
