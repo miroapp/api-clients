@@ -73,28 +73,42 @@ export abstract class ConnectableItem implements ConnectTo {
 
 export abstract class GenericItem extends BaseGenericItem implements ConnectTo {
   static fromGenericItem(api: MiroApi, boardId: string, item: BaseGenericItem): WidgetItem {
+    interface WidgetItemConstructor {
+      new (api: MiroApi, boardId: string, id: number, item: BaseGenericItem): WidgetItem
+    }
+
+    let classToUse: WidgetItemConstructor = Item
     switch (item.type) {
       case 'app_card':
-        return new AppCardItem(api, boardId, item.id, item)
+        classToUse = AppCardItem
+        break
       case 'card':
-        return new CardItem(api, boardId, item.id, item)
+        classToUse = CardItem
+        break
       case 'document':
-        return new DocumentItem(api, boardId, item.id, item)
+        classToUse = DocumentItem
+        break
       case 'embed':
-        return new EmbedItem(api, boardId, item.id, item)
+        classToUse = EmbedItem
+        break
       case 'frame':
-        return new FrameItem(api, boardId, item.id, item)
+        classToUse = FrameItem
+        break
       case 'image':
-        return new ImageItem(api, boardId, item.id, item)
+        classToUse = ImageItem
+        break
       case 'shape':
-        return new ShapeItem(api, boardId, item.id, item)
+        classToUse = ShapeItem
+        break
       case 'sticky_note':
-        return new StickyNoteItem(api, boardId, item.id, item)
+        classToUse = StickyNoteItem
+        break
       case 'text':
-        return new TextItem(api, boardId, item.id, item)
-      default:
-        return new Item(api, boardId, item.id, item)
+        classToUse = TextItem
+        break
     }
+
+    return new classToUse(api, boardId, item.id, item)
   }
 
   /** @group Methods */
