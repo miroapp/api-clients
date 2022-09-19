@@ -5,22 +5,16 @@ import {Miro} from '@mirohq/miro-node'
 
 const app = express()
 
-const options = {
-  clientId: process.env.CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET,
-  redirectUrl: `https://${process.env.TUNNEL}.loca.lt/auth/miro/callback`,
-}
-const miro = new Miro(options)
+const miro = new Miro({
+  clientId: process.env.MIRO_CLIENT_ID,
+  clientSecret: process.env.MIRO_CLIENT_SECRET,
+  redirectUrl: process.env.MIRO_REDIRECT_URL,
+})
 
 const USER_ID = 'WE_DONT_NEED_A_REAL_ID'
 
 app.get('/login', async (req, res) => {
   if (await miro.isAuthorized(USER_ID)) {
-    try {
-      await miro.handleAuthorizationCodeRequest(USER_ID, req)
-    } catch (e) {
-      console.error('Error with handleAuthorizationCodeRequest', e)
-    }
     res.redirect('/')
     return
   }
