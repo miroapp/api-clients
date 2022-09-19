@@ -3872,9 +3872,6 @@ export async function makeJsonRequest(
   appId: string = process.env.MIRO_CLIENT_ID || 'unknown',
   httpTimeout: number = 5000,
 ) {
-  const timeoutAbortController = new AbortController()
-  const timeout = setTimeout(() => timeoutAbortController.abort(), httpTimeout)
-
   const options = {
     method,
     headers: {
@@ -3884,7 +3881,7 @@ export async function makeJsonRequest(
       Authorization: `Bearer ${token}`,
     },
     body,
-    signal: timeoutAbortController.signal,
+    timeout: httpTimeout,
   }
 
   const hasLogger = typeof logger === 'function'

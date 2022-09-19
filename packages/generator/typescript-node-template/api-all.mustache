@@ -129,8 +129,6 @@ export class HttpError extends Error {
 
 export async function makeJsonRequest(token: string, method: string, url: URL, body?: string, logger?: (...thing: any) => void, appId: string = process.env.MIRO_CLIENT_ID || "unknown", httpTimeout: number = 5000) {
 
-    const timeoutAbortController = new AbortController()
-    const timeout = setTimeout(() => timeoutAbortController.abort(), httpTimeout)
 
     const options = {
         method,
@@ -141,7 +139,7 @@ export async function makeJsonRequest(token: string, method: string, url: URL, b
             'Authorization': `Bearer ${token}`
         },
         body,
-        signal: timeoutAbortController.signal
+        timeout: httpTimeout,
     }
 
     const hasLogger = typeof logger === 'function'
