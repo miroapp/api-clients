@@ -5,6 +5,10 @@ import ejs from 'ejs'
 import {Miro} from '@mirohq/miro-node'
 
 const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 app.set('view engine', 'ejs')
 
 const miro = new Miro({
@@ -56,11 +60,18 @@ app.get('/boards/:boardId/item/:itemId', async (req, res) => {
 
   const boardId = req.params.boardId
   const itemId = req.params.itemId
+  const connectedTo = req.query.connectedTo
   const api = miro.as(USER_ID)
   const board = await api.getBoard(boardId)
   const item = await board.getItem(itemId)
 
-  res.render('boardItem', {item, board})
+  const boardItemsGenerator = await board.getAllItems()
+  const boardItems = []
+  for await (const item of boardItemsGenerator) {
+    boardItems.push(item)
+  }
+
+  res.render('boardItem', {item, board, boardItems, connectedTo})
 })
 
 app.get('/boards/:boardId', async (req, res) => {
@@ -79,4 +90,15 @@ app.get('/boards/:boardId', async (req, res) => {
   }
   res.render('board', {boardItems, board})
 })
+
+app.post('/connectTo/:boardId/:itemId', async (req, res) => {
+  const api = miro.as(USER_ID)
+  const board = await api.getBoard(req.params.boardId)
+  const item = await board.getItem(req.params.itemId)
+
+  await item.connectTo(req.body.itemId)
+
+  res.redirect(`/boards/${req.params.boardId}/item/${req.params.itemId}?connectedTo=${req.body.itemId}`)
+})
+
 app.listen(3000, () => console.log(`Listening on localhost, port 3000. http://localhost:3000`))
