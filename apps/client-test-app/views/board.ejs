@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Board <%= locals.board.name %> / <%= board.id %></title>
+</head>
+<body>
+    <h1><%= locals.board.name %> / <%= locals.boardId %></h1>
+    <a href="/">Back to all boards</a>
+    <h2>Items on this board:</h2>
+    <ul>
+        <% locals.boardItems.forEach(item => { %>
+            <li>ID: <em><a href="/boards/<%= board.id %>/item/<%= item.id %>"><%= item.id %></a></em> (<%=item.type%>)</li>
+        <% }) %>
+    </ul>
+</body>
+</html>

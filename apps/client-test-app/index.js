@@ -1,9 +1,15 @@
 import * as dotenv from 'dotenv'
 dotenv.config()
 import express from 'express'
+import ejs from 'ejs'
 import {Miro} from '@mirohq/miro-node'
 
 const app = express()
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
+app.set('view engine', 'ejs')
 
 const miro = new Miro({
   clientId: process.env.MIRO_CLIENT_ID,
@@ -54,35 +60,18 @@ app.get('/boards/:boardId/item/:itemId', async (req, res) => {
 
   const boardId = req.params.boardId
   const itemId = req.params.itemId
+  const connectedTo = req.query.connectedTo
   const api = miro.as(USER_ID)
   const board = await api.getBoard(boardId)
   const item = await board.getItem(itemId)
 
-  let body = `
-    <h1><a href="/boards/${boardId}" title="Back to board">${board.name}</a> / ${item.id}</h1>
-    <dl>
-        <dt>id:</dt>
-        <dd>${item.id}</dd>
-        <dt>type:</dt>
-        <dd>${item.type}</dd>
-        <dt>id:</dt>
-        <dd>${item.id}</dd>
-        <dt>Board id:</dt>
-        <dd>${item.boardId}</dd>
-        <dt>data.content:</dt>
-        <dd>${item.data?.content}</dd>
-        <dt>geometry:</dt>
-        <dd><pre>${JSON.stringify(item.geometry, null, 2)}</pre></dd>
-        <dt>modifiedAt:</dt>
-        <dd>${item.modifiedAt}</dd>
-        <dt>modifiedBy:</dt>
-        <dd><pre>${JSON.stringify(item.modifiedBy, null, 2)}</pre></dd>
-        <dt>position:</dt>
-        <dd><pre>${JSON.stringify(item.position, null, 2)}</pre></dd>
-    </dl>
-    `
+  const boardItemsGenerator = await board.getAllItems()
+  const boardItems = []
+  for await (const item of boardItemsGenerator) {
+    boardItems.push(item)
+  }
 
-  res.send(body)
+  res.render('boardItem', {item, board, boardItems, connectedTo})
 })
 
 app.get('/boards/:boardId', async (req, res) => {
@@ -96,25 +85,20 @@ app.get('/boards/:boardId', async (req, res) => {
   const board = await api.getBoard(boardId)
   const boardItemsGenerator = await board.getAllItems()
   const boardItems = []
-
   for await (const item of boardItemsGenerator) {
     boardItems.push(item)
   }
-  console.log(boardItems)
-
-  let body = `
-    <h1>${board.name} / ${boardId}</h1>
-    <a href="/">Back to all boards</a>
-    <ul>
-        ${boardItems
-          .map(
-            (item) =>
-              `<li>ID: <em><a href="/boards/${boardId}/item/${item.id}">${item.id}</a></em>  (${item.type})</li>`,
-          )
-          .join('')}
-    </ul>
-  `
-
-  res.send(body)
+  res.render('board', {boardItems, board})
 })
+
+app.post('/connectTo/:boardId/:itemId', async (req, res) => {
+  const api = miro.as(USER_ID)
+  const board = await api.getBoard(req.params.boardId)
+  const item = await board.getItem(req.params.itemId)
+
+  await item.connectTo(req.body.itemId)
+
+  res.redirect(`/boards/${req.params.boardId}/item/${req.params.itemId}?connectedTo=${req.body.itemId}`)
+})
+
 app.listen(3000, () => console.log(`Listening on localhost, port 3000. http://localhost:3000`))

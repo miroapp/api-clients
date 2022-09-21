@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>Item <%= locals.item.id %> / Board <%= locals.board.name %> / <%= board.id %></title>
+    </head>
+    <body>
+        <% if (locals.connectedTo) { %>
+            <strong style="border: 1px solid black; padding: 1em 2em; margin: 2em 0; display: block;">Successfully connected this item to <a href="/boards/<%= locals.board.id %>/item/<%= locals.connectedTo %>"><%= locals.connectedTo %></strong>
+        <% } %>
+
+        <h1><a href="/boards/<%= board.id %>" title="Back to board"><%= board.name %></a> / <%= item.id %></h1>
+        <dl>
+            <dt>id:</dt>
+            <dd><%= item.id %></dd>
+            <dt>type:</dt>
+            <dd><%= item.type %></dd>
+            <dt>Board id:</dt>
+            <dd><%= item.boardId %></dd>
+            <dt>data.content:</dt>
+            <dd><%= item.data?.content%></dd>
+            <dt>geometry:</dt>
+            <dd><pre><%=JSON.stringify(item.geometry, null, 2)%></pre></dd>
+            <dt>modifiedAt:</dt>
+            <dd><%= item.modifiedAt%></dd>
+            <dt>modifiedBy:</dt>
+            <dd><pre><%=JSON.stringify(item.modifiedBy, null, 2)%></pre></dd>
+            <dt>position:</dt>
+            <dd><pre><%=JSON.stringify(item.position, null, 2)%></pre></dd>
+        </dl>
+        <h2>Actions:</h2>
+        <h3>Connect to other item on board:</h3>
+        <form action="/connectTo/<%= board.id %>/<%= item.id %>" method="post">
+            <ul>
+                <% boardItems
+                    .filter(({id, type}) => id !== item.id || type !== 'frame')
+                    .forEach(boardItem => {
+                %>
+                    <li><button name="itemId" type="submit" value="<%= boardItem.id %>"><%= boardItem.id %> (<%= boardItem.type %>)</button></li>
+                <% }) %>
+            </ul>
+        </form>
+    </body>
+</html>
