@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Item <%= locals.item.id %> / Board <%= locals.board.name %> / <%= board.id %></title>
+</head>
+<body>
+<h1><a href="/boards/<%= board.id %>" title="Back to board"><%= board.name %></a> / <%= item.id %></h1>
+<dl>
+    <dt>id:</dt>
+    <dd><%= item.id %></dd>
+    <dt>type:</dt>
+    <dd><%= item.type %></dd>
+    <dt>Board id:</dt>
+    <dd><%= item.boardId %></dd>
+    <dt>data.content:</dt>
+    <dd><%= item.data?.content%></dd>
+    <dt>geometry:</dt>
+    <dd><pre><%=JSON.stringify(item.geometry, null, 2)%></pre></dd>
+    <dt>modifiedAt:</dt>
+    <dd><%= item.modifiedAt%></dd>
+    <dt>modifiedBy:</dt>
+    <dd><pre><%=JSON.stringify(item.modifiedBy, null, 2)%></pre></dd>
+    <dt>position:</dt>
+    <dd><pre><%=JSON.stringify(item.position, null, 2)%></pre></dd>
+</dl>
+
+</body>
+</html>
