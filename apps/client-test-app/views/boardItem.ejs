@@ -30,10 +30,11 @@
         <h3>Connect to other item on board:</h3>
         <form action="/connectTo/<%= board.id %>/<%= item.id %>" method="post">
             <ul>
-                <% boardItems.forEach(boardItem => { %>
-                    <% if (boardItem.id !== item.id) { %>
-                        <li><button name="itemId" type="submit" value="<%= boardItem.id %>"><%= boardItem.id %> (<%= boardItem.type %>)</button></li>
-                    <% } %>
+                <% boardItems
+                    .filter(({id, type}) => id !== item.id || type !== 'frame')
+                    .forEach(boardItem => {
+                %>
+                    <li><button name="itemId" type="submit" value="<%= boardItem.id %>"><%= boardItem.id %> (<%= boardItem.type %>)</button></li>
                 <% }) %>
             </ul>
         </form>

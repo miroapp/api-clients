@@ -7,7 +7,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon -e js,ejs index.js"
   },
   "dependencies": {
     "@mirohq/miro-node": "0.0.1-alpha.8",
