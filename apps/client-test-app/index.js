@@ -1,4 +1,5 @@
 import * as dotenv from 'dotenv'
+
 dotenv.config()
 import express from 'express'
 import ejs from 'ejs'
@@ -70,7 +71,6 @@ app.get('/boards/:boardId/item/:itemId', async (req, res) => {
   for await (const item of boardItemsGenerator) {
     boardItems.push(item)
   }
-
   res.render('boardItem', {item, board, boardItems, connectedTo})
 })
 
@@ -96,7 +96,28 @@ app.post('/connectTo/:boardId/:itemId', async (req, res) => {
   const board = await api.getBoard(req.params.boardId)
   const item = await board.getItem(req.params.itemId)
 
-  await item.connectTo(req.body.itemId)
+  try {
+    await item.connectTo(
+      req.body.itemId,
+      {
+        snapTo: 'left',
+      },
+      {
+        style: {
+          color: '#9510ac',
+          startStrokeCap: 'erd_zero_or_one',
+          strokeColor: '#2d9bf0',
+          strokeStyle: 'dotted',
+          strokeWidth: '4',
+          textOrientation: 'aligned',
+        },
+        shape: 'elbowed',
+        captions: [{content: new Date().toUTCString()}, {content: 'whoa'}],
+      },
+    )
+  } catch (e) {
+    console.error(e)
+  }
 
   res.redirect(`/boards/${req.params.boardId}/item/${req.params.itemId}?connectedTo=${req.body.itemId}`)
 })
