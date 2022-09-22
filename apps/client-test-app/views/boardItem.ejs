@@ -31,7 +31,7 @@
         <form action="/connectTo/<%= board.id %>/<%= item.id %>" method="post">
             <ul>
                 <% boardItems
-                    .filter(({id, type}) => id !== item.id || type !== 'frame')
+                    .filter(({id, type}) => id.toString() !== item.id.toString() && type !== 'frame')
                     .forEach(boardItem => {
                 %>
                     <li><button name="itemId" type="submit" value="<%= boardItem.id %>"><%= boardItem.id %> (<%= boardItem.type %>)</button></li>
