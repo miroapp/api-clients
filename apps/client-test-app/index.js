@@ -9,6 +9,7 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(express.static('node_mdules'))
 
 app.set('view engine', 'ejs')
 
@@ -44,11 +45,19 @@ app.get('/', async (req, res) => {
   }
   const api = miro.as(USER_ID)
 
-  let body = '<h1>All boards you have access to</h1><ul>'
+  let body = `
+    <html lang="en">
+        <head>
+            <title>Node client test</title>
+              <link rel="stylesheet" href="https://unpkg.com/mirotone/dist/styles.css" />
+        </head>
+    </html>
+    <body>
+    <h1>All boards you have access to</h1><ul>`
   for await (const board of api.getAllBoards()) {
     body += `<li><a href="boards/${board.id}">${board.name} (${board.id})</a></li>`
   }
-  body += '</ul>'
+  body += '</ul></body>'
 
   res.send(body)
 })
