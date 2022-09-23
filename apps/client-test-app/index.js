@@ -43,11 +43,35 @@ app.get('/', async (req, res) => {
   }
   const api = miro.as(USER_ID)
 
-  let body = '<h1>All boards you have access to</h1><ul>'
-  for await (const board of api.getAllBoards()) {
+  const page = req.query.page || 1
+  const boardsPerPage = 10
+
+  let body = `<h1>Boards you have access to (page ${page})</h1><ul>`
+  const boards = await api.getBoardsPaginated({
+    teamId: '3458764515148204448',
+    limit: boardsPerPage.toString(),
+    offset: (page - 1) * boardsPerPage,
+  })
+
+  for (const board of boards.body.data) {
     body += `<li><a href="boards/${board.id}">${board.name} (${board.id})</a></li>`
   }
-  body += '</ul>'
+  body += `</ul>`
+
+  const {total} = boards.body
+  const pages = Math.ceil(total / boardsPerPage)
+
+  if (pages > 1) {
+    body += `
+    <h2>Pages</h2>
+    <ul>
+        ${new Array(pages)
+          .fill(null)
+          .map((_, i) => `<li><a href="/?page=${i + 1}">${i + 1}</a></li>`)
+          .join('')}
+    </ul>
+    `
+  }
 
   res.send(body)
 })

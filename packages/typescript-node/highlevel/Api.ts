@@ -39,4 +39,11 @@ export abstract class Api {
       currentOffset += size
     }
   }
+
+  async getBoardsPaginated(query?: Parameters<MiroApi['getBoards']>[0]) {
+    const boardsResponse = await this._api.getBoards(query)
+    boardsResponse?.body?.data?.map((board) => new Board(this._api, board.id, board))
+
+    return boardsResponse
+  }
 }
