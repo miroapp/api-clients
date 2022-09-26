@@ -24,10 +24,7 @@ export abstract class Item extends GenericItem {
       id: this.id.toString(),
       ...startItem,
     }
-    const end = {
-      id: endItem.toString(),
-      ...(typeof endItem === 'object' && endItem),
-    }
+    const end = typeof endItem === 'object' ? endItem : {id: endItem.toString()}
 
     const connector = (
       await this._api.createConnector(this.boardId, {
