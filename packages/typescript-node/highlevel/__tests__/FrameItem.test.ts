@@ -12,6 +12,7 @@ describe('FrameItem', () => {
       const item = {
         boardId,
         id: childId,
+        type: 'frame',
       }
       api.getItemsWithinFrame = jest.fn(async () => ({
         response: {} as any,
