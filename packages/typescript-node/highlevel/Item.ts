@@ -18,19 +18,19 @@ export abstract class Item extends GenericItem {
     endItem: string | number | ItemConnectionCreationData,
     connectorCreationData?: ConnectorCreationData,
   ): Promise<Connector> {
-    const start = {
-      ...(connectorCreationData?.startItem || {}),
-      id: this.id.toString(),
-    }
-
     const connector = (
       await this._api.createConnector(this.boardId, {
-        startItem: start,
-        ...connectorCreationData,
-        endItem: {
-          ...(typeof endItem === 'object' && endItem),
-          id: typeof endItem === 'object' ? endItem?.id?.toString() : endItem.toString(),
+        startItem: {
+          ...(connectorCreationData?.startItem || {}),
+          id: this.id.toString(),
         },
+        ...connectorCreationData,
+        endItem:
+          typeof endItem === 'object'
+            ? endItem
+            : {
+                id: endItem.toString(),
+              },
       })
     ).body
     return new Connector(this._api, this.boardId, connector.id, connector)
