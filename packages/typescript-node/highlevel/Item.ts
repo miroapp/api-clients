@@ -11,26 +11,26 @@ export abstract class Item extends GenericItem {
   /**
    * Create a new connector between the current item and some other item
    * @param {string | number | Object} endItem Item that the new connector will connect to
-   * @param {Object=} startItem
    * @param {Object=} connectorCreationData
    * @return {Promise}
    */
   async connectTo(
     endItem: string | number | ItemConnectionCreationData,
-    startItem?: Omit<ItemConnectionCreationData, 'id'>,
-    connectorCreationData?: Omit<ConnectorCreationData, 'startItem' | 'endItem'>,
+    connectorCreationData?: ConnectorCreationData,
   ): Promise<Connector> {
     const start = {
+      ...(connectorCreationData?.startItem || {}),
       id: this.id.toString(),
-      ...startItem,
     }
-    const end = typeof endItem === 'object' ? endItem : {id: endItem.toString()}
 
     const connector = (
       await this._api.createConnector(this.boardId, {
         startItem: start,
-        endItem: end,
         ...connectorCreationData,
+        endItem: {
+          ...(typeof endItem === 'object' && endItem),
+          id: typeof endItem === 'object' ? endItem?.id?.toString() : endItem.toString(),
+        },
       })
     ).body
     return new Connector(this._api, this.boardId, connector.id, connector)
