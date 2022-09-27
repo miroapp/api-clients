@@ -7,7 +7,7 @@ describe('Item test', () => {
     const now = new Date().toUTCString()
     it.each([
       [
-        'plain number input for endpoint',
+        'plain number input for endItem',
         [456],
         {
           startItem: {id: '123'},
@@ -15,15 +15,15 @@ describe('Item test', () => {
         },
       ],
       [
-        'object input for endPoint',
-        [{id: '456', snapTo: 'top'}],
+        'object input for endItem',
+        [{id: '456'}],
         {
           startItem: {id: '123'},
-          endItem: {id: '456', snapTo: 'top'},
+          endItem: {id: '456'},
         },
       ],
       [
-        'object with modifications for endpoint',
+        'object with modifications for endItem',
         [{id: '456', position: {x: '10%', y: '87%'}}],
         {
           startItem: {id: '123'},
@@ -31,18 +31,17 @@ describe('Item test', () => {
         },
       ],
       [
-        'snapTo modifier for endpoint',
-        [456, {snapTo: 'top'}],
+        'snapTo modifier for endItem',
+        [{id: '456', snapTo: 'top'}],
         {
-          startItem: {id: '123', snapTo: 'top'},
-          endItem: {id: '456'},
+          startItem: {id: '123'},
+          endItem: {id: '456', snapTo: 'top'},
         },
       ],
       [
         'extra options for line',
         [
           456,
-          {},
           {
             style: {
               color: '#9510ac',
@@ -52,9 +51,11 @@ describe('Item test', () => {
           },
         ],
         {
-          endItem: {id: '456'},
           startItem: {
             id: '123',
+          },
+          endItem: {
+            id: '456',
           },
           captions: [{content: now}, {content: 'whoa'}],
           shape: 'elbowed',
