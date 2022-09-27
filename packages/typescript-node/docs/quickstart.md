@@ -5,38 +5,37 @@ In this guide, we will do the bare minimum to get some data out of the Miro REST
   - Go through steps 2-5 on the [create your app](https://developers.miro.com/docs/build-your-first-hello-world-app#step-2-create-a-developer-team-in-miro) docs. In step 5, copy the 'Access token'.
 
 
-1: Create a folder and navigate into it
+#### 1: Create a folder and navigate into it
 ```bash
 mkdir my-miro-app
 cd my-miro-app
 ```
 
-2: Initialize a new node project, answer all questions (you can just press enter for all questions to use the default values)
+#### 2: Initialize a new node project
 ```bash
 npm init
 ```
+Answer all questions (you can just press enter for all questions to use the default values)
 
-3: Open the created file (`pacakge.json`), and add:
-```json
-"type": "module"
-```
-
-3: Install the client
+#### 3: Install the client
 ```bash
 npm add @mirohq/miro-node
 ```
 
-4: In your project, create a `index.js` and paste this snippet:
+#### 4: In your project, create a `index.js` and paste this snippet:
 
 ```js
-import {MiroApi} from '@mirohq/miro-node'
+const {MiroApi} = require('@mirohq/miro-node')
 const api = new MiroApi('YOUR_ACCESS_TOKEN')
 
-const boards = await api.getBoards()
-
-console.log(boards)
+const app = async function () {
+	const boards = await api.getBoards()
+	console.log(boards)
+}()
 ```
-5: In your terminal, run the code:
+Replace `YOUR_ACCESS_TOKEN` with the token you got the the Miro settings page.
+
+#### 5: In your terminal, run the code:
 ```bash
 node index.js
 ```
