@@ -1,6 +1,10 @@
 # Miro node client quickstart guide
 In this guide, we will do the bare minimum to get some data out of the Miro REST API. For authentication we will use a hard-coded access token. In a later guide we will be more thorough and add proper authentication. 
 
+### Prerequisites
+  - Go through steps 2-5 on the [create your app](https://developers.miro.com/docs/build-your-first-hello-world-app#step-2-create-a-developer-team-in-miro) docs. In step 5, copy the 'Access token'.
+
+
 1: Create a folder and navigate into it
 ```bash
 mkdir my-miro-app
@@ -32,15 +36,12 @@ const boards = await api.getBoards()
 
 console.log(boards)
 ```
-
-5: Go through steps 2-5 on the [create your app](https://developers.miro.com/docs/build-your-first-hello-world-app#step-2-create-a-developer-team-in-miro) docs. In step 5, copy the 'Access token'. Replace YOUR_ACCESS_TOKEN in the snippet with your token.
-
-6: In your terminal, run the code:
+5: In your terminal, run the code:
 ```bash
 node index.js
 ```
 
-You will see a log with an array all [boards](https://miroapp.github.io/api-clients/classes/highlevel_Board.Board.html) you have access to in the selected team.
+You will see a log with an array of all the [boards](https://miroapp.github.io/api-clients/classes/highlevel_Board.Board.html) you have access to in the selected team.
 
 ```ts
 [
