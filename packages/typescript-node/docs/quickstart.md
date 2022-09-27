@@ -1,4 +1,5 @@
 # Miro node client quickstart guide
+In this guide, we will do the bare minimum to get some data out of the Miro REST API. For authentication we will use a hard-coded access token. In a later guide we will be more thorough and add proper authentication. 
 
 1: Create a folder and navigate into it
 ```bash
@@ -39,56 +40,30 @@ console.log(boards)
 node index.js
 ```
 
-You should see a log with an array all boards you have access to in the selected team.
+You will see a log with an array all [boards](https://miroapp.github.io/api-clients/classes/highlevel_Board.Board.html) you have access to in the selected team.
 
 ```ts
 [
   Board {
-    _api: MiroApi {
-      accessToken: '...',
-      basePath: 'https://api.miro.com',
-      logger: undefined
-    },
+    _api: MiroApi,
     _headParams: [ 'uXjVPZcwwIY=' ],
     createdAt: 2022-09-08T14:15:13.000Z,
-    createdBy: UserInfoShort {
-      id: '...',
-      name: 'Mettin Parzinski',
-      type: 'user'
-    },
-    currentUserMembership: BoardMember {
-      id: '...',
-      name: 'Mettin Parzinski',
-      role: 'owner',
-      type: 'board_member'
-    },
+    createdBy: UserInfoShort,
+    currentUserMembership: BoardMember,
     description: '',
     id: 'uXjVPZcwwIY=',
     modifiedAt: 2022-09-22T13:21:41.000Z,
-    modifiedBy: UserInfoShort {
-      id: '...',
-      name: 'Mettin Parzinski',
-      type: 'user'
-    },
+    modifiedBy: UserInfoShort,
     name: 'Node client test board',
-    owner: UserInfoShort {
-      id: '...',
-      name: 'Mettin Parzinski',
-      type: 'user'
-    },
+    owner: UserInfoShort,
     picture: undefined,
-    policy: BoardPolicy {
-      permissionsPolicy: [BoardPermissionsPolicy],
-      sharingPolicy: [BoardSharingPolicy]
-    },
-    team: Team {
-      id: '...',
-      name: 'My Dev team',
-      picture: undefined,
-      type: 'team'
-    },
+    policy: BoardPolicy,
+    team: Team,
     type: 'board',
     viewLink: 'https://miro.com/app/board/uXjVPZcwwIY='
   },
+  ...etc
 ]
 ```
+
+You can now use the data from `boards` as needed, see the [docs for `Board`](https://miroapp.github.io/api-clients/classes/highlevel_Board.Board.html#getAllItems) to see the methods that are available. I.e. there is a method to get all items on a board `board.getAllItems()`.   
