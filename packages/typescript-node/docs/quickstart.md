@@ -23,7 +23,7 @@ npm init
 
 3: Install the client
 ```bash
-npm add @mirohq/miro-node
+npm install @mirohq/miro-node
 ```
 
 4: In your project, create a `index.js` and paste this snippet:
