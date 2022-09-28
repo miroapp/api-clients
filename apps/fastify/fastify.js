@@ -1,27 +1,43 @@
-import Miro from '@mirohq/miro-node'
+import {Miro} from '@mirohq/miro-node'
 import Fastify from 'fastify'
+import fastifyCookie from '@fastify/cookie'
 
-const fastify = Fastify()
 const miro = new Miro()
 
-fastify.get('/login', async (_req, reply) => {
-  if (await miro.isAuthorized('some_user_id')) {
-    reply.redirect('/')
-    return
+const app = Fastify()
+app.register(fastifyCookie)
+
+// Generate user ids for new sessions
+app.addHook('preHandler', (request, reply, next) => {
+  if (!request.cookies.userId) {
+    const userId = Math.random()
+    reply.setCookie('userId', userId)
+    request.cookies.userId = userId
   }
-  reply.redirect(miro.getAuthUrl())
+  next()
 })
 
-fastify.get('/auth/miro/callback', async (req, reply) => {
-  await miro.handleAuthorizationCodeRequest('some_user_id', req)
+// Exchange the code for a token in the OAuth2 redirect handler
+app.get('/auth/miro/callback', async (req, reply) => {
+  await miro.exchangeCodeForAccessToken(req.cookies.userId, req.query.code)
   reply.redirect('/')
 })
 
-fastify.get('/', async () => {
-  const api = miro.as('some_user_id')
-  const boards = await api.getBoards()
-  const board = boards[0]
-  const [item] = await board.getItems()
-  return item
+app.get('/', async (req, reply) => {
+
+  // If user did not authorize the app, then redirect them to auth url
+  if (!await miro.isAuthorized(req.cookies.userId)) {
+    reply.redirect(miro.getAuthUrl())
+    return
+  }
+
+  // Initialize the API for the current user
+  const api = miro.as(req.cookies.userId)
+
+  // Print the info of the first board
+  for await (const board of api.getAllBoards()) {
+    return board
+  }
 })
-;(async () => await fastify.listen({port: 4000}))()
+
+await app.listen({port: 4000})
