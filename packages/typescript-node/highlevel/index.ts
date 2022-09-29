@@ -2,7 +2,7 @@ import {MiroApi} from '../api'
 import {GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase} from './helpers'
 
 import {Api as BaseApi} from './../highlevel/Api'
-import {Organization as BaseOrganization} from './../model/organization'
+import {Organization as BaseOrganization} from './Organization'
 import {OrganizationMember as BaseOrganizationMember} from './../model/organizationMember'
 import {Team as BaseTeam} from './Team'
 import {BoardDataClassificationLabel as BaseBoardDataClassification} from './../model/boardDataClassificationLabel'
@@ -41,17 +41,6 @@ export class Api extends BaseApi {
     const result = (await this._api.getSpecificBoard(...parameters)).body
 
     return new Board(this._api, result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getBoards} */
-  async getBoards(...parameters: GetParameters0<MiroApi['getBoards']>): Promise<Board[]> {
-    const result = (await this._api.getBoards(...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Board(this._api, result.id, result)
-        })
-      : []
   }
 
   /** {@inheritDoc api!MiroApi.enterpriseGetOrganization} */
@@ -111,35 +100,11 @@ export class Organization extends BaseOrganization {
     return new OrganizationMember(this._api, this.id, result.id, result)
   }
 
-  /** {@inheritDoc api!MiroApi.enterpriseGetOrganizationMembers} */
-  async getOrganizationMembers(
-    ...parameters: GetParameters1<MiroApi['enterpriseGetOrganizationMembers']>
-  ): Promise<OrganizationMember[]> {
-    const result = (await this._api.enterpriseGetOrganizationMembers(this.id.toString(), ...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new OrganizationMember(this._api, this.id, result.id, result)
-        })
-      : []
-  }
-
   /** {@inheritDoc api!MiroApi.enterpriseGetTeam} */
   async getTeam(...parameters: GetParameters1<MiroApi['enterpriseGetTeam']>): Promise<Team> {
     const result = (await this._api.enterpriseGetTeam(this.id.toString(), ...parameters)).body
 
     return new Team(this._api, this.id, result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.enterpriseGetTeams} */
-  async getTeams(...parameters: GetParameters1<MiroApi['enterpriseGetTeams']>): Promise<Team[]> {
-    const result = (await this._api.enterpriseGetTeams(this.id.toString(), ...parameters)).body
-
-    return result
-      ? result.map((result) => {
-          return new Team(this._api, this.id, result.id, result)
-        })
-      : []
   }
 }
 
@@ -251,19 +216,6 @@ export class Team extends BaseTeam {
     ).body
 
     return new TeamMember(this._api, this.orgId, this.teamId, result.memberId, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.enterpriseGetTeamMembers} */
-  async getTeamMembers(...parameters: GetParameters2<MiroApi['enterpriseGetTeamMembers']>): Promise<TeamMember[]> {
-    const result = (
-      await this._api.enterpriseGetTeamMembers(this.orgId.toString(), this.teamId.toString(), ...parameters)
-    ).body
-
-    return result
-      ? result.map((result) => {
-          return new TeamMember(this._api, this.orgId, this.teamId, result.memberId, result)
-        })
-      : []
   }
 
   /** {@inheritDoc api!MiroApi.enterpriseUpdateTeam} */
@@ -440,17 +392,6 @@ export class Board extends BaseBoard {
     return new TextItem(this._api, this.id, result.id, result)
   }
 
-  /** {@inheritDoc api!MiroApi.getBoardMembers} */
-  async getMembers(...parameters: GetParameters1<MiroApi['getBoardMembers']>): Promise<BoardMember[]> {
-    const result = (await this._api.getBoardMembers(this.id.toString(), ...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new BoardMember(this._api, this.id, result.id, result)
-        })
-      : []
-  }
-
   /** {@inheritDoc api!MiroApi.getAppCardItem} */
   async getAppCardItem(...parameters: GetParameters1<MiroApi['getAppCardItem']>): Promise<AppCardItem> {
     const result = (await this._api.getAppCardItem(this.id.toString(), ...parameters)).body
@@ -470,17 +411,6 @@ export class Board extends BaseBoard {
     const result = (await this._api.getConnector(this.id.toString(), ...parameters)).body
 
     return new Connector(this._api, this.id, result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getConnectors} */
-  async getConnectors(...parameters: GetParameters1<MiroApi['getConnectors']>): Promise<Connector[]> {
-    const result = (await this._api.getConnectors(this.id.toString(), ...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Connector(this._api, this.id, result.id, result)
-        })
-      : []
   }
 
   /** {@inheritDoc api!MiroApi.getDocumentItem} */
@@ -546,44 +476,11 @@ export class Board extends BaseBoard {
     return new Tag(this._api, this.id, result.id, result)
   }
 
-  /** {@inheritDoc api!MiroApi.getTagsFromBoard} */
-  async getTags(...parameters: GetParameters1<MiroApi['getTagsFromBoard']>): Promise<Tag[]> {
-    const result = (await this._api.getTagsFromBoard(this.id.toString(), ...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Tag(this._api, this.id, result.id, result)
-        })
-      : []
-  }
-
   /** {@inheritDoc api!MiroApi.getTextItem} */
   async getTextItem(...parameters: GetParameters1<MiroApi['getTextItem']>): Promise<TextItem> {
     const result = (await this._api.getTextItem(this.id.toString(), ...parameters)).body
 
     return new TextItem(this._api, this.id, result.id, result)
-  }
-
-  /** {@inheritDoc api!MiroApi.getItems} */
-  async getItems(...parameters: GetParameters1<MiroApi['getItems']>): Promise<Item[]> {
-    const result = (await this._api.getItems(this.id.toString(), ...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Item(this._api, this.id, result.id, result)
-        })
-      : []
-  }
-
-  /** {@inheritDoc api!MiroApi.getItemsWithinFrame} */
-  async getItemsWithinFrame(...parameters: GetParameters1<MiroApi['getItemsWithinFrame']>): Promise<Item[]> {
-    const result = (await this._api.getItemsWithinFrame(this.id.toString(), ...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Item(this._api, this.id, result.id, result)
-        })
-      : []
   }
 
   /** {@inheritDoc api!MiroApi.copyBoard} */
@@ -692,7 +589,7 @@ export class AppCardItem extends Item {
   }
 
   /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
+  async getAllTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
     const result = (await this._api.getTagsFromItem(this.boardId.toString(), this.id.toString(), ...parameters)).body
 
     return result.tags
@@ -739,7 +636,7 @@ export class CardItem extends Item {
   }
 
   /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
+  async getAllTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
     const result = (await this._api.getTagsFromItem(this.boardId.toString(), this.id.toString(), ...parameters)).body
 
     return result.tags
@@ -916,7 +813,7 @@ export class StickyNoteItem extends Item {
   }
 
   /** {@inheritDoc api!MiroApi.getTagsFromItem} */
-  async getTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
+  async getAllTags(...parameters: GetParameters2<MiroApi['getTagsFromItem']>): Promise<Tag[]> {
     const result = (await this._api.getTagsFromItem(this.boardId.toString(), this.id.toString(), ...parameters)).body
 
     return result.tags
@@ -1012,16 +909,5 @@ export class Tag extends BaseTag {
   /** {@inheritDoc api!MiroApi.deleteTag} */
   async delete(...parameters: GetParameters2<MiroApi['deleteTag']>): Promise<void> {
     await this._api.deleteTag(this.boardId.toString(), this.id.toString(), ...parameters)
-  }
-
-  /** {@inheritDoc api!MiroApi.getItemsByTag} */
-  async getTaggedItems(...parameters: GetParameters2<MiroApi['getItemsByTag']>): Promise<Item[]> {
-    const result = (await this._api.getItemsByTag(this.boardId.toString(), this.id.toString(), ...parameters)).body
-
-    return result.data
-      ? result.data.map((result) => {
-          return new Item(this._api, this.boardId, result.id, result)
-        })
-      : []
   }
 }

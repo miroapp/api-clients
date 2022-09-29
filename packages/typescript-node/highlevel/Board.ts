@@ -1,6 +1,7 @@
 import {Board as BaseBoard} from '../model/board'
-import {BoardMember, Item, Tag} from './index'
-import {BoardMembersPagedResponse, GenericItem, GenericItemCursorPaged, MiroApi} from '../api'
+import {BoardMember, Connector, Item, Tag} from './index'
+import {BoardMembersPagedResponse, ConnectorsCursorPaged, GenericItem, GenericItemCursorPaged, MiroApi} from '../api'
+import {hasMoreData} from './helpers'
 
 export abstract class Board extends BaseBoard {
   abstract _api: MiroApi
@@ -51,14 +52,8 @@ export abstract class Board extends BaseBoard {
         yield new BoardMember(this._api, this.id, item.id, item)
       }
 
-      const responseOffset = response.offset || 0
-      const size = response.data?.length || 0
-      const total = response.total || 0
-
-      if (!total || !size) return
-      if (responseOffset + size >= total) return
-
-      currentOffset += size
+      if (!hasMoreData(response)) return
+      currentOffset += response.data?.length || 0
     }
   }
 
@@ -80,17 +75,40 @@ export abstract class Board extends BaseBoard {
         yield new Tag(this._api, this.id, item.id, item)
       }
 
-      const responseOffset = response.offset || 0
-      const size = response.data?.length || 0
-      const total = response.total || 0
-
-      if (!total || !size) return
-      if (responseOffset + size >= total) return
-
-      currentOffset += size
+      if (!hasMoreData(response)) return
+      currentOffset += response.data?.length || 0
     }
   }
 
+  /**
+   * Get all connectors on the board
+   * Returns an iterator which will automatically paginate and fetch all available tags
+   */
+  async *getAllConnectors(
+    query?: Omit<Parameters<MiroApi['getConnectors']>[1], 'offset'>,
+  ): AsyncGenerator<Connector, void> {
+    let cursor: string | undefined = undefined
+    while (true) {
+      const response: ConnectorsCursorPaged = (
+        await this._api.getConnectors(this.id, {
+          ...query,
+          cursor,
+        })
+      ).body
+
+      for (const connector of response.data || []) {
+        yield new Connector(this._api, this.id, connector.id, connector)
+      }
+
+      cursor = response.cursor
+      const size = response.data?.length || 0
+      const total = response.total || 0
+      if (!total || !size) return
+      if (!cursor) return
+    }
+  }
+
+  /** {@inheritDoc api!MiroApi.getSpecificItem} */
   async getItem(itemId: string): Promise<Item> {
     const response = await this._api.getSpecificItem(this.id, itemId)
 
