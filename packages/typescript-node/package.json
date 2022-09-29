@@ -15,7 +15,7 @@
     "clean": "rm -Rf node_modules/ *.js",
     "build": "tsc",
     "build:docs": "typedoc",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "jest"
   },
   "author": "Miro",
   "license": "MIT",
@@ -39,7 +39,7 @@
       "^.+\\.tsx?$": [
         "esbuild-jest",
         {
-          "format": "esm"
+          "format": "cjs"
         }
       ]
     }
