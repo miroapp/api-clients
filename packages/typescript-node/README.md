@@ -2,7 +2,49 @@
 
 🚧 [Miro Node,js API client reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
 
-### Using Miro authentication wrapper
+## Miro Node.js API client 
+
+The Miro Node.js API client is a JavaScript library that enables Miro REST API functionality in Miro apps based on Node.js.
+You can use Node.js and JavaScript to send requests to and handle responses from the Miro REST API.
+
+You can use the client to implement backend functionality in your Miro app, such as:
+
+- OAuth 2.0 authorization
+- Programmatic data exchange with an external system
+- Data storage in the app backend.
+
+## Install the client
+
+To install the Miro Node.js API client and its dependencies, run the following command in your project root directory:
+
+```bash
+npm install @miro/miro-node
+```
+
+## Import the clients
+
+The Miro Node.js library makes a stateful high-level client, and stateless low-level client:
+
+- `Miro`
+- `MiroApi`
+
+
+### Using stateless MiroApi directly
+
+Besides the high level stateful Miro client the library also exposes a stateless low level client:
+
+```typescript
+import {MiroApi} from './index.ts'
+
+const api = new MiroApi('ACCESS_TOKEN')
+
+const boards = await api.getBoards()
+```
+
+See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroApi.html) for a full list of methods.
+
+
+## Handle OAuth authorization
 
 Miro class is a wrapper that handles authorization and per-user access token management.
 
@@ -14,7 +56,8 @@ import {Miro} from '@mirohq/miro-node'
 const miro = new Miro()
 ```
 
-By default client will load the app configuration from environment variables: `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET`, `MIRO_REDIRECT_URL`. They can also be provided by passing the options object to the iconstructor.
+By default client will load the app configuration from environment variables: `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET`, `MIRO_REDIRECT_URL`. \
+They can also be provided by passing the options object to the iconstructor.
 
 ```typescript
 const miro = new Miro({
@@ -58,7 +101,8 @@ See [the example usage](../../apps/fastify/fastify.js) with _fastify_ web framew
 
 ### Methods & Models
 
-`.as(userId: string)` method returns the instance of the [Api](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class. This instance provides methods to create and get the list of `Board` models which then provides methods to get `Item` model and so forth.
+`.as(userId: string)` method returns the instance of the [Api](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class.
+This instance provides methods to create and get the list of `Board` models which then provides methods to get `Item` model and so forth.
 
 Client provides a few helper methods that make it easy to paginate over all resources. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method returns an async iterator that can be used to iterate over all available boards:
 
@@ -67,17 +111,3 @@ for await (const board of api.getAllBoards()) {
   console.log(board.viewLink)
 }
 ```
-
-### Using stateless MiroApi directly
-
-Besides the high level stateful Miro client the library also exposes a stateless low level client:
-
-```typescript
-import {MiroApi} from './index.ts'
-
-const api = new MiroApi('ACCESS_TOKEN')
-
-const boards = await api.getBoards()
-```
-
-See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroApi.html) for a full list of methods.
