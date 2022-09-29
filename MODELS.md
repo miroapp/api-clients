@@ -48,12 +48,7 @@ classDiagram
   class Api {
     createBoard() Board
     getBoard() Board
-    getBoards() Board[]
     getOrganization() Organization
-  }
-
-  %% NICE
-  class Api {
     getAllBoards() Board[]
   }
 
@@ -61,7 +56,7 @@ classDiagram
   class Organization {
     createTeam() Team
     getTeam() Team
-    getTeams() Team[]
+    getAllTeams() Team[]
   }
 
   %% NICE
@@ -75,12 +70,11 @@ classDiagram
   %% MUST
   class Team {
     updateTeam() void
-    getBoards() Board[]
     inviteTeamMember() void
     deleteTeam() void
     deleteTeamMember() void
     getTeamMember() TeamMember
-    getTeamMembers() TeamMember[]
+    getAllTeamMembers() TeamMember[]
   }
 
   %% NICE
@@ -114,7 +108,7 @@ classDiagram
     getAppCard() AppCardItem
     getCard() CardItem
     getConnector() Connector
-    getConnectors() Connector[]
+    getAllConnectors() Connector[]
     getDocument() DocumentItem
     getEmbed() EmbedItem
     getFrame() FrameItem
@@ -123,19 +117,15 @@ classDiagram
     getStickyNote() StickyNoteItem
     getText() TextItem
     getItem() Item
-    getItems() Item[]
   }
 
   %% NICE
   class Board {
     createTag() Tag
     getTag() Tag
-    getTags() Tag[]
     getAllTags() Tag[]
     getAllItems() Item[]
     getMember() BoardMember
-    getItemsWithinFrame() Item[]
-    getMembers() BoardMember[]
     getAllMembers() BoardMember[]
     copy() Board
     share() void
@@ -164,14 +154,14 @@ classDiagram
 
   %% MUST
   class AppCardItem {
-    getTags() Tag[]
+    getAllTags() Tag[]
     removeTag() void
     attachTag() void
   }
 
   %% MUST
   class CardItem {
-    getTags() Tag[]
+    getAllTags() Tag[]
     removeTag() void
     attachTag() void
   }
@@ -199,7 +189,7 @@ classDiagram
     createStickyNote() StickyNoteItem
     createText() TextItem
 
-    getItems() Item[]
+    getAllItems() Item[]
   }
 
   %% MUST
@@ -212,7 +202,7 @@ classDiagram
 
   %% MUST
   class StickyNoteItem {
-    getTags() Tag[]
+    getAllTags() Tag[]
     removeTag() void
     attachTag() void
   }
@@ -231,7 +221,6 @@ classDiagram
   class Tag {
     update() void
     delete() void
-    getTaggedItems() Item[]
     getAllTaggedItems() Item[]
   }
 ```

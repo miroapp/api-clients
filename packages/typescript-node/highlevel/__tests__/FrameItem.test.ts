@@ -12,7 +12,7 @@ describe('FrameItem', () => {
       const item = {
         boardId,
         id: childId,
-      }
+      } as Item
       api.getItemsWithinFrame = jest.fn(async () => ({
         response: {} as any,
         body: {
@@ -31,48 +31,40 @@ describe('FrameItem', () => {
       }
     }
 
-    it('should call the api w/o any params', () => {
+    it('should call the api w/o any params', async () => {
       const {frameItem, getItemsWithinFrameSpy, id, boardId} = setup()
 
-      frameItem.getItems()
-      expect(getItemsWithinFrameSpy).toBeCalledTimes(1)
-      expect(getItemsWithinFrameSpy).toBeCalledWith(boardId, String(id), undefined)
-    })
-    it('should call the api and pass the cursor param', () => {
-      const {frameItem, getItemsWithinFrameSpy, id, boardId} = setup()
+      const itemIterator = frameItem.getAllItems()
+      await itemIterator.next()
 
-      const lastFetchedItemId = '34093452'
-      frameItem.getItems({cursor: lastFetchedItemId})
       expect(getItemsWithinFrameSpy).toBeCalledTimes(1)
-      expect(getItemsWithinFrameSpy).toBeCalledWith(boardId, String(id), {cursor: lastFetchedItemId})
+      expect(getItemsWithinFrameSpy).toBeCalledWith(boardId, String(id), {cursor: undefined})
     })
+
     it.each(['app_card', 'card', 'document', 'embed', 'frame', 'image', 'shape', 'sticky_note', 'text'] as const)(
       'should call the api and pass the type param (%s)',
-      (type) => {
+      async (type) => {
         const {frameItem, getItemsWithinFrameSpy, id, boardId} = setup()
 
-        frameItem.getItems({type})
+        const itemIterator = frameItem.getAllItems({type})
+        await itemIterator.next()
+
         expect(getItemsWithinFrameSpy).toBeCalledTimes(1)
         expect(getItemsWithinFrameSpy).toBeCalledWith(boardId, String(id), {type})
       },
     )
-    it('should call the api and pass the limit param', () => {
-      const {frameItem, getItemsWithinFrameSpy, id, boardId} = setup()
-
-      const limit = '3'
-      frameItem.getItems({limit})
-      expect(getItemsWithinFrameSpy).toBeCalledTimes(1)
-      expect(getItemsWithinFrameSpy).toBeCalledWith(boardId, String(id), {limit})
-    })
-    it('should return a list of models', async () => {
+    it('should return the models', async () => {
       const {frameItem, childId} = setup()
 
-      const {data} = await frameItem.getItems()
+      // const {data} = await frameItem.getItems()
 
-      expect(data?.[0]).toBeDefined()
+      const itemIterator = frameItem.getAllItems()
+      const item = (await itemIterator.next()).value
 
-      expect(data?.[0]).toBeInstanceOf(Item)
-      expect(data?.[0].id).toEqual(childId)
+      expect(item).toBeDefined()
+
+      expect(item).toBeInstanceOf(Item)
+      expect(item && item.id).toEqual(childId)
     })
   })
 })

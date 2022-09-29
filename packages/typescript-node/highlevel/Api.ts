@@ -1,5 +1,6 @@
 import {Board} from './index'
 import {MiroApi} from '../api'
+import {hasMoreData} from './helpers'
 
 export abstract class Api {
   abstract _api: MiroApi
@@ -29,14 +30,8 @@ export abstract class Api {
         yield new Board(this._api, board.id, board)
       }
 
-      const responseOffset = response.offset || 0
-      const size = response.data?.length || 0
-      const total = response.total || 0
-
-      if (!total || !size) return
-      if (responseOffset + size >= total) return
-
-      currentOffset += size
+      if (!hasMoreData(response)) return
+      currentOffset += response.data?.length || 0
     }
   }
 }
