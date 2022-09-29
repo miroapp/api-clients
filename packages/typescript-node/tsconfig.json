@@ -10,6 +10,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "typeRoots": ["node_modules/@types"]
+    "resolveJsonModule": true,
   },
   "files": ["index.ts", "api.ts"],
   "exclude": ["dist", "api", "model", "__tests__", ".turbo", ".openapi-generator", "node_modules"]
