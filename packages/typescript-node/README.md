@@ -1,6 +1,6 @@
-# WIP: This client is still a work in progress, anything may change at any time
+# ⚠️ 🚧 This client is still a work in progress, and therefore subject to change without notice. 🚧 ⚠️
 
-Reference documentation: https://miroapp.github.io/api-clients/classes/index.Miro.html
+🚧 [Miro Node,js API client reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
 
 ### Using Miro authentication wrapper
 
