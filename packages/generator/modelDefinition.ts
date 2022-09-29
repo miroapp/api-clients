@@ -8,7 +8,6 @@ const MODELS = {
     methods: [
       'createBoard',
       {method: 'getSpecificBoard', alias: 'getBoard'},
-      {method: 'getBoards', returns: 'Board', paginated: 'data'},
       {
         method: 'enterpriseGetOrganization',
         alias: 'getOrganization',
@@ -21,7 +20,7 @@ const MODELS = {
     props: ['id'],
     extendedModel: {
       name: 'Organization',
-      path: '../model/organization',
+      path: 'Organization',
     },
     methods: [
       {method: 'enterpriseCreateTeam', alias: 'createTeam', returns: 'Team'},
@@ -39,19 +38,7 @@ const MODELS = {
         method: 'enterpriseGetOrganizationMember',
         alias: 'getOrganizationMember',
       },
-      {
-        method: 'enterpriseGetOrganizationMembers',
-        alias: 'getOrganizationMembers',
-        returns: 'OrganizationMember',
-        paginated: 'data',
-      },
       {method: 'enterpriseGetTeam', alias: 'getTeam', returns: 'Team'},
-      {
-        method: 'enterpriseGetTeams',
-        alias: 'getTeams',
-        returns: 'Team',
-        paginated: true,
-      },
     ],
   },
 
@@ -97,12 +84,6 @@ const MODELS = {
 
       {method: 'enterpriseInviteTeamMember', alias: 'inviteTeamMember'},
       {method: 'enterpriseGetTeamMember', alias: 'getTeamMember'},
-      {
-        method: 'enterpriseGetTeamMembers',
-        alias: 'getTeamMembers',
-        returns: 'TeamMember',
-        paginated: true,
-      },
 
       {method: 'enterpriseUpdateTeam', alias: 'updateTeam'},
 
@@ -175,16 +156,9 @@ const MODELS = {
       'createTag',
       'createTextItem',
 
-      {
-        method: 'getBoardMembers',
-        alias: 'getMembers',
-        paginated: 'data',
-        returns: 'BoardMember',
-      },
       'getAppCardItem',
       'getCardItem',
       'getConnector',
-      {method: 'getConnectors', returns: 'Connector', paginated: 'data'},
       {method: 'getDocumentItem', returns: 'DocumentItem'},
       'getEmbedItem',
       'getFrameItem',
@@ -198,15 +172,7 @@ const MODELS = {
       {method: 'getSpecificItem', alias: 'getItem', returns: 'Item'},
       'getStickyNoteItem',
       'getTag',
-      {
-        method: 'getTagsFromBoard',
-        alias: 'getTags',
-        returns: 'Tag',
-        paginated: 'data',
-      },
       'getTextItem',
-      {method: 'getItems', returns: 'Item', paginated: 'data'},
-      {method: 'getItemsWithinFrame', returns: 'Item', paginated: 'data'},
 
       {method: 'copyBoard', alias: 'copy', returns: 'Board'},
       {method: 'shareBoard', alias: 'share'},
@@ -249,7 +215,7 @@ const MODELS = {
       {method: 'deleteAppCardItem', alias: 'delete'},
       {
         method: 'getTagsFromItem',
-        alias: 'getTags',
+        alias: 'getAllTags',
         returns: 'Tag',
         paginated: 'tags',
       },
@@ -268,7 +234,7 @@ const MODELS = {
       {method: 'deleteCardItem', alias: 'delete'},
       {
         method: 'getTagsFromItem',
-        alias: 'getTags',
+        alias: 'getAllTags',
         returns: 'Tag',
         paginated: 'tags',
       },
@@ -343,7 +309,7 @@ const MODELS = {
       {method: 'deleteStickyNoteItem', alias: 'delete'},
       {
         method: 'getTagsFromItem',
-        alias: 'getTags',
+        alias: 'getAllTags',
         returns: 'Tag',
         paginated: 'tags',
       },
@@ -384,7 +350,6 @@ const MODELS = {
     methods: [
       {method: 'updateTag', alias: 'update'},
       {method: 'deleteTag', alias: 'delete'},
-      {method: 'getItemsByTag', alias: 'getTaggedItems', returns: 'Item', paginated: 'data'},
     ],
   },
 }
