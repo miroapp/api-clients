@@ -1,4 +1,5 @@
 import fetch, {Response} from 'node-fetch';
+import {version} from '../package.json'
 
 {{#apiInfo}}
 {{#apis}}
@@ -130,7 +131,7 @@ export async function makeJsonRequest(token: string, method: string, url: URL, b
         method,
         headers: {
             'Content-Type': 'application/json',
-            'User-Agent': `miro-node:{{npmVersion}}`,
+            'User-Agent': `miro-node:${version}`,
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`
         },
