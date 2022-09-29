@@ -10,10 +10,10 @@
   ],
   "scripts": {
     "update-spec": "scripts/fetch-spec.mjs > packages/generator/spec.json",
-
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "test": "turbo run test"
+    "test": "turbo run test",
+    "format": "prettier -w ./packages"
   },
   "author": "",
   "license": "MIT",
