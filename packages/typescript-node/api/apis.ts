@@ -1,4 +1,5 @@
 import fetch, {Response} from 'node-fetch'
+import {version} from '../package.json'
 
 import {AppCardCreateRequest} from '../model/appCardCreateRequest'
 import {AppCardItem} from '../model/appCardItem'
@@ -3783,7 +3784,7 @@ export async function makeJsonRequest(
     method,
     headers: {
       'Content-Type': 'application/json',
-      'User-Agent': `miro-node:0.0.1-alpha.8`,
+      'User-Agent': `miro-node:${version}`,
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
