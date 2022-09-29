@@ -51,3 +51,7 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+
+      # Publish the guides to developer portal
+      - name: Publish the guides to developer portal
+        run: "README_API_KEY='${{ secrets.README_API_KEY }}' scripts/upload-docs-to-readme.mjs"

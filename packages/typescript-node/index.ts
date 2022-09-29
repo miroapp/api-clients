@@ -42,13 +42,7 @@ export class Miro {
    * Returns an instance of the highlevel Miro API for the given user id
    */
   as(userId: ExternalUserId): MiroApi {
-    return new MiroApi(
-      async () => await this.getAccessToken(userId),
-      undefined,
-      this.logger,
-      this.clientId,
-      this.httpTimeout,
-    )
+    return new MiroApi(async () => await this.getAccessToken(userId), undefined, this.logger, this.httpTimeout)
   }
 
   /**
@@ -240,10 +234,9 @@ export class MiroApi extends HighlevelApi {
     accessToken: string | (() => Promise<string>),
     basePath: string = defaultBasePath,
     logger?: Logger,
-    clientId?: string,
     httpTimeout?: number,
   ) {
-    super(new MiroLowlevelApi(accessToken, basePath, logger, clientId, httpTimeout), {})
+    super(new MiroLowlevelApi(accessToken, basePath, logger, httpTimeout), {})
   }
 }
 
