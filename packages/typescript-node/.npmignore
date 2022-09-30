@@ -1,7 +1,10 @@
 /api
 /model
 /apps/fastify/examples
-/nested-model
+/highlevel
+/interfaces
+/docs
+/docs-out
 
 scripts/
 test/
@@ -15,7 +18,9 @@ __tests__
 *.json
 *.tgz
 
+*.ts
+!*.d.ts
 
-/*.ts
+!/dist/**/*
 
 *lock
