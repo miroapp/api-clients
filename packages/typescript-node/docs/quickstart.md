@@ -1,10 +1,13 @@
 # Miro node client quickstart guide
+In this guide, you will learn how to get started with the Miro REST API in no time. We will cover how to make your first API call using the Node client library without implementing the authorization process by using a hardcoded access_token.
 
-In this guide, we will do the bare minimum to get some data out of the Miro REST API. For authentication we will use a hard-coded access token. In a later guide we will be more thorough and add proper authentication.
+At the end of this guide, you will have a NodeJs project able to get the list of all the boards you have access to in a specific team.
 
 ### Prerequisites
+ - 1: Have a Miro.com account
+ - 2: Create a Developer team, create a developer app, configure your app and install it to generate an access token. Please follow steps 2 to 5 on the [Build your first Hello, World app](https://developers.miro.com/docs/build-your-first-hello-world-app#step-2-create-a-developer-team-in-miro) guide. Save the `access_token` to use it later.
 
-- Go through steps 2-5 on the [create your app](https://developers.miro.com/docs/build-your-first-hello-world-app#step-2-create-a-developer-team-in-miro) docs. In step 5, copy the 'Access token'.
+If you want to integrate Miro into an existing app, start at step 3.
 
 #### 1: Create a folder and navigate into it
 
@@ -74,3 +77,5 @@ You will see a log with an array of all the [boards](https://miroapp.github.io/a
 ```
 
 You can now use the data from `boards` as needed, see the [docs for `Board`](https://miroapp.github.io/api-clients/classes/highlevel_Board.Board.html#getAllItems) to see the methods that are available. I.e. there is a method to get all items on a board `board.getAllItems()`.
+
+Now start integrating your data into Miro, add some [stickies](https://miroapp.github.io/api-clients/classes/highlevel.StickyNoteItem.html), [add app cards](https://miroapp.github.io/api-clients/classes/highlevel.AppCardItem.html) or whatever else you want to do. For more inspiration, see [the example app](https://github.com/miroapp/app-examples/tree/main/examples/rest-stickies-csv) in the example repo.
