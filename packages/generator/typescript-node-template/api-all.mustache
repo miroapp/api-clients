@@ -1,4 +1,5 @@
 import fetch, {Response} from 'node-fetch';
+import {version} from '../package.json'
 
 {{#apiInfo}}
 {{#apis}}
@@ -20,21 +21,18 @@ export class MiroApi {
     accessToken: string|(() => Promise<string>)
     basePath: string
     logger?: Logger
-    clientId?: string
     httpTimeout?: number
 
     constructor(
         accessToken: string | (() => Promise<string>),
         basePath: string = defaultBasePath,
         logger?: Logger,
-        clientId?: string,
         httpTimeout?: number,
     ) {
         this.accessToken = accessToken
         this.basePath = basePath
         this.logger = logger
         this.httpTimeout = httpTimeout
-        this.clientId = clientId
     }
 
 {{#apis}}
@@ -100,8 +98,7 @@ export class MiroApi {
             undefined,
             {{/bodyParam}}
 
-            this.logger,
-            this.clientId
+            this.logger
         )
 
 
@@ -127,14 +124,14 @@ export class HttpError extends Error {
     }
 }
 
-export async function makeJsonRequest(token: string, method: string, url: URL, body?: string, logger?: (...thing: any) => void, appId: string = process.env.MIRO_CLIENT_ID || "unknown", httpTimeout: number = 5000) {
+export async function makeJsonRequest(token: string, method: string, url: URL, body?: string, logger?: (...thing: any) => void, httpTimeout: number = 5000) {
 
 
     const options = {
         method,
         headers: {
             'Content-Type': 'application/json',
-            'User-Agent': 'miro-node:{{npmVersion}} app_id:${appId}',
+            'User-Agent': `miro-node:${version}`,
             'Accept': 'application/json',
             'Authorization': `Bearer ${token}`
         },

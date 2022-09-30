@@ -1,6 +1,6 @@
 {
   "name": "@mirohq/miro-node",
-  "version": "0.0.1-alpha.8",
+  "version": "0.0.1-alpha.9",
   "description": "NodeJS client for Miro's REST API",
   "repository": {
     "type": "git",
@@ -16,7 +16,7 @@
     "build": "tsc",
     "build:docs": "typedoc && yarn move-docs-to-dist",
     "move-docs-to-dist": "cp -r 'docs-out' 'dist'",
-    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
+    "test": "jest"
   },
   "author": "Miro",
   "license": "MIT",
@@ -40,7 +40,7 @@
       "^.+\\.tsx?$": [
         "esbuild-jest",
         {
-          "format": "esm"
+          "format": "cjs"
         }
       ]
     }

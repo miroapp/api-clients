@@ -71,14 +71,61 @@ Other options are documented in the [reference](https://miroapp.github.io/api-cl
 
 The client has all methods that are needed to complete Miro authorization flows and make API calls:
 
-1. Check if current user has authorized the app: `miro.isAuthorized('some_user_id')`
-2. Request user to authorize the app by redirecting them to: `miro.getAuthUrl()`
-3. Exchange users authorization code for a token in the return url's request handler: `await miro.exchangeCodeForAccessToken('some_user_id', 'https://foo.bar/miro_return_url?code=12345')`
-4. Use the API as a specific user: `await miro.as('some_user_id').getBoards()`
+1. Check if current user has authorized the app: [`miro.isAuthorized(someUserId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized)
+2. Request user to authorize the app by redirecting them to: [`miro.getAuthUrl()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl)
+3. Exchange users authorization code for a token in the return url's request handler: [`await miro.exchangeCodeForAccessToken(someUserId, req.query.code)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken)
+4. Use the API as a specific user: [`await miro.as(someUserId).getBoards()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
 
-Most methods (`isAuthorized`, `exchangeCodeForAccessToken`, `api`) take `user_id` as a first paramters. This is the ID of the user in your app. The one that is currently logged in. It can be either a string or a number.
+Here is a simple implementation of an App using the [fastify](https://www.fastify.io/) framework:
 
-In order to persist user's access and refresh tokens client library requires a persistent storage. By default it uses filesystem to store this state. For production deployments we recommend using a custom implementation backed by a database. It can be passed as an option to Miro contructor:
+```javascript
+import {Miro} from '@mirohq/miro-node'
+import Fastify from 'fastify'
+import fastifyCookie from '@fastify/cookie'
+
+const miro = new Miro()
+
+const app = Fastify()
+app.register(fastifyCookie)
+
+// Generate user ids for new sessions
+app.addHook('preHandler', (request, reply, next) => {
+  if (!request.cookies.userId) {
+    const userId = Math.random()
+    reply.setCookie('userId', userId)
+    request.cookies.userId = userId
+  }
+  next()
+})
+
+// Exchange the code for a token in the OAuth2 redirect handler
+app.get('/auth/miro/callback', async (req, reply) => {
+  await miro.exchangeCodeForAccessToken(req.cookies.userId, req.query.code)
+  reply.redirect('/')
+})
+
+app.get('/', async (req, reply) => {
+  // If user did not authorize the app, then redirect them to auth url
+  if (!(await miro.isAuthorized(req.cookies.userId))) {
+    reply.redirect(miro.getAuthUrl())
+    return
+  }
+
+  // Initialize the API for the current user
+  const api = miro.as(req.cookies.userId)
+
+  // Print the info of the first board
+  for await (const board of api.getAllBoards()) {
+    return board
+  }
+})
+
+await app.listen({port: 4000})
+```
+
+Most methods (`isAuthorized`, `exchangeCodeForAccessToken`, `api`) will take `userId` as a first paramters. This is the internal ID of the user in your application, usually stored in session. It can be either a string or a number.
+
+Client library requires a persistent storage so that it can store user's access and refresh tokens. By default it uses filesystem to store this state. For production deployments we recommend using a custom implementation backed by a database. It is passed as an option to Miro contructor:
 
 ```typescript
 const miro = new Miro({
@@ -95,14 +142,12 @@ export interface Storage {
 }
 ```
 
-The client will automatically refresh access tokens if it is going to expire soon.
-
-See [the example usage](../../apps/fastify/fastify.js) with _fastify_ web framework.
+The client will automatically refresh access tokens before making API calls if they are going to expire soon.
 
 ### Methods & Models
 
-`.as(userId: string)` method returns the instance of the [Api](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class.
-This instance provides methods to create and get the list of `Board` models which then provides methods to get `Item` model and so forth.
+[`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`Api`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class.
+This instance provides methods to create and get [`Board`](https://miroapp.github.io/api-clients/classes/highlevel.Board.html) models which has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/highlevel.Item.html) model and so forth.
 
 Client provides a few helper methods that make it easy to paginate over all resources. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method returns an async iterator that can be used to iterate over all available boards:
 
