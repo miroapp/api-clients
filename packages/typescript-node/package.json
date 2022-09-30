@@ -15,7 +15,7 @@
     "clean": "rm -Rf node_modules/ *.js",
     "build": "tsc",
     "build:docs": "typedoc && yarn move-docs-to-dist",
-    "move-docs-to-dist": "cp -r 'docs' 'dist'",
+    "move-docs-to-dist": "cp -r 'docs-out' 'dist'",
     "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "author": "Miro",

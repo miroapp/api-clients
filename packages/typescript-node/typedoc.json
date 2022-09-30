@@ -7,5 +7,7 @@
   },
   "entryPointStrategy": "expand",
   "exclude": ["__tests__", "test", ".turbo", "../../node_modules/"],
-  "excludeExternals": true
+  "excludeExternals": true,
+  "includes": "docs/includes",
+  "out": "docs-out"
 }
