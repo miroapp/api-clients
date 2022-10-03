@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains information about the style of a sticky note item, such as the fill color or text alignment. For information about the JSON properties, see [Style](https://developers.miro.com/reference/style).
  */
 export class StickyNoteStyle {

@@ -3,6 +3,7 @@ import {OrganizationMember, Team} from './index'
 import {MiroApi} from '../api'
 import {GetParameters1} from './helpers'
 
+/** @hidden */
 export abstract class Organization extends BaseOrganization {
   abstract _api: MiroApi
 
@@ -21,7 +22,7 @@ export abstract class Organization extends BaseOrganization {
     }
   }
 
-  /** {@inheritDoc api!MiroApi.enterpriseGetTeams} */
+  /** {@inheritDoc api/apis!MiroApi.enterpriseGetTeams} */
   async *getAllTeams(...parameters: GetParameters1<MiroApi['enterpriseGetTeams']>): AsyncGenerator<Team, void> {
     const result = (await this._api.enterpriseGetTeams(this.id.toString(), ...parameters)).body
 

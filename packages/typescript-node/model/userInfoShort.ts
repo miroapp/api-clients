@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains information about the user who owns the board.
  */
 export class UserInfoShort {

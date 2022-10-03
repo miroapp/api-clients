@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains sticky note item data, such as the content or shape of the sticky note. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
  */
 export class StickyNoteDataPlatformTags {

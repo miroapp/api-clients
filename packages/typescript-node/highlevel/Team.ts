@@ -3,6 +3,7 @@ import {Board, TeamMember} from './index'
 import {MiroApi} from '../api'
 import {hasMoreData} from './helpers'
 
+/** @hidden */
 export abstract class Team extends BaseTeam {
   abstract _api: MiroApi
   abstract orgId: string

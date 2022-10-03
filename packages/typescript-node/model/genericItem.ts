@@ -18,6 +18,7 @@ import {Position} from './position'
 import {WidgetData} from './widgetData'
 
 /**
+ * @internal
  * Contains the result data.
  */
 export class GenericItem {

@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains pagination links for the collection.
  */
 export class PageLinks {

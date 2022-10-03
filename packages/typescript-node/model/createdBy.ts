@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains information about the user who created the item.
  */
 export class CreatedBy {

@@ -2,6 +2,7 @@ import {FrameItem as ModelFrameItem} from '../model/frameItem'
 import {GenericItemCursorPaged, MiroApi} from '../api'
 import {Item} from './index'
 
+/** @hidden */
 export abstract class FrameItem extends ModelFrameItem {
   abstract _api: MiroApi
   abstract id: number

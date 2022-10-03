@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Data classification labels
  */
 export class DataClassificationLabel {
