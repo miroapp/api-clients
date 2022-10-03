@@ -2,7 +2,7 @@
 
 🚧 [Miro Node,js API client reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
 
-## Miro Node.js API client 
+## Miro Node.js API client library
 
 The Miro Node.js API client is a JavaScript library that enables Miro REST API functionality in Miro apps based on Node.js.
 You can use Node.js and JavaScript to send requests to and handle responses from the Miro REST API.
@@ -13,7 +13,7 @@ You can use the client to implement backend functionality in your Miro app, such
 - Programmatic data exchange with an external system
 - Data storage in the app backend.
 
-## Install the client
+## Install the client library
 
 To install the Miro Node.js API client and its dependencies, run the following command in your project root directory:
 
@@ -23,47 +23,63 @@ npm install @miro/miro-node
 
 ## Import the clients
 
-The Miro Node.js library makes a stateful high-level client, and stateless low-level client:
+The Miro Node.js library makes a stateful high-level client, and stateless low-level client available:
 
-- `Miro`
-- `MiroApi`
+- The `Miro` object is the entry point for the stateful high-level client. \
+  It contains properties and methods to interact with Miro users. For example, to trigger the authorization flow. \
+  The [`Miro` methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) are related to authorization and access token management.
+- The `MiroApi` object is the entry point for the stateless low-level client. \
+  It contains properties and methods for backend-to-backend communication and to run automation scripts. \
+  It enables passing the OAuth access token once, and then reusing it in subsequent calls. \
+    The [`MiroApi` methods](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) enable creating and getting boards associated with the current access token, as well as organization information (available on Enterprise API for users on an Enterprise plan).
 
-
-### Using stateless MiroApi directly
-
-Besides the high level stateful Miro client the library also exposes a stateless low level client:
+To start using the high-level `Miro` client, import it, and then create a new instance:
 
 ```typescript
-import {MiroApi} from './index.ts'
+// Import the Miro object 
+import {Miro} from "@mirohq/miro-node"
 
-const api = new MiroApi('ACCESS_TOKEN')
+// Create a new instance of the Miro object
+const miro = new Miro()
 
+// You can use the 'as' method to return a
+// high-level instance of 'MiroApi' for a specific user
+miro.as(userId: ExternalUserId): MiroApi
+```
+
+To start using the low-level `MiroApi`  client, import it, and then create a new instance:
+
+```typescript
+// Import the MiroApi object 
+import {MiroApi} from "./index.ts"
+
+// Create a new instance of the MiroApi object,
+// and pass the OAuth access token as a parameter
+const api = new MiroApi("<access_token>")
+
+// Use the MiroApi instance to send a request to the Miro REST API,
+// and to get all the boards that can be accessed with the current access token.
 const boards = await api.getBoards()
 ```
 
-See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroApi.html) for a full list of methods.
-
-
 ## Handle OAuth authorization
 
-Miro class is a wrapper that handles authorization and per-user access token management.
+`Miro` handles authorization and per-user access token management. \
+By default, the client loads the app configuration from the following environment variables:
 
-To start using the client create a new instance:
+- `MIRO_CLIENT_ID`
+- `MIRO_CLIENT_SECRET`
+- `MIRO_REDIRECT_URL`
 
-```typescript
-import {Miro} from '@mirohq/miro-node'
-
-const miro = new Miro()
-```
-
-By default client will load the app configuration from environment variables: `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET`, `MIRO_REDIRECT_URL`. \
-They can also be provided by passing the options object to the iconstructor.
+Alternatively, you can pass these values to the constructor when you create a new `Miro` instance:
 
 ```typescript
+import {Miro} from "@mirohq/miro-node"
+
 const miro = new Miro({
-  clientId: 'your_app_id',
-  clientSecret: 'your_app_secret',
-  redirectUrl: 'https://foo.bar/miro_return_url',
+  clientId: "<your_app_client_id>>",
+  clientSecret: "<your_app_client_secret>",
+  redirectUrl: "https://example.com/miro_redirect_url",
 })
 ```
 
