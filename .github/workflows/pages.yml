@@ -47,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: "packages/typescript-node/docs/"
+          path: "packages/typescript-node/dist/docs/"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
