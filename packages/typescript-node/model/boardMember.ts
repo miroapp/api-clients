@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains the current user\'s board membership details. The current user could be different from the board owner.
  */
 export class BoardMember {

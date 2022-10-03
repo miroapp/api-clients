@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains geometrical information about the item, such as its width or height. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry).
  */
 export class GeometryPlatformContainers {

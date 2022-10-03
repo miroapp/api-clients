@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Team collaboration settings
  */
 export class TeamCollaborationSettings {

@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Response for search organization members by user emails
  */
 export class OrganizationMember {

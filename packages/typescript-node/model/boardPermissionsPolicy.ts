@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Defines the permissions policies for the board. For more information, see [Permissions policy](https://developers.miro.com/reference/rest-api-policy-data-model#permissions-policy).
  */
 export class BoardPermissionsPolicy {

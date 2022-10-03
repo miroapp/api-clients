@@ -13,6 +13,7 @@
 import {OrganizationMember} from './organizationMember'
 
 /**
+ * @internal
  * Response for search organization members by user emails
  */
 export class OrganizationMembersSearchByEmailsResponse extends Array<OrganizationMember> {

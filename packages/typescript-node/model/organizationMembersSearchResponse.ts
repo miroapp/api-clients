@@ -13,6 +13,7 @@
 import {OrganizationMember} from './organizationMember'
 
 /**
+ * @internal
  * Response for query by cursor and filter parameters
  */
 export class OrganizationMembersSearchResponse {

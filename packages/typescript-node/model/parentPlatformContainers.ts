@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains information about the parent this item attached to. Passing null for ID will attach widget to the canvas directly.
  */
 export class ParentPlatformContainers {

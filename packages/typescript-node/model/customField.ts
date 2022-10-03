@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.
  */
 export class CustomField {

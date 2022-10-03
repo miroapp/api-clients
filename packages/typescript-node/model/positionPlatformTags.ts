@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains location information about the item, such as its x coordinate, y coordinate, and theorigin of the x and y coordinates.
  */
 export class PositionPlatformTags {

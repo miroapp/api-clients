@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Team invitation settings
  */
 export class TeamInvitationSettings {

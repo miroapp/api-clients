@@ -13,6 +13,7 @@
 import {SelfLink} from './selfLink'
 
 /**
+ * @internal
  * Contains information about the parent frame for the item.
  */
 export class ParentLinksEnvelopePlatformContainers {
