@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Team picture
  */
 export class CreatePictureRequest {

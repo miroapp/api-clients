@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Team account discovery settings
  */
 export class TeamAccountDiscoverySettings {

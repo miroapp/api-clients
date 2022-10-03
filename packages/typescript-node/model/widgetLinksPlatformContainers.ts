@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains applicable links for the item.
  */
 export class WidgetLinksPlatformContainers {

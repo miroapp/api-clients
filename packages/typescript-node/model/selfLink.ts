@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains applicable links for the current object.
  */
 export class SelfLink {

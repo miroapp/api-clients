@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains information about the style of a text item, such as the fill color or font family. For more information on the JSON properties, see [Style](https://developers.miro.com/reference/style).
  */
 export class TextStyle {

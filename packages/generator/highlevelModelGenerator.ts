@@ -23,6 +23,7 @@ export class ${name} extends ${extendedModelName} {
 
     ${mapProps(model.props).join('\n')}
 
+    /** @hidden */
     constructor(${mapProps(constructorParams).join(', ')}) {
         super(${isLocal ? ['api', ...model.props.map(({name}) => name), 'props'].join(', ') : ''})
         this._api = api
@@ -44,7 +45,7 @@ export class ${name} extends ${extendedModelName} {
         const returns = method.returns
 
         return `
-/** {@inheritDoc api!MiroApi.${method.method}} */
+/** {@inheritDoc api/apis!MiroApi.${method.method}} */
 async ${method.alias}(...parameters: GetParameters${method.topLevelCall ? 1 : props.length}<MiroApi['${
           method.method
         }']>): Promise<${returns ? returns : 'void'}${method.paginated ? '[]' : ''}> {

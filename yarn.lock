@@ -3850,9 +3850,9 @@ map-visit@^1.0.0:
     object-visit "^1.0.0"
 
 marked@^4.0.19:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-4.1.0.tgz#3fc6e7485f21c1ca5d6ec4a39de820e146954796"
-  integrity sha512-+Z6KDjSPa6/723PQYyc1axYZpYYpDnECDaU6hkaf5gqBieBkMKYReL5hteF2QizhlMbgbo8umXl/clZ67+GlsA==
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.1.1.tgz#2f709a4462abf65a283f2453dc1c42ab177d302e"
+  integrity sha512-0cNMnTcUJPxbA6uWmCmjWz4NJRe/0Xfk2NhXCUHjew9qJzFN20krFnsUe7QynwqOwa5m1fZ4UDg0ycKFVC0ccw==
 
 media-typer@0.3.0:
   version "0.3.0"
@@ -5209,10 +5209,15 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typedoc@^0.23.10:
-  version "0.23.14"
-  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.23.14.tgz#d3af50b38fe98210ac39e112b5892f9d88546c93"
-  integrity sha512-s2I+ZKBET38EctZvbXp2GooHrNaKjWZkrwGEK/sttnOGiKJqU0vHrsdcwLgKZGuo2aedNL3RRPj1LnAAeYscig==
+typedoc-plugin-missing-exports@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-missing-exports/-/typedoc-plugin-missing-exports-1.0.0.tgz#7212a2cfaba7b48264df4b4110f3a5684b5c49a1"
+  integrity sha512-7s6znXnuAj1eD9KYPyzVzR1lBF5nwAY8IKccP5sdoO9crG4lpd16RoFpLsh2PccJM+I2NASpr0+/NMka6ThwVA==
+
+typedoc@^0.23.15:
+  version "0.23.15"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.23.15.tgz#6d995c47d34e5785dadffe0ebc28372bd019e5e5"
+  integrity sha512-x9Zu+tTnwxb9YdVr+zvX7LYzyBl1nieOr6lrSHbHsA22/RJK2m4Y525WIg5Mj4jWCmfL47v6f4hUzY7EIuwS5w==
   dependencies:
     lunr "^2.3.9"
     marked "^4.0.19"

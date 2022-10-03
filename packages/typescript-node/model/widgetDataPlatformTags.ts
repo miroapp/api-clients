@@ -22,6 +22,7 @@ import {StickyNoteData} from './stickyNoteData'
 import {TextData} from './textData'
 
 /**
+ * @internal
  * Contains the item data, such as the item title, content, or description.
  */
 export class WidgetDataPlatformTags {

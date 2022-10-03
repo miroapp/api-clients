@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Test error obj
  */
 export class GetBoards400Response {

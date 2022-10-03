@@ -4,6 +4,7 @@ import {GenericItem} from '../model/genericItem'
 import {MiroApi} from '../api'
 import {Connector} from '.'
 
+/** @hidden */
 export abstract class Item extends GenericItem {
   abstract _api: MiroApi
   abstract boardId: string

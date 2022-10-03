@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Team sharing policy settings
  */
 export class TeamSharingPolicySettingsChanges {
