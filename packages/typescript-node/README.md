@@ -90,7 +90,7 @@ The client has all methods that are needed to complete Miro authorization flows 
 1. Check if current user has authorized the app: [`miro.isAuthorized(someUserId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized)
 2. Request user to authorize the app by redirecting them to: [`miro.getAuthUrl()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl)
 3. Exchange users authorization code for a token in the return url's request handler: [`await miro.exchangeCodeForAccessToken(someUserId, req.query.code)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken)
-4. Use the API as a specific user: [`await miro.as(someUserId).getBoards()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
+4. Use the API as a specific user: [`await miro.as(someUserId).getBoard(boardId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
 
 Here is a simple implementation of an App using the [fastify](https://www.fastify.io/) framework:
 
@@ -160,15 +160,35 @@ export interface Storage {
 
 The client will automatically refresh access tokens before making API calls if they are going to expire soon.
 
-### Methods & Models
+### Model hierarchy
 
 [`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`Api`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class.
 This instance provides methods to create and get [`Board`](https://miroapp.github.io/api-clients/classes/highlevel.Board.html) models which has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/highlevel.Item.html) model and so forth.
 
-Client provides a few helper methods that make it easy to paginate over all resources. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method returns an async iterator that can be used to iterate over all available boards:
+### Pagination
+
+Client provides helper methods that make it easy to paginate over all resources using `for await...of` loops. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that will automatically paginate.
 
 ```typescript
 for await (const board of api.getAllBoards()) {
   console.log(board.viewLink)
+  if (shouldStop()) {
+    // stop requesting additional pages from the API
+    break
+  }
 }
 ```
+
+### Using stateless MiroApi directly
+
+Besides the high level stateful Miro client the library also exposes a stateless low level client:
+
+```typescript
+import {MiroApi} from './index.ts'
+
+const api = new MiroApi('ACCESS_TOKEN')
+
+const board = await api.getBoard(boardId)
+```
+
+See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroApi.html) for a full list of methods.
