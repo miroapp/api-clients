@@ -31,12 +31,12 @@ The Miro Node.js library makes a stateful high-level client, and stateless low-l
 - The `MiroApi` object is the entry point for the stateless low-level client. \
   It contains properties and methods for backend-to-backend communication and to run automation scripts. \
   It enables passing the OAuth access token once, and then reusing it in subsequent calls. \
-    The [`MiroApi` methods](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) enable creating and getting boards associated with the current access token, as well as organization information (available on Enterprise API for users on an Enterprise plan).
+   The [`MiroApi` methods](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) enable creating and getting boards associated with the current access token, as well as organization information (available on Enterprise API for users on an Enterprise plan).
 
 To start using the high-level `Miro` client, import it, and then create a new instance:
 
 ```typescript
-// Import the Miro object 
+// Import the Miro object
 import {Miro} from "@mirohq/miro-node"
 
 // Create a new instance of the Miro object
@@ -47,15 +47,15 @@ const miro = new Miro()
 miro.as(userId: ExternalUserId): MiroApi
 ```
 
-To start using the low-level `MiroApi`  client, import it, and then create a new instance:
+To start using the low-level `MiroApi` client, import it, and then create a new instance:
 
 ```typescript
-// Import the MiroApi object 
-import {MiroApi} from "./index.ts"
+// Import the MiroApi object
+import {MiroApi} from './index.ts'
 
 // Create a new instance of the MiroApi object,
 // and pass the OAuth access token as a parameter
-const api = new MiroApi("<access_token>")
+const api = new MiroApi('<access_token>')
 
 // Use the MiroApi instance to send a request to the Miro REST API,
 // and to get all the boards that can be accessed with the current access token.
@@ -74,12 +74,12 @@ By default, the client loads the app configuration from the following environmen
 Alternatively, you can pass these values to the constructor when you create a new `Miro` instance:
 
 ```typescript
-import {Miro} from "@mirohq/miro-node"
+import {Miro} from '@mirohq/miro-node'
 
 const miro = new Miro({
-  clientId: "<your_app_client_id>>",
-  clientSecret: "<your_app_client_secret>",
-  redirectUrl: "https://example.com/miro_redirect_url",
+  clientId: '<your_app_client_id>>',
+  clientSecret: '<your_app_client_secret>',
+  redirectUrl: 'https://example.com/miro_redirect_url',
 })
 ```
 

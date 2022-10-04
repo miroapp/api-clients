@@ -1,11 +1,13 @@
 # Miro node client quickstart guide
+
 In this guide, you will learn how to get started with the Miro REST API in no time. We will cover how to make your first API call using the Node client library without implementing the authorization process by using a hardcoded access_token.
 
 At the end of this guide, you will have a NodeJs project able to get the list of all the boards you have access to in a specific team.
 
 ### Prerequisites
- - 1: Have a Miro.com account
- - 2: Create a Developer team, create a developer app, configure your app and install it to generate an access token. Please follow steps 2 to 5 on the [Build your first Hello, World app](https://developers.miro.com/docs/build-your-first-hello-world-app#step-2-create-a-developer-team-in-miro) guide. Save the `access_token` to use it later.
+
+- 1: Have a Miro.com account
+- 2: Create a Developer team, create a developer app, configure your app and install it to generate an access token. Please follow steps 2 to 5 on the [Build your first Hello, World app](https://developers.miro.com/docs/build-your-first-hello-world-app#step-2-create-a-developer-team-in-miro) guide. Save the `access_token` to use it later.
 
 If you want to integrate Miro into an existing app, start at step 3.
 
