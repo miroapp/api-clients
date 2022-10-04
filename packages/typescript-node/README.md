@@ -31,36 +31,84 @@ The Miro Node.js library makes a stateful high-level client, and stateless low-l
 - The `MiroApi` object is the entry point for the stateless low-level client. \
   It contains properties and methods for backend-to-backend communication and to run automation scripts. \
   It enables passing the OAuth access token once, and then reusing it in subsequent calls. \
-   The [`MiroApi` methods](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) enable creating and getting boards associated with the current access token, as well as organization information (available on Enterprise API for users on an Enterprise plan).
+  The [`MiroApi` methods](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) enable creating and getting boards associated with the current access token, performing CRUD operations on board items, as well as retrieving organization information and managing teams sand users (available on Enterprise API for users on an Enterprise plan.)
 
 To start using the high-level `Miro` client, import it, and then create a new instance:
 
 ```typescript
-// Import the Miro object
+// Import the 'Miro' object
 import {Miro} from "@mirohq/miro-node"
 
 // Create a new instance of the Miro object
 const miro = new Miro()
 
-// You can use the 'as' method to return a
-// high-level instance of 'MiroApi' for a specific user
+/* 
+ * The 'as' method returns a high-level instance of
+ * 'Api' for a specific user.
+ * This makes all the methods that enable interacting with
+ * boards and board items available to the specified user
+ */
 miro.as(userId: ExternalUserId): MiroApi
 ```
 
 To start using the low-level `MiroApi` client, import it, and then create a new instance:
 
 ```typescript
-// Import the MiroApi object
+// Import the 'MiroApi' object
 import {MiroApi} from './index.ts'
 
-// Create a new instance of the MiroApi object,
+// Create a new instance of the 'MiroApi' object,
 // and pass the OAuth access token as a parameter
 const api = new MiroApi('<access_token>')
 
-// Use the MiroApi instance to send a request to the Miro REST API,
+// Use the 'MiroApi' instance to send a request to the Miro REST API,
 // and to get all the boards that can be accessed with the current access token.
 const boards = await api.getBoards()
 ```
+
+### Model hierarchy
+
+The `Miro` [`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class. \
+This instance provides methods to create and get the [`Board`](https://miroapp.github.io/api-clients/classes/highlevel.Board.html) model. \
+`Board` has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/highlevel.Item.html) models \
+`Items` includes methods to create connectors, as well as attach and detach tags for the board items that support these features.
+
+```text
+Miro
+   |__ .as
+        |__ MiroApi
+                  |__ Board
+                          |__ Board items
+                                        |__ Tags; connectors
+```
+
+### Pagination
+
+Client provides helper methods that make it easy to paginate over all resources using `for await...of` loops. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that will automatically paginate.
+
+```typescript
+for await (const board of api.getAllBoards()) {
+  console.log(board.viewLink)
+  if (shouldStop()) {
+    // stop requesting additional pages from the API
+    break
+  }
+}
+```
+
+### Using stateless MiroApi directly
+
+Besides the high level stateful Miro client the library also exposes a stateless low level client:
+
+```typescript
+import {MiroApi} from './index.ts'
+
+const api = new MiroApi('ACCESS_TOKEN')
+
+const board = await api.getBoard(boardId)
+```
+
+See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroApi.html) for a full list of methods.
 
 ## Handle OAuth authorization
 
@@ -83,14 +131,16 @@ const miro = new Miro({
 })
 ```
 
-Other options are documented in the [reference](https://miroapp.github.io/api-clients/interfaces/index.Opts.html).
-
-The client has all methods that are needed to complete Miro authorization flows and make API calls:
+The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/interfaces/index.Opts.html) to complete Miro authorization flows and make API calls:
 
 1. Check if current user has authorized the app: [`miro.isAuthorized(someUserId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized)
 2. Request user to authorize the app by redirecting them to: [`miro.getAuthUrl()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl)
 3. Exchange users authorization code for a token in the return url's request handler: [`await miro.exchangeCodeForAccessToken(someUserId, req.query.code)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken)
 4. Use the API as a specific user: [`await miro.as(someUserId).getBoard(boardId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
+
+For more information about all the Other options are documented in the [reference](https://miroapp.github.io/api-clients/interfaces/index.Opts.html).
+
+## Example
 
 Here is a simple implementation of an App using the [fastify](https://www.fastify.io/) framework:
 
@@ -160,35 +210,3 @@ export interface Storage {
 
 The client will automatically refresh access tokens before making API calls if they are going to expire soon.
 
-### Model hierarchy
-
-[`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`Api`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class.
-This instance provides methods to create and get [`Board`](https://miroapp.github.io/api-clients/classes/highlevel.Board.html) models which has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/highlevel.Item.html) model and so forth.
-
-### Pagination
-
-Client provides helper methods that make it easy to paginate over all resources using `for await...of` loops. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that will automatically paginate.
-
-```typescript
-for await (const board of api.getAllBoards()) {
-  console.log(board.viewLink)
-  if (shouldStop()) {
-    // stop requesting additional pages from the API
-    break
-  }
-}
-```
-
-### Using stateless MiroApi directly
-
-Besides the high level stateful Miro client the library also exposes a stateless low level client:
-
-```typescript
-import {MiroApi} from './index.ts'
-
-const api = new MiroApi('ACCESS_TOKEN')
-
-const board = await api.getBoard(boardId)
-```
-
-See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroApi.html) for a full list of methods.
