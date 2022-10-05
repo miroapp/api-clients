@@ -42,7 +42,7 @@ import {Miro} from "@mirohq/miro-node"
 // Create a new instance of the Miro object
 const miro = new Miro()
 
-/* 
+/*
  * The 'as' method returns a high-level instance of
  * 'Api' for a specific user.
  * This makes all the methods that enable interacting with
@@ -209,4 +209,3 @@ export interface Storage {
 ```
 
 The client will automatically refresh access tokens before making API calls if they are going to expire soon.
-
