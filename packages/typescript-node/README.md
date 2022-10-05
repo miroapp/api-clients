@@ -25,10 +25,10 @@ npm install @miro/miro-node
 
 The Miro Node.js library makes a stateful high-level client, and stateless low-level client available:
 
-- The `Miro` object is the entry point for the stateful high-level client. \
+- The `Miro` object is the stateful high-level client. \
   It contains properties and methods to interact with Miro users. For example, to trigger the authorization flow. \
   The [`Miro` methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) are related to authorization and access token management.
-- The `MiroApi` object is the entry point for the stateless low-level client. \
+- The `MiroApi` object is the stateless low-level client. \
   It contains properties and methods for backend-to-backend communication and to run automation scripts. \
   It enables passing the OAuth access token once, and then reusing it in subsequent calls. \
   The [`MiroApi` methods](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) enable creating and getting boards associated with the current access token, performing CRUD operations on board items, as well as retrieving organization information and managing teams sand users (available on Enterprise API for users on an Enterprise plan.)
@@ -66,12 +66,12 @@ const api = new MiroApi('<access_token>')
 const boards = await api.getBoards()
 ```
 
-### Model hierarchy
+## Model hierarchy
 
-The `Miro` [`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class. \
-This instance provides methods to create and get the [`Board`](https://miroapp.github.io/api-clients/classes/highlevel.Board.html) model. \
-`Board` has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/highlevel.Item.html) models \
-`Items` includes methods to create connectors, as well as attach and detach tags for the board items that support these features.
+- The `Miro` [`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class. \
+  This instance provides methods to create and get the [`Board`](https://miroapp.github.io/api-clients/classes/highlevel.Board.html) model.
+- `Board` has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/highlevel.Item.html) models.
+- `Items` includes methods to create connectors, as well as attach and detach tags, for the board items that support these features.
 
 ```text
 Miro
@@ -79,38 +79,28 @@ Miro
         |__ MiroApi
                   |__ Board
                           |__ Board items
-                                        |__ Tags; connectors
+                                        |__ Tags
+                                        |__ Connectors
 ```
 
-### Pagination
+## Pagination
 
-Client provides helper methods that make it easy to paginate over all resources using `for await...of` loops. For example [getAllBoards](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that will automatically paginate.
+The client library includes helper methods that make it easy to paginate over all the resources using `for await...of` loops. \
+For example, the [`getAllBoards`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that paginates automatically.
+
+Example:
 
 ```typescript
 for await (const board of api.getAllBoards()) {
   console.log(board.viewLink)
   if (shouldStop()) {
-    // stop requesting additional pages from the API
+    // Stop requesting additional pages from the API
     break
   }
 }
 ```
 
-### Using stateless MiroApi directly
-
-Besides the high level stateful Miro client the library also exposes a stateless low level client:
-
-```typescript
-import {MiroApi} from './index.ts'
-
-const api = new MiroApi('ACCESS_TOKEN')
-
-const board = await api.getBoard(boardId)
-```
-
-See the [documentation](https://miroapp.github.io/api-clients/interfaces/api.MiroApi.html) for a full list of methods.
-
-## Handle OAuth authorization
+## OAuth authorization
 
 `Miro` handles authorization and per-user access token management. \
 By default, the client loads the app configuration from the following environment variables:
@@ -131,18 +121,46 @@ const miro = new Miro({
 })
 ```
 
-The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/interfaces/index.Opts.html) to complete Miro authorization flows and make API calls:
+The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/interfaces/index.Opts.html) to complete Miro authorization flows, and to make API calls:
 
-1. Check if current user has authorized the app: [`miro.isAuthorized(someUserId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized)
-2. Request user to authorize the app by redirecting them to: [`miro.getAuthUrl()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl)
-3. Exchange users authorization code for a token in the return url's request handler: [`await miro.exchangeCodeForAccessToken(someUserId, req.query.code)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken)
-4. Use the API as a specific user: [`await miro.as(someUserId).getBoard(boardId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
+1. Check if the current user has authorized the app: [`miro.isAuthorized(someUserId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized)
+2. If the user hasn't yet authorized the app, request the user to authorize the app by redirecting them to: [`miro.getAuthUrl()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl)
+3. As part of the authorization flow, exchange the user temporary authorization code for an access token in the return URL request handler: [`await miro.exchangeCodeForAccessToken(someUserId, req.query.code)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken)
+4. Make API calls on behalf of a specific user: [`await miro.as(someUserId).getBoard(boardId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
 
-For more information about all the Other options are documented in the [reference](https://miroapp.github.io/api-clients/interfaces/index.Opts.html).
+For more information about the available options related to authorization, see the [`Opts` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index.Opts.html).
+
+## Storage
+
+⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
+
+Most methods take `userId` as their first parameter. For example: [`isAuthorized`](), [`exchangeCodeForAccessToken`](), [`as`]().
+`userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session. 
+
+The client library requires persistent storage for user access and refresh tokens. \
+The client automatically refreshes access tokens before making API calls, if they are nearing their expiration time.
+
+By default, persistent storage uses the file system through [Node.js `fs`](https://nodejs.org/api/fs.html) to store state information. \
+Pass `storage` to the `Miro` constructor as an option:
+
+```typescript
+const miro = new Miro({
+  storage: new CustomMiroStorage(),
+})
+```
+
+To support the client library storage functionality in your app, implement the following [read and write](https://miroapp.github.io/api-clients/interfaces/index.Storage.html) interface:
+
+```typescript
+export interface Storage {
+  read(userId: ExternalUserId): Promise<State | undefined>
+  write(userId: ExternalUserId, state: State): Awaitable<void>
+}
+```
 
 ## Example
 
-Here is a simple implementation of an App using the [fastify](https://www.fastify.io/) framework:
+This example implements a simple app using the [Fastify](https://www.fastify.io/) framework:
 
 ```javascript
 import {Miro} from '@mirohq/miro-node'
@@ -154,7 +172,7 @@ const miro = new Miro()
 const app = Fastify()
 app.register(fastifyCookie)
 
-// Generate user ids for new sessions
+// Generate user IDs for new sessions
 app.addHook('preHandler', (request, reply, next) => {
   if (!request.cookies.userId) {
     const userId = Math.random()
@@ -164,7 +182,7 @@ app.addHook('preHandler', (request, reply, next) => {
   next()
 })
 
-// Exchange the code for a token in the OAuth2 redirect handler
+// Exchange the temp code for an access token in the OAuth2 redirect handler
 app.get('/auth/miro/callback', async (req, reply) => {
   await miro.exchangeCodeForAccessToken(req.cookies.userId, req.query.code)
   reply.redirect('/')
@@ -180,7 +198,7 @@ app.get('/', async (req, reply) => {
   // Initialize the API for the current user
   const api = miro.as(req.cookies.userId)
 
-  // Print the info of the first board
+  // Print the detail about first returned board
   for await (const board of api.getAllBoards()) {
     return board
   }
@@ -188,25 +206,3 @@ app.get('/', async (req, reply) => {
 
 await app.listen({port: 4000})
 ```
-
-Most methods (`isAuthorized`, `exchangeCodeForAccessToken`, `api`) will take `userId` as a first paramters. This is the internal ID of the user in your application, usually stored in session. It can be either a string or a number.
-
-Client library requires a persistent storage so that it can store user's access and refresh tokens. By default it uses filesystem to store this state. For production deployments we recommend using a custom implementation backed by a database. It is passed as an option to Miro contructor:
-
-```typescript
-const miro = new Miro({
-  storage: new CustomMiroStorage(),
-})
-```
-
-Storage should implement the following interface:
-
-```typescript
-export interface Storage {
-  read(userId: ExternalUserId): Promise<State | undefined>
-  write(userId: ExternalUserId, state: State): Awaitable<void>
-}
-```
-
-The client will automatically refresh access tokens before making API calls if they are going to expire soon.
-
