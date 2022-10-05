@@ -1,7 +1,7 @@
 import {Board as BaseBoard} from '../model/board'
 import {BoardMember, Connector, Item, Tag} from './index'
 import {BoardMembersPagedResponse, GenericItem, ConnectorsCursorPaged, GenericItemCursorPaged, MiroApi} from '../api'
-import {AnyItem} from './Item'
+import {WidgetItem} from './Item'
 import {hasMoreData} from './helpers'
 
 /** @hidden */
@@ -12,7 +12,7 @@ export abstract class Board extends BaseBoard {
    * Get all items on the board
    * Returns an iterator which will automatically paginate and fetch all available items
    */
-  async *getAllItems(query?: Omit<Parameters<MiroApi['getItems']>[1], 'cursor'>): AsyncGenerator<AnyItem, void> {
+  async *getAllItems(query?: Omit<Parameters<MiroApi['getItems']>[1], 'cursor'>): AsyncGenerator<WidgetItem, void> {
     let cursor: string | undefined = undefined
     while (true) {
       const response: GenericItemCursorPaged = (
@@ -111,7 +111,7 @@ export abstract class Board extends BaseBoard {
   }
 
   /** {@inheritDoc api/apis!MiroApi.getSpecificItem} */
-  async getItem(itemId: string): Promise<AnyItem> {
+  async getItem(itemId: string): Promise<WidgetItem> {
     const response = await this._api.getSpecificItem(this.id, itemId)
 
     const item: GenericItem = response.body
