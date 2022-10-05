@@ -14,6 +14,7 @@ import {RelativeOffset} from './relativeOffset'
 import {SelfLink} from './selfLink'
 
 /**
+ * @internal
  * The starting point of the connector.
  */
 export class ItemConnectionWithLinks {

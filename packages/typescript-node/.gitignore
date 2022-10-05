@@ -4,3 +4,4 @@ node_modules
 typings
 dist
 yarn.lock
+docs-theme/index.js

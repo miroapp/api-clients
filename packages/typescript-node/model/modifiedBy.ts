@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains information about the user who last modified the item.
  */
 export class ModifiedBy {

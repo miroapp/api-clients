@@ -1,13 +1,23 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["api.ts", "index.ts", "highlevel/*"],
+  "entryPoints": ["index.ts", "api/apis.ts"],
   "gitRevision": "main",
   "markedOptions": {
-    "baseUrl": "https://developers.miro.com/"
+    "baseUrl": "https://miroapp.github.io/api-clients/typescript-node/"
   },
-  "entryPointStrategy": "expand",
   "exclude": ["__tests__", "test", ".turbo", "../../node_modules/"],
   "excludeExternals": true,
   "includes": "docs/includes",
-  "out": "docs-out"
+  "out": "docs-out",
+  "externalPattern": ["../../node_modules/**/*", "node_modules/**/*"],
+  "plugin": ["typedoc-plugin-missing-exports", "./docs-theme/index.js"],
+  "theme": "miro",
+  "externalSymbolLinkMappings": {
+    "global": {
+      "AsyncGenerator": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator"
+    },
+    "typescript": {
+      "AsyncGenerator": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator"
+    }
+  }
 }

@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * For information about the JSON properties, see [Style](https://developers.miro.com/reference/style).
  */
 export class ShapeStyle {

@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains information about the style of a connector, such as the color or caption font size
  */
 export class ConnectorStyle {

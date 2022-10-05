@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains geometrical information about the item. You can set either the width or height. You cannot set both the at the same time. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry).
  */
 export class FixedRatioNoRotationGeometry {

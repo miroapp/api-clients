@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains information about the parent frame for the item.
  */
 export class Parent {

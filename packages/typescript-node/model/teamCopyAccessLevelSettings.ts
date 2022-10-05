@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Team copy access settings
  */
 export class TeamCopyAccessLevelSettings {

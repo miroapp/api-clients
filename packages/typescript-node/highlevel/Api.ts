@@ -2,10 +2,11 @@ import {Board} from './index'
 import {MiroApi} from '../api'
 import {hasMoreData} from './helpers'
 
+/** @hidden */
 export abstract class Api {
   abstract _api: MiroApi
 
-  /** {@inheritDoc api!MiroApi.revokeToken} */
+  /** {@inheritDoc api/apis!MiroApi.revokeToken} */
   async revokeToken(): Promise<void> {
     await this._api.revokeToken(
       typeof this._api.accessToken === 'function' ? await this._api.accessToken() : this._api.accessToken,

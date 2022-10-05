@@ -17,6 +17,7 @@ import {Team} from './team'
 import {UserInfoShort} from './userInfoShort'
 
 /**
+ * @internal
  * Contains the result data.
  */
 export class Board {

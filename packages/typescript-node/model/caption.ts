@@ -11,6 +11,7 @@
  */
 
 /**
+ * @internal
  * Contains the connector\'s caption data, such as content and its position.
  */
 export class Caption {

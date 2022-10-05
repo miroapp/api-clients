@@ -3,6 +3,7 @@ import {BoardMember, Connector, Item, Tag} from './index'
 import {BoardMembersPagedResponse, ConnectorsCursorPaged, GenericItem, GenericItemCursorPaged, MiroApi} from '../api'
 import {hasMoreData} from './helpers'
 
+/** @hidden */
 export abstract class Board extends BaseBoard {
   abstract _api: MiroApi
 
@@ -108,7 +109,7 @@ export abstract class Board extends BaseBoard {
     }
   }
 
-  /** {@inheritDoc api!MiroApi.getSpecificItem} */
+  /** {@inheritDoc api/apis!MiroApi.getSpecificItem} */
   async getItem(itemId: string): Promise<Item> {
     const response = await this._api.getSpecificItem(this.id, itemId)
 

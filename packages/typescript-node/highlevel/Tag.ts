@@ -2,6 +2,7 @@ import {MiroApi} from '../api'
 import {hasMoreData} from './helpers'
 import {Item} from './index'
 
+/** @hidden */
 export abstract class Tag {
   abstract _api: MiroApi
   abstract boardId: string
