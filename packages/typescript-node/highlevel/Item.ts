@@ -17,7 +17,7 @@ import {
   Item,
 } from '.'
 
-export type AnyItem =
+export type WidgetItem =
   | Item
   | AppCardItem
   | CardItem
@@ -29,17 +29,25 @@ export type AnyItem =
   | StickyNoteItem
   | TextItem
 
-/** @hidden */
-export abstract class GenericItem extends BaseGenericItem {
-  abstract _api: MiroApi
-  abstract boardId: string
-
+export interface ConnectTo {
   /**
    * Create a new connector between the current item and some other item
    * @param {string | number | Object} endItem Item that the new connector will connect to
    * @param {Object=} connectorCreationData
    * @return {Promise}
    */
+  connectTo(
+    endItem: string | number | ItemConnectionCreationData,
+    connectorCreationData?: ConnectorCreationData,
+  ): Promise<Connector>
+}
+
+/** @hidden */
+export abstract class ConnectableItem implements ConnectTo {
+  abstract _api: MiroApi
+  abstract boardId: string
+  abstract id: number
+
   async connectTo(
     endItem: string | number | ItemConnectionCreationData,
     connectorCreationData?: ConnectorCreationData,
@@ -61,8 +69,10 @@ export abstract class GenericItem extends BaseGenericItem {
     ).body
     return new Connector(this._api, this.boardId, connector.id, connector)
   }
+}
 
-  static fromGenericItem(api: MiroApi, boardId: string, item: BaseGenericItem): AnyItem {
+export abstract class GenericItem extends BaseGenericItem implements ConnectTo {
+  static fromGenericItem(api: MiroApi, boardId: string, item: BaseGenericItem): WidgetItem {
     switch (item.type) {
       case 'app_card':
         return new AppCardItem(api, boardId, item.id, item)
@@ -86,4 +96,7 @@ export abstract class GenericItem extends BaseGenericItem {
         return new Item(api, boardId, item.id, item)
     }
   }
+
+  /** @group Methods */
+  connectTo = ConnectableItem.prototype.connectTo
 }
