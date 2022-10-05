@@ -1,7 +1,7 @@
 import {FrameItem as ModelFrameItem} from '../model/frameItem'
 import {GenericItemCursorPaged, MiroApi} from '../api'
 import {Item} from './index'
-import {AnyItem} from './Item'
+import {WidgetItem} from './Item'
 
 /** @hidden */
 export abstract class FrameItem extends ModelFrameItem {
@@ -15,7 +15,7 @@ export abstract class FrameItem extends ModelFrameItem {
    */
   async *getAllItems(
     query?: Omit<Parameters<MiroApi['getItemsWithinFrame']>[2], 'cursor'>,
-  ): AsyncGenerator<AnyItem, void> {
+  ): AsyncGenerator<WidgetItem, void> {
     let cursor: string | undefined = undefined
     while (true) {
       const response: GenericItemCursorPaged = (
