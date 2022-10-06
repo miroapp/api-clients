@@ -1,4 +1,4 @@
-# Miro node client quickstart guide
+# Miro Node.js client quickstart guide (Automation use case)
 
 In this guide, you will learn how to get started with the Miro REST API in no time. We will cover how to make your first API call using the Node client library without implementing the authorization process by using a hardcoded access_token.
 
