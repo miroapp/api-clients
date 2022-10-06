@@ -1,7 +1,7 @@
 import assert from 'assert'
-import fs from 'fs'
 import fetch from 'node-fetch'
 import {HttpError, Logger, MiroApi as MiroLowlevelApi} from './api'
+import { InMemoryStorage, Storage } from './storage'
 
 const defaultBasePath = 'https://api.miro.com'
 
@@ -21,20 +21,20 @@ export class Miro {
    * redirectUrl: MIRO_REDIRECT_URL
    * logger: MIRO_DEBUG
    */
-  constructor(options?: Opts) {
-    const opts = Object.assign(getDefaultOpts(), options)
-    this.clientId = opts.clientId || ''
-    this.clientSecret = opts.clientSecret || ''
-    this.redirectUrl = opts.redirectUrl || ''
-    this.storage = opts.storage || defaultStorage
-    this.logger = opts.logger
+  constructor(options?: MiroOptions) {
+    const opts = options || {}
+    this.clientId = opts.clientId || process.env.MIRO_CLIENT_ID || ''
+    this.clientSecret = opts.clientSecret || process.env.MIRO_CLIENT_SECRET || ''
+    this.redirectUrl = opts.redirectUrl || process.env.MIRO_REDIRECT_URL || ''
+    this.storage = opts.storage || new InMemoryStorage()
+    this.logger = opts.logger || (process.env.MIRO_DEBUG ? console.log : undefined)
     this.httpTimeout = opts.httpTimeout
 
-    assert(this.clientId, 'MIRO_CLIENT_ID is required')
-    assert(this.clientSecret, 'MIRO_CLIENT_SECRET is required')
-    assert(this.redirectUrl, 'MIRO_REDIRECT_URL is required')
-    if (this.storage === defaultStorage) {
-      console.warn('Default storage is not recommended, consider using a custom storage implementation')
+    assert(this.clientId, 'MIRO_CLIENT_ID or options.clientId is required')
+    assert(this.clientSecret, 'MIRO_CLIENT_SECRET or options.clientSecret is required')
+    assert(this.redirectUrl, 'MIRO_REDIRECT_URL or options.redirectUrl is required')
+    if (this.storage instanceof InMemoryStorage) {
+      console.warn('miro-node: Default storage is not recommended, consider using a custom storage implementation')
     }
   }
 
@@ -49,7 +49,7 @@ export class Miro {
    * Checks if the given user id already has token stored
    */
   async isAuthorized(userId: ExternalUserId): Promise<boolean> {
-    return !!(await this.storage.read(userId))
+    return !!(await this.storage.get(userId))
   }
 
   /**
@@ -108,7 +108,7 @@ export class Miro {
    */
   async revokeToken(userId: ExternalUserId): Promise<void> {
     await this.as(userId).revokeToken()
-    await this.storage.write(userId, undefined)
+    await this.storage.set(userId, undefined)
   }
 
   async getToken(userId: ExternalUserId, params: {[key: string]: string}): Promise<string> {
@@ -122,7 +122,7 @@ export class Miro {
 
     const body = (await response.json()) as TokenResponse
 
-    this.storage.write(userId, {
+    this.storage.set(userId, {
       accessToken: body.access_token,
       refreshToken: body.refresh_token,
       tokenExpiresAt: body.expires_in ? new Date(Date.now() + (body.expires_in - 120) * 1000).toISOString() : undefined,
@@ -142,7 +142,7 @@ export class Miro {
   }
 
   async getAccessToken(userId: ExternalUserId): Promise<string> {
-    const state = await this.storage.read(userId)
+    const state = await this.storage.get(userId)
     if (!state || !state.accessToken) {
       throw new Error('No access token stored, run exchangeCodeForAccessToken() first')
     }
@@ -156,20 +156,6 @@ export class Miro {
 
 export type ExternalUserId = string | number
 
-export interface State {
-  userId: string
-  accessToken: string
-  refreshToken?: string
-  tokenExpiresAt?: string
-}
-
-export type Awaitable<T> = Promise<T> | T
-
-export interface Storage {
-  read(userId: ExternalUserId): Promise<State | undefined>
-  write(userId: ExternalUserId, state: State | undefined): Awaitable<void>
-}
-
 interface TokenResponse {
   user_id: string
   scope: string
@@ -182,22 +168,7 @@ interface TokenResponse {
 
 type MiddlewareArgs = [req: {url?: string | undefined; headers: {host?: string | undefined}}, ...rest: any]
 
-export const defaultStorage: Storage = {
-  async read(userId: ExternalUserId) {
-    try {
-      return JSON.parse(fs.readFileSync(`./state-${userId}.json`, 'utf8'))
-    } catch (err) {
-      return undefined
-    }
-  },
-  async write(userId: ExternalUserId, state: State) {
-    const filename = `./state-${userId}.json`
-    if (state === undefined) return fs.unlinkSync(filename)
-    fs.writeFileSync(filename, JSON.stringify(state))
-  },
-}
-
-export interface Opts {
+export interface MiroOptions {
   /** App Client id. Defaults to MIRO_CLIENT_ID environment variable */
   clientId?: string
 
@@ -215,16 +186,6 @@ export interface Opts {
 
   /** Client will abort HTTP requests that last longer than this number of miliseconds. Default is 5000ms. */
   httpTimeout?: number
-}
-
-function getDefaultOpts() {
-  return {
-    clientId: process.env.MIRO_CLIENT_ID,
-    clientSecret: process.env.MIRO_CLIENT_SECRET,
-    redirectUrl: process.env.MIRO_REDIRECT_URL,
-    storage: defaultStorage,
-    logger: process.env.MIRO_DEBUG ? console.log : undefined,
-  }
 }
 
 import {Api as HighlevelApi} from './highlevel/index'

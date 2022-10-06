@@ -1,4 +1,5 @@
-import {defaultStorage, Miro, MiroApi, Opts, State, Storage} from '../index'
+import {Miro, MiroOptions} from '../index'
+import {InMemoryStorage, State, Storage} from '../storage'
 import {Api} from '../highlevel'
 import {jest} from '@jest/globals'
 
@@ -129,7 +130,7 @@ describe('Entrypoint test', () => {
     it('should refresh the token if expired', async () => {
       const miro = testMiro({
         storage: {
-          read: async () => {
+          get: async () => {
             return {
               userId: '123',
               accessToken: 'access',
@@ -137,7 +138,7 @@ describe('Entrypoint test', () => {
               tokenExpiresAt: '2022-08-08T08:08:08.000Z',
             }
           },
-          write: () => {},
+          set: () => {},
         },
       })
       const userId = '123'
@@ -170,7 +171,7 @@ describe('Entrypoint test', () => {
       await miro.revokeToken(userId)
 
       expect(revokeToken).toBeCalledTimes(1)
-      expect(miro.storage.write).toBeCalledWith(userId, undefined)
+      expect(miro.storage.set).toBeCalledWith(userId, undefined)
     })
   })
 
@@ -178,22 +179,23 @@ describe('Entrypoint test', () => {
     it('reads from a file and writes into a file', async () => {
       const userId = '123'
       const accessToken = 'token'
-      await defaultStorage.write(userId, {userId, accessToken})
-      expect(await defaultStorage.read(userId)).toEqual({userId, accessToken})
+      const defaultStorage = new InMemoryStorage()
+      await defaultStorage.set(userId, {userId, accessToken})
+      expect(await defaultStorage.get(userId)).toEqual({userId, accessToken})
 
-      await defaultStorage.write(userId, undefined)
-      expect(await defaultStorage.read(userId)).toEqual(undefined)
+      await defaultStorage.set(userId, undefined)
+      expect(await defaultStorage.get(userId)).toEqual(undefined)
     })
   })
 
-  function testMiro(opts?: Opts) {
+  function testMiro(opts?: MiroOptions) {
     return new Miro({
       clientId: 'id',
       clientSecret: 'secret',
       redirectUrl: 'url',
       storage: {
-        read: async () => undefined,
-        write: jest.fn(async () => {}),
+        get: async () => undefined,
+        set: jest.fn(async () => {}),
       },
       ...opts,
     })
@@ -205,8 +207,8 @@ describe('Entrypoint test', () => {
       clientSecret: '123',
       redirectUrl: '123',
       storage: {
-        read: async (id) => (id === userId ? stored : undefined),
-        write: jest.fn(async () => {}),
+        get: async (id) => (id === userId ? stored : undefined),
+        set: jest.fn(async () => {}),
       },
     })
   }

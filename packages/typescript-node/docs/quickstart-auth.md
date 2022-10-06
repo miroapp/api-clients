@@ -1,6 +1,6 @@
 # Miro Node.js client quickstart guide (Using OAuth 2.0 and Express framework)
 
-In this guide, you will learn how to get started with the Miro REST API by using OAuth 2.0 authorization code flow. We will cover setting up an Express HTTP server that uses Miro client library to implement authorization and token management for users.
+In this guide, you will learn how to get started with the Miro REST API by using OAuth 2.0 authorization code flow. We will cover setting up an HTTP server using [Express](expressjs.com/)  that uses Miro client library to implement authorization and token management for users.
 
 At the end of this guide, you will have a simple application that will prompt users for installation and print a list of all boards the user has access to.
 
@@ -35,7 +35,7 @@ npm install @mirohq/miro-node express express-session
 
 #### 4: Import the dependencides and initial setup
 
-We start by creating `index.js` file. To work with the Miro client library and Express framework we need to import and initialize the libraries. We will also import crypto library to keep
+We start by creating an empty `index.js` file. To work with the Miro client library and Express framework we need to import and initialize the libraries. We will also import crypto library to keep
 
 ```javascript
 const express = require('express')
@@ -49,7 +49,7 @@ Initializing Miro client is done by calling the Miro constructor:
 const miro = new Miro()
 ```
 
-This requires `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET` and `MIRO_REDIRECT_URL` environment variables to be set when running the app. Alternatively these values can be passed as [parameters](TODO) to the constructor. The values of `MIRO_CLIENT_ID` and `MIRO_CLIENT_SECRET` can be found on the App settings page. `MIRO_REDIRECT_URL` should be the same one that we previously configured: `http://127.0.0.1:4000/auth/miro/callback`.
+This requires `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET` and `MIRO_REDIRECT_URL` environment variables to be set when running the app. Alternatively these values can be passed as [parameters](https://miroapp.github.io/api-clients/interfaces/index.Options.html) to the constructor. The values of `MIRO_CLIENT_ID` and `MIRO_CLIENT_SECRET` can be found on the App settings page. `MIRO_REDIRECT_URL` should be the same one that we previously configured: `http://127.0.0.1:4000/auth/miro/callback`.
 
 After that we also initialize our express server and configure the [express-session](https://www.npmjs.com/package/express-session) middleware for session management. For production deployment make sure to replace the secret with a randomly generated string.
 
@@ -68,7 +68,7 @@ Note: To keep the guide simple we use session ids to identify users. In a produc
 
 #### 5: Redirect new users to authorization page
 
-In this step we setup a request handler for our Apps entrypoint. First thing we want to do is to check if the user has installed and authorized the App. We can do this by using `isAuthorized` method. If they haven't installed the App yet then we will redirect the user to Miro's Authorization URL that is generated with `getAuthUrl` method.
+In this step we setup a request handler for our Apps entrypoint. First thing we want to do is to check if the user has installed and authorized the App. We can do this by using [`isAuthorized`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized) method. If they haven't installed the App yet then we will redirect the user to Miro's Authorization URL that is generated with [`getAuthUrl`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl) method.
 
 ```javascript
 app.get('/', async (req, res) => {
@@ -85,7 +85,7 @@ app.get('/', async (req, res) => {
 
 After a user installs and authorizes our App, they will be redirected back to the redirect URL (`MIRO_REDIRECT_URL`).
 
-In order to store the access token required for using the API we will use `exchangeCodeForAccessToken` method. The method requires an id and the value of `code` parameter from the URL. It associates the token with the id and stores it internally using the `Storage`.
+In order to store the access token required for using the API we will use [`exchangeCodeForAccessToken`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken) method. The method requires an id and the value of `code` parameter from the URL. It associates the token with the id and stores it internally using the [`Storage`](https://miroapp.github.io/api-clients/interfaces/index.Storage.html).
 
 We also redirect the user back to the entrpoint.
 
@@ -98,9 +98,9 @@ app.get('/auth/miro/callback', async (req, res) => {
 
 #### 7. Render a list of boards to the users that installed the app
 
-Now that we have obtained the access token we can start using the API. To do so, we make a call to the `as` method. This method takes a user id as parameter and will return an instance of the `MiroApi` class. It will automatically initialize it with the access token associated with a given user id.
+Now that we have obtained the access token we can start using the API. To do so, we make a call to the [`as`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method. This method takes a user id as parameter and will return an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) class. It will automatically initialize it with the access token associated with a given user id.
 
-In order to create a list of boards we use `getAllBoards` generator method. For each board we create a list item with the name of the board and a link to it.
+In order to create a list of boards we use [`getAllBoards`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html#getAllBoards) generator method. For each board we create a list item with the name of the board and a link to it.
 
 ```javascript
 // Inside `app.get('/', ...` handler
@@ -121,7 +121,7 @@ res.send()
 
 #### 8. Configure listener
 
-Finally, we need to instruct the server to start listening to requests on port 4000:
+Finally, we need to instruct the server to start listening to requests on port `4000`:
 
 ```javascript
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
