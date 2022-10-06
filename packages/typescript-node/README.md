@@ -79,14 +79,14 @@ For example:
 1. Instantiate the `Miro` object, and use its `as` method to access the `MiroApi` object and its methods.
 2. Use the `getBoard` method of the the `MiroApi` object to access the `Board` object and its methods.
 3. Use the `getCardItem` method of the the `Board` object to access a specific `CardItem` object and its methods.
-4. Use the `getAllTags` method of the the `CardItem` object to access instances of the  `Tag` object that are attached to the card item.
+4. Use the `getAllTags` method of the the `CardItem` object to access instances of the `Tag` object that are attached to the card item.
 5. Finally, the `Tag` object has methods to update and delete the card item's tags, as well as to retrieve all board items that have a specific tag.
 
 ```text
 Miro
  |__ as
      |__ MiroApi
-          |__ getBoard 
+          |__ getBoard
                |__ Board
                     |__ get<item-type>
                     |__ getItem
@@ -119,7 +119,7 @@ for await (const board of api.getAllBoards()) {
 ⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
 
 Most methods take `userId` as their first parameter. For example: [`isAuthorized`](), [`exchangeCodeForAccessToken`](), [`as`]().
-`userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session. 
+`userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session.
 
 The client library requires persistent storage for user access and refresh tokens. \
 The client automatically refreshes access tokens before making API calls, if they are nearing their expiration time.
@@ -141,6 +141,7 @@ export interface Storage {
   write(userId: ExternalUserId, state: State): Awaitable<void>
 }
 ```
+
 ## OAuth authorization
 
 `Miro` handles authorization and per-user access token management. \

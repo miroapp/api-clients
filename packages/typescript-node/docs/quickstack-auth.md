@@ -8,11 +8,11 @@ At the end of this guide, you will have a simple application that will prompt us
 
 - Node.js v10+ (check with `node --version`)
 - Prepare App data needed for the client:
-  1) [Create a Developer team in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-a-developer-team-in-miro)
-  2) [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-create-your-app-in-miro)
-  3) [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-3-configure-your-app-in-miro)
-  4) Add `http://127.0.0.1:4000/auth/miro/callback` to the Apps redirect URI list
-  4) Save the values of `Client ID` and `Client secret` to use later
+  1. [Create a Developer team in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-a-developer-team-in-miro)
+  2. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-create-your-app-in-miro)
+  3. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-3-configure-your-app-in-miro)
+  4. Add `http://127.0.0.1:4000/auth/miro/callback` to the Apps redirect URI list
+  5. Save the values of `Client ID` and `Client secret` to use later
 
 #### 1: Create a folder and navigate into it
 
@@ -55,11 +55,13 @@ After that we also initialize our express server and configure the [express-sess
 
 ```javascript
 const app = express()
-app.use(session({
-  secret: 'CHANGE_THIS_TO_A_RANDOM_STRING',
-  resave: false,
-  saveUninitialized: true
-}))
+app.use(
+  session({
+    secret: 'CHANGE_THIS_TO_A_RANDOM_STRING',
+    resave: false,
+    saveUninitialized: true,
+  }),
+)
 ```
 
 Note: To keep the guide simple we use session ids to identify users. In a production setup we recommend using real user ids that are separate from session ids. This way users will not have to re-install the App that they already installed in a different session.
@@ -70,8 +72,7 @@ In this step we setup a request handler for our Apps entrypoint. First thing we 
 
 ```javascript
 app.get('/', async (req, res) => {
-
-  if (!await miro.isAuthorized(req.session.id)) {
+  if (!(await miro.isAuthorized(req.session.id))) {
     res.redirect(miro.getAuthUrl())
     return
   }
@@ -154,14 +155,16 @@ const session = require('express-session')
 const miro = new Miro()
 
 const app = express()
-app.use(session({
-  secret: 'CHANGE_THIS_TO_A_RANDOM_STRING',
-  resave: false,
-  saveUninitialized: true
-}))
+app.use(
+  session({
+    secret: 'CHANGE_THIS_TO_A_RANDOM_STRING',
+    resave: false,
+    saveUninitialized: true,
+  }),
+)
 
 app.get('/', async (req, res) => {
-  if (!await miro.isAuthorized(req.session.id)) {
+  if (!(await miro.isAuthorized(req.session.id))) {
     res.redirect(miro.getAuthUrl())
     return
   }
@@ -186,4 +189,3 @@ app.get('/auth/miro/callback', async (req, res) => {
 
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 ```
-
