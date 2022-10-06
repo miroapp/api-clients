@@ -15,8 +15,7 @@
     "clean": "rm -Rf node_modules/ *.js",
     "build": "tsc",
     "prebuild:docs": "tsc --jsx react docs-theme/index.tsx --jsxFactory JSX.createElement --jsxFragmentFactory JSX.Fragment --target es2016 --module commonjs",
-    "build:docs": "typedoc && yarn move-docs-to-dist",
-    "move-docs-to-dist": "cp -r 'docs-out' 'dist'",
+    "build:docs": "typedoc",
     "test": "jest"
   },
   "author": "Miro",
