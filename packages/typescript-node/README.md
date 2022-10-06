@@ -62,8 +62,8 @@ import {MiroApi} from './index.ts'
 const api = new MiroApi('<access_token>')
 
 // Use the 'MiroApi' instance to send a request to the Miro REST API,
-// and to get all the boards that can be accessed with the current access token.
-const boards = await api.getBoards()
+// and to create a new board in the team where the App is installed
+const boards = await api.createBoard()
 ```
 
 ## Model hierarchy
@@ -124,7 +124,7 @@ Most methods take `userId` as their first parameter. For example: [`isAuthorized
 The client library requires persistent storage for user access and refresh tokens. \
 The client automatically refreshes access tokens before making API calls, if they are nearing their expiration time.
 
-By default, persistent storage uses the file system through [Node.js `fs`](https://nodejs.org/api/fs.html) to store state information. \
+By default, persistent storage uses an in memory dictionary to store state information. \
 Pass `storage` to the `Miro` constructor as an option:
 
 ```typescript
@@ -133,12 +133,12 @@ const miro = new Miro({
 })
 ```
 
-To support the client library storage functionality in your app, implement the following [read and write](https://miroapp.github.io/api-clients/interfaces/index.Storage.html) interface:
+To support the client library storage functionality in your app, implement the following [get and set](https://miroapp.github.io/api-clients/interfaces/index.Storage.html) interface:
 
 ```typescript
 export interface Storage {
-  read(userId: ExternalUserId): Promise<State | undefined>
-  write(userId: ExternalUserId, state: State): Awaitable<void>
+  get(userId: ExternalUserId): Promise<State | undefined>
+  set(userId: ExternalUserId, state: State): Awaitable<void>
 }
 ```
 
