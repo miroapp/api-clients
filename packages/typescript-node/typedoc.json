@@ -2,13 +2,14 @@
   "$schema": "https://typedoc.org/schema.json",
   "entryPoints": ["index.ts", "api/apis.ts"],
   "gitRevision": "main",
-  "out": "docs",
   "markedOptions": {
     "baseUrl": "https://miroapp.github.io/api-clients/typescript-node/"
   },
   "exclude": ["__tests__", "test", ".turbo", "../../node_modules/"],
-  "externalPattern": ["../../node_modules/**/*", "node_modules/**/*"],
   "excludeExternals": true,
+  "includes": "docs/includes",
+  "out": "docs-out",
+  "externalPattern": ["../../node_modules/**/*", "node_modules/**/*"],
   "plugin": ["typedoc-plugin-missing-exports", "./docs-theme/index.js"],
   "theme": "miro",
   "externalSymbolLinkMappings": {
