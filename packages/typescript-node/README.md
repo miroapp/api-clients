@@ -73,14 +73,28 @@ const boards = await api.getBoards()
 - `Board` has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/highlevel.Item.html) models.
 - `Items` includes methods to create connectors, as well as attach and detach tags, for the board items that support these features.
 
+It's possible to access the methods, properties, and objects by traversing the hierarchy. \
+For example:
+
+1. Instantiate the `Miro` object, and use its `as` method to access the `MiroApi` object and its methods.
+2. Use the `getBoard` method of the the `MiroApi` object to access the `Board` object and its methods.
+3. Use the `getCardItem` method of the the `Board` object to access a specific `CardItem` object and its methods.
+4. Use the `getAllTags` method of the the `CardItem` object to access instances of the  `Tag` object that are attached to the card item.
+5. Finally, the Tag object has methods to update and delete the card item's tags, as well as to retrieve all board items that have a specific tag.
+
 ```text
 Miro
-   |__ .as
-        |__ MiroApi
-                  |__ Board
-                          |__ Board items
-                                        |__ Tags
-                                        |__ Connectors
+ |__ as
+     |__ MiroApi
+          |__ getBoard 
+               |__ Board
+                    |__ get<item-type>
+                    |__ getItem
+                         |__ Board items
+                              |__ getAllTags
+                              |    |__ Tags
+                              |__ connectTo
+                                   |__ Connectors
 ```
 
 ## Pagination
@@ -100,6 +114,33 @@ for await (const board of api.getAllBoards()) {
 }
 ```
 
+## Storage
+
+⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
+
+Most methods take `userId` as their first parameter. For example: [`isAuthorized`](), [`exchangeCodeForAccessToken`](), [`as`]().
+`userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session. 
+
+The client library requires persistent storage for user access and refresh tokens. \
+The client automatically refreshes access tokens before making API calls, if they are nearing their expiration time.
+
+By default, persistent storage uses the file system through [Node.js `fs`](https://nodejs.org/api/fs.html) to store state information. \
+Pass `storage` to the `Miro` constructor as an option:
+
+```typescript
+const miro = new Miro({
+  storage: new CustomMiroStorage(),
+})
+```
+
+To support the client library storage functionality in your app, implement the following [read and write](https://miroapp.github.io/api-clients/interfaces/index.Storage.html) interface:
+
+```typescript
+export interface Storage {
+  read(userId: ExternalUserId): Promise<State | undefined>
+  write(userId: ExternalUserId, state: State): Awaitable<void>
+}
+```
 ## OAuth authorization
 
 `Miro` handles authorization and per-user access token management. \
@@ -129,34 +170,6 @@ The `Miro` client features all the necessary [methods](https://miroapp.github.io
 4. Make API calls on behalf of a specific user: [`await miro.as(someUserId).getBoard(boardId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
 
 For more information about the available options related to authorization, see the [`Opts` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index.Opts.html).
-
-## Storage
-
-⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
-
-Most methods take `userId` as their first parameter. For example: [`isAuthorized`](), [`exchangeCodeForAccessToken`](), [`as`]().
-`userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session.
-
-The client library requires persistent storage for user access and refresh tokens. \
-The client automatically refreshes access tokens before making API calls, if they are nearing their expiration time.
-
-By default, persistent storage uses the file system through [Node.js `fs`](https://nodejs.org/api/fs.html) to store state information. \
-Pass `storage` to the `Miro` constructor as an option:
-
-```typescript
-const miro = new Miro({
-  storage: new CustomMiroStorage(),
-})
-```
-
-To support the client library storage functionality in your app, implement the following [read and write](https://miroapp.github.io/api-clients/interfaces/index.Storage.html) interface:
-
-```typescript
-export interface Storage {
-  read(userId: ExternalUserId): Promise<State | undefined>
-  write(userId: ExternalUserId, state: State): Awaitable<void>
-}
-```
 
 ## Example
 
