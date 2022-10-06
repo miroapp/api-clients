@@ -45,3 +45,11 @@ await updateDoc(
   categoryId,
   'packages/typescript-node/docs/quickstart-auth.md'
 )
+
+
+await updateDoc(
+  'storage-implementation',
+  'Storage implementation',
+  categoryId,
+  'packages/typescript-node/docs/implementing-storage.md'
+)
