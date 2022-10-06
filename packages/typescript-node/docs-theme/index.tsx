@@ -46,6 +46,11 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
             {title: 'Organization', url: 'classes/index._internal_.Organization-1.html'},
           ],
         },
+        {
+          title: 'Options',
+          url: 'classes/index.Options.html',
+        },
+        { title: 'Storage' },
       ]
 
       const Navigation = ({items}: {items: Item[]}) => {

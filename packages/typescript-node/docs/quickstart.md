@@ -40,8 +40,9 @@ const {MiroApi} = require('@mirohq/miro-node')
 const api = new MiroApi('YOUR_ACCESS_TOKEN')
 
 const app = (async function () {
-  const boards = await api.getBoards()
-  console.log(boards)
+  for await (const board of await api.getAllBoards()) {
+    console.log(board)
+  }
 })()
 ```
 
@@ -53,32 +54,29 @@ Replace `YOUR_ACCESS_TOKEN` with the token you got the the Miro settings page.
 node index.js
 ```
 
-You will see a log with an array of all the [boards](https://miroapp.github.io/api-clients/classes/highlevel_Board.Board.html) you have access to in the selected team.
+You will see a log with all the [boards](https://miroapp.github.io/api-clients/classes/index._internal_.Board.html) you have access to in the selected team.
 
 ```ts
-[
-  Board {
-    _api: MiroApi,
-    _headParams: [ 'uXjVPZcwwIY=' ],
-    createdAt: 2022-09-08T14:15:13.000Z,
-    createdBy: UserInfoShort,
-    currentUserMembership: BoardMember,
-    description: '',
-    id: 'uXjVPZcwwIY=',
-    modifiedAt: 2022-09-22T13:21:41.000Z,
-    modifiedBy: UserInfoShort,
-    name: 'Node client test board',
-    owner: UserInfoShort,
-    picture: undefined,
-    policy: BoardPolicy,
-    team: Team,
-    type: 'board',
-    viewLink: 'https://miro.com/app/board/uXjVPZcwwIY='
-  },
-  ...etc
-]
+Board {
+  _api: MiroApi,
+  createdAt: 2022-09-08T14:15:13.000Z,
+  createdBy: UserInfoShort,
+  currentUserMembership: BoardMember,
+  description: '',
+  id: 'uXjVPZcwwIY=',
+  modifiedAt: 2022-09-22T13:21:41.000Z,
+  modifiedBy: UserInfoShort,
+  name: 'Node client test board',
+  owner: UserInfoShort,
+  picture: undefined,
+  policy: BoardPolicy,
+  team: Team,
+  type: 'board',
+  viewLink: 'https://miro.com/app/board/uXjVPZcwwIY='
+}
+...etc
 ```
 
-You can now use the data from `boards` as needed, see the [docs for `Board`](https://miroapp.github.io/api-clients/classes/highlevel_Board.Board.html#getAllItems) to see the methods that are available. I.e. there is a method to get all items on a board `board.getAllItems()`.
+You can now use the data from each `board` as needed. Visit the [docs for `Board`](https://miroapp.github.io/api-clients/classes/index._internal_.Board.html) to see the methods that are available. I.e. there is a method to get all items on a board [`board.getAllItems()`](https://miroapp.github.io/api-clients/classes/index._internal_.Board.html#getAllItems).
 
-Now start integrating your data into Miro, add some [stickies](https://miroapp.github.io/api-clients/classes/highlevel.StickyNoteItem.html), [add app cards](https://miroapp.github.io/api-clients/classes/highlevel.AppCardItem.html) or whatever else you want to do. For more inspiration, see [the example app](https://github.com/miroapp/app-examples/tree/main/examples/rest-stickies-csv) in the example repo.
+Now start integrating your data into Miro, add some [stickies](https://miroapp.github.io/api-clients/classes/index._internal_.StickyNoteItem.html), [add app cards](https://miroapp.github.io/api-clients/classes/index._internal_.AppCardItem.html) or whatever else you want to do. For more inspiration, see [the example app](https://github.com/miroapp/app-examples/tree/main/examples/rest-stickies-csv) in the example repo.
