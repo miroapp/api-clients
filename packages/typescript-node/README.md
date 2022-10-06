@@ -80,7 +80,7 @@ For example:
 2. Use the `getBoard` method of the the `MiroApi` object to access the `Board` object and its methods.
 3. Use the `getCardItem` method of the the `Board` object to access a specific `CardItem` object and its methods.
 4. Use the `getAllTags` method of the the `CardItem` object to access instances of the  `Tag` object that are attached to the card item.
-5. Finally, the Tag object has methods to update and delete the card item's tags, as well as to retrieve all board items that have a specific tag.
+5. Finally, the `Tag` object has methods to update and delete the card item's tags, as well as to retrieve all board items that have a specific tag.
 
 ```text
 Miro
