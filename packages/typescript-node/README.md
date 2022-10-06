@@ -135,7 +135,7 @@ For more information about the available options related to authorization, see t
 ⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
 
 Most methods take `userId` as their first parameter. For example: [`isAuthorized`](), [`exchangeCodeForAccessToken`](), [`as`]().
-`userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session. 
+`userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session.
 
 The client library requires persistent storage for user access and refresh tokens. \
 The client automatically refreshes access tokens before making API calls, if they are nearing their expiration time.
