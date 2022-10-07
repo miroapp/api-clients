@@ -13,13 +13,13 @@ At the end of the guide, you'll have built a simple app that prompts users for i
 ## Prerequisites
 
 - Node.js v10+ (check with `node --version`)
+- A Miro.com account
 - Prepare App data needed for the client:
   1. [Create a Developer team in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-a-developer-team-in-miro)
   2. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-create-your-app-in-miro)
   3. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-3-configure-your-app-in-miro)
   4. Add `http://127.0.0.1:4000/auth/miro/callback` to the Apps redirect URI list
   5. Save the values of `Client ID` and `Client secret` to use later
-
 
 ## Build the app
 ### 1: Create a folder and navigate into it
