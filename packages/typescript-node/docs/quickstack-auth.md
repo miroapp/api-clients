@@ -1,10 +1,16 @@
-# Miro Node.js client quickstart guide (Using OAuth 2.0 and Express framework)
+# Miro Node.js client quick start guide with OAuth 2.0 and Express
 
-In this guide, you will learn how to get started with the Miro REST API by using OAuth 2.0 authorization code flow. We will cover setting up an Express HTTP server that uses Miro client library to implement authorization and token management for users.
+Build a simple app based on the Miro Node.js client library, the OAuth 2.0 code grant flow, and the Express JavaScript web framework.
 
-At the end of this guide, you will have a simple application that will prompt users for installation and print a list of all boards the user has access to.
+## Goal
 
-### Prerequisites
+This quick start guide helps you familiarize yourself with the [Miro REST API 2.0](https://developers.miro.com/reference/api-reference) and the [OAuth 2.0 authorization code grant flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/) by building a simple app that uses the Miro Node.js client library.
+
+The guide also walks you through setting up a web server based on the [Express](https://expressjs.com/) framework. Express uses the Miro Node.js client library to implement authorization and token management for users.
+
+At the end of the guide, you'll have built a simple app that prompts users for installation )this triggers the OAuth authorization flow), and then prints a list of all the boards the current user has access to.
+
+## Prerequisites
 
 - Node.js v10+ (check with `node --version`)
 - Prepare App data needed for the client:
@@ -14,26 +20,28 @@ At the end of this guide, you will have a simple application that will prompt us
   4. Add `http://127.0.0.1:4000/auth/miro/callback` to the Apps redirect URI list
   5. Save the values of `Client ID` and `Client secret` to use later
 
-#### 1: Create a folder and navigate into it
+
+## Build the app
+### 1: Create a folder and navigate into it
 
 ```bash
 mkdir my-miro-app
 cd my-miro-app
 ```
 
-#### 2: Initialize a new node project
+### 2: Initialize a new node project
 
 ```bash
 npm init -y
 ```
 
-#### 3: Install the client and Express dependencies
+### 3: Install the client and Express dependencies
 
 ```bash
 npm install @mirohq/miro-node express express-session
 ```
 
-#### 4: Import the dependencides and initial setup
+### 4: Import the dependencides and initial setup
 
 We start by creating `index.js` file. To work with the Miro client library and Express framework we need to import and initialize the libraries. We will also import crypto library to keep
 
@@ -66,7 +74,7 @@ app.use(
 
 Note: To keep the guide simple we use session ids to identify users. In a production setup we recommend using real user ids that are separate from session ids. This way users will not have to re-install the App that they already installed in a different session.
 
-#### 5: Redirect new users to authorization page
+### 5: Redirect new users to authorization page
 
 In this step we setup a request handler for our Apps entrypoint. First thing we want to do is to check if the user has installed and authorized the App. We can do this by using `isAuthorized` method. If they haven't installed the App yet then we will redirect the user to Miro's Authorization URL that is generated with `getAuthUrl` method.
 
@@ -81,7 +89,7 @@ app.get('/', async (req, res) => {
 })
 ```
 
-#### 6. Setup callback route
+### 6. Setup callback route
 
 After a user installs and authorizes our App, they will be redirected back to the redirect URL (`MIRO_REDIRECT_URL`).
 
@@ -96,7 +104,7 @@ app.get('/auth/miro/callback', async (req, res) => {
 })
 ```
 
-#### 7. Render a list of boards to the users that installed the app
+### 7. Render a list of boards to the users that installed the app
 
 Now that we have obtained the access token we can start using the API. To do so, we make a call to the `as` method. This method takes a user id as parameter and will return an instance of the `MiroApi` class. It will automatically initialize it with the access token associated with a given user id.
 
@@ -119,7 +127,7 @@ res.write('</ul>')
 res.send()
 ```
 
-#### 8. Configure listener
+### 8. Configure listener
 
 Finally, we need to instruct the server to start listening to requests on port 4000:
 
@@ -127,7 +135,7 @@ Finally, we need to instruct the server to start listening to requests on port 4
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 ```
 
-#### 9. Running the code
+### 9. Running the code
 
 To run the code we will use the command line. As mentioned in step 4, we need to configure environment variables with our App metadata:
 
@@ -145,7 +153,7 @@ node index.js
 
 We can now test the App by opening http://127.0.0.1:4000 in the browser.
 
-### Complete example
+## Complete example
 
 ```javascript
 const express = require('express')
@@ -189,3 +197,8 @@ app.get('/auth/miro/callback', async (req, res) => {
 
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 ```
+
+## See also
+
+- []()
+- []()
