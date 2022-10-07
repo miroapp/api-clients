@@ -1,7 +1,7 @@
 import assert from 'assert'
 import fetch from 'node-fetch'
 import {HttpError, Logger, MiroApi as MiroLowlevelApi} from './api'
-import { InMemoryStorage, Storage } from './storage'
+import {InMemoryStorage, Storage} from './storage'
 
 const defaultBasePath = 'https://api.miro.com'
 

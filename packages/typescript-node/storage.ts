@@ -1,4 +1,4 @@
-import { ExternalUserId } from './index'
+import {ExternalUserId} from './index'
 
 export type Awaitable<T> = Promise<T> | T
 
@@ -15,7 +15,7 @@ export interface Storage {
 }
 
 export class InMemoryStorage implements Storage {
-  storage: Record<string, State|undefined>
+  storage: Record<string, State | undefined>
 
   constructor() {
     this.storage = {}
@@ -25,8 +25,7 @@ export class InMemoryStorage implements Storage {
     return this.storage[userId]
   }
 
-  async set(userId: ExternalUserId, state: State|undefined) {
+  async set(userId: ExternalUserId, state: State | undefined) {
     this.storage[userId] = state
   }
 }
-

@@ -13,7 +13,6 @@ In this example we implement a storage that is using Redis as a backend. We use 
 const redis = require('redis')
 
 class RedisStorage {
-
   // This method will initiate a connection to redis
   // On subsequent calls it will return the same redis connection
   async _getClient() {
@@ -51,7 +50,7 @@ This class can then be used in the Miro constructor by passing it as a parameter
 
 ```javascript
 const miro = new Miro({
-  storage: new RedisStorage()
+  storage: new RedisStorage(),
 })
 ```
 
@@ -63,13 +62,10 @@ When using express framework with the session middleware, we can reuse the sessi
 // Setup session middlware before: app.use(session({...}))
 
 app.use((req, res, next) => {
-
   // Create a separate Miro instance for each request
   req.miro = new Miro({
-
     // Define storage implementation inline
     storage: {
-
       // Load Miro state from the session object (if any)
       get(_userId) {
         return req.session.state
@@ -78,8 +74,8 @@ app.use((req, res, next) => {
       // Store Miro state in the session object
       set(_userId, state) {
         req.session.state = state
-      }
-    }
+      },
+    },
   })
 
   next()
