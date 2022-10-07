@@ -47,10 +47,13 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
           ],
         },
         {
-          title: 'Options',
-          url: 'classes/index.Options.html',
+          title: 'MiroOptions',
+          url: 'classes/index.MiroOptions.html',
         },
-        {title: 'Storage'},
+        {
+          title: 'Storage',
+          url: 'classes/index._internal_.Storage.html',
+        },
       ]
 
       const Navigation = ({items}: {items: Item[]}) => {
