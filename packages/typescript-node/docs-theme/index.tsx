@@ -50,7 +50,7 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
           title: 'Options',
           url: 'classes/index.Options.html',
         },
-        { title: 'Storage' },
+        {title: 'Storage'},
       ]
 
       const Navigation = ({items}: {items: Item[]}) => {
