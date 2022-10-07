@@ -1,6 +1,6 @@
 # Miro Node.js client quickstart guide (Using OAuth 2.0 and Express framework)
 
-In this guide, you will learn how to get started with the Miro REST API by using OAuth 2.0 authorization code flow. We will cover setting up an HTTP server using [Express](expressjs.com/)  that uses Miro client library to implement authorization and token management for users.
+In this guide, you will learn how to get started with the Miro REST API by using OAuth 2.0 authorization code flow. We will cover setting up an HTTP server using [Express](expressjs.com/) that uses Miro client library to implement authorization and token management for users.
 
 At the end of this guide, you will have a simple application that will prompt users for installation and print a list of all boards the user has access to.
 
