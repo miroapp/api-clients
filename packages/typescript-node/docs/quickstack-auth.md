@@ -146,19 +146,22 @@ app.get('/auth/miro/callback', async (req, res) => {
 })
 ```
 
-### Step 7: render a list of boards to the users that installed the app
+### Step 7: render a list of boards
 
-Now that we have obtained the access token we can start using the API. To do so, we make a call to the `as` method. This method takes a user id as parameter and will return an instance of the `MiroApi` class. It will automatically initialize it with the access token associated with a given user id.
+After completing the OAuth 2.0 authorization flow and obtaining an access token, the app can send requests to the API. \
+The first call invokes the [`as`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method. The `as` method takes a user ID as an argument, and it returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) class. \
+The method also automatically initializes `MiroApi` with the access token associated with the specified user ID.
 
-render a list of boards to the users that installed the app
+The `MiroApi` instance enables retrieving board information, and the [`Board`](https://miroapp.github.io/api-clients/classes/index._internal_.Board.html) class.
 
-In order to create a list of boards we use `getAllBoards` generator method. For each board we create a list item with the name of the board and a link to it.
+Use the [`getAllBoards`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html#getAllBoards) generator method to fetch a list of boards that the team the app was installed to can access. \
+Then, render each entry about a retrieved board as a list item with the name of the board, and a link to it.
 
 ```javascript
-// Inside `app.get('/', ...` handler
+// Inside the `app.get('/', ...` handler
 
 res.contentType('html')
-res.write('List of boards in the team:')
+res.write('List of boards available to the team:')
 res.write('<ul>')
 
 const api = miro.as(req.session.id)
@@ -171,7 +174,7 @@ res.write('</ul>')
 res.send()
 ```
 
-### Step 8. Configure listener
+### Step 8: configure a listener
 
 Finally, we need to instruct the server to start listening to requests on port 4000:
 
