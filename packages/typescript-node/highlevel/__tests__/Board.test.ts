@@ -1,6 +1,6 @@
 import {MiroApi} from '../../api'
 import {Board} from '../index'
-import {AppCardItem} from '../AppCardItem'
+import {BaseAppCardItem} from '../AppCardItem'
 import {jest} from '@jest/globals'
 
 describe('Board', () => {
@@ -36,7 +36,7 @@ describe('Board', () => {
       expect(getSpecificItemSpy).toHaveBeenCalledTimes(1)
       expect(getSpecificItemSpy).toHaveBeenCalledWith(boardId, itemId)
 
-      expect(responseItem).toBeInstanceOf(AppCardItem)
+      expect(responseItem).toBeInstanceOf(BaseAppCardItem)
       expect(responseItem.type).toEqual(type)
     })
 

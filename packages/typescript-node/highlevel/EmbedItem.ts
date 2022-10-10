@@ -1,7 +1,7 @@
-import {EmbedItem as BaseEmbedItem} from '../model/embedItem'
+import {EmbedItem} from '../model/embedItem'
 import {ConnectableItem, ConnectTo} from './Item'
 
-export abstract class EmbedItem extends BaseEmbedItem implements ConnectTo {
+export abstract class BaseEmbedItem extends EmbedItem implements ConnectTo {
   type: 'embed' = 'embed'
 
   /** @group Methods */

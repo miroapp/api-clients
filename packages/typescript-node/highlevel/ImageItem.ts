@@ -1,7 +1,7 @@
-import {ImageItem as BaseImageItem} from '../model/imageItem'
+import {ImageItem} from '../model/imageItem'
 import {ConnectableItem, ConnectTo} from './Item'
 
-export abstract class ImageItem extends BaseImageItem implements ConnectTo {
+export abstract class BaseImageItem extends ImageItem implements ConnectTo {
   type: 'image' = 'image'
 
   /** @group Methods */

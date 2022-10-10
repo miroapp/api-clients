@@ -6,8 +6,7 @@
   "license": "MIT",
   "scripts": {
     "test:generator": "test/generator_test.sh",
-    "build": "./scripts/generate-node-client.sh",
-    "generate": "yarn build"
+    "generate": "./scripts/generate-node-client.sh"
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.1"
