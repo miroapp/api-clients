@@ -6,10 +6,9 @@ We will show few examples of custom `Storage` implementations in this guide.
 
 ### Redis backend example
 
-In this example we implement a storage that is using Redis as a backend. We use [redis](https://www.npmjs.com/package/redis) node library to connect to a Redis instance
+In this example we implement a storage that is using Redis as a backend. We use [the redis node library](https://www.npmjs.com/package/redis) to connect to a Redis instance
 
 ```javascript
-//
 const redis = require('redis')
 
 class RedisStorage {
@@ -56,7 +55,7 @@ const miro = new Miro({
 
 ### Using express-session as storage
 
-When using express framework with the session middleware, we can reuse the session storage for storing Miro state.
+When using [express framework](https://expressjs.com/) with the [session middleware](https://www.npmjs.com/package/express-session), we can reuse the session storage for storing Miro state.
 
 ```javascript
 // Setup session middlware before: app.use(session({...}))
