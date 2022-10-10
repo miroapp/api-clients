@@ -229,7 +229,7 @@ app.get('/', async (req, res) => {
   }
 
   res.contentType('html')
-  res.write('List of boards in the team:')
+  res.write('List of boards available to the team:')
   res.write('<ul>')
 
   const api = miro.as(req.session.id)
