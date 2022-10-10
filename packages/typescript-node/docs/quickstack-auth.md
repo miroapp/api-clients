@@ -96,7 +96,7 @@ After initializing the Miro Node.js client, proceed to initialize the Express se
 const app = express()
 app.use(
   session({
-    secret: '<randomly-generated-secret-string>',
+    secret: '<RANDOMLY-GENERATED-SECRET-STRING>',
     resave: false,
     saveUninitialized: true,
   }),
@@ -121,7 +121,7 @@ app.get('/', async (req, res) => {
     return
   }
 
-  // TODO: See step 7.
+  // TODO: see step 7.
 })
 ```
 
@@ -174,31 +174,35 @@ res.write('</ul>')
 res.send()
 ```
 
-### Step 8: configure a listener
+### Step 8: listen to server port
 
-Finally, we need to instruct the server to start listening to requests on port 4000:
+The app [is configured](#prerequisites) to use a local server running on port 4000: `http://127.0.0.1:4000`. \
+Configure the web server, so that it can listen to incoming requests on port `4000`:
 
 ```javascript
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 ```
 
-### Step 9. Running the code
+### Step 9: run the code
 
-To run the code we will use the command line. As mentioned in step 4, we need to configure environment variables with our App metadata:
+You built the app. Now it's time to run it. \
+For the sake of simplicity, run it from the command line.
+
+First, configure and export the environment variables with the app metadata (see Step 4):
 
 ```
-export MIRO_CLIENT_ID="Client id from app settings page"
-export MIRO_CLIENT_SECRET="Secret from app settings page"
+export MIRO_CLIENT_ID="<APP-CLIENT-ID>"
+export MIRO_CLIENT_SECRET="<APP-CLIENT-SECRET>"
 export MIRO_REDIRECT_URL="http://127.0.0.1:4000/auth/miro/callback"
 ```
 
-In order to start our App we tell node to execute `index.js` file from the command line:
+Then, execute `index.js` with Node.js to start the app:
 
 ```bash
 node index.js
 ```
 
-We can now test the App by opening http://127.0.0.1:4000 in the browser.
+To verify that the app is running, open http://127.0.0.1:4000 in a web browser.
 
 ## Complete example
 
@@ -212,7 +216,7 @@ const miro = new Miro()
 const app = express()
 app.use(
   session({
-    secret: 'CHANGE_THIS_TO_A_RANDOM_STRING',
+    secret: '<RANDOMLY-GENERATED-SECRET-STRING>',
     resave: false,
     saveUninitialized: true,
   }),
@@ -244,8 +248,3 @@ app.get('/auth/miro/callback', async (req, res) => {
 
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 ```
-
-## See also
-
-- []()
-- []()
