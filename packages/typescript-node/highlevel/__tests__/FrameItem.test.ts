@@ -1,4 +1,4 @@
-import {FrameItem, Item} from '../index'
+import {FrameItem, Item, StickyNoteItem} from '../index'
 import {MiroApi} from '../../api'
 import {jest} from '@jest/globals'
 
@@ -12,8 +12,9 @@ describe('FrameItem', () => {
       const item = {
         boardId,
         id: childId,
-        type: 'frame',
+        type: 'sticky_note',
       } as Item
+
       api.getItemsWithinFrame = jest.fn(async () => ({
         response: {} as any,
         body: {
@@ -57,14 +58,12 @@ describe('FrameItem', () => {
     it('should return the models', async () => {
       const {frameItem, childId} = setup()
 
-      // const {data} = await frameItem.getItems()
-
       const itemIterator = frameItem.getAllItems()
       const item = (await itemIterator.next()).value
 
       expect(item).toBeDefined()
 
-      expect(item).toBeInstanceOf(Item)
+      expect(item).toBeInstanceOf(StickyNoteItem)
       expect(item && item.id).toEqual(childId)
     })
   })
