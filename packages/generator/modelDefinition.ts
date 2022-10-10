@@ -2,7 +2,7 @@ const MODELS = {
   Api: {
     props: [],
     extendedModel: {
-      name: 'Api',
+      name: 'BaseApi',
       path: '../highlevel/Api',
     },
     methods: [
@@ -19,7 +19,7 @@ const MODELS = {
   Organization: {
     props: ['id'],
     extendedModel: {
-      name: 'Organization',
+      name: 'BaseOrganization',
       path: 'Organization',
     },
     methods: [
@@ -54,7 +54,7 @@ const MODELS = {
   Team: {
     props: ['orgId', {name: 'teamId', type: 'number'}],
     extendedModel: {
-      name: 'Team',
+      name: 'BaseTeam',
       path: 'Team',
     },
     methods: [
@@ -140,7 +140,7 @@ const MODELS = {
   Board: {
     props: ['id'],
     extendedModel: {
-      name: 'Board',
+      name: 'BaseBoard',
       path: 'Board',
     },
     methods: [
@@ -195,7 +195,7 @@ const MODELS = {
   Item: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'GenericItem',
+      name: 'BaseItem',
       path: 'Item',
     },
     methods: [
@@ -207,7 +207,7 @@ const MODELS = {
   AppCardItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'AppCardItem',
+      name: 'BaseAppCardItem',
       path: 'AppCardItem',
     },
     methods: [
@@ -227,7 +227,7 @@ const MODELS = {
   CardItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'CardItem',
+      name: 'BaseCardItem',
       path: 'CardItem',
     },
     methods: [
@@ -247,7 +247,7 @@ const MODELS = {
   DocumentItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'DocumentItem',
+      name: 'BaseDocumentItem',
       path: 'DocumentItem',
     },
     methods: [
@@ -259,7 +259,7 @@ const MODELS = {
   EmbedItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'EmbedItem',
+      name: 'BaseEmbedItem',
       path: 'EmbedItem',
     },
     methods: [
@@ -271,7 +271,7 @@ const MODELS = {
   FrameItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'FrameItem',
+      name: 'BaseFrameItem',
       path: 'FrameItem',
     },
     methods: [
@@ -283,7 +283,7 @@ const MODELS = {
   ImageItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'ImageItem',
+      name: 'BaseImageItem',
       path: 'ImageItem',
     },
     methods: [
@@ -295,7 +295,7 @@ const MODELS = {
   ShapeItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'ShapeItem',
+      name: 'BaseShapeItem',
       path: 'ShapeItem',
     },
     methods: [
@@ -307,7 +307,7 @@ const MODELS = {
   StickyNoteItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'StickyNoteItem',
+      name: 'BaseStickyNoteItem',
       path: 'StickyNoteItem',
     },
     methods: [
@@ -327,7 +327,7 @@ const MODELS = {
   TextItem: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'TextItem',
+      name: 'BaseTextItem',
       path: 'TextItem',
     },
     methods: [
@@ -351,7 +351,7 @@ const MODELS = {
   Tag: {
     props: ['boardId', {name: 'id', type: 'number'}],
     extendedModel: {
-      name: 'Tag',
+      name: 'BaseTag',
       path: 'Tag',
     },
     methods: [

@@ -1,10 +1,10 @@
-import {Organization as BaseOrganization} from '../model/organization'
+import {Organization} from '../model/organization'
 import {OrganizationMember, Team} from './index'
 import {MiroApi} from '../api'
 import {GetParameters1} from './helpers'
 
 /** @hidden */
-export abstract class Organization extends BaseOrganization {
+export abstract class BaseOrganization extends Organization {
   abstract _api: MiroApi
 
   async *getAllOrganizationMembers(

@@ -1,11 +1,11 @@
-import {Board as BaseBoard} from '../model/board'
+import {Board} from '../model/board'
 import {BoardMember, Connector, Item, Tag} from './index'
 import {BoardMembersPagedResponse, GenericItem, ConnectorsCursorPaged, GenericItemCursorPaged, MiroApi} from '../api'
 import {WidgetItem} from './Item'
 import {hasMoreData} from './helpers'
 
 /** @hidden */
-export abstract class Board extends BaseBoard {
+export abstract class BaseBoard extends Board {
   abstract _api: MiroApi
 
   /**

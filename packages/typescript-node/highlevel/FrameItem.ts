@@ -1,10 +1,10 @@
-import {FrameItem as ModelFrameItem} from '../model/frameItem'
+import {FrameItem} from '../model/frameItem'
 import {GenericItemCursorPaged, MiroApi} from '../api'
 import {Item} from './index'
 import {WidgetItem} from './Item'
 
 /** @hidden */
-export abstract class FrameItem extends ModelFrameItem {
+export abstract class BaseFrameItem extends FrameItem {
   abstract _api: MiroApi
   abstract id: number
   abstract boardId: string

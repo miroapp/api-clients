@@ -3,7 +3,7 @@ import {MiroApi} from '../api'
 import {hasMoreData} from './helpers'
 
 /** @hidden */
-export abstract class Api {
+export abstract class BaseApi {
   abstract _api: MiroApi
 
   /** {@inheritDoc api/apis!MiroApi.revokeToken} */
