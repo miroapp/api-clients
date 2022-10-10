@@ -1,6 +1,6 @@
 import type {ConnectorCreationData} from '@mirohq/miro-node/model/connectorCreationData'
 import type {ItemConnectionCreationData} from '@mirohq/miro-node/model/itemConnectionCreationData'
-import {GenericItem as BaseGenericItem} from '../model/genericItem'
+import {GenericItem} from '../model/genericItem'
 import {MiroApi} from '../api'
 
 import {
@@ -71,10 +71,10 @@ export abstract class ConnectableItem implements ConnectTo {
   }
 }
 
-export abstract class GenericItem extends BaseGenericItem implements ConnectTo {
-  static fromGenericItem(api: MiroApi, boardId: string, item: BaseGenericItem): WidgetItem {
+export abstract class BaseItem extends GenericItem implements ConnectTo {
+  static fromGenericItem(api: MiroApi, boardId: string, item: GenericItem): WidgetItem {
     interface WidgetItemConstructor {
-      new (api: MiroApi, boardId: string, id: number, item: BaseGenericItem): WidgetItem
+      new (api: MiroApi, boardId: string, id: number, item: GenericItem): WidgetItem
     }
 
     let classToUse: WidgetItemConstructor = Item

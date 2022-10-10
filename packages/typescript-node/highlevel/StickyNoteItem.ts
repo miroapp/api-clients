@@ -1,7 +1,7 @@
-import {StickyNoteItem as BaseStickyNoteItem} from '../model/stickyNoteItem'
+import {StickyNoteItem} from '../model/stickyNoteItem'
 import {ConnectableItem, ConnectTo} from './Item'
 
-export abstract class StickyNoteItem extends BaseStickyNoteItem implements ConnectTo {
+export abstract class BaseStickyNoteItem extends StickyNoteItem implements ConnectTo {
   type: 'sticky_note' = 'sticky_note'
 
   /** @group Methods */

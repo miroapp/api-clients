@@ -1,7 +1,7 @@
-import {DocumentItem as BaseDocumentItem} from '../model/documentItem'
+import {DocumentItem} from '../model/documentItem'
 import {ConnectableItem, ConnectTo} from './Item'
 
-export abstract class DocumentItem extends BaseDocumentItem implements ConnectTo {
+export abstract class BaseDocumentItem extends DocumentItem implements ConnectTo {
   type: 'document' = 'document'
 
   /** @group Methods */
