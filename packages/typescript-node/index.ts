@@ -72,8 +72,8 @@ export class Miro {
    *
    * @see {@link index.Miro.exchangeCodeForAccessToken}
    */
-  async handleAuthorizationCodeRequest(userId: ExternalUserId, ...args: MiddlewareArgs): Promise<void> {
-    const url = `http://${args[0].headers.host}${args[0].url}`
+  async handleAuthorizationCodeRequest(userId: ExternalUserId, req: Request): Promise<void> {
+    const url = `http://${req.headers.host}${req.url}`
     await this.exchangeCodeForAccessToken(userId, url)
   }
 
@@ -166,7 +166,10 @@ interface TokenResponse {
   token_type: 'bearer'
 }
 
-type MiddlewareArgs = [req: {url?: string | undefined; headers: {host?: string | undefined}}, ...rest: any]
+interface Request {
+  url?: string | undefined
+  headers: {host?: string | undefined}
+}
 
 export interface MiroOptions {
   /** App Client id. Defaults to MIRO_CLIENT_ID environment variable */
