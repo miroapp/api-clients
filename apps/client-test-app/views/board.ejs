@@ -12,5 +12,11 @@
             <li>ID: <em><a href="/boards/<%= board.id %>/item/<%= item.id %>"><%= item.id %></a></em> (<%=item.type%>)</li>
         <% }) %>
     </ul>
+
+    <form action="/image/<%= board.id %>" method="post">
+        <ul>
+            <button name="submit" type="submit">Create an image</button>
+        </ul>
+    </form>
 </body>
 </html>
