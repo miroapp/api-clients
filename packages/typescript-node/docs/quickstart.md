@@ -32,7 +32,7 @@ It's a good to already go through the following steps in your Miro account setti
 5. [Install the app](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-4-install-the-app) to generate an access token. This token grants access to the boards associated with the team that the app is installed to. \
    Save the access token: you'll need to use it later.
 
-ℹ️ To integrate Miro into an existing app, start from step 3 below. ℹ️ 
+ℹ️ To integrate Miro into an existing app, start from step 3 below. ℹ️
 
 ## Build the app
 
