@@ -5,7 +5,7 @@ Implement a [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._
 ## Goal
 
 This guide features a couple of examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add persistent storage functionality to the `Miro` class. \
-The default is a simple in-memory implementation. 
+The default is a simple in-memory implementation.
 
 ⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
 
@@ -14,6 +14,7 @@ The default is a simple in-memory implementation.
 This example implements storage using [Redis](https://redis.io/) as a backend. The [Node-Redis library](https://www.npmjs.com/package/redis) enables connecting to a Redis instance.
 
 Create a class to handle:
+
 - Connecting to a Redis instance
 - Fetcing state from Redis
 - Storing state in Redis
