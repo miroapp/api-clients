@@ -8,7 +8,7 @@ This quick start guide helps you familiarize yourself with the [Miro REST API 2.
 
 The guide also walks you through setting up a web server based on the [Express](https://expressjs.com/) framework. Express uses the Miro Node.js client library to implement authorization and token management for users.
 
-At the end of the guide, you'll have built a simple app that prompts users for installation )this triggers the OAuth authorization flow), and then prints a list of all the boards the current user has access to.
+At the end of the guide, you'll have built a simple app that prompts users for installation (this triggers the OAuth authorization flow), and then prints a list of all the boards the current user has access to.
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ npm install @mirohq/miro-node express express-session
 
 Now it's time to take care of the initial setup of your project:
 
-- Create the `index.js` file.
+- Create a `index.js` file.
 - Import the dependencies that the app needs to run.
 - Initialize the imported resources.
 
@@ -202,7 +202,7 @@ Then, execute `index.js` with Node.js to start the app:
 node index.js
 ```
 
-To verify that the app is running, open http://127.0.0.1:4000 in a web browser.
+To verify that the app is running, open [http://127.0.0.1:4000](http://127.0.0.1:4000) in a web browser.
 
 ## Complete example
 
