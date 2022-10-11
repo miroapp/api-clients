@@ -1,6 +1,30 @@
-# Implementing storage
+# Implement storage in the Miro Node.js client
+
+The [`Miro`](https://miroapp.github.io/api-clients/classes/index.Miro.html) class handles authorization and per-user access token management. \
+By default, the client loads the app configuration from the following environment variables:
+
+- `MIRO_CLIENT_ID`
+- `MIRO_CLIENT_SECRET`
+- `MIRO_REDIRECT_URL`
+
+Alternatively, you can pass these values to the constructor when you create a new `Miro` instance:
+
+```typescript
+import {Miro} from '@mirohq/miro-node'
+
+const miro = new Miro({
+  clientId: '<your_app_client_id>>',
+  clientSecret: '<your_app_client_secret>',
+  redirectUrl: 'https://example.com/miro_redirect_url',
+})
+```
+
+The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/interfaces/index.Opts.html) to complete Miro authorization flows, and to make API calls:
+
 
 In order to automatically manage access and refresh token Miro class needs and implementation of a `Storage` interface. The default implementation is a simple in-memory implementation. For production deployments, we recommend using a custom implementation backed by a database.
+
+## Goal
 
 We will show few examples of custom `Storage` implementations in this guide.
 
