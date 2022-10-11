@@ -81,7 +81,7 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
             <div class="tree-content">
               <a class="tsd-index-link" href={this.relativeURL('./index.html')}>
                 {this.icons[ReflectionKind.Module]()}
-                @mirohq/miro-node
+                @mirohq/miro-api
               </a>
               <Navigation items={items} />
             </div>

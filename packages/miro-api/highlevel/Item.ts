@@ -1,5 +1,5 @@
-import type {ConnectorCreationData} from '@mirohq/miro-node/model/connectorCreationData'
-import type {ItemConnectionCreationData} from '@mirohq/miro-node/model/itemConnectionCreationData'
+import type {ConnectorCreationData} from '../model/connectorCreationData'
+import type {ItemConnectionCreationData} from '../model/itemConnectionCreationData'
 import {GenericItem} from '../model/genericItem'
 import {MiroApi} from '../api'
 

@@ -34,7 +34,7 @@ export class Miro {
     assert(this.clientSecret, 'MIRO_CLIENT_SECRET or options.clientSecret is required')
     assert(this.redirectUrl, 'MIRO_REDIRECT_URL or options.redirectUrl is required')
     if (this.storage instanceof InMemoryStorage) {
-      console.warn('miro-node: Default storage is not recommended, consider using a custom storage implementation')
+      console.warn('miro-api: Default storage is not recommended, consider using a custom storage implementation')
     }
   }
 

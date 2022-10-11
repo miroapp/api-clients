@@ -18,7 +18,7 @@ You can use the client to implement backend functionality in your Miro app, such
 To install the Miro Node.js API client and its dependencies, run the following command in your project root directory:
 
 ```bash
-npm install @miro/miro-node
+npm install @miro/miro-api
 ```
 
 ## Import the clients
@@ -37,7 +37,7 @@ To start using the high-level `Miro` client, import it, and then create a new in
 
 ```typescript
 // Import the 'Miro' object
-import {Miro} from "@mirohq/miro-node"
+import {Miro} from "@mirohq/miro-api"
 
 // Create a new instance of the Miro object
 const miro = new Miro()
@@ -154,7 +154,7 @@ By default, the client loads the app configuration from the following environmen
 Alternatively, you can pass these values to the constructor when you create a new `Miro` instance:
 
 ```typescript
-import {Miro} from '@mirohq/miro-node'
+import {Miro} from '@mirohq/miro-api'
 
 const miro = new Miro({
   clientId: '<your_app_client_id>>',
@@ -177,7 +177,7 @@ For more information about the available options related to authorization, see t
 This example implements a simple app using the [Fastify](https://www.fastify.io/) framework:
 
 ```javascript
-import {Miro} from '@mirohq/miro-node'
+import {Miro} from '@mirohq/miro-api'
 import Fastify from 'fastify'
 import fastifyCookie from '@fastify/cookie'
 
