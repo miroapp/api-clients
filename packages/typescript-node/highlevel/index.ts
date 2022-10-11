@@ -929,15 +929,6 @@ export class DocumentItem extends BaseDocumentItem {
   }
 
   /**
-   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-   * @summary Update document item using URL
-   * @param documentUpdateRequest
-   */
-  async update(documentUpdateRequest: Parameters<MiroApi['updateDocumentItemUsingUrl']>[2]): Promise<void> {
-    await this._api.updateDocumentItemUsingUrl(this.boardId.toString(), this.id.toString(), documentUpdateRequest)
-  }
-
-  /**
    * Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Delete document item
    */
@@ -1028,15 +1019,6 @@ export class ImageItem extends BaseImageItem {
     this.boardId = boardId
     this.id = id
     Object.assign(this, props)
-  }
-
-  /**
-   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-   * @summary Update image item using URL
-   * @param imageUpdateRequest
-   */
-  async update(imageUpdateRequest: Parameters<MiroApi['updateImageItemUsingUrl']>[2]): Promise<void> {
-    await this._api.updateImageItemUsingUrl(this.boardId.toString(), this.id.toString(), imageUpdateRequest)
   }
 
   /**

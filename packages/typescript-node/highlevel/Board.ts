@@ -1,8 +1,35 @@
 import {Board} from '../model/board'
-import {BoardMember, Connector, Item, Tag} from './index'
-import {BoardMembersPagedResponse, GenericItem, ConnectorsCursorPaged, GenericItemCursorPaged, MiroApi} from '../api'
+import {BoardMember, Connector, DocumentItem, ImageItem, Item, Tag} from './index'
+import {ImageItem as ImageResponse} from '../model/imageItem'
+import {
+  BoardMembersPagedResponse,
+  GenericItem,
+  ConnectorsCursorPaged,
+  GenericItemCursorPaged,
+  MiroApi,
+  ImageCreateRequest,
+  DocumentCreateRequest,
+  PositionChange,
+  FixedRatioGeometry,
+  Parent,
+} from '../api'
+import FormData from 'form-data'
 import {WidgetItem} from './Item'
 import {hasMoreData} from './helpers'
+
+export interface WidgetCreateWithBufferRequest {
+  data: {
+    title?: string
+    data: Buffer | ReadableStream
+  }
+  position?: PositionChange
+  geometry?: FixedRatioGeometry
+  parent?: Parent
+}
+
+export function isNotUrl(r: Partial<WidgetCreateWithBufferRequest> | {data?: {}}): r is WidgetCreateWithBufferRequest {
+  return !(r.data && 'url' in r.data)
+}
 
 /** @hidden */
 export abstract class BaseBoard extends Board {
@@ -117,5 +144,37 @@ export abstract class BaseBoard extends Board {
     const item: GenericItem = response.body
 
     return Item.fromGenericItem(this._api, this.id, item)
+  }
+
+  /** {@inheritDoc api/apis!MiroApi.createImageItemUsingUrl} */
+  async createImageItem(request: WidgetCreateWithBufferRequest | ImageCreateRequest): Promise<ImageItem> {
+    const result = isNotUrl(request)
+      ? ((await this.fileUploadRequest('images', request)) as ImageResponse)
+      : (await this._api.createImageItemUsingUrl(this.id.toString(), request)).body
+    return new ImageItem(this._api, this.id, result.id, result)
+  }
+
+  /** {@inheritDoc api/apis!MiroApi.createDocumentItemUsingUrl} */
+  async createDocumentItem(request: DocumentCreateRequest | WidgetCreateWithBufferRequest): Promise<DocumentItem> {
+    const result = isNotUrl(request)
+      ? ((await this.fileUploadRequest('documents', request)) as ImageResponse)
+      : (await this._api.createDocumentItemUsingUrl(this.id.toString(), request)).body
+
+    return new DocumentItem(this._api, this.id, result.id, result)
+  }
+
+  /** @private */
+  async fileUploadRequest(type: 'images' | 'documents', request: WidgetCreateWithBufferRequest) {
+    const body = new FormData()
+    body.append('resource', request.data.data, `filename.${type === 'images' ? 'png' : 'pdf'}`)
+    body.append(
+      'data',
+      JSON.stringify({
+        title: request.data.title,
+        geometry: request.geometry,
+        position: request.position,
+      }),
+    )
+    return (await this._api.call('POST', `/v2/boards/${this.id}/${type}`, body)).body
   }
 }
