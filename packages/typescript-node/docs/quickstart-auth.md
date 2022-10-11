@@ -1,74 +1,119 @@
-# Miro Node.js client quickstart guide (Using OAuth 2.0 and Express framework)
+# Miro Node.js client quick start guide with OAuth 2.0 and Express
 
-In this guide, you will learn how to get started with the Miro REST API by using OAuth 2.0 authorization code flow. We will cover setting up an HTTP server using [Express](expressjs.com/) that uses Miro client library to implement authorization and token management for users.
+Build a simple app based on the Miro Node.js client library, the OAuth 2.0 code grant flow, and the [Express](expressjs.com/) JavaScript web framework.
 
-At the end of this guide, you will have a simple application that will prompt users for installation and print a list of all boards the user has access to.
+## Goal
 
-### Prerequisites
+This quick start guide helps you familiarize yourself with the [Miro REST API 2.0](https://developers.miro.com/reference/api-reference) and the [OAuth 2.0 authorization code grant flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/) by building a simple app that uses the Miro Node.js client library.
 
-- Node.js v10+ (check with `node --version`)
-- Prepare App data needed for the client:
-  1. [Create a Developer team in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-a-developer-team-in-miro)
-  2. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-create-your-app-in-miro)
-  3. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-3-configure-your-app-in-miro)
-  4. Add `http://127.0.0.1:4000/auth/miro/callback` to the Apps redirect URI list
-  5. Save the values of `Client ID` and `Client secret` to use later
+The guide also walks you through setting up a web server based on the [Express](https://expressjs.com/) framework. Express uses the Miro Node.js client library to implement authorization and token management for users.
 
-#### 1: Create a folder and navigate into it
+At the end of the guide, you'll have built a simple app that prompts users for installation (this triggers the OAuth authorization flow), and then prints a list of all the boards the current user has access to.
+
+## Prerequisites
+
+Before you begin, make sure that:
+
+- You have a [Miro account](https://miro.com/signup/).
+- You're [signed in to Miro](https://miro.com/login/).
+- Your Miro account has a [Developer team](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-a-developer-team-in-miro).
+- Your development environment includes [Node.js 14.15 or a later version](https://nodejs.org/en/download/). \
+  To check the Node.js version on your system:
+  1. Open a terminal session.
+  2. In the terminal, run `node --version`.
+
+It's a good to already go through the following steps in your Miro account settings:
+
+1. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-create-your-app-in-miro)
+2. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-3-configure-your-app-in-miro)
+3. In your app settings, go to **Redirect URI for OAuth2.0**; in the input field, enter the following URL: `http://127.0.0.1:4000/auth/miro/callback`; click **Add** to add it to the app [redirect URI list](https://www.oauth.com/oauth2-servers/redirect-uris/).
+4. In your app settings, go to **App Credentials**, and save the values assigned to **Client ID** and **Client secret**. \
+   You'll need to use these values later.
+
+## Build the app
+
+After configuring the options in the previous section, you can start building the app.
+
+### Step 1: create the project directory
+
+1. Open a terminal session.
+2. If it doesn't yet exist, create the app root directory, and then go to the newly created directory. \
+   You can replace the `my-miro-app` placeholder with the name that you want to give to your app.
 
 ```bash
 mkdir my-miro-app
 cd my-miro-app
 ```
 
-#### 2: Initialize a new node project
+### Step 2: initialize the project
+
+In the app root directory, initialize a new Node.js project:
 
 ```bash
 npm init -y
 ```
 
-#### 3: Install the client and Express dependencies
+### Step 3: install client and dependencies
+
+Install the Miro Node.js client library, the Express web framework, and its dependencies:
 
 ```bash
 npm install @mirohq/miro-node express express-session
 ```
 
-#### 4: Import the dependencides and initial setup
+### Step 4: import and initialize dependencies
 
-We start by creating an empty `index.js` file. To work with the Miro client library and Express framework we need to import and initialize the libraries. We will also import crypto library to keep
+Now it's time to take care of the initial setup of your project:
+
+- Create a `index.js` file.
+- Import the dependencies that the app needs to run.
+- Initialize the imported resources.
+
+[`index.js`](https://developers.miro.com/docs/app-panels-and-modals#headless) contains the logic that executes after the app is authorized, installed, and loaded on the board. Code in this file runs as long as the board that contains the app is open.
+
+To work with the Miro Node.js client library and the Express web framework, you need to import and initialize the corresponding libraries:
 
 ```javascript
-const express = require('express')
 const {Miro} = require('@mirohq/miro-node')
+const express = require('express')
 const session = require('express-session')
 ```
 
-Initializing Miro client is done by calling the Miro constructor:
+To initialize the Miro Node.js client, call the `Miro` constructor:
 
 ```javascript
 const miro = new Miro()
 ```
 
-This requires `MIRO_CLIENT_ID`, `MIRO_CLIENT_SECRET` and `MIRO_REDIRECT_URL` environment variables to be set when running the app. Alternatively these values can be passed as [parameters](https://miroapp.github.io/api-clients/interfaces/index.Options.html) to the constructor. The values of `MIRO_CLIENT_ID` and `MIRO_CLIENT_SECRET` can be found on the App settings page. `MIRO_REDIRECT_URL` should be the same one that we previously configured: `http://127.0.0.1:4000/auth/miro/callback`.
+By default, the client loads the app configuration from the following environment variables:
 
-After that we also initialize our express server and configure the [express-session](https://www.npmjs.com/package/express-session) middleware for session management. For production deployment make sure to replace the secret with a randomly generated string.
+- `MIRO_CLIENT_ID`: the app's **Client ID**, generated when [creating the app](#prerequisites) in your Miro account settings.
+- `MIRO_CLIENT_SECRET`: the app's **Client secret**, generated when [creating the app](#prerequisites) in your Miro account settings.
+- `MIRO_REDIRECT_URL`: the app's **Redirect URI for OAuth2.0**, specified when [creating the app](#prerequisites) in your Miro account settings. Its value is `http://127.0.0.1:4000/auth/miro/callback`.
+
+After initializing the Miro Node.js client, proceed to initialize the Express server, and to configure the [express-session](https://www.npmjs.com/package/express-session) middleware for session management.
 
 ```javascript
 const app = express()
 app.use(
   session({
-    secret: 'CHANGE_THIS_TO_A_RANDOM_STRING',
+    secret: '<RANDOMLY-GENERATED-SECRET-STRING>',
     resave: false,
     saveUninitialized: true,
   }),
 )
 ```
 
-Note: To keep the guide simple we use session ids to identify users. In a production setup we recommend using real user ids that are separate from session ids. This way users will not have to re-install the App that they already installed in a different session.
+⚠️ In production deployments, replace the secret with a randomly generated string. ⚠️
 
-#### 5: Redirect new users to authorization page
+ℹ️ For the sake of simplicity, the quick start guide identifies users with session IDs. \
+In production deployments, use actual user IDs, separate from session IDs. This avoids repeatedly prompting users to reinstall the app that they already installed in a previous, different session. ℹ️
 
-In this step we setup a request handler for our Apps entrypoint. First thing we want to do is to check if the user has installed and authorized the App. We can do this by using [`isAuthorized`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized) method. If they haven't installed the App yet then we will redirect the user to Miro's Authorization URL that is generated with [`getAuthUrl`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl) method.
+### Step 5: redirect new users to the authorization page
+
+In this step, you set up a request handler for the app's entry point. \
+First, check if the user has already authorized and installed the app. The [`isAuthorized`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized) method helps you do that. \
+If they haven't installed the app, they're redirected to the Miro authorization URL. The [`getAuthUrl`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl) method generates this URL for you.
 
 ```javascript
 app.get('/', async (req, res) => {
@@ -77,17 +122,23 @@ app.get('/', async (req, res) => {
     return
   }
 
-  // TODO: See step 7.
+  // TODO: see step 7.
 })
 ```
 
-#### 6. Setup callback route
+### Step 6: set up a callback route
 
-After a user installs and authorizes our App, they will be redirected back to the redirect URL (`MIRO_REDIRECT_URL`).
+After a user authorizes and installs the app, they're redirected back to the redirect URL assigned to the `MIRO_REDIRECT_URL` environment variable, and specified in the app's **Redirect URI for OAuth2.0** when [creating the app](#prerequisites) in your Miro account settings. \
+The callback URL is `http://127.0.0.1:4000/auth/miro/callback`.
 
-In order to store the access token required for using the API we will use [`exchangeCodeForAccessToken`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken) method. The method requires an id and the value of `code` parameter from the URL. It associates the token with the id and stores it internally using the [`Storage`](https://miroapp.github.io/api-clients/interfaces/index.Storage.html).
+The [`exchangeCodeForAccessToken`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken) method enables exchanging the temporary OAuth code for an access token that the app can use to send API requests. \
+The method requires passing an ID and the value of the `code` URL parameter:
 
-We also redirect the user back to the entrpoint.
+- It exchanges the code for an access token.
+- Then, it associates the token with the ID.
+- Lastly, it stores the token internally using the client [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html).
+
+After authorizing the user, they're redirected back to the entry point (see Step 5).
 
 ```javascript
 app.get('/auth/miro/callback', async (req, res) => {
@@ -96,17 +147,22 @@ app.get('/auth/miro/callback', async (req, res) => {
 })
 ```
 
-#### 7. Render a list of boards to the users that installed the app
+### Step 7: render a list of boards
 
-Now that we have obtained the access token we can start using the API. To do so, we make a call to the [`as`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method. This method takes a user id as parameter and will return an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) class. It will automatically initialize it with the access token associated with a given user id.
+After completing the OAuth 2.0 authorization flow and obtaining an access token, the app can send requests to the API. \
+The first call invokes the [`as`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method. The `as` method takes a user ID as an argument, and it returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) class. \
+The method also automatically initializes `MiroApi` with the access token associated with the specified user ID.
 
-In order to create a list of boards we use [`getAllBoards`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html#getAllBoards) generator method. For each board we create a list item with the name of the board and a link to it.
+The `MiroApi` instance enables retrieving board information, and the [`Board`](https://miroapp.github.io/api-clients/classes/index._internal_.Board.html) class.
+
+Use the [`getAllBoards`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html#getAllBoards) generator method to fetch a list of boards that the team the app was installed to can access. \
+Then, render each entry about a retrieved board as a list item with the name of the board, and a link to it.
 
 ```javascript
-// Inside `app.get('/', ...` handler
+// Inside the `app.get('/', ...` handler
 
 res.contentType('html')
-res.write('List of boards in the team:')
+res.write('List of boards available to the team:')
 res.write('<ul>')
 
 const api = miro.as(req.session.id)
@@ -119,33 +175,37 @@ res.write('</ul>')
 res.send()
 ```
 
-#### 8. Configure listener
+### Step 8: listen to server port
 
-Finally, we need to instruct the server to start listening to requests on port `4000`:
+The app [is configured](#prerequisites) to use a local server running on port 4000: `http://127.0.0.1:4000`. \
+Configure the web server, so that it can listen to incoming requests on port `4000`:
 
 ```javascript
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 ```
 
-#### 9. Running the code
+### Step 9: run the code
 
-To run the code we will use the command line. As mentioned in step 4, we need to configure environment variables with our App metadata:
+You built the app. Now it's time to run it. \
+For the sake of simplicity, run it from the command line.
+
+First, configure and export the environment variables with the app metadata (see Step 4):
 
 ```
-export MIRO_CLIENT_ID="Client id from app settings page"
-export MIRO_CLIENT_SECRET="Secret from app settings page"
+export MIRO_CLIENT_ID="<APP-CLIENT-ID>"
+export MIRO_CLIENT_SECRET="<APP-CLIENT-SECRET>"
 export MIRO_REDIRECT_URL="http://127.0.0.1:4000/auth/miro/callback"
 ```
 
-In order to start our App we tell node to execute `index.js` file from the command line:
+Then, execute `index.js` with Node.js to start the app:
 
 ```bash
 node index.js
 ```
 
-We can now test the App by opening http://127.0.0.1:4000 in the browser.
+To verify that the app is running, open [http://127.0.0.1:4000](http://127.0.0.1:4000) in a web browser.
 
-### Complete example
+## Complete example
 
 ```javascript
 const express = require('express')
@@ -157,7 +217,7 @@ const miro = new Miro()
 const app = express()
 app.use(
   session({
-    secret: 'CHANGE_THIS_TO_A_RANDOM_STRING',
+    secret: '<RANDOMLY-GENERATED-SECRET-STRING>',
     resave: false,
     saveUninitialized: true,
   }),
@@ -170,7 +230,7 @@ app.get('/', async (req, res) => {
   }
 
   res.contentType('html')
-  res.write('List of boards in the team:')
+  res.write('List of boards available to the team:')
   res.write('<ul>')
 
   const api = miro.as(req.session.id)
