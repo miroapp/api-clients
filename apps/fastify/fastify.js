@@ -1,4 +1,4 @@
-import {Miro} from '@mirohq/miro-node'
+import {Miro} from '@mirohq/miro-api'
 import Fastify from 'fastify'
 import fastifyCookie from '@fastify/cookie'
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-target=../typescript-node
+target=../miro-api
 
 rm -rf "$target/"{api,model}
-openapi-generator-cli generate -i 'spec.json' -o "${target}" -g 'typescript-node' -t './typescript-node-template' -p 'npmName=@mirohq/miro-node' -p "npmVersion=$(jq .version < ../../packages/typescript-node/package.json)"
+openapi-generator-cli generate -i 'spec.json' -o "${target}" -g 'typescript-node' -t './typescript-node-template' -p 'npmName=@mirohq/miro-api' -p "npmVersion=$(jq .version < ../../packages/miro-api/package.json)"
 
 ./scripts/remove_duplicate_imports.sh
 

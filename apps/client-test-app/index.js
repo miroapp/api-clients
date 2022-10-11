@@ -3,7 +3,7 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 import express from 'express'
-import {Miro} from '@mirohq/miro-node'
+import {Miro} from '@mirohq/miro-api'
 
 const app = express()
 

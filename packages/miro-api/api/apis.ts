@@ -3798,7 +3798,7 @@ export async function makeJsonRequest(
   const options: RequestInit = {
     method,
     headers: {
-      'User-Agent': `miro-node:${version}`,
+      'User-Agent': `miro-api:${version}`,
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
