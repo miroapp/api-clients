@@ -65,7 +65,7 @@ Alternatively, set appropriate custom values.
 Install the Miro Node.js client library:
 
 ```bash
-npm install @mirohq/miro-node
+npm install @mirohq/miro-api
 ```
 
 ### Step 4: create the project file
@@ -76,7 +76,7 @@ Now it's time to set up your project:
 2. Copy the following code snippet, and paste it to the newly created `index.js` file:
 
 ```javascript
-const {MiroApi} = require('@mirohq/miro-node')
+const {MiroApi} = require('@mirohq/miro-api')
 const api = new MiroApi('<YOUR_APP_ACCESS_TOKEN>')
 
 const app = (async function () {

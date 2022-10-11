@@ -57,7 +57,7 @@ npm init -y
 Install the Miro Node.js client library, the Express web framework, and its dependencies:
 
 ```bash
-npm install @mirohq/miro-node express express-session
+npm install @mirohq/miro-api express express-session
 ```
 
 ### Step 4: import and initialize dependencies
@@ -73,7 +73,7 @@ Now it's time to take care of the initial setup of your project:
 To work with the Miro Node.js client library and the Express web framework, you need to import and initialize the corresponding libraries:
 
 ```javascript
-const {Miro} = require('@mirohq/miro-node')
+const {Miro} = require('@mirohq/miro-api')
 const express = require('express')
 const session = require('express-session')
 ```
@@ -208,7 +208,7 @@ To verify that the app is running, open [http://127.0.0.1:4000](http://127.0.0.1
 
 ```javascript
 const express = require('express')
-const {Miro} = require('@mirohq/miro-node')
+const {Miro} = require('@mirohq/miro-api')
 const session = require('express-session')
 
 const miro = new Miro()

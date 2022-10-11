@@ -2,11 +2,11 @@ import * as ts from 'typescript'
 import path from 'path'
 import {Model, ModelProps} from './modelDefinition'
 
-import {MiroApi} from '../typescript-node/api/apis'
+import {MiroApi} from '../miro-api/api/apis'
 
-const filePath = path.resolve('../typescript-node/api/')
+const filePath = path.resolve('../miro-api/api/')
 const program = ts.createProgram([filePath], {})
-const source = program.getSourceFile('../typescript-node/api/apis.ts')
+const source = program.getSourceFile('../miro-api/api/apis.ts')
 
 const text = source.getFullText(source)
 
