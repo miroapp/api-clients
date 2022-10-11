@@ -64,7 +64,7 @@ npm install @mirohq/miro-node express express-session
 
 Now it's time to take care of the initial setup of your project:
 
-- Create a `index.js` file.
+- Create an `index.js` file.
 - Import the dependencies that the app needs to run.
 - Initialize the imported resources.
 
