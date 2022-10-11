@@ -1,4 +1,5 @@
-import fetch, {Response} from 'node-fetch'
+import fetch, {Response, RequestInit} from 'node-fetch'
+import FormData from 'form-data'
 import {version} from '../package.json'
 
 import {AppCardCreateRequest} from '../model/appCardCreateRequest'
@@ -3763,6 +3764,20 @@ export class MiroApi {
 
     return {response, body}
   }
+
+  async call(method: string, url: string, body?: string | FormData) {
+    const resource = new URL(url, this.basePath)
+    const {bodyAsJson, response} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      method,
+      resource,
+      body,
+
+      this.logger,
+    )
+
+    return {body: bodyAsJson, response}
+  }
 }
 
 export class HttpError extends Error {
@@ -3776,20 +3791,23 @@ export async function makeJsonRequest(
   token: string,
   method: string,
   url: URL,
-  body?: string,
+  body?: string | FormData,
   logger?: (...thing: any) => void,
-  httpTimeout: number = 5000,
+  httpTimeout: number = 15000,
 ) {
-  const options = {
+  const options: RequestInit = {
     method,
     headers: {
-      'Content-Type': 'application/json',
       'User-Agent': `miro-node:${version}`,
       Accept: 'application/json',
       Authorization: `Bearer ${token}`,
     },
     body,
     timeout: httpTimeout,
+  }
+
+  if (typeof body === 'string') {
+    options.headers = {...options.headers, 'Content-Type': 'application/json'}
   }
 
   const hasLogger = typeof logger === 'function'
