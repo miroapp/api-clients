@@ -1,5 +1,17 @@
 import {MiroApi} from '../../api'
-import {Connector, Item} from '../index'
+import {
+  AppCardItem,
+  CardItem,
+  Connector,
+  DocumentItem,
+  EmbedItem,
+  FrameItem,
+  ImageItem,
+  Item,
+  ShapeItem,
+  StickyNoteItem,
+  TextItem,
+} from '../index'
 import {jest} from '@jest/globals'
 
 describe('Item test', () => {
@@ -81,5 +93,31 @@ describe('Item test', () => {
 
       expect(connector).toBeInstanceOf(Connector)
     })
+
+    it.each(['app_card', 'card', 'document', 'embed', 'frame', 'image', 'shape', 'sticky_note', 'text'])(
+      'returns a specific item based on a generic one (%s)',
+      (type) => {
+        const api = new MiroApi('token')
+        const item = Item.fromGenericItem(api, 'boardId', {
+          id: 123,
+          type,
+        })
+
+        const typeMap = {
+          app_card: AppCardItem,
+          card: CardItem,
+          document: DocumentItem,
+          embed: EmbedItem,
+          frame: FrameItem,
+          image: ImageItem,
+          shape: ShapeItem,
+          sticky_note: StickyNoteItem,
+          text: TextItem,
+        }
+
+        expect(item).toBeInstanceOf(typeMap[type])
+        expect(item.type).toBe(type)
+      },
+    )
   })
 })

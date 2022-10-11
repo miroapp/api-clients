@@ -1,6 +1,6 @@
 # Miro Node.js client quick start guide with OAuth 2.0 and Express
 
-Build a simple app based on the Miro Node.js client library, the OAuth 2.0 code grant flow, and the Express JavaScript web framework.
+Build a simple app based on the Miro Node.js client library, the OAuth 2.0 code grant flow, and the [Express](expressjs.com/) JavaScript web framework.
 
 ## Goal
 
@@ -22,7 +22,7 @@ Before you begin, make sure that:
   1. Open a terminal session.
   2. In the terminal, run `node --version`.
 
-It's a good to already go through the following steps in your Miro account settings:  
+It's a good to already go through the following steps in your Miro account settings:
 
 1. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-create-your-app-in-miro)
 2. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-3-configure-your-app-in-miro)
@@ -33,6 +33,7 @@ It's a good to already go through the following steps in your Miro account setti
 ## Build the app
 
 After configuring the options in the previous section, you can start building the app.
+
 ### Step 1: create the project directory
 
 1. Open a terminal session.
@@ -66,7 +67,7 @@ Now it's time to take care of the initial setup of your project:
 
 - Create the `index.js` file.
 - Import the dependencies that the app needs to run.
-- Initialize the imported resources. 
+- Initialize the imported resources.
 
 [`index.js`](https://developers.miro.com/docs/app-panels-and-modals#headless) contains the logic that executes after the app is authorized, installed, and loaded on the board. Code in this file runs as long as the board that contains the app is open.
 

@@ -114,7 +114,10 @@ ${Object.keys(models)
   .map((name) => {
     const extendedModel = models[name].extendedModel
     if (!extendedModel?.path) return ''
-    return `import { ${extendedModel.name} as Base${name}}  from './${extendedModel.path}';`
+    const importName = `Base${name}`
+    return `import { ${extendedModel.name} ${extendedModel.name !== importName ? `as ${importName}` : ''} } from './${
+      extendedModel.path
+    }';`
   })
   .join('\n')}
 `

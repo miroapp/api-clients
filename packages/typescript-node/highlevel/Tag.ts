@@ -1,9 +1,10 @@
 import {MiroApi} from '../api'
 import {hasMoreData} from './helpers'
 import {Item} from './index'
+import {Tag} from '../model/tag'
 
 /** @hidden */
-export abstract class Tag {
+export abstract class BaseTag extends Tag {
   abstract _api: MiroApi
   abstract boardId: string
   abstract id: number

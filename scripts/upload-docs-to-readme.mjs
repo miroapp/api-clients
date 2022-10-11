@@ -31,3 +31,25 @@ await updateDoc(
   categoryId,
   './packages/typescript-node/README.md'
 )
+
+await updateDoc(
+  'get-started-with-nodejs-api-client',
+  'Miro Node.js client quickstart guide (Automation use case)',
+  categoryId,
+  'packages/typescript-node/docs/quickstart.md'
+)
+
+await updateDoc(
+  'authorization-quickstart',
+  'Miro Node.js client quickstart guide (Using OAuth 2.0 and Express framework)',
+  categoryId,
+  'packages/typescript-node/docs/quickstart-auth.md'
+)
+
+
+await updateDoc(
+  'storage-implementation',
+  'Storage implementation',
+  categoryId,
+  'packages/typescript-node/docs/implementing-storage.md'
+)
