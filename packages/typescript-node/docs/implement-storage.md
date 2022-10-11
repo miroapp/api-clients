@@ -1,43 +1,29 @@
 # Implement storage in the Miro Node.js client
 
-The [`Miro`](https://miroapp.github.io/api-clients/classes/index.Miro.html) class handles authorization and per-user access token management. \
-By default, the client loads the app configuration from the following environment variables:
-
-- `MIRO_CLIENT_ID`
-- `MIRO_CLIENT_SECRET`
-- `MIRO_REDIRECT_URL`
-
-Alternatively, you can pass these values to the constructor when you create a new `Miro` instance:
-
-```typescript
-import {Miro} from '@mirohq/miro-node'
-
-const miro = new Miro({
-  clientId: '<your_app_client_id>>',
-  clientSecret: '<your_app_client_secret>',
-  redirectUrl: 'https://example.com/miro_redirect_url',
-})
-```
-
-The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/interfaces/index.Opts.html) to complete Miro authorization flows, and to make API calls:
-
-
-In order to automatically manage access and refresh token Miro class needs and implementation of a `Storage` interface. The default implementation is a simple in-memory implementation. For production deployments, we recommend using a custom implementation backed by a database.
+Implement a [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to enable the [`Miro`](https://miroapp.github.io/api-clients/classes/index.Miro.html) class to automatically manage access and refresh tokens.
 
 ## Goal
 
-We will show few examples of custom `Storage` implementations in this guide.
+This guide features a couple of examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add persistent storage functionality to the `Miro` class. \
+The default is a simple in-memory implementation. 
 
-### Redis backend example
+⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
 
-In this example we implement a storage that is using Redis as a backend. We use [the redis node library](https://www.npmjs.com/package/redis) to connect to a Redis instance
+## Implement storage with a Redis backend
+
+This example implements storage using [Redis](https://redis.io/) as a backend. The [Node-Redis library](https://www.npmjs.com/package/redis) enables connecting to a Redis instance.
+
+Create a class to handle:
+- Connecting to a Redis instance
+- Fetcing state from Redis
+- Storing state in Redis
 
 ```javascript
 const redis = require('redis')
 
 class RedisStorage {
-  // This method will initiate a connection to redis
-  // On subsequent calls it will return the same redis connection
+  // Initiate a connection to the Redis instance.
+  // On subsequent calls, it returns the same Redis connection
   async _getClient() {
     if (!this.redisClient) {
       const client = redis.createClient()
@@ -47,7 +33,7 @@ class RedisStorage {
     return this.redisClient
   }
 
-  // This method will return the state from redis if there is any
+  // Return the state from Redis, if this data exists
   async get(userId) {
     const client = await this._getClient()
     const value = await client.get(userId.toString())
@@ -55,21 +41,21 @@ class RedisStorage {
     return JSON.parse(value)
   }
 
-  // This method will store the state in redis
-  // If state is undefined then the redis key will be deleted
+  // Store the state in Redis.
+  // If the state is undefined, the corresponding Redis key is deleted
   async set(userId, state) {
     const client = await this._getClient()
 
-    // Delete the state if it's undefined
+    // Delete the state, if it's undefined
     if (!state) return await client.del(userId.toString())
 
-    // Store the state in redis
+    // Store the state in Redis
     await client.set(userId.toString(), JSON.stringify(state))
   }
 }
 ```
 
-This class can then be used in the Miro constructor by passing it as a parameter:
+This class can then be used in the `Miro` constructor by passing it as a parameter:
 
 ```javascript
 const miro = new Miro({
@@ -77,7 +63,7 @@ const miro = new Miro({
 })
 ```
 
-### Using express-session as storage
+## Implement storage with `express-session`
 
 When using [express framework](https://expressjs.com/) with the [session middleware](https://www.npmjs.com/package/express-session), we can reuse the session storage for storing Miro state.
 
