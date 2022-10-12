@@ -1,4 +1,4 @@
-name: Publish @mirohq/miro-node package to npm
+name: Publish @mirohq/miro-api package to npm
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
     paths:
       - .github/workflows/publish.yml
-      - packages/typescript-node/package.json
+      - packages/miro-api/package.json
 
 jobs:
   publish:
@@ -18,16 +18,16 @@ jobs:
           node-version: 16
 
       - run: yarn
-        working-directory: packages/typescript-node
+        working-directory: packages/miro-api
 
       - run: yarn build
-        working-directory: packages/typescript-node
+        working-directory: packages/miro-api
 
       # This step will look at version in package.json, compare it to NPM version and
       # if the versions are different it will publish the package
       - id: publish_miro_node
-        name: Publish miro-node package to NPM
+        name: Publish miro-api package to NPM
         uses: JS-DevTools/npm-publish@v1.4.3
         with:
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
-          package: packages/typescript-node/package.json
+          package: packages/miro-api/package.json

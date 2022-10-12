@@ -37,17 +37,17 @@ jobs:
         with:
           node-version: 16
       - run: yarn
-        working-directory: packages/typescript-node
+        working-directory: packages/miro-api
 
       # generate docs
       - run: yarn build:docs
-        working-directory: packages/typescript-node
+        working-directory: packages/miro-api
 
       # upload and deploy docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          path: "packages/typescript-node/docs-out/"
+          path: "packages/miro-api/docs-out/"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
