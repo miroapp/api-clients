@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: 16
 
-    # Speed up subsequent runs with caching
+      # Speed up subsequent runs with caching
       - name: Cache node modules
         uses: actions/cache@v2
         env:
@@ -30,7 +30,6 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
               ${{ runner.os }}-
-          
 
       - name: Install dependencies
         run: yarn
@@ -39,5 +38,4 @@ jobs:
         run: yarn test
 
       - name: test generator
-        run: yarn workspace generator run test:generator
-
+        run: yarn workspace generator run validate_commited

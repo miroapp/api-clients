@@ -163,14 +163,14 @@ const miro = new Miro({
 })
 ```
 
-The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/interfaces/index.Opts.html) to complete Miro authorization flows, and to make API calls:
+The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/interfaces/index.MiroOptions.html) to complete Miro authorization flows, and to make API calls:
 
 1. Check if the current user has authorized the app: [`miro.isAuthorized(someUserId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized)
 2. If the user hasn't yet authorized the app, request the user to authorize the app by redirecting them to: [`miro.getAuthUrl()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl)
 3. As part of the authorization flow, exchange the user temporary authorization code for an access token in the return URL request handler: [`await miro.exchangeCodeForAccessToken(someUserId, req.query.code)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken)
 4. Make API calls on behalf of a specific user: [`await miro.as(someUserId).getBoard(boardId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
 
-For more information about the available options related to authorization, see the [`Opts` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index.Opts.html).
+For more information about the available options related to authorization, see the [`MiroOptions` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index.MiroOptions.html).
 
 ## Example
 
