@@ -14,7 +14,14 @@ export abstract class BaseDocumentItem extends DocumentItem implements ConnectTo
   /** @group Methods */
   connectTo = ConnectableItem.prototype.connectTo
 
-  /** {@inheritDoc api/apis!MiroApi.updateImageItemUsingUrl} */
+  /**
+   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   *
+   * This method can be used to update the document item with a new URL or from a document file.
+   *
+   * @summary Update document item
+   * @param request If request.data.url is set then the URL will be used to create a document otherwise contents of a request.data.data will be uploaded and used to create a document
+   */
   async update(request: DocumentUpdateRequest | WidgetUpdateWithBufferRequest): Promise<void> {
     if (isNotUrl(request)) {
       const body = new FormData()
@@ -30,6 +37,6 @@ export abstract class BaseDocumentItem extends DocumentItem implements ConnectTo
       await this._api.call('PATCH', `/v2/boards/${this.boardId}/documents/${this.id}`, body)
       return
     }
-    await this._api.updateImageItemUsingUrl(this.boardId.toString(), this.id.toString(), request)
+    await this._api.updateDocumentItemUsingUrl(this.boardId.toString(), this.id.toString(), request)
   }
 }

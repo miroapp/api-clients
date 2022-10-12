@@ -36,8 +36,9 @@ export abstract class BaseBoard extends Board {
   abstract _api: MiroApi
 
   /**
-   * Get all items on the board
+   * Retrieves a list of items for a specific board. You can retrieve all items on the board, or a list of specific types of items by specifying URL query parameter values.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * Returns an iterator which will automatically paginate and fetch all available items
+   * @summary Get items on board
    */
   async *getAllItems(query?: Omit<Parameters<MiroApi['getItems']>[1], 'cursor'>): AsyncGenerator<WidgetItem, void> {
     let cursor: string | undefined = undefined
@@ -62,17 +63,16 @@ export abstract class BaseBoard extends Board {
   }
 
   /**
-   * Get all members on the board
+   * Get all members on the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
+
    * Returns an iterator which will automatically paginate and fetch all available members
+   * @summary Get all board members
    */
-  async *getAllMembers(
-    query?: Omit<Parameters<MiroApi['getBoardMembers']>[1], 'offset'>,
-  ): AsyncGenerator<BoardMember, void> {
+  async *getAllMembers(): AsyncGenerator<BoardMember, void> {
     let currentOffset = 0
     while (true) {
       const response: BoardMembersPagedResponse = (
         await this._api.getBoardMembers(this.id, {
-          ...query,
           offset: currentOffset.toString(),
         })
       ).body
@@ -87,15 +87,16 @@ export abstract class BaseBoard extends Board {
   }
 
   /**
-   * Get all tags on the board
+   * Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
+   *
    * Returns an iterator which will automatically paginate and fetch all available tags
+   * @summary Get tags from board
    */
-  async *getAllTags(query?: Omit<Parameters<MiroApi['getTagsFromBoard']>[1], 'offset'>): AsyncGenerator<Tag, void> {
+  async *getAllTags(): AsyncGenerator<Tag, void> {
     let currentOffset = 0
     while (true) {
       const response = (
         await this._api.getTagsFromBoard(this.id, {
-          ...query,
           offset: currentOffset.toString(),
         })
       ).body
@@ -110,17 +111,14 @@ export abstract class BaseBoard extends Board {
   }
 
   /**
-   * Get all connectors on the board
+   * Retrieves all connectors for a specific board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * Returns an iterator which will automatically paginate and fetch all available tags
    */
-  async *getAllConnectors(
-    query?: Omit<Parameters<MiroApi['getConnectors']>[1], 'offset'>,
-  ): AsyncGenerator<Connector, void> {
+  async *getAllConnectors(): AsyncGenerator<Connector, void> {
     let cursor: string | undefined = undefined
     while (true) {
       const response: ConnectorsCursorPaged = (
         await this._api.getConnectors(this.id, {
-          ...query,
           cursor,
         })
       ).body
@@ -137,7 +135,11 @@ export abstract class BaseBoard extends Board {
     }
   }
 
-  /** {@inheritDoc api/apis!MiroApi.getSpecificItem} */
+  /**
+   * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
+   * @summary Get specific item on board
+   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   */
   async getItem(itemId: string): Promise<WidgetItem> {
     const response = await this._api.getSpecificItem(this.id, itemId)
 
@@ -146,7 +148,13 @@ export abstract class BaseBoard extends Board {
     return Item.fromGenericItem(this._api, this.id, item)
   }
 
-  /** {@inheritDoc api/apis!MiroApi.createImageItemUsingUrl} */
+  /**
+   * Adds an image item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   *
+   * This method can be used to create an image item with a new URL or from an image file.
+   * @summary Create image item
+   * @param request If request.data.url is set then the URL will be used to create an image otherwise contents of a request.data.data will be uploaded and used to create an image
+   */
   async createImageItem(request: WidgetCreateWithBufferRequest | ImageCreateRequest): Promise<ImageItem> {
     const result = isNotUrl(request)
       ? ((await this.fileUploadRequest('images', request)) as ImageResponse)
@@ -154,7 +162,13 @@ export abstract class BaseBoard extends Board {
     return new ImageItem(this._api, this.id, result.id, result)
   }
 
-  /** {@inheritDoc api/apis!MiroApi.createDocumentItemUsingUrl} */
+  /**
+   * Adds a document item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   *
+   * This method can be used to create a document item with a new URL or from a document file.
+   * @summary Create document item
+   * @param request If request.data.url is set then the URL will be used to create a document otherwise contents of a request.data.data will be uploaded and used to create a document
+   */
   async createDocumentItem(request: DocumentCreateRequest | WidgetCreateWithBufferRequest): Promise<DocumentItem> {
     const result = isNotUrl(request)
       ? ((await this.fileUploadRequest('documents', request)) as ImageResponse)
@@ -163,7 +177,7 @@ export abstract class BaseBoard extends Board {
     return new DocumentItem(this._api, this.id, result.id, result)
   }
 
-  /** @private */
+  /** @hidden */
   async fileUploadRequest(type: 'images' | 'documents', request: WidgetCreateWithBufferRequest) {
     const body = new FormData()
     body.append('resource', request.data.data, `filename.${type === 'images' ? 'png' : 'pdf'}`)

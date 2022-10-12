@@ -435,19 +435,6 @@ export class Board extends BaseBoard {
   }
 
   /**
-   * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-   * @summary Create document item using URL
-   * @param documentCreateRequest
-   */
-  async createDocumentItemUsingUrl(
-    documentCreateRequest: Parameters<MiroApi['createDocumentItemUsingUrl']>[1],
-  ): Promise<DocumentItem> {
-    const result = (await this._api.createDocumentItemUsingUrl(this.id.toString(), documentCreateRequest)).body
-
-    return new DocumentItem(this._api, this.id, result.id, result)
-  }
-
-  /**
    * Adds an embed item containing external content to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create embed item
    * @param embedCreateRequest
@@ -467,19 +454,6 @@ export class Board extends BaseBoard {
     const result = (await this._api.createFrameItem(this.id.toString(), frameCreateRequest)).body
 
     return new FrameItem(this._api, this.id, result.id, result)
-  }
-
-  /**
-   * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-   * @summary Create image item using URL
-   * @param imageCreateRequest
-   */
-  async createImageItemUsingUrl(
-    imageCreateRequest: Parameters<MiroApi['createImageItemUsingUrl']>[1],
-  ): Promise<ImageItem> {
-    const result = (await this._api.createImageItemUsingUrl(this.id.toString(), imageCreateRequest)).body
-
-    return new ImageItem(this._api, this.id, result.id, result)
   }
 
   /**
