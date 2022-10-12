@@ -48,11 +48,11 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
         },
         {
           title: 'MiroOptions',
-          url: 'classes/index.MiroOptions.html',
+          url: 'interfaces/index.MiroOptions.html',
         },
         {
           title: 'Storage',
-          url: 'classes/index._internal_.Storage.html',
+          url: 'interfaces/index._internal_.Storage.html',
         },
       ]
 

@@ -5,10 +5,24 @@
   "author": "@mirohq",
   "license": "MIT",
   "scripts": {
-    "test:generator": "test/generator_test.sh",
+    "test": "jest",
+    "validate_commited": "./test/generator_test.sh",
     "generate": "./scripts/generate-node-client.sh"
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.5.1"
+  },
+  "jest": {
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": [
+        "esbuild-jest",
+        {
+          "format": "cjs"
+        }
+      ]
+    }
   }
 }
