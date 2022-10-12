@@ -4,20 +4,26 @@ Implement a [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._
 
 ## Goal
 
-This guide features a couple of examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add persistent storage functionality to the `Miro` class. \
+This guide features two examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add persistent storage functionality to the `Miro` class. \
 The default is a simple in-memory implementation.
 
 ⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
 
 ## Implement storage with a Redis backend
 
-This example implements storage using [Redis](https://redis.io/) as a backend. The [Node-Redis library](https://www.npmjs.com/package/redis) enables connecting to a Redis instance.
+This example implements storage using:
+
+- The [Redis](https://redis.io/) database as a backend.
+- The [Node-Redis library](https://www.npmjs.com/package/redis) library to connect to a Redis instance.
 
 Create a class to handle:
 
-- Connecting to a Redis instance
-- Fetcing state from Redis
-- Storing state in Redis
+- Connecting to a Redis instance.
+- Fetching state from Redis.
+- Storing state in Redis.
+- Deleting state from Redis.
+
+In the example, the class name is `RedisStorage`:
 
 ```javascript
 const redis = require('redis')
@@ -56,7 +62,7 @@ class RedisStorage {
 }
 ```
 
-This class can then be used in the `Miro` constructor by passing it as a parameter:
+To use the class, pass it as a parameter in the `Miro` constructor:
 
 ```javascript
 const miro = new Miro({
