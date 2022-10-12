@@ -4,7 +4,7 @@ Implement a [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._
 
 ## Goal
 
-This guide features two examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add persistent storage functionality to the `Miro` class. \
+This guide features two examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add data storage functionality to the `Miro` class. \
 The default is a simple in-memory implementation.
 
 ⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
@@ -20,7 +20,7 @@ Create a class to handle:
 
 - Connecting to a Redis instance.
 - Fetching state from Redis.
-- Storing state in Redis.
+- Saving state in Redis.
 - Deleting state from Redis.
 
 In the example, the class name is `RedisStorage`:
@@ -72,22 +72,30 @@ const miro = new Miro({
 
 ## Implement storage with `express-session`
 
-When using [express framework](https://expressjs.com/) with the [session middleware](https://www.npmjs.com/package/express-session), we can reuse the session storage for storing Miro state.
+This example implements storage using:
+
+- The [Express](https://expressjs.com/) web framework.
+- The [express-session](https://www.npmjs.com/package/express-session) middleware to enable storing `Miro` state information in the session storage.
+
+The following code example:
+
+- Creates a new `Miro` instance for each request.
+- Loads the state of the current `Miro` instance from the session storage.
+- Saves the state of the current `Miro` instance to the session storage.
 
 ```javascript
-// Setup session middlware before: app.use(session({...}))
-
+// Set up session middleware before: 'app.use(session({...}))'
 app.use((req, res, next) => {
-  // Create a separate Miro instance for each request
+  // Create a separate 'Miro' instance for each request
   req.miro = new Miro({
-    // Define storage implementation inline
+    // Define the storage implementation inline
     storage: {
-      // Load Miro state from the session object (if any)
+      // Load the 'Miro' state from the session object, if it exists
       get(_userId) {
         return req.session.state
       },
 
-      // Store Miro state in the session object
+      // Store the 'Miro' state in the session object
       set(_userId, state) {
         req.session.state = state
       },
@@ -98,7 +106,10 @@ app.use((req, res, next) => {
 })
 ```
 
-Instead of using a global miro variable, each request will now have a separate instane attached to it on `req.miro`. Any endpoints that need to interact with Miro api should use `req.miro`:
+Instead of using a global `miro` variable, each request has a separate `Miro` instance associated with `req.miro`. \
+The client endpoints that interact with the [`Miro` API](https://miroapp.github.io/api-clients/classes/index.Miro.html) use `req.miro` to handle session data.
+
+Example:
 
 ```javascript
 app.get('/', async (req, res) => {
