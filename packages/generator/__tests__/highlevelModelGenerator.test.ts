@@ -21,12 +21,13 @@ describe('generate_node_highlevel_models', () => {
       }),
       `
 import { MiroApi } from '../api'
-import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase, toString } from "./helpers";
+import { KeepBase } from "./helpers";
 
 export class Hello extends Object {
     /** @hidden */
     _api: MiroApi
 
+    /** @hidden */
     constructor(api: MiroApi, props: KeepBase<Object>) {
         super()
         this._api = api
@@ -46,7 +47,7 @@ export class Hello extends Object {
           props: [{name: 'id', type: 'string'}],
           methods: [
             {
-              method: 'getSomeItem',
+              method: 'getSpecificItem',
               alias: 'getItem',
               returns: 'Item',
               topLevelCall: false,
@@ -62,7 +63,7 @@ export class Hello extends Object {
       `
 
 import { MiroApi } from '../api'
-import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase, toString } from "./helpers";
+import { KeepBase } from "./helpers";
 
 export class Hello extends Object {
   /** @hidden */
@@ -70,6 +71,7 @@ export class Hello extends Object {
 
   id: string
 
+  /** @hidden */
   constructor(api: MiroApi, id: string, props: KeepBase<Object>) {
     super()
     this._api = api
@@ -77,11 +79,15 @@ export class Hello extends Object {
     Object.assign(this, props)
   }
 
-  /** @inheritDoc api!MiroApi.getSomeItem */
+    /**
+     * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
+    * @summary Get specific item on board
+    * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+    */
   async getItem(
-    ...parameters: GetParameters1<MiroApi["getSomeItem"]>
+    itemId: Parameters<MiroApi["getSpecificItem"]>[1]
   ): Promise<Item> {
-    const result = (await this._api.getSomeItem(this.id?.toString() || '', ...parameters))
+      const result = (await this._api.getSpecificItem(this.id.toString(), itemId))
       .body;
 
     return new Item(this._api, result);
@@ -92,6 +98,7 @@ export class Item extends Object {
   /** @hidden */
   _api: MiroApi;
 
+  /** @hidden */
   constructor(
     api: MiroApi,
     props: KeepBase<Object>
