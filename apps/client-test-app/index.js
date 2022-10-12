@@ -1,8 +1,8 @@
+import fs from 'fs'
 import * as dotenv from 'dotenv'
 
 dotenv.config()
 import express from 'express'
-import ejs from 'ejs'
 import {Miro} from '@mirohq/miro-node'
 
 const app = express()
@@ -20,28 +20,20 @@ const miro = new Miro({
 
 const USER_ID = 'WE_DONT_NEED_A_REAL_ID'
 
-app.get('/login', async (req, res) => {
-  if (await miro.isAuthorized(USER_ID)) {
-    res.redirect('/')
-    return
-  }
-  res.redirect(miro.getAuthUrl())
-})
-
 app.get('/auth/miro/callback/', async (req, res) => {
-  try {
-    await miro.handleAuthorizationCodeRequest(USER_ID, req)
-  } catch (e) {
-    console.error(e)
-  }
+  await miro.handleAuthorizationCodeRequest(USER_ID, req)
   res.redirect('/')
 })
 
-app.get('/', async (req, res) => {
+app.use(async (_req, res, next) => {
   if (!(await miro.isAuthorized(USER_ID))) {
-    res.redirect('/login')
+    res.redirect(miro.getAuthUrl())
     return
   }
+  next()
+})
+
+app.get('/', async (_req, res) => {
   const api = miro.as(USER_ID)
 
   let body = `
@@ -62,10 +54,6 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/boards/:boardId/item/:itemId', async (req, res) => {
-  if (!(await miro.isAuthorized(USER_ID))) {
-    res.redirect('/login')
-    return
-  }
 
   const boardId = req.params.boardId
   const itemId = req.params.itemId
@@ -74,7 +62,7 @@ app.get('/boards/:boardId/item/:itemId', async (req, res) => {
   const board = await api.getBoard(boardId)
   const item = await board.getItem(itemId)
 
-  const boardItemsGenerator = await board.getAllItems()
+  const boardItemsGenerator = board.getAllItems()
   const boardItems = []
   for await (const item of boardItemsGenerator) {
     boardItems.push(item)
@@ -83,20 +71,27 @@ app.get('/boards/:boardId/item/:itemId', async (req, res) => {
 })
 
 app.get('/boards/:boardId', async (req, res) => {
-  if (!(await miro.isAuthorized(USER_ID))) {
-    res.redirect('/login')
-    return
-  }
-
   const boardId = req.params.boardId
   const api = miro.as(USER_ID)
   const board = await api.getBoard(boardId)
-  const boardItemsGenerator = await board.getAllItems()
+  const boardItemsGenerator = board.getAllItems()
   const boardItems = []
   for await (const item of boardItemsGenerator) {
     boardItems.push(item)
   }
   res.render('board', {boardItems, board})
+})
+
+app.post('/image/:boardId', async (req, res) => {
+  const api = miro.as(USER_ID)
+  const boardId = req.params.boardId
+  const board = await api.getBoard(boardId)
+  await board.createImageItem({
+    data: {
+      data: fs.createReadStream('./img.png')
+    }
+  })
+  res.redirect(`/boards/${boardId}`)
 })
 
 app.post('/connectTo/:boardId/:itemId', async (req, res) => {

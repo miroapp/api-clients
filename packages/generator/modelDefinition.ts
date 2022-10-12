@@ -250,10 +250,7 @@ const MODELS = {
       name: 'BaseDocumentItem',
       path: 'DocumentItem',
     },
-    methods: [
-      {method: 'updateDocumentItemUsingUrl', alias: 'update'},
-      {method: 'deleteDocumentItem', alias: 'delete'},
-    ],
+    methods: [{method: 'deleteDocumentItem', alias: 'delete'}],
   },
 
   EmbedItem: {
@@ -286,10 +283,7 @@ const MODELS = {
       name: 'BaseImageItem',
       path: 'ImageItem',
     },
-    methods: [
-      {method: 'updateImageItemUsingUrl', alias: 'update'},
-      {method: 'deleteImageItem', alias: 'delete'},
-    ],
+    methods: [{method: 'deleteImageItem', alias: 'delete'}],
   },
 
   ShapeItem: {

@@ -1,4 +1,39 @@
-import {Model, getModels, ModelProps} from './modelDefinition'
+import * as ts from 'typescript'
+import path from 'path'
+import {Model, ModelProps} from './modelDefinition'
+
+import {MiroApi} from '../typescript-node/api/apis'
+
+const filePath = path.resolve('../typescript-node/api/')
+const program = ts.createProgram([filePath], {})
+const source = program.getSourceFile('../typescript-node/api/apis.ts')
+
+const text = source.getFullText(source)
+
+const methodDocs: Record<string, {comments: string; params: string[]}> = {}
+
+ts.transform(source, [
+  (context: ts.TransformationContext) => {
+    const visit: ts.Visitor = (node: ts.Node) => {
+      if (ts.isMethodDeclaration(node)) {
+        const end = node.getFullStart()
+        const length = node.getLeadingTriviaWidth(source)
+        const comments = text.slice(end, end + length)
+        const name = ('escapedText' in node.name && node.name.escapedText) || ''
+        const params = []
+        for (const match of comments.matchAll(/@param ([a-zA-Z]+)/gi)) {
+          params.push(match[1])
+        }
+        // params.
+        methodDocs[name] = {comments, params}
+      }
+
+      return ts.visitEachChild(node, visit, context)
+    }
+
+    return (node: ts.Node) => ts.visitNode(node, visit)
+  },
+])
 
 export function run(models: Record<string, Model>) {
   function renderModel(name: string, model: Model): string {
@@ -44,11 +79,24 @@ export class ${name} extends ${extendedModelName} {
       .map((method) => {
         const returns = method.returns
 
+        const prefixParamCount = method.topLevelCall ? 1 : props.length
+        const params = Array.from({
+          length: MiroApi.prototype[method.method].length - prefixParamCount,
+        })
+
+        const original = methodDocs[method.method]
+        let docs = original.comments
+        for (let i = 0; i < prefixParamCount; i++) {
+          docs = docs.replace(/^.* @param .*\n/m, '')
+        }
+
         return `
-/** {@inheritDoc api/apis!MiroApi.${method.method}} */
-async ${method.alias}(...parameters: GetParameters${method.topLevelCall ? 1 : props.length}<MiroApi['${
-          method.method
-        }']>): Promise<${returns ? returns : 'void'}${method.paginated ? '[]' : ''}> {
+${docs} async ${method.alias}(${params.map(
+          (_, i) =>
+            `${original.params[i + prefixParamCount]}: Parameters<MiroApi['${method.method}']>[${
+              i + prefixParamCount
+            }]`,
+        )}): Promise<${returns ? returns : 'void'}${method.paginated ? '[]' : ''}> {
 ${renderFunctionBody(method, props)}
 }
 `
@@ -61,9 +109,17 @@ ${renderFunctionBody(method, props)}
       ? [`this.${props[props.length - 1].name}.toString()`]
       : props.map(({name}) => `this.${name}.toString()`)
 
-    apiCallArguments.push('...parameters')
+    const params = Array.from({
+      length: MiroApi.prototype[method.method].length - apiCallArguments.length,
+    })
 
-    return `await this._api.${method.method}(${apiCallArguments.join(',')})`
+    const original = methodDocs[method.method]
+
+    const allApiCallArguments = apiCallArguments.concat(
+      params.map((_, i) => `${original.params[i + apiCallArguments.length]}`),
+    )
+
+    return `await this._api.${method.method}(${allApiCallArguments.join(',')})`
   }
 
   function renderFunctionBody(method: Model['methods'][number], props: ModelProps) {
@@ -108,7 +164,7 @@ ${renderFunctionBody(method, props)}
   function renderImports() {
     return `
 import { MiroApi } from '../api'
-import { GetParameters0, GetParameters1, GetParameters2, GetParameters3, KeepBase } from "./helpers";
+import { KeepBase } from "./helpers";
 
 ${Object.keys(models)
   .map((name) => {

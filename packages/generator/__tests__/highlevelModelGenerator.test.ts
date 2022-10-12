@@ -77,7 +77,7 @@ export class Hello extends Object {
     Object.assign(this, props)
   }
 
-  /** {@inheritDoc api!MiroApi.getSomeItem} */
+  /** @inheritDoc api!MiroApi.getSomeItem */
   async getItem(
     ...parameters: GetParameters1<MiroApi["getSomeItem"]>
   ): Promise<Item> {
