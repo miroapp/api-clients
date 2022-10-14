@@ -11,11 +11,16 @@
  */
 
 import {InvitationError} from './invitationError'
-import {UserId} from './userId'
 
 export class InvitationResult {
+  /**
+   * Contains information about the invites that failed.
+   */
   'failed'?: Array<InvitationError>
-  'successful'?: Array<UserId>
+  /**
+   * Contains information about the invites that were successfully sent.
+   */
+  'successful'?: Array<number>
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -30,7 +35,7 @@ export class InvitationResult {
     {
       name: 'successful',
       baseName: 'successful',
-      type: 'Array<UserId>',
+      type: 'Array<number>',
     },
   ]
 

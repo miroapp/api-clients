@@ -19,7 +19,13 @@ import {OrganizationMember} from './organizationMember'
 export class OrganizationMembersSearchResponse {
   'cursor'?: string
   'data'?: Array<OrganizationMember>
+  /**
+   * Maximum number of results returned based on the limit specified in the request. For example, if there are 20 results, the request has no cursor value, and the limit is set to 20, the size of the results will be 20. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the cursor parameter value.
+   */
   'limit'?: number
+  /**
+   * Number of results returned in the response considering the cursor and the limit values sent in the request. For example, if there are 20 results, the request does not have a cursor value, and the limit set to 10, the size of the results will be 10.
+   */
   'size'?: number
 
   /** @ignore */

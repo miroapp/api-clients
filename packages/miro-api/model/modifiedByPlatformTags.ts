@@ -10,8 +10,19 @@
  * Do not edit the class manually.
  */
 
-export class UserId {
-  'value'?: number
+/**
+ * @internal
+ * Contains information about the user who last modified the item.
+ */
+export class ModifiedByPlatformTags {
+  /**
+   * Unique identifier (ID) of the user.
+   */
+  'id'?: string
+  /**
+   * Indicates the type of object returned. In this case, `type` returns `user`.
+   */
+  'type'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -19,14 +30,19 @@ export class UserId {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'value',
-      baseName: 'value',
-      type: 'number',
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return UserId.attributeTypeMap
+    return ModifiedByPlatformTags.attributeTypeMap
   }
 }

@@ -100,18 +100,18 @@ export class OrganizationMember {
 
 export namespace OrganizationMember {
   export const LicenseEnum = {
-    Unknown: 'UNKNOWN',
-    Full: 'FULL',
-    Occasional: 'OCCASIONAL',
-    Free: 'FREE',
-    FreeRestricted: 'FREE_RESTRICTED',
-    FullTrial: 'FULL_TRIAL',
+    Full: 'full',
+    Occasional: 'occasional',
+    Free: 'free',
+    FreeRestricted: 'free_restricted',
+    FullTrial: 'full_trial',
+    Unknown: 'unknown',
   } as const
   export const RoleEnum = {
-    Unknown: 'UNKNOWN',
-    OrganizationInternalAdmin: 'ORGANIZATION_INTERNAL_ADMIN',
-    OrganizationInternalUser: 'ORGANIZATION_INTERNAL_USER',
-    OrganizationExternalUser: 'ORGANIZATION_EXTERNAL_USER',
-    OrganizationTeamGuestUser: 'ORGANIZATION_TEAM_GUEST_USER',
+    OrganizationInternalAdmin: 'organization_internal_admin',
+    OrganizationInternalUser: 'organization_internal_user',
+    OrganizationExternalUser: 'organization_external_user',
+    OrganizationTeamGuestUser: 'organization_team_guest_user',
+    Unknown: 'unknown',
   } as const
 }

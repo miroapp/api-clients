@@ -39,6 +39,10 @@ export class DataClassificationLabel {
    * Label order number
    */
   'orderNumber'?: number
+  /**
+   * Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS )
+   */
+  'sharingRecommendation'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -74,6 +78,11 @@ export class DataClassificationLabel {
       name: 'orderNumber',
       baseName: 'orderNumber',
       type: 'number',
+    },
+    {
+      name: 'sharingRecommendation',
+      baseName: 'sharingRecommendation',
+      type: 'string',
     },
   ]
 

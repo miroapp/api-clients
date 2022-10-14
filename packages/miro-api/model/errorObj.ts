@@ -10,19 +10,23 @@
  * Do not edit the class manually.
  */
 
-/**
- * @internal
- * Contains information about the invites that failed.
- */
-export class InvitationError {
+export class ErrorObj {
   /**
-   * Email ID for which the invitation failed.
+   * Code of the error
    */
-  'email'?: string
+  'code'?: string
   /**
-   * Reason why the invitation failed.
+   * Description of the error
    */
-  'reason'?: string
+  'message'?: string
+  /**
+   * Status code of the error
+   */
+  'status'?: number
+  /**
+   * Type of the error
+   */
+  'type'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -30,19 +34,29 @@ export class InvitationError {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'email',
-      baseName: 'email',
+      name: 'code',
+      baseName: 'code',
       type: 'string',
     },
     {
-      name: 'reason',
-      baseName: 'reason',
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
       type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return InvitationError.attributeTypeMap
+    return ErrorObj.attributeTypeMap
   }
 }
