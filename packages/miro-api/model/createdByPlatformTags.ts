@@ -12,13 +12,17 @@
 
 /**
  * @internal
- * Team picture
+ * Contains information about the user who created the item.
  */
-export class CreatePictureRequest {
+export class CreatedByPlatformTags {
   /**
-   * Original team picture url for icon generation. Note: picture update is not supported yet.
+   * Unique identifier (ID) of the user.
    */
-  'originalUrl'?: string
+  'id'?: string
+  /**
+   * Indicates the type of object returned. In this case, `type` returns `user`.
+   */
+  'type'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -26,14 +30,19 @@ export class CreatePictureRequest {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'originalUrl',
-      baseName: 'originalUrl',
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
       type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return CreatePictureRequest.attributeTypeMap
+    return CreatedByPlatformTags.attributeTypeMap
   }
 }

@@ -16,7 +16,11 @@
  */
 export class TeamSharingPolicySettingsChanges {
   /**
-   * Set who can create assets in a team
+   * Allow listed domains
+   */
+  'allowListedDomains'?: Array<string>
+  /**
+   *  * \"company_admins\": Only company admins can create assets in a team * \"admins\": Both team and company admins can create assets in a team. * \"all_members\": all_members
    */
   'createAssetAccessLevel'?:
     | string
@@ -46,6 +50,12 @@ export class TeamSharingPolicySettingsChanges {
     | string
     | typeof TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum[keyof typeof TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum]
   /**
+   *  * \"enabled\": Enabled. Restrict to listed domain. * \"disabled\": Disabled. No domain restriction. * \"enabled_with_external_users_access\": Enabled. Restrict to listed domain but allows external users to access.
+   */
+  'restrictAllowedDomains'?:
+    | string
+    | typeof TeamSharingPolicySettingsChanges.RestrictAllowedDomainsEnum[keyof typeof TeamSharingPolicySettingsChanges.RestrictAllowedDomainsEnum]
+  /**
    *  * \"allowed\": Allow sharing on team * \"not_allowed\": Not allow sharing on team
    */
   'sharingOnAccount'?:
@@ -63,26 +73,17 @@ export class TeamSharingPolicySettingsChanges {
   'sharingViaPublicLink'?:
     | string
     | typeof TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum[keyof typeof TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum]
-  /**
-   *  * \"allowed\": Allow sharing with external users * \"not_allowed\": Not allow sharing with external users
-   */
-  'sharingWithExternalUsers'?:
-    | string
-    | typeof TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum[keyof typeof TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum]
-  /**
-   * Enable whitelist domains
-   */
-  'whiteListDomainsEnabled'?: boolean
-  /**
-   * Whitelisted domains
-   */
-  'whiteListedDomains'?: Array<string>
 
   /** @ignore */
   static discriminator: string | undefined = undefined
 
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
+    {
+      name: 'allowListedDomains',
+      baseName: 'allowListedDomains',
+      type: 'Array<string>',
+    },
     {
       name: 'createAssetAccessLevel',
       baseName: 'createAssetAccessLevel',
@@ -109,6 +110,11 @@ export class TeamSharingPolicySettingsChanges {
       type: 'TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum',
     },
     {
+      name: 'restrictAllowedDomains',
+      baseName: 'restrictAllowedDomains',
+      type: 'TeamSharingPolicySettingsChanges.RestrictAllowedDomainsEnum',
+    },
+    {
       name: 'sharingOnAccount',
       baseName: 'sharingOnAccount',
       type: 'TeamSharingPolicySettingsChanges.SharingOnAccountEnum',
@@ -123,21 +129,6 @@ export class TeamSharingPolicySettingsChanges {
       baseName: 'sharingViaPublicLink',
       type: 'TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum',
     },
-    {
-      name: 'sharingWithExternalUsers',
-      baseName: 'sharingWithExternalUsers',
-      type: 'TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum',
-    },
-    {
-      name: 'whiteListDomainsEnabled',
-      baseName: 'whiteListDomainsEnabled',
-      type: 'boolean',
-    },
-    {
-      name: 'whiteListedDomains',
-      baseName: 'whiteListedDomains',
-      type: 'Array<string>',
-    },
   ]
 
   /** @ignore */
@@ -148,9 +139,9 @@ export class TeamSharingPolicySettingsChanges {
 
 export namespace TeamSharingPolicySettingsChanges {
   export const CreateAssetAccessLevelEnum = {
-    CompanyAdmins: 'COMPANY_ADMINS',
-    Admins: 'ADMINS',
-    AllMembers: 'ALL_MEMBERS',
+    CompanyAdmins: 'company_admins',
+    Admins: 'admins',
+    AllMembers: 'all_members',
   } as const
   export const DefaultBoardAccessEnum = {
     Private: 'private',
@@ -172,6 +163,11 @@ export namespace TeamSharingPolicySettingsChanges {
     Allowed: 'allowed',
     NotAllowed: 'not_allowed',
   } as const
+  export const RestrictAllowedDomainsEnum = {
+    Enabled: 'enabled',
+    EnabledWithExternalUserAccess: 'enabled_with_external_user_access',
+    Disabled: 'disabled',
+  } as const
   export const SharingOnAccountEnum = {
     Allowed: 'allowed',
     NotAllowed: 'not_allowed',
@@ -184,10 +180,6 @@ export namespace TeamSharingPolicySettingsChanges {
   export const SharingViaPublicLinkEnum = {
     Allowed: 'allowed',
     AllowedWithEditing: 'allowed_with_editing',
-    NotAllowed: 'not_allowed',
-  } as const
-  export const SharingWithExternalUsersEnum = {
-    Allowed: 'allowed',
     NotAllowed: 'not_allowed',
   } as const
 }

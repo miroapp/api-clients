@@ -298,9 +298,10 @@ export class Team extends BaseTeam {
   /**
    * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
    * @summary Get team settings
+   * @param teamId The id of a Team.
    */
-  async getTeamSettings(): Promise<TeamSettings> {
-    const result = (await this._api.enterpriseGetTeamSettings(this.teamId.toString())).body
+  async getTeamSettings(teamId: Parameters<MiroApi['enterpriseGetTeamSettings']>[1]): Promise<TeamSettings> {
+    const result = (await this._api.enterpriseGetTeamSettings(this.teamId.toString(), teamId)).body
 
     return new TeamSettings(this._api, result)
   }
@@ -308,10 +309,14 @@ export class Team extends BaseTeam {
   /**
    * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
    * @summary Update team settings
+   * @param teamId The id of a Team.
    * @param teamSettingsChanges
    */
-  async updateTeamSettings(teamSettingsChanges: Parameters<MiroApi['enterpriseUpdateTeamSettings']>[1]): Promise<void> {
-    await this._api.enterpriseUpdateTeamSettings(this.teamId.toString(), teamSettingsChanges)
+  async updateTeamSettings(
+    teamId: Parameters<MiroApi['enterpriseUpdateTeamSettings']>[1],
+    teamSettingsChanges: Parameters<MiroApi['enterpriseUpdateTeamSettings']>[2],
+  ): Promise<void> {
+    await this._api.enterpriseUpdateTeamSettings(this.teamId.toString(), teamId, teamSettingsChanges)
   }
 }
 

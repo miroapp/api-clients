@@ -7,7 +7,6 @@ import fetch from 'node-fetch'
 const apis = [
   'https://api.miro.com/api-docs/platform',
   'https://api.miro.com/api-docs/platform-containers',
-  'https://api.miro.com/api-docs/platform-experimental',
   'https://api.miro.com/api-docs/platform-tags',
   'https://api.miro.com/api-docs/enterprise',
 ]

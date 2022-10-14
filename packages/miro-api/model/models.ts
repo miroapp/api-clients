@@ -33,10 +33,10 @@ export * from './connectorCreationData'
 export * from './connectorStyle'
 export * from './connectorWithLinks'
 export * from './connectorsCursorPaged'
-export * from './createPictureRequest'
 export * from './createTeamRequest'
 export * from './createdBy'
 export * from './createdByPlatformContainers'
+export * from './createdByPlatformTags'
 export * from './customField'
 export * from './customFieldPlatformTags'
 export * from './dataClassificationLabel'
@@ -57,7 +57,9 @@ export * from './embedItem'
 export * from './embedUpdateRequest'
 export * from './embedUrlData'
 export * from './embedUrlDataChanges'
+export * from './enterpriseGetOrganization400Response'
 export * from './enterpriseGetOrganizationMembers200Response'
+export * from './errorObj'
 export * from './fixedRatioGeometry'
 export * from './fixedRatioNoRotationGeometry'
 export * from './frameChanges'
@@ -86,9 +88,6 @@ export * from './imageUpdateRequest'
 export * from './imageUrlData'
 export * from './imageUrlDataChanges'
 export * from './invitationError'
-export * from './invitationErrorReason'
-export * from './invitationErrorReasonStackTraceInner'
-export * from './invitationErrorReasonSuppressedInner'
 export * from './invitationResult'
 export * from './itemConnectionChangesData'
 export * from './itemConnectionCreationData'
@@ -96,14 +95,13 @@ export * from './itemConnectionWithLinks'
 export * from './itemPagedResponse'
 export * from './modifiedBy'
 export * from './modifiedByPlatformContainers'
+export * from './modifiedByPlatformTags'
 export * from './organization'
 export * from './organizationMember'
 export * from './organizationMembersSearchByEmailsResponse'
-export * from './organizationMembersSearchQuery'
 export * from './organizationMembersSearchResponse'
 export * from './pageLinks'
 export * from './pageLinksPlatformContainers'
-export * from './pageLinksPlatformExperimentalFeatures'
 export * from './pageLinksPlatformTags'
 export * from './parent'
 export * from './parentLinksEnvelope'
@@ -118,7 +116,6 @@ export * from './positionPlatformTags'
 export * from './relativeOffset'
 export * from './selfLink'
 export * from './selfLinkPlatformContainers'
-export * from './selfLinkPlatformExperimentalFeatures'
 export * from './selfLinkPlatformTags'
 export * from './shapeCreateRequest'
 export * from './shapeData'
@@ -163,7 +160,6 @@ export * from './textUpdateRequest'
 export * from './updateBoardsDataClassificationLabel'
 export * from './updateBoardsDataClassificationLabelRequest'
 export * from './updateTeamSettingsRequest'
-export * from './userId'
 export * from './userInfoShort'
 export * from './widgetData'
 export * from './widgetDataPlatformTags'
@@ -216,10 +212,10 @@ import {ConnectorCreationData} from './connectorCreationData'
 import {ConnectorStyle} from './connectorStyle'
 import {ConnectorWithLinks} from './connectorWithLinks'
 import {ConnectorsCursorPaged} from './connectorsCursorPaged'
-import {CreatePictureRequest} from './createPictureRequest'
 import {CreateTeamRequest} from './createTeamRequest'
 import {CreatedBy} from './createdBy'
 import {CreatedByPlatformContainers} from './createdByPlatformContainers'
+import {CreatedByPlatformTags} from './createdByPlatformTags'
 import {CustomField} from './customField'
 import {CustomFieldPlatformTags} from './customFieldPlatformTags'
 import {DataClassificationLabel} from './dataClassificationLabel'
@@ -240,7 +236,9 @@ import {EmbedItem} from './embedItem'
 import {EmbedUpdateRequest} from './embedUpdateRequest'
 import {EmbedUrlData} from './embedUrlData'
 import {EmbedUrlDataChanges} from './embedUrlDataChanges'
+import {EnterpriseGetOrganization400Response} from './enterpriseGetOrganization400Response'
 import {EnterpriseGetOrganizationMembers200Response} from './enterpriseGetOrganizationMembers200Response'
+import {ErrorObj} from './errorObj'
 import {FixedRatioGeometry} from './fixedRatioGeometry'
 import {FixedRatioNoRotationGeometry} from './fixedRatioNoRotationGeometry'
 import {FrameChanges} from './frameChanges'
@@ -269,9 +267,6 @@ import {ImageUpdateRequest} from './imageUpdateRequest'
 import {ImageUrlData} from './imageUrlData'
 import {ImageUrlDataChanges} from './imageUrlDataChanges'
 import {InvitationError} from './invitationError'
-import {InvitationErrorReason} from './invitationErrorReason'
-import {InvitationErrorReasonStackTraceInner} from './invitationErrorReasonStackTraceInner'
-import {InvitationErrorReasonSuppressedInner} from './invitationErrorReasonSuppressedInner'
 import {InvitationResult} from './invitationResult'
 import {ItemConnectionChangesData} from './itemConnectionChangesData'
 import {ItemConnectionCreationData} from './itemConnectionCreationData'
@@ -279,14 +274,13 @@ import {ItemConnectionWithLinks} from './itemConnectionWithLinks'
 import {ItemPagedResponse} from './itemPagedResponse'
 import {ModifiedBy} from './modifiedBy'
 import {ModifiedByPlatformContainers} from './modifiedByPlatformContainers'
+import {ModifiedByPlatformTags} from './modifiedByPlatformTags'
 import {Organization} from './organization'
 import {OrganizationMember} from './organizationMember'
 import {OrganizationMembersSearchByEmailsResponse} from './organizationMembersSearchByEmailsResponse'
-import {OrganizationMembersSearchQuery} from './organizationMembersSearchQuery'
 import {OrganizationMembersSearchResponse} from './organizationMembersSearchResponse'
 import {PageLinks} from './pageLinks'
 import {PageLinksPlatformContainers} from './pageLinksPlatformContainers'
-import {PageLinksPlatformExperimentalFeatures} from './pageLinksPlatformExperimentalFeatures'
 import {PageLinksPlatformTags} from './pageLinksPlatformTags'
 import {Parent} from './parent'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
@@ -301,7 +295,6 @@ import {PositionPlatformTags} from './positionPlatformTags'
 import {RelativeOffset} from './relativeOffset'
 import {SelfLink} from './selfLink'
 import {SelfLinkPlatformContainers} from './selfLinkPlatformContainers'
-import {SelfLinkPlatformExperimentalFeatures} from './selfLinkPlatformExperimentalFeatures'
 import {SelfLinkPlatformTags} from './selfLinkPlatformTags'
 import {ShapeCreateRequest} from './shapeCreateRequest'
 import {ShapeData} from './shapeData'
@@ -346,7 +339,6 @@ import {TextUpdateRequest} from './textUpdateRequest'
 import {UpdateBoardsDataClassificationLabel} from './updateBoardsDataClassificationLabel'
 import {UpdateBoardsDataClassificationLabelRequest} from './updateBoardsDataClassificationLabelRequest'
 import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
-import {UserId} from './userId'
 import {UserInfoShort} from './userInfoShort'
 import {WidgetData} from './widgetData'
 import {WidgetDataPlatformTags} from './widgetDataPlatformTags'
@@ -447,10 +439,10 @@ let enumsMap: {[index: string]: any} = {
   'TeamSharingPolicySettings.DefaultOrganizationAccessEnum': TeamSharingPolicySettings.DefaultOrganizationAccessEnum,
   'TeamSharingPolicySettings.DefaultProjectAccessEnum': TeamSharingPolicySettings.DefaultProjectAccessEnum,
   'TeamSharingPolicySettings.MoveBoardToAccountEnum': TeamSharingPolicySettings.MoveBoardToAccountEnum,
+  'TeamSharingPolicySettings.RestrictAllowedDomainsEnum': TeamSharingPolicySettings.RestrictAllowedDomainsEnum,
   'TeamSharingPolicySettings.SharingOnAccountEnum': TeamSharingPolicySettings.SharingOnAccountEnum,
   'TeamSharingPolicySettings.SharingOnOrganizationEnum': TeamSharingPolicySettings.SharingOnOrganizationEnum,
   'TeamSharingPolicySettings.SharingViaPublicLinkEnum': TeamSharingPolicySettings.SharingViaPublicLinkEnum,
-  'TeamSharingPolicySettings.SharingWithExternalUsersEnum': TeamSharingPolicySettings.SharingWithExternalUsersEnum,
   'TeamSharingPolicySettingsChanges.CreateAssetAccessLevelEnum':
     TeamSharingPolicySettingsChanges.CreateAssetAccessLevelEnum,
   'TeamSharingPolicySettingsChanges.DefaultBoardAccessEnum': TeamSharingPolicySettingsChanges.DefaultBoardAccessEnum,
@@ -459,13 +451,13 @@ let enumsMap: {[index: string]: any} = {
   'TeamSharingPolicySettingsChanges.DefaultProjectAccessEnum':
     TeamSharingPolicySettingsChanges.DefaultProjectAccessEnum,
   'TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum': TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum,
+  'TeamSharingPolicySettingsChanges.RestrictAllowedDomainsEnum':
+    TeamSharingPolicySettingsChanges.RestrictAllowedDomainsEnum,
   'TeamSharingPolicySettingsChanges.SharingOnAccountEnum': TeamSharingPolicySettingsChanges.SharingOnAccountEnum,
   'TeamSharingPolicySettingsChanges.SharingOnOrganizationEnum':
     TeamSharingPolicySettingsChanges.SharingOnOrganizationEnum,
   'TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum':
     TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum,
-  'TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum':
-    TeamSharingPolicySettingsChanges.SharingWithExternalUsersEnum,
   'TextStyle.FontFamilyEnum': TextStyle.FontFamilyEnum,
   'TextStyle.TextAlignEnum': TextStyle.TextAlignEnum,
   'WidgetData.ModeEnum': WidgetData.ModeEnum,
@@ -516,10 +508,10 @@ let typeMap: {[index: string]: any} = {
   ConnectorStyle: ConnectorStyle,
   ConnectorWithLinks: ConnectorWithLinks,
   ConnectorsCursorPaged: ConnectorsCursorPaged,
-  CreatePictureRequest: CreatePictureRequest,
   CreateTeamRequest: CreateTeamRequest,
   CreatedBy: CreatedBy,
   CreatedByPlatformContainers: CreatedByPlatformContainers,
+  CreatedByPlatformTags: CreatedByPlatformTags,
   CustomField: CustomField,
   CustomFieldPlatformTags: CustomFieldPlatformTags,
   DataClassificationLabel: DataClassificationLabel,
@@ -540,7 +532,9 @@ let typeMap: {[index: string]: any} = {
   EmbedUpdateRequest: EmbedUpdateRequest,
   EmbedUrlData: EmbedUrlData,
   EmbedUrlDataChanges: EmbedUrlDataChanges,
+  EnterpriseGetOrganization400Response: EnterpriseGetOrganization400Response,
   EnterpriseGetOrganizationMembers200Response: EnterpriseGetOrganizationMembers200Response,
+  ErrorObj: ErrorObj,
   FixedRatioGeometry: FixedRatioGeometry,
   FixedRatioNoRotationGeometry: FixedRatioNoRotationGeometry,
   FrameChanges: FrameChanges,
@@ -569,9 +563,6 @@ let typeMap: {[index: string]: any} = {
   ImageUrlData: ImageUrlData,
   ImageUrlDataChanges: ImageUrlDataChanges,
   InvitationError: InvitationError,
-  InvitationErrorReason: InvitationErrorReason,
-  InvitationErrorReasonStackTraceInner: InvitationErrorReasonStackTraceInner,
-  InvitationErrorReasonSuppressedInner: InvitationErrorReasonSuppressedInner,
   InvitationResult: InvitationResult,
   ItemConnectionChangesData: ItemConnectionChangesData,
   ItemConnectionCreationData: ItemConnectionCreationData,
@@ -579,14 +570,13 @@ let typeMap: {[index: string]: any} = {
   ItemPagedResponse: ItemPagedResponse,
   ModifiedBy: ModifiedBy,
   ModifiedByPlatformContainers: ModifiedByPlatformContainers,
+  ModifiedByPlatformTags: ModifiedByPlatformTags,
   Organization: Organization,
   OrganizationMember: OrganizationMember,
   OrganizationMembersSearchByEmailsResponse: OrganizationMembersSearchByEmailsResponse,
-  OrganizationMembersSearchQuery: OrganizationMembersSearchQuery,
   OrganizationMembersSearchResponse: OrganizationMembersSearchResponse,
   PageLinks: PageLinks,
   PageLinksPlatformContainers: PageLinksPlatformContainers,
-  PageLinksPlatformExperimentalFeatures: PageLinksPlatformExperimentalFeatures,
   PageLinksPlatformTags: PageLinksPlatformTags,
   Parent: Parent,
   ParentLinksEnvelope: ParentLinksEnvelope,
@@ -601,7 +591,6 @@ let typeMap: {[index: string]: any} = {
   RelativeOffset: RelativeOffset,
   SelfLink: SelfLink,
   SelfLinkPlatformContainers: SelfLinkPlatformContainers,
-  SelfLinkPlatformExperimentalFeatures: SelfLinkPlatformExperimentalFeatures,
   SelfLinkPlatformTags: SelfLinkPlatformTags,
   ShapeCreateRequest: ShapeCreateRequest,
   ShapeData: ShapeData,
@@ -646,7 +635,6 @@ let typeMap: {[index: string]: any} = {
   UpdateBoardsDataClassificationLabel: UpdateBoardsDataClassificationLabel,
   UpdateBoardsDataClassificationLabelRequest: UpdateBoardsDataClassificationLabelRequest,
   UpdateTeamSettingsRequest: UpdateTeamSettingsRequest,
-  UserId: UserId,
   UserInfoShort: UserInfoShort,
   WidgetData: WidgetData,
   WidgetDataPlatformTags: WidgetDataPlatformTags,

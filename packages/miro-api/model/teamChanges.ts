@@ -10,14 +10,11 @@
  * Do not edit the class manually.
  */
 
-import {CreatePictureRequest} from './createPictureRequest'
-
 export class TeamChanges {
   /**
    * Team name
    */
   'name'?: string
-  'picture'?: CreatePictureRequest
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -28,11 +25,6 @@ export class TeamChanges {
       name: 'name',
       baseName: 'name',
       type: 'string',
-    },
-    {
-      name: 'picture',
-      baseName: 'picture',
-      type: 'CreatePictureRequest',
     },
   ]
 
