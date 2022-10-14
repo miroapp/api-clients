@@ -9,6 +9,7 @@ import {GetBoards400Response} from '../model/getBoards400Response'
 
 import {BoardDataClassificationLabel} from '../model/boardDataClassificationLabel'
 import {DataClassificationLabelId} from '../model/dataClassificationLabelId'
+import {EnterpriseGetOrganization400Response} from '../model/enterpriseGetOrganization400Response'
 
 import {DataClassificationOrganizationSettings} from '../model/dataClassificationOrganizationSettings'
 
@@ -59,7 +60,6 @@ import {GenericItemUpdate} from '../model/genericItemUpdate'
 import {EnterpriseGetOrganizationMembers200Response} from '../model/enterpriseGetOrganizationMembers200Response'
 import {Organization} from '../model/organization'
 import {OrganizationMember} from '../model/organizationMember'
-import {OrganizationMembersSearchQuery} from '../model/organizationMembersSearchQuery'
 
 import {ShapeCreateRequest} from '../model/shapeCreateRequest'
 import {ShapeItem} from '../model/shapeItem'
@@ -76,6 +76,7 @@ import {TagUpdateRequest} from '../model/tagUpdateRequest'
 import {TagWithLinks} from '../model/tagWithLinks'
 import {TagsPagedResponse} from '../model/tagsPagedResponse'
 
+import {ErrorObj} from '../model/errorObj'
 import {TeamMember} from '../model/teamMember'
 import {TeamMemberChanges} from '../model/teamMemberChanges'
 import {TeamMemberInvite} from '../model/teamMemberInvite'
@@ -857,7 +858,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of boards that match the search criteria provided in the request. If you are an Enterprise customer and a Company Admin, you can retrieve all boards, including all private boards (boards that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins. Note that you only get results instantaneously when you filter by `team_id`. If you use any other filter,  you need to give a few seconds for the indexing of newly created boards before retrieving boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
+   * Retrieves a list of boards that match the search criteria provided in the request. If you are an Enterprise customer and a Company Admin, you can retrieve all boards, including all private boards (boards that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins). Note that you only get results instantaneously when you filter by `team_id`. If you use any other filter,  you need to give a few seconds for the indexing of newly created boards before retrieving boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get boards
    * @param teamId
    * @param query
@@ -1153,7 +1154,7 @@ export class MiroApi {
     boardId: string,
     connectorCreationData: ConnectorCreationData,
   ): Promise<{response: Response; body: ConnectorWithLinks}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/connectors'.replace(
+    const localVarPath = '/v2/boards/{board_id}/connectors'.replace(
       '{' + 'board_id' + '}',
       encodeURIComponent(String(boardId)),
     )
@@ -1187,7 +1188,7 @@ export class MiroApi {
    * @param connectorId [Unique identifier (ID) of the connector](https://developers.miro.com/reference/rest-api-connector-model) that you want to delete.
    */
   async deleteConnector(boardId: string, connectorId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/connectors/{connector_id}'
+    const localVarPath = '/v2/boards/{board_id}/connectors/{connector_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'connector_id' + '}', encodeURIComponent(String(connectorId)))
     let localVarQueryParameters = new URLSearchParams()
@@ -1224,7 +1225,7 @@ export class MiroApi {
    * @param connectorId [Unique identifier (ID) of the connector](https://developers.miro.com/reference/rest-api-connector-model) that you want to retrieve.
    */
   async getConnector(boardId: string, connectorId: string): Promise<{response: Response; body: ConnectorWithLinks}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/connectors/{connector_id}'
+    const localVarPath = '/v2/boards/{board_id}/connectors/{connector_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'connector_id' + '}', encodeURIComponent(String(connectorId)))
     let localVarQueryParameters = new URLSearchParams()
@@ -1269,7 +1270,7 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: ConnectorsCursorPaged}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/connectors'.replace(
+    const localVarPath = '/v2/boards/{board_id}/connectors'.replace(
       '{' + 'board_id' + '}',
       encodeURIComponent(String(boardId)),
     )
@@ -1316,7 +1317,7 @@ export class MiroApi {
     connectorId: string,
     connectorChangesData: ConnectorChangesData,
   ): Promise<{response: Response; body: ConnectorWithLinks}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/connectors/{connector_id}'
+    const localVarPath = '/v2/boards/{board_id}/connectors/{connector_id}'
       .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'connector_id' + '}', encodeURIComponent(String(connectorId)))
     let localVarQueryParameters = new URLSearchParams()
@@ -2310,11 +2311,33 @@ export class MiroApi {
    * Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
    * @summary Get organization members
    * @param orgId id of the organization
-   * @param query query to be used for organization members retrieval
+   * @param emails
+   * @param role
+   * @param license
+   * @param active
+   * @param cursor
+   * @param limit
    */
   async enterpriseGetOrganizationMembers(
     orgId: string,
-    query: OrganizationMembersSearchQuery,
+    query?: {
+      emails?: string
+
+      role?:
+        | 'organization_internal_admin'
+        | 'organization_internal_user'
+        | 'organization_external_user'
+        | 'organization_team_guest_user'
+        | 'unknown'
+
+      license?: 'full' | 'occasional' | 'free' | 'free_restricted' | 'full_trial' | 'unknown'
+
+      active?: boolean
+
+      cursor?: string
+
+      limit?: string
+    },
   ): Promise<{response: Response; body: EnterpriseGetOrganizationMembers200Response}> {
     const localVarPath = '/v2/orgs/{org_id}/members'.replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
     let localVarQueryParameters = new URLSearchParams()
@@ -2323,13 +2346,40 @@ export class MiroApi {
       throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetOrganizationMembers.')
     }
 
-    // verify required parameter 'query' is not null or undefined
-    if (query === null || query === undefined) {
-      throw new Error('Required parameter query was null or undefined when calling enterpriseGetOrganizationMembers.')
+    if (query?.emails !== undefined) {
+      localVarQueryParameters.append('emails', ObjectSerializer.serialize(query?.emails, 'string'))
     }
 
-    if (query !== undefined) {
-      localVarQueryParameters.append('query', ObjectSerializer.serialize(query, 'OrganizationMembersSearchQuery'))
+    if (query?.role !== undefined) {
+      localVarQueryParameters.append(
+        'role',
+        ObjectSerializer.serialize(
+          query?.role,
+          "'organization_internal_admin' | 'organization_internal_user' | 'organization_external_user' | 'organization_team_guest_user' | 'unknown'",
+        ),
+      )
+    }
+
+    if (query?.license !== undefined) {
+      localVarQueryParameters.append(
+        'license',
+        ObjectSerializer.serialize(
+          query?.license,
+          "'full' | 'occasional' | 'free' | 'free_restricted' | 'full_trial' | 'unknown'",
+        ),
+      )
+    }
+
+    if (query?.active !== undefined) {
+      localVarQueryParameters.append('active', ObjectSerializer.serialize(query?.active, 'boolean'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'string'))
     }
 
     const resource = new URL(localVarPath, this.basePath)
@@ -3069,7 +3119,7 @@ export class MiroApi {
     orgId: string,
     teamId: string,
     memberId: string,
-  ): Promise<{response: Response; body: object}> {
+  ): Promise<{response: Response; body?: any}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
       .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -3100,7 +3150,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
+    const body = bodyAsJson
 
     return {response, body}
   }
@@ -3225,7 +3275,7 @@ export class MiroApi {
     orgId: string,
     teamId: string,
     teamMemberInvite: TeamMemberInvite,
-  ): Promise<{response: Response; body: InvitationResult}> {
+  ): Promise<{response: Response; body: TeamMember}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/members'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
       .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -3251,7 +3301,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'InvitationResult')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamMember')
 
     return {response, body}
   }
@@ -3341,14 +3391,18 @@ export class MiroApi {
   /**
    * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
    * @summary Get team settings
+   * @param orgId The id of an Organization.
    * @param teamId The id of a Team.
    */
-  async enterpriseGetTeamSettings(teamId: string): Promise<{response: Response; body: TeamSettings}> {
-    const localVarPath = '/v2/teams_settings/{team_id}'.replace(
-      '{' + 'team_id' + '}',
-      encodeURIComponent(String(teamId)),
-    )
+  async enterpriseGetTeamSettings(orgId: string, teamId: string): Promise<{response: Response; body: TeamSettings}> {
+    const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/settings'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
     let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetTeamSettings.')
+    }
     // verify required parameter 'teamId' is not null or undefined
     if (teamId === null || teamId === undefined) {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseGetTeamSettings.')
@@ -3374,18 +3428,23 @@ export class MiroApi {
   /**
    * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>
    * @summary Update team settings
+   * @param orgId The id of an Organization.
    * @param teamId The id of a Team.
    * @param teamSettingsChanges
    */
   async enterpriseUpdateTeamSettings(
+    orgId: string,
     teamId: string,
     teamSettingsChanges: TeamSettingsChanges,
   ): Promise<{response: Response; body: TeamSettings}> {
-    const localVarPath = '/v2/teams_settings/{team_id}'.replace(
-      '{' + 'team_id' + '}',
-      encodeURIComponent(String(teamId)),
-    )
+    const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/settings'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
     let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseUpdateTeamSettings.')
+    }
     // verify required parameter 'teamId' is not null or undefined
     if (teamId === null || teamId === undefined) {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseUpdateTeamSettings.')
@@ -3448,7 +3507,7 @@ export class MiroApi {
    * @param orgId The id of an Organization.
    * @param teamId The id of a Team.
    */
-  async enterpriseDeleteTeam(orgId: string, teamId: string): Promise<{response: Response; body: object}> {
+  async enterpriseDeleteTeam(orgId: string, teamId: string): Promise<{response: Response; body?: any}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
       .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -3474,7 +3533,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
+    const body = bodyAsJson
 
     return {response, body}
   }

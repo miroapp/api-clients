@@ -47,6 +47,10 @@ export class WidgetDataPlatformTags {
    */
   'mode'?: string | typeof WidgetDataPlatformTags.ModeEnum[keyof typeof WidgetDataPlatformTags.ModeEnum]
   /**
+   * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
+   */
+  'previewUrl'?: string
+  /**
    * Name of the content\'s provider.
    */
   'providerName'?: string
@@ -82,6 +86,14 @@ export class WidgetDataPlatformTags {
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`. Possible values: `disconnected`, `connected`, `disabled`
    */
   'status'?: string | typeof WidgetDataPlatformTags.StatusEnum[keyof typeof WidgetDataPlatformTags.StatusEnum]
+  /**
+   * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
+   */
+  'imageUrl'?: string
+  /**
+   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.  `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.
+   */
+  'documentUrl'?: string
   /**
    * Defines the geometric shape of the sticky note and aspect ratio for its dimensions. Possible values: `square`, `rectangle`
    */
@@ -129,6 +141,11 @@ export class WidgetDataPlatformTags {
       type: 'WidgetDataPlatformTags.ModeEnum',
     },
     {
+      name: 'previewUrl',
+      baseName: 'previewUrl',
+      type: 'string',
+    },
+    {
       name: 'providerName',
       baseName: 'providerName',
       type: 'string',
@@ -172,6 +189,16 @@ export class WidgetDataPlatformTags {
       name: 'status',
       baseName: 'status',
       type: 'WidgetDataPlatformTags.StatusEnum',
+    },
+    {
+      name: 'imageUrl',
+      baseName: 'imageUrl',
+      type: 'string',
+    },
+    {
+      name: 'documentUrl',
+      baseName: 'documentUrl',
+      type: 'string',
     },
     {
       name: 'shape',

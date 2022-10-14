@@ -10,12 +10,27 @@
  * Do not edit the class manually.
  */
 
-import {InvitationErrorReasonStackTraceInner} from './invitationErrorReasonStackTraceInner'
-
-export class InvitationErrorReasonSuppressedInner {
-  'localizedMessage'?: string
+/**
+ * @internal
+ * Test error object
+ */
+export class EnterpriseGetOrganization400Response {
+  /**
+   * Code of the error
+   */
+  'code'?: string
+  /**
+   * Description of the error
+   */
   'message'?: string
-  'stackTrace'?: Array<InvitationErrorReasonStackTraceInner>
+  /**
+   * Status code of the error
+   */
+  'status'?: number
+  /**
+   * Type of the error
+   */
+  'type'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -23,8 +38,8 @@ export class InvitationErrorReasonSuppressedInner {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'localizedMessage',
-      baseName: 'localizedMessage',
+      name: 'code',
+      baseName: 'code',
       type: 'string',
     },
     {
@@ -33,14 +48,19 @@ export class InvitationErrorReasonSuppressedInner {
       type: 'string',
     },
     {
-      name: 'stackTrace',
-      baseName: 'stackTrace',
-      type: 'Array<InvitationErrorReasonStackTraceInner>',
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return InvitationErrorReasonSuppressedInner.attributeTypeMap
+    return EnterpriseGetOrganization400Response.attributeTypeMap
   }
 }

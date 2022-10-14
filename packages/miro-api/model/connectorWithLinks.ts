@@ -17,6 +17,10 @@ import {ItemConnectionWithLinks} from './itemConnectionWithLinks'
 import {ModifiedBy} from './modifiedBy'
 import {SelfLink} from './selfLink'
 
+/**
+ * @internal
+ * Contains the result data.
+ */
 export class ConnectorWithLinks {
   /**
    * Blocks of text you want to display on the connector.

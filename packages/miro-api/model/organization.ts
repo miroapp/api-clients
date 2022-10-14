@@ -69,15 +69,15 @@ export class Organization {
 
 export namespace Organization {
   export const PlanEnum = {
-    Unknown: 'UNKNOWN',
-    Company: 'COMPANY',
-    Consultant: 'CONSULTANT',
-    ConsultantSlf: 'CONSULTANT_SLF',
-    Business: 'BUSINESS',
-    PaidTeamOrg: 'PAID_TEAM_ORG',
-    IntegrationOrg: 'INTEGRATION_ORG',
-    Professional2022: 'PROFESSIONAL_2022',
-    EduTeamOrg: 'EDU_TEAM_ORG',
-    FreeTeamOrg: 'FREE_TEAM_ORG',
+    Company: 'company',
+    Consultant: 'consultant',
+    ConsultantSlf: 'consultant_slf',
+    Business: 'business',
+    PaidTeamOrg: 'paid_team_org',
+    IntegrationOrg: 'integration_org',
+    Professional2022: 'professional_2022',
+    EduTeamOrg: 'edu_team_org',
+    FreeTeamOrg: 'free_team_org',
+    Unknown: 'unknown',
   } as const
 }

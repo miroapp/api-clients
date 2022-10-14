@@ -44,7 +44,7 @@ export class ShapeStyle {
    */
   'fillOpacity'?: string
   /**
-   * Defines the font type for the text in the shape item. Default: `arial`. Possible values: `arial`, `abril_fatface`, `bangers`, `eb_garamond`, `georgia`, `graduate`, `gravitas_one`, `fredoka_one`, `nixie_one`, `open_sans`, `permanent_marker`, `pt_sans`, `pt_sans_narrow`, `pt_serif`, `rammetto_one`, `roboto`, `roboto_condensed`, `roboto_slab`, `caveat`, `times_new_roman`, `titan_one`, `lemon_tuesday`, `roboto_mono`, `noto_sans`, `plex_sans`, `plex_serif`, `plex_mono`, `spoof`, `tiempos_text`
+   * Defines the font type for the text in the shape item. Default: `arial`. Possible values: `arial`, `abril_fatface`, `bangers`, `eb_garamond`, `georgia`, `graduate`, `gravitas_one`, `fredoka_one`, `nixie_one`, `open_sans`, `permanent_marker`, `pt_sans`, `pt_sans_narrow`, `pt_serif`, `rammetto_one`, `roboto`, `roboto_condensed`, `roboto_slab`, `caveat`, `times_new_roman`, `titan_one`, `lemon_tuesday`, `roboto_mono`, `noto_sans`, `plex_sans`, `plex_serif`, `plex_mono`, `spoof`, `tiempos_text`, `formular`
    */
   'fontFamily'?: string | typeof ShapeStyle.FontFamilyEnum[keyof typeof ShapeStyle.FontFamilyEnum]
   /**
@@ -164,6 +164,7 @@ export namespace ShapeStyle {
     PlexMono: 'plex_mono',
     Spoof: 'spoof',
     TiemposText: 'tiempos_text',
+    Formular: 'formular',
   } as const
   export const TextAlignEnum = {
     Left: 'left',
