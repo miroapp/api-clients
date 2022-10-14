@@ -51,5 +51,5 @@ await updateDoc(
   'storage-implementation',
   'Storage implementation',
   categoryId,
-  'packages/miro-api/docs/implementing-storage.md'
+  'packages/miro-api/docs/implement-storage.md'
 )
