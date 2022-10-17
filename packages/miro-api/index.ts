@@ -1,4 +1,3 @@
-import assert from 'assert'
 import fetch from 'node-fetch'
 import {HttpError, Logger, MiroApi as MiroLowlevelApi} from './api'
 import {InMemoryStorage, Storage} from './storage'
@@ -30,9 +29,15 @@ export class Miro {
     this.logger = opts.logger || (process.env.MIRO_DEBUG ? console.log : undefined)
     this.httpTimeout = opts.httpTimeout
 
-    assert(this.clientId, 'MIRO_CLIENT_ID or options.clientId is required')
-    assert(this.clientSecret, 'MIRO_CLIENT_SECRET or options.clientSecret is required')
-    assert(this.redirectUrl, 'MIRO_REDIRECT_URL or options.redirectUrl is required')
+    if (!this.clientId) {
+      throw new Error('miro-api: MIRO_CLIENT_ID or passing options.clientId is required')
+    }
+    if (!this.clientSecret) {
+      throw new Error('miro-api: MIRO_CLIENT_SECRET or passing options.clientSecret is required')
+    }
+    if (!this.redirectUrl) {
+      throw new Error('miro-api: MIRO_REDIRECT_URL or passing options.redirectUrl is required')
+    }
     if (this.storage instanceof InMemoryStorage) {
       console.warn('miro-api: Default storage is not recommended, consider using a custom storage implementation')
     }
