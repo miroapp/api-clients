@@ -7,7 +7,7 @@
       "dependsOn": ["^build:docs"]
     },
     "build": {
-      "dependsOn": ["generate", "^build"]
+      "dependsOn": ["generator#generate"]
     },
     "dev": {
       "dependsOn": ["^dev"]
@@ -16,13 +16,6 @@
       "dependsOn": ["build"],
       "outputs": [],
       "inputs": ["__tests__/**/*.tsx"]
-    },
-    "lint": {
-      "outputs": []
-    },
-    "deploy": {
-      "dependsOn": ["build", "test", "lint"],
-      "outputs": []
     }
   }
 }
