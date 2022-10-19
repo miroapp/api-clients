@@ -1,6 +1,4 @@
-# ⚠️ 🚧 This client is still a work in progress, and therefore subject to change without notice. 🚧 ⚠️
-
-🚧 [Miro Node,js API client reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
+[Miro Node.js API client reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
 
 ## Miro Node.js API client library
 
