@@ -211,4 +211,28 @@ export class MiroApi extends HighlevelApi {
 
 export {MiroApi as MiroLowlevelApi} from './api'
 
+export {
+  Organization,
+  OrganizationMember,
+  Team,
+  BoardDataClassification,
+  DataClassification,
+  TeamMember,
+  TeamSettings,
+  Board,
+  BoardMember,
+  Item,
+  AppCardItem,
+  CardItem,
+  DocumentItem,
+  EmbedItem,
+  FrameItem,
+  ImageItem,
+  ShapeItem,
+  StickyNoteItem,
+  TextItem,
+  Connector,
+  Tag,
+} from './highlevel/index'
+
 export default Miro
