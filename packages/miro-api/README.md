@@ -115,7 +115,7 @@ for await (const board of api.getAllBoards()) {
 ## Storage
 
 > 🚧
-> 
+>
 > ⚠️ For production deployments, we recommend using a custom implementation backed by a database.
 
 Most methods take `userId` as their first parameter. For example: [`isAuthorized`](), [`exchangeCodeForAccessToken`](), [`as`]().

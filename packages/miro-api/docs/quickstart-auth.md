@@ -103,12 +103,12 @@ app.use(
 )
 ```
 
-> 🚧 
-> 
+> 🚧
+>
 > In production deployments, replace the secret with a randomly generated string.
 
-> 📘 
-> 
+> 📘
+>
 > For the sake of simplicity, the quick start guide identifies users with session IDs.  
 > In production deployments, use actual user IDs, separate from session IDs. This avoids repeatedly prompting users to reinstall the app that they already installed in a previous, different session.
 
