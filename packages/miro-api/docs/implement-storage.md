@@ -7,7 +7,9 @@ Implement a [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._
 This guide features two examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add data storage functionality to the `Miro` class. \
 The default is a simple in-memory implementation.
 
-⚠️ For production deployments, we recommend using a custom implementation backed by a database. ⚠️
+> 🚧
+>
+> ⚠️ For production deployments, we recommend using a custom implementation backed by a database.
 
 ## Implement storage with a Redis backend
 
