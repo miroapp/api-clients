@@ -1,7 +1,3 @@
-# Miro Node.js client quick start guide with OAuth 2.0 and Express
-
-Build a simple app based on the Miro Node.js client library, the OAuth 2.0 code grant flow, and the Express JavaScript web framework.
-
 ## Goal
 
 This quick start guide helps you familiarize yourself with the [Miro REST API 2.0](https://developers.miro.com/reference/api-reference) and the [OAuth 2.0 authorization code grant flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/) by building a simple app that uses the Miro Node.js client library.
@@ -16,16 +12,16 @@ Before you begin, make sure that:
 
 - You have a [Miro account](https://miro.com/signup/).
 - You're [signed in to Miro](https://miro.com/login/).
-- Your Miro account has a [Developer team](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-a-developer-team-in-miro).
+- Your Miro account has a [Developer team](https://developers.miro.com/docs/create-a-developer-team).
 - Your development environment includes [Node.js 14.15 or a later version](https://nodejs.org/en/download/). \
   To check the Node.js version on your system:
   1. Open a terminal session.
   2. In the terminal, run `node --version`.
 
-It's a good to already go through the following steps in your Miro account settings:
+It's a good idea to already go through the following steps in your Miro account settings:
 
-1. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-create-your-app-in-miro)
-2. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-3-configure-your-app-in-miro)
+1. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-your-app-in-miro)
+2. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-configure-your-app-in-miro)
 3. In your app settings, go to **Redirect URI for OAuth2.0**; in the input field, enter the following URL: `http://127.0.0.1:4000/auth/miro/callback`; click **Add** to add it to the app [redirect URI list](https://www.oauth.com/oauth2-servers/redirect-uris/).
 4. In your app settings, go to **App Credentials**, and save the values assigned to **Client ID** and **Client secret**. \
    You'll need to use these values later.
@@ -33,6 +29,7 @@ It's a good to already go through the following steps in your Miro account setti
 ## Build the app
 
 After configuring the options in the previous section, you can start building the app.
+
 ### Step 1: create the project directory
 
 1. Open a terminal session.
@@ -109,7 +106,7 @@ app.use(
 
 > 📘
 >
-> For the sake of simplicity, the quick start guide identifies users with session IDs.  
+> For the sake of simplicity, the quick start guide identifies users with session IDs.
 > In production deployments, use actual user IDs, separate from session IDs. This avoids repeatedly prompting users to reinstall the app that they already installed in a previous, different session.
 
 ### Step 5: redirect new users to the authorization page
@@ -252,3 +249,9 @@ app.get('/auth/miro/callback', async (req, res) => {
 
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 ```
+
+## See also
+
+- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
+- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/classes/index.MiroApi.html)
+- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html)
