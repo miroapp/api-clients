@@ -1,7 +1,3 @@
-# Implement storage in the Miro Node.js client
-
-Implement a [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to enable the [`Miro`](https://miroapp.github.io/api-clients/classes/index.Miro.html) class to automatically manage access and refresh tokens.
-
 ## Goal
 
 This guide features two examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add data storage functionality to the `Miro` class. \

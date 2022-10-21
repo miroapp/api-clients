@@ -1,7 +1,3 @@
-# Miro Node.js client quick start guide for task automation
-
-Build a simple app based on the Miro Node.js client library to implement basic task automation on a Miro board.
-
 ## Goal
 
 This quick start guide helps you familiarize yourself with the [Miro REST API 2.0](https://developers.miro.com/reference/api-reference) by building a simple app that uses the Miro Node.js client library.

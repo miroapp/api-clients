@@ -7,10 +7,10 @@ const key = process.env.README_API_KEY
 if (!key) throw new Error('Missing environment variable: README_API_KEY')
 
 // Readme version of the site to publish to
-const readmeVersion = '2-nodejs-test'
+const readmeVersion = 'v2.0'
 
 // ID of the Miro REST API Clients category for the guides
-const categoryId = '6334152e20e40f07e4f23e6b'
+const categoryId = '634e7912341d20002648ef06'
 
 async function updateDoc(slug, title, category, file) {
   const res = await fetch(`https://dash.readme.com/api/v1/docs/${slug}`, {
@@ -22,34 +22,38 @@ async function updateDoc(slug, title, category, file) {
     },
     body: JSON.stringify({ title, category, body: fs.readFileSync(file, 'utf-8') })
   })
-  console.log('Uploaded', (await res.json()).title)
+  if (res.status >= 400) {
+    throw new Error(await res.text())
+  }
+
+  console.log('Uploaded', (await res.json()))
 }
 
 await updateDoc(
-  'node-api-client',
-  'Node.js Api Client',
+  'miro-nodejs-readme',
+  'Miro Node.js client Readme',
   categoryId,
   './packages/miro-api/README.md'
 )
 
 await updateDoc(
-  'get-started-with-nodejs-api-client',
-  'Miro Node.js client quickstart guide (Automation use case)',
+  'miro-nodejs-quickstart',
+  'Miro Node.js client quickstart for task automation',
   categoryId,
   'packages/miro-api/docs/quickstart.md'
 )
 
 await updateDoc(
-  'authorization-quickstart',
-  'Miro Node.js client quickstart guide (Using OAuth 2.0 and Express framework)',
+  'miro-nodejs-quickstart-with-oauth-and-express',
+  'Miro Node.js client quickstart with OAuth and Express',
   categoryId,
   'packages/miro-api/docs/quickstart-auth.md'
 )
 
 
 await updateDoc(
-  'storage-implementation',
-  'Storage implementation',
+  'miro-nodejs-implement-storage-for-data-persistence',
+  'Implement data storage',
   categoryId,
   'packages/miro-api/docs/implement-storage.md'
 )
