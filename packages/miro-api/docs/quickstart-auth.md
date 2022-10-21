@@ -1,7 +1,3 @@
-# Miro Node.js client quick start guide with OAuth 2.0 and Express
-
-Build a simple app based on the Miro Node.js client library, the OAuth 2.0 code grant flow, and the [Express](expressjs.com/) JavaScript web framework.
-
 ## Goal
 
 This quick start guide helps you familiarize yourself with the [Miro REST API 2.0](https://developers.miro.com/reference/api-reference) and the [OAuth 2.0 authorization code grant flow](https://www.oauth.com/oauth2-servers/server-side-apps/authorization-code/) by building a simple app that uses the Miro Node.js client library.
@@ -110,7 +106,7 @@ app.use(
 
 > 📘
 >
-> For the sake of simplicity, the quick start guide identifies users with session IDs.  
+> For the sake of simplicity, the quick start guide identifies users with session IDs.
 > In production deployments, use actual user IDs, separate from session IDs. This avoids repeatedly prompting users to reinstall the app that they already installed in a previous, different session.
 
 ### Step 5: redirect new users to the authorization page
