@@ -31,21 +31,21 @@ async function updateDoc(slug, title, category, file) {
 
 await updateDoc(
   'miro-nodejs-readme',
-  'Node.js Api Client',
+  'Miro Node.js client Readme',
   categoryId,
   './packages/miro-api/README.md'
 )
 
 await updateDoc(
   'miro-nodejs-quickstart',
-  'Miro Node.js client quickstart guide (Automation use case)',
+  'Miro Node.js client quickstart for task automation',
   categoryId,
   'packages/miro-api/docs/quickstart.md'
 )
 
 await updateDoc(
   'miro-nodejs-quickstart-with-oauth-and-express',
-  'Miro Node.js client quickstart guide (Using OAuth 2.0 and Express framework)',
+  'Miro Node.js client quickstart with OAuth and Express',
   categoryId,
   'packages/miro-api/docs/quickstart-auth.md'
 )
@@ -53,7 +53,7 @@ await updateDoc(
 
 await updateDoc(
   'miro-nodejs-implement-storage-for-data-persistence',
-  'Storage implementation',
+  Implement data storage',
   categoryId,
   'packages/miro-api/docs/implement-storage.md'
 )
