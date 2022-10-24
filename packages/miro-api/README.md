@@ -16,7 +16,7 @@ You can use the client to implement backend functionality in your Miro app, such
 To install the Miro Node.js API client and its dependencies, run the following command in your project root directory:
 
 ```bash
-npm install @miro/miro-api
+npm install @mirohq/miro-api
 ```
 
 ## Import the clients
