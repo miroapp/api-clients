@@ -2,7 +2,7 @@ import {ImageUpdateRequest, MiroApi} from '../api'
 import {ImageItem} from '../model/imageItem'
 import {isNotUrl, WidgetCreateWithBufferRequest} from './Board'
 import {ConnectableItem, ConnectTo} from './Item'
-import FormData from 'form-data'
+import FormData = require('form-data')
 
 type WidgetUpdateWithBufferRequest = Partial<WidgetCreateWithBufferRequest>
 
