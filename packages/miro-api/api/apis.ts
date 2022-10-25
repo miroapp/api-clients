@@ -1,6 +1,6 @@
 import fetch, {Response, RequestInit} from 'node-fetch'
-import FormData from 'form-data'
 import {version} from '../package.json'
+import FormData = require('form-data')
 
 import {AppCardCreateRequest} from '../model/appCardCreateRequest'
 import {AppCardItem} from '../model/appCardItem'

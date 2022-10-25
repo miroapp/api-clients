@@ -2,7 +2,7 @@ import {DocumentUpdateRequest, MiroApi} from '../api'
 import {DocumentItem} from '../model/documentItem'
 import {isNotUrl, WidgetCreateWithBufferRequest} from './Board'
 import {ConnectableItem, ConnectTo} from './Item'
-import FormData from 'form-data'
+import FormData = require('form-data')
 
 type WidgetUpdateWithBufferRequest = Partial<WidgetCreateWithBufferRequest>
 

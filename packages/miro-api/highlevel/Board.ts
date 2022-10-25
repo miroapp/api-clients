@@ -13,7 +13,7 @@ import {
   FixedRatioGeometry,
   Parent,
 } from '../api'
-import FormData from 'form-data'
+import FormData = require('form-data')
 import {WidgetItem} from './Item'
 import {hasMoreData} from './helpers'
 
