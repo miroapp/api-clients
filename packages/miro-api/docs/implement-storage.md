@@ -119,3 +119,9 @@ app.get('/', async (req, res) => {
   // ...
 }
 ```
+
+## See also
+
+- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
+- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/classes/index.MiroApi.html)
+- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html)

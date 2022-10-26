@@ -249,3 +249,9 @@ app.get('/auth/miro/callback', async (req, res) => {
 
 app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 ```
+
+## See also
+
+- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
+- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/classes/index.MiroApi.html)
+- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html)

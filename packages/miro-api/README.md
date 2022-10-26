@@ -1,4 +1,4 @@
-[Miro Node.js API client reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
+[Miro Node.js client reference documentation](https://miroapp.github.io/api-clients/index.html)
 
 ## Miro Node.js API client library
 
