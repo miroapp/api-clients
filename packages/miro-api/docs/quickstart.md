@@ -168,3 +168,9 @@ For more information about the methods that `Board` makes available, see the [re
 
 You can also start integrating your data into Miro. For example, add [sticky notes](https://miroapp.github.io/api-clients/classes/index._internal_.StickyNoteItem.html), create [app cards](https://miroapp.github.io/api-clients/classes/index._internal_.AppCardItem.html), and more. \
 For more inspiration, see the [example app to manage sticky notes and tags](https://github.com/miroapp/app-examples/tree/main/examples/node-stickies-csv) on our GitHub repo.
+
+## See also
+
+- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
+- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/classes/index.MiroApi.html)
+- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html)
