@@ -27,6 +27,7 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
           children: [
             {
               title: 'Board',
+              url: 'classes/index.Board.html',
               children: [
                 {title: 'StickyNoteItem'},
                 {title: 'TextItem'},
@@ -37,13 +38,13 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
                 {title: 'ShapeItem'},
                 {title: 'ImageItem'},
                 {title: 'FrameItem'},
-                {title: 'Item'},
-                {title: 'Connector'},
-                {title: 'Tag'},
+                {title: 'Item', url: 'classes/index.Item.html'},
+                {title: 'Connector', url: 'classes/index.Connector.html'},
+                {title: 'Tag', url: 'classes/index.Tag.html'},
               ],
             },
-            {title: 'Team', url: 'classes/index._internal_.Team-1.html'},
-            {title: 'Organization', url: 'classes/index._internal_.Organization-1.html'},
+            {title: 'Team', url: 'classes/index.Team.html'},
+            {title: 'Organization', url: 'classes/index.Organization.html'},
           ],
         },
         {
