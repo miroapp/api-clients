@@ -66,9 +66,9 @@ const boards = await api.createBoard()
 
 ## Model hierarchy
 
-- The `Miro` [`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html) class. \
-  This instance provides methods to create and get the [`Board`](https://miroapp.github.io/api-clients/classes/highlevel.Board.html) model.
-- `Board` has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/highlevel.Item.html) models.
+- The `Miro` [`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken) class. \
+  This instance provides methods to create and get the [`Board`](https://miroapp.github.io/api-clients/classes/index.Board.html) model.
+- `Board` has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/index.Item.html) models.
 - `Items` includes methods to create connectors, as well as attach and detach tags, for the board items that support these features.
 
 It's possible to access the methods, properties, and objects by traversing the hierarchy. \
@@ -98,7 +98,7 @@ Miro
 ## Pagination
 
 The client library includes helper methods that make it easy to paginate over all the resources using `for await...of` loops. \
-For example, the [`getAllBoards`](https://miroapp.github.io/api-clients/classes/highlevel.Api.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that paginates automatically.
+For example, the [`getAllBoards`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that paginates automatically.
 
 Example:
 
@@ -133,7 +133,7 @@ const miro = new Miro({
 })
 ```
 
-To support the client library storage functionality in your app, implement the following [get and set](https://miroapp.github.io/api-clients/interfaces/index.Storage.html) interface:
+To support the client library storage functionality in your app, implement the following [get and set](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface:
 
 ```typescript
 export interface Storage {
