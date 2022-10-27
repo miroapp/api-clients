@@ -74,8 +74,6 @@ export class Miro {
 
   /**
    * Parse request to extract authorization code and get access token
-   *
-   * @see {@link index.Miro.exchangeCodeForAccessToken}
    */
   async handleAuthorizationCodeRequest(userId: ExternalUserId, req: Request): Promise<void> {
     const url = `http://${req.headers.host}${req.url}`
