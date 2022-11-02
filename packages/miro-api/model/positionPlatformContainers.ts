@@ -16,7 +16,7 @@
  */
 export class PositionPlatformContainers {
   /**
-   * Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported. Possible values: `center`
+   * Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported.
    */
   'origin'?: string | typeof PositionPlatformContainers.OriginEnum[keyof typeof PositionPlatformContainers.OriginEnum] =
     PositionPlatformContainers.OriginEnum.Center

@@ -20,7 +20,7 @@ export class CustomFieldPlatformTags {
    */
   'fillColor'?: string
   /**
-   * The shape of the icon on the preview field. Possible values: `round`, `square`
+   * The shape of the icon on the preview field.
    */
   'iconShape'?:
     | string

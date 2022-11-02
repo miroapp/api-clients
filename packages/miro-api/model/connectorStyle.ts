@@ -20,7 +20,7 @@ export class ConnectorStyle {
    */
   'color'?: string
   /**
-   * The decoration cap of the connector end, like an arrow or circle. Default: stealth. Possible values: `none`, `stealth`, `diamond`, `diamond_filled`, `oval`, `oval_filled`, `arrow`, `triangle`, `triangle_filled`, `erd_one`, `erd_many`, `erd_only_one`, `erd_zero_or_one`, `erd_one_or_many`, `erd_zero_or_many`
+   * The decoration cap of the connector end, like an arrow or circle. Default: stealth.
    */
   'endStrokeCap'?: string | typeof ConnectorStyle.EndStrokeCapEnum[keyof typeof ConnectorStyle.EndStrokeCapEnum]
   /**
@@ -28,7 +28,7 @@ export class ConnectorStyle {
    */
   'fontSize'?: string
   /**
-   * The decoration cap of the connector end, like an arrow or circle. Default: none. Possible values: `none`, `stealth`, `diamond`, `diamond_filled`, `oval`, `oval_filled`, `arrow`, `triangle`, `triangle_filled`, `erd_one`, `erd_many`, `erd_only_one`, `erd_zero_or_one`, `erd_one_or_many`, `erd_zero_or_many`
+   * The decoration cap of the connector end, like an arrow or circle. Default: none.
    */
   'startStrokeCap'?: string | typeof ConnectorStyle.StartStrokeCapEnum[keyof typeof ConnectorStyle.StartStrokeCapEnum]
   /**
@@ -36,7 +36,7 @@ export class ConnectorStyle {
    */
   'strokeColor'?: string
   /**
-   * The stroke pattern of the connector line. Default: normal. Possible values: `normal`, `dotted`, `dashed`
+   * The stroke pattern of the connector line. Default: normal.
    */
   'strokeStyle'?: string | typeof ConnectorStyle.StrokeStyleEnum[keyof typeof ConnectorStyle.StrokeStyleEnum]
   /**
@@ -44,7 +44,7 @@ export class ConnectorStyle {
    */
   'strokeWidth'?: string
   /**
-   * The captions orientation relatively to the connector line curvature. Default: aligned. Possible values: `horizontal`, `aligned`
+   * The captions orientation relatively to the connector line curvature. Default: aligned.
    */
   'textOrientation'?:
     | string

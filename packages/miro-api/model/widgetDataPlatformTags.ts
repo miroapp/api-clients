@@ -43,7 +43,7 @@ export class WidgetDataPlatformTags {
    */
   'html'?: string
   /**
-   * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board. Possible values: `inline`, `modal`
+   * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
    */
   'mode'?: string | typeof WidgetDataPlatformTags.ModeEnum[keyof typeof WidgetDataPlatformTags.ModeEnum]
   /**
@@ -83,7 +83,7 @@ export class WidgetDataPlatformTags {
    */
   'owned'?: boolean
   /**
-   * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`. Possible values: `disconnected`, `connected`, `disabled`
+   * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
   'status'?: string | typeof WidgetDataPlatformTags.StatusEnum[keyof typeof WidgetDataPlatformTags.StatusEnum]
   /**
@@ -95,17 +95,17 @@ export class WidgetDataPlatformTags {
    */
   'documentUrl'?: string
   /**
-   * Defines the geometric shape of the sticky note and aspect ratio for its dimensions. Possible values: `square`, `rectangle`
+   * Defines the geometric shape of the sticky note and aspect ratio for its dimensions.
    */
   'shape'?: string | typeof WidgetDataPlatformTags.ShapeEnum[keyof typeof WidgetDataPlatformTags.ShapeEnum] =
     WidgetDataPlatformTags.ShapeEnum.Square
   /**
-   * Only custom frames are supported at the moment. Possible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`
+   * Only custom frames are supported at the moment.
    */
   'format'?: string | typeof WidgetDataPlatformTags.FormatEnum[keyof typeof WidgetDataPlatformTags.FormatEnum] =
     WidgetDataPlatformTags.FormatEnum.Custom
   /**
-   * Only free form frames are supported at the moment. Possible values: `freeform`, `heap`, `grid`, `rows`, `columns`
+   * Only free form frames are supported at the moment.
    */
   'type'?: string | typeof WidgetDataPlatformTags.TypeEnum[keyof typeof WidgetDataPlatformTags.TypeEnum] =
     WidgetDataPlatformTags.TypeEnum.Freeform

@@ -24,7 +24,7 @@ export class ShapeStyle {
    */
   'borderOpacity'?: string
   /**
-   * Defines the style used to represent the border of the shape. Default: `normal`. Possible values: `normal`, `dotted`, `dashed`
+   * Defines the style used to represent the border of the shape. Default: `normal`.
    */
   'borderStyle'?: string | typeof ShapeStyle.BorderStyleEnum[keyof typeof ShapeStyle.BorderStyleEnum]
   /**
@@ -44,7 +44,7 @@ export class ShapeStyle {
    */
   'fillOpacity'?: string
   /**
-   * Defines the font type for the text in the shape item. Default: `arial`. Possible values: `arial`, `abril_fatface`, `bangers`, `eb_garamond`, `georgia`, `graduate`, `gravitas_one`, `fredoka_one`, `nixie_one`, `open_sans`, `permanent_marker`, `pt_sans`, `pt_sans_narrow`, `pt_serif`, `rammetto_one`, `roboto`, `roboto_condensed`, `roboto_slab`, `caveat`, `times_new_roman`, `titan_one`, `lemon_tuesday`, `roboto_mono`, `noto_sans`, `plex_sans`, `plex_serif`, `plex_mono`, `spoof`, `tiempos_text`, `formular`
+   * Defines the font type for the text in the shape item. Default: `arial`.
    */
   'fontFamily'?: string | typeof ShapeStyle.FontFamilyEnum[keyof typeof ShapeStyle.FontFamilyEnum]
   /**
@@ -52,11 +52,11 @@ export class ShapeStyle {
    */
   'fontSize'?: string
   /**
-   * Defines how the sticky note text is horizontally aligned. Default: `center`. Possible values: `left`, `right`, `center`
+   * Defines how the sticky note text is horizontally aligned. Default: `center`.
    */
   'textAlign'?: string | typeof ShapeStyle.TextAlignEnum[keyof typeof ShapeStyle.TextAlignEnum]
   /**
-   * Defines how the sticky note text is vertically aligned. Default: `top`. Possible values: `top`, `middle`, `bottom`
+   * Defines how the sticky note text is vertically aligned. Default: `top`.
    */
   'textAlignVertical'?: string | typeof ShapeStyle.TextAlignVerticalEnum[keyof typeof ShapeStyle.TextAlignVerticalEnum]
 

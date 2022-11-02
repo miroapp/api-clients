@@ -16,7 +16,7 @@
  */
 export class FrameChanges {
   /**
-   * Only custom frames are supported at the moment. Possible values: `custom`
+   * Only custom frames are supported at the moment.
    */
   'format'?: string | typeof FrameChanges.FormatEnum[keyof typeof FrameChanges.FormatEnum] =
     FrameChanges.FormatEnum.Custom
@@ -25,7 +25,7 @@ export class FrameChanges {
    */
   'title'?: string = 'Sample frame title'
   /**
-   * Only free form frames are supported at the moment. Possible values: `freeform`
+   * Only free form frames are supported at the moment.
    */
   'type'?: string | typeof FrameChanges.TypeEnum[keyof typeof FrameChanges.TypeEnum] = FrameChanges.TypeEnum.Freeform
 
