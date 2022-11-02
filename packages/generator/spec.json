@@ -10263,11 +10263,12 @@
             "name": "limit",
             "schema": {
               "maximum": 100,
-              "minimum": 0,
-              "type": "string",
+              "minimum": 1,
+              "type": "integer",
               "description": "Limit for the number of organization members returned in the result list.",
+              "format": "int32",
               "example": 100,
-              "default": "100"
+              "default": 100
             }
           },
           {
@@ -12876,13 +12877,16 @@
         "operationId": "enterprise-get-team-members",
         "parameters": [
           {
-            "description": "Limit for the number of team members returned in the result list.",
-            "example": 100,
             "in": "query",
             "name": "limit",
             "schema": {
+              "maximum": 100,
+              "minimum": 1,
               "type": "integer",
-              "format": "int32"
+              "description": "Limit for the number of team members returned in the result list.",
+              "format": "int32",
+              "example": 100,
+              "default": 100
             }
           },
           {
@@ -14491,7 +14495,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.\nPossible values: `disconnected`, `connected`, `disabled`",
+            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
             "default": "disconnected",
             "enum": ["disconnected", "connected", "disabled"]
           },
@@ -14708,7 +14712,7 @@
           },
           "role": {
             "type": "string",
-            "description": "Role of the board member.\nPossible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`",
+            "description": "Role of the board member.",
             "enum": ["viewer", "commenter", "editor", "coowner", "owner", "guest"]
           },
           "type": {
@@ -14724,7 +14728,7 @@
         "properties": {
           "role": {
             "type": "string",
-            "description": "Role of the board member.\nPossible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`",
+            "description": "Role of the board member.",
             "default": "commenter",
             "enum": ["viewer", "commenter", "editor", "coowner", "owner", "guest"]
           }
@@ -14747,7 +14751,7 @@
           },
           "role": {
             "type": "string",
-            "description": "Role of the board member.\nPossible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`",
+            "description": "Role of the board member.",
             "enum": ["viewer", "commenter", "editor", "coowner", "owner", "guest"]
           },
           "links": {
@@ -14776,7 +14780,7 @@
           },
           "role": {
             "type": "string",
-            "description": "Role of the board member.\nPossible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`",
+            "description": "Role of the board member.",
             "default": "commenter",
             "enum": ["viewer", "commenter", "editor", "coowner", "owner", "guest"]
           },
@@ -14834,19 +14838,19 @@
         "properties": {
           "collaborationToolsStartAccess": {
             "type": "string",
-            "description": "Defines who can start or stop timer, voting, video chat, screen sharing, attention management. Others will only be able to join. To change the value for the `collaborationToolsStartAccess` parameter, contact Miro Customer Support.\nPossible values: `all_editors`, `board_owners_and_coowners`",
+            "description": "Defines who can start or stop timer, voting, video chat, screen sharing, attention management. Others will only be able to join. To change the value for the `collaborationToolsStartAccess` parameter, contact Miro Customer Support.",
             "default": "all_editors",
             "enum": ["all_editors", "board_owners_and_coowners"]
           },
           "copyAccess": {
             "type": "string",
-            "description": "Defines who can copy the board, copy objects, download images, and save the board as a template or PDF.\nPossible values: `anyone`, `team_members`, `team_editors`, `board_owner`",
+            "description": "Defines who can copy the board, copy objects, download images, and save the board as a template or PDF.",
             "default": "anyone",
             "enum": ["anyone", "team_members", "team_editors", "board_owner"]
           },
           "sharingAccess": {
             "type": "string",
-            "description": "Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support.\nPossible values: `team_members_with_editing_rights`, `owner_and_coowners`",
+            "description": "Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support.",
             "default": "team_members_with_editing_rights",
             "enum": ["team_members_with_editing_rights", "owner_and_coowners"]
           }
@@ -14882,24 +14886,24 @@
         "properties": {
           "access": {
             "type": "string",
-            "description": "Defines the public-level access to the board.\nPossible values: `private`, `view`, `edit`, `comment`",
+            "description": "Defines the public-level access to the board.",
             "enum": ["private", "view", "edit", "comment"]
           },
           "inviteToAccountAndBoardLinkAccess": {
             "type": "string",
-            "description": "Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.\nPossible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`, `no_access`",
+            "description": "Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.",
             "default": "no_access",
             "enum": ["viewer", "commenter", "editor", "coowner", "owner", "guest", "no_access"]
           },
           "organizationAccess": {
             "type": "string",
-            "description": "Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.\nPossible values: `private`, `view`, `comment`, `edit`",
+            "description": "Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.",
             "default": "private",
             "enum": ["private", "view", "comment", "edit"]
           },
           "teamAccess": {
             "type": "string",
-            "description": "Defines the team-level access to the board.\nPossible values: `private`, `view`, `comment`, `edit`",
+            "description": "Defines the team-level access to the board.",
             "enum": ["private", "view", "comment", "edit"]
           }
         },
@@ -14910,25 +14914,25 @@
         "properties": {
           "access": {
             "type": "string",
-            "description": "Defines the public-level access to the board.\nPossible values: `private`, `view`, `edit`, `comment`",
+            "description": "Defines the public-level access to the board.",
             "default": "private",
             "enum": ["private", "view", "edit", "comment"]
           },
           "inviteToAccountAndBoardLinkAccess": {
             "type": "string",
-            "description": "Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access` regardless of the value that you assign for this parameter.\nPossible values: `viewer`, `commenter`, `editor`, `no_access`",
+            "description": "Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access` regardless of the value that you assign for this parameter.",
             "default": "no_access",
             "enum": ["viewer", "commenter", "editor", "no_access"]
           },
           "organizationAccess": {
             "type": "string",
-            "description": "Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.\nPossible values: `private`, `view`, `comment`, `edit`",
+            "description": "Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.",
             "default": "private",
             "enum": ["private", "view", "comment", "edit"]
           },
           "teamAccess": {
             "type": "string",
-            "description": "Defines the team-level access to the board.\nPossible values: `private`, `view`, `comment`, `edit`",
+            "description": "Defines the team-level access to the board.",
             "default": "private",
             "enum": ["private", "view", "comment", "edit"]
           }
@@ -15060,7 +15064,7 @@
           },
           "textAlignVertical": {
             "type": "string",
-            "description": "The vertical position of the text on the connector. Default: middle\nPossible values: `top`, `middle`, `bottom`",
+            "description": "The vertical position of the text on the connector. Default: middle",
             "enum": ["top", "middle", "bottom"]
           }
         },
@@ -15182,7 +15186,7 @@
           },
           "shape": {
             "type": "string",
-            "description": "The path type of the connector line, defines curvature. Default: curved.\nPossible values: `straight`, `elbowed`, `curved`",
+            "description": "The path type of the connector line, defines curvature. Default: curved.",
             "enum": ["straight", "elbowed", "curved"]
           },
           "captions": {
@@ -15209,7 +15213,7 @@
           },
           "shape": {
             "type": "string",
-            "description": "The path type of the connector line, defines curvature. Default: curved.\nPossible values: `straight`, `elbowed`, `curved`",
+            "description": "The path type of the connector line, defines curvature. Default: curved.",
             "enum": ["straight", "elbowed", "curved"]
           },
           "captions": {
@@ -15235,7 +15239,7 @@
           },
           "endStrokeCap": {
             "type": "string",
-            "description": "The decoration cap of the connector end, like an arrow or circle. Default: stealth.\nPossible values: `none`, `stealth`, `diamond`, `diamond_filled`, `oval`, `oval_filled`, `arrow`, `triangle`, `triangle_filled`, `erd_one`, `erd_many`, `erd_only_one`, `erd_zero_or_one`, `erd_one_or_many`, `erd_zero_or_many`",
+            "description": "The decoration cap of the connector end, like an arrow or circle. Default: stealth.",
             "enum": [
               "none",
               "stealth",
@@ -15263,7 +15267,7 @@
           },
           "startStrokeCap": {
             "type": "string",
-            "description": "The decoration cap of the connector end, like an arrow or circle. Default: none.\nPossible values: `none`, `stealth`, `diamond`, `diamond_filled`, `oval`, `oval_filled`, `arrow`, `triangle`, `triangle_filled`, `erd_one`, `erd_many`, `erd_only_one`, `erd_zero_or_one`, `erd_one_or_many`, `erd_zero_or_many`",
+            "description": "The decoration cap of the connector end, like an arrow or circle. Default: none.",
             "enum": [
               "none",
               "stealth",
@@ -15289,7 +15293,7 @@
           },
           "strokeStyle": {
             "type": "string",
-            "description": "The stroke pattern of the connector line. Default: normal.\nPossible values: `normal`, `dotted`, `dashed`",
+            "description": "The stroke pattern of the connector line. Default: normal.",
             "enum": ["normal", "dotted", "dashed"]
           },
           "strokeWidth": {
@@ -15301,7 +15305,7 @@
           },
           "textOrientation": {
             "type": "string",
-            "description": "The captions orientation relatively to the connector line curvature. Default: aligned.\nPossible values: `horizontal`, `aligned`",
+            "description": "The captions orientation relatively to the connector line curvature. Default: aligned.",
             "enum": ["horizontal", "aligned"]
           }
         },
@@ -15353,7 +15357,7 @@
           },
           "shape": {
             "type": "string",
-            "description": "The path type of the connector line, defines curvature. Default: curved.\nPossible values: `straight`, `elbowed`, `curved`",
+            "description": "The path type of the connector line, defines curvature. Default: curved.",
             "default": "curved",
             "enum": ["straight", "elbowed", "curved"]
           },
@@ -15615,7 +15619,7 @@
         "properties": {
           "mode": {
             "type": "string",
-            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.\nPossible values: `inline`, `modal`",
+            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
             "enum": ["inline", "modal"]
           },
           "previewUrl": {
@@ -15635,7 +15639,7 @@
         "properties": {
           "mode": {
             "type": "string",
-            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.\nPossible values: `inline`, `modal`",
+            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
             "enum": ["inline", "modal"]
           },
           "previewUrl": {
@@ -15655,18 +15659,18 @@
         "properties": {
           "height": {
             "type": "number",
-            "description": "Height of the item, in pixels.",
-            "format": "double"
+            "format": "double",
+            "description": "Height of the item, in pixels."
           },
           "rotation": {
             "type": "number",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
-            "format": "double"
+            "format": "double",
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
           },
           "width": {
             "type": "number",
-            "description": "Width of the item, in pixels.",
-            "format": "double"
+            "format": "double",
+            "description": "Width of the item, in pixels."
           }
         },
         "description": "Contains geometrical information about the item, such as its width or height. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry)."
@@ -15676,13 +15680,13 @@
         "properties": {
           "height": {
             "type": "number",
-            "description": "Height of the item, in pixels.",
-            "format": "double"
+            "format": "double",
+            "description": "Height of the item, in pixels."
           },
           "width": {
             "type": "number",
-            "description": "Width of the item, in pixels.",
-            "format": "double"
+            "format": "double",
+            "description": "Width of the item, in pixels."
           }
         },
         "description": "Contains geometrical information about the item. You can set either the width or height. You cannot set both the at the same time. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry)."
@@ -15869,7 +15873,7 @@
           },
           "snapTo": {
             "type": "string",
-            "description": "The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.\nPossible values: `auto`, `top`, `right`, `bottom`, `left`",
+            "description": "The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.",
             "enum": ["auto", "top", "right", "bottom", "left"]
           }
         }
@@ -15887,7 +15891,7 @@
           },
           "snapTo": {
             "type": "string",
-            "description": "The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.\nPossible values: `auto`, `top`, `right`, `bottom`, `left`",
+            "description": "The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.",
             "enum": ["auto", "top", "right", "bottom", "left"]
           }
         }
@@ -16014,7 +16018,7 @@
           },
           "borderStyle": {
             "type": "string",
-            "description": "Defines the style used to represent the border of the shape.\nDefault: `normal`.\nPossible values: `normal`, `dotted`, `dashed`",
+            "description": "Defines the style used to represent the border of the shape.\nDefault: `normal`.",
             "enum": ["normal", "dotted", "dashed"]
           },
           "borderWidth": {
@@ -16041,7 +16045,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "description": "Defines the font type for the text in the shape item.\nDefault: `arial`.\nPossible values: `arial`, `abril_fatface`, `bangers`, `eb_garamond`, `georgia`, `graduate`, `gravitas_one`, `fredoka_one`, `nixie_one`, `open_sans`, `permanent_marker`, `pt_sans`, `pt_sans_narrow`, `pt_serif`, `rammetto_one`, `roboto`, `roboto_condensed`, `roboto_slab`, `caveat`, `times_new_roman`, `titan_one`, `lemon_tuesday`, `roboto_mono`, `noto_sans`, `plex_sans`, `plex_serif`, `plex_mono`, `spoof`, `tiempos_text`, `formular`",
+            "description": "Defines the font type for the text in the shape item.\nDefault: `arial`.",
             "enum": [
               "arial",
               "abril_fatface",
@@ -16083,12 +16087,12 @@
           },
           "textAlign": {
             "type": "string",
-            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.\nPossible values: `left`, `right`, `center`",
+            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
             "enum": ["left", "right", "center"]
           },
           "textAlignVertical": {
             "type": "string",
-            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.\nPossible values: `top`, `middle`, `bottom`",
+            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
             "enum": ["top", "middle", "bottom"]
           }
         },
@@ -16193,7 +16197,7 @@
         "properties": {
           "fillColor": {
             "type": "string",
-            "description": "Fill color for the sticky note.\nDefault: `light_yellow`.\nPossible values: `gray`, `light_yellow`, `yellow`, `orange`, `light_green`, `green`, `dark_green`, `cyan`, `light_pink`, `pink`, `violet`, `red`, `light_blue`, `blue`, `dark_blue`, `black`",
+            "description": "Fill color for the sticky note.\nDefault: `light_yellow`.",
             "enum": [
               "gray",
               "light_yellow",
@@ -16215,12 +16219,12 @@
           },
           "textAlign": {
             "type": "string",
-            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.\nPossible values: `left`, `right`, `center`",
+            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
             "enum": ["left", "right", "center"]
           },
           "textAlignVertical": {
             "type": "string",
-            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.\nPossible values: `top`, `middle`, `bottom`",
+            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
             "enum": ["top", "middle", "bottom"]
           }
         },
@@ -16341,7 +16345,7 @@
           },
           "fontFamily": {
             "type": "string",
-            "description": "Font type for the text in the text item.\nDefault: `arial`.\nPossible values: `arial`, `abril_fatface`, `bangers`, `eb_garamond`, `georgia`, `graduate`, `gravitas_one`, `fredoka_one`, `nixie_one`, `open_sans`, `permanent_marker`, `pt_sans`, `pt_sans_narrow`, `pt_serif`, `rammetto_one`, `roboto`, `roboto_condensed`, `roboto_slab`, `caveat`, `times_new_roman`, `titan_one`, `lemon_tuesday`, `roboto_mono`, `noto_sans`, `plex_sans`, `plex_serif`, `plex_mono`, `spoof`, `tiempos_text`, `formular`",
+            "description": "Font type for the text in the text item.\nDefault: `arial`.",
             "enum": [
               "arial",
               "abril_fatface",
@@ -16382,7 +16386,7 @@
           },
           "textAlign": {
             "type": "string",
-            "description": "Horizontal alignment for the item's content.\nDefault: `center.`\nPossible values: `left`, `right`, `center`",
+            "description": "Horizontal alignment for the item's content.\nDefault: `center.`",
             "enum": ["left", "right", "center"]
           }
         },
@@ -16436,13 +16440,13 @@
         "properties": {
           "rotation": {
             "type": "number",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
-            "format": "double"
+            "format": "double",
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
           },
           "width": {
             "type": "number",
-            "description": "Width of the item, in pixels. \nThe minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size.\nFor example, if the font size of the `text` item is `14`, the minimum `width` is `24`.",
-            "format": "double"
+            "format": "double",
+            "description": "Width of the item, in pixels. \nThe minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size.\nFor example, if the font size of the `text` item is `14`, the minimum `width` is `24`."
           }
         },
         "description": "Contains geometrical information about the item, such as its width or rotation. You can only specify the width of the text item as the height is dynamically updated based on the content. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry)."
@@ -16456,7 +16460,7 @@
         "properties": {
           "format": {
             "type": "string",
-            "description": "Only custom frames are supported at the moment.\nPossible values: `custom`",
+            "description": "Only custom frames are supported at the moment.",
             "default": "custom",
             "enum": ["custom"]
           },
@@ -16467,7 +16471,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Only free form frames are supported at the moment.\nPossible values: `freeform`",
+            "description": "Only free form frames are supported at the moment.",
             "default": "freeform",
             "enum": ["freeform"]
           }
@@ -16497,7 +16501,7 @@
         "properties": {
           "format": {
             "type": "string",
-            "description": "Only custom frames are supported at the moment.\nPossible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`",
+            "description": "Only custom frames are supported at the moment.",
             "default": "custom",
             "enum": ["custom", "desktop", "phone", "tablet", "a4", "letter", "ratio_1x1", "ratio_4x3", "ratio_16x9"]
           },
@@ -16508,7 +16512,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Only free form frames are supported at the moment.\nPossible values: `freeform`, `heap`, `grid`, `rows`, `columns`",
+            "description": "Only free form frames are supported at the moment.",
             "default": "freeform",
             "enum": ["freeform", "heap", "grid", "rows", "columns"]
           }
@@ -16732,7 +16736,7 @@
         "properties": {
           "origin": {
             "type": "string",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.\nPossible values: `center`",
+            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.",
             "default": "center",
             "enum": ["center"]
           },
@@ -16762,7 +16766,7 @@
         "properties": {
           "origin": {
             "type": "string",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.\nPossible values: `center`",
+            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.",
             "default": "center",
             "enum": ["center"]
           },
@@ -16898,7 +16902,7 @@
         "properties": {
           "origin": {
             "type": "string",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.\nPossible values: `center`",
+            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.",
             "default": "center",
             "enum": ["center"]
           },
@@ -16956,7 +16960,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.\nPossible values: `disconnected`, `connected`, `disabled`",
+            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
             "enum": ["disconnected", "connected", "disabled"]
           },
           "title": {
@@ -17006,7 +17010,7 @@
           },
           "iconShape": {
             "type": "string",
-            "description": "The shape of the icon on the preview field.\nPossible values: `round`, `square`",
+            "description": "The shape of the icon on the preview field.",
             "default": "round",
             "enum": ["round", "square"]
           },
@@ -17068,7 +17072,7 @@
           },
           "mode": {
             "type": "string",
-            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.\nPossible values: `inline`, `modal`",
+            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
             "enum": ["inline", "modal"]
           },
           "previewUrl": {
@@ -17107,7 +17111,7 @@
         "properties": {
           "format": {
             "type": "string",
-            "description": "Only custom frames are supported at the moment.\nPossible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`",
+            "description": "Only custom frames are supported at the moment.",
             "default": "custom",
             "enum": ["custom", "desktop", "phone", "tablet", "a4", "letter", "ratio_1x1", "ratio_4x3", "ratio_16x9"]
           },
@@ -17118,7 +17122,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Only free form frames are supported at the moment.\nPossible values: `freeform`, `heap`, `grid`, `rows`, `columns`",
+            "description": "Only free form frames are supported at the moment.",
             "default": "freeform",
             "enum": ["freeform", "heap", "grid", "rows", "columns"]
           }
@@ -17178,19 +17182,19 @@
         "properties": {
           "height": {
             "type": "number",
-            "description": "Height of the item, in pixels.",
             "format": "double",
+            "description": "Height of the item, in pixels.",
             "example": 60
           },
           "rotation": {
             "type": "number",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
-            "format": "double"
+            "format": "double",
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
           },
           "width": {
             "type": "number",
-            "description": "Width of the item, in pixels.",
             "format": "double",
+            "description": "Width of the item, in pixels.",
             "example": 320
           }
         },
@@ -17312,7 +17316,7 @@
         "properties": {
           "origin": {
             "type": "string",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.\nPossible values: `center`",
+            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.",
             "default": "center",
             "enum": ["center"]
           },
@@ -17322,17 +17326,17 @@
           },
           "x": {
             "type": "number",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
             "format": "double",
-            "example": 100,
-            "default": 0
+            "default": 0,
+            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
+            "example": 100
           },
           "y": {
             "type": "number",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
             "format": "double",
-            "example": 100,
-            "default": 0
+            "default": 0,
+            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
+            "example": 100
           }
         },
         "description": "Contains location information about the item, such as its x coordinate, y coordinate, and theorigin of the x and y coordinates."
@@ -17358,7 +17362,7 @@
           },
           "shape": {
             "type": "string",
-            "description": "Defines the geometric shape of the item when it is rendered on the board.\nPossible values: `rectangle`, `round_rectangle`, `circle`, `triangle`, `rhombus`, `parallelogram`, `trapezoid`, `pentagon`, `hexagon`, `octagon`, `wedge_round_rectangle_callout`, `star`, `flow_chart_predefined_process`, `cloud`, `cross`, `can`, `right_arrow`, `left_arrow`, `left_right_arrow`, `left_brace`, `right_brace`",
+            "description": "Defines the geometric shape of the item when it is rendered on the board.",
             "default": "rectangle",
             "enum": [
               "rectangle",
@@ -17398,7 +17402,7 @@
           },
           "shape": {
             "type": "string",
-            "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.\nPossible values: `square`, `rectangle`",
+            "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
             "default": "square",
             "enum": ["square", "rectangle"]
           }
@@ -17411,7 +17415,7 @@
         "properties": {
           "fillColor": {
             "type": "string",
-            "description": "Background color of the tag.\nPossible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`",
+            "description": "Background color of the tag.",
             "example": "red",
             "enum": [
               "red",
@@ -17451,7 +17455,7 @@
         "properties": {
           "fillColor": {
             "type": "string",
-            "description": "[Fill color for the tag](https://developers.miro.com/reference/rest-api-tag-data-model)\nPossible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`",
+            "description": "[Fill color for the tag](https://developers.miro.com/reference/rest-api-tag-data-model)",
             "default": "red",
             "enum": [
               "red",
@@ -17482,7 +17486,7 @@
         "properties": {
           "fillColor": {
             "type": "string",
-            "description": "[Fill color for the tag](https://developers.miro.com/reference/rest-api-tag-data-model)\nPossible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`",
+            "description": "[Fill color for the tag](https://developers.miro.com/reference/rest-api-tag-data-model)",
             "default": "red",
             "enum": [
               "red",
@@ -17525,7 +17529,7 @@
           },
           "fillColor": {
             "type": "string",
-            "description": "Background color of the tag.\nPossible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`",
+            "description": "Background color of the tag.",
             "example": "red",
             "enum": [
               "red",
@@ -17692,7 +17696,7 @@
           },
           "status": {
             "type": "string",
-            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.\nPossible values: `disconnected`, `connected`, `disabled`",
+            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
             "enum": ["disconnected", "connected", "disabled"]
           },
           "title": {
@@ -17742,7 +17746,7 @@
           },
           "iconShape": {
             "type": "string",
-            "description": "The shape of the icon on the preview field.\nPossible values: `round`, `square`",
+            "description": "The shape of the icon on the preview field.",
             "default": "round",
             "enum": ["round", "square"]
           },
@@ -17804,7 +17808,7 @@
           },
           "mode": {
             "type": "string",
-            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.\nPossible values: `inline`, `modal`",
+            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
             "enum": ["inline", "modal"]
           },
           "previewUrl": {
@@ -17843,7 +17847,7 @@
         "properties": {
           "format": {
             "type": "string",
-            "description": "Only custom frames are supported at the moment.\nPossible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`",
+            "description": "Only custom frames are supported at the moment.",
             "default": "custom",
             "enum": ["custom", "desktop", "phone", "tablet", "a4", "letter", "ratio_1x1", "ratio_4x3", "ratio_16x9"]
           },
@@ -17854,7 +17858,7 @@
           },
           "type": {
             "type": "string",
-            "description": "Only free form frames are supported at the moment.\nPossible values: `freeform`, `heap`, `grid`, `rows`, `columns`",
+            "description": "Only free form frames are supported at the moment.",
             "default": "freeform",
             "enum": ["freeform", "heap", "grid", "rows", "columns"]
           }
@@ -17866,19 +17870,19 @@
         "properties": {
           "height": {
             "type": "number",
-            "description": "Height of the item, in pixels.",
             "format": "double",
+            "description": "Height of the item, in pixels.",
             "example": 60
           },
           "rotation": {
             "type": "number",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
-            "format": "double"
+            "format": "double",
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
           },
           "width": {
             "type": "number",
-            "description": "Width of the item, in pixels.",
             "format": "double",
+            "description": "Width of the item, in pixels.",
             "example": 320
           }
         },
@@ -17935,7 +17939,7 @@
         "properties": {
           "origin": {
             "type": "string",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.\nPossible values: `center`",
+            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.",
             "default": "center",
             "enum": ["center"]
           },
@@ -17945,17 +17949,17 @@
           },
           "x": {
             "type": "number",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
             "format": "double",
-            "example": 100,
-            "default": 0
+            "default": 0,
+            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
+            "example": 100
           },
           "y": {
             "type": "number",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
             "format": "double",
-            "example": 100,
-            "default": 0
+            "default": 0,
+            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
+            "example": 100
           }
         },
         "description": "Contains location information about the item, such as its x coordinate, y coordinate, and theorigin of the x and y coordinates."
@@ -17981,7 +17985,7 @@
           },
           "shape": {
             "type": "string",
-            "description": "Defines the geometric shape of the item when it is rendered on the board.\nPossible values: `rectangle`, `round_rectangle`, `circle`, `triangle`, `rhombus`, `parallelogram`, `trapezoid`, `pentagon`, `hexagon`, `octagon`, `wedge_round_rectangle_callout`, `star`, `flow_chart_predefined_process`, `cloud`, `cross`, `can`, `right_arrow`, `left_arrow`, `left_right_arrow`, `left_brace`, `right_brace`",
+            "description": "Defines the geometric shape of the item when it is rendered on the board.",
             "default": "rectangle",
             "enum": [
               "rectangle",
@@ -18021,7 +18025,7 @@
           },
           "shape": {
             "type": "string",
-            "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.\nPossible values: `square`, `rectangle`",
+            "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
             "default": "square",
             "enum": ["square", "rectangle"]
           }

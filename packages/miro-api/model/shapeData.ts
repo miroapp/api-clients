@@ -20,7 +20,7 @@ export class ShapeData {
    */
   'content'?: string = 'Hello'
   /**
-   * Defines the geometric shape of the item when it is rendered on the board. Possible values: `rectangle`, `round_rectangle`, `circle`, `triangle`, `rhombus`, `parallelogram`, `trapezoid`, `pentagon`, `hexagon`, `octagon`, `wedge_round_rectangle_callout`, `star`, `flow_chart_predefined_process`, `cloud`, `cross`, `can`, `right_arrow`, `left_arrow`, `left_right_arrow`, `left_brace`, `right_brace`
+   * Defines the geometric shape of the item when it is rendered on the board.
    */
   'shape'?: string | typeof ShapeData.ShapeEnum[keyof typeof ShapeData.ShapeEnum] = ShapeData.ShapeEnum.Rectangle
 

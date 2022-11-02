@@ -24,7 +24,7 @@ export class Caption {
    */
   'position'?: string
   /**
-   * The vertical position of the text on the connector. Default: middle Possible values: `top`, `middle`, `bottom`
+   * The vertical position of the text on the connector. Default: middle
    */
   'textAlignVertical'?: string | typeof Caption.TextAlignVerticalEnum[keyof typeof Caption.TextAlignVerticalEnum]
 

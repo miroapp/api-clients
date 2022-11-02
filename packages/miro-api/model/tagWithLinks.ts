@@ -22,7 +22,7 @@ export class TagWithLinks {
    */
   'title': string
   /**
-   * Background color of the tag. Possible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`
+   * Background color of the tag.
    */
   'fillColor': string | typeof TagWithLinks.FillColorEnum[keyof typeof TagWithLinks.FillColorEnum]
   'links'?: SelfLink

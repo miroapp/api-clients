@@ -16,15 +16,15 @@
  */
 export class StickyNoteStyle {
   /**
-   * Fill color for the sticky note. Default: `light_yellow`. Possible values: `gray`, `light_yellow`, `yellow`, `orange`, `light_green`, `green`, `dark_green`, `cyan`, `light_pink`, `pink`, `violet`, `red`, `light_blue`, `blue`, `dark_blue`, `black`
+   * Fill color for the sticky note. Default: `light_yellow`.
    */
   'fillColor'?: string | typeof StickyNoteStyle.FillColorEnum[keyof typeof StickyNoteStyle.FillColorEnum]
   /**
-   * Defines how the sticky note text is horizontally aligned. Default: `center`. Possible values: `left`, `right`, `center`
+   * Defines how the sticky note text is horizontally aligned. Default: `center`.
    */
   'textAlign'?: string | typeof StickyNoteStyle.TextAlignEnum[keyof typeof StickyNoteStyle.TextAlignEnum]
   /**
-   * Defines how the sticky note text is vertically aligned. Default: `top`. Possible values: `top`, `middle`, `bottom`
+   * Defines how the sticky note text is vertically aligned. Default: `top`.
    */
   'textAlignVertical'?:
     | string

@@ -47,7 +47,7 @@ export class ConnectorWithLinks {
   'modifiedAt'?: Date
   'modifiedBy'?: ModifiedBy
   /**
-   * The path type of the connector line, defines curvature. Default: curved. Possible values: `straight`, `elbowed`, `curved`
+   * The path type of the connector line, defines curvature. Default: curved.
    */
   'shape'?: string | typeof ConnectorWithLinks.ShapeEnum[keyof typeof ConnectorWithLinks.ShapeEnum] =
     ConnectorWithLinks.ShapeEnum.Curved

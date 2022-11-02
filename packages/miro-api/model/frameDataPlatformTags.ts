@@ -16,7 +16,7 @@
  */
 export class FrameDataPlatformTags {
   /**
-   * Only custom frames are supported at the moment. Possible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`
+   * Only custom frames are supported at the moment.
    */
   'format'?: string | typeof FrameDataPlatformTags.FormatEnum[keyof typeof FrameDataPlatformTags.FormatEnum] =
     FrameDataPlatformTags.FormatEnum.Custom
@@ -25,7 +25,7 @@ export class FrameDataPlatformTags {
    */
   'title'?: string
   /**
-   * Only free form frames are supported at the moment. Possible values: `freeform`, `heap`, `grid`, `rows`, `columns`
+   * Only free form frames are supported at the moment.
    */
   'type'?: string | typeof FrameDataPlatformTags.TypeEnum[keyof typeof FrameDataPlatformTags.TypeEnum] =
     FrameDataPlatformTags.TypeEnum.Freeform
