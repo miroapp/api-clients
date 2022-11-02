@@ -13,6 +13,7 @@
   "paths": {
     "/v1/oauth/revoke": {
       "post": {
+        "tags": ["tokens"],
         "summary": "Revoke token",
         "description": "Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.",
         "operationId": "revoke-token",
@@ -33,6 +34,106 @@
           },
           "400": {
             "description": "Failed to revoke token"
+          }
+        }
+      }
+    },
+    "/v1/oauth-token": {
+      "get": {
+        "tags": ["tokens"],
+        "summary": "Get access token information",
+        "description": "Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.",
+        "operationId": "token-info",
+        "responses": {
+          "200": {
+            "description": "Token information",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Token information",
+                  "type": "object",
+                  "required": ["type", "team", "createdBy", "user"],
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "organization": {
+                      "title": "Organization information",
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["type", "name", "id"]
+                    },
+                    "team": {
+                      "title": "Team information",
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["type", "name", "id"]
+                    },
+                    "createdBy": {
+                      "type": "object",
+                      "title": "User information",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["type", "name", "id"]
+                    },
+                    "user": {
+                      "type": "object",
+                      "title": "User information",
+                      "properties": {
+                        "type": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        }
+                      },
+                      "required": ["type", "name", "id"]
+                    },
+                    "scopes": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid token provided"
           }
         }
       }
@@ -15659,18 +15760,18 @@
         "properties": {
           "height": {
             "type": "number",
-            "format": "double",
-            "description": "Height of the item, in pixels."
+            "description": "Height of the item, in pixels.",
+            "format": "double"
           },
           "rotation": {
             "type": "number",
-            "format": "double",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
+            "format": "double"
           },
           "width": {
             "type": "number",
-            "format": "double",
-            "description": "Width of the item, in pixels."
+            "description": "Width of the item, in pixels.",
+            "format": "double"
           }
         },
         "description": "Contains geometrical information about the item, such as its width or height. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry)."
@@ -15680,13 +15781,13 @@
         "properties": {
           "height": {
             "type": "number",
-            "format": "double",
-            "description": "Height of the item, in pixels."
+            "description": "Height of the item, in pixels.",
+            "format": "double"
           },
           "width": {
             "type": "number",
-            "format": "double",
-            "description": "Width of the item, in pixels."
+            "description": "Width of the item, in pixels.",
+            "format": "double"
           }
         },
         "description": "Contains geometrical information about the item. You can set either the width or height. You cannot set both the at the same time. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry)."
@@ -16440,13 +16541,13 @@
         "properties": {
           "rotation": {
             "type": "number",
-            "format": "double",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
+            "format": "double"
           },
           "width": {
             "type": "number",
-            "format": "double",
-            "description": "Width of the item, in pixels. \nThe minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size.\nFor example, if the font size of the `text` item is `14`, the minimum `width` is `24`."
+            "description": "Width of the item, in pixels. \nThe minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size.\nFor example, if the font size of the `text` item is `14`, the minimum `width` is `24`.",
+            "format": "double"
           }
         },
         "description": "Contains geometrical information about the item, such as its width or rotation. You can only specify the width of the text item as the height is dynamically updated based on the content. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry)."
@@ -17182,19 +17283,19 @@
         "properties": {
           "height": {
             "type": "number",
-            "format": "double",
             "description": "Height of the item, in pixels.",
+            "format": "double",
             "example": 60
           },
           "rotation": {
             "type": "number",
-            "format": "double",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
+            "format": "double"
           },
           "width": {
             "type": "number",
-            "format": "double",
             "description": "Width of the item, in pixels.",
+            "format": "double",
             "example": 320
           }
         },
@@ -17326,17 +17427,17 @@
           },
           "x": {
             "type": "number",
-            "format": "double",
-            "default": 0,
             "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
+            "format": "double",
+            "example": 100,
+            "default": 0
           },
           "y": {
             "type": "number",
-            "format": "double",
-            "default": 0,
             "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
+            "format": "double",
+            "example": 100,
+            "default": 0
           }
         },
         "description": "Contains location information about the item, such as its x coordinate, y coordinate, and theorigin of the x and y coordinates."
@@ -17870,19 +17971,19 @@
         "properties": {
           "height": {
             "type": "number",
-            "format": "double",
             "description": "Height of the item, in pixels.",
+            "format": "double",
             "example": 60
           },
           "rotation": {
             "type": "number",
-            "format": "double",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
+            "format": "double"
           },
           "width": {
             "type": "number",
-            "format": "double",
             "description": "Width of the item, in pixels.",
+            "format": "double",
             "example": 320
           }
         },
@@ -17949,17 +18050,17 @@
           },
           "x": {
             "type": "number",
-            "format": "double",
-            "default": 0,
             "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
+            "format": "double",
+            "example": 100,
+            "default": 0
           },
           "y": {
             "type": "number",
-            "format": "double",
-            "default": 0,
             "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
+            "format": "double",
+            "example": 100,
+            "default": 0
           }
         },
         "description": "Contains location information about the item, such as its x coordinate, y coordinate, and theorigin of the x and y coordinates."

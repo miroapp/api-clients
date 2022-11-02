@@ -97,6 +97,7 @@ export * from './modifiedBy'
 export * from './modifiedByPlatformContainers'
 export * from './modifiedByPlatformTags'
 export * from './organization'
+export * from './organizationInformation'
 export * from './organizationMember'
 export * from './organizationMembersSearchByEmailsResponse'
 export * from './organizationMembersSearchResponse'
@@ -142,6 +143,7 @@ export * from './teamCollaborationSettings'
 export * from './teamCollaborationSettingsChanges'
 export * from './teamCopyAccessLevelSettings'
 export * from './teamCopyAccessLevelSettingsChanges'
+export * from './teamInformation'
 export * from './teamInvitationSettings'
 export * from './teamInvitationSettingsChanges'
 export * from './teamMember'
@@ -157,10 +159,12 @@ export * from './textDataPlatformTags'
 export * from './textItem'
 export * from './textStyle'
 export * from './textUpdateRequest'
+export * from './tokenInformation'
 export * from './updateBoardsDataClassificationLabel'
 export * from './updateBoardsDataClassificationLabelRequest'
 export * from './updateTeamSettingsRequest'
 export * from './userInfoShort'
+export * from './userInformation'
 export * from './widgetData'
 export * from './widgetDataPlatformTags'
 export * from './widgetLinks'
@@ -276,6 +280,7 @@ import {ModifiedBy} from './modifiedBy'
 import {ModifiedByPlatformContainers} from './modifiedByPlatformContainers'
 import {ModifiedByPlatformTags} from './modifiedByPlatformTags'
 import {Organization} from './organization'
+import {OrganizationInformation} from './organizationInformation'
 import {OrganizationMember} from './organizationMember'
 import {OrganizationMembersSearchByEmailsResponse} from './organizationMembersSearchByEmailsResponse'
 import {OrganizationMembersSearchResponse} from './organizationMembersSearchResponse'
@@ -321,6 +326,7 @@ import {TeamCollaborationSettings} from './teamCollaborationSettings'
 import {TeamCollaborationSettingsChanges} from './teamCollaborationSettingsChanges'
 import {TeamCopyAccessLevelSettings} from './teamCopyAccessLevelSettings'
 import {TeamCopyAccessLevelSettingsChanges} from './teamCopyAccessLevelSettingsChanges'
+import {TeamInformation} from './teamInformation'
 import {TeamInvitationSettings} from './teamInvitationSettings'
 import {TeamInvitationSettingsChanges} from './teamInvitationSettingsChanges'
 import {TeamMember} from './teamMember'
@@ -336,10 +342,12 @@ import {TextDataPlatformTags} from './textDataPlatformTags'
 import {TextItem} from './textItem'
 import {TextStyle} from './textStyle'
 import {TextUpdateRequest} from './textUpdateRequest'
+import {TokenInformation} from './tokenInformation'
 import {UpdateBoardsDataClassificationLabel} from './updateBoardsDataClassificationLabel'
 import {UpdateBoardsDataClassificationLabelRequest} from './updateBoardsDataClassificationLabelRequest'
 import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
 import {UserInfoShort} from './userInfoShort'
+import {UserInformation} from './userInformation'
 import {WidgetData} from './widgetData'
 import {WidgetDataPlatformTags} from './widgetDataPlatformTags'
 import {WidgetLinks} from './widgetLinks'
@@ -572,6 +580,7 @@ let typeMap: {[index: string]: any} = {
   ModifiedByPlatformContainers: ModifiedByPlatformContainers,
   ModifiedByPlatformTags: ModifiedByPlatformTags,
   Organization: Organization,
+  OrganizationInformation: OrganizationInformation,
   OrganizationMember: OrganizationMember,
   OrganizationMembersSearchByEmailsResponse: OrganizationMembersSearchByEmailsResponse,
   OrganizationMembersSearchResponse: OrganizationMembersSearchResponse,
@@ -617,6 +626,7 @@ let typeMap: {[index: string]: any} = {
   TeamCollaborationSettingsChanges: TeamCollaborationSettingsChanges,
   TeamCopyAccessLevelSettings: TeamCopyAccessLevelSettings,
   TeamCopyAccessLevelSettingsChanges: TeamCopyAccessLevelSettingsChanges,
+  TeamInformation: TeamInformation,
   TeamInvitationSettings: TeamInvitationSettings,
   TeamInvitationSettingsChanges: TeamInvitationSettingsChanges,
   TeamMember: TeamMember,
@@ -632,10 +642,12 @@ let typeMap: {[index: string]: any} = {
   TextItem: TextItem,
   TextStyle: TextStyle,
   TextUpdateRequest: TextUpdateRequest,
+  TokenInformation: TokenInformation,
   UpdateBoardsDataClassificationLabel: UpdateBoardsDataClassificationLabel,
   UpdateBoardsDataClassificationLabelRequest: UpdateBoardsDataClassificationLabelRequest,
   UpdateTeamSettingsRequest: UpdateTeamSettingsRequest,
   UserInfoShort: UserInfoShort,
+  UserInformation: UserInformation,
   WidgetData: WidgetData,
   WidgetDataPlatformTags: WidgetDataPlatformTags,
   WidgetLinks: WidgetLinks,
