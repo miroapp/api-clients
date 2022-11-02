@@ -16,21 +16,21 @@
  */
 export class BoardPermissionsPolicy {
   /**
-   * Defines who can start or stop timer, voting, video chat, screen sharing, attention management. Others will only be able to join. To change the value for the `collaborationToolsStartAccess` parameter, contact Miro Customer Support. Possible values: `all_editors`, `board_owners_and_coowners`
+   * Defines who can start or stop timer, voting, video chat, screen sharing, attention management. Others will only be able to join. To change the value for the `collaborationToolsStartAccess` parameter, contact Miro Customer Support.
    */
   'collaborationToolsStartAccess'?:
     | string
     | typeof BoardPermissionsPolicy.CollaborationToolsStartAccessEnum[keyof typeof BoardPermissionsPolicy.CollaborationToolsStartAccessEnum] =
     BoardPermissionsPolicy.CollaborationToolsStartAccessEnum.AllEditors
   /**
-   * Defines who can copy the board, copy objects, download images, and save the board as a template or PDF. Possible values: `anyone`, `team_members`, `team_editors`, `board_owner`
+   * Defines who can copy the board, copy objects, download images, and save the board as a template or PDF.
    */
   'copyAccess'?:
     | string
     | typeof BoardPermissionsPolicy.CopyAccessEnum[keyof typeof BoardPermissionsPolicy.CopyAccessEnum] =
     BoardPermissionsPolicy.CopyAccessEnum.Anyone
   /**
-   * Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support. Possible values: `team_members_with_editing_rights`, `owner_and_coowners`
+   * Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support.
    */
   'sharingAccess'?:
     | string

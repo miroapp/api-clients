@@ -24,7 +24,7 @@ export class EmbedDataPlatformTags {
    */
   'html'?: string
   /**
-   * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board. Possible values: `inline`, `modal`
+   * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
    */
   'mode'?: string | typeof EmbedDataPlatformTags.ModeEnum[keyof typeof EmbedDataPlatformTags.ModeEnum]
   /**

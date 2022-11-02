@@ -43,7 +43,7 @@ export class WidgetData {
    */
   'html'?: string
   /**
-   * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board. Possible values: `inline`, `modal`
+   * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
    */
   'mode'?: string | typeof WidgetData.ModeEnum[keyof typeof WidgetData.ModeEnum]
   /**
@@ -83,7 +83,7 @@ export class WidgetData {
    */
   'owned'?: boolean
   /**
-   * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`. Possible values: `disconnected`, `connected`, `disabled`
+   * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
   'status'?: string | typeof WidgetData.StatusEnum[keyof typeof WidgetData.StatusEnum]
   /**
@@ -95,15 +95,15 @@ export class WidgetData {
    */
   'documentUrl'?: string
   /**
-   * Defines the geometric shape of the sticky note and aspect ratio for its dimensions. Possible values: `square`, `rectangle`
+   * Defines the geometric shape of the sticky note and aspect ratio for its dimensions.
    */
   'shape'?: string | typeof WidgetData.ShapeEnum[keyof typeof WidgetData.ShapeEnum] = WidgetData.ShapeEnum.Square
   /**
-   * Only custom frames are supported at the moment. Possible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`
+   * Only custom frames are supported at the moment.
    */
   'format'?: string | typeof WidgetData.FormatEnum[keyof typeof WidgetData.FormatEnum] = WidgetData.FormatEnum.Custom
   /**
-   * Only free form frames are supported at the moment. Possible values: `freeform`, `heap`, `grid`, `rows`, `columns`
+   * Only free form frames are supported at the moment.
    */
   'type'?: string | typeof WidgetData.TypeEnum[keyof typeof WidgetData.TypeEnum] = WidgetData.TypeEnum.Freeform
 

@@ -24,7 +24,7 @@ export class BoardMember {
    */
   'name': string
   /**
-   * Role of the board member. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`
+   * Role of the board member.
    */
   'role'?: string | typeof BoardMember.RoleEnum[keyof typeof BoardMember.RoleEnum]
   /**

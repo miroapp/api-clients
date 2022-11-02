@@ -16,7 +16,7 @@
  */
 export class FrameDataPlatformContainers {
   /**
-   * Only custom frames are supported at the moment. Possible values: `custom`, `desktop`, `phone`, `tablet`, `a4`, `letter`, `ratio_1x1`, `ratio_4x3`, `ratio_16x9`
+   * Only custom frames are supported at the moment.
    */
   'format'?:
     | string
@@ -27,7 +27,7 @@ export class FrameDataPlatformContainers {
    */
   'title'?: string
   /**
-   * Only free form frames are supported at the moment. Possible values: `freeform`, `heap`, `grid`, `rows`, `columns`
+   * Only free form frames are supported at the moment.
    */
   'type'?: string | typeof FrameDataPlatformContainers.TypeEnum[keyof typeof FrameDataPlatformContainers.TypeEnum] =
     FrameDataPlatformContainers.TypeEnum.Freeform

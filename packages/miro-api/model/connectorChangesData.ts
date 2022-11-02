@@ -18,7 +18,7 @@ export class ConnectorChangesData {
   'startItem'?: ItemConnectionChangesData
   'endItem'?: ItemConnectionChangesData
   /**
-   * The path type of the connector line, defines curvature. Default: curved. Possible values: `straight`, `elbowed`, `curved`
+   * The path type of the connector line, defines curvature. Default: curved.
    */
   'shape'?: string | typeof ConnectorChangesData.ShapeEnum[keyof typeof ConnectorChangesData.ShapeEnum]
   'captions'?: Array<Caption>

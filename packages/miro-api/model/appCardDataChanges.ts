@@ -26,7 +26,7 @@ export class AppCardDataChanges {
    */
   'fields'?: Array<CustomField>
   /**
-   * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`. Possible values: `disconnected`, `connected`, `disabled`
+   * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
   'status'?: string | typeof AppCardDataChanges.StatusEnum[keyof typeof AppCardDataChanges.StatusEnum] =
     AppCardDataChanges.StatusEnum.Disconnected

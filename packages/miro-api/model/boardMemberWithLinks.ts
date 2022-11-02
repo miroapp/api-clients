@@ -22,7 +22,7 @@ export class BoardMemberWithLinks {
    */
   'name': string
   /**
-   * Role of the board member. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`
+   * Role of the board member.
    */
   'role'?: string | typeof BoardMemberWithLinks.RoleEnum[keyof typeof BoardMemberWithLinks.RoleEnum]
   'links'?: SelfLink

@@ -2336,7 +2336,7 @@ export class MiroApi {
 
       cursor?: string
 
-      limit?: string
+      limit?: number
     },
   ): Promise<{response: Response; body: EnterpriseGetOrganizationMembers200Response}> {
     const localVarPath = '/v2/orgs/{org_id}/members'.replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
@@ -2379,7 +2379,7 @@ export class MiroApi {
     }
 
     if (query?.limit !== undefined) {
-      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'string'))
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
     }
 
     const resource = new URL(localVarPath, this.basePath)
@@ -3207,7 +3207,7 @@ export class MiroApi {
    * @summary List team members
    * @param orgId The id of an Organization.
    * @param teamId The id of a Team.
-   * @param limit Limit for the number of team members returned in the result list.
+   * @param limit
    * @param cursor The ID of the team member used as the reference for pagination. To retrieve the first portion of the collection don\&#39;t pass a cursor value. To retrieve the next portion of the collection, set the &#x60;cursor&#x60; parameter value to the ID of the last team member you received in the response of the previous request.
    * @param filterQuery Filtering query
    */

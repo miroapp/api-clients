@@ -16,7 +16,7 @@ export class BoardMembersInvite {
    */
   'emails': Array<string>
   /**
-   * Role of the board member. Possible values: `viewer`, `commenter`, `editor`, `coowner`, `owner`, `guest`
+   * Role of the board member.
    */
   'role'?: string | typeof BoardMembersInvite.RoleEnum[keyof typeof BoardMembersInvite.RoleEnum] =
     BoardMembersInvite.RoleEnum.Commenter

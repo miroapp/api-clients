@@ -12,7 +12,7 @@
 
 export class TagUpdateRequest {
   /**
-   * [Fill color for the tag](https://developers.miro.com/reference/rest-api-tag-data-model) Possible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`
+   * [Fill color for the tag](https://developers.miro.com/reference/rest-api-tag-data-model)
    */
   'fillColor'?: string | typeof TagUpdateRequest.FillColorEnum[keyof typeof TagUpdateRequest.FillColorEnum] =
     TagUpdateRequest.FillColorEnum.Red

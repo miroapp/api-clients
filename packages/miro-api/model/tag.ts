@@ -12,7 +12,7 @@
 
 export class Tag {
   /**
-   * Background color of the tag. Possible values: `red`, `light_green`, `cyan`, `yellow`, `magenta`, `green`, `blue`, `gray`, `violet`, `dark_green`, `dark_blue`, `black`
+   * Background color of the tag.
    */
   'fillColor': string | typeof Tag.FillColorEnum[keyof typeof Tag.FillColorEnum]
   /**
