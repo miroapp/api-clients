@@ -24,30 +24,109 @@ const baseSpecification = {
     // we might want to add this to backend in the future
     '/v1/oauth/revoke': {
       post: {
+        tags: ['tokens'],
         summary: 'Revoke token',
-        description: 'Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.',
+        description:
+          'Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.',
 
         operationId: 'revoke-token',
         parameters: [
           {
-            description: "Access token that you want to revoke",
-            in: "query",
-            name: "access_token",
+            description: 'Access token that you want to revoke',
+            in: 'query',
+            name: 'access_token',
             required: true,
             schema: {
-              type: "string"
-            }
-          }
+              type: 'string',
+            },
+          },
         ],
         responses: {
-          '204': {
-            description: "Token revoked"
+          204: {
+            description: 'Token revoked',
           },
-          '400': {
-            description: "Failed to revoke token"
-          }
-        }
-      }
+          400: {
+            description: 'Failed to revoke token',
+          },
+        },
+      },
+    },
+
+    '/v1/oauth-token': {
+      get: {
+        tags: ['tokens'],
+        summary: 'Get access token information',
+        description:
+          'Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.',
+
+        operationId: 'token-info',
+        responses: {
+          200: {
+            description: 'Token information',
+            content: {
+              'application/json': {
+                schema: {
+                  title: 'Token information',
+                  type: 'object',
+                  required: ['type', 'team', 'createdBy', 'user'],
+                  properties: {
+                    type: {type: 'string'},
+                    organization: {
+                      title: 'Organization information',
+                      type: 'object',
+                      properties: {
+                        type: {type: 'string'},
+                        name: {type: 'string'},
+                        id: {type: 'string'},
+                      },
+                      required: ['type', 'name', 'id'],
+                    },
+                    team: {
+                      title: 'Team information',
+                      type: 'object',
+                      properties: {
+                        type: {type: 'string'},
+                        name: {type: 'string'},
+                        id: {type: 'string'},
+                      },
+                      required: ['type', 'name', 'id'],
+                    },
+                    createdBy: {
+                      type: 'object',
+                      title: 'User information',
+                      properties: {
+                        type: {type: 'string'},
+                        name: {type: 'string'},
+                        id: {type: 'string'},
+                      },
+                      required: ['type', 'name', 'id'],
+                    },
+                    user: {
+                      type: 'object',
+                      title: 'User information',
+                      properties: {
+                        type: {type: 'string'},
+                        name: {type: 'string'},
+                        id: {type: 'string'},
+                      },
+                      required: ['type', 'name', 'id'],
+                    },
+                    scopes: {
+                      type: 'array',
+                      items: {
+                        type: 'string',
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          400: {
+            description: 'Invalid token provided',
+          },
+        },
+      },
     },
   },
   components: {
@@ -57,7 +136,7 @@ const baseSpecification = {
       oAuth2AuthCode: {
         type: 'oauth2',
         description:
-        'For more information, see https://developers.miro.com/reference/authorization-flow-for-expiring-tokens',
+          'For more information, see https://developers.miro.com/reference/authorization-flow-for-expiring-tokens',
         flows: {
           authorizationCode: {
             authorizationUrl: 'https://miro.com/oauth/authorize',
@@ -69,11 +148,11 @@ const baseSpecification = {
               'screen:record': "Access a user's screen to record it in an iFrame",
               'webcam:record': "Allows an iFrame to access a user's camera to record video",
               'organizations:read':
-              'Read information about the organization, such as name, plan, number of licenses, organization settings, or organization members.',
+                'Read information about the organization, such as name, plan, number of licenses, organization settings, or organization members.',
               'organizations:teams:read':
-              'Read team information, such as the list of teams, team settings, team members, for an organization.',
+                'Read team information, such as the list of teams, team settings, team members, for an organization.',
               'organizations:teams:write':
-              'Create or delete teams, update team information, team settings, team members, for an organization.',
+                'Create or delete teams, update team information, team settings, team members, for an organization.',
             },
           },
         },
@@ -81,7 +160,6 @@ const baseSpecification = {
     },
   },
 }
-
 
 async function getSpec(url) {
   const response = await fetch(url)
@@ -124,50 +202,44 @@ function fixDescriptionLinks(spec) {
 }
 
 const mergedSpec = fixDescriptionLinks(
-  specs.reduce(
-    (acc, spec) => {
-      const specTitle = spec.info?.title?.replaceAll(' ', '')
-      const specSchemasDef = spec.components?.schemas || {}
+  specs.reduce((acc, spec) => {
+    const specTitle = spec.info?.title?.replaceAll(' ', '')
+    const specSchemasDef = spec.components?.schemas || {}
 
-      let specPathsDef = spec.paths
+    let specPathsDef = spec.paths
 
-      for (const key of Object.keys(specSchemasDef)) {
-        const existingDefinition = acc.components.schemas[key]
-        delete acc.components.schemas[key]
-        let newSchema = specSchemasDef[key]
-        let newKey = key
-        if (existingDefinition && isEqual(existingDefinition, newSchema)) {
-          newKey = `${key}${specTitle}`
-          specPathsDef = JSON.parse(
-            JSON.stringify(specPathsDef).replaceAll(
-              `"#/components/schemas/${key}"`,
-              `"#/components/schemas/${newKey}"`,
-            ),
-          )
-        }
-        acc.components.schemas[newKey] = newSchema
+    for (const key of Object.keys(specSchemasDef)) {
+      const existingDefinition = acc.components.schemas[key]
+      delete acc.components.schemas[key]
+      let newSchema = specSchemasDef[key]
+      let newKey = key
+      if (existingDefinition && isEqual(existingDefinition, newSchema)) {
+        newKey = `${key}${specTitle}`
+        specPathsDef = JSON.parse(
+          JSON.stringify(specPathsDef).replaceAll(`"#/components/schemas/${key}"`, `"#/components/schemas/${newKey}"`),
+        )
       }
+      acc.components.schemas[newKey] = newSchema
+    }
 
-      for (const key of Object.keys(spec.paths)) {
-        if (acc.paths[key]) {
-          const newKey = key.replace('boards/{board_id', 'boards/{board_id_' + specTitle)
-          const pathConfig = JSON.parse(JSON.stringify(spec.paths[key]).replaceAll('board_id', 'board_id_' + specTitle))
-          delete spec.paths[key]
-          spec.paths[newKey] = pathConfig
-        }
+    for (const key of Object.keys(spec.paths)) {
+      if (acc.paths[key]) {
+        const newKey = key.replace('boards/{board_id', 'boards/{board_id_' + specTitle)
+        const pathConfig = JSON.parse(JSON.stringify(spec.paths[key]).replaceAll('board_id', 'board_id_' + specTitle))
+        delete spec.paths[key]
+        spec.paths[newKey] = pathConfig
       }
+    }
 
-      return {
-        ...acc,
-        paths: mergeWithoutConflict(acc.paths, spec.paths),
-        components: {
-          ...acc.components,
-          schemas: mergeWithoutConflict(acc.components.schemas, specSchemasDef),
-        },
-      }
-    },
-    baseSpecification,
-  ),
+    return {
+      ...acc,
+      paths: mergeWithoutConflict(acc.paths, spec.paths),
+      components: {
+        ...acc.components,
+        schemas: mergeWithoutConflict(acc.components.schemas, specSchemasDef),
+      },
+    }
+  }, baseSpecification),
 )
 
 console.log(JSON.stringify(mergedSpec, null, 2))

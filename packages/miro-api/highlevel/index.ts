@@ -2,6 +2,7 @@ import {MiroApi} from '../api'
 import {KeepBase} from './helpers'
 
 import {BaseApi} from './../highlevel/Api'
+import {TokenInformation as BaseTokenInformation} from './../model/tokenInformation'
 import {BaseOrganization} from './Organization'
 import {OrganizationMember as BaseOrganizationMember} from './../model/organizationMember'
 import {BaseTeam} from './Team'
@@ -67,6 +68,29 @@ export class Api extends BaseApi {
     const result = (await this._api.enterpriseGetOrganization(orgId)).body
 
     return new Organization(this._api, result.id, result)
+  }
+
+  /**
+   * Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.
+   * @summary Get access token information
+   */
+  async tokenInfo(): Promise<TokenInformation> {
+    const result = (await this._api.tokenInfo()).body
+
+    return new TokenInformation(this._api, result)
+  }
+}
+
+export class TokenInformation extends BaseTokenInformation {
+  /** @hidden */
+  _api: MiroApi
+
+  /** @hidden */
+  constructor(api: MiroApi, props: KeepBase<BaseTokenInformation>) {
+    super()
+    this._api = api
+
+    Object.assign(this, props)
   }
 }
 

@@ -92,6 +92,8 @@ import {TextCreateRequest} from '../model/textCreateRequest'
 import {TextItem} from '../model/textItem'
 import {TextUpdateRequest} from '../model/textUpdateRequest'
 
+import {TokenInformation} from '../model/tokenInformation'
+
 import {ObjectSerializer} from '../model/models'
 
 let defaultBasePath = 'https://api.miro.com'
@@ -1343,41 +1345,6 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ConnectorWithLinks')
-
-    return {response, body}
-  }
-
-  /**
-   * Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
-   * @summary Revoke token
-   * @param accessToken Access token that you want to revoke
-   */
-  async revokeToken(accessToken: string): Promise<{response: Response; body?: any}> {
-    const localVarPath = '/v1/oauth/revoke'
-    let localVarQueryParameters = new URLSearchParams()
-
-    // verify required parameter 'accessToken' is not null or undefined
-    if (accessToken === null || accessToken === undefined) {
-      throw new Error('Required parameter accessToken was null or undefined when calling revokeToken.')
-    }
-
-    if (accessToken !== undefined) {
-      localVarQueryParameters.append('access_token', ObjectSerializer.serialize(accessToken, 'string'))
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'POST',
-      resource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = bodyAsJson
 
     return {response, body}
   }
@@ -3820,6 +3787,66 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TextItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
+   * @summary Revoke token
+   * @param accessToken Access token that you want to revoke
+   */
+  async revokeToken(accessToken: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v1/oauth/revoke'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'accessToken' is not null or undefined
+    if (accessToken === null || accessToken === undefined) {
+      throw new Error('Required parameter accessToken was null or undefined when calling revokeToken.')
+    }
+
+    if (accessToken !== undefined) {
+      localVarQueryParameters.append('access_token', ObjectSerializer.serialize(accessToken, 'string'))
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
+   * Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.
+   * @summary Get access token information
+   */
+  async tokenInfo(): Promise<{response: Response; body: TokenInformation}> {
+    const localVarPath = '/v1/oauth-token'
+    let localVarQueryParameters = new URLSearchParams()
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TokenInformation')
 
     return {response, body}
   }
