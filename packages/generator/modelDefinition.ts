@@ -13,7 +13,17 @@ const MODELS = {
         alias: 'getOrganization',
         returns: 'Organization',
       },
+      {method: 'tokenInfo', returns: 'TokenInformation'},
     ],
+  },
+
+  TokenInformation: {
+    props: [],
+    extendedModel: {
+      name: 'TokenInformation',
+      path: '../model/tokenInformation',
+    },
+    methods: [],
   },
 
   Organization: {

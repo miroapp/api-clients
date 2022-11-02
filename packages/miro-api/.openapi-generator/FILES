@@ -100,6 +100,7 @@ model/modifiedBy.ts
 model/modifiedByPlatformContainers.ts
 model/modifiedByPlatformTags.ts
 model/organization.ts
+model/organizationInformation.ts
 model/organizationMember.ts
 model/organizationMembersSearchByEmailsResponse.ts
 model/organizationMembersSearchResponse.ts
@@ -145,6 +146,7 @@ model/teamCollaborationSettings.ts
 model/teamCollaborationSettingsChanges.ts
 model/teamCopyAccessLevelSettings.ts
 model/teamCopyAccessLevelSettingsChanges.ts
+model/teamInformation.ts
 model/teamInvitationSettings.ts
 model/teamInvitationSettingsChanges.ts
 model/teamMember.ts
@@ -160,10 +162,12 @@ model/textDataPlatformTags.ts
 model/textItem.ts
 model/textStyle.ts
 model/textUpdateRequest.ts
+model/tokenInformation.ts
 model/updateBoardsDataClassificationLabel.ts
 model/updateBoardsDataClassificationLabelRequest.ts
 model/updateTeamSettingsRequest.ts
 model/userInfoShort.ts
+model/userInformation.ts
 model/widgetData.ts
 model/widgetDataPlatformTags.ts
 model/widgetLinks.ts
