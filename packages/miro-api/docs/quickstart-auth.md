@@ -12,16 +12,16 @@ Before you begin, make sure that:
 
 - You have a [Miro account](https://miro.com/signup/).
 - You're [signed in to Miro](https://miro.com/login/).
-- Your Miro account has a [Developer team](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-a-developer-team-in-miro).
+- Your Miro account has a [Developer team](https://developers.miro.com/docs/create-a-developer-team).
 - Your development environment includes [Node.js 14.15 or a later version](https://nodejs.org/en/download/). \
   To check the Node.js version on your system:
   1. Open a terminal session.
   2. In the terminal, run `node --version`.
 
-It's a good to already go through the following steps in your Miro account settings:
+It's a good idea to already go through the following steps in your Miro account settings:
 
-1. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-create-your-app-in-miro)
-2. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-3-configure-your-app-in-miro)
+1. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-your-app-in-miro)
+2. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-configure-your-app-in-miro)
 3. In your app settings, go to **Redirect URI for OAuth2.0**; in the input field, enter the following URL: `http://127.0.0.1:4000/auth/miro/callback`; click **Add** to add it to the app [redirect URI list](https://www.oauth.com/oauth2-servers/redirect-uris/).
 4. In your app settings, go to **App Credentials**, and save the values assigned to **Client ID** and **Client secret**. \
    You'll need to use these values later.
