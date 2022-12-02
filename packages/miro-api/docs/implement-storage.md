@@ -5,7 +5,7 @@ The default is a simple in-memory implementation.
 
 > 🚧
 >
-> ⚠️ For production deployments, we recommend using a custom implementation backed by a database.
+> For production deployments, we recommend using a custom implementation backed by a database.
 
 ## Implement storage with a Redis backend
 

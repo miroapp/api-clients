@@ -116,7 +116,7 @@ for await (const board of api.getAllBoards()) {
 
 > 🚧
 >
-> ⚠️ For production deployments, we recommend using a custom implementation backed by a database.
+> For production deployments, we recommend using a custom implementation backed by a database.
 
 Most methods take `userId` as their first parameter. For example: [`isAuthorized`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized), [`exchangeCodeForAccessToken`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken), [`as`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as).
 `userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session.
