@@ -18,7 +18,7 @@ Before you begin, make sure that:
   1. Open a terminal session.
   2. In the terminal, run `node --version`.
 
-It's a good to already go through the following steps in your Miro account settings:
+It's a good idea to already go through the following steps in your Miro account settings:
 
 1. [Create your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-1-create-your-app-in-miro)
 2. [Configure your app in Miro](https://developers.miro.com/docs/rest-api-build-your-first-hello-world-app#step-2-configure-your-app-in-miro)
