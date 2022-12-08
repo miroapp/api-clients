@@ -88,7 +88,7 @@ const app = (async function () {
 
 [`index.js`](https://developers.miro.com/docs/app-panels-and-modals#headless) contains the logic that executes after the app is authorized, installed, and loaded on the board. Code in this file runs as long as the board that contains the app is open.
 
-#### Step 5: run the code
+### Step 5: run the code
 
 You built the app. Now it's time to run it. \
 For the sake of simplicity, run it from the command line. \
