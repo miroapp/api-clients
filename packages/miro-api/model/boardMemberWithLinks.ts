@@ -24,7 +24,7 @@ export class BoardMemberWithLinks {
   /**
    * Role of the board member.
    */
-  'role'?: string | typeof BoardMemberWithLinks.RoleEnum[keyof typeof BoardMemberWithLinks.RoleEnum]
+  'role'?: string | (typeof BoardMemberWithLinks.RoleEnum)[keyof typeof BoardMemberWithLinks.RoleEnum]
   'links'?: SelfLink
   /**
    * Type of the object that is returned. In this case, `type` returns `board_member`.

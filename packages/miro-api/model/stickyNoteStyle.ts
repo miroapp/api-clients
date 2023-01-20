@@ -18,17 +18,17 @@ export class StickyNoteStyle {
   /**
    * Fill color for the sticky note. Default: `light_yellow`.
    */
-  'fillColor'?: string | typeof StickyNoteStyle.FillColorEnum[keyof typeof StickyNoteStyle.FillColorEnum]
+  'fillColor'?: string | (typeof StickyNoteStyle.FillColorEnum)[keyof typeof StickyNoteStyle.FillColorEnum]
   /**
    * Defines how the sticky note text is horizontally aligned. Default: `center`.
    */
-  'textAlign'?: string | typeof StickyNoteStyle.TextAlignEnum[keyof typeof StickyNoteStyle.TextAlignEnum]
+  'textAlign'?: string | (typeof StickyNoteStyle.TextAlignEnum)[keyof typeof StickyNoteStyle.TextAlignEnum]
   /**
    * Defines how the sticky note text is vertically aligned. Default: `top`.
    */
   'textAlignVertical'?:
     | string
-    | typeof StickyNoteStyle.TextAlignVerticalEnum[keyof typeof StickyNoteStyle.TextAlignVerticalEnum]
+    | (typeof StickyNoteStyle.TextAlignVerticalEnum)[keyof typeof StickyNoteStyle.TextAlignVerticalEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

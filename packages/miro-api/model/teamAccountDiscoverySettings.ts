@@ -20,7 +20,7 @@ export class TeamAccountDiscoverySettings {
    */
   'accountDiscovery'?:
     | string
-    | typeof TeamAccountDiscoverySettings.AccountDiscoveryEnum[keyof typeof TeamAccountDiscoverySettings.AccountDiscoveryEnum]
+    | (typeof TeamAccountDiscoverySettings.AccountDiscoveryEnum)[keyof typeof TeamAccountDiscoverySettings.AccountDiscoveryEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

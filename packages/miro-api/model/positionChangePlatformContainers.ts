@@ -20,7 +20,7 @@ export class PositionChangePlatformContainers {
    */
   'origin'?:
     | string
-    | typeof PositionChangePlatformContainers.OriginEnum[keyof typeof PositionChangePlatformContainers.OriginEnum] =
+    | (typeof PositionChangePlatformContainers.OriginEnum)[keyof typeof PositionChangePlatformContainers.OriginEnum] =
     PositionChangePlatformContainers.OriginEnum.Center
   /**
    * X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. The center point of the board has `x: 0` and `y: 0` coordinates.

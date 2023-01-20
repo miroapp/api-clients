@@ -18,7 +18,7 @@ export class FrameChanges {
   /**
    * Only custom frames are supported at the moment.
    */
-  'format'?: string | typeof FrameChanges.FormatEnum[keyof typeof FrameChanges.FormatEnum] =
+  'format'?: string | (typeof FrameChanges.FormatEnum)[keyof typeof FrameChanges.FormatEnum] =
     FrameChanges.FormatEnum.Custom
   /**
    * Title of the frame. This title appears at the top of the frame.
@@ -27,7 +27,7 @@ export class FrameChanges {
   /**
    * Only free form frames are supported at the moment.
    */
-  'type'?: string | typeof FrameChanges.TypeEnum[keyof typeof FrameChanges.TypeEnum] = FrameChanges.TypeEnum.Freeform
+  'type'?: string | (typeof FrameChanges.TypeEnum)[keyof typeof FrameChanges.TypeEnum] = FrameChanges.TypeEnum.Freeform
 
   /** @ignore */
   static discriminator: string | undefined = undefined

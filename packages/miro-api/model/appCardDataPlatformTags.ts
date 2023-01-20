@@ -32,7 +32,7 @@ export class AppCardDataPlatformTags {
   /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
-  'status'?: string | typeof AppCardDataPlatformTags.StatusEnum[keyof typeof AppCardDataPlatformTags.StatusEnum]
+  'status'?: string | (typeof AppCardDataPlatformTags.StatusEnum)[keyof typeof AppCardDataPlatformTags.StatusEnum]
   /**
    * A short text header to identify the app card.
    */

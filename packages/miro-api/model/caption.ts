@@ -26,7 +26,7 @@ export class Caption {
   /**
    * The vertical position of the text on the connector. Default: middle
    */
-  'textAlignVertical'?: string | typeof Caption.TextAlignVerticalEnum[keyof typeof Caption.TextAlignVerticalEnum]
+  'textAlignVertical'?: string | (typeof Caption.TextAlignVerticalEnum)[keyof typeof Caption.TextAlignVerticalEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

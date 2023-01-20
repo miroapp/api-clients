@@ -26,7 +26,7 @@ export class BoardMember {
   /**
    * Role of the board member.
    */
-  'role'?: string | typeof BoardMember.RoleEnum[keyof typeof BoardMember.RoleEnum]
+  'role'?: string | (typeof BoardMember.RoleEnum)[keyof typeof BoardMember.RoleEnum]
   /**
    * Type of the object that is returned. In this case, `type` returns `board_member`.
    */

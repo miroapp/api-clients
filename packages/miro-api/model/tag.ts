@@ -14,7 +14,7 @@ export class Tag {
   /**
    * Background color of the tag.
    */
-  'fillColor': string | typeof Tag.FillColorEnum[keyof typeof Tag.FillColorEnum]
+  'fillColor': string | (typeof Tag.FillColorEnum)[keyof typeof Tag.FillColorEnum]
   /**
    * Unique identifier of the tag.
    */

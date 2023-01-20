@@ -24,7 +24,7 @@ export class TagWithLinks {
   /**
    * Background color of the tag.
    */
-  'fillColor': string | typeof TagWithLinks.FillColorEnum[keyof typeof TagWithLinks.FillColorEnum]
+  'fillColor': string | (typeof TagWithLinks.FillColorEnum)[keyof typeof TagWithLinks.FillColorEnum]
   'links'?: SelfLink
   /**
    * Type of the object that is returned. In this case, type returns `tag`.

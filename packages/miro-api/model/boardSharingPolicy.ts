@@ -18,25 +18,25 @@ export class BoardSharingPolicy {
   /**
    * Defines the public-level access to the board.
    */
-  'access'?: string | typeof BoardSharingPolicy.AccessEnum[keyof typeof BoardSharingPolicy.AccessEnum]
+  'access'?: string | (typeof BoardSharingPolicy.AccessEnum)[keyof typeof BoardSharingPolicy.AccessEnum]
   /**
    * Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.
    */
   'inviteToAccountAndBoardLinkAccess'?:
     | string
-    | typeof BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum[keyof typeof BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum] =
+    | (typeof BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum)[keyof typeof BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum] =
     BoardSharingPolicy.InviteToAccountAndBoardLinkAccessEnum.NoAccess
   /**
    * Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.
    */
   'organizationAccess'?:
     | string
-    | typeof BoardSharingPolicy.OrganizationAccessEnum[keyof typeof BoardSharingPolicy.OrganizationAccessEnum] =
+    | (typeof BoardSharingPolicy.OrganizationAccessEnum)[keyof typeof BoardSharingPolicy.OrganizationAccessEnum] =
     BoardSharingPolicy.OrganizationAccessEnum.Private
   /**
    * Defines the team-level access to the board.
    */
-  'teamAccess'?: string | typeof BoardSharingPolicy.TeamAccessEnum[keyof typeof BoardSharingPolicy.TeamAccessEnum]
+  'teamAccess'?: string | (typeof BoardSharingPolicy.TeamAccessEnum)[keyof typeof BoardSharingPolicy.TeamAccessEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

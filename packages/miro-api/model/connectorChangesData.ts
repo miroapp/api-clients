@@ -20,7 +20,7 @@ export class ConnectorChangesData {
   /**
    * The path type of the connector line, defines curvature. Default: curved.
    */
-  'shape'?: string | typeof ConnectorChangesData.ShapeEnum[keyof typeof ConnectorChangesData.ShapeEnum]
+  'shape'?: string | (typeof ConnectorChangesData.ShapeEnum)[keyof typeof ConnectorChangesData.ShapeEnum]
   'captions'?: Array<Caption>
   'style'?: ConnectorStyle
 

@@ -14,7 +14,7 @@ export class BoardMemberChanges {
   /**
    * Role of the board member.
    */
-  'role'?: string | typeof BoardMemberChanges.RoleEnum[keyof typeof BoardMemberChanges.RoleEnum] =
+  'role'?: string | (typeof BoardMemberChanges.RoleEnum)[keyof typeof BoardMemberChanges.RoleEnum] =
     BoardMemberChanges.RoleEnum.Commenter
 
   /** @ignore */

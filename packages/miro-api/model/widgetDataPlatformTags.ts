@@ -45,7 +45,7 @@ export class WidgetDataPlatformTags {
   /**
    * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
    */
-  'mode'?: string | typeof WidgetDataPlatformTags.ModeEnum[keyof typeof WidgetDataPlatformTags.ModeEnum]
+  'mode'?: string | (typeof WidgetDataPlatformTags.ModeEnum)[keyof typeof WidgetDataPlatformTags.ModeEnum]
   /**
    * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
    */
@@ -85,7 +85,7 @@ export class WidgetDataPlatformTags {
   /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
-  'status'?: string | typeof WidgetDataPlatformTags.StatusEnum[keyof typeof WidgetDataPlatformTags.StatusEnum]
+  'status'?: string | (typeof WidgetDataPlatformTags.StatusEnum)[keyof typeof WidgetDataPlatformTags.StatusEnum]
   /**
    * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
    */
@@ -97,17 +97,17 @@ export class WidgetDataPlatformTags {
   /**
    * Defines the geometric shape of the sticky note and aspect ratio for its dimensions.
    */
-  'shape'?: string | typeof WidgetDataPlatformTags.ShapeEnum[keyof typeof WidgetDataPlatformTags.ShapeEnum] =
+  'shape'?: string | (typeof WidgetDataPlatformTags.ShapeEnum)[keyof typeof WidgetDataPlatformTags.ShapeEnum] =
     WidgetDataPlatformTags.ShapeEnum.Square
   /**
    * Only custom frames are supported at the moment.
    */
-  'format'?: string | typeof WidgetDataPlatformTags.FormatEnum[keyof typeof WidgetDataPlatformTags.FormatEnum] =
+  'format'?: string | (typeof WidgetDataPlatformTags.FormatEnum)[keyof typeof WidgetDataPlatformTags.FormatEnum] =
     WidgetDataPlatformTags.FormatEnum.Custom
   /**
    * Only free form frames are supported at the moment.
    */
-  'type'?: string | typeof WidgetDataPlatformTags.TypeEnum[keyof typeof WidgetDataPlatformTags.TypeEnum] =
+  'type'?: string | (typeof WidgetDataPlatformTags.TypeEnum)[keyof typeof WidgetDataPlatformTags.TypeEnum] =
     WidgetDataPlatformTags.TypeEnum.Freeform
 
   /** @ignore */

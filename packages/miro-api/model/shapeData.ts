@@ -22,7 +22,7 @@ export class ShapeData {
   /**
    * Defines the geometric shape of the item when it is rendered on the board.
    */
-  'shape'?: string | typeof ShapeData.ShapeEnum[keyof typeof ShapeData.ShapeEnum] = ShapeData.ShapeEnum.Rectangle
+  'shape'?: string | (typeof ShapeData.ShapeEnum)[keyof typeof ShapeData.ShapeEnum] = ShapeData.ShapeEnum.Rectangle
 
   /** @ignore */
   static discriminator: string | undefined = undefined

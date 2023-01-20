@@ -20,7 +20,7 @@ export class TeamCollaborationSettings {
    */
   'coOwnerRole'?:
     | string
-    | typeof TeamCollaborationSettings.CoOwnerRoleEnum[keyof typeof TeamCollaborationSettings.CoOwnerRoleEnum]
+    | (typeof TeamCollaborationSettings.CoOwnerRoleEnum)[keyof typeof TeamCollaborationSettings.CoOwnerRoleEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

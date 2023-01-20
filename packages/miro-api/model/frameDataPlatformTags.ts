@@ -18,7 +18,7 @@ export class FrameDataPlatformTags {
   /**
    * Only custom frames are supported at the moment.
    */
-  'format'?: string | typeof FrameDataPlatformTags.FormatEnum[keyof typeof FrameDataPlatformTags.FormatEnum] =
+  'format'?: string | (typeof FrameDataPlatformTags.FormatEnum)[keyof typeof FrameDataPlatformTags.FormatEnum] =
     FrameDataPlatformTags.FormatEnum.Custom
   /**
    * Title of the frame. This title appears at the top of the frame.
@@ -27,7 +27,7 @@ export class FrameDataPlatformTags {
   /**
    * Only free form frames are supported at the moment.
    */
-  'type'?: string | typeof FrameDataPlatformTags.TypeEnum[keyof typeof FrameDataPlatformTags.TypeEnum] =
+  'type'?: string | (typeof FrameDataPlatformTags.TypeEnum)[keyof typeof FrameDataPlatformTags.TypeEnum] =
     FrameDataPlatformTags.TypeEnum.Freeform
 
   /** @ignore */
