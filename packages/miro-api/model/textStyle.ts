@@ -30,7 +30,7 @@ export class TextStyle {
   /**
    * Font type for the text in the text item. Default: `arial`.
    */
-  'fontFamily'?: string | typeof TextStyle.FontFamilyEnum[keyof typeof TextStyle.FontFamilyEnum]
+  'fontFamily'?: string | (typeof TextStyle.FontFamilyEnum)[keyof typeof TextStyle.FontFamilyEnum]
   /**
    * Font size, in dp. Default: `14`.
    */
@@ -38,7 +38,7 @@ export class TextStyle {
   /**
    * Horizontal alignment for the item\'s content. Default: `center.`
    */
-  'textAlign'?: string | typeof TextStyle.TextAlignEnum[keyof typeof TextStyle.TextAlignEnum]
+  'textAlign'?: string | (typeof TextStyle.TextAlignEnum)[keyof typeof TextStyle.TextAlignEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

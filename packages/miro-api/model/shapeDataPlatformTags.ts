@@ -22,7 +22,7 @@ export class ShapeDataPlatformTags {
   /**
    * Defines the geometric shape of the item when it is rendered on the board.
    */
-  'shape'?: string | typeof ShapeDataPlatformTags.ShapeEnum[keyof typeof ShapeDataPlatformTags.ShapeEnum] =
+  'shape'?: string | (typeof ShapeDataPlatformTags.ShapeEnum)[keyof typeof ShapeDataPlatformTags.ShapeEnum] =
     ShapeDataPlatformTags.ShapeEnum.Rectangle
 
   /** @ignore */

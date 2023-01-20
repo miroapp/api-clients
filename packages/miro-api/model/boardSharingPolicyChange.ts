@@ -18,28 +18,28 @@ export class BoardSharingPolicyChange {
   /**
    * Defines the public-level access to the board.
    */
-  'access'?: string | typeof BoardSharingPolicyChange.AccessEnum[keyof typeof BoardSharingPolicyChange.AccessEnum] =
+  'access'?: string | (typeof BoardSharingPolicyChange.AccessEnum)[keyof typeof BoardSharingPolicyChange.AccessEnum] =
     BoardSharingPolicyChange.AccessEnum.Private
   /**
    * Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access` regardless of the value that you assign for this parameter.
    */
   'inviteToAccountAndBoardLinkAccess'?:
     | string
-    | typeof BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum[keyof typeof BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum] =
+    | (typeof BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum)[keyof typeof BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum] =
     BoardSharingPolicyChange.InviteToAccountAndBoardLinkAccessEnum.NoAccess
   /**
    * Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.
    */
   'organizationAccess'?:
     | string
-    | typeof BoardSharingPolicyChange.OrganizationAccessEnum[keyof typeof BoardSharingPolicyChange.OrganizationAccessEnum] =
+    | (typeof BoardSharingPolicyChange.OrganizationAccessEnum)[keyof typeof BoardSharingPolicyChange.OrganizationAccessEnum] =
     BoardSharingPolicyChange.OrganizationAccessEnum.Private
   /**
    * Defines the team-level access to the board.
    */
   'teamAccess'?:
     | string
-    | typeof BoardSharingPolicyChange.TeamAccessEnum[keyof typeof BoardSharingPolicyChange.TeamAccessEnum] =
+    | (typeof BoardSharingPolicyChange.TeamAccessEnum)[keyof typeof BoardSharingPolicyChange.TeamAccessEnum] =
     BoardSharingPolicyChange.TeamAccessEnum.Private
 
   /** @ignore */

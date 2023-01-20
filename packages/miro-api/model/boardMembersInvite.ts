@@ -18,7 +18,7 @@ export class BoardMembersInvite {
   /**
    * Role of the board member.
    */
-  'role'?: string | typeof BoardMembersInvite.RoleEnum[keyof typeof BoardMembersInvite.RoleEnum] =
+  'role'?: string | (typeof BoardMembersInvite.RoleEnum)[keyof typeof BoardMembersInvite.RoleEnum] =
     BoardMembersInvite.RoleEnum.Commenter
   /**
    * The message that will be sent in the invitation email.

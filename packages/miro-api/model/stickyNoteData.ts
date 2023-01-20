@@ -22,7 +22,7 @@ export class StickyNoteData {
   /**
    * Defines the geometric shape of the sticky note and aspect ratio for its dimensions.
    */
-  'shape'?: string | typeof StickyNoteData.ShapeEnum[keyof typeof StickyNoteData.ShapeEnum] =
+  'shape'?: string | (typeof StickyNoteData.ShapeEnum)[keyof typeof StickyNoteData.ShapeEnum] =
     StickyNoteData.ShapeEnum.Square
 
   /** @ignore */

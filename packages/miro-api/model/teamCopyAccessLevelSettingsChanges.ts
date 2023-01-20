@@ -20,13 +20,13 @@ export class TeamCopyAccessLevelSettingsChanges {
    */
   'copyAccessLevel'?:
     | string
-    | typeof TeamCopyAccessLevelSettingsChanges.CopyAccessLevelEnum[keyof typeof TeamCopyAccessLevelSettingsChanges.CopyAccessLevelEnum]
+    | (typeof TeamCopyAccessLevelSettingsChanges.CopyAccessLevelEnum)[keyof typeof TeamCopyAccessLevelSettingsChanges.CopyAccessLevelEnum]
   /**
    *  * \"anyone\":       Team members and users outside team can be given permission to copy board content. * \"team_members\": Only team members can be given permission to copy board content.
    */
   'copyAccessLevelLimitation'?:
     | string
-    | typeof TeamCopyAccessLevelSettingsChanges.CopyAccessLevelLimitationEnum[keyof typeof TeamCopyAccessLevelSettingsChanges.CopyAccessLevelLimitationEnum]
+    | (typeof TeamCopyAccessLevelSettingsChanges.CopyAccessLevelLimitationEnum)[keyof typeof TeamCopyAccessLevelSettingsChanges.CopyAccessLevelLimitationEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

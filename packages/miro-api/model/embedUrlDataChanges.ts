@@ -18,7 +18,7 @@ export class EmbedUrlDataChanges {
   /**
    * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
    */
-  'mode'?: string | typeof EmbedUrlDataChanges.ModeEnum[keyof typeof EmbedUrlDataChanges.ModeEnum]
+  'mode'?: string | (typeof EmbedUrlDataChanges.ModeEnum)[keyof typeof EmbedUrlDataChanges.ModeEnum]
   /**
    * URL of the image to be used as the preview image for the embedded item.
    */

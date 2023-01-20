@@ -20,13 +20,13 @@ export class TeamInvitationSettingsChanges {
    */
   'inviteExternalUsers'?:
     | string
-    | typeof TeamInvitationSettingsChanges.InviteExternalUsersEnum[keyof typeof TeamInvitationSettingsChanges.InviteExternalUsersEnum]
+    | (typeof TeamInvitationSettingsChanges.InviteExternalUsersEnum)[keyof typeof TeamInvitationSettingsChanges.InviteExternalUsersEnum]
   /**
    *  * \"only_org_admins\": Company admins only can invite * \"admins\":          Company admins and team admins can invite * \"all_members\":     All team members can invite
    */
   'whoCanInvite'?:
     | string
-    | typeof TeamInvitationSettingsChanges.WhoCanInviteEnum[keyof typeof TeamInvitationSettingsChanges.WhoCanInviteEnum]
+    | (typeof TeamInvitationSettingsChanges.WhoCanInviteEnum)[keyof typeof TeamInvitationSettingsChanges.WhoCanInviteEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
