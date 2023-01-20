@@ -32,7 +32,7 @@ export class AppCardData {
   /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
-  'status'?: string | typeof AppCardData.StatusEnum[keyof typeof AppCardData.StatusEnum]
+  'status'?: string | (typeof AppCardData.StatusEnum)[keyof typeof AppCardData.StatusEnum]
   /**
    * A short text header to identify the app card.
    */

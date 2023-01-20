@@ -20,21 +20,21 @@ export class BoardPermissionsPolicy {
    */
   'collaborationToolsStartAccess'?:
     | string
-    | typeof BoardPermissionsPolicy.CollaborationToolsStartAccessEnum[keyof typeof BoardPermissionsPolicy.CollaborationToolsStartAccessEnum] =
+    | (typeof BoardPermissionsPolicy.CollaborationToolsStartAccessEnum)[keyof typeof BoardPermissionsPolicy.CollaborationToolsStartAccessEnum] =
     BoardPermissionsPolicy.CollaborationToolsStartAccessEnum.AllEditors
   /**
    * Defines who can copy the board, copy objects, download images, and save the board as a template or PDF.
    */
   'copyAccess'?:
     | string
-    | typeof BoardPermissionsPolicy.CopyAccessEnum[keyof typeof BoardPermissionsPolicy.CopyAccessEnum] =
+    | (typeof BoardPermissionsPolicy.CopyAccessEnum)[keyof typeof BoardPermissionsPolicy.CopyAccessEnum] =
     BoardPermissionsPolicy.CopyAccessEnum.Anyone
   /**
    * Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support.
    */
   'sharingAccess'?:
     | string
-    | typeof BoardPermissionsPolicy.SharingAccessEnum[keyof typeof BoardPermissionsPolicy.SharingAccessEnum] =
+    | (typeof BoardPermissionsPolicy.SharingAccessEnum)[keyof typeof BoardPermissionsPolicy.SharingAccessEnum] =
     BoardPermissionsPolicy.SharingAccessEnum.TeamMembersWithEditingRights
 
   /** @ignore */

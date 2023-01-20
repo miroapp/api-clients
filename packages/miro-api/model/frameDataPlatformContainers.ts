@@ -20,7 +20,7 @@ export class FrameDataPlatformContainers {
    */
   'format'?:
     | string
-    | typeof FrameDataPlatformContainers.FormatEnum[keyof typeof FrameDataPlatformContainers.FormatEnum] =
+    | (typeof FrameDataPlatformContainers.FormatEnum)[keyof typeof FrameDataPlatformContainers.FormatEnum] =
     FrameDataPlatformContainers.FormatEnum.Custom
   /**
    * Title of the frame. This title appears at the top of the frame.
@@ -29,7 +29,7 @@ export class FrameDataPlatformContainers {
   /**
    * Only free form frames are supported at the moment.
    */
-  'type'?: string | typeof FrameDataPlatformContainers.TypeEnum[keyof typeof FrameDataPlatformContainers.TypeEnum] =
+  'type'?: string | (typeof FrameDataPlatformContainers.TypeEnum)[keyof typeof FrameDataPlatformContainers.TypeEnum] =
     FrameDataPlatformContainers.TypeEnum.Freeform
 
   /** @ignore */

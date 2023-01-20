@@ -26,7 +26,7 @@ export class Organization {
   /**
    * Organization plan type
    */
-  'plan': string | typeof Organization.PlanEnum[keyof typeof Organization.PlanEnum]
+  'plan': string | (typeof Organization.PlanEnum)[keyof typeof Organization.PlanEnum]
   'type'?: string
 
   /** @ignore */

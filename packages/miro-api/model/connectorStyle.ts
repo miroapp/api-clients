@@ -22,7 +22,7 @@ export class ConnectorStyle {
   /**
    * The decoration cap of the connector end, like an arrow or circle. Default: stealth.
    */
-  'endStrokeCap'?: string | typeof ConnectorStyle.EndStrokeCapEnum[keyof typeof ConnectorStyle.EndStrokeCapEnum]
+  'endStrokeCap'?: string | (typeof ConnectorStyle.EndStrokeCapEnum)[keyof typeof ConnectorStyle.EndStrokeCapEnum]
   /**
    * Defines the font size, in dp, for the captions on the connector. Default: 14
    */
@@ -30,7 +30,7 @@ export class ConnectorStyle {
   /**
    * The decoration cap of the connector end, like an arrow or circle. Default: none.
    */
-  'startStrokeCap'?: string | typeof ConnectorStyle.StartStrokeCapEnum[keyof typeof ConnectorStyle.StartStrokeCapEnum]
+  'startStrokeCap'?: string | (typeof ConnectorStyle.StartStrokeCapEnum)[keyof typeof ConnectorStyle.StartStrokeCapEnum]
   /**
    * Hex value of the color of the connector line. Default: #000000.
    */
@@ -38,7 +38,7 @@ export class ConnectorStyle {
   /**
    * The stroke pattern of the connector line. Default: normal.
    */
-  'strokeStyle'?: string | typeof ConnectorStyle.StrokeStyleEnum[keyof typeof ConnectorStyle.StrokeStyleEnum]
+  'strokeStyle'?: string | (typeof ConnectorStyle.StrokeStyleEnum)[keyof typeof ConnectorStyle.StrokeStyleEnum]
   /**
    * The thickness of the connector line, in dp. Default: 1.0.
    */
@@ -48,7 +48,7 @@ export class ConnectorStyle {
    */
   'textOrientation'?:
     | string
-    | typeof ConnectorStyle.TextOrientationEnum[keyof typeof ConnectorStyle.TextOrientationEnum]
+    | (typeof ConnectorStyle.TextOrientationEnum)[keyof typeof ConnectorStyle.TextOrientationEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

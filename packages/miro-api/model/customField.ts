@@ -22,7 +22,7 @@ export class CustomField {
   /**
    * The shape of the icon on the preview field.
    */
-  'iconShape'?: string | typeof CustomField.IconShapeEnum[keyof typeof CustomField.IconShapeEnum] =
+  'iconShape'?: string | (typeof CustomField.IconShapeEnum)[keyof typeof CustomField.IconShapeEnum] =
     CustomField.IconShapeEnum.Round
   /**
    * A valid URL pointing to an image available online. The transport protocol must be HTTPS. Possible image file formats: JPG/JPEG, PNG, SVG.

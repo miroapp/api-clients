@@ -26,7 +26,7 @@ export class ShapeStyle {
   /**
    * Defines the style used to represent the border of the shape. Default: `normal`.
    */
-  'borderStyle'?: string | typeof ShapeStyle.BorderStyleEnum[keyof typeof ShapeStyle.BorderStyleEnum]
+  'borderStyle'?: string | (typeof ShapeStyle.BorderStyleEnum)[keyof typeof ShapeStyle.BorderStyleEnum]
   /**
    * Defines the thickness of the shape border, in dp. Default: `2.0`.
    */
@@ -46,7 +46,7 @@ export class ShapeStyle {
   /**
    * Defines the font type for the text in the shape item. Default: `arial`.
    */
-  'fontFamily'?: string | typeof ShapeStyle.FontFamilyEnum[keyof typeof ShapeStyle.FontFamilyEnum]
+  'fontFamily'?: string | (typeof ShapeStyle.FontFamilyEnum)[keyof typeof ShapeStyle.FontFamilyEnum]
   /**
    * Defines the font size, in dp, for the text on the shape. Default: `14`.
    */
@@ -54,11 +54,13 @@ export class ShapeStyle {
   /**
    * Defines how the sticky note text is horizontally aligned. Default: `center`.
    */
-  'textAlign'?: string | typeof ShapeStyle.TextAlignEnum[keyof typeof ShapeStyle.TextAlignEnum]
+  'textAlign'?: string | (typeof ShapeStyle.TextAlignEnum)[keyof typeof ShapeStyle.TextAlignEnum]
   /**
    * Defines how the sticky note text is vertically aligned. Default: `top`.
    */
-  'textAlignVertical'?: string | typeof ShapeStyle.TextAlignVerticalEnum[keyof typeof ShapeStyle.TextAlignVerticalEnum]
+  'textAlignVertical'?:
+    | string
+    | (typeof ShapeStyle.TextAlignVerticalEnum)[keyof typeof ShapeStyle.TextAlignVerticalEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

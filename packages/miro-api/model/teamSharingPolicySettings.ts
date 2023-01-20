@@ -24,55 +24,55 @@ export class TeamSharingPolicySettings {
    */
   'createAssetAccessLevel'?:
     | string
-    | typeof TeamSharingPolicySettings.CreateAssetAccessLevelEnum[keyof typeof TeamSharingPolicySettings.CreateAssetAccessLevelEnum]
+    | (typeof TeamSharingPolicySettings.CreateAssetAccessLevelEnum)[keyof typeof TeamSharingPolicySettings.CreateAssetAccessLevelEnum]
   /**
    *  Default board access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view * \"comment\": Anyone in the team can comment * \"edit\":    Anyone in the team can edit
    */
   'defaultBoardAccess'?:
     | string
-    | typeof TeamSharingPolicySettings.DefaultBoardAccessEnum[keyof typeof TeamSharingPolicySettings.DefaultBoardAccessEnum]
+    | (typeof TeamSharingPolicySettings.DefaultBoardAccessEnum)[keyof typeof TeamSharingPolicySettings.DefaultBoardAccessEnum]
   /**
    *  Default organization access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view * \"comment\": Anyone in the team can comment * \"edit\":    Anyone in the team can edit
    */
   'defaultOrganizationAccess'?:
     | string
-    | typeof TeamSharingPolicySettings.DefaultOrganizationAccessEnum[keyof typeof TeamSharingPolicySettings.DefaultOrganizationAccessEnum]
+    | (typeof TeamSharingPolicySettings.DefaultOrganizationAccessEnum)[keyof typeof TeamSharingPolicySettings.DefaultOrganizationAccessEnum]
   /**
    *  Default project access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view
    */
   'defaultProjectAccess'?:
     | string
-    | typeof TeamSharingPolicySettings.DefaultProjectAccessEnum[keyof typeof TeamSharingPolicySettings.DefaultProjectAccessEnum]
+    | (typeof TeamSharingPolicySettings.DefaultProjectAccessEnum)[keyof typeof TeamSharingPolicySettings.DefaultProjectAccessEnum]
   /**
    *  * \"allowed\": Allow move board to team * \"not_allowed\": Not allow move board to team
    */
   'moveBoardToAccount'?:
     | string
-    | typeof TeamSharingPolicySettings.MoveBoardToAccountEnum[keyof typeof TeamSharingPolicySettings.MoveBoardToAccountEnum]
+    | (typeof TeamSharingPolicySettings.MoveBoardToAccountEnum)[keyof typeof TeamSharingPolicySettings.MoveBoardToAccountEnum]
   /**
    *  * \"enabled\": Enabled. Restrict to listed domain. * \"disabled\": Disabled. No domain restriction. * \"enabled_with_external_users_access\": Enabled. Restrict to listed domain but allows external users to access.
    */
   'restrictAllowedDomains'?:
     | string
-    | typeof TeamSharingPolicySettings.RestrictAllowedDomainsEnum[keyof typeof TeamSharingPolicySettings.RestrictAllowedDomainsEnum]
+    | (typeof TeamSharingPolicySettings.RestrictAllowedDomainsEnum)[keyof typeof TeamSharingPolicySettings.RestrictAllowedDomainsEnum]
   /**
    *  * \"allowed\": Allow sharing on team * \"not_allowed\": Not allow sharing on team
    */
   'sharingOnAccount'?:
     | string
-    | typeof TeamSharingPolicySettings.SharingOnAccountEnum[keyof typeof TeamSharingPolicySettings.SharingOnAccountEnum]
+    | (typeof TeamSharingPolicySettings.SharingOnAccountEnum)[keyof typeof TeamSharingPolicySettings.SharingOnAccountEnum]
   /**
    *  * \"allowed\": Allow sharing on organization * \"allowed_with_editing\": Allow sharing with editing on organization * \"not_allowed\": Not allow sharing on organization
    */
   'sharingOnOrganization'?:
     | string
-    | typeof TeamSharingPolicySettings.SharingOnOrganizationEnum[keyof typeof TeamSharingPolicySettings.SharingOnOrganizationEnum]
+    | (typeof TeamSharingPolicySettings.SharingOnOrganizationEnum)[keyof typeof TeamSharingPolicySettings.SharingOnOrganizationEnum]
   /**
    *  * \"allowed\": Allow sharing via public link * \"allowed_with_editing\": Allow sharing with editing via public link * \"not_allowed\": Not allow sharing via public link
    */
   'sharingViaPublicLink'?:
     | string
-    | typeof TeamSharingPolicySettings.SharingViaPublicLinkEnum[keyof typeof TeamSharingPolicySettings.SharingViaPublicLinkEnum]
+    | (typeof TeamSharingPolicySettings.SharingViaPublicLinkEnum)[keyof typeof TeamSharingPolicySettings.SharingViaPublicLinkEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

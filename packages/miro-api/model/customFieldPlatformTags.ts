@@ -24,7 +24,7 @@ export class CustomFieldPlatformTags {
    */
   'iconShape'?:
     | string
-    | typeof CustomFieldPlatformTags.IconShapeEnum[keyof typeof CustomFieldPlatformTags.IconShapeEnum] =
+    | (typeof CustomFieldPlatformTags.IconShapeEnum)[keyof typeof CustomFieldPlatformTags.IconShapeEnum] =
     CustomFieldPlatformTags.IconShapeEnum.Round
   /**
    * A valid URL pointing to an image available online. The transport protocol must be HTTPS. Possible image file formats: JPG/JPEG, PNG, SVG.
