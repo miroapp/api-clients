@@ -54,7 +54,11 @@ export class Miro {
    * Checks if the given user id already has token stored
    */
   async isAuthorized(userId: ExternalUserId): Promise<boolean> {
-    return !!(await this.storage.get(userId))
+    try {
+      return !!(await this.getAccessToken(userId))
+    } catch (err) {
+      return false
+    }
   }
 
   /**
