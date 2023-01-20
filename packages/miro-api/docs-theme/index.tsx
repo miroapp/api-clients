@@ -8,11 +8,11 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
     this.footer = () => null
 
     // Replace navigation with custom index
-    const OldNav = this.navigation
     this.navigation = (context) => {
       type Item = {
         title: string
         url?: string
+        icon?: ReflectionKind
         cssClasses?: string
         children?: Array<Item>
       }
@@ -38,22 +38,24 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
                 {title: 'ShapeItem'},
                 {title: 'ImageItem'},
                 {title: 'FrameItem'},
-                {title: 'Item', url: 'classes/index.Item.html'},
-                {title: 'Connector', url: 'classes/index.Connector.html'},
-                {title: 'Tag', url: 'classes/index.Tag.html'},
+                {title: 'Item'},
+                {title: 'Connector'},
+                {title: 'Tag'},
               ],
             },
-            {title: 'Team', url: 'classes/index.Team.html'},
-            {title: 'Organization', url: 'classes/index.Organization.html'},
+            {title: 'Team'},
+            {title: 'Organization'},
           ],
         },
         {
           title: 'MiroOptions',
           url: 'interfaces/index.MiroOptions.html',
+          icon: ReflectionKind.Interface,
         },
         {
           title: 'Storage',
           url: 'interfaces/index._internal_.Storage.html',
+          icon: ReflectionKind.Interface,
         },
       ]
 
@@ -62,11 +64,8 @@ export class MiroThemeContext extends DefaultThemeRenderContext {
           <ul class="js-category-list category" data-id={1}>
             {items.map((item) => (
               <li>
-                <a
-                  class="tsd-index-link"
-                  href={this.relativeURL(item.url || `classes/index._internal_.${item.title}.html`)}
-                >
-                  {this.icons[ReflectionKind.Class]()}
+                <a class="tsd-index-link" href={this.relativeURL(item.url || `classes/index.${item.title}.html`)}>
+                  {this.icons[item.icon || ReflectionKind.Class]()}
                   {item.title}
                 </a>
                 {item.children ? <Navigation items={item.children} /> : null}
