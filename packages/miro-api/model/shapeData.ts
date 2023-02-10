@@ -18,7 +18,7 @@ export class ShapeData {
   /**
    * The text you want to display on the shape.
    */
-  'content'?: string = 'Hello'
+  'content'?: string
   /**
    * Defines the geometric shape of the item when it is rendered on the board.
    */

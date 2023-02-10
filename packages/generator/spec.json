@@ -7656,7 +7656,7 @@
         "responses": {
           "201": {
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FrameItem"
                 }
@@ -7798,7 +7798,7 @@
         "responses": {
           "200": {
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FrameItem"
                 }
@@ -7948,7 +7948,7 @@
         "responses": {
           "200": {
             "content": {
-              "*/*": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/FrameItem"
                 }
@@ -9701,7 +9701,7 @@
     },
     "/v2/orgs/{org_id}": {
       "get": {
-        "description": "Retrieves organization information.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves organization information.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-organization",
         "parameters": [
           {
@@ -9901,9 +9901,658 @@
         "tags": ["organizations"]
       }
     },
+    "/v2/orgs/{org_id}/boards/export/jobs": {
+      "post": {
+        "description": "Creates an export job for one or more boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
+        "operationId": "enterprise-create-board-export",
+        "parameters": [
+          {
+            "description": "Unique identifier of the organization.",
+            "example": 3074457345821141000,
+            "in": "path",
+            "name": "org_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier of the board export job.",
+            "example": "92343229-c532-446d-b8cb-2f155bedb807",
+            "in": "query",
+            "name": "request_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBoardExportRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardExportJobId"
+                }
+              }
+            },
+            "description": "Unique identifier of the board export job"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Invalid authentication credentials"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Invalid access"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Create board export job",
+        "tags": ["Board export job"]
+      }
+    },
+    "/v2/orgs/{org_id}/boards/export/jobs/{job_id}": {
+      "get": {
+        "description": "Retrieves the status of the board export job.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
+        "operationId": "enterprise-board-export-job-status",
+        "parameters": [
+          {
+            "description": "Unique identifier of the organization.",
+            "example": 3074457345821141000,
+            "in": "path",
+            "name": "org_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier of the board export job.",
+            "example": "92343229-c532-446d-b8cb-2f155bedb807",
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardExportJobStatus"
+                }
+              }
+            },
+            "description": "Board export job status"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Invalid authentication credentials"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Invalid access"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get board export job status",
+        "tags": ["Board export job"]
+      }
+    },
+    "/v2/orgs/{org_id}/boards/export/jobs/{job_id}/results": {
+      "get": {
+        "description": "Retrieves the result of the board export job. The response provides more information about the board export job, such as the S3 link to the files created.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
+        "operationId": "enterprise-board-export-job-results",
+        "parameters": [
+          {
+            "description": "Unique identifier of the organization.",
+            "example": 3074457345821141000,
+            "in": "path",
+            "name": "org_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier of the job.",
+            "example": "92343229-c532-446d-b8cb-2f155bedb807",
+            "in": "path",
+            "name": "job_id",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BoardExportResult"
+                }
+              }
+            },
+            "description": "Board export job result"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Invalid authentication credentials"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Invalid access"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "Status code of the error",
+                      "format": "int32",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  },
+                  "description": "Test error object"
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get results for board export job",
+        "tags": ["Board export job"]
+      }
+    },
     "/v2/orgs/{org_id}/data-classification-settings": {
       "get": {
-        "description": "Retrieves board classification settings for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves board classification settings for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-dataclassification-organization-settings-get",
         "parameters": [
           {
@@ -10105,7 +10754,7 @@
     },
     "/v2/orgs/{org_id}/default_teams_settings": {
       "get": {
-        "description": "Retrieves default team settings of an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves default team settings of an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-default-team-settings",
         "parameters": [
           {
@@ -10307,7 +10956,7 @@
     },
     "/v2/orgs/{org_id}/members": {
       "get": {
-        "description": "Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-organization-members",
         "parameters": [
           {
@@ -10578,7 +11227,7 @@
     },
     "/v2/orgs/{org_id}/members/{member_id}": {
       "get": {
-        "description": "Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-organization-member",
         "parameters": [
           {
@@ -10790,7 +11439,7 @@
     },
     "/v2/orgs/{org_id}/teams": {
       "get": {
-        "description": "Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-teams",
         "parameters": [
           {
@@ -11021,7 +11670,7 @@
         "tags": ["Teams api"]
       },
       "post": {
-        "description": "Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-create-team",
         "parameters": [
           {
@@ -11233,7 +11882,7 @@
     },
     "/v2/orgs/{org_id}/teams/{team_id}": {
       "delete": {
-        "description": "Deletes an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Deletes an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-delete-team",
         "parameters": [
           {
@@ -11436,7 +12085,7 @@
         "tags": ["Teams api"]
       },
       "get": {
-        "description": "Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-team",
         "parameters": [
           {
@@ -11646,7 +12295,7 @@
         "tags": ["Teams api"]
       },
       "patch": {
-        "description": "Updates an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Updates an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-update-team",
         "parameters": [
           {
@@ -11868,7 +12517,7 @@
     },
     "/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification": {
       "get": {
-        "description": "Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-dataclassification-board-get",
         "parameters": [
           {
@@ -12088,7 +12737,7 @@
         "tags": ["Board classification: Board level"]
       },
       "post": {
-        "description": "Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-dataclassification-board-set",
         "parameters": [
           {
@@ -12320,7 +12969,7 @@
     },
     "/v2/orgs/{org_id}/teams/{team_id}/data-classification": {
       "patch": {
-        "description": "Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-dataclassification-team-boards-bulk",
         "parameters": [
           {
@@ -12542,7 +13191,7 @@
     },
     "/v2/orgs/{org_id}/teams/{team_id}/data-classification-settings": {
       "get": {
-        "description": "Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-dataclassification-team-settings-get",
         "parameters": [
           {
@@ -12752,7 +13401,7 @@
         "tags": ["Board classification: Team level"]
       },
       "patch": {
-        "description": "Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-dataclassification-team-settings-set",
         "parameters": [
           {
@@ -12974,7 +13623,7 @@
     },
     "/v2/orgs/{org_id}/teams/{team_id}/members": {
       "get": {
-        "description": "Retrieves team members by cursor.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves team members by cursor.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-team-members",
         "parameters": [
           {
@@ -13218,7 +13867,7 @@
         "tags": ["Team members api"]
       },
       "post": {
-        "description": "Invites a new member to an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Invites a new member to an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-invite-team-member",
         "parameters": [
           {
@@ -13450,7 +14099,7 @@
     },
     "/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}": {
       "delete": {
-        "description": "Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-delete-team-member",
         "parameters": [
           {
@@ -13663,7 +14312,7 @@
         "tags": ["Team members api"]
       },
       "get": {
-        "description": "Retrieves team member by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves team member by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-team-member",
         "parameters": [
           {
@@ -13883,7 +14532,7 @@
         "tags": ["Team members api"]
       },
       "patch": {
-        "description": "Updates team member role in team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Updates team member role in team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-update-team-member",
         "parameters": [
           {
@@ -14115,7 +14764,7 @@
     },
     "/v2/orgs/{org_id}/teams/{team_id}/settings": {
       "get": {
-        "description": "Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-get-team-settings",
         "parameters": [
           {
@@ -14325,7 +14974,7 @@
         "tags": ["Team settings api"]
       },
       "patch": {
-        "description": "Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users.</p>",
+        "description": "Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>",
         "operationId": "enterprise-update-team-settings",
         "parameters": [
           {
@@ -14559,7 +15208,6 @@
   "components": {
     "schemas": {
       "AppCardCreateRequest": {
-        "required": ["data"],
         "type": "object",
         "properties": {
           "data": {
@@ -14604,6 +15252,22 @@
             "type": "string",
             "description": "A short text header to identify the app card.",
             "default": "sample app card item"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "shape",
+              "sticky_note",
+              "image",
+              "document",
+              "card",
+              "app_card",
+              "preview",
+              "frame",
+              "embed",
+              "opaque"
+            ]
           }
         },
         "description": "For information about the JSON properties, see [Data](https://developers.miro.com/reference/data)."
@@ -15172,7 +15836,6 @@
         "description": "Contains the connector's caption data, such as content and its position."
       },
       "CardCreateRequest": {
-        "required": ["data"],
         "type": "object",
         "properties": {
           "data": {
@@ -15291,9 +15954,11 @@
             "enum": ["straight", "elbowed", "curved"]
           },
           "captions": {
+            "maxLength": 20,
             "maxItems": 20,
             "minItems": 0,
             "type": "array",
+            "description": "Blocks of text you want to display on the connector.",
             "items": {
               "$ref": "#/components/schemas/Caption"
             }
@@ -15301,9 +15966,11 @@
           "style": {
             "$ref": "#/components/schemas/ConnectorStyle"
           }
-        }
+        },
+        "description": "If both are provided, startItem.id must be different from endItem.id"
       },
       "ConnectorCreationData": {
+        "required": ["endItem", "startItem"],
         "type": "object",
         "properties": {
           "startItem": {
@@ -15318,9 +15985,11 @@
             "enum": ["straight", "elbowed", "curved"]
           },
           "captions": {
+            "maxLength": 20,
             "maxItems": 20,
             "minItems": 0,
             "type": "array",
+            "description": "Blocks of text you want to display on the connector.",
             "items": {
               "$ref": "#/components/schemas/Caption"
             }
@@ -15328,7 +15997,8 @@
           "style": {
             "$ref": "#/components/schemas/ConnectorStyle"
           }
-        }
+        },
+        "description": "startItem.id must be different from endItem.id"
       },
       "ConnectorStyle": {
         "type": "object",
@@ -15605,6 +16275,22 @@
             "description": "A short text header to identify the document.",
             "example": "Sample document title"
           },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "shape",
+              "sticky_note",
+              "image",
+              "document",
+              "card",
+              "app_card",
+              "preview",
+              "frame",
+              "embed",
+              "opaque"
+            ]
+          },
           "url": {
             "type": "string",
             "description": "URL where the document is hosted.",
@@ -15620,6 +16306,22 @@
           "title": {
             "type": "string",
             "description": "A short text header to identify the document."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "shape",
+              "sticky_note",
+              "image",
+              "document",
+              "card",
+              "app_card",
+              "preview",
+              "frame",
+              "embed",
+              "opaque"
+            ]
           },
           "url": {
             "type": "string",
@@ -15727,6 +16429,22 @@
             "type": "string",
             "description": "URL of the image to be used as the preview image for the embedded item."
           },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "shape",
+              "sticky_note",
+              "image",
+              "document",
+              "card",
+              "app_card",
+              "preview",
+              "frame",
+              "embed",
+              "opaque"
+            ]
+          },
           "url": {
             "type": "string",
             "description": "A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.",
@@ -15746,6 +16464,22 @@
           "previewUrl": {
             "type": "string",
             "description": "URL of the image to be used as the preview image for the embedded item."
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "shape",
+              "sticky_note",
+              "image",
+              "document",
+              "card",
+              "app_card",
+              "preview",
+              "frame",
+              "embed",
+              "opaque"
+            ]
           },
           "url": {
             "type": "string",
@@ -15897,6 +16631,22 @@
             "description": "A short text header to identify the image.",
             "example": "Sample image title"
           },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "shape",
+              "sticky_note",
+              "image",
+              "document",
+              "card",
+              "app_card",
+              "preview",
+              "frame",
+              "embed",
+              "opaque"
+            ]
+          },
           "url": {
             "type": "string",
             "description": "URL of the image.",
@@ -15913,6 +16663,22 @@
             "type": "string",
             "description": "A short text header to identify the image.",
             "example": "Test image title"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "text",
+              "shape",
+              "sticky_note",
+              "image",
+              "document",
+              "card",
+              "app_card",
+              "preview",
+              "frame",
+              "embed",
+              "opaque"
+            ]
           },
           "url": {
             "type": "string",
@@ -15977,7 +16743,8 @@
             "description": "The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.",
             "enum": ["auto", "top", "right", "bottom", "left"]
           }
-        }
+        },
+        "description": "The starting point of the connector. If endItem is also provided, startItem.id must be different from endItem.id"
       },
       "ItemConnectionCreationData": {
         "type": "object",
@@ -15995,7 +16762,8 @@
             "description": "The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.",
             "enum": ["auto", "top", "right", "bottom", "left"]
           }
-        }
+        },
+        "description": "The start point of the connector. startItem.id must be different from endItem.id"
       },
       "ItemConnectionWithLinks": {
         "type": "object",
@@ -16031,7 +16799,6 @@
         "description": "The relative position of the point on an item where the connector is attached. Position with x=0% and y=0% correspond to the top-left corner of the item, x=100% and y=100% correspond to the right-bottom corner."
       },
       "ShapeCreateRequest": {
-        "required": ["data"],
         "type": "object",
         "properties": {
           "data": {
@@ -16220,7 +16987,6 @@
         }
       },
       "StickyNoteCreateRequest": {
-        "required": ["data"],
         "type": "object",
         "properties": {
           "data": {
@@ -17244,7 +18010,7 @@
             "$ref": "#/components/schemas/createdBy"
           },
           "data": {
-            "$ref": "#/components/schemas/WidgetData"
+            "$ref": "#/components/schemas/WidgetDataOutput"
           },
           "geometry": {
             "$ref": "#/components/schemas/Geometry"
@@ -17459,7 +18225,7 @@
           "content": {
             "type": "string",
             "description": "The text you want to display on the shape.",
-            "default": "Hello"
+            "example": "Hello"
           },
           "shape": {
             "type": "string",
@@ -17498,8 +18264,7 @@
           "content": {
             "type": "string",
             "description": "The actual text (content) that appears in the sticky note item.",
-            "example": "Hello",
-            "default": "Hello"
+            "example": "Hello"
           },
           "shape": {
             "type": "string",
@@ -17705,13 +18470,12 @@
           "content": {
             "type": "string",
             "description": "The actual text (content) that appears in the text item.",
-            "example": "Hello",
-            "default": "Hello"
+            "example": "Hello"
           }
         },
         "description": "Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data)."
       },
-      "WidgetDataPlatformTags": {
+      "WidgetDataOutputPlatformTags": {
         "type": "object",
         "description": "Contains the item data, such as the item title, content, or description.",
         "oneOf": [
@@ -18082,7 +18846,7 @@
           "content": {
             "type": "string",
             "description": "The text you want to display on the shape.",
-            "default": "Hello"
+            "example": "Hello"
           },
           "shape": {
             "type": "string",
@@ -18121,8 +18885,7 @@
           "content": {
             "type": "string",
             "description": "The actual text (content) that appears in the sticky note item.",
-            "example": "Hello",
-            "default": "Hello"
+            "example": "Hello"
           },
           "shape": {
             "type": "string",
@@ -18140,13 +18903,12 @@
           "content": {
             "type": "string",
             "description": "The actual text (content) that appears in the text item.",
-            "example": "Hello",
-            "default": "Hello"
+            "example": "Hello"
           }
         },
         "description": "Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data)."
       },
-      "WidgetData": {
+      "WidgetDataOutput": {
         "type": "object",
         "description": "Contains the item data, such as the item title, content, or description.",
         "oneOf": [
@@ -18240,6 +19002,90 @@
             "example": "NO_SHARING_RESTRICTIONS"
           }
         }
+      },
+      "BoardExportJobId": {
+        "required": ["jobId"],
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "Unique identifier of the board export job.",
+            "format": "uuid",
+            "example": "92343229-c532-446d-b8cb-2f155bedb807"
+          }
+        }
+      },
+      "BoardExportJobStatus": {
+        "required": ["jobStatus"],
+        "type": "object",
+        "properties": {
+          "jobStatus": {
+            "type": "string",
+            "description": "Indicates the current state of the board export job.\nPossible values:\n `CREATED`: the job has been created but not yet started. Retry the status call after some time.\n`IN_PROGRESS`: the job is in progress, and the results are not ready yet. Retry the status call after some time.\n`FINISHED`: the job is complete. You can now get results for the board export job.",
+            "example": "CREATED"
+          }
+        }
+      },
+      "BoardExportResult": {
+        "type": "object",
+        "properties": {
+          "jobId": {
+            "type": "string",
+            "description": "Unique identifier of the board export job.",
+            "format": "uuid",
+            "example": "92343229-c532-446d-b8cb-2f155bedb807"
+          },
+          "results": {
+            "type": "array",
+            "description": "Board export task results.",
+            "items": {
+              "$ref": "#/components/schemas/BoardExportTaskResult"
+            }
+          }
+        }
+      },
+      "BoardExportTaskResult": {
+        "required": ["boardId", "status"],
+        "type": "object",
+        "properties": {
+          "boardId": {
+            "type": "string",
+            "description": "Unique identifier of the board.",
+            "example": "o9J_kzlUDmo="
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "Contains the description of the error that occurred during a board export task."
+          },
+          "exportLink": {
+            "type": "string",
+            "description": "URL of the S3 bucket that contains the exported files."
+          },
+          "status": {
+            "type": "string",
+            "description": "Indicates the status of the individual board export task.\nPossible values:\n`SUCCESS`: the board export task was completed successfully and the results are available.\n`ERROR`: the board export task encountered an error and failed to complete. The `errorMessage` field provides more information on the error.",
+            "example": "CREATED"
+          }
+        },
+        "description": "Board export task results."
+      },
+      "CreateBoardExportRequest": {
+        "type": "object",
+        "properties": {
+          "boardIds": {
+            "maxItems": 50,
+            "minItems": 1,
+            "type": "array",
+            "description": "List of board IDs to be exported.",
+            "example": "o9J_kzlUDmo=",
+            "items": {
+              "type": "string",
+              "description": "List of board IDs to be exported.",
+              "example": "o9J_kzlUDmo="
+            }
+          }
+        },
+        "description": "List of board IDs to be exported."
       },
       "CreateTeamRequest": {
         "type": "object",
@@ -18394,6 +19240,7 @@
               "professional_2022",
               "edu_team_org",
               "free_team_org",
+              "dev_team_org",
               "unknown"
             ]
           },

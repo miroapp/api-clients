@@ -17,7 +17,7 @@ import {Parent} from './parent'
 import {PositionChange} from './positionChange'
 
 export class AppCardCreateRequest {
-  'data': AppCardDataChanges
+  'data'?: AppCardDataChanges
   'style'?: AppCardStyle
   'position'?: PositionChange
   'geometry'?: Geometry

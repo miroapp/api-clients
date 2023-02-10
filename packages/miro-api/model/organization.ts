@@ -78,6 +78,7 @@ export namespace Organization {
     Professional2022: 'professional_2022',
     EduTeamOrg: 'edu_team_org',
     FreeTeamOrg: 'free_team_org',
+    DevTeamOrg: 'dev_team_org',
     Unknown: 'unknown',
   } as const
 }
