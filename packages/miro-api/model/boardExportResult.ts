@@ -10,15 +10,17 @@
  * Do not edit the class manually.
  */
 
-/**
- * @internal
- * Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).
- */
-export class TextDataPlatformTags {
+import {BoardExportTaskResult} from './boardExportTaskResult'
+
+export class BoardExportResult {
   /**
-   * The actual text (content) that appears in the text item.
+   * Unique identifier of the board export job.
    */
-  'content': string
+  'jobId'?: string
+  /**
+   * Board export task results.
+   */
+  'results'?: Array<BoardExportTaskResult>
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -26,14 +28,19 @@ export class TextDataPlatformTags {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'content',
-      baseName: 'content',
+      name: 'jobId',
+      baseName: 'jobId',
       type: 'string',
+    },
+    {
+      name: 'results',
+      baseName: 'results',
+      type: 'Array<BoardExportTaskResult>',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return TextDataPlatformTags.attributeTypeMap
+    return BoardExportResult.attributeTypeMap
   }
 }

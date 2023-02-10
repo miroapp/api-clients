@@ -18,7 +18,7 @@ export class StickyNoteDataPlatformTags {
   /**
    * The actual text (content) that appears in the sticky note item.
    */
-  'content'?: string = 'Hello'
+  'content'?: string
   /**
    * Defines the geometric shape of the sticky note and aspect ratio for its dimensions.
    */

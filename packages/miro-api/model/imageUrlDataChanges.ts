@@ -19,6 +19,7 @@ export class ImageUrlDataChanges {
    * A short text header to identify the image.
    */
   'title'?: string
+  'type'?: string | (typeof ImageUrlDataChanges.TypeEnum)[keyof typeof ImageUrlDataChanges.TypeEnum]
   /**
    * URL of the image.
    */
@@ -35,6 +36,11 @@ export class ImageUrlDataChanges {
       type: 'string',
     },
     {
+      name: 'type',
+      baseName: 'type',
+      type: 'ImageUrlDataChanges.TypeEnum',
+    },
+    {
       name: 'url',
       baseName: 'url',
       type: 'string',
@@ -45,4 +51,20 @@ export class ImageUrlDataChanges {
   static getAttributeTypeMap() {
     return ImageUrlDataChanges.attributeTypeMap
   }
+}
+
+export namespace ImageUrlDataChanges {
+  export const TypeEnum = {
+    Text: 'text',
+    Shape: 'shape',
+    StickyNote: 'sticky_note',
+    Image: 'image',
+    Document: 'document',
+    Card: 'card',
+    AppCard: 'app_card',
+    Preview: 'preview',
+    Frame: 'frame',
+    Embed: 'embed',
+    Opaque: 'opaque',
+  } as const
 }

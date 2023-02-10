@@ -12,6 +12,10 @@
 
 import {RelativeOffset} from './relativeOffset'
 
+/**
+ * @internal
+ * The starting point of the connector. If endItem is also provided, startItem.id must be different from endItem.id
+ */
 export class ItemConnectionChangesData {
   /**
    * Unique identifier (ID) of the item to which you want to attach the connector. Note that Frames are not supported at the moment.

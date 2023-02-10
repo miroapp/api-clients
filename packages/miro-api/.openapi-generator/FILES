@@ -10,6 +10,10 @@ model/appCardUpdateRequest.ts
 model/board.ts
 model/boardChanges.ts
 model/boardDataClassificationLabel.ts
+model/boardExportJobId.ts
+model/boardExportJobStatus.ts
+model/boardExportResult.ts
+model/boardExportTaskResult.ts
 model/boardLinks.ts
 model/boardMember.ts
 model/boardMemberChanges.ts
@@ -35,6 +39,7 @@ model/connectorCreationData.ts
 model/connectorStyle.ts
 model/connectorWithLinks.ts
 model/connectorsCursorPaged.ts
+model/createBoardExportRequest.ts
 model/createTeamRequest.ts
 model/createdBy.ts
 model/createdByPlatformContainers.ts
@@ -168,8 +173,8 @@ model/updateBoardsDataClassificationLabelRequest.ts
 model/updateTeamSettingsRequest.ts
 model/userInfoShort.ts
 model/userInformation.ts
-model/widgetData.ts
-model/widgetDataPlatformTags.ts
+model/widgetDataOutput.ts
+model/widgetDataOutputPlatformTags.ts
 model/widgetLinks.ts
 model/widgetLinksPlatformContainers.ts
 model/widthOnlyAdjustableGeometry.ts

@@ -12,13 +12,13 @@
 
 /**
  * @internal
- * Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * List of board IDs to be exported.
  */
-export class TextDataPlatformTags {
+export class CreateBoardExportRequest {
   /**
-   * The actual text (content) that appears in the text item.
+   * List of board IDs to be exported.
    */
-  'content': string
+  'boardIds'?: Array<string>
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -26,14 +26,14 @@ export class TextDataPlatformTags {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'content',
-      baseName: 'content',
-      type: 'string',
+      name: 'boardIds',
+      baseName: 'boardIds',
+      type: 'Array<string>',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return TextDataPlatformTags.attributeTypeMap
+    return CreateBoardExportRequest.attributeTypeMap
   }
 }

@@ -17,7 +17,7 @@ import {StickyNoteData} from './stickyNoteData'
 import {StickyNoteStyle} from './stickyNoteStyle'
 
 export class StickyNoteCreateRequest {
-  'data': StickyNoteData
+  'data'?: StickyNoteData
   'style'?: StickyNoteStyle
   'position'?: PositionChange
   'geometry'?: FixedRatioNoRotationGeometry
