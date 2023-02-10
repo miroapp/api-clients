@@ -15,7 +15,7 @@ import {Geometry} from './geometry'
 import {ModifiedBy} from './modifiedBy'
 import {Parent} from './parent'
 import {Position} from './position'
-import {WidgetData} from './widgetData'
+import {WidgetDataOutput} from './widgetDataOutput'
 
 /**
  * @internal
@@ -27,7 +27,7 @@ export class GenericItem {
    */
   'createdAt'?: Date
   'createdBy'?: CreatedBy
-  'data'?: WidgetData
+  'data'?: WidgetDataOutput
   'geometry'?: Geometry
   /**
    * Unique identifier (ID) of an item.
@@ -63,7 +63,7 @@ export class GenericItem {
     {
       name: 'data',
       baseName: 'data',
-      type: 'WidgetData',
+      type: 'WidgetDataOutput',
     },
     {
       name: 'geometry',

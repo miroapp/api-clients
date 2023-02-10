@@ -18,7 +18,7 @@ export class TextData {
   /**
    * The actual text (content) that appears in the text item.
    */
-  'content': string = 'Hello'
+  'content': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

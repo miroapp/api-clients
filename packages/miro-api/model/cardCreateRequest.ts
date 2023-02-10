@@ -17,7 +17,7 @@ import {Parent} from './parent'
 import {PositionChange} from './positionChange'
 
 export class CardCreateRequest {
-  'data': CardData
+  'data'?: CardData
   'style'?: CardStyle
   'position'?: PositionChange
   'geometry'?: Geometry

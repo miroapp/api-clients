@@ -25,11 +25,11 @@ import {TextData} from './textData'
  * @internal
  * Contains the item data, such as the item title, content, or description.
  */
-export class WidgetDataPlatformTags {
+export class WidgetDataOutput {
   /**
    * The actual text (content) that appears in the sticky note item.
    */
-  'content': string = 'Hello'
+  'content': string
   /**
    * Type of the embedded item\'s content.
    */
@@ -45,7 +45,7 @@ export class WidgetDataPlatformTags {
   /**
    * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
    */
-  'mode'?: string | (typeof WidgetDataPlatformTags.ModeEnum)[keyof typeof WidgetDataPlatformTags.ModeEnum]
+  'mode'?: string | (typeof WidgetDataOutput.ModeEnum)[keyof typeof WidgetDataOutput.ModeEnum]
   /**
    * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
    */
@@ -85,7 +85,7 @@ export class WidgetDataPlatformTags {
   /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
-  'status'?: string | (typeof WidgetDataPlatformTags.StatusEnum)[keyof typeof WidgetDataPlatformTags.StatusEnum]
+  'status'?: string | (typeof WidgetDataOutput.StatusEnum)[keyof typeof WidgetDataOutput.StatusEnum]
   /**
    * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
    */
@@ -97,18 +97,18 @@ export class WidgetDataPlatformTags {
   /**
    * Defines the geometric shape of the sticky note and aspect ratio for its dimensions.
    */
-  'shape'?: string | (typeof WidgetDataPlatformTags.ShapeEnum)[keyof typeof WidgetDataPlatformTags.ShapeEnum] =
-    WidgetDataPlatformTags.ShapeEnum.Square
+  'shape'?: string | (typeof WidgetDataOutput.ShapeEnum)[keyof typeof WidgetDataOutput.ShapeEnum] =
+    WidgetDataOutput.ShapeEnum.Square
   /**
    * Only custom frames are supported at the moment.
    */
-  'format'?: string | (typeof WidgetDataPlatformTags.FormatEnum)[keyof typeof WidgetDataPlatformTags.FormatEnum] =
-    WidgetDataPlatformTags.FormatEnum.Custom
+  'format'?: string | (typeof WidgetDataOutput.FormatEnum)[keyof typeof WidgetDataOutput.FormatEnum] =
+    WidgetDataOutput.FormatEnum.Custom
   /**
    * Only free form frames are supported at the moment.
    */
-  'type'?: string | (typeof WidgetDataPlatformTags.TypeEnum)[keyof typeof WidgetDataPlatformTags.TypeEnum] =
-    WidgetDataPlatformTags.TypeEnum.Freeform
+  'type'?: string | (typeof WidgetDataOutput.TypeEnum)[keyof typeof WidgetDataOutput.TypeEnum] =
+    WidgetDataOutput.TypeEnum.Freeform
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -138,7 +138,7 @@ export class WidgetDataPlatformTags {
     {
       name: 'mode',
       baseName: 'mode',
-      type: 'WidgetDataPlatformTags.ModeEnum',
+      type: 'WidgetDataOutput.ModeEnum',
     },
     {
       name: 'previewUrl',
@@ -188,7 +188,7 @@ export class WidgetDataPlatformTags {
     {
       name: 'status',
       baseName: 'status',
-      type: 'WidgetDataPlatformTags.StatusEnum',
+      type: 'WidgetDataOutput.StatusEnum',
     },
     {
       name: 'imageUrl',
@@ -203,27 +203,27 @@ export class WidgetDataPlatformTags {
     {
       name: 'shape',
       baseName: 'shape',
-      type: 'WidgetDataPlatformTags.ShapeEnum',
+      type: 'WidgetDataOutput.ShapeEnum',
     },
     {
       name: 'format',
       baseName: 'format',
-      type: 'WidgetDataPlatformTags.FormatEnum',
+      type: 'WidgetDataOutput.FormatEnum',
     },
     {
       name: 'type',
       baseName: 'type',
-      type: 'WidgetDataPlatformTags.TypeEnum',
+      type: 'WidgetDataOutput.TypeEnum',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return WidgetDataPlatformTags.attributeTypeMap
+    return WidgetDataOutput.attributeTypeMap
   }
 }
 
-export namespace WidgetDataPlatformTags {
+export namespace WidgetDataOutput {
   export const ModeEnum = {
     Inline: 'inline',
     Modal: 'modal',

@@ -8,6 +8,10 @@ export * from './appCardUpdateRequest'
 export * from './board'
 export * from './boardChanges'
 export * from './boardDataClassificationLabel'
+export * from './boardExportJobId'
+export * from './boardExportJobStatus'
+export * from './boardExportResult'
+export * from './boardExportTaskResult'
 export * from './boardLinks'
 export * from './boardMember'
 export * from './boardMemberChanges'
@@ -33,6 +37,7 @@ export * from './connectorCreationData'
 export * from './connectorStyle'
 export * from './connectorWithLinks'
 export * from './connectorsCursorPaged'
+export * from './createBoardExportRequest'
 export * from './createTeamRequest'
 export * from './createdBy'
 export * from './createdByPlatformContainers'
@@ -165,8 +170,8 @@ export * from './updateBoardsDataClassificationLabelRequest'
 export * from './updateTeamSettingsRequest'
 export * from './userInfoShort'
 export * from './userInformation'
-export * from './widgetData'
-export * from './widgetDataPlatformTags'
+export * from './widgetDataOutput'
+export * from './widgetDataOutputPlatformTags'
 export * from './widgetLinks'
 export * from './widgetLinksPlatformContainers'
 export * from './widthOnlyAdjustableGeometry'
@@ -191,6 +196,10 @@ import {AppCardUpdateRequest} from './appCardUpdateRequest'
 import {Board} from './board'
 import {BoardChanges} from './boardChanges'
 import {BoardDataClassificationLabel} from './boardDataClassificationLabel'
+import {BoardExportJobId} from './boardExportJobId'
+import {BoardExportJobStatus} from './boardExportJobStatus'
+import {BoardExportResult} from './boardExportResult'
+import {BoardExportTaskResult} from './boardExportTaskResult'
 import {BoardLinks} from './boardLinks'
 import {BoardMember} from './boardMember'
 import {BoardMemberChanges} from './boardMemberChanges'
@@ -216,6 +225,7 @@ import {ConnectorCreationData} from './connectorCreationData'
 import {ConnectorStyle} from './connectorStyle'
 import {ConnectorWithLinks} from './connectorWithLinks'
 import {ConnectorsCursorPaged} from './connectorsCursorPaged'
+import {CreateBoardExportRequest} from './createBoardExportRequest'
 import {CreateTeamRequest} from './createTeamRequest'
 import {CreatedBy} from './createdBy'
 import {CreatedByPlatformContainers} from './createdByPlatformContainers'
@@ -348,8 +358,8 @@ import {UpdateBoardsDataClassificationLabelRequest} from './updateBoardsDataClas
 import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
 import {UserInfoShort} from './userInfoShort'
 import {UserInformation} from './userInformation'
-import {WidgetData} from './widgetData'
-import {WidgetDataPlatformTags} from './widgetDataPlatformTags'
+import {WidgetDataOutput} from './widgetDataOutput'
+import {WidgetDataOutputPlatformTags} from './widgetDataOutputPlatformTags'
 import {WidgetLinks} from './widgetLinks'
 import {WidgetLinksPlatformContainers} from './widgetLinksPlatformContainers'
 import {WidthOnlyAdjustableGeometry} from './widthOnlyAdjustableGeometry'
@@ -360,6 +370,7 @@ let primitives = ['string', 'boolean', 'double', 'integer', 'long', 'float', 'nu
 let enumsMap: {[index: string]: any} = {
   'AppCardData.StatusEnum': AppCardData.StatusEnum,
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
+  'AppCardDataChanges.TypeEnum': AppCardDataChanges.TypeEnum,
   'AppCardDataPlatformTags.StatusEnum': AppCardDataPlatformTags.StatusEnum,
   'BoardMember.RoleEnum': BoardMember.RoleEnum,
   'BoardMemberChanges.RoleEnum': BoardMemberChanges.RoleEnum,
@@ -387,10 +398,14 @@ let enumsMap: {[index: string]: any} = {
   'ConnectorWithLinks.ShapeEnum': ConnectorWithLinks.ShapeEnum,
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
   'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
+  'DocumentUrlData.TypeEnum': DocumentUrlData.TypeEnum,
+  'DocumentUrlDataChanges.TypeEnum': DocumentUrlDataChanges.TypeEnum,
   'EmbedData.ModeEnum': EmbedData.ModeEnum,
   'EmbedDataPlatformTags.ModeEnum': EmbedDataPlatformTags.ModeEnum,
   'EmbedUrlData.ModeEnum': EmbedUrlData.ModeEnum,
+  'EmbedUrlData.TypeEnum': EmbedUrlData.TypeEnum,
   'EmbedUrlDataChanges.ModeEnum': EmbedUrlDataChanges.ModeEnum,
+  'EmbedUrlDataChanges.TypeEnum': EmbedUrlDataChanges.TypeEnum,
   'FrameChanges.FormatEnum': FrameChanges.FormatEnum,
   'FrameChanges.TypeEnum': FrameChanges.TypeEnum,
   'FrameData.FormatEnum': FrameData.FormatEnum,
@@ -399,6 +414,8 @@ let enumsMap: {[index: string]: any} = {
   'FrameDataPlatformContainers.TypeEnum': FrameDataPlatformContainers.TypeEnum,
   'FrameDataPlatformTags.FormatEnum': FrameDataPlatformTags.FormatEnum,
   'FrameDataPlatformTags.TypeEnum': FrameDataPlatformTags.TypeEnum,
+  'ImageUrlData.TypeEnum': ImageUrlData.TypeEnum,
+  'ImageUrlDataChanges.TypeEnum': ImageUrlDataChanges.TypeEnum,
   'ItemConnectionChangesData.SnapToEnum': ItemConnectionChangesData.SnapToEnum,
   'ItemConnectionCreationData.SnapToEnum': ItemConnectionCreationData.SnapToEnum,
   'Organization.PlanEnum': Organization.PlanEnum,
@@ -468,16 +485,16 @@ let enumsMap: {[index: string]: any} = {
     TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum,
   'TextStyle.FontFamilyEnum': TextStyle.FontFamilyEnum,
   'TextStyle.TextAlignEnum': TextStyle.TextAlignEnum,
-  'WidgetData.ModeEnum': WidgetData.ModeEnum,
-  'WidgetData.StatusEnum': WidgetData.StatusEnum,
-  'WidgetData.ShapeEnum': WidgetData.ShapeEnum,
-  'WidgetData.FormatEnum': WidgetData.FormatEnum,
-  'WidgetData.TypeEnum': WidgetData.TypeEnum,
-  'WidgetDataPlatformTags.ModeEnum': WidgetDataPlatformTags.ModeEnum,
-  'WidgetDataPlatformTags.StatusEnum': WidgetDataPlatformTags.StatusEnum,
-  'WidgetDataPlatformTags.ShapeEnum': WidgetDataPlatformTags.ShapeEnum,
-  'WidgetDataPlatformTags.FormatEnum': WidgetDataPlatformTags.FormatEnum,
-  'WidgetDataPlatformTags.TypeEnum': WidgetDataPlatformTags.TypeEnum,
+  'WidgetDataOutput.ModeEnum': WidgetDataOutput.ModeEnum,
+  'WidgetDataOutput.StatusEnum': WidgetDataOutput.StatusEnum,
+  'WidgetDataOutput.ShapeEnum': WidgetDataOutput.ShapeEnum,
+  'WidgetDataOutput.FormatEnum': WidgetDataOutput.FormatEnum,
+  'WidgetDataOutput.TypeEnum': WidgetDataOutput.TypeEnum,
+  'WidgetDataOutputPlatformTags.ModeEnum': WidgetDataOutputPlatformTags.ModeEnum,
+  'WidgetDataOutputPlatformTags.StatusEnum': WidgetDataOutputPlatformTags.StatusEnum,
+  'WidgetDataOutputPlatformTags.ShapeEnum': WidgetDataOutputPlatformTags.ShapeEnum,
+  'WidgetDataOutputPlatformTags.FormatEnum': WidgetDataOutputPlatformTags.FormatEnum,
+  'WidgetDataOutputPlatformTags.TypeEnum': WidgetDataOutputPlatformTags.TypeEnum,
 }
 
 let typeMap: {[index: string]: any} = {
@@ -491,6 +508,10 @@ let typeMap: {[index: string]: any} = {
   Board: Board,
   BoardChanges: BoardChanges,
   BoardDataClassificationLabel: BoardDataClassificationLabel,
+  BoardExportJobId: BoardExportJobId,
+  BoardExportJobStatus: BoardExportJobStatus,
+  BoardExportResult: BoardExportResult,
+  BoardExportTaskResult: BoardExportTaskResult,
   BoardLinks: BoardLinks,
   BoardMember: BoardMember,
   BoardMemberChanges: BoardMemberChanges,
@@ -516,6 +537,7 @@ let typeMap: {[index: string]: any} = {
   ConnectorStyle: ConnectorStyle,
   ConnectorWithLinks: ConnectorWithLinks,
   ConnectorsCursorPaged: ConnectorsCursorPaged,
+  CreateBoardExportRequest: CreateBoardExportRequest,
   CreateTeamRequest: CreateTeamRequest,
   CreatedBy: CreatedBy,
   CreatedByPlatformContainers: CreatedByPlatformContainers,
@@ -648,8 +670,8 @@ let typeMap: {[index: string]: any} = {
   UpdateTeamSettingsRequest: UpdateTeamSettingsRequest,
   UserInfoShort: UserInfoShort,
   UserInformation: UserInformation,
-  WidgetData: WidgetData,
-  WidgetDataPlatformTags: WidgetDataPlatformTags,
+  WidgetDataOutput: WidgetDataOutput,
+  WidgetDataOutputPlatformTags: WidgetDataOutputPlatformTags,
   WidgetLinks: WidgetLinks,
   WidgetLinksPlatformContainers: WidgetLinksPlatformContainers,
   WidthOnlyAdjustableGeometry: WidthOnlyAdjustableGeometry,

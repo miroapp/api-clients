@@ -14,6 +14,10 @@ import {Caption} from './caption'
 import {ConnectorStyle} from './connectorStyle'
 import {ItemConnectionChangesData} from './itemConnectionChangesData'
 
+/**
+ * @internal
+ * If both are provided, startItem.id must be different from endItem.id
+ */
 export class ConnectorChangesData {
   'startItem'?: ItemConnectionChangesData
   'endItem'?: ItemConnectionChangesData
@@ -21,6 +25,9 @@ export class ConnectorChangesData {
    * The path type of the connector line, defines curvature. Default: curved.
    */
   'shape'?: string | (typeof ConnectorChangesData.ShapeEnum)[keyof typeof ConnectorChangesData.ShapeEnum]
+  /**
+   * Blocks of text you want to display on the connector.
+   */
   'captions'?: Array<Caption>
   'style'?: ConnectorStyle
 

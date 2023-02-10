@@ -17,7 +17,7 @@ import {ShapeData} from './shapeData'
 import {ShapeStyle} from './shapeStyle'
 
 export class ShapeCreateRequest {
-  'data': ShapeData
+  'data'?: ShapeData
   'style'?: ShapeStyle
   'position'?: PositionChange
   'geometry'?: Geometry

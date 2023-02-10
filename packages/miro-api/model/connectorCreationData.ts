@@ -14,13 +14,20 @@ import {Caption} from './caption'
 import {ConnectorStyle} from './connectorStyle'
 import {ItemConnectionCreationData} from './itemConnectionCreationData'
 
+/**
+ * @internal
+ * startItem.id must be different from endItem.id
+ */
 export class ConnectorCreationData {
-  'startItem'?: ItemConnectionCreationData
-  'endItem'?: ItemConnectionCreationData
+  'startItem': ItemConnectionCreationData
+  'endItem': ItemConnectionCreationData
   /**
    * The path type of the connector line, defines curvature. Default: curved.
    */
   'shape'?: string | (typeof ConnectorCreationData.ShapeEnum)[keyof typeof ConnectorCreationData.ShapeEnum]
+  /**
+   * Blocks of text you want to display on the connector.
+   */
   'captions'?: Array<Caption>
   'style'?: ConnectorStyle
 
