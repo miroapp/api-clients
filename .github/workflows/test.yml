@@ -39,3 +39,7 @@ jobs:
 
       - name: test generator
         run: yarn workspace generator run validate_commited
+
+      - name: test build
+        run: yarn && yarn build
+        working-directory: packages/miro-api

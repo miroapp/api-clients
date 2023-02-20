@@ -1,3 +1,9 @@
+## [1.0.4]
+
+- added export board API
+- updated documentation
+- updated dependencies
+
 ## [1.0.3]
 
 - updated dependencies
