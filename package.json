@@ -19,7 +19,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "jest": "^29.4.3",
+    "jest": "^29.5.0",
     "lodash": "^4.17.21",
     "prettier": "^2.8.4",
     "tsx": "^3.12.3"
