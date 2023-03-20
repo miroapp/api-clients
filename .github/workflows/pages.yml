@@ -50,7 +50,7 @@ jobs:
           path: "packages/miro-api/docs-out/"
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v2
 
       # Publish the guides to developer portal
       - name: Publish the guides to developer portal
