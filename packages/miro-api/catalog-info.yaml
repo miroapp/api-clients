@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: miro-api
+  annotations:
+    github.com/project-slug: miroapp/api-clients
+spec:
+  type: library
+  lifecycle: production
+  owner: developer-experience
