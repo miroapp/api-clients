@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest",
+    "coverage": "jest --coverage --coverageDirectory coverage",
     "validate_commited": "./test/generator_test.sh",
     "generate": "./scripts/generate-node-client.sh"
   },
