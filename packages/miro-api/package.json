@@ -17,7 +17,7 @@
     "prebuild:docs": "tsc --jsx react docs-theme/index.tsx --jsxFactory JSX.createElement --jsxFragmentFactory JSX.Fragment --target es2016 --module commonjs",
     "build:docs": "typedoc",
     "test": "jest",
-    "coverage": "jest --coverage --coverageDirectory coverage"
+    "coverage": "jest --coverage --coverageDirectory coverage --coverageReporters html"
   },
   "author": "Miro",
   "license": "MIT",
