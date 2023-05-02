@@ -13,6 +13,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "test": "turbo run test",
+    "coverage": "turbo run coverage",
     "format": "prettier -w ./packages",
     "prepare": "husky install"
   },

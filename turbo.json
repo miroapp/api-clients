@@ -16,6 +16,11 @@
       "dependsOn": ["build"],
       "outputs": [],
       "inputs": ["__tests__/**/*.tsx"]
+    },
+    "coverage": {
+      "dependsOn": ["build"],
+      "outputs": [],
+      "inputs": ["__tests__/**/*.tsx"]
     }
   }
 }
