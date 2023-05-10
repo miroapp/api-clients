@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,40,27
+/miroapp/api-clients/tree/main/packages/miro-api,17,5
+/miroapp/api-clients/commits/main,12,1
+/miroapp/api-clients/tree/main/packages,8,4
+/miroapp/api-clients/issues,5,3
+/miroapp/api-clients/blob/main/packages/miro-api/model/organization.ts,5,1
+/miroapp/api-clients/blob/ed6d5e9613177a001ef15e8864f22c92c09f6b6c/scripts/upload-docs-to-readme.mjs,4,1
+/miroapp/api-clients/tree/main/packages/miro-api/docs,3,2
+/miroapp/api-clients/blob/ed6d5e9613177a001ef15e8864f22c92c09f6b6c/packages/miro-api/docs/quickstart.md,3,1
+/miroapp/api-clients/tree/main/apps/client-test-app,3,1
