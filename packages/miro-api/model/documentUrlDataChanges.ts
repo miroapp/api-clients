@@ -12,14 +12,13 @@
 
 /**
  * @internal
- * For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains information about the document URL.
  */
 export class DocumentUrlDataChanges {
   /**
    * A short text header to identify the document.
    */
   'title'?: string
-  'type'?: string | (typeof DocumentUrlDataChanges.TypeEnum)[keyof typeof DocumentUrlDataChanges.TypeEnum]
   /**
    * URL where the document is hosted.
    */
@@ -36,11 +35,6 @@ export class DocumentUrlDataChanges {
       type: 'string',
     },
     {
-      name: 'type',
-      baseName: 'type',
-      type: 'DocumentUrlDataChanges.TypeEnum',
-    },
-    {
       name: 'url',
       baseName: 'url',
       type: 'string',
@@ -51,20 +45,4 @@ export class DocumentUrlDataChanges {
   static getAttributeTypeMap() {
     return DocumentUrlDataChanges.attributeTypeMap
   }
-}
-
-export namespace DocumentUrlDataChanges {
-  export const TypeEnum = {
-    Text: 'text',
-    Shape: 'shape',
-    StickyNote: 'sticky_note',
-    Image: 'image',
-    Document: 'document',
-    Card: 'card',
-    AppCard: 'app_card',
-    Preview: 'preview',
-    Frame: 'frame',
-    Embed: 'embed',
-    Opaque: 'opaque',
-  } as const
 }

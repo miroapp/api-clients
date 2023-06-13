@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-export class EmbedDataPlatformTags {
+export class EmbedDataResponse {
   /**
    * Type of the embedded item\'s content.
    */
@@ -20,15 +20,15 @@ export class EmbedDataPlatformTags {
    */
   'description'?: string
   /**
-   * Html code of the embedded item.
+   * HTML code of the embedded item.
    */
   'html'?: string
   /**
    * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
    */
-  'mode'?: string | (typeof EmbedDataPlatformTags.ModeEnum)[keyof typeof EmbedDataPlatformTags.ModeEnum]
+  'mode'?: string | (typeof EmbedDataResponse.ModeEnum)[keyof typeof EmbedDataResponse.ModeEnum]
   /**
-   * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
+   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
    */
   'previewUrl'?: string
   /**
@@ -71,7 +71,7 @@ export class EmbedDataPlatformTags {
     {
       name: 'mode',
       baseName: 'mode',
-      type: 'EmbedDataPlatformTags.ModeEnum',
+      type: 'EmbedDataResponse.ModeEnum',
     },
     {
       name: 'previewUrl',
@@ -102,11 +102,11 @@ export class EmbedDataPlatformTags {
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return EmbedDataPlatformTags.attributeTypeMap
+    return EmbedDataResponse.attributeTypeMap
   }
 }
 
-export namespace EmbedDataPlatformTags {
+export namespace EmbedDataResponse {
   export const ModeEnum = {
     Inline: 'inline',
     Modal: 'modal',

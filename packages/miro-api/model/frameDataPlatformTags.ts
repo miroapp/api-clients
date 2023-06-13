@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains frame item data, such as the title, frame type, or frame format. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains frame item data, such as the title, frame type, or frame format.
  */
 export class FrameDataPlatformTags {
   /**

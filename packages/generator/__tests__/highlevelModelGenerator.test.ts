@@ -82,7 +82,7 @@ export class Hello extends Object {
     /**
      * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
     * @summary Get specific item on board
-    * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
     */
   async getItem(
     itemId: Parameters<MiroApi["getSpecificItem"]>[1]

@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains card item data, such as the title, description, due date, or assignee ID. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains card item data, such as the title, description, due date, or assignee ID.
  */
 export class CardData {
   /**

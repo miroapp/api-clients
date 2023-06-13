@@ -47,8 +47,8 @@ export abstract class BaseTeam extends Team {
         await this._api.enterpriseGetTeamMembers(this.orgId.toString(), this.id.toString(), {...query, cursor})
       ).body
 
-      for (const member of response || []) {
-        yield new TeamMember(this._api, this.orgId, this.id, member.memberId, member)
+      for (const member of response.data) {
+        yield new TeamMember(this._api, this.orgId, this.id, member.id, member)
       }
       return
     }

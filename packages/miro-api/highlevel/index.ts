@@ -51,7 +51,7 @@ export class Api extends BaseApi {
   /**
    * Retrieves information about a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get specific board
-   * @param boardId [Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to retrieve.
+   * @param boardId Unique identifier (ID) of the board that you want to retrieve.
    */
   async getBoard(boardId: Parameters<MiroApi['getSpecificBoard']>[0]): Promise<Board> {
     const result = (await this._api.getSpecificBoard(boardId)).body
@@ -155,7 +155,7 @@ export class Organization extends BaseOrganization {
   /**
    * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
    * @summary Get team
-   * @param teamId The id of a Team.
+   * @param teamId The id of the Team.
    */
   async getTeam(teamId: Parameters<MiroApi['enterpriseGetTeam']>[1]): Promise<Team> {
     const result = (await this._api.enterpriseGetTeam(this.id.toString(), teamId)).body
@@ -186,10 +186,10 @@ export class Team extends BaseTeam {
   _api: MiroApi
 
   orgId: string
-  teamId: number
+  teamId: string
 
   /** @hidden */
-  constructor(api: MiroApi, orgId: string, teamId: number, props: KeepBase<BaseTeam>) {
+  constructor(api: MiroApi, orgId: string, teamId: string, props: KeepBase<BaseTeam>) {
     super()
     this._api = api
     this.orgId = orgId
@@ -208,7 +208,7 @@ export class Team extends BaseTeam {
   /**
    * Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
    * @summary Delete team member from team
-   * @param memberId The id of a Team member.
+   * @param memberId The id of the Team Member
    */
   async deleteTeamMember(memberId: Parameters<MiroApi['enterpriseDeleteTeamMember']>[2]): Promise<void> {
     await this._api.enterpriseDeleteTeamMember(this.orgId.toString(), this.teamId.toString(), memberId)
@@ -290,7 +290,7 @@ export class Team extends BaseTeam {
   }
 
   /**
-   * Invites a new member to an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * Invites a new Miro user to an existing team. The user must exist in your Miro organization. Users who do not exist in your Miro organization can be invited to the team via [SCIM](https://developers.miro.com/docs/scim) and an external identity provider, such as Okta or Azure Active Directory.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
    * @summary Invite team members
    * @param teamMemberInvite
    */
@@ -301,13 +301,13 @@ export class Team extends BaseTeam {
   /**
    * Retrieves team member by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
    * @summary Get team member
-   * @param memberId The id of a Team member.
+   * @param memberId The id of the Team Member
    */
   async getTeamMember(memberId: Parameters<MiroApi['enterpriseGetTeamMember']>[2]): Promise<TeamMember> {
     const result = (await this._api.enterpriseGetTeamMember(this.orgId.toString(), this.teamId.toString(), memberId))
       .body
 
-    return new TeamMember(this._api, this.orgId, this.teamId, result.memberId, result)
+    return new TeamMember(this._api, this.orgId, this.teamId, result.id, result)
   }
 
   /**
@@ -322,7 +322,7 @@ export class Team extends BaseTeam {
   /**
    * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
    * @summary Get team settings
-   * @param teamId The id of a Team.
+   * @param teamId The id of the Team.
    */
   async getTeamSettings(teamId: Parameters<MiroApi['enterpriseGetTeamSettings']>[1]): Promise<TeamSettings> {
     const result = (await this._api.enterpriseGetTeamSettings(this.teamId.toString(), teamId)).body
@@ -333,7 +333,7 @@ export class Team extends BaseTeam {
   /**
    * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
    * @summary Update team settings
-   * @param teamId The id of a Team.
+   * @param teamId The id of the Team.
    * @param teamSettingsChanges
    */
   async updateTeamSettings(
@@ -375,16 +375,16 @@ export class TeamMember extends BaseTeamMember {
   _api: MiroApi
 
   orgId: string
-  teamId: number
-  memberId: number
+  teamId: string
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, orgId: string, teamId: number, memberId: number, props: KeepBase<BaseTeamMember>) {
+  constructor(api: MiroApi, orgId: string, teamId: string, id: string, props: KeepBase<BaseTeamMember>) {
     super()
     this._api = api
     this.orgId = orgId
     this.teamId = teamId
-    this.memberId = memberId
+    this.id = id
     Object.assign(this, props)
   }
 
@@ -397,7 +397,7 @@ export class TeamMember extends BaseTeamMember {
     await this._api.enterpriseUpdateTeamMember(
       this.orgId.toString(),
       this.teamId.toString(),
-      this.memberId.toString(),
+      this.id.toString(),
       teamMemberChanges,
     )
   }
@@ -534,7 +534,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific app card item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get app card item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
   async getAppCardItem(itemId: Parameters<MiroApi['getAppCardItem']>[1]): Promise<AppCardItem> {
     const result = (await this._api.getAppCardItem(this.id.toString(), itemId)).body
@@ -545,7 +545,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific card item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get card item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
   async getCardItem(itemId: Parameters<MiroApi['getCardItem']>[1]): Promise<CardItem> {
     const result = (await this._api.getCardItem(this.id.toString(), itemId)).body
@@ -556,7 +556,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific connector on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get specific connector
-   * @param connectorId [Unique identifier (ID) of the connector](https://developers.miro.com/reference/rest-api-connector-model) that you want to retrieve.
+   * @param connectorId Unique identifier (ID) of the connector that you want to retrieve.
    */
   async getConnector(connectorId: Parameters<MiroApi['getConnector']>[1]): Promise<Connector> {
     const result = (await this._api.getConnector(this.id.toString(), connectorId)).body
@@ -567,7 +567,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get document item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
   async getDocumentItem(itemId: Parameters<MiroApi['getDocumentItem']>[1]): Promise<DocumentItem> {
     const result = (await this._api.getDocumentItem(this.id.toString(), itemId)).body
@@ -578,7 +578,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific embed item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get embed item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
   async getEmbedItem(itemId: Parameters<MiroApi['getEmbedItem']>[1]): Promise<EmbedItem> {
     const result = (await this._api.getEmbedItem(this.id.toString(), itemId)).body
@@ -589,7 +589,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific frame on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get frame
-   * @param itemId [Unique identifier (ID) of the frame](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the frame that you want to retrieve.
    */
   async getFrameItem(itemId: Parameters<MiroApi['getFrameItem']>[1]): Promise<FrameItem> {
     const result = (await this._api.getFrameItem(this.id.toString(), itemId)).body
@@ -600,7 +600,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get image item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
   async getImageItem(itemId: Parameters<MiroApi['getImageItem']>[1]): Promise<ImageItem> {
     const result = (await this._api.getImageItem(this.id.toString(), itemId)).body
@@ -611,7 +611,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get shape item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
   async getShapeItem(itemId: Parameters<MiroApi['getShapeItem']>[1]): Promise<ShapeItem> {
     const result = (await this._api.getShapeItem(this.id.toString(), itemId)).body
@@ -633,7 +633,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific sticky note item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get sticky note item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
   async getStickyNoteItem(itemId: Parameters<MiroApi['getStickyNoteItem']>[1]): Promise<StickyNoteItem> {
     const result = (await this._api.getStickyNoteItem(this.id.toString(), itemId)).body
@@ -644,7 +644,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific tag.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get tag
-   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to retrieve.
+   * @param tagId Unique identifier (ID) of the tag that you want to retrieve.
    */
   async getTag(tagId: Parameters<MiroApi['getTag']>[1]): Promise<Tag> {
     const result = (await this._api.getTag(this.id.toString(), tagId)).body
@@ -655,7 +655,7 @@ export class Board extends BaseBoard {
   /**
    * Retrieves information for a specific text item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get text item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to retrieve.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
   async getTextItem(itemId: Parameters<MiroApi['getTextItem']>[1]): Promise<TextItem> {
     const result = (await this._api.getTextItem(this.id.toString(), itemId)).body
@@ -675,7 +675,7 @@ export class Board extends BaseBoard {
   }
 
   /**
-   * Shares the board and Invites new members to collaborate on a board by sending an invitation email. Depending on the board\'s [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy), there might be various scenarios where membership in the team is required in order to share the board with a user. For more information on sharing policy and different scenarios, see [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy).<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
+   * Shares the board and Invites new members to collaborate on a board by sending an invitation email. Depending on the board\'s Sharing policy, there might be various scenarios where membership in the team is required in order to share the board with a user.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Share board
    * @param boardMembersInvite
    */
@@ -684,7 +684,7 @@ export class Board extends BaseBoard {
   }
 
   /**
-   *
+   * Updates a specific board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update board
    * @param boardChanges
    */
@@ -693,7 +693,7 @@ export class Board extends BaseBoard {
   }
 
   /**
-   *
+   * Deletes a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Delete board
    */
   async delete(): Promise<void> {
@@ -712,8 +712,8 @@ export class Board extends BaseBoard {
   /**
    * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Remove tag from item
-   * @param itemId [Unique identifier (ID) of the item](https://developers.miro.com/reference/rest-api-item-model) that you want to remove the tag from.
-   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to remove from the item.
+   * @param itemId Unique identifier (ID) of the item that you want to remove the tag from.
+   * @param tagId Unique identifier (ID) of the tag that you want to remove from the item.
    */
   async removeTag(
     itemId: Parameters<MiroApi['removeTagFromItem']>[1],
@@ -833,7 +833,7 @@ export class AppCardItem extends BaseAppCardItem {
   /**
    * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Remove tag from item
-   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to remove from the item.
+   * @param tagId Unique identifier (ID) of the tag that you want to remove from the item.
    */
   async removeTag(tagId: Parameters<MiroApi['removeTagFromItem']>[2]): Promise<void> {
     await this._api.removeTagFromItem(this.boardId.toString(), this.id.toString(), tagId)
@@ -842,7 +842,7 @@ export class AppCardItem extends BaseAppCardItem {
   /**
    * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Attach tag to item
-   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) you want to add to the item.
+   * @param tagId Unique identifier (ID) of the tag you want to add to the item.
    */
   async attachTag(tagId: Parameters<MiroApi['attachTagToItem']>[2]): Promise<void> {
     await this._api.attachTagToItem(this.boardId.toString(), this.id.toString(), tagId)
@@ -899,7 +899,7 @@ export class CardItem extends BaseCardItem {
   /**
    * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Remove tag from item
-   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to remove from the item.
+   * @param tagId Unique identifier (ID) of the tag that you want to remove from the item.
    */
   async removeTag(tagId: Parameters<MiroApi['removeTagFromItem']>[2]): Promise<void> {
     await this._api.removeTagFromItem(this.boardId.toString(), this.id.toString(), tagId)
@@ -908,7 +908,7 @@ export class CardItem extends BaseCardItem {
   /**
    * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Attach tag to item
-   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) you want to add to the item.
+   * @param tagId Unique identifier (ID) of the tag you want to add to the item.
    */
   async attachTag(tagId: Parameters<MiroApi['attachTagToItem']>[2]): Promise<void> {
     await this._api.attachTagToItem(this.boardId.toString(), this.id.toString(), tagId)
@@ -1117,7 +1117,7 @@ export class StickyNoteItem extends BaseStickyNoteItem {
   /**
    * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Remove tag from item
-   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) that you want to remove from the item.
+   * @param tagId Unique identifier (ID) of the tag that you want to remove from the item.
    */
   async removeTag(tagId: Parameters<MiroApi['removeTagFromItem']>[2]): Promise<void> {
     await this._api.removeTagFromItem(this.boardId.toString(), this.id.toString(), tagId)
@@ -1126,7 +1126,7 @@ export class StickyNoteItem extends BaseStickyNoteItem {
   /**
    * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Attach tag to item
-   * @param tagId [Unique identifier (ID) of the tag](https://developers.miro.com/reference/rest-api-tag-data-model) you want to add to the item.
+   * @param tagId Unique identifier (ID) of the tag you want to add to the item.
    */
   async attachTag(tagId: Parameters<MiroApi['attachTagToItem']>[2]): Promise<void> {
     await this._api.attachTagToItem(this.boardId.toString(), this.id.toString(), tagId)

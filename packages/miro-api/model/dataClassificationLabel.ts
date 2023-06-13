@@ -12,9 +12,13 @@
 
 /**
  * @internal
- * Data classification labels
+ * Data classification label
  */
 export class DataClassificationLabel {
+  /**
+   * Label id
+   */
+  'id'?: string
   /**
    * Label color
    */
@@ -28,10 +32,6 @@ export class DataClassificationLabel {
    */
   'description'?: string
   /**
-   * Label id
-   */
-  'id'?: string
-  /**
    * Label name
    */
   'name'?: string
@@ -43,12 +43,21 @@ export class DataClassificationLabel {
    * Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS )
    */
   'sharingRecommendation'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'data-classification-label'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
 
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
     {
       name: 'color',
       baseName: 'color',
@@ -65,11 +74,6 @@ export class DataClassificationLabel {
       type: 'string',
     },
     {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-    },
-    {
       name: 'name',
       baseName: 'name',
       type: 'string',
@@ -82,6 +86,11 @@ export class DataClassificationLabel {
     {
       name: 'sharingRecommendation',
       baseName: 'sharingRecommendation',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
       type: 'string',
     },
   ]

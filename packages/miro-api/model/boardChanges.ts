@@ -26,6 +26,10 @@ export class BoardChanges {
    * Unique identifier (ID) of the team where the board must be placed.
    */
   'teamId'?: string
+  /**
+   * Unique identifier (ID) of the project to which the board must be added.
+   */
+  'projectId'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -50,6 +54,11 @@ export class BoardChanges {
     {
       name: 'teamId',
       baseName: 'teamId',
+      type: 'string',
+    },
+    {
+      name: 'projectId',
+      baseName: 'projectId',
       type: 'string',
     },
   ]

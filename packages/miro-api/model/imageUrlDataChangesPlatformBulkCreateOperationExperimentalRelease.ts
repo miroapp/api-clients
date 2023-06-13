@@ -10,23 +10,19 @@
  * Do not edit the class manually.
  */
 
-export class ErrorObj {
+/**
+ * @internal
+ * Contains information about the image URL.
+ */
+export class ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease {
   /**
-   * Code of the error
+   * A short text header to identify the image.
    */
-  'code'?: string
+  'title'?: string
   /**
-   * Description of the error
+   * URL of the image.
    */
-  'message'?: string
-  /**
-   * Status code of the error
-   */
-  'status'?: number
-  /**
-   * Type of the error
-   */
-  'type'?: string
+  'url'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -34,29 +30,19 @@ export class ErrorObj {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'code',
-      baseName: 'code',
+      name: 'title',
+      baseName: 'title',
       type: 'string',
     },
     {
-      name: 'message',
-      baseName: 'message',
-      type: 'string',
-    },
-    {
-      name: 'status',
-      baseName: 'status',
-      type: 'number',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
+      name: 'url',
+      baseName: 'url',
       type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ErrorObj.attributeTypeMap
+    return ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease.attributeTypeMap
   }
 }

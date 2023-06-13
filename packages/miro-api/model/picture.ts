@@ -10,15 +10,11 @@
  * Do not edit the class manually.
  */
 
-/**
- * @internal
- * Team picture
- */
 export class Picture {
   /**
    * Id of the picture
    */
-  'id'?: number
+  'id'?: string
   /**
    * Url of the picture
    */
@@ -27,7 +23,10 @@ export class Picture {
    * Original team picture url for icon generation
    */
   'originalUrl'?: string
-  'type'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'picture'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -37,7 +36,7 @@ export class Picture {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'imageURL',

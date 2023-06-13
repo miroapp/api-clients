@@ -62,7 +62,7 @@ const MODELS = {
   },
 
   Team: {
-    props: ['orgId', {name: 'teamId', type: 'number'}],
+    props: ['orgId', {name: 'teamId', type: 'string'}],
     extendedModel: {
       name: 'BaseTeam',
       path: 'Team',
@@ -129,8 +129,8 @@ const MODELS = {
   },
 
   TeamMember: {
-    id: 'memberId',
-    props: ['orgId', {name: 'teamId', type: 'number'}, {name: 'memberId', type: 'number'}],
+    id: 'id',
+    props: ['orgId', {name: 'teamId', type: 'string'}, {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'TeamMember',
       path: '../model/teamMember',

@@ -14,7 +14,7 @@ export class TeamMemberInvite {
   /**
    * User email to add to a team
    */
-  'userEmail'?: string
+  'email'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -22,8 +22,8 @@ export class TeamMemberInvite {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'userEmail',
-      baseName: 'userEmail',
+      name: 'email',
+      baseName: 'email',
       type: 'string',
     },
   ]

@@ -1,14 +1,21 @@
 #!/usr/bin/env node
+import {readFile} from 'fs/promises'
 import isEqual from 'lodash/isEqual.js'
 import mapValues from 'lodash/mapValues.js'
-
-import fetch from 'node-fetch'
+import {load} from 'js-yaml'
 
 const apis = [
-  'https://api.miro.com/api-docs/platform',
-  'https://api.miro.com/api-docs/platform-containers',
-  'https://api.miro.com/api-docs/platform-tags',
-  'https://api.miro.com/api-docs/enterprise',
+  '../api-specification/apis/production/public-api/platform.yaml',
+  '../api-specification/apis/production/public-api/platform-tags.yaml',
+  '../api-specification/apis/production/public-api/platform-experimental.yaml',
+  '../api-specification/apis/production/public-api/platform-containers.yaml',
+  '../api-specification/apis/production/public-api/platform-containers-experimental.yaml',
+  '../api-specification/apis/production/public-api/platform-items-bulk.yaml',
+  '../api-specification/apis/production/enterprise/enterprise-teams.yaml',
+  '../api-specification/apis/production/enterprise/enterprise-organizations.yaml',
+  '../api-specification/apis/production/enterprise/enterprise-board-classification.yaml',
+  '../api-specification/apis/production/enterprise/enterprise-board-export.yaml',
+  '../api-specification/apis/production/enterprise/enterprise-projects.yaml',
 ]
 
 const baseSpecification = {
@@ -131,6 +138,7 @@ const baseSpecification = {
   },
   components: {
     schemas: {},
+    parameters: {},
     securitySchemes: {
       // define standard OAuth2 endpoints and scopes
       oAuth2AuthCode: {
@@ -161,21 +169,11 @@ const baseSpecification = {
   },
 }
 
-async function getSpec(url) {
-  const response = await fetch(url)
-  if (response.status > 299) {
-    throw new Error(`Failed to fetch ${url}: ${await response.text()}`)
-  }
-  const spec = await response.json()
-
-  // some specs are double encoded so we need to JSON.parse again
-  if (typeof spec === 'string') {
-    return JSON.parse(spec)
-  }
-  return spec
+async function getSpecsForApi(fileName) {
+  return load(await readFile(fileName, {encoding: 'utf8'}))
 }
 
-const specs = await Promise.all(apis.map(getSpec))
+const specs = (await Promise.all(apis.map(getSpecsForApi))).flat()
 
 function mergeWithoutConflict(first, second) {
   for (const key of Object.keys(first)) {
@@ -194,7 +192,7 @@ function fixDescriptionLinks(spec) {
       // correct
       method.description = method.description
         .replace(/target="_?blank"/gi, 'target=_blank')
-        .replace(/href="([a-z\/]+)"/gi, 'href=https://developers.miro.com$1')
+        .replace(/href="([a-z/]+)"/gi, 'href=https://developers.miro.com$1')
       return method
     })
   })
@@ -203,8 +201,9 @@ function fixDescriptionLinks(spec) {
 
 const mergedSpec = fixDescriptionLinks(
   specs.reduce((acc, spec) => {
-    const specTitle = spec.info?.title?.replaceAll(' ', '')
+    const specTitle = spec.info?.title?.replace(/ |\(|\)/g, '')
     const specSchemasDef = spec.components?.schemas || {}
+    const specParametersDef = spec.components?.parameters || {}
 
     let specPathsDef = spec.paths
 
@@ -222,6 +221,20 @@ const mergedSpec = fixDescriptionLinks(
       acc.components.schemas[newKey] = newSchema
     }
 
+    for (const key of Object.keys(specParametersDef)) {
+      const existingDefinition = acc.components.parameters[key]
+      delete acc.components.parameters[key]
+      let newSchema = specParametersDef[key]
+      let newKey = key
+      if (existingDefinition && isEqual(existingDefinition, newSchema)) {
+        newKey = `${key}${specTitle}`
+        specPathsDef = JSON.parse(
+          JSON.stringify(specPathsDef).replaceAll(`"#/components/parameters/${key}"`, `"#/components/parameters/${newKey}"`),
+        )
+      }
+      acc.components.parameters[newKey] = newSchema
+    }
+
     for (const key of Object.keys(spec.paths)) {
       if (acc.paths[key]) {
         const newKey = key.replace('boards/{board_id', 'boards/{board_id_' + specTitle)
@@ -237,6 +250,7 @@ const mergedSpec = fixDescriptionLinks(
       components: {
         ...acc.components,
         schemas: mergeWithoutConflict(acc.components.schemas, specSchemasDef),
+        parameters: {...acc.components.parameters, ...specParametersDef},
       },
     }
   }, baseSpecification),

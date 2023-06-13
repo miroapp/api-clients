@@ -12,9 +12,13 @@
 
 /**
  * @internal
- * Response for search organization members by user emails
+ * Organization member
  */
 export class OrganizationMember {
+  /**
+   * Id of the user
+   */
+  'id': string
   /**
    * Flag is user active
    */
@@ -23,10 +27,6 @@ export class OrganizationMember {
    * User email
    */
   'email': string
-  /**
-   * Id of the user
-   */
-  'id': string
   /**
    * Last time when the user was active
    */
@@ -43,13 +43,21 @@ export class OrganizationMember {
    * Name of the user role in the organization
    */
   'role': string | (typeof OrganizationMember.RoleEnum)[keyof typeof OrganizationMember.RoleEnum]
-  'type'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'organization-member'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
 
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
+    {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
     {
       name: 'active',
       baseName: 'active',
@@ -58,11 +66,6 @@ export class OrganizationMember {
     {
       name: 'email',
       baseName: 'email',
-      type: 'string',
-    },
-    {
-      name: 'id',
-      baseName: 'id',
       type: 'string',
     },
     {

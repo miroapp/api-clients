@@ -12,13 +12,13 @@
 
 export class Organization {
   /**
-   * Purchased FULL licenses
-   */
-  'fullLicensesPurchased': number
-  /**
    * Id of the organization
    */
   'id': string
+  /**
+   * Purchased FULL licenses
+   */
+  'fullLicensesPurchased': number
   /**
    * Name of the organization
    */
@@ -27,7 +27,10 @@ export class Organization {
    * Organization plan type
    */
   'plan': string | (typeof Organization.PlanEnum)[keyof typeof Organization.PlanEnum]
-  'type'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'organization'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -35,14 +38,14 @@ export class Organization {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'fullLicensesPurchased',
-      baseName: 'fullLicensesPurchased',
-      type: 'number',
-    },
-    {
       name: 'id',
       baseName: 'id',
       type: 'string',
+    },
+    {
+      name: 'fullLicensesPurchased',
+      baseName: 'fullLicensesPurchased',
+      type: 'number',
     },
     {
       name: 'name',

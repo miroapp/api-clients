@@ -42,6 +42,5 @@ export namespace BoardMemberChanges {
     Editor: 'editor',
     Coowner: 'coowner',
     Owner: 'owner',
-    Guest: 'guest',
   } as const
 }

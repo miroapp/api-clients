@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains location information about the item, such as its x coordinate, y coordinate, and theorigin of the x and y coordinates.
+ * Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
  */
 export class PositionPlatformTags {
   /**
@@ -22,13 +22,13 @@ export class PositionPlatformTags {
     PositionPlatformTags.OriginEnum.Center
   'relativeTo'?: string | (typeof PositionPlatformTags.RelativeToEnum)[keyof typeof PositionPlatformTags.RelativeToEnum]
   /**
-   * X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. The center point of the board has `x: 0` and `y: 0` coordinates.
+   * X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.
    */
-  'x'?: number = 0
+  'x'?: number
   /**
-   * Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. The center point of the board has `x: 0` and `y: 0` coordinates.
+   * Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.
    */
-  'y'?: number = 0
+  'y'?: number
 
   /** @ignore */
   static discriminator: string | undefined = undefined

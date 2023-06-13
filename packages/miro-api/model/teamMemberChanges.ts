@@ -12,9 +12,9 @@
 
 export class TeamMemberChanges {
   /**
-   * User role inside team
+   *  Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"non_team\":   External user, non-team user. * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
    */
-  'role'?: string
+  'role'?: string | (typeof TeamMemberChanges.RoleEnum)[keyof typeof TeamMemberChanges.RoleEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -24,7 +24,7 @@ export class TeamMemberChanges {
     {
       name: 'role',
       baseName: 'role',
-      type: 'string',
+      type: 'TeamMemberChanges.RoleEnum',
     },
   ]
 
@@ -32,4 +32,14 @@ export class TeamMemberChanges {
   static getAttributeTypeMap() {
     return TeamMemberChanges.attributeTypeMap
   }
+}
+
+export namespace TeamMemberChanges {
+  export const RoleEnum = {
+    NonTeam: 'non_team',
+    Member: 'member',
+    Admin: 'admin',
+    TeamGuest: 'team_guest',
+    Null: 'null',
+  } as const
 }
