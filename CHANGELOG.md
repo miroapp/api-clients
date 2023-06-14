@@ -1,3 +1,7 @@
+## [2.0.0]
+
+- added new experimental API endpoints and updated based on latest specification
+
 ## [1.0.4]
 
 - added export board API
