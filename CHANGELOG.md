@@ -1,6 +1,10 @@
 ## [2.0.0]
 
-- added new experimental API endpoints and updated based on latest specification
+- added new experimental API endpoints and updated based on latest specification:
+   - https://developers.miro.com/changelog/2023-05-04-changelog
+   - https://developers.miro.com/changelog/2023-05-24-changelog#flowchart
+   - https://developers.miro.com/changelog/2023-06-12
+   - https://developers.miro.com/changelog/2023-02-06-changelog
 
 ## [1.0.4]
 
