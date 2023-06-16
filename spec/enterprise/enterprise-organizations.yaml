@@ -1,0 +1,439 @@
+openapi: 3.0.1
+info:
+  title: Organizations (Enterprise Plan)
+  version: v2
+servers:
+- url: https://api.miro.com
+security:
+- bearerAuth: []
+tags:
+- description: Organization API for reading organization info.
+  name: Organizations
+- description: Organization API for managing members of an organization.
+  name: Organization Members
+paths:
+  /v2/orgs/{org_id}:
+    get:
+      description: Retrieves organization information.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">organizations:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 3</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-organization
+      parameters:
+      - description: id of the organization
+        example: 3074457345821141000
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organization'
+          description: Organization found
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Get organization info
+      tags:
+      - Organizations
+  /v2/orgs/{org_id}/members:
+    get:
+      description: Retrieves organization members based on the organization ID and
+        the cursor, or based on the user emails provided in the request.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">organizations:read</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-organization-members
+      parameters:
+      - in: query
+        name: emails
+        schema:
+          type: string
+          description: 'Emails of the organization members you want to retrieve. If
+            you specify a value for the `emails` parameter, only the `emails` parameter
+            is considered. All other filtering parameters are ignored. Maximum emails
+            size is 10. Example: `emails=someEmail1@miro.com,someEmail2@miro.com`'
+          example: someEmail1@miro.com
+      - in: query
+        name: role
+        schema:
+          type: string
+          description: Filter organization members by role
+          enum:
+          - organization_internal_admin
+          - organization_internal_user
+          - organization_external_user
+          - organization_team_guest_user
+          - unknown
+      - in: query
+        name: license
+        schema:
+          type: string
+          description: Filter organization members by license
+          enum:
+          - full
+          - occasional
+          - free
+          - free_restricted
+          - full_trial
+          - unknown
+      - in: query
+        name: active
+        schema:
+          type: boolean
+      - in: query
+        name: cursor
+        schema:
+          type: string
+          description: The ID of the organization member used as the reference for
+            pagination. To retrieve the first portion of the collection don't pass
+            a cursor value. To retrieve the next portion of the collection, set the
+            `cursor` parameter value to the ID of the last organization member you
+            received in the response of the previous request.
+          example: 3055557345821141000
+      - in: query
+        name: limit
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: Limit for the number of organization members returned in the
+            result list.
+          format: int32
+          example: 100
+          default: 100
+      - description: id of the organization
+        example: 3074457345821141000
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/OrganizationMembersSearchResponse'
+                - $ref: '#/components/schemas/OrganizationMembersSearchByEmailsResponse'
+          description: Organization members queries successfully
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Get organization members
+      tags:
+      - Organization Members
+  /v2/orgs/{org_id}/members/{member_id}:
+    get:
+      description: Retrieves organization member information for an existing organization.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">organizations:read</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-organization-member
+      parameters:
+      - description: id of the organization
+        example: 3074457345821141000
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      - description: id of the organization member
+        example: 3055557345821141000
+        in: path
+        name: member_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationMember'
+          description: Organization member found
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Get organization member
+      tags:
+      - Organization Members
+components:
+  schemas:
+    BasicError:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+        code:
+          type: string
+          description: Description of the status code.
+        message:
+          type: string
+          description: Explanation for the error
+        type:
+          type: string
+          description: Type of the object returned.
+          default: error
+    Organization:
+      required:
+      - fullLicensesPurchased
+      - id
+      - name
+      - plan
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the organization
+          example: '3074457345821140946'
+        fullLicensesPurchased:
+          type: integer
+          description: Purchased FULL licenses
+          format: int32
+        name:
+          type: string
+          description: Name of the organization
+          example: Miro company
+        plan:
+          type: string
+          description: Organization plan type
+          example: company
+          enum:
+          - company
+          - consultant
+          - consultant_slf
+          - business
+          - paid_team_org
+          - integration_org
+          - professional_2022
+          - edu_team_org
+          - free_team_org
+          - dev_team_org
+          - unknown
+        type:
+          type: string
+          description: Type of the object returned.
+          default: organization
+    OrganizationMember:
+      description: Organization member
+      required:
+      - active
+      - email
+      - id
+      - license
+      - role
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the user
+          example: '3074457345821140934'
+        active:
+          type: boolean
+          description: Flag is user active
+          example: true
+        email:
+          type: string
+          description: User email
+          example: user@miro.com
+        lastActivityAt:
+          type: string
+          description: Last time when the user was active
+          format: date-time
+        license:
+          type: string
+          description: Name of the current user license in the organization
+          example: full
+          enum:
+          - full
+          - occasional
+          - free
+          - free_restricted
+          - full_trial
+          - unknown
+        licenseAssignedAt:
+          type: string
+          description: Time when the license was assigned to the user
+          format: date-time
+        role:
+          type: string
+          description: Name of the user role in the organization
+          example: organization_internal_user
+          enum:
+          - organization_internal_admin
+          - organization_internal_user
+          - organization_external_user
+          - organization_team_guest_user
+          - unknown
+        type:
+          type: string
+          description: Type of the object returned.
+          default: organization-member
+    OrganizationMembersSearchByEmailsResponse:
+      description: Response for search organization members by user emails
+      type: array
+      properties:
+        empty:
+          type: boolean
+      items:
+        $ref: '#/components/schemas/OrganizationMember'
+    OrganizationMembersSearchResponse:
+      type: object
+      description: Response for query by cursor and filter parameters
+      properties:
+        limit:
+          type: integer
+          description: Maximum number of results returned based on the limit specified
+            in the request. For example, if there are 20 results, the request has
+            no cursor value, and the limit is set to 20, the size of the results will
+            be 20. The rest of the results will not be returned. To retrieve the rest
+            of the results, you must make another request and set the appropriate
+            value for the cursor parameter value.
+          format: int32
+          example: 20
+        size:
+          type: integer
+          description: Number of results returned in the response considering the
+            cursor and the limit values sent in the request. For example, if there
+            are 20 results, the request does not have a cursor value, and the limit
+            set to 10, the size of the results will be 10.
+          format: int32
+          example: 1
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationMember'
+        cursor:
+          type: string
+          description: Indicator of the position of the next page of the result. To
+            retrieve the next page, make another query setting its cursor field to
+            the value returned by the current query. If the value is empty, there
+            are no more pages to fetch.
+          example: '3074457345821140946'
+        type:
+          type: string
+          description: Type of the object returned.
+          default: cursor-list
+  responses:
+    '400':
+      description: Malformed request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 400
+                code:
+                  default: invalidParameters
+    '401':
+      description: Invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 401
+                code:
+                  default: tokenNotProvided
+    '403':
+      description: Invalid access
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 403
+                code:
+                  default: forbiddenAccess
+    '404':
+      description: Invalid access
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 404
+                code:
+                  default: notFound
+    '409':
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 409
+                code:
+                  default: conflict
+    '429':
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 429
+                code:
+                  default: tooManyRequests
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http

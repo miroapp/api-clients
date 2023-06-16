@@ -1,0 +1,1340 @@
+openapi: 3.0.1
+info:
+  title: Projects (Beta - Enterprise Plan)
+  version: v2
+servers:
+- url: https://api.miro.com
+security:
+- bearerAuth: []
+tags:
+- description: Project APIs for managing project-related functionalities.
+  name: Projects
+- description: Project API for managing settings of project
+  name: Project Settings
+- description: Project APIs for managing members of a project.
+  name: Project Members
+paths:
+  /v2/orgs/{org_id}/teams/{team_id}/projects:
+    post:
+      description: Projects are essentially folders of boards with the option to manage
+        user access for a smaller group of people within a team. Projects are here
+        to help you organize your boards and make them easier to find and share. In
+        other words, a project is a group of boards that you can share with your teammates
+        all at once. For more information, see our <a href="https://help.miro.com/hc/en-us/articles/360018262033-Projects"
+        target="blank">Help Center page on Projects</a>. <br><br>This API creates
+        a new project in an existing team of an organization.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">projects:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-create-project
+      parameters:
+      - name: org_id
+        description: The ID of the organization within which you you want to create
+          a project.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team within which you you want to create a project.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Contains information about the project, such as the project
+            name.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Create project
+      tags:
+      - Projects
+    get:
+      description: Retrieves the list of projects in an existing team of an organization.
+        You can retrieve all projects, including all private projects (projects that
+        haven't been specifically shared with you) by enabling Content Admin permissions.
+        To enable Content Admin permissions, see [Content Admin permissions for Company
+        Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">projects:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-projects
+      parameters:
+      - name: org_id
+        description: The ID of the organization from which you want to retrieve the
+          list of available projects.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team from which you want to retrieve the list of
+          available projects.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: limit
+        description: The maximum number of results to return per call. If the number
+          of projects in the response is greater than the limit specified, the response
+          returns the cursor parameter with a value.
+        in: query
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 100
+        example: 100
+      - name: cursor
+        description: An indicator of the position of a page in the full set of results.
+          To obtain the first page leave it empty. To obtain subqequent pages set
+          it to the value returned in the cursor field of the previous request.
+        in: query
+        schema:
+          type: string
+        example: 3074457345618265000
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectPage'
+          description: Contains the result set information, such as the content, limit,
+            cursor, or size.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: List of projects
+      tags:
+      - Projects
+  /v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}:
+    get:
+      description: Retrieves project information, such as a name for an existing project.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">projects:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-project
+      parameters:
+      - name: org_id
+        description: The ID of the organization from which you want to retrieve the
+          project information.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team from which you want to retrieve the project
+          information.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of the project for which you want to retrieve the information.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Project object
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Get project
+      tags:
+      - Projects
+    patch:
+      description: Update information about a project, such as the project name.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">projects:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-update-project
+      parameters:
+      - name: org_id
+        description: The ID of an Organization.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of a Team.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of a Project.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Project object
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Update project
+      tags:
+      - Projects
+    delete:
+      description: Deletes a project. After a project is deleted, all boards and users
+        that belong to the project remain in the team.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">projects:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 4</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-delete-project
+      parameters:
+      - name: org_id
+        description: The ID of the organization from which you want to delete a project.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team from which you want to delete a project.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of the project that you want to delete.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      responses:
+        '204':
+          description: Project deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Delete project
+      tags:
+      - Projects
+  /v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/settings:
+    get:
+      description: Retrieves the project settings.<br/><h3>Required scope</h3> <a
+        target="blank" href="/reference/scopes">projects:read</a> <br/><h3>Rate limiting</h3>
+        <a target="blank" href="/reference/ratelimiting">Level 1</a> <br/><h3>Enterprise
+        only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
+        plan</a> users. You can only use this endpoint if you have the role of a Company
+        Admin.</p>
+      operationId: enterprise-get-project-settings
+      parameters:
+      - name: org_id
+        description: The ID of the organization to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012091'
+      - name: project_id
+        description: The ID of the project for which you want to retrieve the project
+          settings.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSettings'
+          description: Defines the sharing policies for the boards within the project.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Get project settings
+      tags:
+      - Project Settings
+    patch:
+      description: Updates the settings of a project.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">projects:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-update-project-settings
+      parameters:
+      - name: org_id
+        description: The ID of the organization to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of the project whose settings you want to update.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectSettingsRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectSettings'
+          description: Project object
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Update project settings
+      tags:
+      - Project Settings
+  /v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members:
+    post:
+      description: Add a Miro user to a project.<br/><h3>Required scope</h3> <a target="blank"
+        href="/reference/scopes">projects:write</a> <br/><h3>Rate limiting</h3> <a
+        target="blank" href="/reference/ratelimiting">Level 1</a> <br/><h3>Enterprise
+        only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
+        plan</a> users. You can only use this endpoint if you have the role of a Company
+        Admin.</p>
+      operationId: enterprise-add-project-member
+      parameters:
+      - name: org_id
+        description: The ID of the organization to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of the project to which you want to add a user.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddProjectMemberRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectMember'
+          description: Project object
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Add member in a project
+      tags:
+      - Project Members
+    get:
+      description: Retrieves the list of members for a specific project.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">projects:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-project-members
+      parameters:
+      - name: org_id
+        description: The ID of the organization to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of the project for which you want to retrieve the list
+          of members.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: limit
+        description: The maximum number of results to return per call. If the number
+          of project members in the response is greater than the limit specified,
+          the response returns the cursor parameter with a value.
+        in: query
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 100
+        example: 100
+      - name: cursor
+        description: An indicator of the position of a page in the full set of results.
+          To obtain the first page leave it empty. To obtain subqequent pages set
+          it to the value returned in the cursor field of the previous request.
+        in: query
+        schema:
+          type: string
+        example: 3074457345618265000
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectMemberPage'
+          description: Page of project member
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: List of project members
+      tags:
+      - Project Members
+  /v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members/{member_id}:
+    get:
+      description: Retrieves information for a specific project member.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">projects:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-project-member
+      parameters:
+      - name: org_id
+        description: The ID of the organization to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of the project from which you want to retrieve specific
+          member information.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: member_id
+        description: The ID of the member for which you want to retrieve information.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '307445734562315000'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectMember'
+          description: Contains information about the project member, such as the
+            member's role.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Get project member
+      tags:
+      - Project Members
+    patch:
+      description: Updates details of a project member, such as the member's role.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">projects:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-update-project-member
+      parameters:
+      - name: org_id
+        description: The ID of the organization to which the project member belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team to which the project member belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of a Project.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: member_id
+        description: The ID of the member whose details you want to update.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '307445734562315000'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectMemberRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectMember'
+          description: Contains information about the project member, such as the
+            member's role.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Update project member
+      tags:
+      - Project Members
+    delete:
+      description: Remove a member from a project. The user remains in the team even
+        after the member is removed from a project.<br/><h3>Required scope</h3> <a
+        target="blank" href="/reference/scopes">projects:write</a> <br/><h3>Rate limiting</h3>
+        <a target="blank" href="/reference/ratelimiting">Level 4</a> <br/><h3>Enterprise
+        only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
+        plan</a> users. You can only use this endpoint if you have the role of a Company
+        Admin.</p>
+      operationId: enterprise-delete-project-member
+      parameters:
+      - name: org_id
+        description: The ID of the organization to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: team_id
+        description: The ID of the team to which the project belongs.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345619012000'
+      - name: project_id
+        description: The ID of the project from which you want to remove a member.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      - name: member_id
+        description: The ID of the member that you want to remove from a project.
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '3074457345618265000'
+      responses:
+        '204':
+          description: Project member removed
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400'
+          description: Malformed request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401'
+          description: Invalid authentication credentials
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error403'
+          description: Invalid access
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404'
+          description: Not found
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409'
+          description: Conflict
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429'
+          description: Too many requests
+      summary: Remove project member
+      tags:
+      - Project Members
+components:
+  schemas:
+    ProjectPage:
+      type: object
+      required:
+      - limit
+      - size
+      - data
+      properties:
+        limit:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 100
+          example: 100
+          description: The maximum number of results to return per call. If the number
+            of project in the response is greater than the limit specified, the response
+            returns the cursor parameter with a value.
+        size:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+          default: 100
+          example: 87
+          description: Number of results returned in the response considering the
+            cursor and the limit values sent in the request. For example, if there
+            are 20 results, the request does not have a cursor value, and the limit
+            set to 10, the size of the results will be 10. In this example, the response
+            will also return a cursor value that can be used to retrieve the next
+            set of 10 remaining results in the collection.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+          description: Contains the result data.
+        cursor:
+          type: string
+          description: Indicator of the position of the next page of the result. To
+            retrieve the next page, make another query setting its cursor field to
+            the value returned by the current query. If the value is empty, there
+            are no more pages to fetch.
+          example: '3074457345821140946'
+        type:
+          type: string
+          description: Type of the object returned.
+          default: cursor-list
+    Project:
+      type: object
+      required:
+      - id
+      - name
+      - type
+      properties:
+        id:
+          type: string
+          description: Project ID.
+          example: '3074457345618265000'
+        name:
+          type: string
+          description: Name of the project.
+          example: Product Guild project
+        type:
+          type: string
+          description: Type of the object returned.
+          default: project
+    CreateProjectRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Project name
+          example: Product Guild project
+    UpdateProjectRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Project name
+          example: Product Guild project
+    UpdateProjectSettingsRequest:
+      type: object
+      properties:
+        sharingPolicySettings:
+          $ref: '#/components/schemas/SharingPolicySettings'
+    ProjectSettings:
+      type: object
+      required:
+      - sharingPolicySettings
+      - type
+      properties:
+        sharingPolicySettings:
+          $ref: '#/components/schemas/SharingPolicySettings'
+        type:
+          type: string
+          description: Type of the object
+          default: project_settings
+    ProjectMemberPage:
+      type: object
+      required:
+      - limit
+      - size
+      - data
+      properties:
+        limit:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 100
+          example: 100
+          description: The maximum number of results to return per call. If the number
+            of project member in the response is greater than the limit specified,
+            the response returns the cursor parameter with a value.
+        size:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 100
+          default: 100
+          example: 87
+          description: Number of results returned in the response considering the
+            cursor and the limit values sent in the request. For example, if there
+            are 20 results, the request does not have a cursor value, and the limit
+            set to 10, the size of the results will be 10. In this example, the response
+            will also return a cursor value that can be used to retrieve the next
+            set of 10 remaining results in the collection.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProjectMember'
+          description: Contains the result data.
+        cursor:
+          type: string
+          description: Indicator of the position of the next page of the result. To
+            retrieve the next page, make another query setting its cursor field to
+            the value returned by the current query. If the value is empty, there
+            are no more pages to fetch.
+          example: '3074457345821140946'
+        type:
+          type: string
+          description: Type of the object returned.
+          default: cursor-list
+    ProjectMember:
+      type: object
+      required:
+      - id
+      - email
+      - role
+      - type
+      properties:
+        id:
+          type: string
+          description: ID of the project member.
+          example: '3074457345618265000'
+        email:
+          type: string
+          description: Email ID of the project member.
+          example: someone@domain.com
+        role:
+          $ref: '#/components/schemas/ProjectRole'
+        type:
+          type: string
+          description: Type of the object
+          default: project_member
+    AddProjectMemberRequest:
+      type: object
+      required:
+      - email
+      - role
+      properties:
+        email:
+          type: string
+          description: Email ID of the user.
+          example: someone@domain.com
+        role:
+          $ref: '#/components/schemas/ProjectRole'
+    UpdateProjectMemberRequest:
+      type: object
+      properties:
+        role:
+          $ref: '#/components/schemas/ProjectRole'
+    SharingPolicySettings:
+      type: object
+      properties:
+        teamAccess:
+          $ref: '#/components/schemas/TeamAccess'
+    TeamAccess:
+      type: string
+      description: 'Team access
+
+        * "private": Only the members of the project can access the information within
+        the project.
+
+        * "view":    Anyone in the team can view the information in within the project.
+
+        '
+      enum:
+      - private
+      - view
+      default: private
+      example: private
+    ProjectRole:
+      type: string
+      description: Role of the project member.
+      enum:
+      - owner
+      - editor
+      - viewer
+      - commentator
+      - coowner
+      example: viewer
+    ProjectRoleToAdd:
+      type: string
+      description: Role of the project member.
+      enum:
+      - editor
+      - viewer
+      - commentator
+      - coowner
+      example: viewer
+    Error400:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+          default: 400
+        code:
+          type: string
+          description: Description of the status code.
+          default: invalidParameters
+        message:
+          type: string
+          description: Explanation of the error.
+        type:
+          type: string
+          default: error
+    Error401:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+          default: 401
+        code:
+          type: string
+          description: Description of the status code.
+          default: tokenNotProvided
+        message:
+          type: string
+          description: Explanation of the error.
+        type:
+          type: string
+          default: error
+    Error403:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+          default: 403
+        code:
+          type: string
+          description: Description of the status code.
+          example: forbiddenAccess
+        message:
+          type: string
+          description: Explanation of the error.
+        type:
+          type: string
+          default: error
+    Error404:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+          default: 404
+        code:
+          type: string
+          description: Description of the status code.
+          example: notFound
+        message:
+          type: string
+          description: Explanation of the error.
+        type:
+          type: string
+          default: error
+    Error409:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+          default: 409
+        code:
+          type: string
+          description: Description of the status code.
+          example: conflict
+        message:
+          type: string
+          description: Explanation of the error.
+        type:
+          type: string
+          default: error
+    Error429:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+          default: 429
+        code:
+          type: string
+          description: Description of the status code.
+          example: tooManyRequests
+        message:
+          type: string
+          description: Explanation of the error.
+        type:
+          type: string
+          default: error
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http

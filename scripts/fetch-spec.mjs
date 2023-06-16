@@ -5,17 +5,17 @@ import mapValues from 'lodash/mapValues.js'
 import {load} from 'js-yaml'
 
 const apis = [
-  '../api-specification/apis/production/public-api/platform.yaml',
-  '../api-specification/apis/production/public-api/platform-tags.yaml',
-  '../api-specification/apis/production/public-api/platform-experimental.yaml',
-  '../api-specification/apis/production/public-api/platform-containers.yaml',
-  '../api-specification/apis/production/public-api/platform-containers-experimental.yaml',
-  '../api-specification/apis/production/public-api/platform-items-bulk.yaml',
-  '../api-specification/apis/production/enterprise/enterprise-teams.yaml',
-  '../api-specification/apis/production/enterprise/enterprise-organizations.yaml',
-  '../api-specification/apis/production/enterprise/enterprise-board-classification.yaml',
-  '../api-specification/apis/production/enterprise/enterprise-board-export.yaml',
-  '../api-specification/apis/production/enterprise/enterprise-projects.yaml',
+  './spec/public-api/platform.yaml',
+  './spec/public-api/platform-tags.yaml',
+  './spec/public-api/platform-experimental.yaml',
+  './spec/public-api/platform-containers.yaml',
+  './spec/public-api/platform-containers-experimental.yaml',
+  './spec/public-api/platform-items-bulk.yaml',
+  './spec/enterprise/enterprise-teams.yaml',
+  './spec/enterprise/enterprise-organizations.yaml',
+  './spec/enterprise/enterprise-board-classification.yaml',
+  './spec/enterprise/enterprise-board-export.yaml',
+  './spec/enterprise/enterprise-projects.yaml',
 ]
 
 const baseSpecification = {
