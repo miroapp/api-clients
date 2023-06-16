@@ -33,7 +33,7 @@ paths:
         \ if you want to create one sticky note, one card, and one shape item in one\
         \ call, the rate limiting applicable will be 300 credits. This is because\
         \ create item calls take Level 2 rate limiting of 100 credits each, 100 for\
-        \ sticky note, 100 for card, and 100 for shape item. "
+        \ sticky note, 100 for card, and 100 for shape item."
       operationId: create-items
       requestBody:
         content:
@@ -202,16 +202,19 @@ components:
       properties:
         documentUrl:
           type: string
-          description: "The URL to download the resource. You must use your access\
-            \ token to access the URL. The URL contains the `redirect` parameter to\
-            \ control the request execution. \n`redirect`: By default, the `redirect`\
-            \ parameter is set to `false` and the resource object containing the URL\
-            \ and the resource type is returned with a 200 OK HTTP code. This URL\
-            \ is valid for 60 seconds. You can use this URL to retrieve the resource\
-            \ file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT\
-            \ HTTP response is returned. If you follow HTTP 3xx responses as redirects,\
-            \ you will automatically be redirected to the resource file and the content\
-            \ type returned is `application/octet-stream`."
+          description: 'The URL to download the resource. You must use your access
+            token to access the URL. The URL contains the `redirect` parameter to
+            control the request execution.
+
+            `redirect`: By default, the `redirect` parameter is set to `false` and
+            the resource object containing the URL and the resource type is returned
+            with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use
+            this URL to retrieve the resource file.
+
+            If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT
+            HTTP response is returned. If you follow HTTP 3xx responses as redirects,
+            you will automatically be redirected to the resource file and the content
+            type returned is `application/octet-stream`.'
           example: https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false
         title:
           type: string
@@ -278,20 +281,26 @@ components:
           - modal
         previewUrl:
           type: string
-          description: "The URL to download the resource. You must use your access\
-            \ token to access the URL. \nThe URL contains the `redirect` parameter\
-            \ and the `format` parameter to control the request execution as described\
-            \ in the following parameters:\n`format` parameter: By default, the image\
-            \ format is set to the preview image. If you want to download the original\
-            \ image, set the `format` parameter in the URL to `original`.\n`redirect`:\
-            \ By default, the `redirect` parameter is set to `false` and the resource\
-            \ object containing the URL and the resource type is returned with a 200\
-            \ OK HTTP code. This URL is valid for 60 seconds. You can use this URL\
-            \ to retrieve the resource file.\nIf the `redirect` parameter is set to\
-            \ `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow\
-            \ HTTP 3xx responses as redirects, you will automatically be redirected\
-            \ to the resource file and the content type returned can be `image/png`,\
-            \ 'image/svg', or 'image/jpg', depending on the original image type."
+          description: 'The URL to download the resource. You must use your access
+            token to access the URL.
+
+            The URL contains the `redirect` parameter and the `format` parameter to
+            control the request execution as described in the following parameters:
+
+            `format` parameter: By default, the image format is set to the preview
+            image. If you want to download the original image, set the `format` parameter
+            in the URL to `original`.
+
+            `redirect`: By default, the `redirect` parameter is set to `false` and
+            the resource object containing the URL and the resource type is returned
+            with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use
+            this URL to retrieve the resource file.
+
+            If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT
+            HTTP response is returned. If you follow HTTP 3xx responses as redirects,
+            you will automatically be redirected to the resource file and the content
+            type returned can be `image/png`, ''image/svg'', or ''image/jpg'', depending
+            on the original image type.'
           example: https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false
         providerName:
           type: string
@@ -566,11 +575,16 @@ components:
           example: '#e6e6e6'
         fillOpacity:
           type: string
-          description: "Opacity level of the background color.\nPossible values: any\
-            \ number between `0.0` and `1.0`, where: \n`0.0`: the background color\
-            \ is completely transparent or invisible.\n`1.0`: the background color\
-            \ is completely opaque or solid.\nDefault: `1.0` if `fillColor` is provided,\
-            \ `0.0` if `fillColor` is not provided."
+          description: 'Opacity level of the background color.
+
+            Possible values: any number between `0.0` and `1.0`, where:
+
+            `0.0`: the background color is completely transparent or invisible.
+
+            `1.0`: the background color is completely opaque or solid.
+
+            Default: `1.0` if `fillColor` is provided, `0.0` if `fillColor` is not
+            provided.'
           maximum: 1
           minimum: 0
         fontFamily:
@@ -883,7 +897,7 @@ components:
         imageUrl:
           type: string
           description: 'The URL to download the resource. You must use your access
-            token to access the URL.  The URL contains the `redirect` parameter and
+            token to access the URL. The URL contains the `redirect` parameter and
             the `format` parameter to control the request execution as described in
             the following parameters: `format` parameter: By default, the image format
             is set to the preview image. If you want to download the original image,

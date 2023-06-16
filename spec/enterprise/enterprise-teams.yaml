@@ -824,7 +824,7 @@ components:
       description: Team invitation settings
     TeamMember:
       required:
-      - memberId
+      - id
       - teamId
       - role
       type: object

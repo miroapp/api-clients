@@ -661,8 +661,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
-          format: int64
+          type: string
           description: Unique identifier (ID) of an item.
           example: 3458764517517819000
         data:
@@ -744,10 +743,9 @@ components:
         geometry:
           $ref: '#/components/schemas/Geometry'
         id:
-          type: integer
-          format: int64
+          type: string
           description: Unique identifier (ID) of an item.
-          example: 3458764517517819000
+          example: '3458764517517819000'
         links:
           $ref: '#/components/schemas/WidgetLinks'
         modifiedAt:
