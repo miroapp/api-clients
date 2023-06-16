@@ -22,7 +22,7 @@ export class ImageItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
   'data'?: ImageData
   'position'?: Position
   'geometry'?: Geometry
@@ -51,7 +51,7 @@ export class ImageItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'data',

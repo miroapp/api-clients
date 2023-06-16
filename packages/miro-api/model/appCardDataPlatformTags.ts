@@ -14,7 +14,7 @@ import {CustomField} from './customField'
 
 /**
  * @internal
- * Contains app card item data, such as the title, description, or fields. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains app card item data, such as the title, description, or fields.
  */
 export class AppCardDataPlatformTags {
   /**

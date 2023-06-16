@@ -20,17 +20,20 @@ export class TeamSettings {
   /**
    * Organization id
    */
-  'organizationId'?: number
+  'organizationId'?: string
   'teamAccountDiscoverySettings'?: TeamAccountDiscoverySettings
   'teamCollaborationSettings'?: TeamCollaborationSettings
   'teamCopyAccessLevelSettings'?: TeamCopyAccessLevelSettings
   /**
    * Team id
    */
-  'teamId'?: number
+  'teamId'?: string
   'teamInvitationSettings'?: TeamInvitationSettings
   'teamSharingPolicySettings'?: TeamSharingPolicySettings
-  'type'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'team-settings'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -40,7 +43,7 @@ export class TeamSettings {
     {
       name: 'organizationId',
       baseName: 'organizationId',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'teamAccountDiscoverySettings',
@@ -60,7 +63,7 @@ export class TeamSettings {
     {
       name: 'teamId',
       baseName: 'teamId',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'teamInvitationSettings',

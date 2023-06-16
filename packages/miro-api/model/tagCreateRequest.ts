@@ -12,12 +12,12 @@
 
 export class TagCreateRequest {
   /**
-   * [Fill color for the tag](https://developers.miro.com/reference/rest-api-tag-data-model)
+   * Fill color for the tag.
    */
   'fillColor'?: string | (typeof TagCreateRequest.FillColorEnum)[keyof typeof TagCreateRequest.FillColorEnum] =
     TagCreateRequest.FillColorEnum.Red
   /**
-   * [Text of the tag](https://developers.miro.com/reference/rest-api-tag-data-model)
+   * Text of the tag. Case-sensitive. Must be unique.
    */
   'title': string
 

@@ -39,7 +39,7 @@ export abstract class BaseOrganization extends Organization {
   async *getAllTeams(query: Parameters<MiroApi['enterpriseGetTeams']>[1]): AsyncGenerator<Team, void> {
     const result = (await this._api.enterpriseGetTeams(this.id.toString(), query)).body
 
-    for (const team of result) {
+    for (const team of result.data) {
       yield new Team(this._api, this.id, team.id, team)
     }
   }

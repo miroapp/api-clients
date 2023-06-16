@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains frame item data, such as the title, frame type, or frame format. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains frame item data, such as the title, frame type, or frame format.
  */
 export class FrameChanges {
   /**
@@ -28,6 +28,10 @@ export class FrameChanges {
    * Only free form frames are supported at the moment.
    */
   'type'?: string | (typeof FrameChanges.TypeEnum)[keyof typeof FrameChanges.TypeEnum] = FrameChanges.TypeEnum.Freeform
+  /**
+   * Hide or reveal the content inside a frame (Enterprise plan only).
+   */
+  'showContent'?: boolean = true
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -48,6 +52,11 @@ export class FrameChanges {
       name: 'type',
       baseName: 'type',
       type: 'FrameChanges.TypeEnum',
+    },
+    {
+      name: 'showContent',
+      baseName: 'showContent',
+      type: 'boolean',
     },
   ]
 

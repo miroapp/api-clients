@@ -12,34 +12,37 @@
 
 export class TeamMember {
   /**
-   * Invited user date
+   * Team member id.
+   */
+  'id': string
+  /**
+   *  Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"non_team\":   External user, non-team user. * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
+   */
+  'role': string | (typeof TeamMember.RoleEnum)[keyof typeof TeamMember.RoleEnum]
+  /**
+   * Date and time when member was invited to the team.
    */
   'createdAt'?: Date
   /**
-   * User id of user who invited the team member
+   * Id of the user who invited the team member.
    */
-  'createdByUserId'?: number
+  'createdBy'?: string
   /**
-   * Team member id
-   */
-  'memberId': number
-  /**
-   * Latest user role modification date
+   * Date and time when the user\'s membership was last updated.
    */
   'modifiedAt'?: Date
   /**
-   * User id of user who updated the team member
+   * Id of the user who last updated the user\'s membership.
    */
-  'modifiedByUserId'?: number
+  'modifiedBy'?: string
   /**
    * Team id
    */
-  'teamId': number
-  'type'?: string
+  'teamId': string
   /**
-   *      * \"non_team\":   External user, non-team user.     * \"member\":     Team member with full member permissions.     * \"admin\":      Admin of a team. Team member with permission to manage team.     * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
+   * Type of the object returned.
    */
-  'userRole': string | (typeof TeamMember.UserRoleEnum)[keyof typeof TeamMember.UserRoleEnum]
+  'type'?: string = 'team-member'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -47,19 +50,24 @@ export class TeamMember {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
+    {
+      name: 'role',
+      baseName: 'role',
+      type: 'TeamMember.RoleEnum',
+    },
+    {
       name: 'createdAt',
       baseName: 'createdAt',
       type: 'Date',
     },
     {
-      name: 'createdByUserId',
-      baseName: 'createdByUserId',
-      type: 'number',
-    },
-    {
-      name: 'memberId',
-      baseName: 'memberId',
-      type: 'number',
+      name: 'createdBy',
+      baseName: 'createdBy',
+      type: 'string',
     },
     {
       name: 'modifiedAt',
@@ -67,24 +75,19 @@ export class TeamMember {
       type: 'Date',
     },
     {
-      name: 'modifiedByUserId',
-      baseName: 'modifiedByUserId',
-      type: 'number',
+      name: 'modifiedBy',
+      baseName: 'modifiedBy',
+      type: 'string',
     },
     {
       name: 'teamId',
       baseName: 'teamId',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'type',
       baseName: 'type',
       type: 'string',
-    },
-    {
-      name: 'userRole',
-      baseName: 'userRole',
-      type: 'TeamMember.UserRoleEnum',
     },
   ]
 
@@ -95,7 +98,7 @@ export class TeamMember {
 }
 
 export namespace TeamMember {
-  export const UserRoleEnum = {
+  export const RoleEnum = {
     NonTeam: 'non_team',
     Member: 'member',
     Admin: 'admin',

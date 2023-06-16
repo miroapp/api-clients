@@ -13,6 +13,7 @@
 import {BoardMember} from './boardMember'
 import {BoardPolicy} from './boardPolicy'
 import {Picture} from './picture'
+import {Project} from './project'
 import {Team} from './team'
 import {UserInfoShort} from './userInfoShort'
 
@@ -48,6 +49,7 @@ export class Board {
   'picture'?: Picture
   'policy'?: BoardPolicy
   'team'?: Team
+  'project'?: Project
   /**
    * Type of the object that is returned. In this case, type returns `board`.
    */
@@ -121,6 +123,11 @@ export class Board {
       name: 'team',
       baseName: 'team',
       type: 'Team',
+    },
+    {
+      name: 'project',
+      baseName: 'project',
+      type: 'Project',
     },
     {
       name: 'type',

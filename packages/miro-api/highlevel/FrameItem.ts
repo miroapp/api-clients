@@ -6,7 +6,7 @@ import {WidgetItem} from './Item'
 /** @hidden */
 export abstract class BaseFrameItem extends FrameItem {
   abstract _api: MiroApi
-  abstract id: number
+  abstract id: string
   abstract boardId: string
 
   /**

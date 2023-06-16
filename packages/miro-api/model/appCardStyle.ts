@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains information about the style of an app card item, such as the fill color. For information about the JSON properties, see [Style](https://developers.miro.com/reference/style).
+ * Contains information about the style of an app card item, such as the fill color.
  */
 export class AppCardStyle {
   /**

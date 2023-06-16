@@ -12,10 +12,13 @@
 
 /**
  * @internal
- * Contains information about the parent this item attached to. Passing null for ID will attach widget to the canvas directly.
+ * Contains text item data
  */
-export class ParentPlatformContainers {
-  'id'?: number
+export class TextDataPlatformContainersExperimental {
+  /**
+   * The actual text (content) that appears in the text item.
+   */
+  'content'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -23,14 +26,14 @@ export class ParentPlatformContainers {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'id',
-      baseName: 'id',
-      type: 'number',
+      name: 'content',
+      baseName: 'content',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ParentPlatformContainers.attributeTypeMap
+    return TextDataPlatformContainersExperimental.attributeTypeMap
   }
 }

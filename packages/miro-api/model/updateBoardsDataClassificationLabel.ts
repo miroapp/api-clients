@@ -15,6 +15,10 @@ export class UpdateBoardsDataClassificationLabel {
    * Number of boards updated in the team
    */
   'numberUpdatedBoards'?: number
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'boards-data-classification-label-changed'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -25,6 +29,11 @@ export class UpdateBoardsDataClassificationLabel {
       name: 'numberUpdatedBoards',
       baseName: 'numberUpdatedBoards',
       type: 'number',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
     },
   ]
 

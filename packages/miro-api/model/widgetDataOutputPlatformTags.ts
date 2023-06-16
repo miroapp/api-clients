@@ -47,7 +47,7 @@ export class WidgetDataOutputPlatformTags {
    */
   'mode'?: string | (typeof WidgetDataOutputPlatformTags.ModeEnum)[keyof typeof WidgetDataOutputPlatformTags.ModeEnum]
   /**
-   * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
+   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
    */
   'previewUrl'?: string
   /**
@@ -67,9 +67,9 @@ export class WidgetDataOutputPlatformTags {
    */
   'url'?: string
   /**
-   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is numeric, and it is automatically assigned to a user when they first sign up.
+   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing  numbers, and it is automatically assigned to a user when they first sign up.
    */
-  'assigneeId'?: number
+  'assigneeId'?: string
   /**
    * The date when the task or activity described in the card is due to be completed. In the GUI, users can select the due date from a calendar. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
@@ -79,21 +79,18 @@ export class WidgetDataOutputPlatformTags {
    */
   'fields'?: Array<CustomField>
   /**
-   * Defines whether the card is owned by the application making the call.
-   */
-  'owned'?: boolean
-  /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
   'status'?:
     | string
-    | (typeof WidgetDataOutputPlatformTags.StatusEnum)[keyof typeof WidgetDataOutputPlatformTags.StatusEnum]
+    | (typeof WidgetDataOutputPlatformTags.StatusEnum)[keyof typeof WidgetDataOutputPlatformTags.StatusEnum] =
+    WidgetDataOutputPlatformTags.StatusEnum.Disconnected
   /**
-   * The URL to download the resource. You must use your access token to access the URL.  The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
+   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
    */
   'imageUrl'?: string
   /**
-   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.  `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.
+   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.
    */
   'documentUrl'?: string
   /**
@@ -115,6 +112,10 @@ export class WidgetDataOutputPlatformTags {
    */
   'type'?: string | (typeof WidgetDataOutputPlatformTags.TypeEnum)[keyof typeof WidgetDataOutputPlatformTags.TypeEnum] =
     WidgetDataOutputPlatformTags.TypeEnum.Freeform
+  /**
+   * Hide or reveal the content inside a frame (Enterprise plan only).
+   */
+  'showContent'?: boolean = true
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -174,7 +175,7 @@ export class WidgetDataOutputPlatformTags {
     {
       name: 'assigneeId',
       baseName: 'assigneeId',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'dueDate',
@@ -185,11 +186,6 @@ export class WidgetDataOutputPlatformTags {
       name: 'fields',
       baseName: 'fields',
       type: 'Array<CustomField>',
-    },
-    {
-      name: 'owned',
-      baseName: 'owned',
-      type: 'boolean',
     },
     {
       name: 'status',
@@ -220,6 +216,11 @@ export class WidgetDataOutputPlatformTags {
       name: 'type',
       baseName: 'type',
       type: 'WidgetDataOutputPlatformTags.TypeEnum',
+    },
+    {
+      name: 'showContent',
+      baseName: 'showContent',
+      type: 'boolean',
     },
   ]
 

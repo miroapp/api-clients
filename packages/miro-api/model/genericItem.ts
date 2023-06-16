@@ -13,9 +13,9 @@
 import {CreatedBy} from './createdBy'
 import {Geometry} from './geometry'
 import {ModifiedBy} from './modifiedBy'
-import {Parent} from './parent'
+import {ParentLinksEnvelope} from './parentLinksEnvelope'
 import {Position} from './position'
-import {WidgetDataOutput} from './widgetDataOutput'
+import {WidgetLinks} from './widgetLinks'
 
 /**
  * @internal
@@ -27,18 +27,19 @@ export class GenericItem {
    */
   'createdAt'?: Date
   'createdBy'?: CreatedBy
-  'data'?: WidgetDataOutput
+  'data'?: object
   'geometry'?: Geometry
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
+  'links'?: WidgetLinks
   /**
    * Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
   'modifiedAt'?: Date
   'modifiedBy'?: ModifiedBy
-  'parent'?: Parent
+  'parent'?: ParentLinksEnvelope
   'position'?: Position
   /**
    * Type of item that is returned.
@@ -63,7 +64,7 @@ export class GenericItem {
     {
       name: 'data',
       baseName: 'data',
-      type: 'WidgetDataOutput',
+      type: 'object',
     },
     {
       name: 'geometry',
@@ -73,7 +74,12 @@ export class GenericItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
+    },
+    {
+      name: 'links',
+      baseName: 'links',
+      type: 'WidgetLinks',
     },
     {
       name: 'modifiedAt',
@@ -88,7 +94,7 @@ export class GenericItem {
     {
       name: 'parent',
       baseName: 'parent',
-      type: 'Parent',
+      type: 'ParentLinksEnvelope',
     },
     {
       name: 'position',

@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains information about the embed URL.
  */
 export class EmbedUrlDataChanges {
   /**
@@ -23,7 +23,6 @@ export class EmbedUrlDataChanges {
    * URL of the image to be used as the preview image for the embedded item.
    */
   'previewUrl'?: string
-  'type'?: string | (typeof EmbedUrlDataChanges.TypeEnum)[keyof typeof EmbedUrlDataChanges.TypeEnum]
   /**
    * A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.
    */
@@ -45,11 +44,6 @@ export class EmbedUrlDataChanges {
       type: 'string',
     },
     {
-      name: 'type',
-      baseName: 'type',
-      type: 'EmbedUrlDataChanges.TypeEnum',
-    },
-    {
       name: 'url',
       baseName: 'url',
       type: 'string',
@@ -66,18 +60,5 @@ export namespace EmbedUrlDataChanges {
   export const ModeEnum = {
     Inline: 'inline',
     Modal: 'modal',
-  } as const
-  export const TypeEnum = {
-    Text: 'text',
-    Shape: 'shape',
-    StickyNote: 'sticky_note',
-    Image: 'image',
-    Document: 'document',
-    Card: 'card',
-    AppCard: 'app_card',
-    Preview: 'preview',
-    Frame: 'frame',
-    Embed: 'embed',
-    Opaque: 'opaque',
   } as const
 }

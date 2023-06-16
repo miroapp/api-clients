@@ -60,6 +60,5 @@ export namespace BoardMembersInvite {
     Editor: 'editor',
     Coowner: 'coowner',
     Owner: 'owner',
-    Guest: 'guest',
   } as const
 }

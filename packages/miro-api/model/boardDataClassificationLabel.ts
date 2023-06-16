@@ -31,6 +31,10 @@ export class BoardDataClassificationLabel {
    * Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS )
    */
   'sharingRecommendation'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'board-data-classification-label'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -60,6 +64,11 @@ export class BoardDataClassificationLabel {
     {
       name: 'sharingRecommendation',
       baseName: 'sharingRecommendation',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
       type: 'string',
     },
   ]

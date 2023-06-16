@@ -14,7 +14,11 @@ export class TeamMemberInvite {
   /**
    * User email to add to a team
    */
-  'userEmail'?: string
+  'email': string
+  /**
+   *  Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
+   */
+  'role'?: string | (typeof TeamMemberInvite.RoleEnum)[keyof typeof TeamMemberInvite.RoleEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -22,9 +26,14 @@ export class TeamMemberInvite {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'userEmail',
-      baseName: 'userEmail',
+      name: 'email',
+      baseName: 'email',
       type: 'string',
+    },
+    {
+      name: 'role',
+      baseName: 'role',
+      type: 'TeamMemberInvite.RoleEnum',
     },
   ]
 
@@ -32,4 +41,12 @@ export class TeamMemberInvite {
   static getAttributeTypeMap() {
     return TeamMemberInvite.attributeTypeMap
   }
+}
+
+export namespace TeamMemberInvite {
+  export const RoleEnum = {
+    Member: 'member',
+    Admin: 'admin',
+    TeamGuest: 'team_guest',
+  } as const
 }

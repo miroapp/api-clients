@@ -14,11 +14,11 @@ import {SelfLink} from './selfLink'
 
 /**
  * @internal
- * Contains information about the parent frame for the item.
+ * Contains information about the parent mind map node for the item.
  */
 export class ParentLinksEnvelope {
   /**
-   * Unique identifier (ID) of the parent frame for the item.
+   * Unique identifier (ID) of the parent mind map node  for the item.
    */
   'id'?: number
   'links'?: SelfLink

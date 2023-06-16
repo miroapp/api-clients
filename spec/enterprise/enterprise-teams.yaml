@@ -1,0 +1,1427 @@
+openapi: 3.0.1
+info:
+  title: Teams (Enterprise Plan)
+  version: v2
+servers:
+- url: https://api.miro.com
+security:
+- bearerAuth: []
+tags:
+- description: Team API for managing teams.
+  name: Teams
+- description: Team API for managing settings of team.
+  name: Team Settings
+- description: Team API for managing members of a team.
+  name: Team Members
+paths:
+  /v2/orgs/{org_id}/teams:
+    post:
+      description: Creates a new team in an existing organization.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">organizations:teams:write</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-create-team
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Team object
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Create team
+      tags:
+      - Teams
+    get:
+      description: Retrieves list of teams in an existing organization.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">organizations:teams:read</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-teams
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - name: limit
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: Limit for the number of teams returned in the result list.
+          format: int32
+          example: 100
+          default: 100
+      - description: An indicator of the position of a page in the full set of results.
+          To obtain the first page leave it empty. To obtain subqequent pages set
+          it to the value returned in the cursor field of the previous request.
+        example: 3055557345821140500
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: Name query. Filters teams by name using case insensitive partial
+          match. A value "dev" will return both "Developer's team" and "Team for developers".
+        example: My team
+        in: query
+        name: name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Page of teams that match the search query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamsPage'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: List teams
+      tags:
+      - Teams
+  /v2/orgs/{org_id}/teams/{team_id}:
+    get:
+      description: Retrieves team information for an existing team.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">organizations:teams:read</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-team
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Team object
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Get team
+      tags:
+      - Teams
+    patch:
+      description: Updates an existing team.<br/><h3>Required scope</h3> <a target="blank"
+        href="/reference/scopes">organizations:teams:write</a> <br/><h3>Rate limiting</h3>
+        <a target="blank" href="/reference/ratelimiting">Level 1</a> <br/><h3>Enterprise
+        only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
+        plan</a> users. You can only use this endpoint if you have the role of a Company
+        Admin.</p>
+      operationId: enterprise-update-team
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamChanges'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+          description: Team object
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Update team
+      tags:
+      - Teams
+    delete:
+      description: Deletes an existing team.<br/><h3>Required scope</h3> <a target="blank"
+        href="/reference/scopes">organizations:teams:write</a> <br/><h3>Rate limiting</h3>
+        <a target="blank" href="/reference/ratelimiting">Level 4</a> <br/><h3>Enterprise
+        only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
+        plan</a> users. You can only use this endpoint if you have the role of a Company
+        Admin.</p>
+      operationId: enterprise-delete-team
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      responses:
+        '204':
+          description: Team deleted
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Delete team
+      tags:
+      - Teams
+  /v2/orgs/{org_id}/teams/{team_id}/members:
+    post:
+      description: Invites a new Miro user to an existing team. The user must exist
+        in your Miro organization. Users who do not exist in your Miro organization
+        can be invited to the team via [SCIM](https://developers.miro.com/docs/scim)
+        and an external identity provider, such as Okta or Azure Active Directory.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">organizations:teams:write</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-invite-team-member
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamMemberInvite'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMember'
+          description: Invitation result object
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Invite team members
+      tags:
+      - Team Members
+    get:
+      description: Retrieves team members by cursor.<br/><h3>Required scope</h3> <a
+        target="blank" href="/reference/scopes">organizations:teams:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-team-members
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      - name: limit
+        in: query
+        schema:
+          maximum: 100
+          minimum: 1
+          type: integer
+          description: Limit for the number of team members returned in the result
+            list.
+          format: int32
+          example: 100
+          default: 100
+      - description: An indicator of the position of a page in the full set of results.
+          To obtain the first page leave it empty. To obtain subqequent pages set
+          it to the value returned in the cursor field of the previous request.
+        example: 3055557345821140500
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: "\nRole query. Filters members by role using full word match.\
+          \ Accepted values are:            \n* \"member\":     Team member with full\
+          \ member permissions.\n* \"admin\":      Admin of a team. Team member with\
+          \ permission to manage team.\n* \"non_team\":   External user, non-team\
+          \ user.\n* \"team_guest\": Team-guest user, user with access only to a team\
+          \ without access to organization.\n"
+        in: query
+        name: role
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Page of team members that match the search query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMembersPage'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: List team members
+      tags:
+      - Team Members
+  /v2/orgs/{org_id}/teams/{team_id}/members/{member_id}:
+    get:
+      description: Retrieves team member by id.<br/><h3>Required scope</h3> <a target="blank"
+        href="/reference/scopes">organizations:teams:read</a> <br/><h3>Rate limiting</h3>
+        <a target="blank" href="/reference/ratelimiting">Level 1</a> <br/><h3>Enterprise
+        only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
+        plan</a> users. You can only use this endpoint if you have the role of a Company
+        Admin.</p>
+      operationId: enterprise-get-team-member
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      - $ref: '#/components/parameters/pathTeamMemberId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMember'
+          description: Team member object
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Get team member
+      tags:
+      - Team Members
+    patch:
+      description: Updates team member role in team by id.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">organizations:teams:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-update-team-member
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      - $ref: '#/components/parameters/pathTeamMemberId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamMemberChanges'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamMember'
+          description: Team member object
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Update team member
+      tags:
+      - Team Members
+    delete:
+      description: Deletes team member from team by id.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">organizations:teams:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-delete-team-member
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      - $ref: '#/components/parameters/pathTeamMemberId'
+      responses:
+        '204':
+          description: Deleted successfully
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Delete team member from team
+      tags:
+      - Team Members
+  /v2/orgs/{org_id}/default_teams_settings:
+    get:
+      description: Retrieves default team settings of an existing organization.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">organizations:teams:read</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-default-team-settings
+      parameters:
+      - description: The id of an Organization.
+        example: 3074457345618265000
+        in: path
+        name: org_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamSettings'
+          description: Team settings
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Get default team settings
+      tags:
+      - Team Settings
+  /v2/orgs/{org_id}/teams/{team_id}/settings:
+    get:
+      description: Retrieves team settings of an existing team.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">organizations:teams:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-get-team-settings
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamSettings'
+          description: Team settings
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Get team settings
+      tags:
+      - Team Settings
+    patch:
+      description: Updates team settings of an existing team.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">organizations:teams:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a>
+        <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
+        href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
+        You can only use this endpoint if you have the role of a Company Admin.</p>
+      operationId: enterprise-update-team-settings
+      parameters:
+      - $ref: '#/components/parameters/pathOrgId'
+      - $ref: '#/components/parameters/pathTeamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TeamSettingsChanges'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TeamSettings'
+          description: Team settings
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Update team settings
+      tags:
+      - Team Settings
+components:
+  parameters:
+    pathOrgId:
+      name: org_id
+      description: The id of the Organization.
+      in: path
+      required: true
+      schema:
+        type: string
+      example: '3074457345618265000'
+    pathTeamId:
+      name: team_id
+      description: The id of the Team.
+      in: path
+      required: true
+      schema:
+        type: string
+      example: '3074457345618265000'
+    pathTeamMemberId:
+      name: member_id
+      description: The id of the Team Member
+      in: path
+      required: true
+      schema:
+        type: string
+      example: '3074457345618265000'
+  schemas:
+    BasicError:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+        code:
+          type: string
+          description: Description of the status code.
+        message:
+          type: string
+          description: Explanation for the error
+        type:
+          type: string
+          description: Type of the object returned.
+          default: error
+    Picture:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Id of the picture
+          example: 3074457345618261500
+        imageURL:
+          type: string
+          description: Url of the picture
+          example: https://miro.images/5252525252/125252/266/144/1/size210.jpg
+        originalUrl:
+          type: string
+          description: Original team picture url for icon generation
+          example: https://miro.com/original-image.jpg
+        type:
+          type: string
+          description: Type of the object returned.
+          default: picture
+    Team:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: Team id
+          example: 3074457345618265000
+        name:
+          type: string
+          description: Team name
+          example: My Team
+        picture:
+          $ref: '#/components/schemas/Picture'
+        type:
+          type: string
+          description: Type of the object returned.
+          default: team
+    CreateTeamRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Team name
+          example: My Team
+    TeamAccountDiscoverySettings:
+      type: object
+      properties:
+        accountDiscovery:
+          type: string
+          description: '
+
+            * "hidden":  Only invited users can see and access the team.
+
+            * "request": Members of organization can find and request to join with
+            admin approval.
+
+            * "join":    Members of organization can find and join.
+
+            '
+          enum:
+          - hidden
+          - request
+          - join
+      description: Team account discovery settings
+    TeamAccountDiscoverySettingsChanges:
+      type: object
+      properties:
+        accountDiscovery:
+          type: string
+          description: '
+
+            * "hidden":  Only invited users can see and access the team.
+
+            * "request": Members of organization can find and request to join with
+            admin approval.
+
+            * "join":    Members of organization can find and join.
+
+            '
+          enum:
+          - hidden
+          - request
+          - join
+      description: Team account discovery settings
+    TeamChanges:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Team name
+          example: My Team
+    TeamCollaborationSettings:
+      type: object
+      properties:
+        coOwnerRole:
+          type: string
+          description: '
+
+            * "enabled": Enable Co-owner role on boards and projects
+
+            * "disabled": Disabled Co-owner role on boards and projects
+
+            '
+          enum:
+          - enabled
+          - disabled
+      description: Team collaboration settings
+    TeamCollaborationSettingsChanges:
+      type: object
+      properties:
+        coOwnerRole:
+          type: string
+          description: '
+
+            * "enabled": Enable Co-owner role on boards and projects
+
+            * "disabled": Disabled Co-owner role on boards and projects
+
+            '
+          enum:
+          - enabled
+          - disabled
+      description: Team collaboration settings
+    TeamCopyAccessLevelSettings:
+      type: object
+      properties:
+        copyAccessLevel:
+          type: string
+          description: '
+
+            * "anyone":       Anyone with the board access can copy board content
+            on newly created boards.
+
+            * "team_members": Team members can copy board content on newly created
+            boards.
+
+            * "team_editors": Team members with editing rights can copy board content
+            on newly created boards.
+
+            * "board_owner":  Board owners only can copy board content on newly created
+            boards.
+
+            '
+          enum:
+          - anyone
+          - team_members
+          - team_editors
+          - board_owner            -
+        copyAccessLevelLimitation:
+          type: string
+          description: '
+
+            * "anyone":       Team members and users outside team can be given permission
+            to copy board content.
+
+            * "team_members": Only team members can be given permission to copy board
+            content.
+
+            '
+          enum:
+          - anyone
+          - team_members
+      description: Team copy access settings
+    TeamCopyAccessLevelSettingsChanges:
+      type: object
+      properties:
+        copyAccessLevel:
+          type: string
+          description: '
+
+            * "anyone":       Anyone with the board access can copy board content
+            on newly created boards.
+
+            * "team_members": Team members can copy board content on newly created
+            boards.
+
+            * "team_editors": Team members with editing rights can copy board content
+            on newly created boards.
+
+            * "board_owner":  Board owners only can copy board content on newly created
+            boards.
+
+            '
+          enum:
+          - anyone
+          - team_members
+          - team_editors
+          - board_owner
+        copyAccessLevelLimitation:
+          type: string
+          description: '
+
+            * "anyone":       Team members and users outside team can be given permission
+            to copy board content.
+
+            * "team_members": Only team members can be given permission to copy board
+            content.
+
+            '
+          enum:
+          - anyone
+          - team_members
+      description: Team copy access settings
+    TeamInvitationSettings:
+      type: object
+      properties:
+        inviteExternalUsers:
+          type: string
+          description: '
+
+            * "allowed": Allow non-team collaborators for team
+
+            * "not_allowed": Not Allow non-team collaborators for team
+
+            '
+          enum:
+          - allowed
+          - not_allowed
+        whoCanInvite:
+          type: string
+          description: '
+
+            * "only_org_admins": Company admins only can invite
+
+            * "admins":          Company admins and team admins can invite
+
+            * "all_members":     All team members can invite
+
+            '
+          enum:
+          - only_org_admins
+          - admins
+          - all_members
+      description: Team invitation settings
+    TeamInvitationSettingsChanges:
+      type: object
+      properties:
+        inviteExternalUsers:
+          type: string
+          description: '
+
+            * "allowed": Allow non-team collaborators for team
+
+            * "not_allowed": Not Allow non-team collaborators for team
+
+            '
+          enum:
+          - allowed
+          - not_allowed
+        whoCanInvite:
+          type: string
+          description: '
+
+            * "only_org_admins": Company admins only can invite
+
+            * "admins":          Company admins and team admins can invite
+
+            * "all_members":     All team members can invite
+
+            '
+          enum:
+          - only_org_admins
+          - admins
+          - all_members
+      description: Team invitation settings
+    TeamMember:
+      required:
+      - id
+      - teamId
+      - role
+      type: object
+      properties:
+        id:
+          type: string
+          description: Team member id.
+          example: 3074457345618264000
+        role:
+          type: string
+          description: '
+
+            Role of the team member.
+
+            * "member":     Team member with full member permissions.
+
+            * "admin":      Admin of a team. Team member with permission to manage
+            team.
+
+            * "non_team":   External user, non-team user.
+
+            * "team_guest": Team-guest user, user with access only to a team without
+            access to organization.
+
+            '
+          enum:
+          - non_team
+          - member
+          - admin
+          - team_guest
+        createdAt:
+          type: string
+          description: Date and time when member was invited to the team.
+          format: date-time
+        createdBy:
+          type: string
+          description: Id of the user who invited the team member.
+          example: 3074457345618264000
+        modifiedAt:
+          type: string
+          description: Date and time when the user's membership was last updated.
+          format: date-time
+        modifiedBy:
+          type: string
+          description: Id of the user who last updated the user's membership.
+          example: 3074457345618264000
+        teamId:
+          type: string
+          description: Team id
+          example: 3074457345618265000
+        type:
+          description: Type of the object returned.
+          type: string
+          default: team-member
+    TeamMemberChanges:
+      type: object
+      properties:
+        role:
+          type: string
+          example: member
+          description: '
+
+            Role of the team member.
+
+            * "member":     Team member with full member permissions.
+
+            * "admin":      Admin of a team. Team member with permission to manage
+            team.
+
+            * "team_guest": Team-guest user, user with access only to a team without
+            access to organization.
+
+            '
+          enum:
+          - member
+          - admin
+          - team_guest
+    TeamMemberInvite:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          description: User email to add to a team
+          example: user@miro.com
+        role:
+          type: string
+          example: member
+          description: '
+
+            Role of the team member.
+
+            * "member":     Team member with full member permissions.
+
+            * "admin":      Admin of a team. Team member with permission to manage
+            team.
+
+            * "team_guest": Team-guest user, user with access only to a team without
+            access to organization.
+
+            '
+          enum:
+          - member
+          - admin
+          - team_guest
+    TeamSettings:
+      type: object
+      properties:
+        organizationId:
+          type: string
+          description: Organization id
+          example: 3074457345618265000
+        teamAccountDiscoverySettings:
+          $ref: '#/components/schemas/TeamAccountDiscoverySettings'
+        teamCollaborationSettings:
+          $ref: '#/components/schemas/TeamCollaborationSettings'
+        teamCopyAccessLevelSettings:
+          $ref: '#/components/schemas/TeamCopyAccessLevelSettings'
+        teamId:
+          type: string
+          description: Team id
+          example: '3074457345618265000'
+        teamInvitationSettings:
+          $ref: '#/components/schemas/TeamInvitationSettings'
+        teamSharingPolicySettings:
+          $ref: '#/components/schemas/TeamSharingPolicySettings'
+        type:
+          type: string
+          description: Type of the object returned.
+          default: team-settings
+    TeamSettingsChanges:
+      type: object
+      properties:
+        teamAccountDiscoverySettings:
+          $ref: '#/components/schemas/TeamAccountDiscoverySettingsChanges'
+        teamCollaborationSettings:
+          $ref: '#/components/schemas/TeamCollaborationSettingsChanges'
+        teamCopyAccessLevelSettings:
+          $ref: '#/components/schemas/TeamCopyAccessLevelSettingsChanges'
+        teamInvitationSettings:
+          $ref: '#/components/schemas/TeamInvitationSettingsChanges'
+        teamSharingPolicySettings:
+          $ref: '#/components/schemas/TeamSharingPolicySettingsChanges'
+    TeamSharingPolicySettings:
+      type: object
+      properties:
+        allowListedDomains:
+          type: array
+          description: Allow listed domains
+          items:
+            type: string
+            description: Allow listed domains
+        createAssetAccessLevel:
+          type: string
+          description: '
+
+            * "company_admins": Only company admins can create assets in a team
+
+            * "admins": Both team and company admins can create assets in a team.
+
+            * "all_members": all_members
+
+            '
+          enum:
+          - company_admins
+          - admins
+          - all_members
+        defaultBoardAccess:
+          type: string
+          description: '
+
+            Default board access
+
+            * "private": Only board owners can access
+
+            * "view":    Anyone in the team can view
+
+            * "comment": Anyone in the team can comment
+
+            * "edit":    Anyone in the team can edit
+
+            '
+          enum:
+          - private
+          - view
+          - comment
+          - edit
+        defaultOrganizationAccess:
+          type: string
+          description: '
+
+            Default organization access
+
+            * "private": Only board owners can access
+
+            * "view":    Anyone in the team can view
+
+            * "comment": Anyone in the team can comment
+
+            * "edit":    Anyone in the team can edit
+
+            '
+          enum:
+          - private
+          - view
+          - comment
+          - edit
+        defaultProjectAccess:
+          type: string
+          description: '
+
+            Default project access
+
+            * "private": Only board owners can access
+
+            * "view":    Anyone in the team can view
+
+            '
+          enum:
+          - private
+          - view
+        moveBoardToAccount:
+          type: string
+          description: '
+
+            * "allowed": Allow move board to team
+
+            * "not_allowed": Not allow move board to team
+
+            '
+          enum:
+          - allowed
+          - not_allowed
+        restrictAllowedDomains:
+          type: string
+          description: '
+
+            * "enabled": Enabled. Restrict to listed domain.
+
+            * "disabled": Disabled. No domain restriction.
+
+            * "enabled_with_external_users_access": Enabled. Restrict to listed domain
+            but allows external users to access.
+
+            '
+          enum:
+          - enabled
+          - enabled_with_external_user_access
+          - disabled
+        sharingOnAccount:
+          type: string
+          description: '
+
+            * "allowed": Allow sharing on team
+
+            * "not_allowed": Not allow sharing on team
+
+            '
+          enum:
+          - allowed
+          - not_allowed
+        sharingOnOrganization:
+          type: string
+          description: '
+
+            * "allowed": Allow sharing on organization
+
+            * "allowed_with_editing": Allow sharing with editing on organization
+
+            * "not_allowed": Not allow sharing on organization
+
+            '
+          enum:
+          - allowed
+          - allowed_with_editing
+          - not_allowed
+        sharingViaPublicLink:
+          type: string
+          description: '
+
+            * "allowed": Allow sharing via public link
+
+            * "allowed_with_editing": Allow sharing with editing via public link
+
+            * "not_allowed": Not allow sharing via public link
+
+            '
+          enum:
+          - allowed
+          - allowed_with_editing
+          - not_allowed
+      description: Team sharing policy settings
+    TeamSharingPolicySettingsChanges:
+      type: object
+      properties:
+        allowListedDomains:
+          type: array
+          description: Allow listed domains
+          items:
+            type: string
+            description: Allow listed domains
+        createAssetAccessLevel:
+          type: string
+          description: '
+
+            * "company_admins": Only company admins can create assets in a team
+
+            * "admins": Both team and company admins can create assets in a team.
+
+            * "all_members": all_members
+
+            '
+          enum:
+          - company_admins
+          - admins
+          - all_members
+        defaultBoardAccess:
+          type: string
+          description: '
+
+            Default board access
+
+            * "private": Only board owners can access
+
+            * "view":    Anyone in the team can view
+
+            * "comment": Anyone in the team can comment
+
+            * "edit":    Anyone in the team can edit
+
+            '
+          enum:
+          - private
+          - view
+          - comment
+          - edit
+        defaultOrganizationAccess:
+          type: string
+          description: '
+
+            Default organization access
+
+            * "private": Only board owners can access
+
+            * "view":    Anyone in the team can view
+
+            * "comment": Anyone in the team can comment
+
+            * "edit":    Anyone in the team can edit
+
+            '
+          enum:
+          - private
+          - view
+          - comment
+          - edit
+        defaultProjectAccess:
+          type: string
+          description: '
+
+            Default project access
+
+            * "private": Only board owners can access
+
+            * "view":    Anyone in the team can view
+
+            '
+          enum:
+          - private
+          - view
+        moveBoardToAccount:
+          type: string
+          description: '
+
+            * "allowed": Allow move board to team
+
+            * "not_allowed": Not allow move board to team
+
+            '
+          enum:
+          - allowed
+          - not_allowed
+        restrictAllowedDomains:
+          type: string
+          description: '
+
+            * "enabled": Enabled. Restrict to listed domain.
+
+            * "disabled": Disabled. No domain restriction.
+
+            * "enabled_with_external_users_access": Enabled. Restrict to listed domain
+            but allows external users to access.
+
+            '
+          enum:
+          - enabled
+          - enabled_with_external_user_access
+          - disabled
+        sharingOnAccount:
+          type: string
+          description: '
+
+            * "allowed": Allow sharing on team
+
+            * "not_allowed": Not allow sharing on team
+
+            '
+          enum:
+          - allowed
+          - not_allowed
+        sharingOnOrganization:
+          type: string
+          description: '
+
+            * "allowed": Allow sharing on organization
+
+            * "allowed_with_editing": Allow sharing with editing on organization
+
+            * "not_allowed": Not allow sharing on organization
+
+            '
+          enum:
+          - allowed
+          - allowed_with_editing
+          - not_allowed
+        sharingViaPublicLink:
+          type: string
+          description: '
+
+            * "allowed": Allow sharing via public link
+
+            * "allowed_with_editing": Allow sharing with editing via public link
+
+            * "not_allowed": Not allow sharing via public link
+
+            '
+          enum:
+          - allowed
+          - allowed_with_editing
+          - not_allowed
+      description: Team sharing policy settings
+    PageLimit:
+      type: integer
+      format: int32
+      minimum: 1
+      maximum: 100
+      default: 100
+      example: 100
+      description: The maximum number of results to return per call. If the number
+        of project in the response is greater than the limit specified, the response
+        returns the cursor parameter with a value.
+    PageSize:
+      type: integer
+      format: int32
+      minimum: 0
+      maximum: 100
+      default: 100
+      example: 87
+      description: Number of results returned in the response considering the cursor
+        and the limit values sent in the request. For example, if there are 20 results,
+        the request does not have a cursor value, and the limit set to 10, the size
+        of the results will be 10. In this example, the response will also return
+        a cursor value that can be used to retrieve the next set of 10 remaining results
+        in the collection.
+    PageCursor:
+      type: string
+      description: Indicator of the position of the next page of the result. To retrieve
+        the next page, make another query setting its cursor field to the value returned
+        by the current query. If the value is empty, there are no more pages to fetch.
+      example: '3074457345821140946'
+    PageType:
+      type: string
+      description: Type of the object returned.
+      default: cursor-list
+    TeamsPage:
+      type: object
+      description: Page of teams that match the search query.
+      required:
+      - limit
+      - size
+      - data
+      properties:
+        limit:
+          $ref: '#/components/schemas/PageLimit'
+        size:
+          $ref: '#/components/schemas/PageSize'
+        data:
+          type: array
+          description: List of teams
+          items:
+            $ref: '#/components/schemas/Team'
+        cursor:
+          $ref: '#/components/schemas/PageCursor'
+        type:
+          $ref: '#/components/schemas/PageType'
+    TeamMembersPage:
+      type: object
+      description: Page of team members that match the search query.
+      required:
+      - limit
+      - size
+      - data
+      properties:
+        limit:
+          $ref: '#/components/schemas/PageLimit'
+        size:
+          $ref: '#/components/schemas/PageSize'
+        data:
+          type: array
+          description: List of team members
+          items:
+            $ref: '#/components/schemas/TeamMember'
+        cursor:
+          $ref: '#/components/schemas/PageCursor'
+        type:
+          $ref: '#/components/schemas/PageType'
+  responses:
+    '400':
+      description: Malformed request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 400
+                code:
+                  default: invalidParameters
+    '401':
+      description: Invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 401
+                code:
+                  default: tokenNotProvided
+    '403':
+      description: Invalid access
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 403
+                code:
+                  default: forbiddenAccess
+    '404':
+      description: Invalid access
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 404
+                code:
+                  default: notFound
+    '409':
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 409
+                code:
+                  default: conflict
+    '429':
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 429
+                code:
+                  default: tooManyRequests
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http

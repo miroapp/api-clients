@@ -16,7 +16,7 @@ export class TagWithLinks {
   /**
    * Unique identifier of the tag.
    */
-  'id': number
+  'id': string
   /**
    * Text of the tag
    */
@@ -39,7 +39,7 @@ export class TagWithLinks {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'title',

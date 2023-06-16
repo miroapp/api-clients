@@ -19,6 +19,10 @@ export class DataClassificationTeamSettings {
    * Data classification enabled for team
    */
   'enabled'?: boolean
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'team-data-classification-settings'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -34,6 +38,11 @@ export class DataClassificationTeamSettings {
       name: 'enabled',
       baseName: 'enabled',
       type: 'boolean',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
     },
   ]
 
