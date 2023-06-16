@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains geometrical information about the item, such as its width or rotation. You can set either the width or height, you cannot set both  the width and height at the same time.
+ * Contains geometrical information about the item, such as its width or rotation. You can set either the width or height, you cannot set both the width and height at the same time.
  */
 export class FixedRatioGeometry {
   /**

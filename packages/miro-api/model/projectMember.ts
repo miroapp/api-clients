@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import {ProjectRoleToAdd} from './projectRoleToAdd'
+import {ProjectRole} from './projectRole'
 
 export class ProjectMember {
   /**
@@ -21,7 +21,7 @@ export class ProjectMember {
    * Email ID of the project member.
    */
   'email': string
-  'role': ProjectRoleToAdd
+  'role': ProjectRole
   /**
    * Type of the object
    */
@@ -45,7 +45,7 @@ export class ProjectMember {
     {
       name: 'role',
       baseName: 'role',
-      type: 'ProjectRoleToAdd',
+      type: 'ProjectRole',
     },
     {
       name: 'type',

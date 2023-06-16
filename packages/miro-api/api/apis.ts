@@ -42,10 +42,8 @@ import {ConnectorWithLinks} from '../model/connectorWithLinks'
 import {ConnectorsCursorPaged} from '../model/connectorsCursorPaged'
 
 import {BulkOperationError} from '../model/bulkOperationError'
-import {ItemChanges} from '../model/itemChanges'
 import {ItemCreate} from '../model/itemCreate'
 import {Items} from '../model/items'
-import {ItemsPage} from '../model/itemsPage'
 
 import {DocumentCreateRequest} from '../model/documentCreateRequest'
 import {DocumentItem} from '../model/documentItem'
@@ -68,9 +66,6 @@ import {ImageItem} from '../model/imageItem'
 import {ImageUpdateRequest} from '../model/imageUpdateRequest'
 
 import {GenericItemUpdate} from '../model/genericItemUpdate'
-import {MindmapCursorPaged} from '../model/mindmapCursorPaged'
-
-import {MindmapItem} from '../model/mindmapItem'
 
 import {EnterpriseGetOrganizationMembers200Response} from '../model/enterpriseGetOrganizationMembers200Response'
 import {OrganizationMember} from '../model/organizationMember'
@@ -1561,147 +1556,6 @@ export class MiroApi {
   }
 
   /**
-   * Deletes items from a board. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> per item ID
-   * @param boardId Unique identifier (ID) of the board where you want to create the item.
-   * @param idsThisOperationIsTransactionalIfAnyItemsDeleteOperationFailsTheDeleteOperationForAllTheRemainingItemsAlsoFails IDs of items to delete. You can delete up to 50 items per call.
-   */
-  async deleteItems(
-    boardId: string,
-    idsThisOperationIsTransactionalIfAnyItemsDeleteOperationFailsTheDeleteOperationForAllTheRemainingItemsAlsoFails: Set<string>,
-  ): Promise<{response: Response; body?: any}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/items/bulk'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling deleteItems.')
-    }
-
-    // verify required parameter 'idsThisOperationIsTransactionalIfAnyItemsDeleteOperationFailsTheDeleteOperationForAllTheRemainingItemsAlsoFails' is not null or undefined
-    if (
-      idsThisOperationIsTransactionalIfAnyItemsDeleteOperationFailsTheDeleteOperationForAllTheRemainingItemsAlsoFails ===
-        null ||
-      idsThisOperationIsTransactionalIfAnyItemsDeleteOperationFailsTheDeleteOperationForAllTheRemainingItemsAlsoFails ===
-        undefined
-    ) {
-      throw new Error(
-        'Required parameter idsThisOperationIsTransactionalIfAnyItemsDeleteOperationFailsTheDeleteOperationForAllTheRemainingItemsAlsoFails was null or undefined when calling deleteItems.',
-      )
-    }
-
-    if (
-      idsThisOperationIsTransactionalIfAnyItemsDeleteOperationFailsTheDeleteOperationForAllTheRemainingItemsAlsoFails !==
-      undefined
-    ) {
-      localVarQueryParameters.append(
-        'ids This operation is transactional. If any item&#39;s delete operation fails, the delete operation for all the remaining items also fails.',
-        ObjectSerializer.serialize(
-          idsThisOperationIsTransactionalIfAnyItemsDeleteOperationFailsTheDeleteOperationForAllTheRemainingItemsAlsoFails,
-          'Set<string>',
-        ),
-      )
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'DELETE',
-      resource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = bodyAsJson
-
-    return {response, body}
-  }
-
-  /**
-   * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, a list of specific types of items, or a list of items filtered by their IDs by specifying URL query parameter values. <b>Filtering by IDs can\'t be used with any other parameters like `limit` or `type`.</b> <br />This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item ID
-   * @param boardId Unique identifier (ID) of the board where you want to create the item.
-   * @param ids IDs of items to retrieve. You can provide up to 50 IDs per call.
-   */
-  async getItemsBulk(boardId: string, ids: Set<string>): Promise<{response: Response; body: ItemsPage}> {
-    const localVarPath =
-      '/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalRelease}/items'.replace(
-        '{' + 'board_id' + '}',
-        encodeURIComponent(String(boardId)),
-      )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getItemsBulk.')
-    }
-
-    // verify required parameter 'ids' is not null or undefined
-    if (ids === null || ids === undefined) {
-      throw new Error('Required parameter ids was null or undefined when calling getItemsBulk.')
-    }
-
-    if (ids !== undefined) {
-      localVarQueryParameters.append('ids', ObjectSerializer.serialize(ids, 'Set<string>'))
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'GET',
-      resource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'ItemsPage')
-
-    return {response, body}
-  }
-
-  /**
-   * Updates multiple items at once. You can update up to 20 items of the same or different type per update call. For example, you can update 3 shape items, 4 card items, and 5 sticky notes in one update call. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item
-   * @param boardId Unique identifier (ID) of the board where you want to create the item.
-   * @param itemChanges
-   */
-  async updateItems(
-    boardId: string,
-
-    itemChanges?: Array<ItemChanges>,
-  ): Promise<{response: Response; body: Items}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/items/bulk'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling updateItems.')
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'PATCH',
-      resource,
-      JSON.stringify(ObjectSerializer.serialize(itemChanges, 'Array<ItemChanges>')),
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'Items')
-
-    return {response, body}
-  }
-
-  /**
    * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create document item using URL
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
@@ -2625,71 +2479,6 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the list of child nodes for a specific mind map node.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-   * @summary Get child nodes of mind map node
-   * @param boardIdPlatformContainersExperimental Unique identifier (ID) of the board that contains the mind map node for which you want to retrieve the list of child nodes.
-   * @param parentItemId ID of the mind map node for which you want to retrieve the child nodes.
-   * @param limit Maximum number of results returned
-   * @param cursor Points to the next portion of the results set
-   */
-  async getMindmapChildrenExperimental(
-    boardIdPlatformContainersExperimental: string,
-    parentItemId: string,
-    query?: {
-      limit?: string
-
-      cursor?: string
-    },
-  ): Promise<{response: Response; body: MindmapCursorPaged}> {
-    const localVarPath = '/v2-experimental/boards/{board_id_PlatformContainersExperimental}/items'.replace(
-      '{' + 'board_id_PlatformContainersExperimental' + '}',
-      encodeURIComponent(String(boardIdPlatformContainersExperimental)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformContainersExperimental' is not null or undefined
-    if (boardIdPlatformContainersExperimental === null || boardIdPlatformContainersExperimental === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatformContainersExperimental was null or undefined when calling getMindmapChildrenExperimental.',
-      )
-    }
-
-    // verify required parameter 'parentItemId' is not null or undefined
-    if (parentItemId === null || parentItemId === undefined) {
-      throw new Error(
-        'Required parameter parentItemId was null or undefined when calling getMindmapChildrenExperimental.',
-      )
-    }
-
-    if (parentItemId !== undefined) {
-      localVarQueryParameters.append('parent_item_id', ObjectSerializer.serialize(parentItemId, 'string'))
-    }
-
-    if (query?.limit !== undefined) {
-      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'string'))
-    }
-
-    if (query?.cursor !== undefined) {
-      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'GET',
-      resource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'MindmapCursorPaged')
-
-    return {response, body}
-  }
-
-  /**
    * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get specific item on board
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
@@ -2764,93 +2553,6 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItem')
-
-    return {response, body}
-  }
-
-  /**
-   * Retrieves information for a specific mind map node on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
-   * @summary Get specific mind map node
-   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a mind map node.
-   * @param itemId Unique identifier (ID) of the mind map node that you want to retrieve.
-   */
-  async getMindmapNodeExperimental(boardId: string, itemId: string): Promise<{response: Response; body: MindmapItem}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
-      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getMindmapNodeExperimental.')
-    }
-    // verify required parameter 'itemId' is not null or undefined
-    if (itemId === null || itemId === undefined) {
-      throw new Error('Required parameter itemId was null or undefined when calling getMindmapNodeExperimental.')
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'GET',
-      resource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'MindmapItem')
-
-    return {response, body}
-  }
-
-  /**
-   * Retrieves a list of mind map nodes for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-   * @summary Get mind map nodes
-   * @param boardId Unique identifier (ID) of the board from which you want to retrieve mind map nodes.
-   * @param limit Maximum number of results returned
-   * @param cursor Points to the next portion of the results set
-   */
-  async getMindmapNodesExperimental(
-    boardId: string,
-    query?: {
-      limit?: string
-
-      cursor?: string
-    },
-  ): Promise<{response: Response; body: MindmapCursorPaged}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/mindmap_nodes'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getMindmapNodesExperimental.')
-    }
-
-    if (query?.limit !== undefined) {
-      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'string'))
-    }
-
-    if (query?.cursor !== undefined) {
-      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'GET',
-      resource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'MindmapCursorPaged')
 
     return {response, body}
   }

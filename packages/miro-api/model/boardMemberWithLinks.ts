@@ -16,7 +16,7 @@ export class BoardMemberWithLinks {
   /**
    * Unique identifier (ID) of the user.
    */
-  'id': number
+  'id': string
   /**
    * Name of the user.
    */
@@ -39,7 +39,7 @@ export class BoardMemberWithLinks {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'name',

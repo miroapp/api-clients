@@ -22,7 +22,7 @@ export class DocumentItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
   'data'?: DocumentData
   'position'?: Position
   'geometry'?: Geometry
@@ -51,7 +51,7 @@ export class DocumentItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'data',

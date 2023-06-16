@@ -18,7 +18,7 @@ export class BoardMember {
   /**
    * Unique identifier (ID) of the user.
    */
-  'id': number
+  'id': string
   /**
    * Name of the user.
    */
@@ -40,7 +40,7 @@ export class BoardMember {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'name',

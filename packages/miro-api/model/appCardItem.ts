@@ -23,7 +23,7 @@ export class AppCardItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
   'data'?: AppCardData
   'style'?: AppCardStyle
   'position'?: Position
@@ -53,7 +53,7 @@ export class AppCardItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'data',

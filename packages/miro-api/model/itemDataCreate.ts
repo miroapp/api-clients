@@ -43,9 +43,9 @@ export class ItemDataCreate {
    */
   'title'?: string
   /**
-   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is numeric, and it is automatically assigned to a user when they first sign up.
+   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing  numbers, and it is automatically assigned to a user when they first sign up.
    */
-  'assigneeId'?: number
+  'assigneeId'?: string
   /**
    * The date when the task or activity described in the card is due to be completed. In the GUI, users can select the due date from a calendar. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
@@ -100,7 +100,7 @@ export class ItemDataCreate {
     {
       name: 'assigneeId',
       baseName: 'assigneeId',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'dueDate',

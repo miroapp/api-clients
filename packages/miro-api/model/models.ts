@@ -625,6 +625,7 @@ let enumsMap: {[index: string]: any} = {
   'TeamInvitationSettingsChanges.WhoCanInviteEnum': TeamInvitationSettingsChanges.WhoCanInviteEnum,
   'TeamMember.RoleEnum': TeamMember.RoleEnum,
   'TeamMemberChanges.RoleEnum': TeamMemberChanges.RoleEnum,
+  'TeamMemberInvite.RoleEnum': TeamMemberInvite.RoleEnum,
   'TeamSharingPolicySettings.CreateAssetAccessLevelEnum': TeamSharingPolicySettings.CreateAssetAccessLevelEnum,
   'TeamSharingPolicySettings.DefaultBoardAccessEnum': TeamSharingPolicySettings.DefaultBoardAccessEnum,
   'TeamSharingPolicySettings.DefaultOrganizationAccessEnum': TeamSharingPolicySettings.DefaultOrganizationAccessEnum,

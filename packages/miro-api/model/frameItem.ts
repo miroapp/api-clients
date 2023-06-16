@@ -22,7 +22,7 @@ export class FrameItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
   'data'?: FrameData
   'style'?: FrameStyle
   'position'?: Position
@@ -51,7 +51,7 @@ export class FrameItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'data',

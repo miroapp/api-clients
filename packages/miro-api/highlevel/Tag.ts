@@ -7,7 +7,7 @@ import {Tag} from '../model/tag'
 export abstract class BaseTag extends Tag {
   abstract _api: MiroApi
   abstract boardId: string
-  abstract id: number
+  abstract id: string
 
   /**
    * Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>

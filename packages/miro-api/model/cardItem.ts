@@ -23,7 +23,7 @@ export class CardItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
   'data'?: CardData
   'style'?: CardStyle
   'position'?: Position
@@ -53,7 +53,7 @@ export class CardItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'data',

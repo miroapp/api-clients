@@ -728,10 +728,10 @@ export class BoardMember extends BaseBoardMember {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseBoardMember>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseBoardMember>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -754,10 +754,10 @@ export class Item extends BaseItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -788,10 +788,10 @@ export class AppCardItem extends BaseAppCardItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseAppCardItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseAppCardItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -854,10 +854,10 @@ export class CardItem extends BaseCardItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseCardItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseCardItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -920,10 +920,10 @@ export class DocumentItem extends BaseDocumentItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseDocumentItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseDocumentItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -945,10 +945,10 @@ export class EmbedItem extends BaseEmbedItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseEmbedItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseEmbedItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -979,10 +979,10 @@ export class FrameItem extends BaseFrameItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseFrameItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseFrameItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -1013,10 +1013,10 @@ export class ImageItem extends BaseImageItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseImageItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseImageItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -1038,10 +1038,10 @@ export class ShapeItem extends BaseShapeItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseShapeItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseShapeItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -1072,10 +1072,10 @@ export class StickyNoteItem extends BaseStickyNoteItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseStickyNoteItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseStickyNoteItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -1138,10 +1138,10 @@ export class TextItem extends BaseTextItem {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseTextItem>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseTextItem>) {
     super()
     this._api = api
     this.boardId = boardId
@@ -1206,10 +1206,10 @@ export class Tag extends BaseTag {
   _api: MiroApi
 
   boardId: string
-  id: number
+  id: string
 
   /** @hidden */
-  constructor(api: MiroApi, boardId: string, id: number, props: KeepBase<BaseTag>) {
+  constructor(api: MiroApi, boardId: string, id: string, props: KeepBase<BaseTag>) {
     super()
     this._api = api
     this.boardId = boardId

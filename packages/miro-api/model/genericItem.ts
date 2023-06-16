@@ -32,7 +32,7 @@ export class GenericItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
   'links'?: WidgetLinks
   /**
    * Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
@@ -74,7 +74,7 @@ export class GenericItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'links',

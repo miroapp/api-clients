@@ -9664,28 +9664,7 @@
           "required": true,
           "description": "Unique identifier (ID) of the mind map node that you want to retrieve."
         }
-      ],
-      "get": {
-        "x-settings": {
-          "draft": true
-        },
-        "summary": "Get specific mind map node",
-        "tags": ["mind maps"],
-        "responses": {
-          "200": {
-            "description": "Mind map node retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MindmapItem"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-mindmap-node-experimental",
-        "description": "Retrieves information for a specific mind map node on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>"
-      }
+      ]
     },
     "/v2-experimental/boards/{board_id}/mindmap_nodes": {
       "parameters": [
@@ -9698,46 +9677,7 @@
           "required": true,
           "description": "Unique identifier (ID) of the board from which you want to retrieve mind map nodes."
         }
-      ],
-      "get": {
-        "x-settings": {
-          "draft": true
-        },
-        "summary": "Get mind map nodes",
-        "tags": ["mind maps"],
-        "responses": {
-          "200": {
-            "description": "Mind map nodes retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MindmapCursorPaged"
-                }
-              }
-            }
-          }
-        },
-        "operationId": "get-mindmap-nodes-experimental",
-        "description": "Retrieves a list of mind map nodes for a specific board.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
-        "parameters": [
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "Maximum number of results returned"
-          },
-          {
-            "schema": {
-              "type": "string"
-            },
-            "in": "query",
-            "name": "cursor",
-            "description": "Points to the next portion of the results set"
-          }
-        ]
-      }
+      ]
     },
     "/v2-experimental/boards/{board_id}/items": {
       "get": {
@@ -10929,171 +10869,6 @@
       }
     },
     "/v2-experimental/boards/{board_id_PlatformContainersExperimental}/items": {
-      "get": {
-        "x-settings": {
-          "draft": true
-        },
-        "description": "Retrieves the list of child nodes for a specific mind map node. \nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
-        "operationId": "get-mindmap-children-experimental",
-        "parameters": [
-          {
-            "description": "Unique identifier (ID) of the board that contains the mind map node for which you want to retrieve the list of child nodes.",
-            "in": "path",
-            "name": "board_id_PlatformContainersExperimental",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "ID of the mind map node for which you want to retrieve the child nodes.",
-            "in": "query",
-            "name": "parent_item_id",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "minimum": 0
-            }
-          },
-          {
-            "in": "query",
-            "name": "limit",
-            "schema": {
-              "type": "string",
-              "default": "10",
-              "description": "The maximum number of results to return per call. If the number of items in the response is greater than the limit specified, the response returns the cursor parameter with a value.",
-              "maximum": 50,
-              "minimum": 10
-            },
-            "description": "Maximum number of results returned"
-          },
-          {
-            "in": "query",
-            "name": "cursor",
-            "schema": {
-              "type": "string",
-              "description": "A cursor-paginated method returns a portion of the total set of results based on the limit specified and a `cursor` that points to the next portion of the results. To retrieve the next portion of the collection, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request."
-            },
-            "description": "Points to the next portion of the results set"
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MindmapCursorPaged"
-                }
-              }
-            },
-            "description": "Child nodes retrieved"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Malformed request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not found"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "summary": "Get child nodes of mind map node",
-        "tags": ["items"]
-      },
       "parameters": [
         {
           "schema": {
@@ -11166,109 +10941,6 @@
           }
         },
         "summary": "Create items in bulk"
-      },
-      "patch": {
-        "x-settings": {
-          "draft": true
-        },
-        "description": "Updates multiple items at once. You can update up to 20 items of the same or different type per update call. For example, you can update 3 shape items, 4 card items, and 5 sticky notes in one update call.\n<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item",
-        "operationId": "update-items",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ItemChanges"
-                },
-                "minItems": 1,
-                "maxItems": 20
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Items updated",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Items"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Malformed request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BulkOperationError"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too many requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "x-settings": {
-          "draft": true
-        },
-        "description": "Deletes items from a board.\n<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> per item ID",
-        "operationId": "delete-items",
-        "parameters": [
-          {
-            "name": "ids This operation is transactional. If any item's delete operation fails, the delete operation for all the remaining items also fails.",
-            "description": "IDs of items to delete. You can delete up to 50 items per call.",
-            "in": "query",
-            "required": true,
-            "explode": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/ItemId"
-              },
-              "minItems": 1,
-              "maxItems": 50,
-              "uniqueItems": true
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Items deleted"
-          },
-          "400": {
-            "description": "Malformed request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BulkOperationError"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too many requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalRelease}/items": {
@@ -11276,64 +10948,7 @@
         {
           "$ref": "#/components/parameters/boardId"
         }
-      ],
-      "get": {
-        "x-settings": {
-          "draft": true
-        },
-        "description": "Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, a list of specific types of items, or a list of items filtered by their IDs by specifying URL query parameter values. <b>Filtering by IDs can't be used with any other parameters like `limit` or `type`.</b>\n<br />This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.\n<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item ID",
-        "operationId": "get-items-bulk",
-        "parameters": [
-          {
-            "name": "ids",
-            "description": "IDs of items to retrieve. You can provide up to 50 IDs per call.",
-            "in": "query",
-            "required": true,
-            "explode": false,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/ItemId"
-              },
-              "minItems": 1,
-              "maxItems": 50,
-              "uniqueItems": true
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Items found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ItemsPage"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Malformed request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too many requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
+      ]
     },
     "/v2/orgs/{org_id}/teams": {
       "post": {
@@ -12945,7 +12560,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "MzQ1ODc2NDUxMzgyMDU1Mjk1NQ=="
+            "example": 3074457345618265000
           }
         ],
         "responses": {
@@ -13736,7 +13351,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "MzQ1ODc2NDUxMzgyMDU1Mjk1NQ=="
+            "example": 3074457345618265000
           }
         ],
         "responses": {
@@ -14236,8 +13851,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
             "example": 3458764517517819000
           },
@@ -14421,8 +14035,7 @@
         "description": "Contains the current user's board membership details. The current user could be different from the board owner.",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of the user.",
             "example": 3074457353169356300
           },
@@ -14459,8 +14072,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of the user.",
             "example": 3074457353169356300
           },
@@ -14819,8 +14431,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
             "example": 3458764517517819000
           },
@@ -15152,8 +14763,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
             "example": 3458764517517819000
           },
@@ -15252,8 +14862,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
             "example": 3458764517517819000
           },
@@ -15337,7 +14946,7 @@
       },
       "FixedRatioGeometry": {
         "type": "object",
-        "description": "Contains geometrical information about the item, such as its width or rotation. You can set either the width or height, you cannot set both  the width and height at the same time.",
+        "description": "Contains geometrical information about the item, such as its width or rotation. You can set either the width or height, you cannot set both the width and height at the same time.",
         "properties": {
           "height": {
             "type": "number",
@@ -15405,8 +15014,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
             "example": 3458764517517819000
           },
@@ -15642,8 +15250,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
             "example": 3458764517517819000
           },
@@ -15736,8 +15343,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
             "example": 3458764517517819000
           },
@@ -15810,8 +15416,7 @@
         "description": "Contains information about the user who created the board.",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of the user.",
             "example": 3074457353169356300
           },
@@ -15840,7 +15445,7 @@
           "width": {
             "type": "number",
             "format": "double",
-            "description": "Width of the item, in pixels. \nThe minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size.\nFor example, if the font size of the `text` item is `14`, the minimum `width` is `24`."
+            "description": "Width of the item, in pixels.\nThe minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size.\nFor example, if the font size of the `text` item is `14`, the minimum `width` is `24`."
           }
         }
       },
@@ -15918,7 +15523,7 @@
         "properties": {
           "documentUrl": {
             "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution. \n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
+            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
             "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false"
           },
           "title": {
@@ -15953,7 +15558,7 @@
           },
           "previewUrl": {
             "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. \nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
+            "description": "The URL to download the resource. You must use your access token to access the URL.\nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
             "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
           },
           "providerName": {
@@ -16044,7 +15649,7 @@
         "properties": {
           "imageUrl": {
             "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. \nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
+            "description": "The URL to download the resource. You must use your access token to access the URL.\nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
             "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
           },
           "title": {
@@ -16245,8 +15850,7 @@
             "example": "red"
           },
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier of the tag.",
             "example": 3074457363306854000
           },
@@ -16329,8 +15933,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier of the tag.",
             "example": 3074457363306854000
           },
@@ -16492,7 +16095,7 @@
         "properties": {
           "documentUrl": {
             "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution. \n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
+            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
             "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false"
           },
           "title": {
@@ -16507,7 +16110,7 @@
         "properties": {
           "imageUrl": {
             "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. \nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
+            "description": "The URL to download the resource. You must use your access token to access the URL.\nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
             "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
           },
           "title": {
@@ -16794,10 +16397,9 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/ShapeData"
@@ -17055,8 +16657,7 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
             "example": 3458764517517819000
           },
@@ -17149,10 +16750,9 @@
             "$ref": "#/components/schemas/Geometry"
           },
           "id": {
-            "type": "integer",
-            "format": "int64",
+            "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "links": {
             "$ref": "#/components/schemas/WidgetLinks"
@@ -17703,9 +17303,9 @@
         "description": "Contains card item data, such as the title, description, due date, or assignee ID.",
         "properties": {
           "assigneeId": {
-            "type": "integer",
+            "type": "string",
             "format": "int64",
-            "description": "Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is numeric, and it is automatically assigned to a user when they first sign up.",
+            "description": "Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing  numbers, and it is automatically assigned to a user when they first sign up.",
             "example": 3074457362577955300
           },
           "description": {
@@ -19163,18 +18763,25 @@
           "role": {
             "type": "string",
             "example": "member",
-            "description": "\nRole of the team member.\n* \"member\":     Team member with full member permissions.\n* \"admin\":      Admin of a team. Team member with permission to manage team.\n* \"non_team\":   External user, non-team user.\n* \"team_guest\": Team-guest user, user with access only to a team without access to organization.\n",
-            "enum": ["non_team", "member", "admin", "team_guest", null]
+            "description": "\nRole of the team member.\n* \"member\":     Team member with full member permissions.\n* \"admin\":      Admin of a team. Team member with permission to manage team.\n* \"team_guest\": Team-guest user, user with access only to a team without access to organization.\n",
+            "enum": ["member", "admin", "team_guest"]
           }
         }
       },
       "TeamMemberInvite": {
         "type": "object",
+        "required": ["email"],
         "properties": {
           "email": {
             "type": "string",
             "description": "User email to add to a team",
             "example": "user@miro.com"
+          },
+          "role": {
+            "type": "string",
+            "example": "member",
+            "description": "\nRole of the team member.\n* \"member\":     Team member with full member permissions.\n* \"admin\":      Admin of a team. Team member with permission to manage team.\n* \"team_guest\": Team-guest user, user with access only to a team without access to organization.\n",
+            "enum": ["member", "admin", "team_guest"]
           }
         }
       },
@@ -19198,8 +18805,7 @@
           "teamId": {
             "type": "string",
             "description": "Team id",
-            "format": "int64",
-            "example": 3074457345618265000
+            "example": "3074457345618265000"
           },
           "teamInvitationSettings": {
             "$ref": "#/components/schemas/TeamInvitationSettings"
@@ -20069,7 +19675,7 @@
             "example": "someone@domain.com"
           },
           "role": {
-            "$ref": "#/components/schemas/ProjectRoleToAdd"
+            "$ref": "#/components/schemas/ProjectRole"
           },
           "type": {
             "type": "string",
