@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Defines the public-level, organization-level, and team-level access for the board. The access level that a user gets depends on the highest level of access that results from considering the public-level, team-level, organization-level, and direct sharing access. For more information, see [Sharing policy](https://developers.miro.com/reference/rest-api-policy-data-model#sharing-policy).
+ * Defines the public-level, organization-level, and team-level access for the board. The access level that a user gets depends on the highest level of access that results from considering the public-level, team-level, organization-level, and direct sharing access.
  */
 export class BoardSharingPolicy {
   /**

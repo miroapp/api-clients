@@ -14,7 +14,7 @@ import {CustomField} from './customField'
 
 /**
  * @internal
- * Contains app card item data, such as the title, description, or fields. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains app card item data, such as the title, description, or fields.
  */
 export class AppCardData {
   /**
@@ -26,17 +26,14 @@ export class AppCardData {
    */
   'fields'?: Array<CustomField>
   /**
-   * Defines whether the card is owned by the application making the call.
-   */
-  'owned'?: boolean
-  /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
-  'status'?: string | (typeof AppCardData.StatusEnum)[keyof typeof AppCardData.StatusEnum]
+  'status'?: string | (typeof AppCardData.StatusEnum)[keyof typeof AppCardData.StatusEnum] =
+    AppCardData.StatusEnum.Disconnected
   /**
    * A short text header to identify the app card.
    */
-  'title'?: string
+  'title'?: string = 'sample app card item'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -52,11 +49,6 @@ export class AppCardData {
       name: 'fields',
       baseName: 'fields',
       type: 'Array<CustomField>',
-    },
-    {
-      name: 'owned',
-      baseName: 'owned',
-      type: 'boolean',
     },
     {
       name: 'status',

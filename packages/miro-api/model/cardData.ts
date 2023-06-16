@@ -12,13 +12,13 @@
 
 /**
  * @internal
- * Contains card item data, such as the title, description, due date, or assignee ID. For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains card item data, such as the title, description, due date, or assignee ID.
  */
 export class CardData {
   /**
-   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is numeric, and it is automatically assigned to a user when they first sign up.
+   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing  numbers, and it is automatically assigned to a user when they first sign up.
    */
-  'assigneeId'?: number
+  'assigneeId'?: string
   /**
    * A short text description to add context about the card.
    */
@@ -40,7 +40,7 @@ export class CardData {
     {
       name: 'assigneeId',
       baseName: 'assigneeId',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'description',

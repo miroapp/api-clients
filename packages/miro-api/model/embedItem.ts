@@ -22,7 +22,7 @@ export class EmbedItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
   'data'?: EmbedData
   'position'?: Position
   'geometry'?: Geometry
@@ -51,7 +51,7 @@ export class EmbedItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'data',

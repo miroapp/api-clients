@@ -21,6 +21,10 @@ export class DataClassificationOrganizationSettings {
    * Data classification labels
    */
   'labels'?: Array<DataClassificationLabel>
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'data-classification-organization-settings'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -36,6 +40,11 @@ export class DataClassificationOrganizationSettings {
       name: 'labels',
       baseName: 'labels',
       type: 'Array<DataClassificationLabel>',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
     },
   ]
 

@@ -46,7 +46,7 @@ export interface ConnectTo {
 export abstract class ConnectableItem implements ConnectTo {
   abstract _api: MiroApi
   abstract boardId: string
-  abstract id: number
+  abstract id: string
 
   async connectTo(
     endItem: string | number | ItemConnectionCreationData,
@@ -74,7 +74,7 @@ export abstract class ConnectableItem implements ConnectTo {
 export abstract class BaseItem extends GenericItem implements ConnectTo {
   static fromGenericItem(api: MiroApi, boardId: string, item: GenericItem): WidgetItem {
     interface WidgetItemConstructor {
-      new (api: MiroApi, boardId: string, id: number, item: GenericItem): WidgetItem
+      new (api: MiroApi, boardId: string, id: string, item: GenericItem): WidgetItem
     }
 
     let classToUse: WidgetItemConstructor = Item

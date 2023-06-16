@@ -16,12 +16,9 @@
  */
 export class WidgetLinks {
   /**
-   * Link to obtain information about the child items related to the frame.
+   * Link to obtain information about the child nodes
    */
   'related'?: string
-  /**
-   * Link to obtain information about the current item.
-   */
   'self'?: string
 
   /** @ignore */

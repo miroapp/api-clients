@@ -1,0 +1,1697 @@
+openapi: 3.0.1
+info:
+  title: Platform Experimental Features
+  version: v2.0
+x-settings:
+  skip-tests: true
+servers:
+- url: https://api.miro.com
+security:
+- bearerAuth: []
+paths:
+  /v2-experimental/webhooks/board_subscriptions:
+    post:
+      description: Creates a webhook subscription to receive notifications when an
+        item on a board is updated. Subscriptions are created per user, per board.
+        You can create multiple subscriptions. We currently support all board items
+        barring tags, connectors, and comments. Changes in item position do not trigger
+        an event at the moment.<br/><h3>Required scope</h3> <a target="blank" href="/reference/scopes">boards:read</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        2</a><br/>
+      operationId: create-board-subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBoardSubscriptionRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardSubscription'
+          description: Subscription created
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Create webhook subscription
+      tags:
+      - Webhooks (experimental)
+  /v2-experimental/webhooks/board_subscriptions/{subscription_id}:
+    patch:
+      description: Updates the status or the callback URL of an existing webhook subscription.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a><br/>
+      operationId: update-board-subscription
+      parameters:
+      - in: path
+        name: subscription_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBoardSubscriptionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BoardSubscription'
+          description: Subscription updated
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Update webhook subscription
+      tags:
+      - Webhooks (experimental)
+  /v2-experimental/webhooks/subscriptions:
+    get:
+      description: Retrieves information about all webhook subscriptions for a specific
+        user.<br/><h3>Required scope</h3> <a target="blank" href="/reference/scopes">boards:read</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        4</a><br/>
+      operationId: get-user-subscriptions
+      parameters:
+      - in: query
+        name: limit
+        required: false
+        schema:
+          type: string
+          default: '10'
+          description: The maximum number of results to return per call. If the number
+            of webhook subscriptions in the response is greater than the limit specified,
+            the response returns the cursor parameter with a value.
+          maximum: 100
+          minimum: 1
+      - in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+          description: A cursor-paginated method returns a portion of the total set
+            of results based on the limit specified and a `cursor` that points to
+            the next portion of the results. To retrieve the next portion of the collection,
+            set the `cursor` parameter equal to the `cursor` value you received in
+            the response of the previous request.
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSubscriptionsCursorPaged'
+          description: Subscriptions retrieved
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Get webhook subscriptions
+      tags:
+      - Webhooks (experimental)
+  /v2-experimental/webhooks/subscriptions/{subscription_id}:
+    get:
+      description: Retrieves information for a specific webhook subscription.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a><br/>
+      operationId: get-subscription-by-id
+      parameters:
+      - in: path
+        name: subscription_id
+        required: true
+        schema:
+          type: string
+        description: Unique identifier (ID) of the subscription that you want to retrieve
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericSubscription'
+          description: Subscription retrieved
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Get specific webhook subscription
+      tags:
+      - Webhooks (experimental)
+    delete:
+      description: Deletes the specified webhook subscription.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate limiting</h3>
+        <a target="blank" href="/reference/ratelimiting">Level 2</a><br/>
+      operationId: delete-subscription-by-id
+      parameters:
+      - in: path
+        name: subscription_id
+        required: true
+        schema:
+          type: string
+        description: Unique identifier (ID) of the subscription that you want to delete
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Subscription deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Delete webhook subscription
+      tags:
+      - Webhooks (experimental)
+  /v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}:
+    parameters:
+    - schema:
+        type: string
+      name: board_id
+      in: path
+      required: true
+      description: Unique identifier (ID) of the board from which you want to retrieve
+        a mind map node.
+    - schema:
+        type: string
+      name: item_id
+      in: path
+      required: true
+      description: Unique identifier (ID) of the mind map node that you want to retrieve.
+  /v2-experimental/boards/{board_id}/mindmap_nodes:
+    parameters:
+    - schema:
+        type: string
+      name: board_id
+      in: path
+      required: true
+      description: Unique identifier (ID) of the board from which you want to retrieve
+        mind map nodes.
+  /v2-experimental/boards/{board_id}/items:
+    get:
+      description: 'Retrieves a list of items for a specific board. You can retrieve
+        all items on the board, a list of child items inside a parent item, or a list
+        of specific types of items by specifying URL query parameter values.
+
+
+        This method returns results using a cursor-based approach. A cursor-paginated
+        method returns a portion of the total set of results based on the limit specified
+        and a cursor that points to the next portion of the results. To retrieve the
+        next portion of the collection, on your next call to the same method, set
+        the `cursor` parameter equal to the `cursor` value you received in the response
+        of the previous request. For example, if you set the `limit` query parameter
+        to `10` and the board contains 20 objects, the first call will return information
+        about the first 10 objects in the response along with a cursor parameter and
+        value. In this example, let''s say the cursor parameter value returned in
+        the response is `foo`. If you want to retrieve the next set of objects, on
+        your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a><br/>'
+      operationId: get-items-flowchart
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: string
+          default: '10'
+          description: The maximum number of results to return per call. If the number
+            of items in the response is greater than the limit specified, the response
+            returns the cursor parameter with a value.
+          maximum: 50
+          minimum: 10
+      - in: query
+        name: type
+        schema:
+          type: string
+          enum:
+          - shape
+      - in: query
+        name: cursor
+        schema:
+          type: string
+          description: A cursor-paginated method returns a portion of the total set
+            of results based on the limit specified and a `cursor` that points to
+            the next portion of the results. To retrieve the next portion of the collection,
+            set the `cursor` parameter equal to the `cursor` value you received in
+            the response of the previous request.
+      - description: Unique identifier (ID) of the board for which you want to retrieve
+          the list of available items.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericItemCursorPaged'
+          description: Items retrieved
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Get items on board
+      tags:
+      - Flowchart shapes (experimental)
+  /v2-experimental/boards/{board_id}/items/{item_id}:
+    get:
+      description: Retrieves information for a specific item on a board.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a><br/>
+      operationId: get-specific-item-flowchart
+      parameters:
+      - description: Unique identifier (ID) of the board from which you want to retrieve
+          a specific item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier (ID) of the item that you want to retrieve.
+        in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericItem'
+          description: Item retrieved
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Get specific item on board
+      tags:
+      - Flowchart shapes (experimental)
+  /v2-experimental/boards/{board_id}/shapes/{item_id}:
+    get:
+      description: Retrieves information for a specific shape item on a board.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a><br/>
+      operationId: get-shape-item-flowchart
+      parameters:
+      - description: Unique identifier (ID) of the board from which you want to retrieve
+          a specific item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier (ID) of the item that you want to retrieve.
+        in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShapeItem'
+          description: Shape item retrieved
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Get shape item
+      tags:
+      - Flowchart shapes (experimental)
+components:
+  schemas:
+    BoardSubscription:
+      type: object
+      properties:
+        callbackUrl:
+          type: string
+          description: Indicates the HTTPS URL to which Miro sends a webhook when
+            an event occurs.
+          example: https://api.asana.com/v2/webhooks_endpoint
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the webhook subscription was created.<br>Format:
+            UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+          example: 2022-03-30 17:26:50+00:00
+        data:
+          $ref: '#/components/schemas/BoardSubscriptionData'
+        id:
+          type: string
+          description: Unique identifier (ID) of a webhook subscription.
+          example: 99c152bb-8259-4c7a-96d8-ad8eef47ecd4
+        modifiedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the webhook subscription was last modified.
+            <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),
+            includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+          example: 2022-03-30 17:26:50+00:00
+        status:
+          type: string
+          default: enabled
+          description: 'Indicates whether the status of the webhook subscription.
+            `enabled`: Miro sends a webhook when an event occurs in the associated
+            board.
+
+            `disabled`: Miro does not send a webhook even when an event occurs in
+            the associated board.
+
+            `lost_access`: The user with which the webhook subscription is associated
+            has lost access to the board.
+
+            The user needs to regain access to the board, and then reenable the webhook
+            subscription by updating the webhook subscription status to `enabled`
+            by using the update webhook endpoint.'
+          enum:
+          - enabled
+          - disabled
+          - lost_access
+        type:
+          type: string
+          description: The type of object associated with the webhook subscription.
+          example: board_subscription
+    BoardSubscriptionData:
+      type: object
+      description: Contains information about a webhook subscription, such as the
+        board ID associated with the webhook subscription, the date and time when
+        the webhook subscription was last updated, and the type of board item that
+        the subscription is associated with.
+      properties:
+        boardId:
+          type: string
+          description: '[Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model)
+            with which the webhook subscription is associated.'
+          example: uXjVOfjmfkE=
+    CreateBoardSubscriptionRequest:
+      type: object
+      description: Contains the board ID associated with the webhook subscription,
+        the webhook callback URL, and the status of the webhook subscription.
+      properties:
+        boardId:
+          type: string
+          description: '[Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model)
+            that you want to associate with the webhook subscription.'
+        callbackUrl:
+          type: string
+          description: Indicates the HTTPS URL to which Miro sends a webhook when
+            an event occurs.
+          example: https://yourwebhooklistener.com/v2/webhooks_endpoint
+          maxLength: 256
+          minLength: 8
+          pattern: ^https:\/\/(.*)
+        status:
+          type: string
+          default: enabled
+          description: 'Indicates whether the status of the webhook subscription.`enabled`:
+            Miro sends a webhook when an event occurs in the associated board.
+
+            `disabled`: Miro does not send a webhook even when an event occurs in
+            the associated board.
+
+            `lost_access`: The user with which the webhook subscription is associated
+            has lost access to the board.
+
+            The user needs to regain access to the board, and then reenable the webhook
+            subscription by updating the webhook subscription status to `enabled`
+            by using the update webhook endpoint.'
+          enum:
+          - enabled
+          - disabled
+    GenericSubscription:
+      type: object
+      properties:
+        callbackUrl:
+          type: string
+          description: Indicates the HTTPS URL to which Miro sends a webhook when
+            an event occurs.
+          example: https://api.asana.com/v2/webhooks_endpoint
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the webhook subscription was created.<br>Format:
+            UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+          example: 2022-03-30 17:26:50+00:00
+        data:
+          $ref: '#/components/schemas/SubscriptionData'
+        id:
+          type: string
+          description: Unique identifier (ID) of a webhook subscription.
+          example: 99c152bb-8259-4c7a-96d8-ad8eef47ecd4
+        modifiedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the webhook subscription was last modified.
+            <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),
+            includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+          example: 2022-03-30 17:26:50+00:00
+        status:
+          type: string
+          default: enabled
+          description: 'Indicates whether the status of the webhook subscription.
+            `enabled`: Miro sends a webhook when an event occurs in the associated
+            board.
+
+            `disabled`: Miro does not send a webhook even when an event occurs in
+            the associated board.
+
+            `lost_access`: The user with which the webhook subscription is associated
+            has lost access to the board.
+
+            The user needs to regain access to the board, and then reenable the webhook
+            subscription by updating the webhook subscription status to `enabled`
+            by using the update webhook endpoint.'
+          enum:
+          - enabled
+          - disabled
+          - lost_access
+        type:
+          type: string
+          description: The type of object associated with the webhook subscription.
+          example: board_subscription
+    GenericSubscriptionsCursorPaged:
+      type: object
+      properties:
+        cursor:
+          type: string
+          description: A cursor-paginated method returns a portion of the total set
+            of results based on the `limit` specified and a `cursor` that points to
+            the next portion of the results. To retrieve the next set of results of
+            the collection, set the `cursor` parameter in your next request to the
+            value returned in this parameter.
+          example: MzQ1ODc2NDUyMjQ5MDA4Mjg5NX4=
+        data:
+          type: array
+          description: Contains the result data.
+          items:
+            $ref: '#/components/schemas/GenericSubscription'
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of results returned based on the `limit` specified
+            in the request. For example, if there are `20` results, the request has
+            no `cursor` value, and the `limit` is set to `20`,the `size` of the results
+            will be `20`. The rest of the results will not be returned. To retrieve
+            the rest of the results, you must make another request and set the appropriate
+            value for the `cursor` parameter value that you obtained from the response.
+          example: 20
+        size:
+          type: integer
+          format: int32
+          description: Number of results returned in the response considering the
+            `cursor` and the `limit` values sent in the request. For example, if there
+            are `20` results, the request does not have a `cursor` value, and the
+            `limit` set to `10`, the `size` of the results will be `10`.<br>In this
+            example, the response will also return a cursor value that can be used
+            to retrieve the next set of 10 remaining results in the collection.
+          example: 1
+        total:
+          type: integer
+          format: int64
+          description: Total number of results available. If the value of the `total`
+            parameter is higher than the value of the `size` parameter, this means
+            that there are more results that you can retrieve. To retrieve more results,
+            you can make another request and set the `offset` value accordingly. For
+            example, if there are `30` results, and the request has the `offset` set
+            to `0` and the `limit` set to `20`, the `size` parameter will return `20`
+            and the `total` parameter will return `30`. This means that there are
+            9 more results to retrieve (as the offset is zero-based).
+    SubscriptionData:
+      type: object
+      description: Contains information about a webhook subscription, such as the
+        board ID that the webhook subscription is associated with.
+      oneOf:
+      - $ref: '#/components/schemas/BoardSubscriptionData'
+    UpdateBoardSubscriptionRequest:
+      type: object
+      description: Contains updated information about a subscription.
+      properties:
+        callbackUrl:
+          type: string
+          description: Indicates the HTTPS URL to which Miro sends a webhook when
+            an event occurs.
+          example: https://yourwebhooklistener.com/v2/webhooks_endpoint
+          maxLength: 256
+          minLength: 8
+          pattern: ^https:\/\/(.*)
+        status:
+          type: string
+          default: enabled
+          description: 'Indicates whether the status of the webhook subscription.
+            `enabled`: Miro sends a webhook when an event occurs in the associated
+            board.
+
+            `disabled`: Miro does not send a webhook even when an event occurs in
+            the associated board.
+
+            `lost_access`: The user with which the webhook subscription is associated
+            has lost access to the board.
+
+            The user needs to regain access to the board, and then reenable the webhook
+            subscription by updating the webhook subscription status to `enabled`
+            by using the update webhook endpoint.'
+          enum:
+          - enabled
+          - disabled
+    MindmapData:
+      type: object
+      description: Contains mind map node data, such as `nodeView` or `isRoot`.
+      properties:
+        nodeView:
+          $ref: '#/components/schemas/MindmapNodeView'
+        isRoot:
+          type: boolean
+          description: Indicates whether this node is the root of the mind map.
+    MindmapNodeView:
+      type: object
+      description: Contains the information about the mind map node.
+      properties:
+        type:
+          type: string
+          description: Type of item used as mind map node. Currently, `type` can only
+            be equal to `text`.
+        data:
+          $ref: '#/components/schemas/MindmapWidgetDataOutput'
+    MindmapItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier (ID) of an item.
+        data:
+          $ref: '#/components/schemas/MindmapData'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the item was created. <br>Format: UTC,
+            adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        modifiedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the item was last modified. <br>Format:
+            UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+        modifiedBy:
+          $ref: '#/components/schemas/ModifiedBy'
+        parent:
+          $ref: '#/components/schemas/ParentLinksEnvelope'
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        type:
+          type: string
+          description: Type of item that is returned.
+      required:
+      - id
+      - type
+    MindmapCursorPaged:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Contains the result data.
+          items:
+            $ref: '#/components/schemas/MindmapItem'
+        total:
+          type: integer
+          format: int64
+          description: Total number of results available. If the value of the `total`
+            parameter is higher than the value of the `size` parameter, this means
+            that there are more results that you can retrieve. To retrieve more results,
+            you can make another request and set the `offset` value accordingly. For
+            example, if there are `30` results, and the request has the `offset` set
+            to `0` and the `limit` set to `20`, the `size` parameter will return `20`
+            and the `total` parameter will return `30`. This means that there are
+            9 more results to retrieve (as the offset is zero-based).
+        size:
+          type: integer
+          format: int32
+          description: Number of results returned in the response considering the
+            `cursor` and the `limit` values sent in the request. For example, if there
+            are `20` results, the request does not have a `cursor` value, and the
+            `limit` set to `10`, the `size` of the results will be `10`.<br>In this
+            example, the response will also return a cursor value that can be used
+            to retrieve the next set of 10 remaining results in the collection.'
+        cursor:
+          type: string
+          description: A cursor-paginated method returns a portion of the total set
+            of results based on the `limit` specified and a `cursor` that points to
+            the next portion of the results. To retrieve the next set of results of
+            the collection, set the `cursor` parameter in your next request to the
+            value returned in this parameter.'
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of results returned based on the `limit` specified
+            in the request. For example, if there are `20` results, the request has
+            no `cursor` value, and the `limit` is set to `20`,the `size` of the results
+            will be `20`. The rest of the results will not be returned. To retrieve
+            the rest of the results, you must make another request and set the appropriate
+            value for the `cursor` parameter value that you obtained from the response.'
+        links:
+          $ref: '#/components/schemas/PageLinks'
+    CreatedBy:
+      type: object
+      description: Contains information about the user who created the item.
+      properties:
+        id:
+          type: string
+          description: Unique identifier (ID) of the user.
+          example: '3458764517517852417'
+        type:
+          type: string
+          description: Indicates the type of object returned. In this case, `type`
+            returns `user`.
+          example: user
+    ModifiedBy:
+      type: object
+      description: Contains information about the user who last modified the item.
+      properties:
+        id:
+          type: string
+          description: Unique identifier (ID) of the user.
+          example: '3458764517517852417'
+        type:
+          type: string
+          description: Indicates the type of object returned. In this case, `type`
+            returns `user`.
+          example: user
+    GenericItemCursorPaged:
+      type: object
+      properties:
+        data:
+          type: array
+          description: Contains the result data.
+          items:
+            $ref: '#/components/schemas/GenericItem'
+        total:
+          type: integer
+          format: int64
+          description: Total number of results available. If the value of the `total`
+            parameter is higher than the value of the `size` parameter, this means
+            that there are more results that you can retrieve. To retrieve more results,
+            you can make another request and set the `offset` value accordingly. For
+            example, if there are `30` results, and the request has the `offset` set
+            to `0` and the `limit` set to `20`, the `size` parameter will return `20`
+            and the `total` parameter will return `30`. This means that there are
+            9 more results to retrieve (as the offset is zero-based).
+        size:
+          type: integer
+          format: int32
+          description: Number of results returned in the response considering the
+            `cursor` and the `limit` values sent in the request. For example, if there
+            are `20` results, the request does not have a `cursor` value, and the
+            `limit` set to `10`, the `size` of the results will be `10`.<br>In this
+            example, the response will also return a cursor value that can be used
+            to retrieve the next set of 10 remaining results in the collection.
+          example: 1
+        cursor:
+          type: string
+          description: A cursor-paginated method returns a portion of the total set
+            of results based on the `limit` specified and a `cursor` that points to
+            the next portion of the results. To retrieve the next set of results of
+            the collection, set the `cursor` parameter in your next request to the
+            value returned in this parameter.
+          example: MzQ1ODc2NDUyMjQ5MDA4Mjg5NX4=
+        limit:
+          type: integer
+          format: int32
+          description: Maximum number of results returned based on the `limit` specified
+            in the request. For example, if there are `20` results, the request has
+            no `cursor` value, and the `limit` is set to `20`,the `size` of the results
+            will be `20`. The rest of the results will not be returned. To retrieve
+            the rest of the results, you must make another request and set the appropriate
+            value for the `cursor` parameter value that you obtained from the response.
+          example: 20
+        links:
+          $ref: '#/components/schemas/PageLinks'
+    GenericItem:
+      type: object
+      description: Contains the result data.
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the item was created. <br>Format: UTC,
+            adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+          example: 2022-03-30 17:26:50+00:00
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        data:
+          $ref: '#/components/schemas/WidgetDataOutput'
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier (ID) of an item.
+          example: 3458764517517819000
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        modifiedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the item was last modified. <br>Format:
+            UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+          example: 2022-03-30 17:26:50+00:00
+        modifiedBy:
+          $ref: '#/components/schemas/ModifiedBy'
+        parent:
+          $ref: '#/components/schemas/ParentLinksEnvelope'
+        position:
+          $ref: '#/components/schemas/Position'
+        type:
+          type: string
+          description: Type of item that is returned.
+          example: sticky_note
+      required:
+      - id
+      - type
+    PageLinks:
+      type: object
+      description: Contains pagination links for the collection.
+      properties:
+        first:
+          type: string
+          description: Link to retrieve information in the first page of the collection.
+          example: http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=MzQ1ODc2NaSDN&#RDMDA3MzYyOX==
+        last:
+          type: string
+          description: Link to the retrieve information in the last page of the collection.
+          example: http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=MzQ1ODc2NDUyNDUyMDA3MzYyOX==
+        next:
+          type: string
+          description: Link to retrieve information in the next page of the collection.
+          example: http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=MzQ1ODc2NDUyNDsdgsFEwfFJCw==
+        prev:
+          type: string
+          description: Link to retrieve information in the previous page of the collection.
+          example: http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=
+        self:
+          type: string
+          description: Link to retrieve information in the current page of the collection.
+          example: http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=MzQ1OD1245643FWUyMDA3MzYyOX==
+    WidgetDataOutput:
+      oneOf:
+      - $ref: '#/components/schemas/ShapeData'
+      description: Contains the item data, such as the item title, content, or description.
+    MindmapWidgetDataOutput:
+      oneOf:
+      - $ref: '#/components/schemas/TextData'
+      description: Contains the mind map node data, such as the item title, content,
+        or description.
+    TextData:
+      type: object
+      description: Contains text item data
+      properties:
+        content:
+          type: string
+          description: The actual text (content) that appears in the text item.
+    ParentLinksEnvelope:
+      type: object
+      description: Contains information about the parent frame for the item.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier (ID) of the parent frame for the item.
+          example: 3074457362577955300
+        links:
+          $ref: '#/components/schemas/SelfLink'
+    Position:
+      type: object
+      description: Contains location information about the item, such as its x coordinate,
+        y coordinate, and the origin of the x and y coordinates.
+      properties:
+        origin:
+          type: string
+          default: center
+          description: 'Area of the item that is referenced by its x and y coordinates.
+            For example, an item with a center origin will have its x and y coordinates
+            point to its center. The center point of the board has x: 0 and y: 0 coordinates.
+
+            Currently, only one option is supported.'
+          enum:
+          - center
+        relativeTo:
+          type: string
+          enum:
+          - canvas_center
+          - parent_top_left
+        x:
+          type: number
+          format: double
+          description: 'X-axis coordinate of the location of the item on the board.
+
+            By default, all items have absolute positioning to the board, not the
+            current viewport. Default: 0.
+
+            The center point of the board has `x: 0` and `y: 0` coordinates.'
+          example: 100
+        y:
+          type: number
+          format: double
+          description: 'Y-axis coordinate of the location of the item on the board.
+
+            By default, all items have absolute positioning to the board, not the
+            current viewport. Default: 0.
+
+            The center point of the board has `x: 0` and `y: 0` coordinates.'
+          example: 100
+    SelfLink:
+      type: object
+      description: Contains applicable links for the current object.
+      properties:
+        self:
+          type: string
+          description: Link to obtain more information about the current object.
+          example: http://api.miro.com/v2/boards/o9J_koQspF4=/object_type/3074457349143649487
+    ShapeData:
+      type: object
+      description: Contains shape item data, such as the content or shape type of
+        the shape.
+      properties:
+        content:
+          type: string
+          description: The text you want to display on the shape.
+          example: Hello
+        shape:
+          type: string
+          default: rectangle
+          description: 'Defines the geometric shape of the item when it is rendered
+            on the board. <details> <summary>Basic shapes</summary> <ul> <li>rectangle</li>
+            <li>round_rectangle</li> <li>circle</li> <li>triangle</li> <li>rhombus</li>
+            <li>parallelogram</li> <li>trapezoid</li> <li>pentagon</li> <li>hexagon</li>
+            <li>octagon</li> <li>wedge_round_rectangle_callout</li> <li>star</li>
+            <li>flow_chart_predefined_process</li> <li>cloud</li> <li>cross</li> <li>can</li>
+            <li>right_arrow</li> <li>left_arrow</li> <li>left_right_arrow</li> <li>left_brace</li>
+            <li>right_brace</li> </ul> </details>
+
+            <details> <summary>Flowchart shapes</summary> <ul> <li>flow_chart_connector</li>
+            <li>flow_chart_magnetic_disk</li> <li>flow_chart_input_output</li> <li>flow_chart_decision</li>
+            <li>flow_chart_delay</li> <li>flow_chart_display</li> <li>flow_chart_document</li>
+            <li>flow_chart_magnetic_drum</li> <li>flow_chart_internal_storage</li>
+            <li>flow_chart_manual_input</li> <li>flow_chart_manual_operation</li>
+            <li>flow_chart_merge</li> <li>flow_chart_multidocuments</li> <li>flow_chart_note_curly_left</li>
+            <li>flow_chart_note_curly_right</li> <li>flow_chart_note_square</li> <li>flow_chart_offpage_connector</li>
+            <li>flow_chart_or</li> <li>flow_chart_predefined_process_2</li> <li>flow_chart_preparation</li>
+            <li>flow_chart_process</li> <li>flow_chart_online_storage</li> <li>flow_chart_summing_junction</li>
+            <li>flow_chart_terminator</li> </ul> </details>'
+    ShapeItem:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (ID) of an item.
+          example: '3458764517517819000'
+        data:
+          $ref: '#/components/schemas/ShapeData'
+        style:
+          $ref: '#/components/schemas/ShapeStyle'
+        position:
+          $ref: '#/components/schemas/Position'
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the item was created. <br>Format: UTC,
+            adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+          example: 2022-03-30 17:26:50+00:00
+        createdBy:
+          $ref: '#/components/schemas/CreatedBy'
+        modifiedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the item was last modified. <br>Format:
+            UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+          example: 2022-03-30 17:26:50+00:00
+        modifiedBy:
+          $ref: '#/components/schemas/ModifiedBy'
+        parent:
+          $ref: '#/components/schemas/ParentLinksEnvelope'
+        links:
+          $ref: '#/components/schemas/WidgetLinks'
+        type:
+          type: string
+          description: Type of item that is returned.
+          example: shape
+      required:
+      - id
+      - type
+    ShapeStyle:
+      type: object
+      description: Contains information about the shape style, such as the border
+        color or opacity.
+      properties:
+        borderColor:
+          type: string
+          description: 'Defines the color of the border of the shape.
+
+            Default: `#1a1a1a` (dark gray).'
+        borderOpacity:
+          type: string
+          description: 'Defines the opacity level of the shape border.
+
+            Possible values: any number between `0.0` and `1.0`, where:
+
+            `0.0`: the background color is completely transparent or invisible
+
+            `1.0`: the background color is completely opaque or solid
+
+            Default: `1.0` (solid color).'
+          maximum: 1
+          minimum: 0
+        borderStyle:
+          type: string
+          description: 'Defines the style used to represent the border of the shape.
+
+            Default: `normal`.'
+          enum:
+          - normal
+          - dotted
+          - dashed
+        borderWidth:
+          type: string
+          description: 'Defines the thickness of the shape border, in dp.
+
+            Default: `2.0`.'
+          maximum: 24
+          minimum: 1
+        color:
+          type: string
+          description: 'Hex value representing the color for the text within the shape
+            item.
+
+            Default: `#1a1a1a`.'
+          example: '#1a1a1a'
+        fillColor:
+          type: string
+          description: 'Fill color for the shape.
+
+            Hex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7`
+            `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb`
+            `#ffcee0` `#b384bb` `#000000`
+
+            Default: #ffffff.'
+          example: '#8fd14f'
+        fillOpacity:
+          type: string
+          description: 'Opacity level of the fill color.
+
+            Possible values: any number between `0` and `1`, where:
+
+            `0.0`: the background color is completely transparent or invisible
+
+            `1.0`: the background color is completely opaque or solid
+
+            Default: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.
+
+            '
+          maximum: 1
+          minimum: 0
+        fontFamily:
+          type: string
+          description: 'Defines the font type for the text in the shape item.
+
+            Default: `arial`.'
+          enum:
+          - arial
+          - abril_fatface
+          - bangers
+          - eb_garamond
+          - georgia
+          - graduate
+          - gravitas_one
+          - fredoka_one
+          - nixie_one
+          - open_sans
+          - permanent_marker
+          - pt_sans
+          - pt_sans_narrow
+          - pt_serif
+          - rammetto_one
+          - roboto
+          - roboto_condensed
+          - roboto_slab
+          - caveat
+          - times_new_roman
+          - titan_one
+          - lemon_tuesday
+          - roboto_mono
+          - noto_sans
+          - plex_sans
+          - plex_serif
+          - plex_mono
+          - spoof
+          - tiempos_text
+          - formular
+        fontSize:
+          type: string
+          description: 'Defines the font size, in dp, for the text on the shape.
+
+            Default: `14`.'
+          maximum: 288
+          minimum: 10
+        textAlign:
+          type: string
+          description: 'Defines how the sticky note text is horizontally aligned.
+
+            Default: `center`.'
+          enum:
+          - left
+          - right
+          - center
+        textAlignVertical:
+          type: string
+          description: 'Defines how the sticky note text is vertically aligned.
+
+            Default: `top`.'
+          enum:
+          - top
+          - middle
+          - bottom
+    WidgetLinks:
+      type: object
+      description: Contains applicable links for the item.
+      properties:
+        related:
+          type: string
+          description: Link to obtain information about the child items related to
+            the frame.
+          example: http://api.miro.com/v2/boards/o9J_koQspF4=/items?parent_item_id=307445734914369434&limit=10&cursor=
+        self:
+          type: string
+          description: Link to obtain information about the current item.
+          example: http://api.miro.com/v2/boards/o9J_koQspF4=/item/3074457349143649487
+    Geometry:
+      type: object
+      description: Contains geometrical information about the item, such as its width
+        or height.
+      properties:
+        height:
+          type: number
+          format: double
+          description: Height of the item, in pixels.
+          example: 60
+        rotation:
+          type: number
+          format: double
+          description: Rotation angle of an item, in degrees, relative to the board.
+            You can rotate items clockwise (right) and counterclockwise (left) by
+            specifying positive and negative values, respectively.
+        width:
+          type: number
+          format: double
+          description: Width of the item, in pixels.
+          example: 320
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http

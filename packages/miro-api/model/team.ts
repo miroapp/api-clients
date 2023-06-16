@@ -16,13 +16,16 @@ export class Team {
   /**
    * Team id
    */
-  'id': number
+  'id': string
   /**
    * Team name
    */
   'name': string
   'picture'?: Picture
-  'type'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'team'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -32,7 +35,7 @@ export class Team {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'name',

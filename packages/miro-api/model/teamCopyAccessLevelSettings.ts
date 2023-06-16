@@ -56,7 +56,7 @@ export namespace TeamCopyAccessLevelSettings {
     Anyone: 'anyone',
     TeamMembers: 'team_members',
     TeamEditors: 'team_editors',
-    BoardOwner: 'board_owner',
+    BoardOwner: 'board_owner            -',
   } as const
   export const CopyAccessLevelLimitationEnum = {
     Anyone: 'anyone',

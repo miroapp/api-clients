@@ -18,7 +18,7 @@ export class Tag {
   /**
    * Unique identifier of the tag.
    */
-  'id': number
+  'id': string
   /**
    * Text of the tag
    */
@@ -41,7 +41,7 @@ export class Tag {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'title',

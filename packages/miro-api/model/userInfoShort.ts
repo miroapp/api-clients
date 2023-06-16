@@ -12,13 +12,13 @@
 
 /**
  * @internal
- * Contains information about the user who owns the board.
+ * Contains information about the user who created the board.
  */
 export class UserInfoShort {
   /**
    * Unique identifier (ID) of the user.
    */
-  'id': number
+  'id': string
   /**
    * Name of the user.
    */
@@ -36,7 +36,7 @@ export class UserInfoShort {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'name',

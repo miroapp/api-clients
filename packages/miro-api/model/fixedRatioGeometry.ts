@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains geometrical information about the item, such as its width or height. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry).
+ * Contains geometrical information about the item, such as its width or rotation. You can set either the width or height, you cannot set both the width and height at the same time.
  */
 export class FixedRatioGeometry {
   /**
@@ -20,13 +20,13 @@ export class FixedRatioGeometry {
    */
   'height'?: number
   /**
-   * Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.
-   */
-  'rotation'?: number
-  /**
    * Width of the item, in pixels.
    */
   'width'?: number
+  /**
+   * Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.
+   */
+  'rotation'?: number
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -39,13 +39,13 @@ export class FixedRatioGeometry {
       type: 'number',
     },
     {
-      name: 'rotation',
-      baseName: 'rotation',
+      name: 'width',
+      baseName: 'width',
       type: 'number',
     },
     {
-      name: 'width',
-      baseName: 'width',
+      name: 'rotation',
+      baseName: 'rotation',
       type: 'number',
     },
   ]

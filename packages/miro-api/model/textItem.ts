@@ -23,7 +23,7 @@ export class TextItem {
   /**
    * Unique identifier (ID) of an item.
    */
-  'id': number
+  'id': string
   'data'?: TextData
   'style'?: TextStyle
   'position'?: Position
@@ -53,7 +53,7 @@ export class TextItem {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'data',

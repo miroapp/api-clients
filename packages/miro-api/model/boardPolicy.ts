@@ -15,7 +15,7 @@ import {BoardSharingPolicy} from './boardSharingPolicy'
 
 /**
  * @internal
- * Defines the permissions policies and sharing policies for the board. For more information, see [Permissions policy](https://developers.miro.com/reference/rest-api-policy-data-model).
+ * Defines the permissions policies and sharing policies for the board.
  */
 export class BoardPolicy {
   'permissionsPolicy'?: BoardPermissionsPolicy

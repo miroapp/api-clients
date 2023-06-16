@@ -10,14 +10,17 @@
  * Do not edit the class manually.
  */
 
-import {GenericItem} from './genericItem'
+import {MindmapItem} from './mindmapItem'
 import {PageLinks} from './pageLinks'
 
-export class GenericItemCursorPagedPlatformContainers {
+export class MindmapCursorPaged {
   /**
    * Contains the result data.
    */
-  'data'?: Array<GenericItem>
+  'data'?: Array<MindmapItem>
+  /**
+   * Total number of results available. If the value of the `total` parameter is higher than the value of the `size` parameter, this means that there are more results that you can retrieve. To retrieve more results, you can make another request and set the `offset` value accordingly. For example, if there are `30` results, and the request has the `offset` set to `0` and the `limit` set to `20`, the `size` parameter will return `20` and the `total` parameter will return `30`. This means that there are 9 more results to retrieve (as the offset is zero-based).
+   */
   'total'?: number
   /**
    * Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.
@@ -41,7 +44,7 @@ export class GenericItemCursorPagedPlatformContainers {
     {
       name: 'data',
       baseName: 'data',
-      type: 'Array<GenericItem>',
+      type: 'Array<MindmapItem>',
     },
     {
       name: 'total',
@@ -72,6 +75,6 @@ export class GenericItemCursorPagedPlatformContainers {
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return GenericItemCursorPagedPlatformContainers.attributeTypeMap
+    return MindmapCursorPaged.attributeTypeMap
   }
 }

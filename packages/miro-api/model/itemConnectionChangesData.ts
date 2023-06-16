@@ -14,7 +14,7 @@ import {RelativeOffset} from './relativeOffset'
 
 /**
  * @internal
- * The starting point of the connector. If endItem is also provided, startItem.id must be different from endItem.id
+ * The ending point of the connector. If startItem is also provided, endItem.id must be different from startItem.id
  */
 export class ItemConnectionChangesData {
   /**

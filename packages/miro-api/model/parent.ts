@@ -12,13 +12,10 @@
 
 /**
  * @internal
- * Contains information about the parent frame for the item.
+ * Contains information about the parent this item is attached to. Passing null for ID will attach widget to the canvas directly.
  */
 export class Parent {
-  /**
-   * Unique identifier (ID) of the parent frame for the item.
-   */
-  'id'?: number
+  'id'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -28,7 +25,7 @@ export class Parent {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
   ]
 

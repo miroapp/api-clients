@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains geometrical information about the item, such as its width or rotation. You can only specify the width of the text item as the height is dynamically updated based on the content. For information about the JSON properties, see [Geometry](https://developers.miro.com/reference/geometry).
+ * Contains geometrical information about the item, such as its width or rotation. You can only specify the width of the text item as the height is dynamically updated based on the content.
  */
 export class WidthOnlyAdjustableGeometry {
   /**
@@ -20,7 +20,7 @@ export class WidthOnlyAdjustableGeometry {
    */
   'rotation'?: number
   /**
-   * Width of the item, in pixels.  The minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size. For example, if the font size of the `text` item is `14`, the minimum `width` is `24`.
+   * Width of the item, in pixels. The minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size. For example, if the font size of the `text` item is `14`, the minimum `width` is `24`.
    */
   'width'?: number
 

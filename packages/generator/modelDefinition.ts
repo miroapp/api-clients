@@ -62,7 +62,7 @@ const MODELS = {
   },
 
   Team: {
-    props: ['orgId', {name: 'teamId', type: 'number'}],
+    props: ['orgId', {name: 'teamId', type: 'string'}],
     extendedModel: {
       name: 'BaseTeam',
       path: 'Team',
@@ -129,8 +129,8 @@ const MODELS = {
   },
 
   TeamMember: {
-    id: 'memberId',
-    props: ['orgId', {name: 'teamId', type: 'number'}, {name: 'memberId', type: 'number'}],
+    id: 'id',
+    props: ['orgId', {name: 'teamId', type: 'string'}, {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'TeamMember',
       path: '../model/teamMember',
@@ -192,7 +192,7 @@ const MODELS = {
   },
 
   BoardMember: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BoardMember',
       path: '../model/boardMember',
@@ -201,7 +201,7 @@ const MODELS = {
   },
 
   Item: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseItem',
       path: 'Item',
@@ -213,7 +213,7 @@ const MODELS = {
   },
 
   AppCardItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseAppCardItem',
       path: 'AppCardItem',
@@ -233,7 +233,7 @@ const MODELS = {
   },
 
   CardItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseCardItem',
       path: 'CardItem',
@@ -253,7 +253,7 @@ const MODELS = {
   },
 
   DocumentItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseDocumentItem',
       path: 'DocumentItem',
@@ -262,7 +262,7 @@ const MODELS = {
   },
 
   EmbedItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseEmbedItem',
       path: 'EmbedItem',
@@ -274,7 +274,7 @@ const MODELS = {
   },
 
   FrameItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseFrameItem',
       path: 'FrameItem',
@@ -286,7 +286,7 @@ const MODELS = {
   },
 
   ImageItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseImageItem',
       path: 'ImageItem',
@@ -295,7 +295,7 @@ const MODELS = {
   },
 
   ShapeItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseShapeItem',
       path: 'ShapeItem',
@@ -307,7 +307,7 @@ const MODELS = {
   },
 
   StickyNoteItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseStickyNoteItem',
       path: 'StickyNoteItem',
@@ -327,7 +327,7 @@ const MODELS = {
   },
 
   TextItem: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseTextItem',
       path: 'TextItem',
@@ -351,7 +351,7 @@ const MODELS = {
   },
 
   Tag: {
-    props: ['boardId', {name: 'id', type: 'number'}],
+    props: ['boardId', {name: 'id', type: 'string'}],
     extendedModel: {
       name: 'BaseTag',
       path: 'Tag',

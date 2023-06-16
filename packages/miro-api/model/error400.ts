@@ -10,33 +10,31 @@
  * Do not edit the class manually.
  */
 
-/**
- * @internal
- * Test error object
- */
-export class EnterpriseGetOrganization400Response {
+export class Error400 {
   /**
-   * Code of the error
+   * HTTP status code.
    */
-  'code'?: string
+  'status'?: number = 400
   /**
-   * Description of the error
+   * Description of the status code.
+   */
+  'code'?: string = 'invalidParameters'
+  /**
+   * Explanation of the error.
    */
   'message'?: string
-  /**
-   * Status code of the error
-   */
-  'status'?: number
-  /**
-   * Type of the error
-   */
-  'type'?: string
+  'type'?: string = 'error'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
 
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
+    },
     {
       name: 'code',
       baseName: 'code',
@@ -48,11 +46,6 @@ export class EnterpriseGetOrganization400Response {
       type: 'string',
     },
     {
-      name: 'status',
-      baseName: 'status',
-      type: 'number',
-    },
-    {
       name: 'type',
       baseName: 'type',
       type: 'string',
@@ -61,6 +54,6 @@ export class EnterpriseGetOrganization400Response {
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return EnterpriseGetOrganization400Response.attributeTypeMap
+    return Error400.attributeTypeMap
   }
 }

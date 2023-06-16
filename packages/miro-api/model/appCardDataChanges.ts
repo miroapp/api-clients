@@ -14,7 +14,7 @@ import {CustomField} from './customField'
 
 /**
  * @internal
- * For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains app card item data, such as the title, description, or fields.
  */
 export class AppCardDataChanges {
   /**
@@ -34,7 +34,6 @@ export class AppCardDataChanges {
    * A short text header to identify the app card.
    */
   'title'?: string = 'sample app card item'
-  'type'?: string | (typeof AppCardDataChanges.TypeEnum)[keyof typeof AppCardDataChanges.TypeEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -61,11 +60,6 @@ export class AppCardDataChanges {
       baseName: 'title',
       type: 'string',
     },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'AppCardDataChanges.TypeEnum',
-    },
   ]
 
   /** @ignore */
@@ -79,18 +73,5 @@ export namespace AppCardDataChanges {
     Disconnected: 'disconnected',
     Connected: 'connected',
     Disabled: 'disabled',
-  } as const
-  export const TypeEnum = {
-    Text: 'text',
-    Shape: 'shape',
-    StickyNote: 'sticky_note',
-    Image: 'image',
-    Document: 'document',
-    Card: 'card',
-    AppCard: 'app_card',
-    Preview: 'preview',
-    Frame: 'frame',
-    Embed: 'embed',
-    Opaque: 'opaque',
   } as const
 }

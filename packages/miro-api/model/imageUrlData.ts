@@ -12,14 +12,13 @@
 
 /**
  * @internal
- * For information about the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Contains information about the image URL.
  */
 export class ImageUrlData {
   /**
    * A short text header to identify the image.
    */
   'title'?: string
-  'type'?: string | (typeof ImageUrlData.TypeEnum)[keyof typeof ImageUrlData.TypeEnum]
   /**
    * URL of the image.
    */
@@ -36,11 +35,6 @@ export class ImageUrlData {
       type: 'string',
     },
     {
-      name: 'type',
-      baseName: 'type',
-      type: 'ImageUrlData.TypeEnum',
-    },
-    {
       name: 'url',
       baseName: 'url',
       type: 'string',
@@ -51,20 +45,4 @@ export class ImageUrlData {
   static getAttributeTypeMap() {
     return ImageUrlData.attributeTypeMap
   }
-}
-
-export namespace ImageUrlData {
-  export const TypeEnum = {
-    Text: 'text',
-    Shape: 'shape',
-    StickyNote: 'sticky_note',
-    Image: 'image',
-    Document: 'document',
-    Card: 'card',
-    AppCard: 'app_card',
-    Preview: 'preview',
-    Frame: 'frame',
-    Embed: 'embed',
-    Opaque: 'opaque',
-  } as const
 }
