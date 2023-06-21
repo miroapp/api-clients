@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,36,27
+/miroapp/api-clients/tree/main/packages,9,4
+/miroapp/api-clients/issues,8,6
+/miroapp/api-clients/tree/main/packages/miro-api,8,4
+/miroapp/api-clients/tree/main/spec,8,1
+/miroapp/api-clients/blob/main/packages/generator/spec.json,6,3
+/miroapp/api-clients/pulls,5,3
+/miroapp/api-clients/blob/ed6d5e9613177a001ef15e8864f22c92c09f6b6c/packages/miro-api/highlevel/FrameItem.ts,5,1
+/miroapp/api-clients/blob/main/packages/miro-api/highlevel/index.ts,4,3
+/miroapp/api-clients/tree/main/packages/miro-api/api,4,2
