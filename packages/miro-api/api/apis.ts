@@ -30,7 +30,9 @@ import {InvitationResult} from '../model/invitationResult'
 
 import {BoardChanges} from '../model/boardChanges'
 import {BoardWithLinks} from '../model/boardWithLinks'
+import {BoardWithLinksAndWithoutProject} from '../model/boardWithLinksAndWithoutProject'
 import {BoardsPagedResponse} from '../model/boardsPagedResponse'
+import {CopyBoardChanges} from '../model/copyBoardChanges'
 
 import {CardCreateRequest} from '../model/cardCreateRequest'
 import {CardItem} from '../model/cardItem'
@@ -932,13 +934,13 @@ export class MiroApi {
    * Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a><br/>
    * @summary Copy board
    * @param copyFrom Unique identifier (ID) of the board that you want to copy.
-   * @param boardChanges
+   * @param copyBoardChanges
    */
   async copyBoard(
     copyFrom: string,
 
-    boardChanges?: BoardChanges,
-  ): Promise<{response: Response; body: BoardWithLinks}> {
+    copyBoardChanges?: CopyBoardChanges,
+  ): Promise<{response: Response; body: BoardWithLinksAndWithoutProject}> {
     const localVarPath = '/v2/boards'
     let localVarQueryParameters = new URLSearchParams()
 
@@ -958,12 +960,12 @@ export class MiroApi {
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PUT',
       resource,
-      JSON.stringify(ObjectSerializer.serialize(boardChanges, 'BoardChanges')),
+      JSON.stringify(ObjectSerializer.serialize(copyBoardChanges, 'CopyBoardChanges')),
 
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinks')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinksAndWithoutProject')
 
     return {response, body}
   }

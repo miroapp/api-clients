@@ -34,6 +34,7 @@ model/boardSharingPolicyChange.ts
 model/boardSubscription.ts
 model/boardSubscriptionData.ts
 model/boardWithLinks.ts
+model/boardWithLinksAndWithoutProject.ts
 model/boardsPagedResponse.ts
 model/bulkOperationError.ts
 model/bulkOperationErrorContext.ts
@@ -50,6 +51,7 @@ model/connectorCreationData.ts
 model/connectorStyle.ts
 model/connectorWithLinks.ts
 model/connectorsCursorPaged.ts
+model/copyBoardChanges.ts
 model/createBoardExportRequest.ts
 model/createBoardSubscriptionRequest.ts
 model/createProjectRequest.ts
