@@ -32,6 +32,7 @@ export * from './boardSharingPolicyChange'
 export * from './boardSubscription'
 export * from './boardSubscriptionData'
 export * from './boardWithLinks'
+export * from './boardWithLinksAndWithoutProject'
 export * from './boardsPagedResponse'
 export * from './bulkOperationError'
 export * from './bulkOperationErrorContext'
@@ -48,6 +49,7 @@ export * from './connectorCreationData'
 export * from './connectorStyle'
 export * from './connectorWithLinks'
 export * from './connectorsCursorPaged'
+export * from './copyBoardChanges'
 export * from './createBoardExportRequest'
 export * from './createBoardSubscriptionRequest'
 export * from './createProjectRequest'
@@ -289,6 +291,7 @@ import {BoardSharingPolicyChange} from './boardSharingPolicyChange'
 import {BoardSubscription} from './boardSubscription'
 import {BoardSubscriptionData} from './boardSubscriptionData'
 import {BoardWithLinks} from './boardWithLinks'
+import {BoardWithLinksAndWithoutProject} from './boardWithLinksAndWithoutProject'
 import {BoardsPagedResponse} from './boardsPagedResponse'
 import {BulkOperationError} from './bulkOperationError'
 import {BulkOperationErrorContext} from './bulkOperationErrorContext'
@@ -305,6 +308,7 @@ import {ConnectorCreationData} from './connectorCreationData'
 import {ConnectorStyle} from './connectorStyle'
 import {ConnectorWithLinks} from './connectorWithLinks'
 import {ConnectorsCursorPaged} from './connectorsCursorPaged'
+import {CopyBoardChanges} from './copyBoardChanges'
 import {CreateBoardExportRequest} from './createBoardExportRequest'
 import {CreateBoardSubscriptionRequest} from './createBoardSubscriptionRequest'
 import {CreateProjectRequest} from './createProjectRequest'
@@ -696,6 +700,7 @@ let typeMap: {[index: string]: any} = {
   BoardSubscription: BoardSubscription,
   BoardSubscriptionData: BoardSubscriptionData,
   BoardWithLinks: BoardWithLinks,
+  BoardWithLinksAndWithoutProject: BoardWithLinksAndWithoutProject,
   BoardsPagedResponse: BoardsPagedResponse,
   BulkOperationError: BulkOperationError,
   BulkOperationErrorContext: BulkOperationErrorContext,
@@ -712,6 +717,7 @@ let typeMap: {[index: string]: any} = {
   ConnectorStyle: ConnectorStyle,
   ConnectorWithLinks: ConnectorWithLinks,
   ConnectorsCursorPaged: ConnectorsCursorPaged,
+  CopyBoardChanges: CopyBoardChanges,
   CreateBoardExportRequest: CreateBoardExportRequest,
   CreateBoardSubscriptionRequest: CreateBoardSubscriptionRequest,
   CreateProjectRequest: CreateProjectRequest,

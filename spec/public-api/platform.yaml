@@ -296,13 +296,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BoardChanges'
+              $ref: '#/components/schemas/CopyBoardChanges'
       responses:
         '201':
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BoardWithLinks'
+                $ref: '#/components/schemas/BoardWithLinksAndWithoutProject'
           description: Board copied
         '400':
           content:
@@ -5886,6 +5886,26 @@ components:
           type: string
           description: Unique identifier (ID) of the project to which the board must
             be added.
+    CopyBoardChanges:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the board.
+          maxLength: 300
+          minLength: 0
+        name:
+          type: string
+          default: Untitled
+          description: Name for the board.
+          maxLength: 60
+          minLength: 1
+        policy:
+          $ref: '#/components/schemas/BoardPolicyChange'
+        teamId:
+          type: string
+          description: Unique identifier (ID) of the team where the board must be
+            placed.
     BoardLinks:
       type: object
       description: Contains applicable links for the board.
@@ -6226,6 +6246,63 @@ components:
           $ref: '#/components/schemas/Team'
         project:
           $ref: '#/components/schemas/Project'
+        picture:
+          $ref: '#/components/schemas/Picture'
+        policy:
+          $ref: '#/components/schemas/BoardPolicy'
+        viewLink:
+          type: string
+          description: URL to view the board.
+          example: https://miro.com/app/board/uXjVOD6LSME=
+        owner:
+          $ref: '#/components/schemas/UserInfoShort'
+        currentUserMembership:
+          $ref: '#/components/schemas/BoardMember'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the board was created. Format: UTC, adheres
+            to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing
+            Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+        createdBy:
+          $ref: '#/components/schemas/UserInfoShort'
+        modifiedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the board was last modified. Format: UTC,
+            adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+        modifiedBy:
+          $ref: '#/components/schemas/UserInfoShort'
+        links:
+          $ref: '#/components/schemas/BoardLinks'
+        type:
+          type: string
+          description: Type of the object that is returned. In this case, type returns
+            `board`.
+          example: board
+      required:
+      - description
+      - id
+      - name
+      - type
+    BoardWithLinksAndWithoutProject:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (ID) of the board.
+          example: uXjVOD6LSME=
+        name:
+          type: string
+          description: Name of the board.
+          example: Sample board name
+        description:
+          type: string
+          description: Description of the board.
+          example: Sample board description
+        team:
+          $ref: '#/components/schemas/Team'
         picture:
           $ref: '#/components/schemas/Picture'
         policy:
