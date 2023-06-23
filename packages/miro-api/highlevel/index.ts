@@ -666,10 +666,10 @@ export class Board extends BaseBoard {
   /**
    * Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a><br/>
    * @summary Copy board
-   * @param boardChanges
+   * @param copyBoardChanges
    */
-  async copy(boardChanges: Parameters<MiroApi['copyBoard']>[1]): Promise<Board> {
-    const result = (await this._api.copyBoard(this.id.toString(), boardChanges)).body
+  async copy(copyBoardChanges: Parameters<MiroApi['copyBoard']>[1]): Promise<Board> {
+    const result = (await this._api.copyBoard(this.id.toString(), copyBoardChanges)).body
 
     return new Board(this._api, result.id, result)
   }
