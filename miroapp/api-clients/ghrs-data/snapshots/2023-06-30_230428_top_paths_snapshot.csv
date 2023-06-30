@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,41,24
+/miroapp/api-clients/commits/main,38,2
+/miroapp/api-clients/commits/DX-1244,22,1
+/miroapp/api-clients/tree/main/apps,15,5
+/miroapp/api-clients/tree/main/packages,15,5
+/miroapp/api-clients/tree/main/spec,15,3
+/miroapp/api-clients/commits/DX-1214,15,1
+/miroapp/api-clients/blob/main/packages/generator/spec.json,11,2
+/miroapp/api-clients/commit/f47320d363ebca3c4bda1a3d1c62f208fe3aadac,10,3
+/miroapp/api-clients/tree/main/apps/client-test-app,10,3
