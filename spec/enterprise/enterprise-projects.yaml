@@ -1,6 +1,6 @@
 openapi: 3.0.1
 info:
-  title: Projects (Beta - Enterprise Plan)
+  title: Projects (Enterprise Plan)
   version: v2
 servers:
 - url: https://api.miro.com

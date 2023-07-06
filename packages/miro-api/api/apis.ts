@@ -57,7 +57,9 @@ import {EmbedUpdateRequest} from '../model/embedUpdateRequest'
 
 import {GenericItem} from '../model/genericItem'
 import {GenericItemCursorPaged} from '../model/genericItemCursorPaged'
+import {ShapeCreateRequest} from '../model/shapeCreateRequest'
 import {ShapeItem} from '../model/shapeItem'
+import {ShapeUpdateRequest} from '../model/shapeUpdateRequest'
 
 import {FrameCreateRequest} from '../model/frameCreateRequest'
 import {FrameItem} from '../model/frameItem'
@@ -92,9 +94,6 @@ import {CreateProjectRequest} from '../model/createProjectRequest'
 import {Project} from '../model/project'
 import {ProjectPage} from '../model/projectPage'
 import {UpdateProjectRequest} from '../model/updateProjectRequest'
-
-import {ShapeCreateRequest} from '../model/shapeCreateRequest'
-import {ShapeUpdateRequest} from '../model/shapeUpdateRequest'
 
 import {StickyNoteCreateRequest} from '../model/stickyNoteCreateRequest'
 import {StickyNoteItem} from '../model/stickyNoteItem'
@@ -1864,6 +1863,80 @@ export class MiroApi {
   }
 
   /**
+   * Adds a flowchart shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Create shape item
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param shapeCreateRequest
+   */
+  async createShapeItemFlowchart(
+    boardId: string,
+    shapeCreateRequest: ShapeCreateRequest,
+  ): Promise<{response: Response; body: ShapeItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/shapes'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling createShapeItemFlowchart.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      resource,
+      JSON.stringify(ObjectSerializer.serialize(shapeCreateRequest, 'ShapeCreateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ShapeItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Deletes a flowchart shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
+   * @summary Delete shape item
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
+   * @param itemId Unique identifier (ID) of the item that you want to delete.
+   */
+  async deleteShapeItemFlowchart(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/shapes/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteShapeItemFlowchart.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling deleteShapeItemFlowchart.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
+
+    return {response, body}
+  }
+
+  /**
    * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items on board
    * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
@@ -1990,6 +2063,48 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates a flowchart shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Update shape item
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param shapeUpdateRequest
+   */
+  async updateShapeItemFlowchart(
+    boardId: string,
+    itemId: string,
+    shapeUpdateRequest: ShapeUpdateRequest,
+  ): Promise<{response: Response; body: ShapeItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/shapes/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateShapeItemFlowchart.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling updateShapeItemFlowchart.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      resource,
+      JSON.stringify(ObjectSerializer.serialize(shapeUpdateRequest, 'ShapeUpdateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ShapeItem')
 
     return {response, body}
   }
