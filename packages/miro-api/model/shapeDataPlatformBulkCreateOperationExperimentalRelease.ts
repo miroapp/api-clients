@@ -14,7 +14,7 @@
  * @internal
  * Contains shape item data, such as the content or shape type of the shape.
  */
-export class ShapeDataPlatformTags {
+export class ShapeDataPlatformBulkCreateOperationExperimentalRelease {
   /**
    * The text you want to display on the shape.
    */
@@ -22,8 +22,10 @@ export class ShapeDataPlatformTags {
   /**
    * Defines the geometric shape of the item when it is rendered on the board.
    */
-  'shape'?: string | (typeof ShapeDataPlatformTags.ShapeEnum)[keyof typeof ShapeDataPlatformTags.ShapeEnum] =
-    ShapeDataPlatformTags.ShapeEnum.Rectangle
+  'shape'?:
+    | string
+    | (typeof ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum)[keyof typeof ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum] =
+    ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum.Rectangle
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,17 +40,17 @@ export class ShapeDataPlatformTags {
     {
       name: 'shape',
       baseName: 'shape',
-      type: 'ShapeDataPlatformTags.ShapeEnum',
+      type: 'ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ShapeDataPlatformTags.attributeTypeMap
+    return ShapeDataPlatformBulkCreateOperationExperimentalRelease.attributeTypeMap
   }
 }
 
-export namespace ShapeDataPlatformTags {
+export namespace ShapeDataPlatformBulkCreateOperationExperimentalRelease {
   export const ShapeEnum = {
     Rectangle: 'rectangle',
     RoundRectangle: 'round_rectangle',

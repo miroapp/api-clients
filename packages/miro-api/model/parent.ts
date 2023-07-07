@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains information about the parent this item is attached to. Passing null for ID will attach widget to the canvas directly.
+ * Contains information about the parent this item must be attached to. A maximum of 1000 items can be attached to a frame. Passing `null` for `parent.id` directly attaches an item to the canvas.
  */
 export class Parent {
   'id'?: string

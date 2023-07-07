@@ -164,10 +164,6 @@ export * from './parentWithLinks'
 export * from './picture'
 export * from './position'
 export * from './positionChange'
-export * from './positionChangePlatformContainers'
-export * from './positionPlatformContainers'
-export * from './positionPlatformExperimentalFeatures'
-export * from './positionPlatformTags'
 export * from './project'
 export * from './projectMember'
 export * from './projectMemberPage'
@@ -182,10 +178,13 @@ export * from './selfLinkPlatformExperimentalFeatures'
 export * from './selfLinkPlatformTags'
 export * from './shapeCreateRequest'
 export * from './shapeData'
-export * from './shapeDataPlatformTags'
+export * from './shapeDataForCreate'
+export * from './shapeDataForUpdate'
+export * from './shapeDataPlatformBulkCreateOperationExperimentalRelease'
 export * from './shapeItem'
 export * from './shapeStyle'
-export * from './shapeStylePlatformExperimentalFeatures'
+export * from './shapeStyleForCreate'
+export * from './shapeStyleForUpdate'
 export * from './shapeUpdateRequest'
 export * from './sharingPolicySettings'
 export * from './stickyNoteCreateRequest'
@@ -423,10 +422,6 @@ import {ParentWithLinks} from './parentWithLinks'
 import {Picture} from './picture'
 import {Position} from './position'
 import {PositionChange} from './positionChange'
-import {PositionChangePlatformContainers} from './positionChangePlatformContainers'
-import {PositionPlatformContainers} from './positionPlatformContainers'
-import {PositionPlatformExperimentalFeatures} from './positionPlatformExperimentalFeatures'
-import {PositionPlatformTags} from './positionPlatformTags'
 import {Project} from './project'
 import {ProjectMember} from './projectMember'
 import {ProjectMemberPage} from './projectMemberPage'
@@ -441,10 +436,13 @@ import {SelfLinkPlatformExperimentalFeatures} from './selfLinkPlatformExperiment
 import {SelfLinkPlatformTags} from './selfLinkPlatformTags'
 import {ShapeCreateRequest} from './shapeCreateRequest'
 import {ShapeData} from './shapeData'
-import {ShapeDataPlatformTags} from './shapeDataPlatformTags'
+import {ShapeDataForCreate} from './shapeDataForCreate'
+import {ShapeDataForUpdate} from './shapeDataForUpdate'
+import {ShapeDataPlatformBulkCreateOperationExperimentalRelease} from './shapeDataPlatformBulkCreateOperationExperimentalRelease'
 import {ShapeItem} from './shapeItem'
 import {ShapeStyle} from './shapeStyle'
-import {ShapeStylePlatformExperimentalFeatures} from './shapeStylePlatformExperimentalFeatures'
+import {ShapeStyleForCreate} from './shapeStyleForCreate'
+import {ShapeStyleForUpdate} from './shapeStyleForUpdate'
 import {ShapeUpdateRequest} from './shapeUpdateRequest'
 import {SharingPolicySettings} from './sharingPolicySettings'
 import {StickyNoteCreateRequest} from './stickyNoteCreateRequest'
@@ -576,25 +574,23 @@ let enumsMap: {[index: string]: any} = {
   'OrganizationMember.RoleEnum': OrganizationMember.RoleEnum,
   'Position.OriginEnum': Position.OriginEnum,
   'Position.RelativeToEnum': Position.RelativeToEnum,
-  'PositionPlatformContainers.OriginEnum': PositionPlatformContainers.OriginEnum,
-  'PositionPlatformContainers.RelativeToEnum': PositionPlatformContainers.RelativeToEnum,
-  'PositionPlatformExperimentalFeatures.OriginEnum': PositionPlatformExperimentalFeatures.OriginEnum,
-  'PositionPlatformExperimentalFeatures.RelativeToEnum': PositionPlatformExperimentalFeatures.RelativeToEnum,
-  'PositionPlatformTags.OriginEnum': PositionPlatformTags.OriginEnum,
-  'PositionPlatformTags.RelativeToEnum': PositionPlatformTags.RelativeToEnum,
   ProjectRole: ProjectRole,
   ProjectRoleToAdd: ProjectRoleToAdd,
   'ShapeData.ShapeEnum': ShapeData.ShapeEnum,
-  'ShapeDataPlatformTags.ShapeEnum': ShapeDataPlatformTags.ShapeEnum,
+  'ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum':
+    ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum,
   'ShapeStyle.BorderStyleEnum': ShapeStyle.BorderStyleEnum,
   'ShapeStyle.FontFamilyEnum': ShapeStyle.FontFamilyEnum,
   'ShapeStyle.TextAlignEnum': ShapeStyle.TextAlignEnum,
   'ShapeStyle.TextAlignVerticalEnum': ShapeStyle.TextAlignVerticalEnum,
-  'ShapeStylePlatformExperimentalFeatures.BorderStyleEnum': ShapeStylePlatformExperimentalFeatures.BorderStyleEnum,
-  'ShapeStylePlatformExperimentalFeatures.FontFamilyEnum': ShapeStylePlatformExperimentalFeatures.FontFamilyEnum,
-  'ShapeStylePlatformExperimentalFeatures.TextAlignEnum': ShapeStylePlatformExperimentalFeatures.TextAlignEnum,
-  'ShapeStylePlatformExperimentalFeatures.TextAlignVerticalEnum':
-    ShapeStylePlatformExperimentalFeatures.TextAlignVerticalEnum,
+  'ShapeStyleForCreate.BorderStyleEnum': ShapeStyleForCreate.BorderStyleEnum,
+  'ShapeStyleForCreate.FontFamilyEnum': ShapeStyleForCreate.FontFamilyEnum,
+  'ShapeStyleForCreate.TextAlignEnum': ShapeStyleForCreate.TextAlignEnum,
+  'ShapeStyleForCreate.TextAlignVerticalEnum': ShapeStyleForCreate.TextAlignVerticalEnum,
+  'ShapeStyleForUpdate.BorderStyleEnum': ShapeStyleForUpdate.BorderStyleEnum,
+  'ShapeStyleForUpdate.FontFamilyEnum': ShapeStyleForUpdate.FontFamilyEnum,
+  'ShapeStyleForUpdate.TextAlignEnum': ShapeStyleForUpdate.TextAlignEnum,
+  'ShapeStyleForUpdate.TextAlignVerticalEnum': ShapeStyleForUpdate.TextAlignVerticalEnum,
   'StickyNoteData.ShapeEnum': StickyNoteData.ShapeEnum,
   'StickyNoteDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum':
     StickyNoteDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum,
@@ -835,10 +831,6 @@ let typeMap: {[index: string]: any} = {
   Picture: Picture,
   Position: Position,
   PositionChange: PositionChange,
-  PositionChangePlatformContainers: PositionChangePlatformContainers,
-  PositionPlatformContainers: PositionPlatformContainers,
-  PositionPlatformExperimentalFeatures: PositionPlatformExperimentalFeatures,
-  PositionPlatformTags: PositionPlatformTags,
   Project: Project,
   ProjectMember: ProjectMember,
   ProjectMemberPage: ProjectMemberPage,
@@ -851,10 +843,13 @@ let typeMap: {[index: string]: any} = {
   SelfLinkPlatformTags: SelfLinkPlatformTags,
   ShapeCreateRequest: ShapeCreateRequest,
   ShapeData: ShapeData,
-  ShapeDataPlatformTags: ShapeDataPlatformTags,
+  ShapeDataForCreate: ShapeDataForCreate,
+  ShapeDataForUpdate: ShapeDataForUpdate,
+  ShapeDataPlatformBulkCreateOperationExperimentalRelease: ShapeDataPlatformBulkCreateOperationExperimentalRelease,
   ShapeItem: ShapeItem,
   ShapeStyle: ShapeStyle,
-  ShapeStylePlatformExperimentalFeatures: ShapeStylePlatformExperimentalFeatures,
+  ShapeStyleForCreate: ShapeStyleForCreate,
+  ShapeStyleForUpdate: ShapeStyleForUpdate,
   ShapeUpdateRequest: ShapeUpdateRequest,
   SharingPolicySettings: SharingPolicySettings,
   StickyNoteCreateRequest: StickyNoteCreateRequest,

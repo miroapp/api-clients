@@ -12,9 +12,9 @@
 
 /**
  * @internal
- * Contains information about the shape style, such as the border color or opacity.
+ * Contains information about the shape style, such as the border color or opacity. <br> All properties in style object are supported for shape types aren\'t listed below. <br> <table>   <tr>     <th align=\"left\">Shape type</th>     <th align=\"left\">Unsupported properties</th>   </tr>   <tr>     <td>flow_chart_or</td>     <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>   </tr>   <tr>     <td>flow_chart_summing_junction</td>     <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>   </tr>   <tr>     <td>flow_chart_note_curly_left</td>     <td>fillColor, fillOpacity</td>   </tr>   <tr>     <td>flow_chart_note_curly_right</td>     <td>fillColor, fillOpacity</td>   </tr>   <tr>     <td>flow_chart_note_square</td>     <td>fillColor, fillOpacity</td>   </tr> </table>
  */
-export class ShapeStylePlatformExperimentalFeatures {
+export class ShapeStyleForCreate {
   /**
    * Defines the color of the border of the shape. Default: `#1a1a1a` (dark gray).
    */
@@ -28,7 +28,7 @@ export class ShapeStylePlatformExperimentalFeatures {
    */
   'borderStyle'?:
     | string
-    | (typeof ShapeStylePlatformExperimentalFeatures.BorderStyleEnum)[keyof typeof ShapeStylePlatformExperimentalFeatures.BorderStyleEnum]
+    | (typeof ShapeStyleForCreate.BorderStyleEnum)[keyof typeof ShapeStyleForCreate.BorderStyleEnum]
   /**
    * Defines the thickness of the shape border, in dp. Default: `2.0`.
    */
@@ -42,31 +42,27 @@ export class ShapeStylePlatformExperimentalFeatures {
    */
   'fillColor'?: string
   /**
-   * Opacity level of the fill color. Possible values: any number between `0` and `1`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.
+   * Opacity level of the fill color. Possible values: any number between `0` and `1`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default:  `Flowchart` shapes: `1.0`. `Basic` shapes: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.
    */
   'fillOpacity'?: string
   /**
    * Defines the font type for the text in the shape item. Default: `arial`.
    */
-  'fontFamily'?:
-    | string
-    | (typeof ShapeStylePlatformExperimentalFeatures.FontFamilyEnum)[keyof typeof ShapeStylePlatformExperimentalFeatures.FontFamilyEnum]
+  'fontFamily'?: string | (typeof ShapeStyleForCreate.FontFamilyEnum)[keyof typeof ShapeStyleForCreate.FontFamilyEnum]
   /**
    * Defines the font size, in dp, for the text on the shape. Default: `14`.
    */
   'fontSize'?: string
   /**
-   * Defines how the sticky note text is horizontally aligned. Default: `center`.
+   * Defines how the shape text is horizontally aligned. Default:  Flowchart shapes: `center`. Basic shapes: `left`.  `unknown` is returned for unsupported shapes.
    */
-  'textAlign'?:
-    | string
-    | (typeof ShapeStylePlatformExperimentalFeatures.TextAlignEnum)[keyof typeof ShapeStylePlatformExperimentalFeatures.TextAlignEnum]
+  'textAlign'?: string | (typeof ShapeStyleForCreate.TextAlignEnum)[keyof typeof ShapeStyleForCreate.TextAlignEnum]
   /**
-   * Defines how the sticky note text is vertically aligned. Default: `top`.
+   * Defines how the shape text is vertically aligned. Default:  Flowchart shapes: `middle`. Basic shapes: `top`.  `unknown` is returned for unsupported shapes.
    */
   'textAlignVertical'?:
     | string
-    | (typeof ShapeStylePlatformExperimentalFeatures.TextAlignVerticalEnum)[keyof typeof ShapeStylePlatformExperimentalFeatures.TextAlignVerticalEnum]
+    | (typeof ShapeStyleForCreate.TextAlignVerticalEnum)[keyof typeof ShapeStyleForCreate.TextAlignVerticalEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -86,7 +82,7 @@ export class ShapeStylePlatformExperimentalFeatures {
     {
       name: 'borderStyle',
       baseName: 'borderStyle',
-      type: 'ShapeStylePlatformExperimentalFeatures.BorderStyleEnum',
+      type: 'ShapeStyleForCreate.BorderStyleEnum',
     },
     {
       name: 'borderWidth',
@@ -111,7 +107,7 @@ export class ShapeStylePlatformExperimentalFeatures {
     {
       name: 'fontFamily',
       baseName: 'fontFamily',
-      type: 'ShapeStylePlatformExperimentalFeatures.FontFamilyEnum',
+      type: 'ShapeStyleForCreate.FontFamilyEnum',
     },
     {
       name: 'fontSize',
@@ -121,22 +117,22 @@ export class ShapeStylePlatformExperimentalFeatures {
     {
       name: 'textAlign',
       baseName: 'textAlign',
-      type: 'ShapeStylePlatformExperimentalFeatures.TextAlignEnum',
+      type: 'ShapeStyleForCreate.TextAlignEnum',
     },
     {
       name: 'textAlignVertical',
       baseName: 'textAlignVertical',
-      type: 'ShapeStylePlatformExperimentalFeatures.TextAlignVerticalEnum',
+      type: 'ShapeStyleForCreate.TextAlignVerticalEnum',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ShapeStylePlatformExperimentalFeatures.attributeTypeMap
+    return ShapeStyleForCreate.attributeTypeMap
   }
 }
 
-export namespace ShapeStylePlatformExperimentalFeatures {
+export namespace ShapeStyleForCreate {
   export const BorderStyleEnum = {
     Normal: 'normal',
     Dotted: 'dotted',
@@ -178,10 +174,12 @@ export namespace ShapeStylePlatformExperimentalFeatures {
     Left: 'left',
     Right: 'right',
     Center: 'center',
+    Unknown: 'unknown',
   } as const
   export const TextAlignVerticalEnum = {
     Top: 'top',
     Middle: 'middle',
     Bottom: 'bottom',
+    Unknown: 'unknown',
   } as const
 }

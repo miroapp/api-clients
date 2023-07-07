@@ -9981,6 +9981,149 @@
         "tags": ["Flowchart shapes (experimental)"]
       }
     },
+    "/v2-experimental/boards/{board_id}/shapes": {
+      "post": {
+        "description": "Adds a flowchart shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
+        "operationId": "create-shape-item-flowchart",
+        "parameters": [
+          {
+            "description": "Unique identifier (ID) of the board where you want to create the item.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShapeCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShapeItem"
+                }
+              }
+            },
+            "description": "Shape item created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Create shape item",
+        "tags": ["Flowchart shapes (experimental)"]
+      }
+    },
     "/v2-experimental/boards/{board_id}/shapes/{item_id}": {
       "get": {
         "description": "Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
@@ -10120,6 +10263,296 @@
           }
         },
         "summary": "Get shape item",
+        "tags": ["Flowchart shapes (experimental)"]
+      },
+      "patch": {
+        "description": "Updates a flowchart shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
+        "operationId": "update-shape-item-flowchart",
+        "parameters": [
+          {
+            "description": "Unique identifier (ID) of the board where you want to update the item.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier (ID) of the item that you want to update.",
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ShapeUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ShapeItem"
+                }
+              }
+            },
+            "description": "Shape item updated"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Update shape item",
+        "tags": ["Flowchart shapes (experimental)"]
+      },
+      "delete": {
+        "description": "Deletes a flowchart shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
+        "operationId": "delete-shape-item-flowchart",
+        "parameters": [
+          {
+            "description": "Unique identifier (ID) of the board from which you want to delete the item.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier (ID) of the item that you want to delete.",
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Shape item deleted"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Delete shape item",
         "tags": ["Flowchart shapes (experimental)"]
       }
     },
@@ -15276,46 +15709,6 @@
           }
         }
       },
-      "ShapeCreateRequest": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/ShapeData"
-          },
-          "style": {
-            "$ref": "#/components/schemas/ShapeStyle"
-          },
-          "position": {
-            "$ref": "#/components/schemas/PositionChange"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/Parent"
-          }
-        }
-      },
-      "ShapeUpdateRequest": {
-        "type": "object",
-        "properties": {
-          "data": {
-            "$ref": "#/components/schemas/ShapeData"
-          },
-          "style": {
-            "$ref": "#/components/schemas/ShapeStyle"
-          },
-          "position": {
-            "$ref": "#/components/schemas/PositionChange"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/Parent"
-          }
-        }
-      },
       "StickyNoteCreateRequest": {
         "type": "object",
         "properties": {
@@ -15822,34 +16215,6 @@
           }
         }
       },
-      "PositionPlatformTags": {
-        "type": "object",
-        "description": "Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.",
-        "properties": {
-          "origin": {
-            "type": "string",
-            "default": "center",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.",
-            "enum": ["center"]
-          },
-          "relativeTo": {
-            "type": "string",
-            "enum": ["canvas_center", "parent_top_left"]
-          },
-          "x": {
-            "type": "number",
-            "format": "double",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          },
-          "y": {
-            "type": "number",
-            "format": "double",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          }
-        }
-      },
       "SelfLinkPlatformTags": {
         "type": "object",
         "description": "Contains applicable links for the current object.",
@@ -15858,45 +16223,6 @@
             "type": "string",
             "description": "Link to obtain more information about the current object.",
             "example": "http://api.miro.com/v2/boards/o9J_koQspF4=/object_type/3074457349143649487"
-          }
-        }
-      },
-      "ShapeDataPlatformTags": {
-        "type": "object",
-        "description": "Contains shape item data, such as the content or shape type of the shape.",
-        "properties": {
-          "content": {
-            "type": "string",
-            "description": "The text you want to display on the shape.",
-            "example": "Hello"
-          },
-          "shape": {
-            "type": "string",
-            "default": "rectangle",
-            "description": "Defines the geometric shape of the item when it is rendered on the board.",
-            "enum": [
-              "rectangle",
-              "round_rectangle",
-              "circle",
-              "triangle",
-              "rhombus",
-              "parallelogram",
-              "trapezoid",
-              "pentagon",
-              "hexagon",
-              "octagon",
-              "wedge_round_rectangle_callout",
-              "star",
-              "flow_chart_predefined_process",
-              "cloud",
-              "cross",
-              "can",
-              "right_arrow",
-              "left_arrow",
-              "left_right_arrow",
-              "left_brace",
-              "right_brace"
-            ]
           }
         }
       },
@@ -16444,34 +16770,6 @@
           }
         }
       },
-      "PositionPlatformExperimentalFeatures": {
-        "type": "object",
-        "description": "Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.",
-        "properties": {
-          "origin": {
-            "type": "string",
-            "default": "center",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.",
-            "enum": ["center"]
-          },
-          "relativeTo": {
-            "type": "string",
-            "enum": ["canvas_center", "parent_top_left"]
-          },
-          "x": {
-            "type": "number",
-            "format": "double",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          },
-          "y": {
-            "type": "number",
-            "format": "double",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          }
-        }
-      },
       "SelfLinkPlatformExperimentalFeatures": {
         "type": "object",
         "description": "Contains applicable links for the current object.",
@@ -16480,6 +16778,58 @@
             "type": "string",
             "description": "Link to obtain more information about the current object.",
             "example": "http://api.miro.com/v2/boards/o9J_koQspF4=/object_type/3074457349143649487"
+          }
+        }
+      },
+      "ShapeCreateRequest": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ShapeDataForCreate"
+          },
+          "style": {
+            "$ref": "#/components/schemas/ShapeStyleForCreate"
+          },
+          "position": {
+            "$ref": "#/components/schemas/PositionChange"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Parent"
+          }
+        }
+      },
+      "ShapeDataForCreate": {
+        "type": "object",
+        "description": "Contains shape item data, such as the content or the type of the shape.",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The text you want to display on the shape.\n<br>**Not supported for shapes:**\n<ul>\n  <li>flow_chart_or</li>\n  <li>flow_chart_summing_junction</li>\n</ul>",
+            "example": "Hello"
+          },
+          "shape": {
+            "type": "string",
+            "default": "rectangle",
+            "description": "Defines the geometric shape of the item when it is rendered on the board. <details>\n  <summary>Basic shapes</summary>\n  <ul>\n    <li>rectangle</li>\n    <li>round_rectangle</li>\n    <li>circle</li>\n    <li>triangle</li>\n    <li>rhombus</li>\n    <li>parallelogram</li>\n    <li>trapezoid</li>\n    <li>pentagon</li>\n    <li>hexagon</li>\n    <li>octagon</li>\n    <li>wedge_round_rectangle_callout</li>\n    <li>star</li>\n    <li>flow_chart_predefined_process</li>\n    <li>cloud</li>\n    <li>cross</li>\n    <li>can</li>\n    <li>right_arrow</li>\n    <li>left_arrow</li>\n    <li>left_right_arrow</li>\n    <li>left_brace</li>\n    <li>right_brace</li>\n  </ul>\n</details>\n<details>\n  <summary>Flowchart shapes</summary>\n  <ul>\n    <li>flow_chart_connector</li>\n    <li>flow_chart_magnetic_disk</li>\n    <li>flow_chart_input_output</li>\n    <li>flow_chart_decision</li>\n    <li>flow_chart_delay</li>\n    <li>flow_chart_display</li>\n    <li>flow_chart_document</li>\n    <li>flow_chart_magnetic_drum</li>\n    <li>flow_chart_internal_storage</li>\n    <li>flow_chart_manual_input</li>\n    <li>flow_chart_manual_operation</li>\n    <li>flow_chart_merge</li>\n    <li>flow_chart_multidocuments</li>\n    <li>flow_chart_note_curly_left</li>\n    <li>flow_chart_note_curly_right</li>\n    <li>flow_chart_note_square</li>\n    <li>flow_chart_offpage_connector</li>\n    <li>flow_chart_or</li>\n    <li>flow_chart_predefined_process_2</li>\n    <li>flow_chart_preparation</li>\n    <li>flow_chart_process</li>\n    <li>flow_chart_online_storage</li>\n    <li>flow_chart_summing_junction</li>\n    <li>flow_chart_terminator</li>\n  </ul>\n</details>"
+          }
+        }
+      },
+      "ShapeDataForUpdate": {
+        "type": "object",
+        "description": "Contains shape item data, such as the content or the type of the shape.",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The text you want to display on the shape.\n**Note: When updating a shape type to one of the types below, existing `content` will be lost.**\n<br>**Not supported for shapes:**\n<ul>\n  <li>flow_chart_or</li>\n  <li>flow_chart_summing_junction</li>\n</ul>",
+            "example": "Hello"
+          },
+          "shape": {
+            "type": "string",
+            "default": "rectangle",
+            "description": "Defines the geometric shape of the item when it is rendered on the board. <details>\n  <summary>Basic shapes</summary>\n  <ul>\n    <li>rectangle</li>\n    <li>round_rectangle</li>\n    <li>circle</li>\n    <li>triangle</li>\n    <li>rhombus</li>\n    <li>parallelogram</li>\n    <li>trapezoid</li>\n    <li>pentagon</li>\n    <li>hexagon</li>\n    <li>octagon</li>\n    <li>wedge_round_rectangle_callout</li>\n    <li>star</li>\n    <li>flow_chart_predefined_process</li>\n    <li>cloud</li>\n    <li>cross</li>\n    <li>can</li>\n    <li>right_arrow</li>\n    <li>left_arrow</li>\n    <li>left_right_arrow</li>\n    <li>left_brace</li>\n    <li>right_brace</li>\n  </ul>\n</details>\n<details>\n  <summary>Flowchart shapes</summary>\n  <ul>\n    <li>flow_chart_connector</li>\n    <li>flow_chart_magnetic_disk</li>\n    <li>flow_chart_input_output</li>\n    <li>flow_chart_decision</li>\n    <li>flow_chart_delay</li>\n    <li>flow_chart_display</li>\n    <li>flow_chart_document</li>\n    <li>flow_chart_magnetic_drum</li>\n    <li>flow_chart_internal_storage</li>\n    <li>flow_chart_manual_input</li>\n    <li>flow_chart_manual_operation</li>\n    <li>flow_chart_merge</li>\n    <li>flow_chart_multidocuments</li>\n    <li>flow_chart_note_curly_left</li>\n    <li>flow_chart_note_curly_right</li>\n    <li>flow_chart_note_square</li>\n    <li>flow_chart_offpage_connector</li>\n    <li>flow_chart_or</li>\n    <li>flow_chart_predefined_process_2</li>\n    <li>flow_chart_preparation</li>\n    <li>flow_chart_process</li>\n    <li>flow_chart_online_storage</li>\n    <li>flow_chart_summing_junction</li>\n    <li>flow_chart_terminator</li>\n  </ul>\n</details>"
           }
         }
       },
@@ -16492,10 +16842,10 @@
             "example": "3458764517517819000"
           },
           "data": {
-            "$ref": "#/components/schemas/ShapeData"
+            "$ref": "#/components/schemas/ShapeDataForCreate"
           },
           "style": {
-            "$ref": "#/components/schemas/ShapeStyle"
+            "$ref": "#/components/schemas/ShapeStyleForCreate"
           },
           "position": {
             "$ref": "#/components/schemas/Position"
@@ -16535,9 +16885,9 @@
         },
         "required": ["id", "type"]
       },
-      "ShapeStylePlatformExperimentalFeatures": {
+      "ShapeStyleForCreate": {
         "type": "object",
-        "description": "Contains information about the shape style, such as the border color or opacity.",
+        "description": "Contains information about the shape style, such as the border color or opacity. <br> All properties in style object are supported for shape types aren't listed below. <br> <table>\n  <tr>\n    <th align=\"left\">Shape type</th>\n    <th align=\"left\">Unsupported properties</th>\n  </tr>\n  <tr>\n    <td>flow_chart_or</td>\n    <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>\n  </tr>\n  <tr>\n    <td>flow_chart_summing_junction</td>\n    <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>\n  </tr>\n  <tr>\n    <td>flow_chart_note_curly_left</td>\n    <td>fillColor, fillOpacity</td>\n  </tr>\n  <tr>\n    <td>flow_chart_note_curly_right</td>\n    <td>fillColor, fillOpacity</td>\n  </tr>\n  <tr>\n    <td>flow_chart_note_square</td>\n    <td>fillColor, fillOpacity</td>\n  </tr>\n</table>",
         "properties": {
           "borderColor": {
             "type": "string",
@@ -16572,7 +16922,7 @@
           },
           "fillOpacity": {
             "type": "string",
-            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.\n",
+            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault:  `Flowchart` shapes: `1.0`. `Basic` shapes: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.\n",
             "maximum": 1,
             "minimum": 0
           },
@@ -16620,13 +16970,128 @@
           },
           "textAlign": {
             "type": "string",
-            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
+            "description": "Defines how the shape text is horizontally aligned.\nDefault: \nFlowchart shapes: `center`.\nBasic shapes: `left`.\n\n`unknown` is returned for unsupported shapes.",
+            "enum": ["left", "right", "center", "unknown"]
+          },
+          "textAlignVertical": {
+            "type": "string",
+            "description": "Defines how the shape text is vertically aligned.\nDefault: \nFlowchart shapes: `middle`.\nBasic shapes: `top`.\n\n`unknown` is returned for unsupported shapes.",
+            "enum": ["top", "middle", "bottom", "unknown"]
+          }
+        }
+      },
+      "ShapeStyleForUpdate": {
+        "type": "object",
+        "description": "Contains information about the shape style, such as the border color or opacity. <br> All properties in style object are supported for shape types aren't listed below. <br> <table>\n  <tr>\n    <th align=\"left\">Shape type</th>\n    <th align=\"left\">Unsupported properties</th>\n  </tr>\n  <tr>\n    <td>flow_chart_or</td>\n    <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>\n  </tr>\n  <tr>\n    <td>flow_chart_summing_junction</td>\n    <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>\n  </tr>\n  <tr>\n    <td>flow_chart_note_curly_left</td>\n    <td>fillColor, fillOpacity</td>\n  </tr>\n  <tr>\n    <td>flow_chart_note_curly_right</td>\n    <td>fillColor, fillOpacity</td>\n  </tr>\n  <tr>\n    <td>flow_chart_note_square</td>\n    <td>fillColor, fillOpacity</td>\n  </tr>\n</table>",
+        "properties": {
+          "borderColor": {
+            "type": "string",
+            "description": "Defines the color of the border of the shape.\nDefault: `#1a1a1a` (dark gray)."
+          },
+          "borderOpacity": {
+            "type": "string",
+            "description": "Defines the opacity level of the shape border.\nPossible values: any number between `0.0` and `1.0`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault: `1.0` (solid color).",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "borderStyle": {
+            "type": "string",
+            "description": "Defines the style used to represent the border of the shape.\nDefault: `normal`.",
+            "enum": ["normal", "dotted", "dashed"]
+          },
+          "borderWidth": {
+            "type": "string",
+            "description": "Defines the thickness of the shape border, in dp.\nDefault: `2.0`.",
+            "maximum": 24,
+            "minimum": 1
+          },
+          "color": {
+            "type": "string",
+            "description": "Hex value representing the color for the text within the shape item.\nDefault: `#1a1a1a`.",
+            "example": "#1a1a1a"
+          },
+          "fillColor": {
+            "type": "string",
+            "description": "Fill color for the shape.\nHex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000`\nDefault: #ffffff.",
+            "example": "#8fd14f"
+          },
+          "fillOpacity": {
+            "type": "string",
+            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault:  Flowchart shapes: `1.0`. Basic shapes: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.\n",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "fontFamily": {
+            "type": "string",
+            "description": "Defines the font type for the text in the shape item.\nDefault: `arial`.",
+            "enum": [
+              "arial",
+              "abril_fatface",
+              "bangers",
+              "eb_garamond",
+              "georgia",
+              "graduate",
+              "gravitas_one",
+              "fredoka_one",
+              "nixie_one",
+              "open_sans",
+              "permanent_marker",
+              "pt_sans",
+              "pt_sans_narrow",
+              "pt_serif",
+              "rammetto_one",
+              "roboto",
+              "roboto_condensed",
+              "roboto_slab",
+              "caveat",
+              "times_new_roman",
+              "titan_one",
+              "lemon_tuesday",
+              "roboto_mono",
+              "noto_sans",
+              "plex_sans",
+              "plex_serif",
+              "plex_mono",
+              "spoof",
+              "tiempos_text",
+              "formular"
+            ]
+          },
+          "fontSize": {
+            "type": "string",
+            "description": "Defines the font size, in dp, for the text on the shape.\nDefault: `14`.",
+            "maximum": 288,
+            "minimum": 10
+          },
+          "textAlign": {
+            "type": "string",
+            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: \nFlowchart shapes: `center`.\nBasic shapes: `left`.",
             "enum": ["left", "right", "center"]
           },
           "textAlignVertical": {
             "type": "string",
-            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
+            "description": "Defines how the sticky note text is vertically aligned.\nDefault: \nFlowchart shapes: `middle`.\nBasic shapes: `top`.",
             "enum": ["top", "middle", "bottom"]
+          }
+        }
+      },
+      "ShapeUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/ShapeDataForUpdate"
+          },
+          "style": {
+            "$ref": "#/components/schemas/ShapeStyleForUpdate"
+          },
+          "position": {
+            "$ref": "#/components/schemas/PositionChange"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Parent"
           }
         }
       },
@@ -16991,52 +17456,6 @@
           },
           "links": {
             "$ref": "#/components/schemas/SelfLink"
-          }
-        }
-      },
-      "PositionPlatformContainers": {
-        "type": "object",
-        "description": "Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.",
-        "properties": {
-          "origin": {
-            "type": "string",
-            "default": "center",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported.",
-            "enum": ["center"]
-          },
-          "relativeTo": {
-            "type": "string",
-            "enum": ["canvas_center", "parent_top_left"]
-          },
-          "x": {
-            "type": "number",
-            "format": "double",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          },
-          "y": {
-            "type": "number",
-            "format": "double",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          }
-        }
-      },
-      "PositionChangePlatformContainers": {
-        "type": "object",
-        "description": "Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.",
-        "properties": {
-          "x": {
-            "type": "number",
-            "format": "double",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          },
-          "y": {
-            "type": "number",
-            "format": "double",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
           }
         }
       },
@@ -17532,7 +17951,7 @@
           }
         }
       },
-      "ShapeData": {
+      "ShapeDataPlatformBulkCreateOperationExperimentalRelease": {
         "type": "object",
         "description": "Contains shape item data, such as the content or shape type of the shape.",
         "properties": {
@@ -18246,7 +18665,7 @@
       },
       "Parent": {
         "type": "object",
-        "description": "Contains information about the parent this item is attached to. Passing null for ID will attach widget to the canvas directly.",
+        "description": "Contains information about the parent this item must be attached to. A maximum of 1000 items can be attached to a frame. Passing `null` for `parent.id` directly attaches an item to the canvas.",
         "properties": {
           "id": {
             "type": "string",
@@ -18474,6 +18893,45 @@
           }
         },
         "required": ["url"]
+      },
+      "ShapeData": {
+        "type": "object",
+        "description": "Contains shape item data, such as the content or shape type of the shape.",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The text you want to display on the shape.",
+            "example": "Hello"
+          },
+          "shape": {
+            "type": "string",
+            "default": "rectangle",
+            "description": "Defines the geometric shape of the item when it is rendered on the board.",
+            "enum": [
+              "rectangle",
+              "round_rectangle",
+              "circle",
+              "triangle",
+              "rhombus",
+              "parallelogram",
+              "trapezoid",
+              "pentagon",
+              "hexagon",
+              "octagon",
+              "wedge_round_rectangle_callout",
+              "star",
+              "flow_chart_predefined_process",
+              "cloud",
+              "cross",
+              "can",
+              "right_arrow",
+              "left_arrow",
+              "left_right_arrow",
+              "left_brace",
+              "right_brace"
+            ]
+          }
+        }
       },
       "StickyNoteData": {
         "type": "object",
