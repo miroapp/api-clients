@@ -1,0 +1,277 @@
+openapi: 3.0.1
+info:
+  title: Audit Logs (Enterprise Plan)
+  version: v2
+servers:
+- url: https://api.miro.com
+security:
+- bearerAuth: []
+tags:
+- description: Audit Logs API for reading audit logs of an organization.
+  name: Audit Logs
+paths:
+  /v2/audit/logs:
+    get:
+      description: Retrieves a page of audit events.<br/><h3>Required scope</h3> <a
+        target="blank" href="/reference/scopes">auditlogs:read</a> <br/><h3>Rate limiting</h3>
+        <a target="blank" href="/reference/ratelimiting">Level 2</a>
+      operationId: enterprise-get-audit-logs
+      parameters:
+      - description: yyyy-MM-ddThh:mm:ss.SSSZ
+        example: 2023-01-01 00:00:00+00:00
+        in: query
+        name: createdAfter
+        required: true
+        schema:
+          type: string
+          format: date
+      - description: yyyy-MM-ddThh:mm:ss.SSSZ
+        example: 2024-01-01 00:00:00+00:00
+        in: query
+        name: createdBefore
+        required: true
+        schema:
+          type: string
+          format: date
+      - description: The cursor output from the previous page, to fetch the next page
+        in: query
+        name: cursor
+        schema:
+          type: string
+      - description: The item limit to fetch per page, defaults to 100
+        example: 100
+        in: query
+        name: limit
+        schema:
+          type: integer
+      - description: Sorting mode. Accepted values are ASC and DESC, defaults to ASC
+        example: ASC
+        in: query
+        name: sorting
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditPage'
+          description: Audit logs fetched
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '409':
+          $ref: '#/components/responses/409'
+        '429':
+          $ref: '#/components/responses/429'
+      summary: Get audit logs
+      tags:
+      - Audit Logs
+components:
+  schemas:
+    BasicError:
+      type: object
+      properties:
+        status:
+          type: number
+          description: HTTP status code.
+        code:
+          type: string
+          description: Description of the status code.
+        message:
+          type: string
+          description: Explanation for the error
+        type:
+          type: string
+          description: Type of the object returned.
+          default: error
+    AuditPage:
+      type: object
+      properties:
+        limit:
+          type: integer
+          description: Page limit
+        cursor:
+          type: string
+          description: The key that should be used as the cursor request parameter
+            to fetch the next page
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/AuditEvent'
+          description: Audit events list
+    AuditEvent:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Audit event id
+        context:
+          $ref: '#/components/schemas/AuditContext'
+        object:
+          $ref: '#/components/schemas/AuditObject'
+        createdAt:
+          type: string
+          description: Time when the audit event has been created
+          format: date-time
+        details:
+          type: object
+          description: Details json related to the audit event
+        createdBy:
+          $ref: '#/components/schemas/AuditCreatedBy'
+        event:
+          type: string
+          description: Event type of the audit event
+    AuditContext:
+      type: object
+      description: Audit context
+      properties:
+        ip:
+          type: string
+          description: Ip address associated with the audit context
+        team:
+          $ref: '#/components/schemas/AuditTeam'
+        organization:
+          $ref: '#/components/schemas/AuditOrganization'
+    AuditTeam:
+      type: object
+      description: Team associated with the audit context
+      properties:
+        id:
+          type: string
+          description: Id of the team
+        name:
+          type: string
+          description: Name of the team
+    AuditOrganization:
+      type: object
+      description: Organization associated with the audit context
+      properties:
+        id:
+          type: string
+          description: Id of the organization
+        name:
+          type: string
+          description: Name of the organization
+    AuditObject:
+      type: object
+      description: The object related with the audit event
+      properties:
+        id:
+          type: string
+          description: Id of the object
+        name:
+          type: string
+          description: Name of the object
+    AuditCreatedBy:
+      type: object
+      description: The details regarding the creator of the audit event
+      properties:
+        type:
+          type: string
+          description: Type of the creator
+          enum:
+          - user
+          - application
+          - scim_provisioner
+          - miro_automation
+        id:
+          type: string
+          description: Id of the creator
+        name:
+          type: string
+          description: Name of the creator
+        email:
+          type: string
+          description: Email of the creator
+  responses:
+    '400':
+      description: Malformed request
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 400
+                code:
+                  default: invalidParameters
+    '401':
+      description: Invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 401
+                code:
+                  default: tokenNotProvided
+    '403':
+      description: Invalid access
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 403
+                code:
+                  default: forbiddenAccess
+    '404':
+      description: Invalid access
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 404
+                code:
+                  default: notFound
+    '409':
+      description: Conflict
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 409
+                code:
+                  default: conflict
+    '429':
+      description: Too many requests
+      content:
+        application/json:
+          schema:
+            allOf:
+            - $ref: '#/components/schemas/BasicError'
+            - type: object
+              properties:
+                status:
+                  default: 429
+                code:
+                  default: tooManyRequests
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      type: http

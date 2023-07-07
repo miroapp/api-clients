@@ -167,10 +167,6 @@ model/parentWithLinks.ts
 model/picture.ts
 model/position.ts
 model/positionChange.ts
-model/positionChangePlatformContainers.ts
-model/positionPlatformContainers.ts
-model/positionPlatformExperimentalFeatures.ts
-model/positionPlatformTags.ts
 model/project.ts
 model/projectMember.ts
 model/projectMemberPage.ts
@@ -185,10 +181,13 @@ model/selfLinkPlatformExperimentalFeatures.ts
 model/selfLinkPlatformTags.ts
 model/shapeCreateRequest.ts
 model/shapeData.ts
-model/shapeDataPlatformTags.ts
+model/shapeDataForCreate.ts
+model/shapeDataForUpdate.ts
+model/shapeDataPlatformBulkCreateOperationExperimentalRelease.ts
 model/shapeItem.ts
 model/shapeStyle.ts
-model/shapeStylePlatformExperimentalFeatures.ts
+model/shapeStyleForCreate.ts
+model/shapeStyleForUpdate.ts
 model/shapeUpdateRequest.ts
 model/sharingPolicySettings.ts
 model/stickyNoteCreateRequest.ts
