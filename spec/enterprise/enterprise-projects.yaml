@@ -27,7 +27,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-create-project
       parameters:
       - name: org_id
@@ -108,7 +110,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-get-projects
       parameters:
       - name: org_id
@@ -195,7 +199,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-get-project
       parameters:
       - name: org_id
@@ -267,7 +273,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-update-project
       parameters:
       - name: org_id
@@ -350,7 +358,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 4</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-delete-project
       parameters:
       - name: org_id
@@ -423,7 +433,8 @@ paths:
         <a target="blank" href="/reference/ratelimiting">Level 1</a> <br/><h3>Enterprise
         only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
         plan</a> users. You can only use this endpoint if you have the role of a Company
-        Admin.</p>
+        Admin. You can request temporary access to Enterprise APIs using <a target="_blank"
+        href="https://miro-survey.typeform.com/to/BVPTNWJ9">this form</a>.</p>
       operationId: enterprise-get-project-settings
       parameters:
       - name: org_id
@@ -494,7 +505,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-update-project-settings
       parameters:
       - name: org_id
@@ -577,7 +590,8 @@ paths:
         target="blank" href="/reference/ratelimiting">Level 1</a> <br/><h3>Enterprise
         only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
         plan</a> users. You can only use this endpoint if you have the role of a Company
-        Admin.</p>
+        Admin. You can request temporary access to Enterprise APIs using <a target="_blank"
+        href="https://miro-survey.typeform.com/to/BVPTNWJ9">this form</a>.</p>
       operationId: enterprise-add-project-member
       parameters:
       - name: org_id
@@ -659,7 +673,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-get-project-members
       parameters:
       - name: org_id
@@ -757,7 +773,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-get-project-member
       parameters:
       - name: org_id
@@ -842,7 +860,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-update-project-member
       parameters:
       - name: org_id
@@ -933,7 +953,8 @@ paths:
         <a target="blank" href="/reference/ratelimiting">Level 4</a> <br/><h3>Enterprise
         only</h3> <p>This API is available only for <a target="blank" href="/reference/api-reference#enterprise-plan">Enterprise
         plan</a> users. You can only use this endpoint if you have the role of a Company
-        Admin.</p>
+        Admin. You can request temporary access to Enterprise APIs using <a target="_blank"
+        href="https://miro-survey.typeform.com/to/BVPTNWJ9">this form</a>.</p>
       operationId: enterprise-delete-project-member
       parameters:
       - name: org_id
