@@ -19,7 +19,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 4</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-create-board-export
       parameters:
       - description: Unique identifier of the organization.
@@ -72,7 +74,9 @@ paths:
         limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 4</a>
         <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-board-export-job-status
       parameters:
       - description: Unique identifier of the organization.
@@ -120,7 +124,9 @@ paths:
         <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
         4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target="blank"
         href="/reference/api-reference#enterprise-plan">Enterprise plan</a> users.
-        You can only use this endpoint if you have the role of a Company Admin.</p>
+        You can only use this endpoint if you have the role of a Company Admin. You
+        can request temporary access to Enterprise APIs using <a target="_blank" href="https://miro-survey.typeform.com/to/BVPTNWJ9">this
+        form</a>.</p>
       operationId: enterprise-board-export-job-results
       parameters:
       - description: Unique identifier of the organization.
