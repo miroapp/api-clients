@@ -9644,28 +9644,6 @@
         "tags": ["Webhooks (experimental)"]
       }
     },
-    "/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "board_id",
-          "in": "path",
-          "required": true,
-          "description": "Unique identifier (ID) of the board from which you want to retrieve a mind map node."
-        },
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "item_id",
-          "in": "path",
-          "required": true,
-          "description": "Unique identifier (ID) of the mind map node that you want to retrieve."
-        }
-      ]
-    },
     "/v2-experimental/boards/{board_id}/mindmap_nodes": {
       "parameters": [
         {
@@ -9678,883 +9656,6 @@
           "description": "Unique identifier (ID) of the board from which you want to retrieve mind map nodes."
         }
       ]
-    },
-    "/v2-experimental/boards/{board_id}/items": {
-      "get": {
-        "description": "Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
-        "operationId": "get-items-flowchart",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "limit",
-            "schema": {
-              "type": "string",
-              "default": "10",
-              "description": "The maximum number of results to return per call. If the number of items in the response is greater than the limit specified, the response returns the cursor parameter with a value.",
-              "maximum": 50,
-              "minimum": 10
-            }
-          },
-          {
-            "in": "query",
-            "name": "type",
-            "schema": {
-              "type": "string",
-              "enum": ["shape"]
-            }
-          },
-          {
-            "in": "query",
-            "name": "cursor",
-            "schema": {
-              "type": "string",
-              "description": "A cursor-paginated method returns a portion of the total set of results based on the limit specified and a `cursor` that points to the next portion of the results. To retrieve the next portion of the collection, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request."
-            }
-          },
-          {
-            "description": "Unique identifier (ID) of the board for which you want to retrieve the list of available items.",
-            "in": "path",
-            "name": "board_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericItemCursorPaged"
-                }
-              }
-            },
-            "description": "Items retrieved"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Malformed request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not found"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "summary": "Get items on board",
-        "tags": ["Flowchart shapes (experimental)"]
-      }
-    },
-    "/v2-experimental/boards/{board_id}/items/{item_id}": {
-      "get": {
-        "description": "Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
-        "operationId": "get-specific-item-flowchart",
-        "parameters": [
-          {
-            "description": "Unique identifier (ID) of the board from which you want to retrieve a specific item.",
-            "in": "path",
-            "name": "board_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Unique identifier (ID) of the item that you want to retrieve.",
-            "in": "path",
-            "name": "item_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericItem"
-                }
-              }
-            },
-            "description": "Item retrieved"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Malformed request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not found"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "summary": "Get specific item on board",
-        "tags": ["Flowchart shapes (experimental)"]
-      }
-    },
-    "/v2-experimental/boards/{board_id}/shapes": {
-      "post": {
-        "description": "Adds a flowchart shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
-        "operationId": "create-shape-item-flowchart",
-        "parameters": [
-          {
-            "description": "Unique identifier (ID) of the board where you want to create the item.",
-            "in": "path",
-            "name": "board_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ShapeCreateRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ShapeItem"
-                }
-              }
-            },
-            "description": "Shape item created"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Malformed request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not found"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "summary": "Create shape item",
-        "tags": ["Flowchart shapes (experimental)"]
-      }
-    },
-    "/v2-experimental/boards/{board_id}/shapes/{item_id}": {
-      "get": {
-        "description": "Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
-        "operationId": "get-shape-item-flowchart",
-        "parameters": [
-          {
-            "description": "Unique identifier (ID) of the board from which you want to retrieve a specific item.",
-            "in": "path",
-            "name": "board_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Unique identifier (ID) of the item that you want to retrieve.",
-            "in": "path",
-            "name": "item_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ShapeItem"
-                }
-              }
-            },
-            "description": "Shape item retrieved"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Malformed request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not found"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "summary": "Get shape item",
-        "tags": ["Flowchart shapes (experimental)"]
-      },
-      "patch": {
-        "description": "Updates a flowchart shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
-        "operationId": "update-shape-item-flowchart",
-        "parameters": [
-          {
-            "description": "Unique identifier (ID) of the board where you want to update the item.",
-            "in": "path",
-            "name": "board_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Unique identifier (ID) of the item that you want to update.",
-            "in": "path",
-            "name": "item_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ShapeUpdateRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ShapeItem"
-                }
-              }
-            },
-            "description": "Shape item updated"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Malformed request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not found"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "summary": "Update shape item",
-        "tags": ["Flowchart shapes (experimental)"]
-      },
-      "delete": {
-        "description": "Deletes a flowchart shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
-        "operationId": "delete-shape-item-flowchart",
-        "parameters": [
-          {
-            "description": "Unique identifier (ID) of the board from which you want to delete the item.",
-            "in": "path",
-            "name": "board_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "Unique identifier (ID) of the item that you want to delete.",
-            "in": "path",
-            "name": "item_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Shape item deleted"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Malformed request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not found"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "summary": "Delete shape item",
-        "tags": ["Flowchart shapes (experimental)"]
-      }
     },
     "/v2/boards/{board_id}/frames": {
       "post": {
@@ -11301,13 +10402,13 @@
         "tags": ["items"]
       }
     },
-    "/v2-experimental/boards/{board_id_PlatformContainersExperimental}/items": {
+    "/v2-experimental/boards/{board_id}/items": {
       "parameters": [
         {
           "schema": {
             "type": "string"
           },
-          "name": "board_id_PlatformContainersExperimental",
+          "name": "board_id",
           "in": "path",
           "required": true,
           "description": "Unique identifier (ID) of the board from which you want to retrieve the child nodes of a mind map node."
@@ -11453,7 +10554,7 @@
             }
           },
           {
-            "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subqequent pages set it to the value returned in the cursor field of the previous request.",
+            "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.",
             "example": 3055557345821140500,
             "in": "query",
             "name": "cursor",
@@ -11709,7 +10810,7 @@
             }
           },
           {
-            "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subqequent pages set it to the value returned in the cursor field of the previous request.",
+            "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.",
             "example": 3055557345821140500,
             "in": "query",
             "name": "cursor",
@@ -12988,7 +12089,7 @@
           },
           {
             "name": "cursor",
-            "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subqequent pages set it to the value returned in the cursor field of the previous request.",
+            "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.",
             "in": "query",
             "schema": {
               "type": "string"
@@ -13779,7 +12880,7 @@
           },
           {
             "name": "cursor",
-            "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subqequent pages set it to the value returned in the cursor field of the previous request.",
+            "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.",
             "in": "query",
             "schema": {
               "type": "string"
@@ -16755,21 +15856,6 @@
         ],
         "description": "Contains the mind map node data, such as the item title, content, or description."
       },
-      "ParentLinksEnvelopePlatformExperimentalFeatures": {
-        "type": "object",
-        "description": "Contains information about the parent frame for the item.",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Unique identifier (ID) of the parent frame for the item.",
-            "example": 3074457362577955300
-          },
-          "links": {
-            "$ref": "#/components/schemas/SelfLink"
-          }
-        }
-      },
       "SelfLinkPlatformExperimentalFeatures": {
         "type": "object",
         "description": "Contains applicable links for the current object.",
@@ -17444,21 +16530,6 @@
           }
         }
       },
-      "ParentLinksEnvelopePlatformContainers": {
-        "type": "object",
-        "description": "Contains information about the parent frame for the item.",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Unique identifier (ID) of the parent frame for the item.",
-            "example": 3074457362577955300
-          },
-          "links": {
-            "$ref": "#/components/schemas/SelfLink"
-          }
-        }
-      },
       "SelfLinkPlatformContainers": {
         "type": "object",
         "description": "Contains applicable links for the current object.",
@@ -17588,9 +16659,10 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "format": "int64",
-            "description": "Unique identifier (ID) of the parent mind map node  for the item."
+            "description": "Unique identifier (ID) of the parent mind map node for the item.",
+            "example": 3074457362577955300
           },
           "links": {
             "$ref": "#/components/schemas/SelfLink"
@@ -17602,9 +16674,10 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "format": "int64",
-            "description": "Unique identifier (ID) of an item."
+            "description": "Unique identifier (ID) of an item.",
+            "example": 3074457362577955300
           },
           "data": {
             "$ref": "#/components/schemas/MindmapData"
@@ -17657,7 +16730,7 @@
         "properties": {
           "related": {
             "type": "string",
-            "description": "Link to obtain information about the child nodes"
+            "description": "Link to obtain information about the child nodes."
           },
           "self": {
             "type": "string"
@@ -17666,7 +16739,7 @@
       },
       "MindmapNodeView": {
         "type": "object",
-        "description": "Contains the information about the item used as a mind map node.",
+        "description": "Contains information about the item used as a mind map node.",
         "properties": {
           "type": {
             "type": "string",
@@ -17685,23 +16758,14 @@
         ],
         "description": "Contains the item data, such as the item title, content, or description."
       },
-      "TextDataPlatformContainersExperimental": {
-        "type": "object",
-        "description": "Contains text item data",
-        "properties": {
-          "content": {
-            "type": "string",
-            "description": "The actual text (content) that appears in the text item."
-          }
-        }
-      },
       "MindmapItem": {
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer",
+            "type": "string",
             "format": "int64",
-            "description": "Unique identifier (ID) of an item."
+            "description": "Unique identifier (ID) of an item.",
+            "example": 3074457362577955300
           },
           "data": {
             "$ref": "#/components/schemas/MindmapData"
@@ -18670,7 +17734,8 @@
           "id": {
             "type": "string",
             "format": "int64",
-            "example": "3458764517517819001"
+            "example": "3458764517517819001",
+            "description": "Unique identifier (ID) of the parent for the item."
           }
         }
       },
@@ -18681,7 +17746,8 @@
           "id": {
             "type": "string",
             "format": "int64",
-            "example": "3458764517517819001"
+            "example": "3458764517517819001",
+            "description": "Unique identifier (ID) of a container item."
           },
           "links": {
             "$ref": "#/components/schemas/SelfLink"

@@ -1016,6 +1016,7 @@ components:
           type: string
           format: int64
           example: '3458764517517819001'
+          description: Unique identifier (ID) of the parent for the item.
     ParentWithLinks:
       type: object
       description: Contains information about the parent this item attached to.
@@ -1024,6 +1025,7 @@ components:
           type: string
           format: int64
           example: '3458764517517819001'
+          description: Unique identifier (ID) of a container item.
         links:
           $ref: '#/components/schemas/SelfLink'
     Position:

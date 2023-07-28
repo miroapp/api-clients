@@ -76,7 +76,7 @@ paths:
           example: 100
           default: 100
       - description: An indicator of the position of a page in the full set of results.
-          To obtain the first page leave it empty. To obtain subqequent pages set
+          To obtain the first page leave it empty. To obtain subsequent pages set
           it to the value returned in the cursor field of the previous request.
         example: 3055557345821140500
         in: query
@@ -280,7 +280,7 @@ paths:
           example: 100
           default: 100
       - description: An indicator of the position of a page in the full set of results.
-          To obtain the first page leave it empty. To obtain subqequent pages set
+          To obtain the first page leave it empty. To obtain subsequent pages set
           it to the value returned in the cursor field of the previous request.
         example: 3055557345821140500
         in: query

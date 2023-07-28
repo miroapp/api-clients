@@ -92,6 +92,7 @@ components:
         id:
           type: string
           description: Unique identifier (ID) of the user.
+          example: '3458764517517852417'
         type:
           type: string
           description: Indicates the type of object returned. In this case, `type`
@@ -103,6 +104,7 @@ components:
         id:
           type: string
           description: Unique identifier (ID) of the user.
+          example: '3458764517517852417'
         type:
           type: string
           description: Indicates the type of object returned. In this case, `type`
@@ -111,10 +113,11 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           format: int64
-          description: Unique identifier (ID) of the parent mind map node  for the
+          description: Unique identifier (ID) of the parent mind map node for the
             item.
+          example: 3074457362577955300
         links:
           $ref: '#/components/schemas/SelfLink'
       description: Contains information about the parent mind map node for the item.
@@ -129,9 +132,10 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
           format: int64
           description: Unique identifier (ID) of an item.
+          example: 3074457362577955300
         data:
           $ref: '#/components/schemas/MindmapData'
         createdAt:
@@ -175,12 +179,12 @@ components:
       properties:
         related:
           type: string
-          description: Link to obtain information about the child nodes
+          description: Link to obtain information about the child nodes.
         self:
           type: string
     MindmapNodeView:
       type: object
-      description: Contains the information about the item used as a mind map node.
+      description: Contains information about the item used as a mind map node.
       properties:
         type:
           type: string
@@ -194,7 +198,7 @@ components:
       description: Contains the item data, such as the item title, content, or description.
     TextData:
       type: object
-      description: Contains text item data
+      description: Contains text item data.
       properties:
         content:
           type: string

@@ -7552,14 +7552,15 @@ components:
         `parent.id` directly attaches an item to the canvas.
       properties:
         id:
-          type: integer
+          type: string
           format: int64
+          description: Unique identifier (ID) of the parent frame for the item.
     ParentLinksEnvelope:
       type: object
       description: Contains information about the parent frame for the item.
       properties:
         id:
-          type: integer
+          type: string
           format: int64
           description: Unique identifier (ID) of the parent frame for the item.
           example: 3074457362577955300
@@ -7649,7 +7650,7 @@ components:
         associated.
       properties:
         id:
-          type: integer
+          type: string
           format: int64
           description: Unique identifier (ID) of the project.
           example: 3088887345710756000
@@ -8052,7 +8053,7 @@ components:
       description: Contains information about the team with which the board is associated.
       properties:
         id:
-          type: integer
+          type: string
           format: int64
           description: Unique identifier (ID) of the team.
           example: 3088887345710753000

@@ -1014,7 +1014,7 @@ components:
         or assignee ID.
       properties:
         assigneeId:
-          type: integer
+          type: string
           format: int64
           description: Unique user identifier. In the GUI, the user ID is mapped to
             the name of the user who is assigned as the owner of the task or activity
@@ -1397,7 +1397,7 @@ components:
       description: Contains information about the parent frame for the item.
       properties:
         id:
-          type: integer
+          type: string
           format: int64
           description: Unique identifier (ID) of the parent frame for the item.
           example: 3074457362577955300

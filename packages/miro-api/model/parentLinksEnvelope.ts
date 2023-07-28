@@ -18,9 +18,9 @@ import {SelfLink} from './selfLink'
  */
 export class ParentLinksEnvelope {
   /**
-   * Unique identifier (ID) of the parent mind map node  for the item.
+   * Unique identifier (ID) of the parent mind map node for the item.
    */
-  'id'?: number
+  'id'?: string
   'links'?: SelfLink
 
   /** @ignore */
@@ -31,7 +31,7 @@ export class ParentLinksEnvelope {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'links',

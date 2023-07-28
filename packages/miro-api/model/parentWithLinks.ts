@@ -17,6 +17,9 @@ import {SelfLink} from './selfLink'
  * Contains information about the parent this item attached to.
  */
 export class ParentWithLinks {
+  /**
+   * Unique identifier (ID) of a container item.
+   */
   'id'?: string
   'links'?: SelfLink
 
