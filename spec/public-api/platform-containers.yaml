@@ -874,7 +874,7 @@ components:
       description: Contains information about the parent frame for the item.
       properties:
         id:
-          type: integer
+          type: string
           format: int64
           description: Unique identifier (ID) of the parent frame for the item.
           example: 3074457362577955300

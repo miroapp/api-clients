@@ -161,8 +161,6 @@ model/pageLinksPlatformExperimentalFeatures.ts
 model/pageLinksPlatformTags.ts
 model/parent.ts
 model/parentLinksEnvelope.ts
-model/parentLinksEnvelopePlatformContainers.ts
-model/parentLinksEnvelopePlatformExperimentalFeatures.ts
 model/parentWithLinks.ts
 model/picture.ts
 model/position.ts
@@ -227,7 +225,6 @@ model/teamSharingPolicySettingsChanges.ts
 model/teamsPage.ts
 model/textCreateRequest.ts
 model/textData.ts
-model/textDataPlatformContainersExperimental.ts
 model/textDataPlatformTags.ts
 model/textItem.ts
 model/textStyle.ts

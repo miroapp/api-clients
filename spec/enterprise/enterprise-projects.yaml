@@ -145,7 +145,7 @@ paths:
         example: 100
       - name: cursor
         description: An indicator of the position of a page in the full set of results.
-          To obtain the first page leave it empty. To obtain subqequent pages set
+          To obtain the first page leave it empty. To obtain subsequent pages set
           it to the value returned in the cursor field of the previous request.
         in: query
         schema:
@@ -714,7 +714,7 @@ paths:
         example: 100
       - name: cursor
         description: An indicator of the position of a page in the full set of results.
-          To obtain the first page leave it empty. To obtain subqequent pages set
+          To obtain the first page leave it empty. To obtain subsequent pages set
           it to the value returned in the cursor field of the previous request.
         in: query
         schema:

@@ -14,7 +14,7 @@ import {WidgetDataOutput} from './widgetDataOutput'
 
 /**
  * @internal
- * Contains the information about the item used as a mind map node.
+ * Contains information about the item used as a mind map node.
  */
 export class MindmapNodeView {
   /**

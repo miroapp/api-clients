@@ -158,8 +158,6 @@ export * from './pageLinksPlatformExperimentalFeatures'
 export * from './pageLinksPlatformTags'
 export * from './parent'
 export * from './parentLinksEnvelope'
-export * from './parentLinksEnvelopePlatformContainers'
-export * from './parentLinksEnvelopePlatformExperimentalFeatures'
 export * from './parentWithLinks'
 export * from './picture'
 export * from './position'
@@ -224,7 +222,6 @@ export * from './teamSharingPolicySettingsChanges'
 export * from './teamsPage'
 export * from './textCreateRequest'
 export * from './textData'
-export * from './textDataPlatformContainersExperimental'
 export * from './textDataPlatformTags'
 export * from './textItem'
 export * from './textStyle'
@@ -416,8 +413,6 @@ import {PageLinksPlatformExperimentalFeatures} from './pageLinksPlatformExperime
 import {PageLinksPlatformTags} from './pageLinksPlatformTags'
 import {Parent} from './parent'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
-import {ParentLinksEnvelopePlatformContainers} from './parentLinksEnvelopePlatformContainers'
-import {ParentLinksEnvelopePlatformExperimentalFeatures} from './parentLinksEnvelopePlatformExperimentalFeatures'
 import {ParentWithLinks} from './parentWithLinks'
 import {Picture} from './picture'
 import {Position} from './position'
@@ -482,7 +477,6 @@ import {TeamSharingPolicySettingsChanges} from './teamSharingPolicySettingsChang
 import {TeamsPage} from './teamsPage'
 import {TextCreateRequest} from './textCreateRequest'
 import {TextData} from './textData'
-import {TextDataPlatformContainersExperimental} from './textDataPlatformContainersExperimental'
 import {TextDataPlatformTags} from './textDataPlatformTags'
 import {TextItem} from './textItem'
 import {TextStyle} from './textStyle'
@@ -825,8 +819,6 @@ let typeMap: {[index: string]: any} = {
   PageLinksPlatformTags: PageLinksPlatformTags,
   Parent: Parent,
   ParentLinksEnvelope: ParentLinksEnvelope,
-  ParentLinksEnvelopePlatformContainers: ParentLinksEnvelopePlatformContainers,
-  ParentLinksEnvelopePlatformExperimentalFeatures: ParentLinksEnvelopePlatformExperimentalFeatures,
   ParentWithLinks: ParentWithLinks,
   Picture: Picture,
   Position: Position,
@@ -890,7 +882,6 @@ let typeMap: {[index: string]: any} = {
   TeamsPage: TeamsPage,
   TextCreateRequest: TextCreateRequest,
   TextData: TextData,
-  TextDataPlatformContainersExperimental: TextDataPlatformContainersExperimental,
   TextDataPlatformTags: TextDataPlatformTags,
   TextItem: TextItem,
   TextStyle: TextStyle,
