@@ -24,7 +24,8 @@ export abstract class BaseOrganization extends Organization {
         yield new OrganizationMember(this._api, this.id, item.id, item)
       }
 
-      if (!response.data?.length || !response.cursor) return
+      cursor = response.cursor
+      if (!response.data?.length || !cursor) return
     }
   }
 
