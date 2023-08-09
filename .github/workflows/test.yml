@@ -5,15 +5,15 @@ on:
     branches:
       - main
   workflow_dispatch:
-  pull_request:
+  pull_request_target:
     branches: [main]
+
+permissions:
+  pull-requests: write
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
-    permissions:
-      pull-requests: write
 
     steps:
       - uses: actions/checkout@v3
