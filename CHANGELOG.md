@@ -1,3 +1,7 @@
+## [2.0.1]
+
+- fixed cursor pagination for `getAllOrganizationMembers`
+
 ## [2.0.0]
 
 - added new experimental API endpoints and updated based on latest specification:

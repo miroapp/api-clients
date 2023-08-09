@@ -1,6 +1,6 @@
 import {Organization} from '../model/organization'
 import {OrganizationMember, Team} from './index'
-import {MiroApi} from '../api'
+import {EnterpriseGetOrganizationMembers200Response, MiroApi} from '../api'
 
 /** @hidden */
 export abstract class BaseOrganization extends Organization {
@@ -18,13 +18,16 @@ export abstract class BaseOrganization extends Organization {
   ): AsyncGenerator<OrganizationMember, void> {
     let cursor: string | undefined = undefined
     while (true) {
-      const response = (await this._api.enterpriseGetOrganizationMembers(this.id.toString(), {...query, cursor})).body
+      const response: EnterpriseGetOrganizationMembers200Response = (
+        await this._api.enterpriseGetOrganizationMembers(this.id.toString(), {...query, cursor})
+      ).body
 
       for (const item of response.data || []) {
         yield new OrganizationMember(this._api, this.id, item.id, item)
       }
 
-      if (!response.data?.length || !response.cursor) return
+      cursor = response.cursor
+      if (!response.data?.length || !cursor) return
     }
   }
 
