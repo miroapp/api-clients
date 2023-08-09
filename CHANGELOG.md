@@ -1,6 +1,6 @@
 ## [2.0.1]
 
-- fixed cursor pagination for `getAllOrganizationMembers`
+- fixed cursor pagination for `getAllOrganizationMembers` ([#209](https://github.com/miroapp/api-clients/pull/209) by [Mahito](https://github.com/Mahito))
 
 ## [2.0.0]
 
