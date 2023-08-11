@@ -7,6 +7,10 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+# The rule disables major version updates for all dependencies
+#    ignore:
+#      - dependency-name: "*"
+#        update-types: [ "version-update:semver-major" ]
       
   - package-ecosystem: "github-actions"
     directory: "/"

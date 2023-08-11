@@ -42,6 +42,7 @@ jobs:
         run: yarn coverage
 
       - name: Coverage Report as Comment (Clover)
+        if: ${{ github.actor != 'dependabot[bot]' }}
         uses: lucassabreu/comment-coverage-clover@main
         with:
           file: packages/miro-api/coverage/clover.xml
