@@ -1,6 +1,6 @@
 import {Team} from '../model/team'
 import {Board, TeamMember} from './index'
-import {MiroApi} from '../api'
+import {MiroApi, TeamMembersPage} from '../api'
 import {hasMoreData} from './helpers'
 
 /** @hidden */
@@ -43,14 +43,16 @@ export abstract class BaseTeam extends Team {
   ): AsyncGenerator<TeamMember, void> {
     let cursor: string | undefined = undefined
     while (true) {
-      const response = (
+      const response: TeamMembersPage = (
         await this._api.enterpriseGetTeamMembers(this.orgId.toString(), this.id.toString(), {...query, cursor})
       ).body
 
       for (const member of response.data) {
         yield new TeamMember(this._api, this.orgId, this.id, member.id, member)
       }
-      return
+
+      cursor = response.cursor
+      if (!response.data.length || !cursor) return
     }
   }
 }
