@@ -49,7 +49,7 @@ jobs:
 
       # upload and deploy docs
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v2
         with:
           path: "packages/miro-api/docs-out/"
 
