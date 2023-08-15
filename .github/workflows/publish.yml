@@ -29,7 +29,7 @@ jobs:
       # if the versions are different it will publish the package
       - id: publish_miro_node
         name: Publish miro-api package to NPM
-        uses: JS-DevTools/npm-publish@v1.4.3
+        uses: JS-DevTools/npm-publish@v2.2.1
         with:
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
           package: packages/miro-api/package.json
