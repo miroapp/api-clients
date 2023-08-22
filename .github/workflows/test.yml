@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
-  pull_request_target:
-    branches: [main]
+
+  pull_request:
+    branches: [ main ]
 
 permissions:
   pull-requests: write
@@ -26,18 +28,20 @@ jobs:
       - name: Install dependencies
         run: yarn
 
-      - name: run tests
+      - name: Run tests
         run: yarn coverage
 
       - name: Coverage Report as Comment (Clover)
-        if: ${{ github.actor != 'dependabot[bot]' }}
+        # Skip the step for PRs from forks, because GitHub doesn't
+        # provide `write` permissions for changes from forks
+        if: ${{ github.actor != 'dependabot[bot]' && github.repository_owner == 'miroapp' }}
         uses: lucassabreu/comment-coverage-clover@main
         with:
           file: packages/miro-api/coverage/clover.xml
 
-      - name: test generator
+      - name: Test generator
         run: yarn workspace generator run validate_commited
 
-      - name: test build
+      - name: Test build
         run: yarn && yarn build
         working-directory: packages/miro-api
