@@ -3,25 +3,12 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 
 metadata:
-  name: miro-api
-  annotations:
-    github.com/project-slug: miroapp/api-clients
-
-spec:
-  type: library
-  lifecycle: production
-  owner: developer-experience
-
----
-apiVersion: backstage.io/v1alpha1
-kind: Component
-
-metadata:
   name: miro-node-js-api-client
   title: NodeJS API client
   description: NodeJS client for the Miro developers platform REST API
   annotations:
     backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: miroapp/api-clients
   tags: []
   links: []
 
