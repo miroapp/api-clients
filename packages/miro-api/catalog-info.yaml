@@ -12,3 +12,25 @@ spec:
   lifecycle: production
   owner: developer-experience
 
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+
+metadata:
+  name: miro-node-js-api-client
+  title: NodeJS API client
+  description: NodeJS client for the Miro developers platform REST API
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+  tags: []
+  links: []
+
+spec:
+  type: library
+  owner: developer-experience
+  criticality: low
+  lifecycle: production
+  operations:
+    region: eu
+    support: full
+
