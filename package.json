@@ -24,7 +24,7 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "prettier": "^2.8.7",
-    "tsx": "^3.12.8"
+    "tsx": "^3.12.10"
   },
   "devDependencies": {
     "@mirohq/prettier-config": "^2.0.0",
