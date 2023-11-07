@@ -11,6 +11,7 @@ export class Miro {
   storage: Storage
   logger?: (l: any) => void
   httpTimeout?: number
+  basePath: string
 
   /**
    * Initializes the Miro API with the given client id and client secret
@@ -28,6 +29,7 @@ export class Miro {
     this.storage = opts.storage || new InMemoryStorage()
     this.logger = opts.logger || (process.env.MIRO_DEBUG ? console.log : undefined)
     this.httpTimeout = opts.httpTimeout
+    this.basePath = opts.basePath || defaultBasePath
 
     if (!this.clientId) {
       throw new Error('miro-api: MIRO_CLIENT_ID or passing options.clientId is required')
@@ -47,7 +49,7 @@ export class Miro {
    * Returns an instance of the highlevel Miro API for the given user id
    */
   as(userId: ExternalUserId): MiroApi {
-    return new MiroApi(async () => await this.getAccessToken(userId), undefined, this.logger, this.httpTimeout)
+    return new MiroApi(async () => await this.getAccessToken(userId), this.basePath, this.logger, this.httpTimeout)
   }
 
   /**
@@ -65,7 +67,7 @@ export class Miro {
    * Returns a URL that user should be redirected to in order to authorize the application, accepts an optional state argument and a teamId that will be used as a default
    */
   getAuthUrl(state?: string, teamId?: string): string {
-    const authorizeUrl = new URL('/oauth/authorize', defaultBasePath.replace('api.', ''))
+    const authorizeUrl = new URL('/oauth/authorize', this.basePath.replace('api.', ''))
     authorizeUrl.search = new URLSearchParams({
       response_type: 'code',
       client_id: this.clientId,
@@ -185,7 +187,7 @@ export interface MiroOptions {
   /** App Client secret. Defaults to MIRO_CLIENT_SECRET environment variable */
   clientSecret?: string
 
-  /** App redirect URL, should match the one configued in the Miro App settings page. Defaults to MIRO_REDIRECT_URL environment variable */
+  /** App redirect URL, should match the one configured in the Miro App settings page. Defaults to MIRO_REDIRECT_URL environment variable */
   redirectUrl?: string
 
   /** Implementation of storage to use for access and refresh tokens */
@@ -196,6 +198,9 @@ export interface MiroOptions {
 
   /** Client will abort HTTP requests that last longer than this number of miliseconds. Default is 5000ms. */
   httpTimeout?: number
+
+  /** Base path **/
+  basePath?: string
 }
 
 import {Api as HighlevelApi} from './highlevel/index'
