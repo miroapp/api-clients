@@ -1,6 +1,6 @@
 ## [2.1.0]
 
-- added option to change base url for PAI requests
+- added option to change base URL for API requests
 
 ## [2.0.2]
 
