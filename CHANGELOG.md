@@ -1,7 +1,11 @@
+## [2.1.0]
+
+- added option to change base url for PAI requests
+
 ## [2.0.2]
 
 - fixed cursor pagination for `getAllTeamMembers` ([#224](https://github.com/miroapp/api-clients/issues/224) by [Mahito](https://github.com/Mahito))
-- 
+
 ## [2.0.1]
 
 - fixed cursor pagination for `getAllOrganizationMembers` ([#209](https://github.com/miroapp/api-clients/pull/209) by [Mahito](https://github.com/Mahito))
