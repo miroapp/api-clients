@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2021",
+    "strict": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "lib": ["es2021", "dom"],
+    "typeRoots": ["node_modules/@types"],
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "files": ["scripts/update-spec.ts"],
+  "exclude": ["dist", "api", "model", "__tests__", ".turbo", ".openapi-generator", "node_modules"]
+}

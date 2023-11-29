@@ -4,12 +4,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "workspaces": [
     "packages/*",
     "apps/*"
   ],
   "scripts": {
-    "update-spec": "scripts/fetch-spec.mjs > packages/generator/spec.json",
+    "update-spec": "scripts/update-spec.ts",
     "build": "yarn workspace generator generate && yarn workspace @mirohq/miro-api build",
     "dev": "yarn workspace client-test-app dev",
     "pretest": "yarn build",
@@ -30,6 +31,8 @@
   "devDependencies": {
     "@mirohq/prettier-config": "^2.0.0",
     "@types/jest": "^29.5.8",
+    "@types/js-yaml": "^4.0.9",
+    "@types/lodash": "^4.14.202",
     "esbuild": "^0.19.8",
     "esbuild-jest": "^0.5.0",
     "husky": "^8.0.3"
