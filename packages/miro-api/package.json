@@ -23,8 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "form-data": "^4.0.0",
-    "node-fetch": "^2.7.0",
-    "typedoc": "0.23.24"
+    "node-fetch": "^2.7.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.8",

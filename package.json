@@ -10,10 +10,11 @@
   ],
   "scripts": {
     "update-spec": "scripts/fetch-spec.mjs > packages/generator/spec.json",
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "test": "turbo run test",
-    "coverage": "turbo run coverage",
+    "build": "yarn workspace generator generate && yarn workspace @mirohq/miro-api build",
+    "dev": "yarn workspace client-test-app dev",
+    "pretest": "yarn build",
+    "test": "yarn workspaces run test",
+    "coverage": "yarn workspaces run coverage",
     "format": "prettier -w ./packages",
     "prepare": "husky install"
   },
@@ -24,14 +25,13 @@
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "prettier": "^2.8.7",
-    "tsx": "^3.14.0"
+    "tsx": "^4.6.0"
   },
   "devDependencies": {
     "@mirohq/prettier-config": "^2.0.0",
     "@types/jest": "^29.5.8",
     "esbuild": "^0.19.8",
     "esbuild-jest": "^0.5.0",
-    "husky": "^8.0.3",
-    "turbo": "^1.10.16"
+    "husky": "^8.0.3"
   }
 }
