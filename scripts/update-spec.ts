@@ -4,19 +4,10 @@ import isEqual from 'lodash/isEqual'
 import mapValues from 'lodash/mapValues'
 import {load} from 'js-yaml'
 import {writeFile} from 'fs/promises'
+import glob from 'fast-glob'
 
-const apis = [
-  './spec/public-api/platform.yaml',
-  './spec/public-api/platform-tags.yaml',
-  './spec/public-api/platform-experimental.yaml',
-  './spec/public-api/platform-containers.yaml',
-  './spec/public-api/platform-containers-experimental.yaml',
-  './spec/public-api/platform-items-bulk.yaml',
-  './spec/enterprise/enterprise-teams.yaml',
-  './spec/enterprise/enterprise-organizations.yaml',
-  './spec/enterprise/enterprise-board-classification.yaml',
-  './spec/enterprise/enterprise-projects.yaml',
-]
+
+const apis = await glob('./spec/**/*.yaml')
 
 type Endpoint = Record<
   string,
