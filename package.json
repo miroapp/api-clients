@@ -15,7 +15,7 @@
     "dev": "yarn workspace client-test-app dev",
     "pretest": "yarn build",
     "test": "yarn workspaces run test",
-    "coverage": "yarn workspaces run coverage",
+    "coverage": "yarn workspace generator coverage && yarn workspace @mirohq/miro-api coverage",
     "format": "prettier -w ./packages",
     "prepare": "husky install"
   },
