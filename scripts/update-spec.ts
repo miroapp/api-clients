@@ -1,24 +1,47 @@
-#!/usr/bin/env node
+#!/usr/bin/env tsx
 import {readFile} from 'fs/promises'
-import isEqual from 'lodash/isEqual.js'
-import mapValues from 'lodash/mapValues.js'
+import isEqual from 'lodash/isEqual'
+import mapValues from 'lodash/mapValues'
 import {load} from 'js-yaml'
+import {writeFile} from 'fs/promises'
+import glob from 'fast-glob'
 
-const apis = [
-  './spec/public-api/platform.yaml',
-  './spec/public-api/platform-tags.yaml',
-  './spec/public-api/platform-experimental.yaml',
-  './spec/public-api/platform-containers.yaml',
-  './spec/public-api/platform-containers-experimental.yaml',
-  './spec/public-api/platform-items-bulk.yaml',
-  './spec/enterprise/enterprise-teams.yaml',
-  './spec/enterprise/enterprise-organizations.yaml',
-  './spec/enterprise/enterprise-board-classification.yaml',
-  './spec/enterprise/enterprise-board-export.yaml',
-  './spec/enterprise/enterprise-projects.yaml',
-]
 
-const baseSpecification = {
+const apis = await glob('./spec/**/*.yaml')
+
+type Endpoint = Record<
+  string,
+  {
+    description: string
+    summary: string
+    operationId: string
+    parameters?: unknown
+    responses?: unknown
+    tags?: string[]
+  }
+>
+
+interface Spec {
+  paths: Record<string, Endpoint>
+
+  components: {
+    schemas: Record<string, unknown>
+    parameters: Record<string, unknown>
+    securitySchemes: unknown
+  }
+  openapi: string
+  info: {
+    description: string
+    title: string
+    version: string
+  }
+  servers: Array<{url: string}>
+}
+
+/*
+ * Define top level metadata for the api
+ */
+const baseSpecification: Spec = {
   openapi: '3.0.1',
   info: {
     description: 'Miro API',
@@ -169,13 +192,16 @@ const baseSpecification = {
   },
 }
 
-async function getSpecsForApi(fileName) {
+async function getSpecsForApi(fileName: string) {
   return load(await readFile(fileName, {encoding: 'utf8'}))
 }
 
-const specs = (await Promise.all(apis.map(getSpecsForApi))).flat()
+const specs = (await Promise.all(apis.map(getSpecsForApi))).flat() as Spec[]
 
-function mergeWithoutConflict(first, second) {
+/*
+ * Tries to merge objects, if there's conflicting properties it will throw
+ */
+function mergeWithoutConflict(first: any, second: any) {
   for (const key of Object.keys(first)) {
     if (second[key] && !isEqual(first[key], second[key])) throw new Error('Conflict: ' + key)
   }
@@ -185,7 +211,10 @@ function mergeWithoutConflict(first, second) {
   }
 }
 
-function fixDescriptionLinks(spec) {
+/*
+ * Will make sure that the links point to developer portal
+ */
+function fixDescriptionLinks(spec: Spec) {
   spec.paths = mapValues(spec.paths, (path) => {
     return mapValues(path, (method) => {
       if (!method.description) return method
@@ -199,14 +228,29 @@ function fixDescriptionLinks(spec) {
   return spec
 }
 
+/*
+ * Code generator does not support multiple tags since we have a single file for all tags
+ */
+function removeMultipleTagsFromEndpoints(spec: Spec) {
+  Object.keys(spec.paths).forEach((path) => {
+    const endpoint = spec.paths[path]
+    Object.keys(endpoint).forEach((method) => {
+      endpoint[method].tags = endpoint[method].tags?.slice(0, 1)
+    })
+  })
+}
+
 const mergedSpec = fixDescriptionLinks(
-  specs.reduce((acc, spec) => {
+  // Create a single spec file that merges all endpoints, schemas, parameters
+  // from all individual spec files
+  specs.reduce<Spec>((acc: Spec, spec: Spec): Spec => {
     const specTitle = spec.info?.title?.replace(/ |\(|\)/g, '')
     const specSchemasDef = spec.components?.schemas || {}
     const specParametersDef = spec.components?.parameters || {}
 
     let specPathsDef = spec.paths
 
+    // Deduplicate schema definitions
     for (const key of Object.keys(specSchemasDef)) {
       const existingDefinition = acc.components.schemas[key]
       delete acc.components.schemas[key]
@@ -221,6 +265,7 @@ const mergedSpec = fixDescriptionLinks(
       acc.components.schemas[newKey] = newSchema
     }
 
+    // Deduplicate parameters
     for (const key of Object.keys(specParametersDef)) {
       const existingDefinition = acc.components.parameters[key]
       delete acc.components.parameters[key]
@@ -235,6 +280,10 @@ const mergedSpec = fixDescriptionLinks(
       acc.components.parameters[newKey] = newSchema
     }
 
+    // Deduplicate paths
+    //
+    // there are some endpoint definitions in the spec that have the same path
+    // but define different query parameters
     for (const key of Object.keys(spec.paths)) {
       if (acc.paths[key]) {
         const newKey = key.replace('boards/{board_id', 'boards/{board_id_' + specTitle)
@@ -243,6 +292,8 @@ const mergedSpec = fixDescriptionLinks(
         spec.paths[newKey] = pathConfig
       }
     }
+
+    removeMultipleTagsFromEndpoints(spec)
 
     return {
       ...acc,
@@ -256,4 +307,4 @@ const mergedSpec = fixDescriptionLinks(
   }, baseSpecification),
 )
 
-console.log(JSON.stringify(mergedSpec, null, 2))
+writeFile('packages/generator/spec.json', JSON.stringify(mergedSpec, null, 2))

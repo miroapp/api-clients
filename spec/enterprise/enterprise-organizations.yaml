@@ -318,9 +318,6 @@ components:
     OrganizationMembersSearchByEmailsResponse:
       description: Response for search organization members by user emails
       type: array
-      properties:
-        empty:
-          type: boolean
       items:
         $ref: '#/components/schemas/OrganizationMember'
     OrganizationMembersSearchResponse:
