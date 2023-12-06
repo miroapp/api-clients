@@ -1,0 +1,33 @@
+{
+  "name": "postman-collection-generator",
+  "private": true,
+  "version": "0.0.1",
+  "author": "@mirohq",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "generateCollection": "tsx main.ts",
+    "test": "jest --watch",
+    "coverage": "jest --coverage --coverageDirectory coverage"
+  },
+  "dependencies": {
+    "openapi-to-postmanv2": "^4.18.0",
+    "openapi-types": "^12.1.3"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": [
+        "esbuild-jest",
+        {
+          "format": "cjs"
+        }
+      ]
+    },
+    "extensionsToTreatAsEsm": [
+      ".ts"
+    ],
+    "modulePathIgnorePatterns": [
+      "spec.ts"
+    ]
+  }
+}

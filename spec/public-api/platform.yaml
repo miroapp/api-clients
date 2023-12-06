@@ -4,6 +4,10 @@ info:
   version: v2.0
 servers:
 - url: https://api.miro.com
+- variables: 
+  - parent_id:
+    default: 0
+    name: parent_id
 security:
 - bearerAuth: []
 paths:
