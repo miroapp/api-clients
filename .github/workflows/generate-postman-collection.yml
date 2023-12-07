@@ -1,17 +1,13 @@
 name: Publish updated specs to postman
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: [ "main" ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-    // setup postman converter
-    // read spec.json
-    // iterate over spec.json to create the collection
-    // publish to postman with postman secret
+    # // setup postman converter
+    # // read spec.json
+    # // iterate over spec.json to create the collection
+    # // publish to postman with postman secret
 
 jobs:
   # Single deploy job since we're just deploying
