@@ -174,7 +174,7 @@ paths:
         schema:
           type: string
       - description: id of the organization member
-        example: 3055557345821141000
+        example: '3055557345821141000'
         in: path
         name: member_id
         required: true
