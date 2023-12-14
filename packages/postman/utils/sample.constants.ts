@@ -1,4 +1,4 @@
-import {camelToSnake} from './string-utils'
+import { camelToSnake } from './string-utils'
 
 export const variableParams = ['teamId', 'boardId', 'accessToken', 'itemId', 'boardMemberId', 'tagId'].flatMap(
   (param) => [param, camelToSnake(param)],
@@ -29,6 +29,12 @@ export const missingPostmanVariables = [
     value: '<Add your access token here>',
     type: 'string',
   },
+  {
+    key: 'board_id',
+    value: 'o9J_kzlUDmo=',
+    type: 'string',
+  },
+
 ]
 
 export const auth = {
