@@ -23,7 +23,7 @@ paths:
       operationId: enterprise-create-board-export
       parameters:
       - description: Unique identifier of the organization.
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -76,7 +76,7 @@ paths:
       operationId: enterprise-board-export-job-status
       parameters:
       - description: Unique identifier of the organization.
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -124,7 +124,7 @@ paths:
       operationId: enterprise-board-export-job-results
       parameters:
       - description: Unique identifier of the organization.
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true

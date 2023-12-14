@@ -27,7 +27,7 @@ paths:
       operationId: enterprise-dataclassification-organization-settings-get
       parameters:
       - description: id of the organization
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -66,7 +66,7 @@ paths:
       operationId: enterprise-dataclassification-team-boards-bulk
       parameters:
       - description: id of the organization
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -118,7 +118,7 @@ paths:
       operationId: enterprise-dataclassification-team-settings-get
       parameters:
       - description: id of the organization
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -163,7 +163,7 @@ paths:
       operationId: enterprise-dataclassification-team-settings-set
       parameters:
       - description: id of the organization
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -214,7 +214,7 @@ paths:
       operationId: enterprise-dataclassification-board-get
       parameters:
       - description: id of the organization
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -271,7 +271,7 @@ paths:
         name: org_id
         required: true
         schema:
-          type: string
+          type: number
       - description: id of the team
         example: 3074457345618265000
         in: path

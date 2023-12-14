@@ -25,7 +25,7 @@ paths:
       operationId: enterprise-get-organization
       parameters:
       - description: id of the organization
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -124,7 +124,7 @@ paths:
           example: 100
           default: 100
       - description: id of the organization
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
@@ -167,7 +167,7 @@ paths:
       operationId: enterprise-get-organization-member
       parameters:
       - description: id of the organization
-        example: 3074457345821141000
+        example: '3074457345821141000'
         in: path
         name: org_id
         required: true
