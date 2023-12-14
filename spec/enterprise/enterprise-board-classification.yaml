@@ -73,7 +73,7 @@ paths:
         schema:
           type: string
       - description: id of the team
-        example: 3074457345618265000
+        example: '3074457345618265000'
         in: path
         name: team_id
         required: true
@@ -125,7 +125,7 @@ paths:
         schema:
           type: string
       - description: id of the team
-        example: 3074457345618265000
+        example: '3074457345618265000'
         in: path
         name: team_id
         required: true
@@ -170,7 +170,7 @@ paths:
         schema:
           type: string
       - description: id of the team
-        example: 3074457345618265000
+        example: '3074457345618265000'
         in: path
         name: team_id
         required: true
@@ -221,7 +221,7 @@ paths:
         schema:
           type: string
       - description: id of the team
-        example: 3074457345618265000
+        example: '3074457345618265000'
         in: path
         name: team_id
         required: true
@@ -273,7 +273,7 @@ paths:
         schema:
           type: number
       - description: id of the team
-        example: 3074457345618265000
+        example: '3074457345618265000'
         in: path
         name: team_id
         required: true
