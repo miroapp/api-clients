@@ -35,3 +35,37 @@ jobs:
       # generate docs
       - run: yarn run generateCollection
         working-directory: packages/postman
+
+
+
+jobs:
+          publish:
+            runs-on: ubuntu-latest
+            steps:
+              - uses: actions/checkout@v4
+        
+              - uses: actions/setup-node@v3
+                with:
+                  node-version: 20
+                  cache: 'yarn'
+        
+              - run: yarn
+                working-directory: packages/postman
+        
+              - run: yarn run update-spec
+
+              - run: yarn run postman:publish
+        
+              # This step will look at version in package.json, compare it to NPM version and
+              # if the versions are different it will publish the package
+              - id: publish_postman_collection
+                name: Send collection to postman using API
+                uses: JS-DevTools/npm-publish@v3.0.1
+                with:
+                  token: ${{ secrets.NPM_PUBLISH_TOKEN }}
+                  package: packages/miro-api/package.json
+        
+
+                  # collection id - 29517133-05b68d35-0c2b-4eec-8d5b-a7e328af5f27
+                  # my workspace id - 59dac659-57a6-4476-8710-f56d359b9d86
+        
