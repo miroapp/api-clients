@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "description": "Our APIs are based on a RESTful approach (see <a href='https://en.wikipedia.org/wiki/REST'>REST</a>). It features predictable and resource-oriented URLs and uses HTTP response codes to indicate API errors.",
-    "title": "Miro API",
-    "version": "0.1"
+    "title": "Miro Developer Platform",
+    "version": "v2.0",
+    "description": "<img src=\"https://content.pstmn.io/47449ea6-0ef7-4af2-bac1-e58a70e61c58/aW1hZ2UucG5n\" width=\"1685\" height=\"593\">\n\n### Miro Developer Platform concepts\n\n- New to the Miro Developer Platform? Interested in learning more about platform concepts?  \n[Read our introduction page](https://beta.developers.miro.com/docs/introduction) and familiarize yourself with the Miro Developer Platform capabilities in a few minutes.\n\n\n### Getting started with the Miro REST API\n\n- [Quickstart (video):](https://beta.developers.miro.com/docs/try-out-the-rest-api-in-less-than-3-minutes) try the REST API in less than 3 minutes.\n- [Quickstart (article):](https://beta.developers.miro.com/docs/build-your-first-hello-world-app-1) get started and try the REST API in less than 3 minutes.\n\n\n### Miro REST API tutorials\n\nCheck out our how-to articles with step-by-step instructions and code examples so you can:\n\n- [Get started with OAuth 2.0 and Miro](https://beta.developers.miro.com/docs/getting-started-with-oauth)\n\n\n### Miro App Examples\n\nClone our [Miro App Examples repository](https://github.com/miroapp/app-examples) to get inspiration, customize, and explore apps built on top of Miro's Developer Platform 2.0.\n"
   },
   "servers": [
     {
@@ -13,7 +13,9 @@
   "paths": {
     "/v1/oauth/revoke": {
       "post": {
-        "tags": ["tokens"],
+        "tags": [
+          "tokens"
+        ],
         "summary": "Revoke token",
         "description": "Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.",
         "operationId": "revoke-token",
@@ -40,7 +42,9 @@
     },
     "/v1/oauth-token": {
       "get": {
-        "tags": ["tokens"],
+        "tags": [
+          "tokens"
+        ],
         "summary": "Get access token information",
         "description": "Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.",
         "operationId": "token-info",
@@ -52,7 +56,12 @@
                 "schema": {
                   "title": "Token information",
                   "type": "object",
-                  "required": ["type", "team", "createdBy", "user"],
+                  "required": [
+                    "type",
+                    "team",
+                    "createdBy",
+                    "user"
+                  ],
                   "properties": {
                     "type": {
                       "type": "string"
@@ -71,7 +80,11 @@
                           "type": "string"
                         }
                       },
-                      "required": ["type", "name", "id"]
+                      "required": [
+                        "type",
+                        "name",
+                        "id"
+                      ]
                     },
                     "team": {
                       "title": "Team information",
@@ -87,7 +100,11 @@
                           "type": "string"
                         }
                       },
-                      "required": ["type", "name", "id"]
+                      "required": [
+                        "type",
+                        "name",
+                        "id"
+                      ]
                     },
                     "createdBy": {
                       "type": "object",
@@ -103,7 +120,11 @@
                           "type": "string"
                         }
                       },
-                      "required": ["type", "name", "id"]
+                      "required": [
+                        "type",
+                        "name",
+                        "id"
+                      ]
                     },
                     "user": {
                       "type": "object",
@@ -119,7 +140,11 @@
                           "type": "string"
                         }
                       },
-                      "required": ["type", "name", "id"]
+                      "required": [
+                        "type",
+                        "name",
+                        "id"
+                      ]
                     },
                     "scopes": {
                       "type": "array",
@@ -189,7 +214,10 @@
             "name": "sorting",
             "schema": {
               "type": "string",
-              "enum": ["ASC", "DESC"]
+              "enum": [
+                "ASC",
+                "DESC"
+              ]
             }
           }
         ],
@@ -224,7 +252,9 @@
           }
         },
         "summary": "Get audit logs",
-        "tags": ["Audit Logs"]
+        "tags": [
+          "Audit Logs"
+        ]
       }
     },
     "/v2/orgs/{org_id}/boards/export/jobs": {
@@ -237,7 +267,7 @@
         "parameters": [
           {
             "description": "Unique identifier of the organization.",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -295,7 +325,9 @@
           }
         },
         "summary": "Create board export job",
-        "tags": ["Board export job"]
+        "tags": [
+          "Board export job"
+        ]
       }
     },
     "/v2/orgs/{org_id}/boards/export/jobs/{job_id}": {
@@ -308,7 +340,7 @@
         "parameters": [
           {
             "description": "Unique identifier of the organization.",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -356,7 +388,9 @@
           }
         },
         "summary": "Get board export job status",
-        "tags": ["Board export job"]
+        "tags": [
+          "Board export job"
+        ]
       }
     },
     "/v2/orgs/{org_id}/boards/export/jobs/{job_id}/results": {
@@ -369,7 +403,7 @@
         "parameters": [
           {
             "description": "Unique identifier of the organization.",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -417,7 +451,9 @@
           }
         },
         "summary": "Get results for board export job",
-        "tags": ["Board export job"]
+        "tags": [
+          "Board export job"
+        ]
       }
     },
     "/v2/orgs/{org_id}/data-classification-settings": {
@@ -427,7 +463,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -464,7 +500,9 @@
           }
         },
         "summary": "Get organization settings",
-        "tags": ["Board classification: Organization level"]
+        "tags": [
+          "Board classification: Organization level"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/data-classification": {
@@ -474,7 +512,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -484,7 +522,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -531,7 +569,9 @@
           }
         },
         "summary": "Bulk update boards classification",
-        "tags": ["Board classification: Team level"]
+        "tags": [
+          "Board classification: Team level"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/data-classification-settings": {
@@ -541,7 +581,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -551,7 +591,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -588,7 +628,9 @@
           }
         },
         "summary": "Get team settings",
-        "tags": ["Board classification: Team level"]
+        "tags": [
+          "Board classification: Team level"
+        ]
       },
       "patch": {
         "description": "Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -596,7 +638,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -606,7 +648,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -653,7 +695,9 @@
           }
         },
         "summary": "Update team settings",
-        "tags": ["Board classification: Team level"]
+        "tags": [
+          "Board classification: Team level"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification": {
@@ -663,7 +707,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -673,7 +717,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -720,7 +764,9 @@
           }
         },
         "summary": "Get board classification",
-        "tags": ["Board classification: Board level"]
+        "tags": [
+          "Board classification: Board level"
+        ]
       },
       "post": {
         "description": "Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -733,12 +779,12 @@
             "name": "org_id",
             "required": true,
             "schema": {
-              "type": "string"
+              "type": "number"
             }
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -795,7 +841,9 @@
           }
         },
         "summary": "Update board classification",
-        "tags": ["Board classification: Board level"]
+        "tags": [
+          "Board classification: Board level"
+        ]
       }
     },
     "/v2/orgs/{org_id}": {
@@ -805,7 +853,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -845,7 +893,9 @@
           }
         },
         "summary": "Get organization info",
-        "tags": ["Organizations"]
+        "tags": [
+          "Organizations"
+        ]
       }
     },
     "/v2/orgs/{org_id}/members": {
@@ -883,7 +933,14 @@
             "schema": {
               "type": "string",
               "description": "Filter organization members by license",
-              "enum": ["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
+              "enum": [
+                "full",
+                "occasional",
+                "free",
+                "free_restricted",
+                "full_trial",
+                "unknown"
+              ]
             }
           },
           {
@@ -917,7 +974,7 @@
           },
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -964,7 +1021,9 @@
           }
         },
         "summary": "Get organization members",
-        "tags": ["Organization Members"]
+        "tags": [
+          "Organization Members"
+        ]
       }
     },
     "/v2/orgs/{org_id}/members/{member_id}": {
@@ -974,7 +1033,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -984,7 +1043,7 @@
           },
           {
             "description": "id of the organization member",
-            "example": 3055557345821141000,
+            "example": "3055557345821141000",
             "in": "path",
             "name": "member_id",
             "required": true,
@@ -1024,7 +1083,9 @@
           }
         },
         "summary": "Get organization member",
-        "tags": ["Organization Members"]
+        "tags": [
+          "Organization Members"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/projects": {
@@ -1136,7 +1197,9 @@
           }
         },
         "summary": "Create project",
-        "tags": ["Projects"]
+        "tags": [
+          "Projects"
+        ]
       },
       "get": {
         "description": "Retrieves the list of projects in an existing team of an organization. You can retrieve all projects, including all private projects (projects that haven't been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -1248,7 +1311,9 @@
           }
         },
         "summary": "List of projects",
-        "tags": ["Projects"]
+        "tags": [
+          "Projects"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}": {
@@ -1350,7 +1415,9 @@
           }
         },
         "summary": "Get project",
-        "tags": ["Projects"]
+        "tags": [
+          "Projects"
+        ]
       },
       "patch": {
         "description": "Update information about a project, such as the project name.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -1470,7 +1537,9 @@
           }
         },
         "summary": "Update project",
-        "tags": ["Projects"]
+        "tags": [
+          "Projects"
+        ]
       },
       "delete": {
         "description": "Deletes a project. After a project is deleted, all boards and users that belong to the project remain in the team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -1573,7 +1642,9 @@
           }
         },
         "summary": "Delete project",
-        "tags": ["Projects"]
+        "tags": [
+          "Projects"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/settings": {
@@ -1675,7 +1746,9 @@
           }
         },
         "summary": "Get project settings",
-        "tags": ["Project Settings"]
+        "tags": [
+          "Project Settings"
+        ]
       },
       "patch": {
         "description": "Updates the settings of a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -1795,7 +1868,9 @@
           }
         },
         "summary": "Update project settings",
-        "tags": ["Project Settings"]
+        "tags": [
+          "Project Settings"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members": {
@@ -1917,7 +1992,9 @@
           }
         },
         "summary": "Add member in a project",
-        "tags": ["Project Members"]
+        "tags": [
+          "Project Members"
+        ]
       },
       "get": {
         "description": "Retrieves the list of members for a specific project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2049,7 +2126,9 @@
           }
         },
         "summary": "List of project members",
-        "tags": ["Project Members"]
+        "tags": [
+          "Project Members"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members/{member_id}": {
@@ -2171,7 +2250,9 @@
           }
         },
         "summary": "Get project member",
-        "tags": ["Project Members"]
+        "tags": [
+          "Project Members"
+        ]
       },
       "patch": {
         "description": "Updates details of a project member, such as the member's role.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2301,7 +2382,9 @@
           }
         },
         "summary": "Update project member",
-        "tags": ["Project Members"]
+        "tags": [
+          "Project Members"
+        ]
       },
       "delete": {
         "description": "Remove a member from a project. The user remains in the team even after the member is removed from a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2414,7 +2497,9 @@
           }
         },
         "summary": "Remove project member",
-        "tags": ["Project Members"]
+        "tags": [
+          "Project Members"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams": {
@@ -2464,7 +2549,9 @@
           }
         },
         "summary": "Create team",
-        "tags": ["Teams"]
+        "tags": [
+          "Teams"
+        ]
       },
       "get": {
         "description": "Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2533,7 +2620,9 @@
           }
         },
         "summary": "List teams",
-        "tags": ["Teams"]
+        "tags": [
+          "Teams"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}": {
@@ -2576,7 +2665,9 @@
           }
         },
         "summary": "Get team",
-        "tags": ["Teams"]
+        "tags": [
+          "Teams"
+        ]
       },
       "patch": {
         "description": "Updates an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2627,7 +2718,9 @@
           }
         },
         "summary": "Update team",
-        "tags": ["Teams"]
+        "tags": [
+          "Teams"
+        ]
       },
       "delete": {
         "description": "Deletes an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2661,7 +2754,9 @@
           }
         },
         "summary": "Delete team",
-        "tags": ["Teams"]
+        "tags": [
+          "Teams"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/members": {
@@ -2717,7 +2812,9 @@
           }
         },
         "summary": "Invite team members",
-        "tags": ["Team Members"]
+        "tags": [
+          "Team Members"
+        ]
       },
       "get": {
         "description": "Retrieves team members by cursor.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2788,7 +2885,9 @@
           }
         },
         "summary": "List team members",
-        "tags": ["Team Members"]
+        "tags": [
+          "Team Members"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}": {
@@ -2834,7 +2933,9 @@
           }
         },
         "summary": "Get team member",
-        "tags": ["Team Members"]
+        "tags": [
+          "Team Members"
+        ]
       },
       "patch": {
         "description": "Updates team member role in team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2888,7 +2989,9 @@
           }
         },
         "summary": "Update team member",
-        "tags": ["Team Members"]
+        "tags": [
+          "Team Members"
+        ]
       },
       "delete": {
         "description": "Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -2925,7 +3028,9 @@
           }
         },
         "summary": "Delete team member from team",
-        "tags": ["Team Members"]
+        "tags": [
+          "Team Members"
+        ]
       }
     },
     "/v2/orgs/{org_id}/default_teams_settings": {
@@ -2972,7 +3077,9 @@
           }
         },
         "summary": "Get default team settings",
-        "tags": ["Team Settings"]
+        "tags": [
+          "Team Settings"
+        ]
       }
     },
     "/v2/orgs/{org_id}/teams/{team_id}/settings": {
@@ -3015,7 +3122,9 @@
           }
         },
         "summary": "Get team settings",
-        "tags": ["Team Settings"]
+        "tags": [
+          "Team Settings"
+        ]
       },
       "patch": {
         "description": "Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
@@ -3069,7 +3178,9 @@
           }
         },
         "summary": "Update team settings",
-        "tags": ["Team Settings"]
+        "tags": [
+          "Team Settings"
+        ]
       }
     },
     "/v2-experimental/boards/{board_id}/items": {
@@ -3225,7 +3336,9 @@
           }
         },
         "summary": "Create frame",
-        "tags": ["frames"]
+        "tags": [
+          "frames"
+        ]
       }
     },
     "/v2/boards/{board_id}/frames/{item_id}": {
@@ -3367,7 +3480,9 @@
           }
         },
         "summary": "Get frame",
-        "tags": ["frames"]
+        "tags": [
+          "frames"
+        ]
       },
       "patch": {
         "description": "Updates a frame on a board based on the data, style, or geometry properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -3517,7 +3632,9 @@
           }
         },
         "summary": "Update frame",
-        "tags": ["frames"]
+        "tags": [
+          "frames"
+        ]
       },
       "delete": {
         "description": "Deletes a frame from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -3657,7 +3774,9 @@
           }
         },
         "summary": "Delete frame",
-        "tags": ["frames"]
+        "tags": [
+          "frames"
+        ]
       }
     },
     "/v2/boards/{board_id}/items": {
@@ -3827,7 +3946,9 @@
           }
         },
         "summary": "Get items within frame",
-        "tags": ["items"]
+        "tags": [
+          "items"
+        ]
       }
     },
     "/v2-experimental/webhooks/board_subscriptions": {
@@ -3959,7 +4080,9 @@
           }
         },
         "summary": "Create webhook subscription",
-        "tags": ["Webhooks (experimental)"]
+        "tags": [
+          "Webhooks (experimental)"
+        ]
       }
     },
     "/v2-experimental/webhooks/board_subscriptions/{subscription_id}": {
@@ -4101,7 +4224,9 @@
           }
         },
         "summary": "Update webhook subscription",
-        "tags": ["Webhooks (experimental)"]
+        "tags": [
+          "Webhooks (experimental)"
+        ]
       }
     },
     "/v2-experimental/webhooks/subscriptions": {
@@ -4246,7 +4371,9 @@
           }
         },
         "summary": "Get webhook subscriptions",
-        "tags": ["Webhooks (experimental)"]
+        "tags": [
+          "Webhooks (experimental)"
+        ]
       }
     },
     "/v2-experimental/webhooks/subscriptions/{subscription_id}": {
@@ -4379,7 +4506,9 @@
           }
         },
         "summary": "Get specific webhook subscription",
-        "tags": ["Webhooks (experimental)"]
+        "tags": [
+          "Webhooks (experimental)"
+        ]
       },
       "delete": {
         "description": "Deletes the specified webhook subscription.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -4510,7 +4639,9 @@
           }
         },
         "summary": "Delete webhook subscription",
-        "tags": ["Webhooks (experimental)"]
+        "tags": [
+          "Webhooks (experimental)"
+        ]
       }
     },
     "/v2-experimental/boards/{board_id}/mindmap_nodes": {
@@ -4740,7 +4871,9 @@
           }
         },
         "summary": "Attach tag to item",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       },
       "delete": {
         "description": "Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
@@ -4886,7 +5019,9 @@
           }
         },
         "summary": "Remove tag from item",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       }
     },
     "/v2/boards/{board_id}/items/{item_id}/tags": {
@@ -5025,7 +5160,9 @@
           }
         },
         "summary": "Get tags from item",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       }
     },
     "/v2/boards/{board_id}/tags": {
@@ -5165,7 +5302,9 @@
           }
         },
         "summary": "Create tag",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       },
       "get": {
         "description": "Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
@@ -5311,7 +5450,9 @@
           }
         },
         "summary": "Get tags from board",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       }
     },
     "/v2/boards/{board_id}/tags/{tag_id}": {
@@ -5450,7 +5591,9 @@
           }
         },
         "summary": "Get tag",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       },
       "patch": {
         "description": "Updates a tag based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
@@ -5597,7 +5740,9 @@
           }
         },
         "summary": "Update tag",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       },
       "delete": {
         "description": "Deletes the specified tag from the board. The tag is also removed from all cards and sticky notes on the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
@@ -5734,7 +5879,9 @@
           }
         },
         "summary": "Delete tag",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       }
     },
     "/v2/boards/{board_id_PlatformTags}/items": {
@@ -5891,7 +6038,9 @@
           }
         },
         "summary": "Get items by tag",
-        "tags": ["tags"]
+        "tags": [
+          "tags"
+        ]
       }
     },
     "/v2/boards": {
@@ -6022,7 +6171,9 @@
           }
         },
         "summary": "Create board",
-        "tags": ["boards"]
+        "tags": [
+          "boards"
+        ]
       },
       "get": {
         "description": "Retrieves a list of boards that match the search criteria provided in the request. If you are an Enterprise customer and a Company Admin, you can retrieve all boards, including all private boards (boards that haven't been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins). Note that you only get results instantaneously when you filter by the `team_id`, `project_id`, or both the `team_id` and `project_id`. If you use any other filter,  you need to give a few seconds for the indexing of newly created boards before retrieving boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
@@ -6086,7 +6237,13 @@
               "type": "string",
               "default": "default",
               "description": "Sort order in which you want to view the result set. Options `last_created` and `alphabetically` are applicable only when you search for boards by team.\n* `default` - If `team_id` is present, `last_created`. Otherwise, `last_opened`.\n* `last_modified` - sort by the date and time when the board was last modified.\n* `last_opened` - sort by the date and time when the board was last opened.\n* `last_created` - sort by the date and time when the board was created.\n* `alphabetically` - sort by the board name (alphabetically).",
-              "enum": ["default", "last_modified", "last_opened", "last_created", "alphabetically"]
+              "enum": [
+                "default",
+                "last_modified",
+                "last_opened",
+                "last_created",
+                "alphabetically"
+              ]
             }
           }
         ],
@@ -6205,7 +6362,9 @@
           }
         },
         "summary": "Get boards",
-        "tags": ["boards"]
+        "tags": [
+          "boards"
+        ]
       },
       "put": {
         "description": "Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a><br/>",
@@ -6345,7 +6504,9 @@
           }
         },
         "summary": "Copy board",
-        "tags": ["boards"]
+        "tags": [
+          "boards"
+        ]
       }
     },
     "/v2/boards/{board_id}": {
@@ -6478,7 +6639,9 @@
           }
         },
         "summary": "Get specific board",
-        "tags": ["boards"]
+        "tags": [
+          "boards"
+        ]
       },
       "patch": {
         "description": "Updates a specific board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -6619,7 +6782,9 @@
           }
         },
         "summary": "Update board",
-        "tags": ["boards"]
+        "tags": [
+          "boards"
+        ]
       },
       "delete": {
         "description": "Deletes a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -6750,7 +6915,9 @@
           }
         },
         "summary": "Delete board",
-        "tags": ["boards"]
+        "tags": [
+          "boards"
+        ]
       }
     },
     "/v2/boards/{board_id}/app_cards": {
@@ -6893,7 +7060,9 @@
           }
         },
         "summary": "Create app card item",
-        "tags": ["app_cards"]
+        "tags": [
+          "app_cards"
+        ]
       }
     },
     "/v2/boards/{board_id}/app_cards/{item_id}": {
@@ -7035,7 +7204,9 @@
           }
         },
         "summary": "Get app card item",
-        "tags": ["app_cards"]
+        "tags": [
+          "app_cards"
+        ]
       },
       "patch": {
         "description": "Updates an app card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -7185,7 +7356,9 @@
           }
         },
         "summary": "Update app card item",
-        "tags": ["app_cards"]
+        "tags": [
+          "app_cards"
+        ]
       },
       "delete": {
         "description": "Deletes an app card item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -7325,7 +7498,9 @@
           }
         },
         "summary": "Delete app card item",
-        "tags": ["app_cards"]
+        "tags": [
+          "app_cards"
+        ]
       }
     },
     "/v2/boards/{board_id}/cards": {
@@ -7468,7 +7643,9 @@
           }
         },
         "summary": "Create card item",
-        "tags": ["cards"]
+        "tags": [
+          "cards"
+        ]
       }
     },
     "/v2/boards/{board_id}/cards/{item_id}": {
@@ -7610,7 +7787,9 @@
           }
         },
         "summary": "Get card item",
-        "tags": ["cards"]
+        "tags": [
+          "cards"
+        ]
       },
       "patch": {
         "description": "Updates a card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -7760,7 +7939,9 @@
           }
         },
         "summary": "Update card item",
-        "tags": ["cards"]
+        "tags": [
+          "cards"
+        ]
       },
       "delete": {
         "description": "Deletes a card item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -7900,7 +8081,9 @@
           }
         },
         "summary": "Delete card item",
-        "tags": ["cards"]
+        "tags": [
+          "cards"
+        ]
       }
     },
     "/v2/boards/{board_id}/connectors": {
@@ -8043,7 +8226,9 @@
           }
         },
         "summary": "Create connector",
-        "tags": ["connectors"]
+        "tags": [
+          "connectors"
+        ]
       },
       "get": {
         "description": "Retrieves a list of connectors for a specific board.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -8193,7 +8378,9 @@
           }
         },
         "summary": "Get connectors",
-        "tags": ["connectors"]
+        "tags": [
+          "connectors"
+        ]
       }
     },
     "/v2/boards/{board_id}/connectors/{connector_id}": {
@@ -8335,7 +8522,9 @@
           }
         },
         "summary": "Get specific connector",
-        "tags": ["connectors"]
+        "tags": [
+          "connectors"
+        ]
       },
       "patch": {
         "description": "Updates a connector on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -8485,7 +8674,9 @@
           }
         },
         "summary": "Update connector",
-        "tags": ["connectors"]
+        "tags": [
+          "connectors"
+        ]
       },
       "delete": {
         "description": "Deletes the specified connector from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -8625,7 +8816,9 @@
           }
         },
         "summary": "Delete connector",
-        "tags": ["connectors"]
+        "tags": [
+          "connectors"
+        ]
       }
     },
     "/v2/boards/{board_id}/documents": {
@@ -8768,7 +8961,9 @@
           }
         },
         "summary": "Create document item using URL",
-        "tags": ["documents"]
+        "tags": [
+          "documents"
+        ]
       }
     },
     "/v2/boards/{board_id}/documents/{item_id}": {
@@ -8910,7 +9105,9 @@
           }
         },
         "summary": "Get document item",
-        "tags": ["documents"]
+        "tags": [
+          "documents"
+        ]
       },
       "patch": {
         "description": "Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -9060,7 +9257,9 @@
           }
         },
         "summary": "Update document item using URL",
-        "tags": ["documents"]
+        "tags": [
+          "documents"
+        ]
       },
       "delete": {
         "description": "Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -9200,7 +9399,9 @@
           }
         },
         "summary": "Delete document item",
-        "tags": ["documents"]
+        "tags": [
+          "documents"
+        ]
       }
     },
     "/v2/boards/{board_id}/embeds": {
@@ -9343,7 +9544,9 @@
           }
         },
         "summary": "Create embed item",
-        "tags": ["embeds"]
+        "tags": [
+          "embeds"
+        ]
       }
     },
     "/v2/boards/{board_id}/embeds/{item_id}": {
@@ -9485,7 +9688,9 @@
           }
         },
         "summary": "Get embed item",
-        "tags": ["embeds"]
+        "tags": [
+          "embeds"
+        ]
       },
       "patch": {
         "description": "Updates an embed item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -9635,7 +9840,9 @@
           }
         },
         "summary": "Update embed item",
-        "tags": ["embeds"]
+        "tags": [
+          "embeds"
+        ]
       },
       "delete": {
         "description": "Deletes an embed item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -9775,7 +9982,9 @@
           }
         },
         "summary": "Delete embed item",
-        "tags": ["embeds"]
+        "tags": [
+          "embeds"
+        ]
       }
     },
     "/v2/boards/{board_id}/images": {
@@ -9921,7 +10130,9 @@
           }
         },
         "summary": "Create image item using URL",
-        "tags": ["images"]
+        "tags": [
+          "images"
+        ]
       }
     },
     "/v2/boards/{board_id}/images/{item_id}": {
@@ -10066,7 +10277,9 @@
           }
         },
         "summary": "Get image item",
-        "tags": ["images"]
+        "tags": [
+          "images"
+        ]
       },
       "patch": {
         "x-settings": {
@@ -10219,7 +10432,9 @@
           }
         },
         "summary": "Update image item using URL",
-        "tags": ["images"]
+        "tags": [
+          "images"
+        ]
       },
       "delete": {
         "x-settings": {
@@ -10362,7 +10577,9 @@
           }
         },
         "summary": "Delete image item",
-        "tags": ["images"]
+        "tags": [
+          "images"
+        ]
       }
     },
     "/v2/boards/{board_id}/members": {
@@ -10505,7 +10722,9 @@
           }
         },
         "summary": "Share board",
-        "tags": ["board_members"]
+        "tags": [
+          "board_members"
+        ]
       },
       "get": {
         "description": "Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
@@ -10654,7 +10873,9 @@
           }
         },
         "summary": "Get all board members",
-        "tags": ["board_members"]
+        "tags": [
+          "board_members"
+        ]
       }
     },
     "/v2/boards/{board_id}/members/{board_member_id}": {
@@ -10796,7 +11017,9 @@
           }
         },
         "summary": "Get specific board member",
-        "tags": ["board_members"]
+        "tags": [
+          "board_members"
+        ]
       },
       "patch": {
         "description": "Updates the role of a board member.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -10946,7 +11169,9 @@
           }
         },
         "summary": "Update board member",
-        "tags": ["board_members"]
+        "tags": [
+          "board_members"
+        ]
       },
       "delete": {
         "description": "Removes a board member from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -11086,7 +11311,9 @@
           }
         },
         "summary": "Remove board member",
-        "tags": ["board_members"]
+        "tags": [
+          "board_members"
+        ]
       }
     },
     "/v2/boards/{board_id}/shapes": {
@@ -11229,7 +11456,9 @@
           }
         },
         "summary": "Create shape item",
-        "tags": ["shapes"]
+        "tags": [
+          "shapes"
+        ]
       }
     },
     "/v2/boards/{board_id}/shapes/{item_id}": {
@@ -11371,7 +11600,9 @@
           }
         },
         "summary": "Get shape item",
-        "tags": ["shapes"]
+        "tags": [
+          "shapes"
+        ]
       },
       "patch": {
         "description": "Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -11521,7 +11752,9 @@
           }
         },
         "summary": "Update shape item",
-        "tags": ["shapes"]
+        "tags": [
+          "shapes"
+        ]
       },
       "delete": {
         "description": "Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -11661,7 +11894,9 @@
           }
         },
         "summary": "Delete shape item",
-        "tags": ["shapes"]
+        "tags": [
+          "shapes"
+        ]
       }
     },
     "/v2/boards/{board_id}/sticky_notes": {
@@ -11804,7 +12039,9 @@
           }
         },
         "summary": "Create sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": [
+          "sticky_notes"
+        ]
       }
     },
     "/v2/boards/{board_id}/sticky_notes/{item_id}": {
@@ -11946,7 +12183,9 @@
           }
         },
         "summary": "Get sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": [
+          "sticky_notes"
+        ]
       },
       "patch": {
         "description": "Updates a sticky note item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -12096,7 +12335,9 @@
           }
         },
         "summary": "Update sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": [
+          "sticky_notes"
+        ]
       },
       "delete": {
         "description": "Deletes a sticky note item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -12236,7 +12477,9 @@
           }
         },
         "summary": "Delete sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": [
+          "sticky_notes"
+        ]
       }
     },
     "/v2/boards/{board_id}/texts": {
@@ -12379,7 +12622,9 @@
           }
         },
         "summary": "Create text item",
-        "tags": ["texts"]
+        "tags": [
+          "texts"
+        ]
       }
     },
     "/v2/boards/{board_id}/texts/{item_id}": {
@@ -12521,7 +12766,9 @@
           }
         },
         "summary": "Get text item",
-        "tags": ["texts"]
+        "tags": [
+          "texts"
+        ]
       },
       "patch": {
         "description": "Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -12671,7 +12918,9 @@
           }
         },
         "summary": "Update text item",
-        "tags": ["texts"]
+        "tags": [
+          "texts"
+        ]
       },
       "delete": {
         "description": "Deletes a text item from the board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -12811,7 +13060,9 @@
           }
         },
         "summary": "Delete text item",
-        "tags": ["texts"]
+        "tags": [
+          "texts"
+        ]
       }
     },
     "/v2/boards/{board_id_Platform}/items": {
@@ -12983,7 +13234,9 @@
           }
         },
         "summary": "Get items on board",
-        "tags": ["items"]
+        "tags": [
+          "items"
+        ]
       }
     },
     "/v2/boards/{board_id_Platform}/items/{item_id}": {
@@ -13125,7 +13378,9 @@
           }
         },
         "summary": "Get specific item on board",
-        "tags": ["items"]
+        "tags": [
+          "items"
+        ]
       },
       "patch": {
         "description": "Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -13275,7 +13530,9 @@
           }
         },
         "summary": "Update item position or parent",
-        "tags": ["items"]
+        "tags": [
+          "items"
+        ]
       },
       "delete": {
         "description": "Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
@@ -13415,7 +13672,9 @@
           }
         },
         "summary": "Delete item",
-        "tags": ["items"]
+        "tags": [
+          "items"
+        ]
       }
     }
   },
@@ -13537,7 +13796,12 @@
           "type": {
             "type": "string",
             "description": "Type of the creator",
-            "enum": ["user", "application", "scim_provisioner", "miro_automation"]
+            "enum": [
+              "user",
+              "application",
+              "scim_provisioner",
+              "miro_automation"
+            ]
           },
           "id": {
             "type": "string",
@@ -13778,7 +14042,9 @@
         }
       },
       "BoardExportJobIdBoardExportJobEnterprisePlan": {
-        "required": ["jobId"],
+        "required": [
+          "jobId"
+        ],
         "type": "object",
         "properties": {
           "jobId": {
@@ -13790,7 +14056,9 @@
         }
       },
       "BoardExportJobStatusBoardExportJobEnterprisePlan": {
-        "required": ["jobStatus"],
+        "required": [
+          "jobStatus"
+        ],
         "type": "object",
         "properties": {
           "jobStatus": {
@@ -13819,7 +14087,10 @@
         }
       },
       "BoardExportTaskResultBoardExportJobEnterprisePlan": {
-        "required": ["boardId", "status"],
+        "required": [
+          "boardId",
+          "status"
+        ],
         "type": "object",
         "properties": {
           "boardId": {
@@ -13862,7 +14133,9 @@
         "description": "List of board IDs to be exported."
       },
       "BoardExportJobId": {
-        "required": ["jobId"],
+        "required": [
+          "jobId"
+        ],
         "type": "object",
         "properties": {
           "jobId": {
@@ -13874,7 +14147,9 @@
         }
       },
       "BoardExportJobStatus": {
-        "required": ["jobStatus"],
+        "required": [
+          "jobStatus"
+        ],
         "type": "object",
         "properties": {
           "jobStatus": {
@@ -13903,7 +14178,10 @@
         }
       },
       "BoardExportTaskResult": {
-        "required": ["boardId", "status"],
+        "required": [
+          "boardId",
+          "status"
+        ],
         "type": "object",
         "properties": {
           "boardId": {
@@ -13946,7 +14224,12 @@
         "description": "List of board IDs to be exported."
       },
       "Organization": {
-        "required": ["fullLicensesPurchased", "id", "name", "plan"],
+        "required": [
+          "fullLicensesPurchased",
+          "id",
+          "name",
+          "plan"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -13991,7 +14274,13 @@
       },
       "OrganizationMember": {
         "description": "Organization member",
-        "required": ["active", "email", "id", "license", "role"],
+        "required": [
+          "active",
+          "email",
+          "id",
+          "license",
+          "role"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -14018,7 +14307,14 @@
             "type": "string",
             "description": "Name of the current user license in the organization",
             "example": "full",
-            "enum": ["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
+            "enum": [
+              "full",
+              "occasional",
+              "free",
+              "free_restricted",
+              "full_trial",
+              "unknown"
+            ]
           },
           "licenseAssignedAt": {
             "type": "string",
@@ -14087,7 +14383,11 @@
       },
       "ProjectPage": {
         "type": "object",
-        "required": ["limit", "size", "data"],
+        "required": [
+          "limit",
+          "size",
+          "data"
+        ],
         "properties": {
           "limit": {
             "type": "integer",
@@ -14128,7 +14428,9 @@
       },
       "CreateProjectRequest": {
         "type": "object",
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -14139,7 +14441,9 @@
       },
       "UpdateProjectRequest": {
         "type": "object",
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -14158,7 +14462,10 @@
       },
       "ProjectSettings": {
         "type": "object",
-        "required": ["sharingPolicySettings", "type"],
+        "required": [
+          "sharingPolicySettings",
+          "type"
+        ],
         "properties": {
           "sharingPolicySettings": {
             "$ref": "#/components/schemas/SharingPolicySettings"
@@ -14172,7 +14479,11 @@
       },
       "ProjectMemberPage": {
         "type": "object",
-        "required": ["limit", "size", "data"],
+        "required": [
+          "limit",
+          "size",
+          "data"
+        ],
         "properties": {
           "limit": {
             "type": "integer",
@@ -14213,7 +14524,12 @@
       },
       "ProjectMember": {
         "type": "object",
-        "required": ["id", "email", "role", "type"],
+        "required": [
+          "id",
+          "email",
+          "role",
+          "type"
+        ],
         "properties": {
           "id": {
             "type": "string",
@@ -14237,7 +14553,10 @@
       },
       "AddProjectMemberRequest": {
         "type": "object",
-        "required": ["email", "role"],
+        "required": [
+          "email",
+          "role"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -14268,20 +14587,34 @@
       "TeamAccess": {
         "type": "string",
         "description": "Team access\n* \"private\": Only the members of the project can access the information within the project.\n* \"view\":    Anyone in the team can view the information in within the project.\n",
-        "enum": ["private", "view"],
+        "enum": [
+          "private",
+          "view"
+        ],
         "default": "private",
         "example": "private"
       },
       "ProjectRole": {
         "type": "string",
         "description": "Role of the project member.",
-        "enum": ["owner", "editor", "viewer", "commentator", "coowner"],
+        "enum": [
+          "owner",
+          "editor",
+          "viewer",
+          "commentator",
+          "coowner"
+        ],
         "example": "viewer"
       },
       "ProjectRoleToAdd": {
         "type": "string",
         "description": "Role of the project member.",
-        "enum": ["editor", "viewer", "commentator", "coowner"],
+        "enum": [
+          "editor",
+          "viewer",
+          "commentator",
+          "coowner"
+        ],
         "example": "viewer"
       },
       "Error400": {
@@ -14460,7 +14793,11 @@
           "accountDiscovery": {
             "type": "string",
             "description": "\n* \"hidden\":  Only invited users can see and access the team.\n* \"request\": Members of organization can find and request to join with admin approval.\n* \"join\":    Members of organization can find and join.\n",
-            "enum": ["hidden", "request", "join"]
+            "enum": [
+              "hidden",
+              "request",
+              "join"
+            ]
           }
         },
         "description": "Team account discovery settings"
@@ -14471,7 +14808,11 @@
           "accountDiscovery": {
             "type": "string",
             "description": "\n* \"hidden\":  Only invited users can see and access the team.\n* \"request\": Members of organization can find and request to join with admin approval.\n* \"join\":    Members of organization can find and join.\n",
-            "enum": ["hidden", "request", "join"]
+            "enum": [
+              "hidden",
+              "request",
+              "join"
+            ]
           }
         },
         "description": "Team account discovery settings"
@@ -14492,7 +14833,10 @@
           "coOwnerRole": {
             "type": "string",
             "description": "\n* \"enabled\": Enable Co-owner role on boards and projects\n* \"disabled\": Disabled Co-owner role on boards and projects\n",
-            "enum": ["enabled", "disabled"]
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
           }
         },
         "description": "Team collaboration settings"
@@ -14503,7 +14847,10 @@
           "coOwnerRole": {
             "type": "string",
             "description": "\n* \"enabled\": Enable Co-owner role on boards and projects\n* \"disabled\": Disabled Co-owner role on boards and projects\n",
-            "enum": ["enabled", "disabled"]
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
           }
         },
         "description": "Team collaboration settings"
@@ -14514,12 +14861,20 @@
           "copyAccessLevel": {
             "type": "string",
             "description": "\n* \"anyone\":       Anyone with the board access can copy board content on newly created boards.\n* \"team_members\": Team members can copy board content on newly created boards.\n* \"team_editors\": Team members with editing rights can copy board content on newly created boards.\n* \"board_owner\":  Board owners only can copy board content on newly created boards.\n",
-            "enum": ["anyone", "team_members", "team_editors", "board_owner            -"]
+            "enum": [
+              "anyone",
+              "team_members",
+              "team_editors",
+              "board_owner            -"
+            ]
           },
           "copyAccessLevelLimitation": {
             "type": "string",
             "description": "\n* \"anyone\":       Team members and users outside team can be given permission to copy board content.\n* \"team_members\": Only team members can be given permission to copy board content.\n",
-            "enum": ["anyone", "team_members"]
+            "enum": [
+              "anyone",
+              "team_members"
+            ]
           }
         },
         "description": "Team copy access settings"
@@ -14530,12 +14885,20 @@
           "copyAccessLevel": {
             "type": "string",
             "description": "\n* \"anyone\":       Anyone with the board access can copy board content on newly created boards.\n* \"team_members\": Team members can copy board content on newly created boards.\n* \"team_editors\": Team members with editing rights can copy board content on newly created boards.\n* \"board_owner\":  Board owners only can copy board content on newly created boards.\n",
-            "enum": ["anyone", "team_members", "team_editors", "board_owner"]
+            "enum": [
+              "anyone",
+              "team_members",
+              "team_editors",
+              "board_owner"
+            ]
           },
           "copyAccessLevelLimitation": {
             "type": "string",
             "description": "\n* \"anyone\":       Team members and users outside team can be given permission to copy board content.\n* \"team_members\": Only team members can be given permission to copy board content.\n",
-            "enum": ["anyone", "team_members"]
+            "enum": [
+              "anyone",
+              "team_members"
+            ]
           }
         },
         "description": "Team copy access settings"
@@ -14546,12 +14909,19 @@
           "inviteExternalUsers": {
             "type": "string",
             "description": "\n* \"allowed\": Allow non-team collaborators for team\n* \"not_allowed\": Not Allow non-team collaborators for team\n",
-            "enum": ["allowed", "not_allowed"]
+            "enum": [
+              "allowed",
+              "not_allowed"
+            ]
           },
           "whoCanInvite": {
             "type": "string",
             "description": "\n* \"only_org_admins\": Company admins only can invite\n* \"admins\":          Company admins and team admins can invite\n* \"all_members\":     All team members can invite\n",
-            "enum": ["only_org_admins", "admins", "all_members"]
+            "enum": [
+              "only_org_admins",
+              "admins",
+              "all_members"
+            ]
           }
         },
         "description": "Team invitation settings"
@@ -14562,18 +14932,29 @@
           "inviteExternalUsers": {
             "type": "string",
             "description": "\n* \"allowed\": Allow non-team collaborators for team\n* \"not_allowed\": Not Allow non-team collaborators for team\n",
-            "enum": ["allowed", "not_allowed"]
+            "enum": [
+              "allowed",
+              "not_allowed"
+            ]
           },
           "whoCanInvite": {
             "type": "string",
             "description": "\n* \"only_org_admins\": Company admins only can invite\n* \"admins\":          Company admins and team admins can invite\n* \"all_members\":     All team members can invite\n",
-            "enum": ["only_org_admins", "admins", "all_members"]
+            "enum": [
+              "only_org_admins",
+              "admins",
+              "all_members"
+            ]
           }
         },
         "description": "Team invitation settings"
       },
       "TeamMember": {
-        "required": ["id", "teamId", "role"],
+        "required": [
+          "id",
+          "teamId",
+          "role"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -14584,7 +14965,12 @@
           "role": {
             "type": "string",
             "description": "\nRole of the team member.\n* \"member\":     Team member with full member permissions.\n* \"admin\":      Admin of a team. Team member with permission to manage team.\n* \"non_team\":   External user, non-team user.\n* \"team_guest\": Team-guest user, user with access only to a team without access to organization.\n",
-            "enum": ["non_team", "member", "admin", "team_guest"]
+            "enum": [
+              "non_team",
+              "member",
+              "admin",
+              "team_guest"
+            ]
           },
           "createdAt": {
             "type": "string",
@@ -14625,13 +15011,19 @@
             "type": "string",
             "example": "member",
             "description": "\nRole of the team member.\n* \"member\":     Team member with full member permissions.\n* \"admin\":      Admin of a team. Team member with permission to manage team.\n* \"team_guest\": Team-guest user, user with access only to a team without access to organization.\n",
-            "enum": ["member", "admin", "team_guest"]
+            "enum": [
+              "member",
+              "admin",
+              "team_guest"
+            ]
           }
         }
       },
       "TeamMemberInvite": {
         "type": "object",
-        "required": ["email"],
+        "required": [
+          "email"
+        ],
         "properties": {
           "email": {
             "type": "string",
@@ -14642,7 +15034,11 @@
             "type": "string",
             "example": "member",
             "description": "\nRole of the team member.\n* \"member\":     Team member with full member permissions.\n* \"admin\":      Admin of a team. Team member with permission to manage team.\n* \"team_guest\": Team-guest user, user with access only to a team without access to organization.\n",
-            "enum": ["member", "admin", "team_guest"]
+            "enum": [
+              "member",
+              "admin",
+              "team_guest"
+            ]
           }
         }
       },
@@ -14715,47 +15111,82 @@
           "createAssetAccessLevel": {
             "type": "string",
             "description": "\n* \"company_admins\": Only company admins can create assets in a team\n* \"admins\": Both team and company admins can create assets in a team.\n* \"all_members\": all_members\n",
-            "enum": ["company_admins", "admins", "all_members"]
+            "enum": [
+              "company_admins",
+              "admins",
+              "all_members"
+            ]
           },
           "defaultBoardAccess": {
             "type": "string",
             "description": "\nDefault board access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n* \"comment\": Anyone in the team can comment\n* \"edit\":    Anyone in the team can edit\n",
-            "enum": ["private", "view", "comment", "edit"]
+            "enum": [
+              "private",
+              "view",
+              "comment",
+              "edit"
+            ]
           },
           "defaultOrganizationAccess": {
             "type": "string",
             "description": "\nDefault organization access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n* \"comment\": Anyone in the team can comment\n* \"edit\":    Anyone in the team can edit\n",
-            "enum": ["private", "view", "comment", "edit"]
+            "enum": [
+              "private",
+              "view",
+              "comment",
+              "edit"
+            ]
           },
           "defaultProjectAccess": {
             "type": "string",
             "description": "\nDefault project access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n",
-            "enum": ["private", "view"]
+            "enum": [
+              "private",
+              "view"
+            ]
           },
           "moveBoardToAccount": {
             "type": "string",
             "description": "\n* \"allowed\": Allow move board to team\n* \"not_allowed\": Not allow move board to team\n",
-            "enum": ["allowed", "not_allowed"]
+            "enum": [
+              "allowed",
+              "not_allowed"
+            ]
           },
           "restrictAllowedDomains": {
             "type": "string",
             "description": "\n* \"enabled\": Enabled. Restrict to listed domain.\n* \"disabled\": Disabled. No domain restriction.\n* \"enabled_with_external_users_access\": Enabled. Restrict to listed domain but allows external users to access.\n",
-            "enum": ["enabled", "enabled_with_external_user_access", "disabled"]
+            "enum": [
+              "enabled",
+              "enabled_with_external_user_access",
+              "disabled"
+            ]
           },
           "sharingOnAccount": {
             "type": "string",
             "description": "\n* \"allowed\": Allow sharing on team\n* \"not_allowed\": Not allow sharing on team\n",
-            "enum": ["allowed", "not_allowed"]
+            "enum": [
+              "allowed",
+              "not_allowed"
+            ]
           },
           "sharingOnOrganization": {
             "type": "string",
             "description": "\n* \"allowed\": Allow sharing on organization\n* \"allowed_with_editing\": Allow sharing with editing on organization\n* \"not_allowed\": Not allow sharing on organization\n",
-            "enum": ["allowed", "allowed_with_editing", "not_allowed"]
+            "enum": [
+              "allowed",
+              "allowed_with_editing",
+              "not_allowed"
+            ]
           },
           "sharingViaPublicLink": {
             "type": "string",
             "description": "\n* \"allowed\": Allow sharing via public link\n* \"allowed_with_editing\": Allow sharing with editing via public link\n* \"not_allowed\": Not allow sharing via public link\n",
-            "enum": ["allowed", "allowed_with_editing", "not_allowed"]
+            "enum": [
+              "allowed",
+              "allowed_with_editing",
+              "not_allowed"
+            ]
           }
         },
         "description": "Team sharing policy settings"
@@ -14774,47 +15205,82 @@
           "createAssetAccessLevel": {
             "type": "string",
             "description": "\n* \"company_admins\": Only company admins can create assets in a team\n* \"admins\": Both team and company admins can create assets in a team.\n* \"all_members\": all_members\n",
-            "enum": ["company_admins", "admins", "all_members"]
+            "enum": [
+              "company_admins",
+              "admins",
+              "all_members"
+            ]
           },
           "defaultBoardAccess": {
             "type": "string",
             "description": "\nDefault board access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n* \"comment\": Anyone in the team can comment\n* \"edit\":    Anyone in the team can edit\n",
-            "enum": ["private", "view", "comment", "edit"]
+            "enum": [
+              "private",
+              "view",
+              "comment",
+              "edit"
+            ]
           },
           "defaultOrganizationAccess": {
             "type": "string",
             "description": "\nDefault organization access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n* \"comment\": Anyone in the team can comment\n* \"edit\":    Anyone in the team can edit\n",
-            "enum": ["private", "view", "comment", "edit"]
+            "enum": [
+              "private",
+              "view",
+              "comment",
+              "edit"
+            ]
           },
           "defaultProjectAccess": {
             "type": "string",
             "description": "\nDefault project access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n",
-            "enum": ["private", "view"]
+            "enum": [
+              "private",
+              "view"
+            ]
           },
           "moveBoardToAccount": {
             "type": "string",
             "description": "\n* \"allowed\": Allow move board to team\n* \"not_allowed\": Not allow move board to team\n",
-            "enum": ["allowed", "not_allowed"]
+            "enum": [
+              "allowed",
+              "not_allowed"
+            ]
           },
           "restrictAllowedDomains": {
             "type": "string",
             "description": "\n* \"enabled\": Enabled. Restrict to listed domain.\n* \"disabled\": Disabled. No domain restriction.\n* \"enabled_with_external_users_access\": Enabled. Restrict to listed domain but allows external users to access.\n",
-            "enum": ["enabled", "enabled_with_external_user_access", "disabled"]
+            "enum": [
+              "enabled",
+              "enabled_with_external_user_access",
+              "disabled"
+            ]
           },
           "sharingOnAccount": {
             "type": "string",
             "description": "\n* \"allowed\": Allow sharing on team\n* \"not_allowed\": Not allow sharing on team\n",
-            "enum": ["allowed", "not_allowed"]
+            "enum": [
+              "allowed",
+              "not_allowed"
+            ]
           },
           "sharingOnOrganization": {
             "type": "string",
             "description": "\n* \"allowed\": Allow sharing on organization\n* \"allowed_with_editing\": Allow sharing with editing on organization\n* \"not_allowed\": Not allow sharing on organization\n",
-            "enum": ["allowed", "allowed_with_editing", "not_allowed"]
+            "enum": [
+              "allowed",
+              "allowed_with_editing",
+              "not_allowed"
+            ]
           },
           "sharingViaPublicLink": {
             "type": "string",
             "description": "\n* \"allowed\": Allow sharing via public link\n* \"allowed_with_editing\": Allow sharing with editing via public link\n* \"not_allowed\": Not allow sharing via public link\n",
-            "enum": ["allowed", "allowed_with_editing", "not_allowed"]
+            "enum": [
+              "allowed",
+              "allowed_with_editing",
+              "not_allowed"
+            ]
           }
         },
         "description": "Team sharing policy settings"
@@ -14850,7 +15316,11 @@
       "TeamsPage": {
         "type": "object",
         "description": "Page of teams that match the search query.",
-        "required": ["limit", "size", "data"],
+        "required": [
+          "limit",
+          "size",
+          "data"
+        ],
         "properties": {
           "limit": {
             "$ref": "#/components/schemas/PageLimit"
@@ -14876,7 +15346,11 @@
       "TeamMembersPage": {
         "type": "object",
         "description": "Page of team members that match the search query.",
-        "required": ["limit", "size", "data"],
+        "required": [
+          "limit",
+          "size",
+          "data"
+        ],
         "properties": {
           "limit": {
             "$ref": "#/components/schemas/PageLimit"
@@ -14929,7 +15403,9 @@
             "type": "string",
             "default": "custom",
             "description": "Only custom frames are supported at the moment.",
-            "enum": ["custom"]
+            "enum": [
+              "custom"
+            ]
           },
           "title": {
             "type": "string",
@@ -14940,7 +15416,9 @@
             "type": "string",
             "default": "freeform",
             "description": "Only free form frames are supported at the moment.",
-            "enum": ["freeform"]
+            "enum": [
+              "freeform"
+            ]
           },
           "showContent": {
             "type": "boolean",
@@ -14965,7 +15443,9 @@
             "$ref": "#/components/schemas/GeometryNoRotation"
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "FrameItem": {
         "type": "object",
@@ -15014,7 +15494,10 @@
             "example": "frame"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "FrameStyle": {
         "type": "object",
@@ -15095,7 +15578,11 @@
             "type": "string",
             "default": "enabled",
             "description": "Indicates whether the status of the webhook subscription. `enabled`: Miro sends a webhook when an event occurs in the associated board.\n`disabled`: Miro does not send a webhook even when an event occurs in the associated board.\n`lost_access`: The user with which the webhook subscription is associated has lost access to the board.\nThe user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.",
-            "enum": ["enabled", "disabled", "lost_access"]
+            "enum": [
+              "enabled",
+              "disabled",
+              "lost_access"
+            ]
           },
           "type": {
             "type": "string",
@@ -15135,7 +15622,10 @@
             "type": "string",
             "default": "enabled",
             "description": "Indicates whether the status of the webhook subscription.`enabled`: Miro sends a webhook when an event occurs in the associated board.\n`disabled`: Miro does not send a webhook even when an event occurs in the associated board.\n`lost_access`: The user with which the webhook subscription is associated has lost access to the board.\nThe user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.",
-            "enum": ["enabled", "disabled"]
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
           }
         }
       },
@@ -15171,7 +15661,11 @@
             "type": "string",
             "default": "enabled",
             "description": "Indicates whether the status of the webhook subscription. `enabled`: Miro sends a webhook when an event occurs in the associated board.\n`disabled`: Miro does not send a webhook even when an event occurs in the associated board.\n`lost_access`: The user with which the webhook subscription is associated has lost access to the board.\nThe user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.",
-            "enum": ["enabled", "disabled", "lost_access"]
+            "enum": [
+              "enabled",
+              "disabled",
+              "lost_access"
+            ]
           },
           "type": {
             "type": "string",
@@ -15239,7 +15733,10 @@
             "type": "string",
             "default": "enabled",
             "description": "Indicates whether the status of the webhook subscription. `enabled`: Miro sends a webhook when an event occurs in the associated board.\n`disabled`: Miro does not send a webhook even when an event occurs in the associated board.\n`lost_access`: The user with which the webhook subscription is associated has lost access to the board.\nThe user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.",
-            "enum": ["enabled", "disabled"]
+            "enum": [
+              "enabled",
+              "disabled"
+            ]
           }
         }
       },
@@ -15308,7 +15805,10 @@
             "description": "Type of item that is returned."
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "MindmapCursorPaged": {
         "type": "object",
@@ -15443,7 +15943,11 @@
           "borderStyle": {
             "type": "string",
             "description": "Defines the style used to represent the border of the shape.\nDefault: `normal`.",
-            "enum": ["normal", "dotted", "dashed"]
+            "enum": [
+              "normal",
+              "dotted",
+              "dashed"
+            ]
           },
           "borderWidth": {
             "type": "string",
@@ -15512,12 +16016,22 @@
           "textAlign": {
             "type": "string",
             "description": "Defines how the shape text is horizontally aligned.\nDefault: \nFlowchart shapes: `center`.\nBasic shapes: `left`.\n\n`unknown` is returned for unsupported shapes.",
-            "enum": ["left", "right", "center", "unknown"]
+            "enum": [
+              "left",
+              "right",
+              "center",
+              "unknown"
+            ]
           },
           "textAlignVertical": {
             "type": "string",
             "description": "Defines how the shape text is vertically aligned.\nDefault: \nFlowchart shapes: `middle`.\nBasic shapes: `top`.\n\n`unknown` is returned for unsupported shapes.",
-            "enum": ["top", "middle", "bottom", "unknown"]
+            "enum": [
+              "top",
+              "middle",
+              "bottom",
+              "unknown"
+            ]
           }
         }
       },
@@ -15538,7 +16052,11 @@
           "borderStyle": {
             "type": "string",
             "description": "Defines the style used to represent the border of the shape.\nDefault: `normal`.",
-            "enum": ["normal", "dotted", "dashed"]
+            "enum": [
+              "normal",
+              "dotted",
+              "dashed"
+            ]
           },
           "borderWidth": {
             "type": "string",
@@ -15607,12 +16125,20 @@
           "textAlign": {
             "type": "string",
             "description": "Defines how the sticky note text is horizontally aligned.\nDefault: \nFlowchart shapes: `center`.\nBasic shapes: `left`.",
-            "enum": ["left", "right", "center"]
+            "enum": [
+              "left",
+              "right",
+              "center"
+            ]
           },
           "textAlignVertical": {
             "type": "string",
             "description": "Defines how the sticky note text is vertically aligned.\nDefault: \nFlowchart shapes: `middle`.\nBasic shapes: `top`.",
-            "enum": ["top", "middle", "bottom"]
+            "enum": [
+              "top",
+              "middle",
+              "bottom"
+            ]
           }
         }
       },
@@ -15694,7 +16220,10 @@
             "description": "Type of item that is returned."
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "AppCardDataResponse": {
         "type": "object",
@@ -15719,7 +16248,11 @@
           "status": {
             "type": "string",
             "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
-            "enum": ["disconnected", "connected", "disabled"]
+            "enum": [
+              "disconnected",
+              "connected",
+              "disabled"
+            ]
           },
           "title": {
             "type": "string",
@@ -15764,7 +16297,10 @@
           "mode": {
             "type": "string",
             "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
-            "enum": ["inline", "modal"]
+            "enum": [
+              "inline",
+              "modal"
+            ]
           },
           "previewUrl": {
             "type": "string",
@@ -15857,7 +16393,11 @@
             "$ref": "#/components/schemas/SelfLink"
           }
         },
-        "required": ["id", "type", "links"]
+        "required": [
+          "id",
+          "type",
+          "links"
+        ]
       },
       "ItemChanges": {
         "type": "object",
@@ -15909,7 +16449,9 @@
             "$ref": "#/components/schemas/Parent"
           }
         },
-        "required": ["type"]
+        "required": [
+          "type"
+        ]
       },
       "ItemData": {
         "type": "object",
@@ -16006,7 +16548,10 @@
             "example": "fixed-list"
           }
         },
-        "required": ["type", "data"]
+        "required": [
+          "type",
+          "data"
+        ]
       },
       "ItemsPage": {
         "type": "object",
@@ -16046,7 +16591,14 @@
             "example": "cursor-list"
           }
         },
-        "required": ["type", "size", "limit", "total", "data", "links"]
+        "required": [
+          "type",
+          "size",
+          "limit",
+          "total",
+          "data",
+          "links"
+        ]
       },
       "ItemStyle": {
         "type": "object",
@@ -16072,7 +16624,17 @@
       "ItemTypeChange": {
         "type": "string",
         "description": "Type of item that you want to create.",
-        "enum": ["app_card", "text", "shape", "sticky_note", "image", "document", "card", "frame", "embed"],
+        "enum": [
+          "app_card",
+          "text",
+          "shape",
+          "sticky_note",
+          "image",
+          "document",
+          "card",
+          "frame",
+          "embed"
+        ],
         "example": "text"
       },
       "ImageDataResponse": {
@@ -16190,7 +16752,10 @@
             "example": "error"
           }
         },
-        "required": ["message", "type"]
+        "required": [
+          "message",
+          "type"
+        ]
       },
       "BulkOperationError": {
         "type": "object",
@@ -16229,7 +16794,9 @@
             "example": 400
           }
         },
-        "required": ["message"]
+        "required": [
+          "message"
+        ]
       },
       "BulkSubOperationError": {
         "type": "object",
@@ -16247,7 +16814,10 @@
             "type": "object"
           }
         },
-        "required": ["field", "message"]
+        "required": [
+          "field",
+          "message"
+        ]
       },
       "CreatedBy": {
         "type": "object",
@@ -16294,7 +16864,10 @@
             "type": "string",
             "default": "round",
             "description": "The shape of the icon on the preview field.",
-            "enum": ["round", "square"]
+            "enum": [
+              "round",
+              "square"
+            ]
           },
           "iconUrl": {
             "type": "string",
@@ -16450,7 +17023,10 @@
             "type": "string",
             "default": "square",
             "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
-            "enum": ["square", "rectangle"]
+            "enum": [
+              "square",
+              "rectangle"
+            ]
           }
         }
       },
@@ -16491,7 +17067,12 @@
             "description": "Type of the object that is returned. In this case, type returns `tag`."
           }
         },
-        "required": ["fillColor", "id", "title", "type"]
+        "required": [
+          "fillColor",
+          "id",
+          "title",
+          "type"
+        ]
       },
       "TagCreateRequest": {
         "type": "object",
@@ -16523,7 +17104,9 @@
             "minLength": 0
           }
         },
-        "required": ["title"]
+        "required": [
+          "title"
+        ]
       },
       "TagUpdateRequest": {
         "type": "object",
@@ -16596,7 +17179,12 @@
             "description": "Type of the object that is returned. In this case, type returns `tag`."
           }
         },
-        "required": ["fillColor", "id", "title", "type"]
+        "required": [
+          "fillColor",
+          "id",
+          "title",
+          "type"
+        ]
       },
       "TagsPagedResponse": {
         "type": "object",
@@ -16650,7 +17238,9 @@
             "example": "Hello"
           }
         },
-        "required": ["content"]
+        "required": [
+          "content"
+        ]
       },
       "createdByPlatformTags": {
         "type": "object",
@@ -16727,7 +17317,11 @@
           "status": {
             "type": "string",
             "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
-            "enum": ["disconnected", "connected", "disabled"]
+            "enum": [
+              "disconnected",
+              "connected",
+              "disabled"
+            ]
           },
           "title": {
             "type": "string",
@@ -16756,7 +17350,11 @@
             "type": "string",
             "default": "disconnected",
             "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
-            "enum": ["disconnected", "connected", "disabled"]
+            "enum": [
+              "disconnected",
+              "connected",
+              "disabled"
+            ]
           },
           "title": {
             "type": "string",
@@ -16815,7 +17413,10 @@
             "example": "app_card"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "AppCardStylePlatform": {
         "type": "object",
@@ -16912,7 +17513,12 @@
             "example": "https://miro.com/app/board/uXjVOD6LSME="
           }
         },
-        "required": ["description", "id", "name", "type"]
+        "required": [
+          "description",
+          "id",
+          "name",
+          "type"
+        ]
       },
       "BoardChanges": {
         "type": "object",
@@ -17001,7 +17607,13 @@
           "role": {
             "type": "string",
             "description": "Role of the board member.",
-            "enum": ["viewer", "commenter", "editor", "coowner", "owner"]
+            "enum": [
+              "viewer",
+              "commenter",
+              "editor",
+              "coowner",
+              "owner"
+            ]
           },
           "type": {
             "type": "string",
@@ -17009,7 +17621,11 @@
             "example": "board_member"
           }
         },
-        "required": ["id", "name", "type"]
+        "required": [
+          "id",
+          "name",
+          "type"
+        ]
       },
       "BoardMemberChanges": {
         "type": "object",
@@ -17018,7 +17634,13 @@
             "type": "string",
             "default": "commenter",
             "description": "Role of the board member.",
-            "enum": ["viewer", "commenter", "editor", "coowner", "owner"]
+            "enum": [
+              "viewer",
+              "commenter",
+              "editor",
+              "coowner",
+              "owner"
+            ]
           }
         }
       },
@@ -17038,7 +17660,13 @@
           "role": {
             "type": "string",
             "description": "Role of the board member.",
-            "enum": ["viewer", "commenter", "editor", "coowner", "owner"]
+            "enum": [
+              "viewer",
+              "commenter",
+              "editor",
+              "coowner",
+              "owner"
+            ]
           },
           "links": {
             "$ref": "#/components/schemas/SelfLink"
@@ -17049,7 +17677,11 @@
             "example": "board_member"
           }
         },
-        "required": ["id", "name", "type"]
+        "required": [
+          "id",
+          "name",
+          "type"
+        ]
       },
       "BoardMembersInvite": {
         "type": "object",
@@ -17069,7 +17701,13 @@
             "type": "string",
             "default": "commenter",
             "description": "Role of the board member.",
-            "enum": ["viewer", "commenter", "editor", "coowner", "owner"]
+            "enum": [
+              "viewer",
+              "commenter",
+              "editor",
+              "coowner",
+              "owner"
+            ]
           },
           "message": {
             "type": "string",
@@ -17077,7 +17715,9 @@
             "example": "Hey there! Join my board and let's collaborate on this project!"
           }
         },
-        "required": ["emails"]
+        "required": [
+          "emails"
+        ]
       },
       "BoardMembersPagedResponse": {
         "type": "object",
@@ -17129,19 +17769,30 @@
             "type": "string",
             "default": "all_editors",
             "description": "Defines who can start or stop timer, voting, video chat, screen sharing, attention management. Others will only be able to join. To change the value for the `collaborationToolsStartAccess` parameter, contact Miro Customer Support.",
-            "enum": ["all_editors", "board_owners_and_coowners"]
+            "enum": [
+              "all_editors",
+              "board_owners_and_coowners"
+            ]
           },
           "copyAccess": {
             "type": "string",
             "default": "anyone",
             "description": "Defines who can copy the board, copy objects, download images, and save the board as a template or PDF.",
-            "enum": ["anyone", "team_members", "team_editors", "board_owner"]
+            "enum": [
+              "anyone",
+              "team_members",
+              "team_editors",
+              "board_owner"
+            ]
           },
           "sharingAccess": {
             "type": "string",
             "default": "team_members_with_editing_rights",
             "description": "Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support.",
-            "enum": ["team_members_with_editing_rights", "owner_and_coowners"]
+            "enum": [
+              "team_members_with_editing_rights",
+              "owner_and_coowners"
+            ]
           }
         }
       },
@@ -17176,24 +17827,47 @@
           "access": {
             "type": "string",
             "description": "Defines the public-level access to the board.",
-            "enum": ["private", "view", "edit", "comment"]
+            "enum": [
+              "private",
+              "view",
+              "edit",
+              "comment"
+            ]
           },
           "inviteToAccountAndBoardLinkAccess": {
             "type": "string",
             "default": "no_access",
             "description": "Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.",
-            "enum": ["viewer", "commenter", "editor", "coowner", "owner", "guest", "no_access"]
+            "enum": [
+              "viewer",
+              "commenter",
+              "editor",
+              "coowner",
+              "owner",
+              "guest",
+              "no_access"
+            ]
           },
           "organizationAccess": {
             "type": "string",
             "default": "private",
             "description": "Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.",
-            "enum": ["private", "view", "comment", "edit"]
+            "enum": [
+              "private",
+              "view",
+              "comment",
+              "edit"
+            ]
           },
           "teamAccess": {
             "type": "string",
             "description": "Defines the team-level access to the board.",
-            "enum": ["private", "view", "comment", "edit"]
+            "enum": [
+              "private",
+              "view",
+              "comment",
+              "edit"
+            ]
           }
         }
       },
@@ -17205,25 +17879,45 @@
             "type": "string",
             "default": "private",
             "description": "Defines the public-level access to the board.",
-            "enum": ["private", "view", "edit", "comment"]
+            "enum": [
+              "private",
+              "view",
+              "edit",
+              "comment"
+            ]
           },
           "inviteToAccountAndBoardLinkAccess": {
             "type": "string",
             "default": "no_access",
             "description": "Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access` regardless of the value that you assign for this parameter.",
-            "enum": ["viewer", "commenter", "editor", "no_access"]
+            "enum": [
+              "viewer",
+              "commenter",
+              "editor",
+              "no_access"
+            ]
           },
           "organizationAccess": {
             "type": "string",
             "default": "private",
             "description": "Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.",
-            "enum": ["private", "view", "comment", "edit"]
+            "enum": [
+              "private",
+              "view",
+              "comment",
+              "edit"
+            ]
           },
           "teamAccess": {
             "type": "string",
             "default": "private",
             "description": "Defines the team-level access to the board.",
-            "enum": ["private", "view", "comment", "edit"]
+            "enum": [
+              "private",
+              "view",
+              "comment",
+              "edit"
+            ]
           }
         }
       },
@@ -17293,7 +17987,12 @@
             "example": "board"
           }
         },
-        "required": ["description", "id", "name", "type"]
+        "required": [
+          "description",
+          "id",
+          "name",
+          "type"
+        ]
       },
       "BoardWithLinksAndWithoutProject": {
         "type": "object",
@@ -17358,7 +18057,12 @@
             "example": "board"
           }
         },
-        "required": ["description", "id", "name", "type"]
+        "required": [
+          "description",
+          "id",
+          "name",
+          "type"
+        ]
       },
       "BoardsPagedResponse": {
         "type": "object",
@@ -17421,10 +18125,16 @@
           "textAlignVertical": {
             "type": "string",
             "description": "The vertical position of the text on the connector. Default: middle",
-            "enum": ["top", "middle", "bottom"]
+            "enum": [
+              "top",
+              "middle",
+              "bottom"
+            ]
           }
         },
-        "required": ["content"]
+        "required": [
+          "content"
+        ]
       },
       "CardCreateRequest": {
         "type": "object",
@@ -17525,7 +18235,10 @@
             "example": "card"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "CardStylePlatform": {
         "type": "object",
@@ -17571,7 +18284,11 @@
           "shape": {
             "type": "string",
             "description": "The path type of the connector line, defines curvature. Default: curved.",
-            "enum": ["straight", "elbowed", "curved"]
+            "enum": [
+              "straight",
+              "elbowed",
+              "curved"
+            ]
           },
           "captions": {
             "type": "array",
@@ -17601,7 +18318,11 @@
           "shape": {
             "type": "string",
             "description": "The path type of the connector line, defines curvature. Default: curved.",
-            "enum": ["straight", "elbowed", "curved"]
+            "enum": [
+              "straight",
+              "elbowed",
+              "curved"
+            ]
           },
           "captions": {
             "type": "array",
@@ -17617,7 +18338,10 @@
             "$ref": "#/components/schemas/ConnectorStyle"
           }
         },
-        "required": ["endItem", "startItem"]
+        "required": [
+          "endItem",
+          "startItem"
+        ]
       },
       "ConnectorStyle": {
         "type": "object",
@@ -17685,7 +18409,11 @@
           "strokeStyle": {
             "type": "string",
             "description": "The stroke pattern of the connector line. Default: normal.",
-            "enum": ["normal", "dotted", "dashed"]
+            "enum": [
+              "normal",
+              "dotted",
+              "dashed"
+            ]
           },
           "strokeWidth": {
             "type": "string",
@@ -17697,7 +18425,10 @@
           "textOrientation": {
             "type": "string",
             "description": "The captions orientation relatively to the connector line curvature. Default: aligned.",
-            "enum": ["horizontal", "aligned"]
+            "enum": [
+              "horizontal",
+              "aligned"
+            ]
           }
         }
       },
@@ -17749,7 +18480,11 @@
             "type": "string",
             "default": "curved",
             "description": "The path type of the connector line, defines curvature. Default: curved.",
-            "enum": ["straight", "elbowed", "curved"]
+            "enum": [
+              "straight",
+              "elbowed",
+              "curved"
+            ]
           },
           "startItem": {
             "$ref": "#/components/schemas/ItemConnectionWithLinks"
@@ -17762,7 +18497,9 @@
             "description": "Type of board object that is returned."
           }
         },
-        "required": ["id"]
+        "required": [
+          "id"
+        ]
       },
       "ConnectorsCursorPaged": {
         "type": "object",
@@ -17813,7 +18550,10 @@
             "type": "string",
             "default": "round",
             "description": "The shape of the icon on the preview field.",
-            "enum": ["round", "square"]
+            "enum": [
+              "round",
+              "square"
+            ]
           },
           "iconUrl": {
             "type": "string",
@@ -17853,7 +18593,9 @@
             "$ref": "#/components/schemas/Parent"
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "DocumentDataPlatform": {
         "type": "object",
@@ -17917,7 +18659,10 @@
             "example": "document"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "DocumentUpdateRequest": {
         "type": "object",
@@ -17952,7 +18697,9 @@
             "example": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
           }
         },
-        "required": ["url"]
+        "required": [
+          "url"
+        ]
       },
       "DocumentUrlDataChanges": {
         "type": "object",
@@ -17985,7 +18732,9 @@
             "$ref": "#/components/schemas/Parent"
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "EmbedData": {
         "type": "object",
@@ -18008,7 +18757,10 @@
           "mode": {
             "type": "string",
             "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
-            "enum": ["inline", "modal"]
+            "enum": [
+              "inline",
+              "modal"
+            ]
           },
           "previewUrl": {
             "type": "string",
@@ -18084,7 +18836,10 @@
             "example": "embed"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "EmbedUpdateRequest": {
         "type": "object",
@@ -18110,7 +18865,10 @@
           "mode": {
             "type": "string",
             "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
-            "enum": ["inline", "modal"]
+            "enum": [
+              "inline",
+              "modal"
+            ]
           },
           "previewUrl": {
             "type": "string",
@@ -18122,7 +18880,9 @@
             "description": "A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS."
           }
         },
-        "required": ["url"]
+        "required": [
+          "url"
+        ]
       },
       "EmbedUrlDataChanges": {
         "type": "object",
@@ -18131,7 +18891,10 @@
           "mode": {
             "type": "string",
             "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
-            "enum": ["inline", "modal"]
+            "enum": [
+              "inline",
+              "modal"
+            ]
           },
           "previewUrl": {
             "type": "string",
@@ -18189,7 +18952,17 @@
             "type": "string",
             "default": "custom",
             "description": "Only custom frames are supported at the moment.",
-            "enum": ["custom", "desktop", "phone", "tablet", "a4", "letter", "ratio_1x1", "ratio_4x3", "ratio_16x9"]
+            "enum": [
+              "custom",
+              "desktop",
+              "phone",
+              "tablet",
+              "a4",
+              "letter",
+              "ratio_1x1",
+              "ratio_4x3",
+              "ratio_16x9"
+            ]
           },
           "title": {
             "type": "string",
@@ -18200,7 +18973,13 @@
             "type": "string",
             "default": "freeform",
             "description": "Only free form frames are supported at the moment.",
-            "enum": ["freeform", "heap", "grid", "rows", "columns"]
+            "enum": [
+              "freeform",
+              "heap",
+              "grid",
+              "rows",
+              "columns"
+            ]
           }
         }
       },
@@ -18252,7 +19031,10 @@
             "example": "sticky_note"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "GenericItemCursorPaged": {
         "type": "object",
@@ -18340,7 +19122,9 @@
             "$ref": "#/components/schemas/Parent"
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "ImageDataPlatform": {
         "type": "object",
@@ -18404,7 +19188,10 @@
             "example": "image"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "ImageUpdateRequest": {
         "type": "object",
@@ -18439,7 +19226,9 @@
             "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
           }
         },
-        "required": ["url"]
+        "required": [
+          "url"
+        ]
       },
       "ImageUrlDataChangesPlatform": {
         "type": "object",
@@ -18511,7 +19300,13 @@
           "snapTo": {
             "type": "string",
             "description": "The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.",
-            "enum": ["auto", "top", "right", "bottom", "left"]
+            "enum": [
+              "auto",
+              "top",
+              "right",
+              "bottom",
+              "left"
+            ]
           }
         }
       },
@@ -18530,7 +19325,13 @@
           "snapTo": {
             "type": "string",
             "description": "The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.",
-            "enum": ["auto", "top", "right", "bottom", "left"]
+            "enum": [
+              "auto",
+              "top",
+              "right",
+              "bottom",
+              "left"
+            ]
           }
         }
       },
@@ -18633,11 +19434,16 @@
             "type": "string",
             "default": "center",
             "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported (center).",
-            "enum": ["center"]
+            "enum": [
+              "center"
+            ]
           },
           "relativeTo": {
             "type": "string",
-            "enum": ["canvas_center", "parent_top_left"]
+            "enum": [
+              "canvas_center",
+              "parent_top_left"
+            ]
           },
           "x": {
             "type": "number",
@@ -18819,7 +19625,10 @@
             "example": "shape"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "ShapeStyle": {
         "type": "object",
@@ -18838,7 +19647,11 @@
           "borderStyle": {
             "type": "string",
             "description": "Defines the style used to represent the border of the shape.\nDefault: `normal`.",
-            "enum": ["normal", "dotted", "dashed"]
+            "enum": [
+              "normal",
+              "dotted",
+              "dashed"
+            ]
           },
           "borderWidth": {
             "type": "string",
@@ -18907,12 +19720,20 @@
           "textAlign": {
             "type": "string",
             "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
-            "enum": ["left", "right", "center"]
+            "enum": [
+              "left",
+              "right",
+              "center"
+            ]
           },
           "textAlignVertical": {
             "type": "string",
             "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
-            "enum": ["top", "middle", "bottom"]
+            "enum": [
+              "top",
+              "middle",
+              "bottom"
+            ]
           }
         }
       },
@@ -18969,7 +19790,10 @@
             "type": "string",
             "default": "square",
             "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
-            "enum": ["square", "rectangle"]
+            "enum": [
+              "square",
+              "rectangle"
+            ]
           }
         }
       },
@@ -19023,7 +19847,10 @@
             "example": "sticky_note"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "StickyNoteStylePlatform": {
         "type": "object",
@@ -19054,12 +19881,20 @@
           "textAlign": {
             "type": "string",
             "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
-            "enum": ["left", "right", "center"]
+            "enum": [
+              "left",
+              "right",
+              "center"
+            ]
           },
           "textAlignVertical": {
             "type": "string",
             "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
-            "enum": ["top", "middle", "bottom"]
+            "enum": [
+              "top",
+              "middle",
+              "bottom"
+            ]
           }
         }
       },
@@ -19119,7 +19954,9 @@
             "$ref": "#/components/schemas/Parent"
           }
         },
-        "required": ["data"]
+        "required": [
+          "data"
+        ]
       },
       "TextDataPlatform": {
         "type": "object",
@@ -19131,7 +19968,9 @@
             "example": "Hello"
           }
         },
-        "required": ["content"]
+        "required": [
+          "content"
+        ]
       },
       "TextItem": {
         "type": "object",
@@ -19183,7 +20022,10 @@
             "example": "text"
           }
         },
-        "required": ["id", "type"]
+        "required": [
+          "id",
+          "type"
+        ]
       },
       "TextStyle": {
         "type": "object",
@@ -19249,7 +20091,11 @@
           "textAlign": {
             "type": "string",
             "description": "Horizontal alignment for the item's content.\nDefault: `center.`",
-            "enum": ["left", "right", "center"]
+            "enum": [
+              "left",
+              "right",
+              "center"
+            ]
           }
         }
       },
@@ -19293,7 +20139,11 @@
             "example": "user"
           }
         },
-        "required": ["id", "name", "type"]
+        "required": [
+          "id",
+          "name",
+          "type"
+        ]
       },
       "WidgetDataOutputPlatform": {
         "type": "object",
@@ -19415,7 +20265,11 @@
           "status": {
             "type": "string",
             "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
-            "enum": ["disconnected", "connected", "disabled"]
+            "enum": [
+              "disconnected",
+              "connected",
+              "disabled"
+            ]
           },
           "title": {
             "type": "string",
@@ -19459,7 +20313,10 @@
             "type": "string",
             "default": "round",
             "description": "The shape of the icon on the preview field.",
-            "enum": ["round", "square"]
+            "enum": [
+              "round",
+              "square"
+            ]
           },
           "iconUrl": {
             "type": "string",
@@ -19514,7 +20371,9 @@
             "example": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
           }
         },
-        "required": ["url"]
+        "required": [
+          "url"
+        ]
       },
       "EmbedUrlData": {
         "type": "object",
@@ -19523,7 +20382,10 @@
           "mode": {
             "type": "string",
             "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
-            "enum": ["inline", "modal"]
+            "enum": [
+              "inline",
+              "modal"
+            ]
           },
           "previewUrl": {
             "type": "string",
@@ -19535,7 +20397,9 @@
             "description": "A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS."
           }
         },
-        "required": ["url"]
+        "required": [
+          "url"
+        ]
       },
       "FrameData": {
         "type": "object",
@@ -19545,7 +20409,17 @@
             "type": "string",
             "default": "custom",
             "description": "Only custom frames are supported at the moment.",
-            "enum": ["custom", "desktop", "phone", "tablet", "a4", "letter", "ratio_1x1", "ratio_4x3", "ratio_16x9"]
+            "enum": [
+              "custom",
+              "desktop",
+              "phone",
+              "tablet",
+              "a4",
+              "letter",
+              "ratio_1x1",
+              "ratio_4x3",
+              "ratio_16x9"
+            ]
           },
           "title": {
             "type": "string",
@@ -19556,7 +20430,13 @@
             "type": "string",
             "default": "freeform",
             "description": "Only free form frames are supported at the moment.",
-            "enum": ["freeform", "heap", "grid", "rows", "columns"]
+            "enum": [
+              "freeform",
+              "heap",
+              "grid",
+              "rows",
+              "columns"
+            ]
           }
         }
       },
@@ -19614,7 +20494,9 @@
             "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
           }
         },
-        "required": ["url"]
+        "required": [
+          "url"
+        ]
       },
       "ImageUrlDataChanges": {
         "type": "object",
@@ -19687,7 +20569,10 @@
             "type": "string",
             "default": "square",
             "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
-            "enum": ["square", "rectangle"]
+            "enum": [
+              "square",
+              "rectangle"
+            ]
           }
         }
       },
@@ -19720,12 +20605,20 @@
           "textAlign": {
             "type": "string",
             "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
-            "enum": ["left", "right", "center"]
+            "enum": [
+              "left",
+              "right",
+              "center"
+            ]
           },
           "textAlignVertical": {
             "type": "string",
             "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
-            "enum": ["top", "middle", "bottom"]
+            "enum": [
+              "top",
+              "middle",
+              "bottom"
+            ]
           }
         }
       },
@@ -19739,7 +20632,9 @@
             "example": "Hello"
           }
         },
-        "required": ["content"]
+        "required": [
+          "content"
+        ]
       },
       "WidgetDataOutput": {
         "type": "object",
@@ -19884,16 +20779,6 @@
             }
           }
         }
-      },
-      "auth": {
-        "type": "bearer",
-        "bearer": [
-          {
-            "key": "token",
-            "value": "{{access_token}}",
-            "type": "string"
-          }
-        ]
       }
     }
   }
