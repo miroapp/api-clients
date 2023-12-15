@@ -178,16 +178,16 @@ export const baseSpecification: Spec = {
                     },
                 },
             },
-            "auth": {
-                "type": "bearer",
-                "bearer": [
-                    {
-                        "key": "token",
-                        "value": "{{access_token}}",
-                        "type": "string"
-                    }
-                ]
-            }
+            // "auth": {
+            //     "type": "bearer",
+            //     "bearer": [
+            //         {
+            //             "key": "token",
+            //             "value": "{{access_token}}",
+            //             "type": "string"
+            //         }
+            //     ]
+            // }
         }
     }
 }
