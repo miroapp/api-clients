@@ -1,9 +1,11 @@
-import * as ts from 'typescript'
+// Fixing import to fix "createProgram is not a function" as per this - https://github.com/microsoft/TypeScript/issues/54018
+import ts from 'typescript'
 import path from 'path'
 import {Model, ModelProps} from './modelDefinition'
 
-import {MiroApi} from '../miro-api/api/apis'
+import * as apis from './../../packages/miro-api/api/apis' // Changed import pattern to fix issue with "./../../packages/miro-api/api/apis has no exported member named MiroApi"
 
+const {MiroApi} = apis
 const filePath = path.resolve('../miro-api/api/')
 const program = ts.createProgram([filePath], {})
 const source = program.getSourceFile('../miro-api/api/apis.ts')
@@ -51,26 +53,25 @@ export function run(models: Record<string, Model>) {
     ]
 
     return `
+    export class ${name} extends ${extendedModelName} {
+        /** @hidden */
+        _api: MiroApi
 
-export class ${name} extends ${extendedModelName} {
-    /** @hidden */
-    _api: MiroApi
+        ${mapProps(model.props).join('\n')}
 
-    ${mapProps(model.props).join('\n')}
+        /** @hidden */
+        constructor(${mapProps(constructorParams).join(', ')}) {
+            super(${isLocal ? ['api', ...model.props.map(({name}) => name), 'props'].join(', ') : ''})
+            this._api = api
+            ${model.props.map(({name}) => `this.${name} = ${name}`).join('\n')}
+            Object.assign(this, props)
+        }
 
-    /** @hidden */
-    constructor(${mapProps(constructorParams).join(', ')}) {
-        super(${isLocal ? ['api', ...model.props.map(({name}) => name), 'props'].join(', ') : ''})
-        this._api = api
-        ${model.props.map(({name}) => `this.${name} = ${name}`).join('\n')}
-        Object.assign(this, props)
+        ${renderMethods(models[model.inherits], model.props)}
+
+        ${renderMethods(model, model.props)}
     }
-
-    ${renderMethods(models[model.inherits], model.props)}
-
-    ${renderMethods(model, model.props)}
-}
-`
+    `
   }
 
   function renderMethods(model?: Model, props?: ModelProps) {
@@ -79,10 +80,14 @@ export class ${name} extends ${extendedModelName} {
       .map((method) => {
         const returns = method.returns
 
-        const prefixParamCount = method.topLevelCall ? 1 : props.length
-        const params = Array.from({
-          length: MiroApi.prototype[method.method].length - prefixParamCount,
-        })
+        const prefixParamCount = method.topLevelCall ? 1 : props?.length || 0
+        try {
+          const params = Array.from({
+            length: MiroApi.prototype[method.method].length - prefixParamCount,
+          })
+        } catch (e) {
+          console.log('e', e)
+        }
 
         const original = methodDocs[method.method]
         let docs = original.comments
@@ -178,14 +183,4 @@ ${Object.keys(models)
   .join('\n')}
 `
   }
-
-  let code = renderImports()
-
-  for (const name of Object.keys(models)) {
-    const model = models[name]
-
-    code += renderModel(name, model)
-  }
-
-  return code
 }
