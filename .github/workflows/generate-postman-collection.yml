@@ -4,11 +4,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-    # // setup postman converter
-    # // read spec.json
-    # // iterate over spec.json to create the collection
-    # // publish to postman with postman secret
-
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -29,8 +24,5 @@ jobs:
 
       - id: publish_postman_collection
         name: Send collection to postman using API
-        uses: JS-DevTools/npm-publish@v3.0.1
-        with:
-          token: ${{ secrets.NPM_PUBLISH_TOKEN }}
-          package: packages/miro-api/package.json
+        run: "POSTMAN_API_KEY='${{ secrets.POSTMAN_API_KEY }}' POSTMAN_COLLECTION_ID='${{ secrets.POSTMAN_COLLECTION_ID}}' yarn run upload-to-postman"
         

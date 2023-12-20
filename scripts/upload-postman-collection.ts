@@ -12,17 +12,23 @@ if (!collection) throw new Error('Missing postman collection');
 
 
 async function uploadCollection() {
-    const res = await fetch(`https://api.getpostman.com/collections/${collectionId}`, {
+
+    const config = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'X-API-Key': key
         },
         body: JSON.stringify({ body: collection })
-    })
+    };
+
+    config.headers['X-API-Key'] = key;
+    const res = await fetch(`https://api.getpostman.com/collections/${collectionId}`, config);
     if (res.status >= 400) {
-        throw new Error(await res.text())
+        const error = await res.text();
+        throw new Error(error)
     }
 
-    console.log('Uploaded', (await res.json()))
+    const response = await res.json();
+    console.log('Uploaded', response);
 }
+uploadCollection();
