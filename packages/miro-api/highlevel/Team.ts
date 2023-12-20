@@ -19,7 +19,7 @@ export abstract class BaseTeam extends Team {
       const response = (
         await this._api.getBoards({
           ...query,
-          teamId: this.id.toString(),
+          teamId: this.id!.toString(),
           offset: currentOffset.toString(),
         })
       ).body
@@ -44,11 +44,11 @@ export abstract class BaseTeam extends Team {
     let cursor: string | undefined = undefined
     while (true) {
       const response: TeamMembersPage = (
-        await this._api.enterpriseGetTeamMembers(this.orgId.toString(), this.id.toString(), {...query, cursor})
+        await this._api.enterpriseGetTeamMembers(this.orgId.toString(), this.id!.toString(), {...query, cursor})
       ).body
 
       for (const member of response.data) {
-        yield new TeamMember(this._api, this.orgId, this.id, member.id, member)
+        yield new TeamMember(this._api, this.orgId, this.id!, member.id, member)
       }
 
       cursor = response.cursor
