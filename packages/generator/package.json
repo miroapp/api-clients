@@ -4,7 +4,6 @@
   "version": "0.0.1",
   "author": "@mirohq",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "test": "jest",
     "coverage": "jest --coverage --coverageDirectory coverage",
