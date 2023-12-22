@@ -1,20 +1,16 @@
 // Fixing import to fix "createProgram is not a function" as per this - https://github.com/microsoft/TypeScript/issues/54018
 import ts from 'typescript'
 import path from 'path'
-import { Model, ModelProps } from './modelDefinition'
-import fs from 'fs'
-import apis from './../miro-api/api/apis' // Changed import pattern to fix issue with "./../../packages/miro-api/api/apis has no exported member named MiroApi"
+import {Model, ModelProps} from './modelDefinition'
+import {MiroApi} from './../miro-api/api/apis' // Changed import pattern to fix issue with "./../../packages/miro-api/api/apis has no exported member named MiroApi"
 
-const { MiroApi } = apis
-
-fs.writeFileSync('apis.json', JSON.stringify(apis))
 const filePath = path.resolve('../miro-api/api/')
 const program = ts.createProgram([filePath], {})
 const source = program.getSourceFile('../miro-api/api/apis.ts')
 
 const text = source.getFullText(source)
 
-const methodDocs: Record<string, { comments: string; params: string[] }> = {}
+const methodDocs: Record<string, {comments: string; params: string[]}> = {}
 
 ts.transform(source, [
   (context: ts.TransformationContext) => {
@@ -29,7 +25,7 @@ ts.transform(source, [
           params.push(match[1])
         }
         // params.
-        methodDocs[name] = { comments, params }
+        methodDocs[name] = {comments, params}
       }
 
       return ts.visitEachChild(node, visit, context)
@@ -45,13 +41,13 @@ export function run(models: Record<string, Model>) {
     const extendedModelName = model.extendedModel?.path ? `Base${name}` : model.extendedModel?.name || 'Object'
 
     function mapProps(props: ModelProps) {
-      return props.map(({ name, type }) => `${name}: ${type}`)
+      return props.map(({name, type}) => `${name}: ${type}`)
     }
 
     const constructorParams = [
-      { name: 'api', type: 'MiroApi' },
+      {name: 'api', type: 'MiroApi'},
       ...model.props,
-      { name: 'props', type: `KeepBase<${extendedModelName}>` },
+      {name: 'props', type: `KeepBase<${extendedModelName}>`},
     ]
 
     return `
@@ -64,9 +60,9 @@ export class ${name} extends ${extendedModelName} {
 
     /** @hidden */
     constructor(${mapProps(constructorParams).join(', ')}) {
-        super(${isLocal ? ['api', ...model.props.map(({ name }) => name), 'props'].join(', ') : ''})
+        super(${isLocal ? ['api', ...model.props.map(({name}) => name), 'props'].join(', ') : ''})
         this._api = api
-        ${model.props.map(({ name }) => `this.${name} = ${name}`).join('\n')}
+        ${model.props.map(({name}) => `this.${name} = ${name}`).join('\n')}
         Object.assign(this, props)
     }
 
@@ -97,7 +93,8 @@ export class ${name} extends ${extendedModelName} {
         return `
 ${docs} async ${method.alias}(${params.map(
           (_, i) =>
-            `${original.params[i + prefixParamCount]}: Parameters<MiroApi['${method.method}']>[${i + prefixParamCount
+            `${original.params[i + prefixParamCount]}: Parameters<MiroApi['${method.method}']>[${
+              i + prefixParamCount
             }]`,
         )}): Promise<${returns ? returns : 'void'}${method.paginated ? '[]' : ''}> {
 ${renderFunctionBody(method, props)}
@@ -110,7 +107,7 @@ ${renderFunctionBody(method, props)}
   function renderApiCall(method: Model['methods'][number], props: ModelProps) {
     const apiCallArguments = method.topLevelCall
       ? [`this.${props[props.length - 1].name}.toString()`]
-      : props.map(({ name }) => `this.${name}.toString()`)
+      : props.map(({name}) => `this.${name}.toString()`)
 
     const params = Array.from({
       length: MiroApi.prototype[method.method].length - apiCallArguments.length,
@@ -148,7 +145,7 @@ ${renderFunctionBody(method, props)}
   function renderModelContructorArgs(model: Model, props: ModelProps): string {
     return [
       'this._api',
-      ...model.props.map((_, i, { length }) => {
+      ...model.props.map((_, i, {length}) => {
         if (i === length - 1) return `result.${model.id}`
         return !props[i] ? `parameters[${i}]` : `this.${props[i].name}`
       }),
@@ -170,14 +167,15 @@ import { MiroApi } from '../api'
 import { KeepBase } from "./helpers";
 
 ${Object.keys(models)
-        .map((name) => {
-          const extendedModel = models[name].extendedModel
-          if (!extendedModel?.path) return ''
-          const importName = `Base${name}`
-          return `import { ${extendedModel.name} ${extendedModel.name !== importName ? `as ${importName}` : ''} } from './${extendedModel.path
-            }';`
-        })
-        .join('\n')}
+  .map((name) => {
+    const extendedModel = models[name].extendedModel
+    if (!extendedModel?.path) return ''
+    const importName = `Base${name}`
+    return `import { ${extendedModel.name} ${extendedModel.name !== importName ? `as ${importName}` : ''} } from './${
+      extendedModel.path
+    }';`
+  })
+  .join('\n')}
 `
   }
 
