@@ -116,7 +116,7 @@ export class Organization extends BaseOrganization {
   async createTeam(createTeamRequest: Parameters<MiroApi['enterpriseCreateTeam']>[1]): Promise<Team> {
     const result = (await this._api.enterpriseCreateTeam(this.id.toString(), createTeamRequest)).body
 
-    return new Team(this._api, this.id, result.id!, result)
+    return new Team(this._api, this.id, result.id, result)
   }
 
   /**
@@ -160,7 +160,7 @@ export class Organization extends BaseOrganization {
   async getTeam(teamId: Parameters<MiroApi['enterpriseGetTeam']>[1]): Promise<Team> {
     const result = (await this._api.enterpriseGetTeam(this.id.toString(), teamId)).body
 
-    return new Team(this._api, this.id, result.id!, result)
+    return new Team(this._api, this.id, result.id, result)
   }
 }
 

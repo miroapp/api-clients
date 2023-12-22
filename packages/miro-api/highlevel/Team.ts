@@ -1,7 +1,7 @@
-import {Team} from '../model/team'
-import {Board, TeamMember} from './index'
-import {MiroApi, TeamMembersPage} from '../api'
-import {hasMoreData} from './helpers'
+import { Team } from '../model/team'
+import { Board, TeamMember } from './index'
+import { MiroApi, TeamMembersPage } from '../api'
+import { hasMoreData } from './helpers'
 
 /** @hidden */
 export abstract class BaseTeam extends Team {
@@ -44,11 +44,11 @@ export abstract class BaseTeam extends Team {
     let cursor: string | undefined = undefined
     while (true) {
       const response: TeamMembersPage = (
-        await this._api.enterpriseGetTeamMembers(this.orgId.toString(), this.id!.toString(), {...query, cursor})
+        await this._api.enterpriseGetTeamMembers(this.orgId.toString(), this.id!.toString(), { ...query, cursor })
       ).body
 
       for (const member of response.data) {
-        yield new TeamMember(this._api, this.orgId, this.id!, member.id, member)
+        yield new TeamMember(this._api, this.orgId, this.id, member.id, member)
       }
 
       cursor = response.cursor
