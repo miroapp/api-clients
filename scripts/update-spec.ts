@@ -4,7 +4,6 @@ import isEqual from 'lodash/isEqual'
 import { load } from 'js-yaml'
 import glob from 'fast-glob'
 import { Spec, baseSpecification } from './base-spec'
-import fs from 'fs';
 import { writeFile } from 'fs/promises';
 import { fixDescriptionLinks, removeMultipleTagsFromEndpoints, mergeWithoutConflict } from './utils'
 
@@ -28,7 +27,6 @@ export const updateSpec = async (specFiles = ['./spec/**/*.yaml']): Promise<Spec
 
   const specs = (await Promise.all(apis.map(getSpecsForApi))).flat() as Spec[]
 
-  fs.writeFileSync("specs.json", JSON.stringify(specs));
   let mergedSpec = baseSpecification;
   try {
     mergedSpec = fixDescriptionLinks(
