@@ -1,8 +1,8 @@
-import {findReplacement} from './findReplacement'
-import {OpenAPIV3_1} from 'openapi-types'
+import { findReplacement } from './findReplacement'
+import { OpenAPIV3_1 } from './../types/types';
 
 type OASDoc = OpenAPIV3_1.Document
-// type SchemaProperty = OpenAPIV3_1.SchemaObject & { type: string }
+type SchemaObject = OpenAPIV3_1.SchemaObject;
 
 export const traverseComponents = (oas: OASDoc) => {
   if (!oas.components || !oas.components.schemas) return oas
@@ -30,6 +30,6 @@ export const traverseComponents = (oas: OASDoc) => {
   return oas
 }
 
-function isSchemaObject(obj: any): obj is OpenAPIV3_1.SchemaObject {
+function isSchemaObject(obj: any): obj is SchemaObject {
   return obj && typeof obj === 'object' && 'type' in obj
 }

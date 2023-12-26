@@ -1,4 +1,4 @@
-import {specWithoutExample, specWithComponents1, specModified, liveCollection} from './spec'
+import {specWithoutExample, specWithOnlyComponents, specModified, liveCollection} from './spec'
 import {traverseOAS} from '../utils/traverseOAS'
 import {traverseComponents} from '../utils/traverseComponents'
 import convertToPostmanCollection from '../utils/convertToPostmanCollection'
@@ -13,16 +13,16 @@ describe('Add default values as example', () => {
 
 describe('Add Default Values to components', () => {
   it('should not change the example value', () => {
-    const modifiedOAS = traverseComponents(specWithComponents1)
+    const modifiedOAS = traverseComponents(specWithOnlyComponents)
     console.log(modifiedOAS)
-    const original = specWithComponents1.components.schemas['AppCardDataChanges'].properties.description.example
+    const original = specWithOnlyComponents.components.schemas['AppCardDataChanges'].properties.description.example
     expect(modifiedOAS.components.schemas['AppCardDataChanges'].properties.description.example).toBe(original)
   })
 
   it('should add example where missing', () => {
-    const modifiedOAS = traverseComponents(specWithComponents1)
+    const modifiedOAS = traverseComponents(specWithOnlyComponents)
     console.log(modifiedOAS)
-    const statusEnums = specWithComponents1.components.schemas['AppCardDataChanges'].properties.status.enum
+    const statusEnums = specWithOnlyComponents.components.schemas['AppCardDataChanges'].properties.status.enum
     expect(modifiedOAS.components.schemas['AppCardDataChanges'].properties.status.example).toBe(statusEnums[0])
   })
 

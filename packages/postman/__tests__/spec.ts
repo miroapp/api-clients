@@ -1,4 +1,4 @@
-import {OpenAPIV3_1} from 'openapi-types'
+import { OpenAPIV3_1 } from './../types/types';
 
 const openAPI = {
   openapi: '3.0.1',
@@ -47,7 +47,7 @@ export const specWithoutExample: OpenAPIV3_1.Document = {
     },
   },
 }
-export const specWithComponents1: OpenAPIV3_1.Document = {
+export const specWithOnlyComponents: OpenAPIV3_1.Document = {
   ...openAPI,
   components: {
     schemas: {

@@ -1,10 +1,9 @@
-import {addDefaultValues} from './addDefaultValues'
-import {snakeToTitleCase} from './string-utils'
-import {OpenAPIV3_1} from 'openapi-types'
+import { addDefaultValues } from './addDefaultValues'
+import { snakeToTitleCase } from './string-utils'
+import { OpenAPIV3_1 } from './../types/types';
 
-type OASDoc = OpenAPIV3_1.Document
 
-export const traverseOAS = (oas: OASDoc) => {
+export const traverseOAS = (oas: OpenAPIV3_1.Document) => {
   for (const path in oas.paths) {
     const pathItem = oas.paths[path]
     for (const method in pathItem) {
