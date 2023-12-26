@@ -1,10 +1,10 @@
 import Converter from 'openapi-to-postmanv2'
 import fs from 'fs'
-import { missingPostmanVariables, auth, event } from './sample.constants'
+import {missingPostmanVariables, auth, event} from './sample.constants'
 
-export default ({ type = 'json', oas }) =>
+export default ({type = 'json', oas}) =>
   Converter.convert(
-    { type, data: oas },
+    {type, data: oas},
     {
       requestParametersResolution: 'Example',
       folderStrategy: 'Tags',
@@ -13,26 +13,30 @@ export default ({ type = 'json', oas }) =>
       if (!conversionResult.result) {
         console.log('Could not convert', conversionResult.reason)
       } else {
-        const postmanCollection = JSON.stringify(conversionResult.output[0].data, null, 2)
-        let postmanCollectionJson = JSON.parse(postmanCollection)
+        try {
+          const postmanCollection = JSON.stringify(conversionResult.output[0].data, null, 2)
+          let postmanCollectionJson = JSON.parse(postmanCollection)
 
-        postmanCollectionJson = {
-          ...postmanCollectionJson,
-          variable: [...postmanCollectionJson.variable, ...missingPostmanVariables],
-          ...auth,
-          ...event,
+          postmanCollectionJson = {
+            ...postmanCollectionJson,
+            variable: [...postmanCollectionJson.variable, ...missingPostmanVariables],
+            ...auth,
+            ...event,
+          }
+
+          // const modifiedPostmanJson = unselectOptionalQueryParams(postmanCollectionJson.item);
+
+          // TODO: send postman collection to api
+          fs.writeFileSync('generated/postman-collection.json', JSON.stringify(postmanCollectionJson, null, 2))
+          console.log('Postman collection generated at : generated/postman-collection.json ')
+        } catch (e) {
+          console.error('operation with json failed', e)
         }
-
-        // const modifiedPostmanJson = unselectOptionalQueryParams(postmanCollectionJson.item);
-
-        // TODO: send postman collection to api
-        fs.writeFileSync('generated/postman-collection.json', JSON.stringify(postmanCollectionJson, null, 2))
-        console.log('Postman collection generated at : generated/postman-collection.json ')
       }
     },
   )
 
-// NOTE: hack to disable (unselect) all optional query params in postman collection 
+// NOTE: hack to disable (unselect) all optional query params in postman collection
 // so that requests with optional params work directly in postman
 // openapi-to-postmanv2 doesn't seem to provide an ootb way to do this
 // const unselectOptionalQueryParams = (items) => {
@@ -50,7 +54,6 @@ export default ({ type = 'json', oas }) =>
 //       })
 //     }
 //   }
-
 
 //   return items;
 // }
