@@ -8,12 +8,23 @@ import { writeFile } from 'fs/promises';
 import { fixDescriptionLinks, removeMultipleTagsFromEndpoints, mergeWithoutConflict } from './utils'
 
 
+const apis = [
+  './spec/public-api/platform.yaml',
+  './spec/public-api/platform-tags.yaml',
+  './spec/public-api/platform-experimental.yaml',
+  './spec/public-api/platform-containers.yaml',
+  './spec/public-api/platform-containers-experimental.yaml',
+  './spec/public-api/platform-items-bulk.yaml',
+  './spec/enterprise/enterprise-teams.yaml',
+  './spec/enterprise/enterprise-organizations.yaml',
+  './spec/enterprise/enterprise-board-classification.yaml',
+  './spec/enterprise/enterprise-board-export.yaml',
+  './spec/enterprise/enterprise-projects.yaml',
+];
 
 export const updateSpec = async (specFiles = ['./spec/**/*.yaml']): Promise<Spec> => {
 
   const baseYml = await glob("./spec/base.yaml");
-
-  const apis = await glob(specFiles[0]);
 
   apis.push(baseYml[0]);
 
@@ -90,22 +101,10 @@ export const updateSpec = async (specFiles = ['./spec/**/*.yaml']): Promise<Spec
 
         for (const key of Object.keys(spec.paths)) {
           if (acc.paths[key]) {
-            // if (key.includes('boards/{board_id')) {
             const newKey = key.replace('boards/{board_id', 'boards/{board_id_' + specTitle);
             const pathConfig = JSON.parse(JSON.stringify(spec.paths[key]).replaceAll('board_id', 'board_id_' + specTitle))
-            spec.paths[newKey] = pathConfig
-
-            // for issue with org_id dupes (it's silent right now , not sure why though 🤨 )
-            // }
-            // else if (key.includes('orgs/{org_id')) {
-            //   const newKey = key.replace('orgs/{org_id', 'orgs/{org_id_' + specTitle)
-            //   console.log("🚀 ~ file: update-spec.ts:320 ~ specTitle:", specTitle)
-            //   const pathConfig = JSON.parse(JSON.stringify(spec.paths[key]).replaceAll('org_id', 'org_id_' + specTitle))
-            //   spec.paths[newKey] = pathConfig
-            // }
-
-            // const newKey1 = key.replace('orgs/{org_id', 'orgs/{org_id_' + specTitle)
             delete spec.paths[key]
+            spec.paths[newKey] = pathConfig
           }
         }
 
