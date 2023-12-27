@@ -11,7 +11,7 @@
  */
 
 import {Item} from './item'
-import {PageLinks} from './pageLinks'
+import {PageLinksPlatformBulkCreateOperationExperimentalRelease} from './pageLinksPlatformBulkCreateOperationExperimentalRelease'
 
 /**
  * @internal
@@ -34,7 +34,7 @@ export class ItemsPage {
    * Contains the result data.
    */
   'data': Array<Item>
-  'links': PageLinks
+  'links': PageLinksPlatformBulkCreateOperationExperimentalRelease
   /**
    * Type of the object.
    */
@@ -68,7 +68,7 @@ export class ItemsPage {
     {
       name: 'links',
       baseName: 'links',
-      type: 'PageLinks',
+      type: 'PageLinksPlatformBulkCreateOperationExperimentalRelease',
     },
     {
       name: 'type',

@@ -12,9 +12,9 @@
 
 import {AppCardStyle} from './appCardStyle'
 import {CardStyle} from './cardStyle'
-import {ShapeStyle} from './shapeStyle'
+import {ShapeStylePlatformBulkCreateOperationExperimentalRelease} from './shapeStylePlatformBulkCreateOperationExperimentalRelease'
 import {StickyNoteStyle} from './stickyNoteStyle'
-import {TextStyle} from './textStyle'
+import {TextStylePlatformBulkCreateOperationExperimentalRelease} from './textStylePlatformBulkCreateOperationExperimentalRelease'
 
 /**
  * @internal

@@ -1,10 +1,9 @@
-import {Team} from '../model/team'
 import {Board, TeamMember} from './index'
-import {MiroApi, TeamMembersPage} from '../api'
+import {MiroApi, TeamMembersPage, TeamTeamsEnterprisePlan} from '../api'
 import {hasMoreData} from './helpers'
 
 /** @hidden */
-export abstract class BaseTeam extends Team {
+export abstract class BaseTeam extends TeamTeamsEnterprisePlan {
   abstract _api: MiroApi
   abstract orgId: string
 

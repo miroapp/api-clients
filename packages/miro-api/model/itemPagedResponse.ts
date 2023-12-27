@@ -10,14 +10,14 @@
  * Do not edit the class manually.
  */
 
-import {GenericItem} from './genericItem'
+import {GenericItemPlatformTags} from './genericItemPlatformTags'
 import {PageLinks} from './pageLinks'
 
 export class ItemPagedResponse {
   /**
    * Contains the result data.
    */
-  'data'?: Array<GenericItem>
+  'data'?: Array<GenericItemPlatformTags>
   /**
    * Maximum number of results returned based on the `limit` specified in the request. For example, if there are `30` results, and the request has the offset set to `0` and the `limit` set to `20`, the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the offset parameter. In this example, you will set the offset parameter to 20 as the offset is zero-based.
    */
@@ -45,7 +45,7 @@ export class ItemPagedResponse {
     {
       name: 'data',
       baseName: 'data',
-      type: 'Array<GenericItem>',
+      type: 'Array<GenericItemPlatformTags>',
     },
     {
       name: 'limit',

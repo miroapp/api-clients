@@ -2,15 +2,14 @@ export * from './addProjectMemberRequest'
 export * from './appCardCreateRequest'
 export * from './appCardData'
 export * from './appCardDataChanges'
-export * from './appCardDataPlatformTags'
+export * from './appCardDataPlatformBulkCreateOperationExperimentalRelease'
 export * from './appCardDataResponse'
 export * from './appCardItem'
 export * from './appCardStyle'
-export * from './appCardStylePlatformBulkCreateOperationExperimentalRelease'
 export * from './appCardUpdateRequest'
 export * from './basicError'
-export * from './basicErrorBoardExportJobEnterprisePlan'
 export * from './basicErrorOrganizationsEnterprisePlan'
+export * from './basicErrorTeamsEnterprisePlan'
 export * from './board'
 export * from './boardChanges'
 export * from './boardDataClassificationLabel'
@@ -40,9 +39,10 @@ export * from './bulkSubOperationError'
 export * from './caption'
 export * from './cardCreateRequest'
 export * from './cardData'
+export * from './cardDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './cardDataPlatformTags'
 export * from './cardItem'
 export * from './cardStyle'
-export * from './cardStylePlatformBulkCreateOperationExperimentalRelease'
 export * from './cardUpdateRequest'
 export * from './connectorChangesData'
 export * from './connectorCreationData'
@@ -55,32 +55,27 @@ export * from './createBoardSubscriptionRequest'
 export * from './createProjectRequest'
 export * from './createTeamRequest'
 export * from './createdBy'
-export * from './createdByPlatformContainers'
-export * from './createdByPlatformTags'
+export * from './createdByPlatformContainersExperimental'
 export * from './customField'
-export * from './customFieldPlatformBulkCreateOperationExperimentalRelease'
-export * from './customFieldPlatformTags'
 export * from './dataClassificationLabel'
 export * from './dataClassificationLabelId'
 export * from './dataClassificationOrganizationSettings'
 export * from './dataClassificationTeamSettings'
 export * from './documentCreateRequest'
 export * from './documentData'
-export * from './documentDataPlatformTags'
 export * from './documentDataResponse'
 export * from './documentItem'
 export * from './documentUpdateRequest'
 export * from './documentUrlData'
 export * from './documentUrlDataChanges'
-export * from './documentUrlDataPlatformBulkCreateOperationExperimentalRelease'
 export * from './embedCreateRequest'
 export * from './embedData'
+export * from './embedDataPlatformTags'
 export * from './embedDataResponse'
 export * from './embedItem'
 export * from './embedUpdateRequest'
 export * from './embedUrlData'
 export * from './embedUrlDataChanges'
-export * from './embedUrlDataPlatformBulkCreateOperationExperimentalRelease'
 export * from './enterpriseGetOrganizationMembers200Response'
 export * from './error400'
 export * from './error401'
@@ -93,34 +88,32 @@ export * from './fixedRatioNoRotationGeometry'
 export * from './frameChanges'
 export * from './frameCreateRequest'
 export * from './frameData'
-export * from './frameDataPlatformTags'
+export * from './frameDataPlatformContainers'
 export * from './frameItem'
 export * from './frameStyle'
 export * from './frameUpdateRequest'
 export * from './genericItem'
 export * from './genericItemCursorPaged'
+export * from './genericItemCursorPagedPlatformContainers'
+export * from './genericItemCursorPagedPlatformExperimentalFeatures'
+export * from './genericItemPlatformContainers'
+export * from './genericItemPlatformExperimentalFeatures'
+export * from './genericItemPlatformTags'
 export * from './genericItemUpdate'
 export * from './genericSubscription'
 export * from './genericSubscriptionsCursorPaged'
 export * from './geometry'
 export * from './geometryNoRotation'
-export * from './geometryPlatformBulkCreateOperationExperimentalRelease'
-export * from './geometryPlatformContainers'
-export * from './geometryPlatformExperimentalFeatures'
-export * from './geometryPlatformTags'
 export * from './getBoards400Response'
 export * from './getTagsFromItem400Response'
 export * from './getTagsResponse'
 export * from './imageCreateRequest'
 export * from './imageData'
-export * from './imageDataPlatformTags'
 export * from './imageDataResponse'
 export * from './imageItem'
 export * from './imageUpdateRequest'
 export * from './imageUrlData'
 export * from './imageUrlDataChanges'
-export * from './imageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease'
-export * from './imageUrlDataPlatformBulkCreateOperationExperimentalRelease'
 export * from './invitationError'
 export * from './invitationResult'
 export * from './item'
@@ -138,60 +131,74 @@ export * from './itemTypeChange'
 export * from './items'
 export * from './itemsPage'
 export * from './mindmapCursorPaged'
+export * from './mindmapCursorPagedPlatformContainersExperimental'
 export * from './mindmapData'
+export * from './mindmapDataPlatformContainersExperimental'
 export * from './mindmapItem'
 export * from './mindmapItemPlatformContainersExperimental'
 export * from './mindmapNodeView'
+export * from './mindmapNodeViewPlatformContainersExperimental'
 export * from './mindmapWidgetDataOutput'
 export * from './modelError'
 export * from './modifiedBy'
-export * from './modifiedByPlatformContainers'
-export * from './modifiedByPlatformTags'
+export * from './modifiedByPlatformContainersExperimental'
 export * from './organization'
 export * from './organizationInformation'
 export * from './organizationMember'
-export * from './organizationMembersSearchByEmailsResponse'
 export * from './organizationMembersSearchResponse'
 export * from './pageLinks'
-export * from './pageLinksPlatformContainers'
-export * from './pageLinksPlatformExperimentalFeatures'
-export * from './pageLinksPlatformTags'
+export * from './pageLinksPlatformBulkCreateOperationExperimentalRelease'
+export * from './pageLinksPlatformContainersExperimental'
 export * from './parent'
 export * from './parentLinksEnvelope'
+export * from './parentLinksEnvelopePlatformContainersExperimental'
+export * from './parentLinksEnvelopePlatformExperimentalFeatures'
+export * from './parentPlatformBulkCreateOperationExperimentalRelease'
+export * from './parentPlatformExperimentalFeatures'
+export * from './parentPlatformTags'
 export * from './parentWithLinks'
 export * from './picture'
+export * from './pictureTeamsEnterprisePlan'
 export * from './position'
 export * from './positionChange'
+export * from './positionChangePlatformBulkCreateOperationExperimentalRelease'
+export * from './positionChangePlatformContainers'
+export * from './positionChangePlatformExperimentalFeatures'
+export * from './positionPlatformBulkCreateOperationExperimentalRelease'
+export * from './positionPlatformContainers'
+export * from './positionPlatformTags'
 export * from './project'
 export * from './projectMember'
 export * from './projectMemberPage'
 export * from './projectPage'
+export * from './projectProjectsEnterprisePlan'
 export * from './projectRole'
 export * from './projectRoleToAdd'
 export * from './projectSettings'
 export * from './relativeOffset'
 export * from './selfLink'
-export * from './selfLinkPlatformContainers'
-export * from './selfLinkPlatformExperimentalFeatures'
-export * from './selfLinkPlatformTags'
+export * from './selfLinkPlatformBulkCreateOperationExperimentalRelease'
+export * from './selfLinkPlatformContainersExperimental'
 export * from './shapeCreateRequest'
+export * from './shapeCreateRequestPlatformExperimentalFeatures'
 export * from './shapeData'
 export * from './shapeDataForCreate'
 export * from './shapeDataForUpdate'
 export * from './shapeDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './shapeDataPlatformTags'
 export * from './shapeItem'
+export * from './shapeItemPlatformExperimentalFeatures'
 export * from './shapeStyle'
 export * from './shapeStyleForCreate'
 export * from './shapeStyleForUpdate'
+export * from './shapeStylePlatformBulkCreateOperationExperimentalRelease'
 export * from './shapeUpdateRequest'
+export * from './shapeUpdateRequestPlatformExperimentalFeatures'
 export * from './sharingPolicySettings'
 export * from './stickyNoteCreateRequest'
 export * from './stickyNoteData'
-export * from './stickyNoteDataPlatformBulkCreateOperationExperimentalRelease'
-export * from './stickyNoteDataPlatformTags'
 export * from './stickyNoteItem'
 export * from './stickyNoteStyle'
-export * from './stickyNoteStylePlatformBulkCreateOperationExperimentalRelease'
 export * from './stickyNoteUpdateRequest'
 export * from './subscriptionData'
 export * from './tag'
@@ -219,12 +226,15 @@ export * from './teamSettings'
 export * from './teamSettingsChanges'
 export * from './teamSharingPolicySettings'
 export * from './teamSharingPolicySettingsChanges'
+export * from './teamTeamsEnterprisePlan'
 export * from './teamsPage'
 export * from './textCreateRequest'
 export * from './textData'
-export * from './textDataPlatformTags'
+export * from './textDataPlatformContainersExperimental'
+export * from './textDataPlatformExperimentalFeatures'
 export * from './textItem'
 export * from './textStyle'
+export * from './textStylePlatformBulkCreateOperationExperimentalRelease'
 export * from './textUpdateRequest'
 export * from './tokenInformation'
 export * from './updateBoardSubscriptionRequest'
@@ -237,10 +247,11 @@ export * from './updateTeamSettingsRequest'
 export * from './userInfoShort'
 export * from './userInformation'
 export * from './widgetDataOutput'
+export * from './widgetDataOutputPlatformContainersExperimental'
+export * from './widgetDataOutputPlatformExperimentalFeatures'
 export * from './widgetDataOutputPlatformTags'
 export * from './widgetLinks'
-export * from './widgetLinksPlatformContainers'
-export * from './widgetLinksPlatformExperimentalFeatures'
+export * from './widgetLinksPlatformContainersExperimental'
 export * from './widthOnlyAdjustableGeometry'
 
 import * as fs from 'fs'
@@ -257,15 +268,14 @@ import {AddProjectMemberRequest} from './addProjectMemberRequest'
 import {AppCardCreateRequest} from './appCardCreateRequest'
 import {AppCardData} from './appCardData'
 import {AppCardDataChanges} from './appCardDataChanges'
-import {AppCardDataPlatformTags} from './appCardDataPlatformTags'
+import {AppCardDataPlatformBulkCreateOperationExperimentalRelease} from './appCardDataPlatformBulkCreateOperationExperimentalRelease'
 import {AppCardDataResponse} from './appCardDataResponse'
 import {AppCardItem} from './appCardItem'
 import {AppCardStyle} from './appCardStyle'
-import {AppCardStylePlatformBulkCreateOperationExperimentalRelease} from './appCardStylePlatformBulkCreateOperationExperimentalRelease'
 import {AppCardUpdateRequest} from './appCardUpdateRequest'
 import {BasicError} from './basicError'
-import {BasicErrorBoardExportJobEnterprisePlan} from './basicErrorBoardExportJobEnterprisePlan'
 import {BasicErrorOrganizationsEnterprisePlan} from './basicErrorOrganizationsEnterprisePlan'
+import {BasicErrorTeamsEnterprisePlan} from './basicErrorTeamsEnterprisePlan'
 import {Board} from './board'
 import {BoardChanges} from './boardChanges'
 import {BoardDataClassificationLabel} from './boardDataClassificationLabel'
@@ -295,9 +305,10 @@ import {BulkSubOperationError} from './bulkSubOperationError'
 import {Caption} from './caption'
 import {CardCreateRequest} from './cardCreateRequest'
 import {CardData} from './cardData'
+import {CardDataPlatformBulkCreateOperationExperimentalRelease} from './cardDataPlatformBulkCreateOperationExperimentalRelease'
+import {CardDataPlatformTags} from './cardDataPlatformTags'
 import {CardItem} from './cardItem'
 import {CardStyle} from './cardStyle'
-import {CardStylePlatformBulkCreateOperationExperimentalRelease} from './cardStylePlatformBulkCreateOperationExperimentalRelease'
 import {CardUpdateRequest} from './cardUpdateRequest'
 import {ConnectorChangesData} from './connectorChangesData'
 import {ConnectorCreationData} from './connectorCreationData'
@@ -310,32 +321,27 @@ import {CreateBoardSubscriptionRequest} from './createBoardSubscriptionRequest'
 import {CreateProjectRequest} from './createProjectRequest'
 import {CreateTeamRequest} from './createTeamRequest'
 import {CreatedBy} from './createdBy'
-import {CreatedByPlatformContainers} from './createdByPlatformContainers'
-import {CreatedByPlatformTags} from './createdByPlatformTags'
+import {CreatedByPlatformContainersExperimental} from './createdByPlatformContainersExperimental'
 import {CustomField} from './customField'
-import {CustomFieldPlatformBulkCreateOperationExperimentalRelease} from './customFieldPlatformBulkCreateOperationExperimentalRelease'
-import {CustomFieldPlatformTags} from './customFieldPlatformTags'
 import {DataClassificationLabel} from './dataClassificationLabel'
 import {DataClassificationLabelId} from './dataClassificationLabelId'
 import {DataClassificationOrganizationSettings} from './dataClassificationOrganizationSettings'
 import {DataClassificationTeamSettings} from './dataClassificationTeamSettings'
 import {DocumentCreateRequest} from './documentCreateRequest'
 import {DocumentData} from './documentData'
-import {DocumentDataPlatformTags} from './documentDataPlatformTags'
 import {DocumentDataResponse} from './documentDataResponse'
 import {DocumentItem} from './documentItem'
 import {DocumentUpdateRequest} from './documentUpdateRequest'
 import {DocumentUrlData} from './documentUrlData'
 import {DocumentUrlDataChanges} from './documentUrlDataChanges'
-import {DocumentUrlDataPlatformBulkCreateOperationExperimentalRelease} from './documentUrlDataPlatformBulkCreateOperationExperimentalRelease'
 import {EmbedCreateRequest} from './embedCreateRequest'
 import {EmbedData} from './embedData'
+import {EmbedDataPlatformTags} from './embedDataPlatformTags'
 import {EmbedDataResponse} from './embedDataResponse'
 import {EmbedItem} from './embedItem'
 import {EmbedUpdateRequest} from './embedUpdateRequest'
 import {EmbedUrlData} from './embedUrlData'
 import {EmbedUrlDataChanges} from './embedUrlDataChanges'
-import {EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease} from './embedUrlDataPlatformBulkCreateOperationExperimentalRelease'
 import {EnterpriseGetOrganizationMembers200Response} from './enterpriseGetOrganizationMembers200Response'
 import {Error400} from './error400'
 import {Error401} from './error401'
@@ -348,34 +354,32 @@ import {FixedRatioNoRotationGeometry} from './fixedRatioNoRotationGeometry'
 import {FrameChanges} from './frameChanges'
 import {FrameCreateRequest} from './frameCreateRequest'
 import {FrameData} from './frameData'
-import {FrameDataPlatformTags} from './frameDataPlatformTags'
+import {FrameDataPlatformContainers} from './frameDataPlatformContainers'
 import {FrameItem} from './frameItem'
 import {FrameStyle} from './frameStyle'
 import {FrameUpdateRequest} from './frameUpdateRequest'
 import {GenericItem} from './genericItem'
 import {GenericItemCursorPaged} from './genericItemCursorPaged'
+import {GenericItemCursorPagedPlatformContainers} from './genericItemCursorPagedPlatformContainers'
+import {GenericItemCursorPagedPlatformExperimentalFeatures} from './genericItemCursorPagedPlatformExperimentalFeatures'
+import {GenericItemPlatformContainers} from './genericItemPlatformContainers'
+import {GenericItemPlatformExperimentalFeatures} from './genericItemPlatformExperimentalFeatures'
+import {GenericItemPlatformTags} from './genericItemPlatformTags'
 import {GenericItemUpdate} from './genericItemUpdate'
 import {GenericSubscription} from './genericSubscription'
 import {GenericSubscriptionsCursorPaged} from './genericSubscriptionsCursorPaged'
 import {Geometry} from './geometry'
 import {GeometryNoRotation} from './geometryNoRotation'
-import {GeometryPlatformBulkCreateOperationExperimentalRelease} from './geometryPlatformBulkCreateOperationExperimentalRelease'
-import {GeometryPlatformContainers} from './geometryPlatformContainers'
-import {GeometryPlatformExperimentalFeatures} from './geometryPlatformExperimentalFeatures'
-import {GeometryPlatformTags} from './geometryPlatformTags'
 import {GetBoards400Response} from './getBoards400Response'
 import {GetTagsFromItem400Response} from './getTagsFromItem400Response'
 import {GetTagsResponse} from './getTagsResponse'
 import {ImageCreateRequest} from './imageCreateRequest'
 import {ImageData} from './imageData'
-import {ImageDataPlatformTags} from './imageDataPlatformTags'
 import {ImageDataResponse} from './imageDataResponse'
 import {ImageItem} from './imageItem'
 import {ImageUpdateRequest} from './imageUpdateRequest'
 import {ImageUrlData} from './imageUrlData'
 import {ImageUrlDataChanges} from './imageUrlDataChanges'
-import {ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease} from './imageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease'
-import {ImageUrlDataPlatformBulkCreateOperationExperimentalRelease} from './imageUrlDataPlatformBulkCreateOperationExperimentalRelease'
 import {InvitationError} from './invitationError'
 import {InvitationResult} from './invitationResult'
 import {Item} from './item'
@@ -393,60 +397,74 @@ import {ItemTypeChange} from './itemTypeChange'
 import {Items} from './items'
 import {ItemsPage} from './itemsPage'
 import {MindmapCursorPaged} from './mindmapCursorPaged'
+import {MindmapCursorPagedPlatformContainersExperimental} from './mindmapCursorPagedPlatformContainersExperimental'
 import {MindmapData} from './mindmapData'
+import {MindmapDataPlatformContainersExperimental} from './mindmapDataPlatformContainersExperimental'
 import {MindmapItem} from './mindmapItem'
 import {MindmapItemPlatformContainersExperimental} from './mindmapItemPlatformContainersExperimental'
 import {MindmapNodeView} from './mindmapNodeView'
+import {MindmapNodeViewPlatformContainersExperimental} from './mindmapNodeViewPlatformContainersExperimental'
 import {MindmapWidgetDataOutput} from './mindmapWidgetDataOutput'
 import {ModelError} from './modelError'
 import {ModifiedBy} from './modifiedBy'
-import {ModifiedByPlatformContainers} from './modifiedByPlatformContainers'
-import {ModifiedByPlatformTags} from './modifiedByPlatformTags'
+import {ModifiedByPlatformContainersExperimental} from './modifiedByPlatformContainersExperimental'
 import {Organization} from './organization'
 import {OrganizationInformation} from './organizationInformation'
 import {OrganizationMember} from './organizationMember'
-import {OrganizationMembersSearchByEmailsResponse} from './organizationMembersSearchByEmailsResponse'
 import {OrganizationMembersSearchResponse} from './organizationMembersSearchResponse'
 import {PageLinks} from './pageLinks'
-import {PageLinksPlatformContainers} from './pageLinksPlatformContainers'
-import {PageLinksPlatformExperimentalFeatures} from './pageLinksPlatformExperimentalFeatures'
-import {PageLinksPlatformTags} from './pageLinksPlatformTags'
+import {PageLinksPlatformBulkCreateOperationExperimentalRelease} from './pageLinksPlatformBulkCreateOperationExperimentalRelease'
+import {PageLinksPlatformContainersExperimental} from './pageLinksPlatformContainersExperimental'
 import {Parent} from './parent'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
+import {ParentLinksEnvelopePlatformContainersExperimental} from './parentLinksEnvelopePlatformContainersExperimental'
+import {ParentLinksEnvelopePlatformExperimentalFeatures} from './parentLinksEnvelopePlatformExperimentalFeatures'
+import {ParentPlatformBulkCreateOperationExperimentalRelease} from './parentPlatformBulkCreateOperationExperimentalRelease'
+import {ParentPlatformExperimentalFeatures} from './parentPlatformExperimentalFeatures'
+import {ParentPlatformTags} from './parentPlatformTags'
 import {ParentWithLinks} from './parentWithLinks'
 import {Picture} from './picture'
+import {PictureTeamsEnterprisePlan} from './pictureTeamsEnterprisePlan'
 import {Position} from './position'
 import {PositionChange} from './positionChange'
+import {PositionChangePlatformBulkCreateOperationExperimentalRelease} from './positionChangePlatformBulkCreateOperationExperimentalRelease'
+import {PositionChangePlatformContainers} from './positionChangePlatformContainers'
+import {PositionChangePlatformExperimentalFeatures} from './positionChangePlatformExperimentalFeatures'
+import {PositionPlatformBulkCreateOperationExperimentalRelease} from './positionPlatformBulkCreateOperationExperimentalRelease'
+import {PositionPlatformContainers} from './positionPlatformContainers'
+import {PositionPlatformTags} from './positionPlatformTags'
 import {Project} from './project'
 import {ProjectMember} from './projectMember'
 import {ProjectMemberPage} from './projectMemberPage'
 import {ProjectPage} from './projectPage'
+import {ProjectProjectsEnterprisePlan} from './projectProjectsEnterprisePlan'
 import {ProjectRole} from './projectRole'
 import {ProjectRoleToAdd} from './projectRoleToAdd'
 import {ProjectSettings} from './projectSettings'
 import {RelativeOffset} from './relativeOffset'
 import {SelfLink} from './selfLink'
-import {SelfLinkPlatformContainers} from './selfLinkPlatformContainers'
-import {SelfLinkPlatformExperimentalFeatures} from './selfLinkPlatformExperimentalFeatures'
-import {SelfLinkPlatformTags} from './selfLinkPlatformTags'
+import {SelfLinkPlatformBulkCreateOperationExperimentalRelease} from './selfLinkPlatformBulkCreateOperationExperimentalRelease'
+import {SelfLinkPlatformContainersExperimental} from './selfLinkPlatformContainersExperimental'
 import {ShapeCreateRequest} from './shapeCreateRequest'
+import {ShapeCreateRequestPlatformExperimentalFeatures} from './shapeCreateRequestPlatformExperimentalFeatures'
 import {ShapeData} from './shapeData'
 import {ShapeDataForCreate} from './shapeDataForCreate'
 import {ShapeDataForUpdate} from './shapeDataForUpdate'
 import {ShapeDataPlatformBulkCreateOperationExperimentalRelease} from './shapeDataPlatformBulkCreateOperationExperimentalRelease'
+import {ShapeDataPlatformTags} from './shapeDataPlatformTags'
 import {ShapeItem} from './shapeItem'
+import {ShapeItemPlatformExperimentalFeatures} from './shapeItemPlatformExperimentalFeatures'
 import {ShapeStyle} from './shapeStyle'
 import {ShapeStyleForCreate} from './shapeStyleForCreate'
 import {ShapeStyleForUpdate} from './shapeStyleForUpdate'
+import {ShapeStylePlatformBulkCreateOperationExperimentalRelease} from './shapeStylePlatformBulkCreateOperationExperimentalRelease'
 import {ShapeUpdateRequest} from './shapeUpdateRequest'
+import {ShapeUpdateRequestPlatformExperimentalFeatures} from './shapeUpdateRequestPlatformExperimentalFeatures'
 import {SharingPolicySettings} from './sharingPolicySettings'
 import {StickyNoteCreateRequest} from './stickyNoteCreateRequest'
 import {StickyNoteData} from './stickyNoteData'
-import {StickyNoteDataPlatformBulkCreateOperationExperimentalRelease} from './stickyNoteDataPlatformBulkCreateOperationExperimentalRelease'
-import {StickyNoteDataPlatformTags} from './stickyNoteDataPlatformTags'
 import {StickyNoteItem} from './stickyNoteItem'
 import {StickyNoteStyle} from './stickyNoteStyle'
-import {StickyNoteStylePlatformBulkCreateOperationExperimentalRelease} from './stickyNoteStylePlatformBulkCreateOperationExperimentalRelease'
 import {StickyNoteUpdateRequest} from './stickyNoteUpdateRequest'
 import {SubscriptionData} from './subscriptionData'
 import {Tag} from './tag'
@@ -474,12 +492,15 @@ import {TeamSettings} from './teamSettings'
 import {TeamSettingsChanges} from './teamSettingsChanges'
 import {TeamSharingPolicySettings} from './teamSharingPolicySettings'
 import {TeamSharingPolicySettingsChanges} from './teamSharingPolicySettingsChanges'
+import {TeamTeamsEnterprisePlan} from './teamTeamsEnterprisePlan'
 import {TeamsPage} from './teamsPage'
 import {TextCreateRequest} from './textCreateRequest'
 import {TextData} from './textData'
-import {TextDataPlatformTags} from './textDataPlatformTags'
+import {TextDataPlatformContainersExperimental} from './textDataPlatformContainersExperimental'
+import {TextDataPlatformExperimentalFeatures} from './textDataPlatformExperimentalFeatures'
 import {TextItem} from './textItem'
 import {TextStyle} from './textStyle'
+import {TextStylePlatformBulkCreateOperationExperimentalRelease} from './textStylePlatformBulkCreateOperationExperimentalRelease'
 import {TextUpdateRequest} from './textUpdateRequest'
 import {TokenInformation} from './tokenInformation'
 import {UpdateBoardSubscriptionRequest} from './updateBoardSubscriptionRequest'
@@ -492,10 +513,11 @@ import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
 import {UserInfoShort} from './userInfoShort'
 import {UserInformation} from './userInformation'
 import {WidgetDataOutput} from './widgetDataOutput'
+import {WidgetDataOutputPlatformContainersExperimental} from './widgetDataOutputPlatformContainersExperimental'
+import {WidgetDataOutputPlatformExperimentalFeatures} from './widgetDataOutputPlatformExperimentalFeatures'
 import {WidgetDataOutputPlatformTags} from './widgetDataOutputPlatformTags'
 import {WidgetLinks} from './widgetLinks'
-import {WidgetLinksPlatformContainers} from './widgetLinksPlatformContainers'
-import {WidgetLinksPlatformExperimentalFeatures} from './widgetLinksPlatformExperimentalFeatures'
+import {WidgetLinksPlatformContainersExperimental} from './widgetLinksPlatformContainersExperimental'
 import {WidthOnlyAdjustableGeometry} from './widthOnlyAdjustableGeometry'
 
 /* tslint:disable:no-unused-variable */
@@ -504,7 +526,8 @@ let primitives = ['string', 'boolean', 'double', 'integer', 'long', 'float', 'nu
 let enumsMap: {[index: string]: any} = {
   'AppCardData.StatusEnum': AppCardData.StatusEnum,
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
-  'AppCardDataPlatformTags.StatusEnum': AppCardDataPlatformTags.StatusEnum,
+  'AppCardDataPlatformBulkCreateOperationExperimentalRelease.StatusEnum':
+    AppCardDataPlatformBulkCreateOperationExperimentalRelease.StatusEnum,
   'AppCardDataResponse.StatusEnum': AppCardDataResponse.StatusEnum,
   'BoardMember.RoleEnum': BoardMember.RoleEnum,
   'BoardMemberChanges.RoleEnum': BoardMemberChanges.RoleEnum,
@@ -533,21 +556,17 @@ let enumsMap: {[index: string]: any} = {
   'ConnectorWithLinks.ShapeEnum': ConnectorWithLinks.ShapeEnum,
   'CreateBoardSubscriptionRequest.StatusEnum': CreateBoardSubscriptionRequest.StatusEnum,
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
-  'CustomFieldPlatformBulkCreateOperationExperimentalRelease.IconShapeEnum':
-    CustomFieldPlatformBulkCreateOperationExperimentalRelease.IconShapeEnum,
-  'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
   'EmbedData.ModeEnum': EmbedData.ModeEnum,
+  'EmbedDataPlatformTags.ModeEnum': EmbedDataPlatformTags.ModeEnum,
   'EmbedDataResponse.ModeEnum': EmbedDataResponse.ModeEnum,
   'EmbedUrlData.ModeEnum': EmbedUrlData.ModeEnum,
   'EmbedUrlDataChanges.ModeEnum': EmbedUrlDataChanges.ModeEnum,
-  'EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease.ModeEnum':
-    EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease.ModeEnum,
   'FrameChanges.FormatEnum': FrameChanges.FormatEnum,
   'FrameChanges.TypeEnum': FrameChanges.TypeEnum,
   'FrameData.FormatEnum': FrameData.FormatEnum,
   'FrameData.TypeEnum': FrameData.TypeEnum,
-  'FrameDataPlatformTags.FormatEnum': FrameDataPlatformTags.FormatEnum,
-  'FrameDataPlatformTags.TypeEnum': FrameDataPlatformTags.TypeEnum,
+  'FrameDataPlatformContainers.FormatEnum': FrameDataPlatformContainers.FormatEnum,
+  'FrameDataPlatformContainers.TypeEnum': FrameDataPlatformContainers.TypeEnum,
   'GenericSubscription.StatusEnum': GenericSubscription.StatusEnum,
   'ItemConnectionChangesData.SnapToEnum': ItemConnectionChangesData.SnapToEnum,
   'ItemConnectionCreationData.SnapToEnum': ItemConnectionCreationData.SnapToEnum,
@@ -568,11 +587,21 @@ let enumsMap: {[index: string]: any} = {
   'OrganizationMember.RoleEnum': OrganizationMember.RoleEnum,
   'Position.OriginEnum': Position.OriginEnum,
   'Position.RelativeToEnum': Position.RelativeToEnum,
+  'PositionChangePlatformExperimentalFeatures.OriginEnum': PositionChangePlatformExperimentalFeatures.OriginEnum,
+  'PositionPlatformBulkCreateOperationExperimentalRelease.OriginEnum':
+    PositionPlatformBulkCreateOperationExperimentalRelease.OriginEnum,
+  'PositionPlatformBulkCreateOperationExperimentalRelease.RelativeToEnum':
+    PositionPlatformBulkCreateOperationExperimentalRelease.RelativeToEnum,
+  'PositionPlatformContainers.OriginEnum': PositionPlatformContainers.OriginEnum,
+  'PositionPlatformContainers.RelativeToEnum': PositionPlatformContainers.RelativeToEnum,
+  'PositionPlatformTags.OriginEnum': PositionPlatformTags.OriginEnum,
+  'PositionPlatformTags.RelativeToEnum': PositionPlatformTags.RelativeToEnum,
   ProjectRole: ProjectRole,
   ProjectRoleToAdd: ProjectRoleToAdd,
   'ShapeData.ShapeEnum': ShapeData.ShapeEnum,
   'ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum':
     ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum,
+  'ShapeDataPlatformTags.ShapeEnum': ShapeDataPlatformTags.ShapeEnum,
   'ShapeStyle.BorderStyleEnum': ShapeStyle.BorderStyleEnum,
   'ShapeStyle.FontFamilyEnum': ShapeStyle.FontFamilyEnum,
   'ShapeStyle.TextAlignEnum': ShapeStyle.TextAlignEnum,
@@ -585,19 +614,18 @@ let enumsMap: {[index: string]: any} = {
   'ShapeStyleForUpdate.FontFamilyEnum': ShapeStyleForUpdate.FontFamilyEnum,
   'ShapeStyleForUpdate.TextAlignEnum': ShapeStyleForUpdate.TextAlignEnum,
   'ShapeStyleForUpdate.TextAlignVerticalEnum': ShapeStyleForUpdate.TextAlignVerticalEnum,
+  'ShapeStylePlatformBulkCreateOperationExperimentalRelease.BorderStyleEnum':
+    ShapeStylePlatformBulkCreateOperationExperimentalRelease.BorderStyleEnum,
+  'ShapeStylePlatformBulkCreateOperationExperimentalRelease.FontFamilyEnum':
+    ShapeStylePlatformBulkCreateOperationExperimentalRelease.FontFamilyEnum,
+  'ShapeStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum':
+    ShapeStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum,
+  'ShapeStylePlatformBulkCreateOperationExperimentalRelease.TextAlignVerticalEnum':
+    ShapeStylePlatformBulkCreateOperationExperimentalRelease.TextAlignVerticalEnum,
   'StickyNoteData.ShapeEnum': StickyNoteData.ShapeEnum,
-  'StickyNoteDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum':
-    StickyNoteDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum,
-  'StickyNoteDataPlatformTags.ShapeEnum': StickyNoteDataPlatformTags.ShapeEnum,
   'StickyNoteStyle.FillColorEnum': StickyNoteStyle.FillColorEnum,
   'StickyNoteStyle.TextAlignEnum': StickyNoteStyle.TextAlignEnum,
   'StickyNoteStyle.TextAlignVerticalEnum': StickyNoteStyle.TextAlignVerticalEnum,
-  'StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.FillColorEnum':
-    StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.FillColorEnum,
-  'StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum':
-    StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum,
-  'StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignVerticalEnum':
-    StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignVerticalEnum,
   'Tag.FillColorEnum': Tag.FillColorEnum,
   'TagCreateRequest.FillColorEnum': TagCreateRequest.FillColorEnum,
   'TagUpdateRequest.FillColorEnum': TagUpdateRequest.FillColorEnum,
@@ -646,7 +674,16 @@ let enumsMap: {[index: string]: any} = {
     TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum,
   'TextStyle.FontFamilyEnum': TextStyle.FontFamilyEnum,
   'TextStyle.TextAlignEnum': TextStyle.TextAlignEnum,
+  'TextStylePlatformBulkCreateOperationExperimentalRelease.FontFamilyEnum':
+    TextStylePlatformBulkCreateOperationExperimentalRelease.FontFamilyEnum,
+  'TextStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum':
+    TextStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum,
   'UpdateBoardSubscriptionRequest.StatusEnum': UpdateBoardSubscriptionRequest.StatusEnum,
+  'WidgetDataOutput.ModeEnum': WidgetDataOutput.ModeEnum,
+  'WidgetDataOutput.StatusEnum': WidgetDataOutput.StatusEnum,
+  'WidgetDataOutput.ShapeEnum': WidgetDataOutput.ShapeEnum,
+  'WidgetDataOutput.FormatEnum': WidgetDataOutput.FormatEnum,
+  'WidgetDataOutput.TypeEnum': WidgetDataOutput.TypeEnum,
   'WidgetDataOutputPlatformTags.ModeEnum': WidgetDataOutputPlatformTags.ModeEnum,
   'WidgetDataOutputPlatformTags.StatusEnum': WidgetDataOutputPlatformTags.StatusEnum,
   'WidgetDataOutputPlatformTags.ShapeEnum': WidgetDataOutputPlatformTags.ShapeEnum,
@@ -659,16 +696,14 @@ let typeMap: {[index: string]: any} = {
   AppCardCreateRequest: AppCardCreateRequest,
   AppCardData: AppCardData,
   AppCardDataChanges: AppCardDataChanges,
-  AppCardDataPlatformTags: AppCardDataPlatformTags,
+  AppCardDataPlatformBulkCreateOperationExperimentalRelease: AppCardDataPlatformBulkCreateOperationExperimentalRelease,
   AppCardDataResponse: AppCardDataResponse,
   AppCardItem: AppCardItem,
   AppCardStyle: AppCardStyle,
-  AppCardStylePlatformBulkCreateOperationExperimentalRelease:
-    AppCardStylePlatformBulkCreateOperationExperimentalRelease,
   AppCardUpdateRequest: AppCardUpdateRequest,
   BasicError: BasicError,
-  BasicErrorBoardExportJobEnterprisePlan: BasicErrorBoardExportJobEnterprisePlan,
   BasicErrorOrganizationsEnterprisePlan: BasicErrorOrganizationsEnterprisePlan,
+  BasicErrorTeamsEnterprisePlan: BasicErrorTeamsEnterprisePlan,
   Board: Board,
   BoardChanges: BoardChanges,
   BoardDataClassificationLabel: BoardDataClassificationLabel,
@@ -698,9 +733,10 @@ let typeMap: {[index: string]: any} = {
   Caption: Caption,
   CardCreateRequest: CardCreateRequest,
   CardData: CardData,
+  CardDataPlatformBulkCreateOperationExperimentalRelease: CardDataPlatformBulkCreateOperationExperimentalRelease,
+  CardDataPlatformTags: CardDataPlatformTags,
   CardItem: CardItem,
   CardStyle: CardStyle,
-  CardStylePlatformBulkCreateOperationExperimentalRelease: CardStylePlatformBulkCreateOperationExperimentalRelease,
   CardUpdateRequest: CardUpdateRequest,
   ConnectorChangesData: ConnectorChangesData,
   ConnectorCreationData: ConnectorCreationData,
@@ -713,34 +749,27 @@ let typeMap: {[index: string]: any} = {
   CreateProjectRequest: CreateProjectRequest,
   CreateTeamRequest: CreateTeamRequest,
   CreatedBy: CreatedBy,
-  CreatedByPlatformContainers: CreatedByPlatformContainers,
-  CreatedByPlatformTags: CreatedByPlatformTags,
+  CreatedByPlatformContainersExperimental: CreatedByPlatformContainersExperimental,
   CustomField: CustomField,
-  CustomFieldPlatformBulkCreateOperationExperimentalRelease: CustomFieldPlatformBulkCreateOperationExperimentalRelease,
-  CustomFieldPlatformTags: CustomFieldPlatformTags,
   DataClassificationLabel: DataClassificationLabel,
   DataClassificationLabelId: DataClassificationLabelId,
   DataClassificationOrganizationSettings: DataClassificationOrganizationSettings,
   DataClassificationTeamSettings: DataClassificationTeamSettings,
   DocumentCreateRequest: DocumentCreateRequest,
   DocumentData: DocumentData,
-  DocumentDataPlatformTags: DocumentDataPlatformTags,
   DocumentDataResponse: DocumentDataResponse,
   DocumentItem: DocumentItem,
   DocumentUpdateRequest: DocumentUpdateRequest,
   DocumentUrlData: DocumentUrlData,
   DocumentUrlDataChanges: DocumentUrlDataChanges,
-  DocumentUrlDataPlatformBulkCreateOperationExperimentalRelease:
-    DocumentUrlDataPlatformBulkCreateOperationExperimentalRelease,
   EmbedCreateRequest: EmbedCreateRequest,
   EmbedData: EmbedData,
+  EmbedDataPlatformTags: EmbedDataPlatformTags,
   EmbedDataResponse: EmbedDataResponse,
   EmbedItem: EmbedItem,
   EmbedUpdateRequest: EmbedUpdateRequest,
   EmbedUrlData: EmbedUrlData,
   EmbedUrlDataChanges: EmbedUrlDataChanges,
-  EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease:
-    EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease,
   EnterpriseGetOrganizationMembers200Response: EnterpriseGetOrganizationMembers200Response,
   Error400: Error400,
   Error401: Error401,
@@ -753,36 +782,32 @@ let typeMap: {[index: string]: any} = {
   FrameChanges: FrameChanges,
   FrameCreateRequest: FrameCreateRequest,
   FrameData: FrameData,
-  FrameDataPlatformTags: FrameDataPlatformTags,
+  FrameDataPlatformContainers: FrameDataPlatformContainers,
   FrameItem: FrameItem,
   FrameStyle: FrameStyle,
   FrameUpdateRequest: FrameUpdateRequest,
   GenericItem: GenericItem,
   GenericItemCursorPaged: GenericItemCursorPaged,
+  GenericItemCursorPagedPlatformContainers: GenericItemCursorPagedPlatformContainers,
+  GenericItemCursorPagedPlatformExperimentalFeatures: GenericItemCursorPagedPlatformExperimentalFeatures,
+  GenericItemPlatformContainers: GenericItemPlatformContainers,
+  GenericItemPlatformExperimentalFeatures: GenericItemPlatformExperimentalFeatures,
+  GenericItemPlatformTags: GenericItemPlatformTags,
   GenericItemUpdate: GenericItemUpdate,
   GenericSubscription: GenericSubscription,
   GenericSubscriptionsCursorPaged: GenericSubscriptionsCursorPaged,
   Geometry: Geometry,
   GeometryNoRotation: GeometryNoRotation,
-  GeometryPlatformBulkCreateOperationExperimentalRelease: GeometryPlatformBulkCreateOperationExperimentalRelease,
-  GeometryPlatformContainers: GeometryPlatformContainers,
-  GeometryPlatformExperimentalFeatures: GeometryPlatformExperimentalFeatures,
-  GeometryPlatformTags: GeometryPlatformTags,
   GetBoards400Response: GetBoards400Response,
   GetTagsFromItem400Response: GetTagsFromItem400Response,
   GetTagsResponse: GetTagsResponse,
   ImageCreateRequest: ImageCreateRequest,
   ImageData: ImageData,
-  ImageDataPlatformTags: ImageDataPlatformTags,
   ImageDataResponse: ImageDataResponse,
   ImageItem: ImageItem,
   ImageUpdateRequest: ImageUpdateRequest,
   ImageUrlData: ImageUrlData,
   ImageUrlDataChanges: ImageUrlDataChanges,
-  ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease:
-    ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease,
-  ImageUrlDataPlatformBulkCreateOperationExperimentalRelease:
-    ImageUrlDataPlatformBulkCreateOperationExperimentalRelease,
   InvitationError: InvitationError,
   InvitationResult: InvitationResult,
   Item: Item,
@@ -799,60 +824,73 @@ let typeMap: {[index: string]: any} = {
   Items: Items,
   ItemsPage: ItemsPage,
   MindmapCursorPaged: MindmapCursorPaged,
+  MindmapCursorPagedPlatformContainersExperimental: MindmapCursorPagedPlatformContainersExperimental,
   MindmapData: MindmapData,
+  MindmapDataPlatformContainersExperimental: MindmapDataPlatformContainersExperimental,
   MindmapItem: MindmapItem,
   MindmapItemPlatformContainersExperimental: MindmapItemPlatformContainersExperimental,
   MindmapNodeView: MindmapNodeView,
+  MindmapNodeViewPlatformContainersExperimental: MindmapNodeViewPlatformContainersExperimental,
   MindmapWidgetDataOutput: MindmapWidgetDataOutput,
   ModelError: ModelError,
   ModifiedBy: ModifiedBy,
-  ModifiedByPlatformContainers: ModifiedByPlatformContainers,
-  ModifiedByPlatformTags: ModifiedByPlatformTags,
+  ModifiedByPlatformContainersExperimental: ModifiedByPlatformContainersExperimental,
   Organization: Organization,
   OrganizationInformation: OrganizationInformation,
   OrganizationMember: OrganizationMember,
-  OrganizationMembersSearchByEmailsResponse: OrganizationMembersSearchByEmailsResponse,
   OrganizationMembersSearchResponse: OrganizationMembersSearchResponse,
   PageLinks: PageLinks,
-  PageLinksPlatformContainers: PageLinksPlatformContainers,
-  PageLinksPlatformExperimentalFeatures: PageLinksPlatformExperimentalFeatures,
-  PageLinksPlatformTags: PageLinksPlatformTags,
+  PageLinksPlatformBulkCreateOperationExperimentalRelease: PageLinksPlatformBulkCreateOperationExperimentalRelease,
+  PageLinksPlatformContainersExperimental: PageLinksPlatformContainersExperimental,
   Parent: Parent,
   ParentLinksEnvelope: ParentLinksEnvelope,
+  ParentLinksEnvelopePlatformContainersExperimental: ParentLinksEnvelopePlatformContainersExperimental,
+  ParentLinksEnvelopePlatformExperimentalFeatures: ParentLinksEnvelopePlatformExperimentalFeatures,
+  ParentPlatformBulkCreateOperationExperimentalRelease: ParentPlatformBulkCreateOperationExperimentalRelease,
+  ParentPlatformExperimentalFeatures: ParentPlatformExperimentalFeatures,
+  ParentPlatformTags: ParentPlatformTags,
   ParentWithLinks: ParentWithLinks,
   Picture: Picture,
+  PictureTeamsEnterprisePlan: PictureTeamsEnterprisePlan,
   Position: Position,
   PositionChange: PositionChange,
+  PositionChangePlatformBulkCreateOperationExperimentalRelease:
+    PositionChangePlatformBulkCreateOperationExperimentalRelease,
+  PositionChangePlatformContainers: PositionChangePlatformContainers,
+  PositionChangePlatformExperimentalFeatures: PositionChangePlatformExperimentalFeatures,
+  PositionPlatformBulkCreateOperationExperimentalRelease: PositionPlatformBulkCreateOperationExperimentalRelease,
+  PositionPlatformContainers: PositionPlatformContainers,
+  PositionPlatformTags: PositionPlatformTags,
   Project: Project,
   ProjectMember: ProjectMember,
   ProjectMemberPage: ProjectMemberPage,
   ProjectPage: ProjectPage,
+  ProjectProjectsEnterprisePlan: ProjectProjectsEnterprisePlan,
   ProjectSettings: ProjectSettings,
   RelativeOffset: RelativeOffset,
   SelfLink: SelfLink,
-  SelfLinkPlatformContainers: SelfLinkPlatformContainers,
-  SelfLinkPlatformExperimentalFeatures: SelfLinkPlatformExperimentalFeatures,
-  SelfLinkPlatformTags: SelfLinkPlatformTags,
+  SelfLinkPlatformBulkCreateOperationExperimentalRelease: SelfLinkPlatformBulkCreateOperationExperimentalRelease,
+  SelfLinkPlatformContainersExperimental: SelfLinkPlatformContainersExperimental,
   ShapeCreateRequest: ShapeCreateRequest,
+  ShapeCreateRequestPlatformExperimentalFeatures: ShapeCreateRequestPlatformExperimentalFeatures,
   ShapeData: ShapeData,
   ShapeDataForCreate: ShapeDataForCreate,
   ShapeDataForUpdate: ShapeDataForUpdate,
   ShapeDataPlatformBulkCreateOperationExperimentalRelease: ShapeDataPlatformBulkCreateOperationExperimentalRelease,
+  ShapeDataPlatformTags: ShapeDataPlatformTags,
   ShapeItem: ShapeItem,
+  ShapeItemPlatformExperimentalFeatures: ShapeItemPlatformExperimentalFeatures,
   ShapeStyle: ShapeStyle,
   ShapeStyleForCreate: ShapeStyleForCreate,
   ShapeStyleForUpdate: ShapeStyleForUpdate,
+  ShapeStylePlatformBulkCreateOperationExperimentalRelease: ShapeStylePlatformBulkCreateOperationExperimentalRelease,
   ShapeUpdateRequest: ShapeUpdateRequest,
+  ShapeUpdateRequestPlatformExperimentalFeatures: ShapeUpdateRequestPlatformExperimentalFeatures,
   SharingPolicySettings: SharingPolicySettings,
   StickyNoteCreateRequest: StickyNoteCreateRequest,
   StickyNoteData: StickyNoteData,
-  StickyNoteDataPlatformBulkCreateOperationExperimentalRelease:
-    StickyNoteDataPlatformBulkCreateOperationExperimentalRelease,
-  StickyNoteDataPlatformTags: StickyNoteDataPlatformTags,
   StickyNoteItem: StickyNoteItem,
   StickyNoteStyle: StickyNoteStyle,
-  StickyNoteStylePlatformBulkCreateOperationExperimentalRelease:
-    StickyNoteStylePlatformBulkCreateOperationExperimentalRelease,
   StickyNoteUpdateRequest: StickyNoteUpdateRequest,
   SubscriptionData: SubscriptionData,
   Tag: Tag,
@@ -879,12 +917,15 @@ let typeMap: {[index: string]: any} = {
   TeamSettingsChanges: TeamSettingsChanges,
   TeamSharingPolicySettings: TeamSharingPolicySettings,
   TeamSharingPolicySettingsChanges: TeamSharingPolicySettingsChanges,
+  TeamTeamsEnterprisePlan: TeamTeamsEnterprisePlan,
   TeamsPage: TeamsPage,
   TextCreateRequest: TextCreateRequest,
   TextData: TextData,
-  TextDataPlatformTags: TextDataPlatformTags,
+  TextDataPlatformContainersExperimental: TextDataPlatformContainersExperimental,
+  TextDataPlatformExperimentalFeatures: TextDataPlatformExperimentalFeatures,
   TextItem: TextItem,
   TextStyle: TextStyle,
+  TextStylePlatformBulkCreateOperationExperimentalRelease: TextStylePlatformBulkCreateOperationExperimentalRelease,
   TextUpdateRequest: TextUpdateRequest,
   TokenInformation: TokenInformation,
   UpdateBoardSubscriptionRequest: UpdateBoardSubscriptionRequest,
@@ -897,10 +938,11 @@ let typeMap: {[index: string]: any} = {
   UserInfoShort: UserInfoShort,
   UserInformation: UserInformation,
   WidgetDataOutput: WidgetDataOutput,
+  WidgetDataOutputPlatformContainersExperimental: WidgetDataOutputPlatformContainersExperimental,
+  WidgetDataOutputPlatformExperimentalFeatures: WidgetDataOutputPlatformExperimentalFeatures,
   WidgetDataOutputPlatformTags: WidgetDataOutputPlatformTags,
   WidgetLinks: WidgetLinks,
-  WidgetLinksPlatformContainers: WidgetLinksPlatformContainers,
-  WidgetLinksPlatformExperimentalFeatures: WidgetLinksPlatformExperimentalFeatures,
+  WidgetLinksPlatformContainersExperimental: WidgetLinksPlatformContainersExperimental,
   WidthOnlyAdjustableGeometry: WidthOnlyAdjustableGeometry,
 }
 

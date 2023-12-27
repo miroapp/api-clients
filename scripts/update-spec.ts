@@ -7,7 +7,14 @@ import {writeFile} from 'fs/promises'
 import glob from 'fast-glob'
 
 
-const apis = await glob('./spec/**/*.yaml')
+const specsToExclude = ['./spec/enterprise/enterprise-audit-logs.yaml', './spec/enterprise/enterprise-beta-apis.yaml'];
+const apis = (await glob('./spec/**/*.yaml'))
+  .filter((api) => !specsToExclude.includes(api))
+  // First process enterprise specs because they were first historically
+  .sort((a, b) => {
+    if (a.startsWith('./spec/public-api')) return -1
+    return a.localeCompare(b)
+  })
 
 type Endpoint = Record<
   string,
@@ -192,8 +199,18 @@ const baseSpecification: Spec = {
   },
 }
 
-async function getSpecsForApi(fileName: string) {
-  return load(await readFile(fileName, {encoding: 'utf8'}))
+async function getSpecsForApi(fileName: string): Promise<Spec> {
+  const spec = load(await readFile(fileName, {encoding: 'utf8'})) as Spec
+
+  // normalize components to always have schemas and parameters defined
+  return {
+    ...spec,
+    components: {
+      ...spec.components,
+      schemas: spec.components.schemas || {},
+      parameters: spec.components.parameters || {},
+    },
+  }
 }
 
 const specs = (await Promise.all(apis.map(getSpecsForApi))).flat() as Spec[]
@@ -240,44 +257,46 @@ function removeMultipleTagsFromEndpoints(spec: Spec) {
   })
 }
 
+function updateDefinitionReferences(spec: Spec, reference: string, newReference: string): Spec {
+  return JSON.parse(JSON.stringify(spec).replaceAll(`"${reference}"`, `"${newReference}"`))
+}
+
 const mergedSpec = fixDescriptionLinks(
   // Create a single spec file that merges all endpoints, schemas, parameters
   // from all individual spec files
   specs.reduce<Spec>((acc: Spec, spec: Spec): Spec => {
-    const specTitle = spec.info?.title?.replace(/ |\(|\)/g, '')
-    const specSchemasDef = spec.components?.schemas || {}
-    const specParametersDef = spec.components?.parameters || {}
-
-    let specPathsDef = spec.paths
+    const specTitle = spec.info?.title?.replace(/[ ()]/g, '')
 
     // Deduplicate schema definitions
-    for (const key of Object.keys(specSchemasDef)) {
+    for (const key of Object.keys(spec.components.schemas)) {
       const existingDefinition = acc.components.schemas[key]
-      delete acc.components.schemas[key]
-      let newSchema = specSchemasDef[key]
-      let newKey = key
-      if (existingDefinition && isEqual(existingDefinition, newSchema)) {
-        newKey = `${key}${specTitle}`
-        specPathsDef = JSON.parse(
-          JSON.stringify(specPathsDef).replaceAll(`"#/components/schemas/${key}"`, `"#/components/schemas/${newKey}"`),
-        )
+      const newDefinition = spec.components.schemas[key]
+
+      if (!existingDefinition || isEqual(existingDefinition, newDefinition)) {
+        continue;
       }
-      acc.components.schemas[newKey] = newSchema
+
+      const newKey = `${key}${specTitle}`
+      delete spec.components.schemas[key]
+      spec.components.schemas[newKey] = newDefinition
+
+      spec = updateDefinitionReferences(spec, `#/components/schemas/${key}`, `#/components/schemas/${newKey}`)
     }
 
-    // Deduplicate parameters
-    for (const key of Object.keys(specParametersDef)) {
+    // Deduplicate parameter definitions
+    for (const key of Object.keys(spec.components.parameters)) {
       const existingDefinition = acc.components.parameters[key]
-      delete acc.components.parameters[key]
-      let newSchema = specParametersDef[key]
-      let newKey = key
-      if (existingDefinition && isEqual(existingDefinition, newSchema)) {
-        newKey = `${key}${specTitle}`
-        specPathsDef = JSON.parse(
-          JSON.stringify(specPathsDef).replaceAll(`"#/components/parameters/${key}"`, `"#/components/parameters/${newKey}"`),
-        )
+      const newDefinition = spec.components.parameters[key]
+
+      if (!existingDefinition || isEqual(existingDefinition, newDefinition, )) {
+        continue;
       }
-      acc.components.parameters[newKey] = newSchema
+
+      const newKey = `${key}${specTitle}`
+      delete spec.components.parameters[key]
+      spec.components.parameters[newKey] = newDefinition
+
+      spec = updateDefinitionReferences(spec, `#/components/parameters/${key}`, `#/components/parameters/${newKey}`)
     }
 
     // Deduplicate paths
@@ -300,8 +319,8 @@ const mergedSpec = fixDescriptionLinks(
       paths: mergeWithoutConflict(acc.paths, spec.paths),
       components: {
         ...acc.components,
-        schemas: mergeWithoutConflict(acc.components.schemas, specSchemasDef),
-        parameters: {...acc.components.parameters, ...specParametersDef},
+        schemas: mergeWithoutConflict(acc.components.schemas, spec.components.schemas),
+        parameters: mergeWithoutConflict(acc.components.parameters, spec.components.parameters),
       },
     }
   }, baseSpecification),

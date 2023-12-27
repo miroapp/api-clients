@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import {Team} from './team'
+import {TeamTeamsEnterprisePlan} from './teamTeamsEnterprisePlan'
 
 /**
  * @internal
@@ -28,7 +28,7 @@ export class TeamsPage {
   /**
    * List of teams
    */
-  'data': Array<Team>
+  'data': Array<TeamTeamsEnterprisePlan>
   /**
    * Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.
    */
@@ -56,7 +56,7 @@ export class TeamsPage {
     {
       name: 'data',
       baseName: 'data',
-      type: 'Array<Team>',
+      type: 'Array<TeamTeamsEnterprisePlan>',
     },
     {
       name: 'cursor',

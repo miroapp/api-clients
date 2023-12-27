@@ -19,7 +19,7 @@ import {MindmapNodeView} from './mindmapNodeView'
 export class MindmapData {
   'nodeView'?: MindmapNodeView
   /**
-   * Indicates whether this node is the root node of the mind map.
+   * Indicates whether this node is the root of the mind map.
    */
   'isRoot'?: boolean
 

@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
+ * Contains information about the item\'s position on the board, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
  */
 export class PositionChange {
   /**

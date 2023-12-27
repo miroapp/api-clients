@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import {AppCardData} from './appCardData'
+import {AppCardDataPlatformBulkCreateOperationExperimentalRelease} from './appCardDataPlatformBulkCreateOperationExperimentalRelease'
 import {CustomField} from './customField'
 import {ImageUrlDataChanges} from './imageUrlDataChanges'
 

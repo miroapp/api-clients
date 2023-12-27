@@ -10,30 +10,30 @@
  * Do not edit the class manually.
  */
 
-import {CreatedBy} from './createdBy'
-import {MindmapData} from './mindmapData'
-import {ModifiedBy} from './modifiedBy'
-import {ParentLinksEnvelope} from './parentLinksEnvelope'
-import {WidgetLinks} from './widgetLinks'
+import {CreatedByPlatformContainersExperimental} from './createdByPlatformContainersExperimental'
+import {MindmapDataPlatformContainersExperimental} from './mindmapDataPlatformContainersExperimental'
+import {ModifiedByPlatformContainersExperimental} from './modifiedByPlatformContainersExperimental'
+import {ParentLinksEnvelopePlatformContainersExperimental} from './parentLinksEnvelopePlatformContainersExperimental'
+import {WidgetLinksPlatformContainersExperimental} from './widgetLinksPlatformContainersExperimental'
 
 export class MindmapItemPlatformContainersExperimental {
   /**
    * Unique identifier (ID) of an item.
    */
   'id': string
-  'data'?: MindmapData
+  'data'?: MindmapDataPlatformContainersExperimental
   /**
    * Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
   'createdAt'?: Date
-  'createdBy'?: CreatedBy
+  'createdBy'?: CreatedByPlatformContainersExperimental
   /**
    * Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
   'modifiedAt'?: Date
-  'modifiedBy'?: ModifiedBy
-  'parent'?: ParentLinksEnvelope
-  'links'?: WidgetLinks
+  'modifiedBy'?: ModifiedByPlatformContainersExperimental
+  'parent'?: ParentLinksEnvelopePlatformContainersExperimental
+  'links'?: WidgetLinksPlatformContainersExperimental
   /**
    * Type of item that is returned.
    */
@@ -52,7 +52,7 @@ export class MindmapItemPlatformContainersExperimental {
     {
       name: 'data',
       baseName: 'data',
-      type: 'MindmapData',
+      type: 'MindmapDataPlatformContainersExperimental',
     },
     {
       name: 'createdAt',
@@ -62,7 +62,7 @@ export class MindmapItemPlatformContainersExperimental {
     {
       name: 'createdBy',
       baseName: 'createdBy',
-      type: 'CreatedBy',
+      type: 'CreatedByPlatformContainersExperimental',
     },
     {
       name: 'modifiedAt',
@@ -72,17 +72,17 @@ export class MindmapItemPlatformContainersExperimental {
     {
       name: 'modifiedBy',
       baseName: 'modifiedBy',
-      type: 'ModifiedBy',
+      type: 'ModifiedByPlatformContainersExperimental',
     },
     {
       name: 'parent',
       baseName: 'parent',
-      type: 'ParentLinksEnvelope',
+      type: 'ParentLinksEnvelopePlatformContainersExperimental',
     },
     {
       name: 'links',
       baseName: 'links',
-      type: 'WidgetLinks',
+      type: 'WidgetLinksPlatformContainersExperimental',
     },
     {
       name: 'type',

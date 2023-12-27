@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import {Project} from './project'
+import {ProjectProjectsEnterprisePlan} from './projectProjectsEnterprisePlan'
 
 export class ProjectPage {
   /**
@@ -24,7 +24,7 @@ export class ProjectPage {
   /**
    * Contains the result data.
    */
-  'data': Array<Project>
+  'data': Array<ProjectProjectsEnterprisePlan>
   /**
    * Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.
    */
@@ -52,7 +52,7 @@ export class ProjectPage {
     {
       name: 'data',
       baseName: 'data',
-      type: 'Array<Project>',
+      type: 'Array<ProjectProjectsEnterprisePlan>',
     },
     {
       name: 'cursor',

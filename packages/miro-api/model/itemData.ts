@@ -11,12 +11,12 @@
  */
 
 import {AppCardDataResponse} from './appCardDataResponse'
-import {CardData} from './cardData'
+import {CardDataPlatformBulkCreateOperationExperimentalRelease} from './cardDataPlatformBulkCreateOperationExperimentalRelease'
 import {CustomField} from './customField'
 import {DocumentDataResponse} from './documentDataResponse'
 import {EmbedDataResponse} from './embedDataResponse'
 import {ImageDataResponse} from './imageDataResponse'
-import {ShapeData} from './shapeData'
+import {ShapeDataPlatformBulkCreateOperationExperimentalRelease} from './shapeDataPlatformBulkCreateOperationExperimentalRelease'
 import {StickyNoteData} from './stickyNoteData'
 import {TextData} from './textData'
 

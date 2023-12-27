@@ -11,11 +11,11 @@
  */
 
 import {CreatedBy} from './createdBy'
-import {FrameData} from './frameData'
+import {FrameDataPlatformContainers} from './frameDataPlatformContainers'
 import {FrameStyle} from './frameStyle'
 import {Geometry} from './geometry'
 import {ModifiedBy} from './modifiedBy'
-import {Position} from './position'
+import {PositionPlatformContainers} from './positionPlatformContainers'
 import {WidgetLinks} from './widgetLinks'
 
 export class FrameItem {
@@ -23,9 +23,9 @@ export class FrameItem {
    * Unique identifier (ID) of an item.
    */
   'id': string
-  'data'?: FrameData
+  'data'?: FrameDataPlatformContainers
   'style'?: FrameStyle
-  'position'?: Position
+  'position'?: PositionPlatformContainers
   'geometry'?: Geometry
   /**
    * Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
@@ -56,7 +56,7 @@ export class FrameItem {
     {
       name: 'data',
       baseName: 'data',
-      type: 'FrameData',
+      type: 'FrameDataPlatformContainers',
     },
     {
       name: 'style',
@@ -66,7 +66,7 @@ export class FrameItem {
     {
       name: 'position',
       baseName: 'position',
-      type: 'Position',
+      type: 'PositionPlatformContainers',
     },
     {
       name: 'geometry',

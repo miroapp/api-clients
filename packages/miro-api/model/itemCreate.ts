@@ -14,8 +14,8 @@ import {Geometry} from './geometry'
 import {ItemDataCreate} from './itemDataCreate'
 import {ItemStyle} from './itemStyle'
 import {ItemTypeChange} from './itemTypeChange'
-import {Parent} from './parent'
-import {PositionChange} from './positionChange'
+import {ParentPlatformBulkCreateOperationExperimentalRelease} from './parentPlatformBulkCreateOperationExperimentalRelease'
+import {PositionChangePlatformBulkCreateOperationExperimentalRelease} from './positionChangePlatformBulkCreateOperationExperimentalRelease'
 
 /**
  * @internal
@@ -25,9 +25,9 @@ export class ItemCreate {
   'type': ItemTypeChange
   'data'?: ItemDataCreate
   'style'?: ItemStyle
-  'position'?: PositionChange
+  'position'?: PositionChangePlatformBulkCreateOperationExperimentalRelease
   'geometry'?: Geometry
-  'parent'?: Parent
+  'parent'?: ParentPlatformBulkCreateOperationExperimentalRelease
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -52,7 +52,7 @@ export class ItemCreate {
     {
       name: 'position',
       baseName: 'position',
-      type: 'PositionChange',
+      type: 'PositionChangePlatformBulkCreateOperationExperimentalRelease',
     },
     {
       name: 'geometry',
@@ -62,7 +62,7 @@ export class ItemCreate {
     {
       name: 'parent',
       baseName: 'parent',
-      type: 'Parent',
+      type: 'ParentPlatformBulkCreateOperationExperimentalRelease',
     },
   ]
 

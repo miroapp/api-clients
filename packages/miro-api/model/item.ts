@@ -16,8 +16,8 @@ import {ItemData} from './itemData'
 import {ItemStyle} from './itemStyle'
 import {ModifiedBy} from './modifiedBy'
 import {ParentWithLinks} from './parentWithLinks'
-import {Position} from './position'
-import {SelfLink} from './selfLink'
+import {PositionPlatformBulkCreateOperationExperimentalRelease} from './positionPlatformBulkCreateOperationExperimentalRelease'
+import {SelfLinkPlatformBulkCreateOperationExperimentalRelease} from './selfLinkPlatformBulkCreateOperationExperimentalRelease'
 
 /**
  * @internal
@@ -30,7 +30,7 @@ export class Item {
   'id': string
   'data'?: ItemData
   'style'?: ItemStyle
-  'position'?: Position
+  'position'?: PositionPlatformBulkCreateOperationExperimentalRelease
   'geometry'?: Geometry
   'parent'?: ParentWithLinks
   'isSupported'?: boolean
@@ -44,7 +44,7 @@ export class Item {
    * Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
   'modifiedAt'?: Date
-  'links': SelfLink
+  'links': SelfLinkPlatformBulkCreateOperationExperimentalRelease
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -69,7 +69,7 @@ export class Item {
     {
       name: 'position',
       baseName: 'position',
-      type: 'Position',
+      type: 'PositionPlatformBulkCreateOperationExperimentalRelease',
     },
     {
       name: 'geometry',
@@ -109,7 +109,7 @@ export class Item {
     {
       name: 'links',
       baseName: 'links',
-      type: 'SelfLink',
+      type: 'SelfLinkPlatformBulkCreateOperationExperimentalRelease',
     },
   ]
 

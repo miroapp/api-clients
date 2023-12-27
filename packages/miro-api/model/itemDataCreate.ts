@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 
-import {AppCardData} from './appCardData'
-import {CardData} from './cardData'
+import {AppCardDataPlatformBulkCreateOperationExperimentalRelease} from './appCardDataPlatformBulkCreateOperationExperimentalRelease'
+import {CardDataPlatformBulkCreateOperationExperimentalRelease} from './cardDataPlatformBulkCreateOperationExperimentalRelease'
 import {CustomField} from './customField'
 import {DocumentUrlData} from './documentUrlData'
 import {EmbedUrlData} from './embedUrlData'
 import {ImageUrlData} from './imageUrlData'
-import {ShapeData} from './shapeData'
+import {ShapeDataPlatformBulkCreateOperationExperimentalRelease} from './shapeDataPlatformBulkCreateOperationExperimentalRelease'
 import {StickyNoteData} from './stickyNoteData'
 import {TextData} from './textData'
 

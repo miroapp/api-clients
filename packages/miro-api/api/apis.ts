@@ -65,6 +65,7 @@ import {ImageUpdateRequest} from '../model/imageUpdateRequest'
 
 import {GenericItem} from '../model/genericItem'
 import {GenericItemCursorPaged} from '../model/genericItemCursorPaged'
+import {GenericItemCursorPagedPlatformContainers} from '../model/genericItemCursorPagedPlatformContainers'
 import {GenericItemUpdate} from '../model/genericItemUpdate'
 
 import {EnterpriseGetOrganizationMembers200Response} from '../model/enterpriseGetOrganizationMembers200Response'
@@ -87,8 +88,8 @@ import {ProjectSettings} from '../model/projectSettings'
 import {UpdateProjectSettingsRequest} from '../model/updateProjectSettingsRequest'
 
 import {CreateProjectRequest} from '../model/createProjectRequest'
-import {Project} from '../model/project'
 import {ProjectPage} from '../model/projectPage'
+import {ProjectProjectsEnterprisePlan} from '../model/projectProjectsEnterprisePlan'
 import {UpdateProjectRequest} from '../model/updateProjectRequest'
 
 import {ShapeCreateRequest} from '../model/shapeCreateRequest'
@@ -116,8 +117,8 @@ import {TeamSettings} from '../model/teamSettings'
 import {TeamSettingsChanges} from '../model/teamSettingsChanges'
 
 import {CreateTeamRequest} from '../model/createTeamRequest'
-import {Team} from '../model/team'
 import {TeamChanges} from '../model/teamChanges'
+import {TeamTeamsEnterprisePlan} from '../model/teamTeamsEnterprisePlan'
 import {TeamsPage} from '../model/teamsPage'
 
 import {TextCreateRequest} from '../model/textCreateRequest'
@@ -2297,7 +2298,7 @@ export class MiroApi {
 
       cursor?: string
     },
-  ): Promise<{response: Response; body: GenericItemCursorPaged}> {
+  ): Promise<{response: Response; body: GenericItemCursorPagedPlatformContainers}> {
     const localVarPath = '/v2/boards/{board_id_PlatformContainers}/items'.replace(
       '{' + 'board_id_PlatformContainers' + '}',
       encodeURIComponent(String(boardIdPlatformContainers)),
@@ -2343,7 +2344,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItemCursorPaged')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItemCursorPagedPlatformContainers')
 
     return {response, body}
   }
@@ -2973,7 +2974,7 @@ export class MiroApi {
     orgId: string,
     teamId: string,
     createProjectRequest: CreateProjectRequest,
-  ): Promise<{response: Response; body: Project}> {
+  ): Promise<{response: Response; body: ProjectProjectsEnterprisePlan}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/projects'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
       .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -2999,7 +3000,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'Project')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ProjectProjectsEnterprisePlan')
 
     return {response, body}
   }
@@ -3062,7 +3063,7 @@ export class MiroApi {
     orgId: string,
     teamId: string,
     projectId: string,
-  ): Promise<{response: Response; body: Project}> {
+  ): Promise<{response: Response; body: ProjectProjectsEnterprisePlan}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
       .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -3093,7 +3094,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'Project')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ProjectProjectsEnterprisePlan')
 
     return {response, body}
   }
@@ -3166,7 +3167,7 @@ export class MiroApi {
     teamId: string,
     projectId: string,
     updateProjectRequest: UpdateProjectRequest,
-  ): Promise<{response: Response; body: Project}> {
+  ): Promise<{response: Response; body: ProjectProjectsEnterprisePlan}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
       .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -3197,7 +3198,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'Project')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ProjectProjectsEnterprisePlan')
 
     return {response, body}
   }
@@ -4279,7 +4280,7 @@ export class MiroApi {
   async enterpriseCreateTeam(
     orgId: string,
     createTeamRequest: CreateTeamRequest,
-  ): Promise<{response: Response; body: Team}> {
+  ): Promise<{response: Response; body: TeamTeamsEnterprisePlan}> {
     const localVarPath = '/v2/orgs/{org_id}/teams'.replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
     let localVarQueryParameters = new URLSearchParams()
     // verify required parameter 'orgId' is not null or undefined
@@ -4299,7 +4300,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'Team')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamTeamsEnterprisePlan')
 
     return {response, body}
   }
@@ -4347,7 +4348,7 @@ export class MiroApi {
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
    */
-  async enterpriseGetTeam(orgId: string, teamId: string): Promise<{response: Response; body: Team}> {
+  async enterpriseGetTeam(orgId: string, teamId: string): Promise<{response: Response; body: TeamTeamsEnterprisePlan}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
       .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -4373,7 +4374,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'Team')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamTeamsEnterprisePlan')
 
     return {response, body}
   }
@@ -4443,7 +4444,7 @@ export class MiroApi {
     orgId: string,
     teamId: string,
     teamChanges: TeamChanges,
-  ): Promise<{response: Response; body: Team}> {
+  ): Promise<{response: Response; body: TeamTeamsEnterprisePlan}> {
     const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}'
       .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
       .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
@@ -4469,7 +4470,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'Team')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamTeamsEnterprisePlan')
 
     return {response, body}
   }

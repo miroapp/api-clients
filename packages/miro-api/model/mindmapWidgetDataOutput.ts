@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import {TextData} from './textData'
+import {TextDataPlatformExperimentalFeatures} from './textDataPlatformExperimentalFeatures'
 
 /**
  * @internal
@@ -20,7 +20,7 @@ export class MindmapWidgetDataOutput {
   /**
    * The actual text (content) that appears in the text item.
    */
-  'content': string
+  'content'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

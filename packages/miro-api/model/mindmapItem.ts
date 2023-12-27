@@ -13,7 +13,7 @@
 import {CreatedBy} from './createdBy'
 import {MindmapData} from './mindmapData'
 import {ModifiedBy} from './modifiedBy'
-import {ParentLinksEnvelope} from './parentLinksEnvelope'
+import {ParentLinksEnvelopePlatformExperimentalFeatures} from './parentLinksEnvelopePlatformExperimentalFeatures'
 import {WidgetLinks} from './widgetLinks'
 
 export class MindmapItem {
@@ -32,7 +32,7 @@ export class MindmapItem {
    */
   'modifiedAt'?: Date
   'modifiedBy'?: ModifiedBy
-  'parent'?: ParentLinksEnvelope
+  'parent'?: ParentLinksEnvelopePlatformExperimentalFeatures
   'links'?: WidgetLinks
   /**
    * Type of item that is returned.
@@ -77,7 +77,7 @@ export class MindmapItem {
     {
       name: 'parent',
       baseName: 'parent',
-      type: 'ParentLinksEnvelope',
+      type: 'ParentLinksEnvelopePlatformExperimentalFeatures',
     },
     {
       name: 'links',

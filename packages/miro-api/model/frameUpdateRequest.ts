@@ -13,12 +13,12 @@
 import {FrameChanges} from './frameChanges'
 import {FrameStyle} from './frameStyle'
 import {GeometryNoRotation} from './geometryNoRotation'
-import {PositionChange} from './positionChange'
+import {PositionChangePlatformContainers} from './positionChangePlatformContainers'
 
 export class FrameUpdateRequest {
   'data'?: FrameChanges
   'style'?: FrameStyle
-  'position'?: PositionChange
+  'position'?: PositionChangePlatformContainers
   'geometry'?: GeometryNoRotation
 
   /** @ignore */
@@ -39,7 +39,7 @@ export class FrameUpdateRequest {
     {
       name: 'position',
       baseName: 'position',
-      type: 'PositionChange',
+      type: 'PositionChangePlatformContainers',
     },
     {
       name: 'geometry',

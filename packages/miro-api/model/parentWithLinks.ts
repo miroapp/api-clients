@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import {SelfLink} from './selfLink'
+import {SelfLinkPlatformBulkCreateOperationExperimentalRelease} from './selfLinkPlatformBulkCreateOperationExperimentalRelease'
 
 /**
  * @internal
@@ -21,7 +21,7 @@ export class ParentWithLinks {
    * Unique identifier (ID) of a container item.
    */
   'id'?: string
-  'links'?: SelfLink
+  'links'?: SelfLinkPlatformBulkCreateOperationExperimentalRelease
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -36,7 +36,7 @@ export class ParentWithLinks {
     {
       name: 'links',
       baseName: 'links',
-      type: 'SelfLink',
+      type: 'SelfLinkPlatformBulkCreateOperationExperimentalRelease',
     },
   ]
 
