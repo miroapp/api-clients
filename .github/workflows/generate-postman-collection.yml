@@ -1,28 +1,28 @@
-name: Publish updated specs to postman
+# name: Publish updated specs to postman
 
-on:
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+# on:
+#   # Allows you to run this workflow manually from the Actions tab
+#   workflow_dispatch:
 
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+# jobs:
+#   publish:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v4
         
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: 'yarn'
+#       - uses: actions/setup-node@v3
+#         with:
+#           node-version: 20
+#           cache: 'yarn'
         
-      - run: yarn
-        working-directory: packages/postman
+#       - run: yarn
+#         working-directory: packages/postman
         
-      - run: yarn run update-spec
+#       - run: yarn run update-spec
 
-      - run: yarn run postman:publish
+#       - run: yarn run postman:publish
 
-      - id: publish_postman_collection
-        name: Send collection to postman using API
-        run: "POSTMAN_API_KEY='${{ secrets.POSTMAN_API_KEY }}' POSTMAN_COLLECTION_ID='${{ secrets.POSTMAN_COLLECTION_ID}}' yarn run upload-to-postman"
+#       - id: publish_postman_collection
+#         name: Send collection to postman using API
+#         run: "POSTMAN_API_KEY='${{ secrets.POSTMAN_API_KEY }}' POSTMAN_COLLECTION_ID='${{ secrets.POSTMAN_COLLECTION_ID}}' yarn run upload-to-postman"
         
