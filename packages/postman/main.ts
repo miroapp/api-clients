@@ -1,8 +1,7 @@
 import fs from 'fs'
 import { traverseOAS } from './utils/traverseOAS'
 import { traverseComponents } from './utils/traverseComponents'
-import { OpenAPIV3_1 } from './types/types';
-import { writeModifiedOASFile } from './utils/writeModifiedOASFile'
+import { OpenAPIV3_1 } from './types/types'
 import { convertOASToPostmanCollection } from './utils/convertOASToPostmanCollection'
 
 try {
@@ -12,7 +11,6 @@ try {
   traverseOAS(oas)
   traverseComponents(oas)
 
-  writeModifiedOASFile(oas, 'generated/spec-modified.json')
   convertOASToPostmanCollection(oas)
 } catch (error) {
   console.error('An error occurred:', error)

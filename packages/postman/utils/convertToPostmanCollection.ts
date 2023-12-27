@@ -1,10 +1,10 @@
 import Converter from 'openapi-to-postmanv2'
 import fs from 'fs'
-import { missingPostmanVariables, auth, event } from './sample.constants'
+import {missingPostmanVariables, auth, event} from './sample.constants'
 
-export const convertToPostmanCollection = ({ type = 'json', oas }) =>
+export const convertToPostmanCollection = ({type = 'json', oas}) =>
   Converter.convert(
-    { type, data: oas },
+    {type, data: oas},
     {
       requestParametersResolution: 'Example',
       folderStrategy: 'Tags',
@@ -26,7 +26,6 @@ export const convertToPostmanCollection = ({ type = 'json', oas }) =>
 
           // const modifiedPostmanJson = unselectOptionalQueryParams(postmanCollectionJson.item);
 
-          // TODO: send postman collection to api
           fs.writeFileSync('generated/postman-collection.json', JSON.stringify(postmanCollectionJson, null, 2))
           console.log('Postman collection generated at : generated/postman-collection.json ')
         } catch (e) {
