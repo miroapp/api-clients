@@ -1,7 +1,7 @@
-import {specWithoutExample, specWithOnlyComponents, specModified, liveCollection} from './spec'
-import {traverseOAS} from '../utils/traverseOAS'
-import {traverseComponents} from '../utils/traverseComponents'
-import convertToPostmanCollection from '../utils/convertToPostmanCollection'
+import { specWithoutExample, specWithOnlyComponents, specModified, liveCollection } from './spec'
+import { traverseOAS } from '../utils/traverseOAS'
+import { traverseComponents } from '../utils/traverseComponents'
+import { convertToPostmanCollection } from '../utils/convertToPostmanCollection'
 import fs from 'fs'
 
 describe('Add default values as example', () => {
@@ -27,7 +27,7 @@ describe('Add Default Values to components', () => {
   })
 
   it('postman collection is generated based on tags', () => {
-    convertToPostmanCollection({oas: specModified})
+    convertToPostmanCollection({ oas: specModified })
     fs.readFile('generated/postman-collection.json', 'utf8', function (err, data) {
       if (err) console.log("couldn't read file at generated/postman-collection.json")
       const postmanCollectionJson = JSON.parse(data)
@@ -37,14 +37,14 @@ describe('Add Default Values to components', () => {
 })
 
 describe('Test against live collection', () => {
-  let postmanCollectionJson = {event: [], variable: [], auth: {type: 'bearer'}}
+  let postmanCollectionJson = { event: [], variable: [], auth: { type: 'bearer' } }
   beforeEach(() => {
     fs.readFile('generated/postman-collection.json', 'utf8', function (err, data) {
       postmanCollectionJson = JSON.parse(data)
     })
   })
   it('should have event, variable and auth fields', () => {
-    convertToPostmanCollection({oas: specModified})
+    convertToPostmanCollection({ oas: specModified })
     fs.readFile('generated/postman-collection.json', 'utf8', function (err, data) {
       if (err) console.log("couldn't read file at generated/postman-collection.json")
       expect(postmanCollectionJson.event.length).toBe(liveCollection.event.length)
@@ -55,7 +55,7 @@ describe('Test against live collection', () => {
   })
 
   it('should have (at least) the same apis as the live one ', () => {
-    convertToPostmanCollection({oas: specModified})
+    convertToPostmanCollection({ oas: specModified })
     fs.readFile('generated/postman-collection.json', 'utf8', function (err, data) {
       if (err) console.log("couldn't read file at generated/postman-collection.json")
       const postmanCollectionJson = JSON.parse(data)

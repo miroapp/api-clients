@@ -1,10 +1,10 @@
 import Converter from 'openapi-to-postmanv2'
 import fs from 'fs'
-import {missingPostmanVariables, auth, event} from './sample.constants'
+import { missingPostmanVariables, auth, event } from './sample.constants'
 
-export default ({type = 'json', oas}) =>
+export const convertToPostmanCollection = ({ type = 'json', oas }) =>
   Converter.convert(
-    {type, data: oas},
+    { type, data: oas },
     {
       requestParametersResolution: 'Example',
       folderStrategy: 'Tags',
