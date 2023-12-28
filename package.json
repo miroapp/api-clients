@@ -11,12 +11,12 @@
   ],
   "scripts": {
     "update-spec": "scripts/update-spec.ts",
-    "postman:publish": "yarn workspace postman-collection-generator run generateCollection ",
+    "postman:publish": "yarn workspace miro-postman-collection run generateCollection ",
     "build": "yarn workspace generator generate && yarn workspace @mirohq/miro-api build",
     "dev": "yarn workspace client-test-app dev",
     "pretest": "yarn build",
     "test": "yarn workspaces run test",
-    "test:postman": "yarn workspace postman-collection-generator run test --watch",
+    "test:postman": "yarn workspace miro-postman-collection run test --watch",
     "coverage": "yarn workspace generator coverage && yarn workspace @mirohq/miro-api coverage",
     "format": "prettier -w ./packages",
     "prepare": "husky install"
