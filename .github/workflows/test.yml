@@ -45,3 +45,7 @@ jobs:
       - name: Test build
         run: yarn && yarn build
         working-directory: packages/miro-api
+
+      - name: Test build docs
+        run: yarn build:docs
+        working-directory: packages/miro-api
