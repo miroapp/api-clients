@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,57,29
+/miroapp/api-clients/pull/287/files,55,3
+/miroapp/api-clients/pull/287,54,3
+/miroapp/api-clients/pulls,44,2
+/miroapp/api-clients/actions,40,2
+/miroapp/api-clients/blob/main/packages/generator/spec.json,26,4
+/miroapp/api-clients/tree/main/apps,23,6
+/miroapp/api-clients/blob/main/packages/miro-api/highlevel/index.ts,18,1
+/miroapp/api-clients/tree/main/apps/client-test-app,14,4
+/miroapp/api-clients/blob/main/packages/generator/highlevelModelGenerator.ts,14,1
