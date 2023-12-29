@@ -1,8 +1,7 @@
-// Fixing import to fix "createProgram is not a function" as per this - https://github.com/microsoft/TypeScript/issues/54018
-import ts from 'typescript'
+import * as ts from 'typescript'
 import path from 'path'
 import {Model, ModelProps} from './modelDefinition'
-import {MiroApi} from './../miro-api/api/apis' // Changed import pattern to fix issue with "./../../packages/miro-api/api/apis has no exported member named MiroApi"
+import {MiroApi} from './../miro-api/api/apis'
 
 const filePath = path.resolve('../miro-api/api/')
 const program = ts.createProgram([filePath], {})
