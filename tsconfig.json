@@ -11,9 +11,5 @@
     "resolveJsonModule": true
   },
   "files": ["scripts/update-spec.ts"],
-  "exclude": ["dist", "api", "model", "__tests__", ".turbo", ".openapi-generator", "node_modules"],
-  "paths": {
-    "@postman/*": ["packages/postman"],
-
-  }
+  "exclude": ["dist", "api", "model", "__tests__", ".turbo", ".openapi-generator", "node_modules"]
 }
