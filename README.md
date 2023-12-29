@@ -14,13 +14,12 @@ Contribution to this project is open and welcome! Read our [CONTRIBUTING.md](./C
 
 - This repo also contains `postman` workspace that uses `spec.json` created with `update-spec.ts` to generate the postman collection. 
 
-To run this locally, go to the root directory (api-clients), and run : 
+If you have updated any yaml files, generate a new `spec.json` by running :
 
 `yarn update-spec`
 
-`yarn build`
+To generate the collection locally from `spec.json`, go to the root directory (api-clients), and run : 
 
 `yarn postman:publish`
-
 
 The generated collection is available at `generated/postman-collection.json` for reference.
