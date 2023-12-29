@@ -7,7 +7,8 @@ import { Spec, baseSpecification } from './base-spec'
 import { writeFile } from 'fs/promises';
 import { fixDescriptionLinks, removeMultipleTagsFromEndpoints, mergeWithoutConflict } from './utils'
 
-
+// NOTE: hard coding these files again to avoid inclusion of all yaml files.
+// Using glob includes "enterprise-beta-apis.yaml" and "enterprise-audit-logs.yaml" which have duplicated apis that throw error
 const apis = [
   './spec/public-api/platform.yaml',
   './spec/public-api/platform-tags.yaml',
