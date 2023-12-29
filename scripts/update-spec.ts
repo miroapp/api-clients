@@ -23,7 +23,7 @@ const apis = [
   './spec/enterprise/enterprise-projects.yaml',
 ];
 
-export const updateSpec = async (specFiles = ['./spec/**/*.yaml']): Promise<Spec> => {
+export const updateSpec = async (): Promise<Spec> => {
 
   const baseYml = await glob("./spec/base.yaml");
 
@@ -140,12 +140,9 @@ export const writeSpecToFile = async (spec: Spec) => {
 }
 
 try {
-  async function processOAS(files: string[]) {
-    if (files && !files.length) { console.log("No files found to process"); return; }
-    const mergedSpec = await updateSpec(files);
-    writeSpecToFile(mergedSpec);
-  }
-  processOAS(['./spec/**/*.yaml']);
+
+  const mergedSpec = await updateSpec();
+  writeSpecToFile(mergedSpec);
 } catch (e) {
   console.log('error while processing specs', e);
 }
