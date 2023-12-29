@@ -67,15 +67,11 @@ export const updateSpec = async (): Promise<Spec> => {
           delete acc.components.schemas[key]
           let newSchema = specSchemasDef[key]
           let newKey = key
-          try {
-            if (existingDefinition && isEqual(existingDefinition, newSchema)) {
-              newKey = `${key}${specTitle}`
-              specPathsDef = JSON.parse(
-                JSON.stringify(specPathsDef).replaceAll(`"#/components/schemas/${key}"`, `"#/components/schemas/${newKey}"`),
-              )
-            }
-          } catch (e) {
-            console.log(" error .... ", e);
+          if (existingDefinition && isEqual(existingDefinition, newSchema)) {
+            newKey = `${key}${specTitle}`
+            specPathsDef = JSON.parse(
+              JSON.stringify(specPathsDef).replaceAll(`"#/components/schemas/${key}"`, `"#/components/schemas/${newKey}"`),
+            )
           }
           acc.components.schemas[newKey] = newSchema
         }
