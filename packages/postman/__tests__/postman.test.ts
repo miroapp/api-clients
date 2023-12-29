@@ -64,9 +64,8 @@ describe('Test against live collection', () => {
         expect(postmanCollectionJsonNames.has(item.name)).toBe(true)
       })
       expect(postmanCollectionJson.event.length).toBe(2)
-      expect(postmanCollectionJson.variable.length).toBe(3)
+      expect(postmanCollectionJson.variable.length).toBe(4)
     })
   })
 })
 
-// TODO: org_id/ apis are there in experimental and enterprise board export , both /v2/orgs/{org_id}/boards/export/jobs: (dupes)
