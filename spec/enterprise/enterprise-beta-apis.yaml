@@ -1,7 +1,7 @@
--openapi: 3.0.1
--info:
--  title: Enterprise Beta APIs
--  version: v2.0
+openapi: 3.0.1
+info:
+  title: Enterprise Beta APIs
+  version: v2.0
 servers:
 - url: https://api.miro.com
 security:
