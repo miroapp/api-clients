@@ -1,10 +1,10 @@
 import Converter from 'openapi-to-postmanv2'
 import fs from 'fs'
-import {missingPostmanVariables, auth, event} from './sample.constants'
+import { missingPostmanVariables, auth, event } from './sample.constants'
 
-export const convertToPostmanCollection = ({type = 'json', oas}) =>
+export const convertToPostmanCollection = ({ type = 'json', oas }) =>
   Converter.convert(
-    {type, data: oas},
+    { type, data: oas },
     {
       requestParametersResolution: 'Example',
       folderStrategy: 'Tags',
@@ -35,24 +35,3 @@ export const convertToPostmanCollection = ({type = 'json', oas}) =>
     },
   )
 
-// NOTE: hack to disable (unselect) all optional query params in postman collection
-// so that requests with optional params work directly in postman
-// openapi-to-postmanv2 doesn't seem to provide an ootb way to do this
-// const unselectOptionalQueryParams = (items) => {
-//   for (const item of items) {
-//     if (Array.isArray(item)) {
-//       item.forEach((o) => {
-//         if (o.item) unselectOptionalQueryParams(o.item);
-
-//         if (o.url && o.url.query) {
-//           const allQueries = o.url.query.map((q) => !q.description.toLowerCase().startsWith("(Required)".toLowerCase()) ? { ...q, disabled: true } : q)
-//           o.url.query = allQueries;
-//         }
-
-// TODO: consider "parameters" also for unselcting optional query params
-//       })
-//     }
-//   }
-
-//   return items;
-// }
