@@ -10,22 +10,19 @@
  * Do not edit the class manually.
  */
 
-import {Picture} from './picture'
-
+/**
+ * @internal
+ * Contains information about the team with which the board is associated.
+ */
 export class Team {
   /**
-   * Team id
+   * Unique identifier (ID) of the team.
    */
   'id': string
   /**
-   * Team name
+   * Name of the team.
    */
   'name': string
-  'picture'?: Picture
-  /**
-   * Type of the object returned.
-   */
-  'type'?: string = 'team'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -40,16 +37,6 @@ export class Team {
     {
       name: 'name',
       baseName: 'name',
-      type: 'string',
-    },
-    {
-      name: 'picture',
-      baseName: 'picture',
-      type: 'Picture',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
       type: 'string',
     },
   ]

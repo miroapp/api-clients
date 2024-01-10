@@ -40,7 +40,7 @@ export class ShapeStyle {
    */
   'fillColor'?: string
   /**
-   * Opacity level of the fill color. Possible values: any number between `0` and `1`, where: `0.0`: the background color is completely transparent or invisible. `1.0`: the background color is completely opaque or solid.   Default: `1.0` if `fillColor` is provided, `0.0` if `fillColor` is not provided.
+   * Opacity level of the fill color. Possible values: any number between `0` and `1`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.
    */
   'fillOpacity'?: string
   /**

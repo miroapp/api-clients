@@ -173,6 +173,16 @@ components:
         isRoot:
           type: boolean
           description: Indicates whether this node is the root node of the mind map.
+        direction:
+          type: string
+          description: Indicates where this node is positioned relative to the root
+            node. `start` indicates that this node must be positioned at the start
+            of the root node, which is either the left or top of the root node. `end`
+            indicates that this node must be positioned at the emd of the root node,
+            which is either the right or bottom of the root node.
+          enum:
+          - start
+          - end
     WidgetLinks:
       type: object
       description: Contains applicable links for the item.

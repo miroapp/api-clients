@@ -16,7 +16,7 @@
  */
 export class Parent {
   /**
-   * Unique identifier (ID) of the parent for the item.
+   * Unique identifier (ID) of the parent frame for the item.
    */
   'id'?: string
 

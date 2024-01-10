@@ -19,9 +19,13 @@ import {MindmapNodeView} from './mindmapNodeView'
 export class MindmapData {
   'nodeView'?: MindmapNodeView
   /**
-   * Indicates whether this node is the root node of the mind map.
+   * Indicates whether this node is the root of the mind map.
    */
   'isRoot'?: boolean
+  /**
+   * Indicates where this node is positioned relative to the root node. `start` indicates that this node must be positioned at the start of the root node, which is either the left or top of the root node. `end` indicates that this node must be positioned at the emd of the root node, which is either the right or bottom of the root node.
+   */
+  'direction'?: string | (typeof MindmapData.DirectionEnum)[keyof typeof MindmapData.DirectionEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,10 +42,22 @@ export class MindmapData {
       baseName: 'isRoot',
       type: 'boolean',
     },
+    {
+      name: 'direction',
+      baseName: 'direction',
+      type: 'MindmapData.DirectionEnum',
+    },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
     return MindmapData.attributeTypeMap
   }
+}
+
+export namespace MindmapData {
+  export const DirectionEnum = {
+    Start: 'start',
+    End: 'end',
+  } as const
 }
