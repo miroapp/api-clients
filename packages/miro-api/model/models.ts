@@ -2,22 +2,32 @@ export * from './addProjectMemberRequest'
 export * from './appCardCreateRequest'
 export * from './appCardData'
 export * from './appCardDataChanges'
-export * from './appCardDataPlatformTags'
+export * from './appCardDataPlatform'
 export * from './appCardDataResponse'
 export * from './appCardItem'
 export * from './appCardStyle'
-export * from './appCardStylePlatformBulkCreateOperationExperimentalRelease'
+export * from './appCardStylePlatform'
 export * from './appCardUpdateRequest'
+export * from './attachTagToItem400Response'
+export * from './auditContext'
+export * from './auditCreatedBy'
+export * from './auditEvent'
+export * from './auditObject'
+export * from './auditOrganization'
+export * from './auditPage'
+export * from './auditTeam'
 export * from './basicError'
-export * from './basicErrorBoardExportJobEnterprisePlan'
-export * from './basicErrorOrganizationsEnterprisePlan'
+export * from './basicErrorEnterpriseUserSessionsExpirationEnterprisePlan'
+export * from './basicErrorTeamsEnterprisePlan'
 export * from './board'
 export * from './boardChanges'
+export * from './boardContentLogData'
 export * from './boardDataClassificationLabel'
 export * from './boardExportJobId'
 export * from './boardExportJobStatus'
 export * from './boardExportResult'
 export * from './boardExportTaskResult'
+export * from './boardItemContentLog'
 export * from './boardLinks'
 export * from './boardMember'
 export * from './boardMemberChanges'
@@ -32,6 +42,7 @@ export * from './boardSharingPolicyChange'
 export * from './boardSubscription'
 export * from './boardSubscriptionData'
 export * from './boardWithLinks'
+export * from './boardWithLinksAndLastOpened'
 export * from './boardWithLinksAndWithoutProject'
 export * from './boardsPagedResponse'
 export * from './bulkOperationError'
@@ -42,7 +53,7 @@ export * from './cardCreateRequest'
 export * from './cardData'
 export * from './cardItem'
 export * from './cardStyle'
-export * from './cardStylePlatformBulkCreateOperationExperimentalRelease'
+export * from './cardStylePlatform'
 export * from './cardUpdateRequest'
 export * from './connectorChangesData'
 export * from './connectorCreationData'
@@ -52,13 +63,15 @@ export * from './connectorsCursorPaged'
 export * from './copyBoardChanges'
 export * from './createBoardExportRequest'
 export * from './createBoardSubscriptionRequest'
+export * from './createFrameItem400Response'
 export * from './createProjectRequest'
 export * from './createTeamRequest'
 export * from './createdBy'
-export * from './createdByPlatformContainers'
+export * from './createdByPlatform'
+export * from './createdByPlatformBulkCreateOperationExperimentalRelease'
 export * from './createdByPlatformTags'
 export * from './customField'
-export * from './customFieldPlatformBulkCreateOperationExperimentalRelease'
+export * from './customFieldPlatform'
 export * from './customFieldPlatformTags'
 export * from './dataClassificationLabel'
 export * from './dataClassificationLabelId'
@@ -66,13 +79,13 @@ export * from './dataClassificationOrganizationSettings'
 export * from './dataClassificationTeamSettings'
 export * from './documentCreateRequest'
 export * from './documentData'
-export * from './documentDataPlatformTags'
+export * from './documentDataPlatform'
 export * from './documentDataResponse'
 export * from './documentItem'
 export * from './documentUpdateRequest'
 export * from './documentUrlData'
 export * from './documentUrlDataChanges'
-export * from './documentUrlDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './documentUrlDataPlatform'
 export * from './embedCreateRequest'
 export * from './embedData'
 export * from './embedDataResponse'
@@ -80,7 +93,7 @@ export * from './embedItem'
 export * from './embedUpdateRequest'
 export * from './embedUrlData'
 export * from './embedUrlDataChanges'
-export * from './embedUrlDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './embedUrlDataPlatform'
 export * from './enterpriseGetOrganizationMembers200Response'
 export * from './error400'
 export * from './error401'
@@ -93,7 +106,7 @@ export * from './fixedRatioNoRotationGeometry'
 export * from './frameChanges'
 export * from './frameCreateRequest'
 export * from './frameData'
-export * from './frameDataPlatformTags'
+export * from './frameDataPlatform'
 export * from './frameItem'
 export * from './frameStyle'
 export * from './frameUpdateRequest'
@@ -104,23 +117,23 @@ export * from './genericSubscription'
 export * from './genericSubscriptionsCursorPaged'
 export * from './geometry'
 export * from './geometryNoRotation'
+export * from './geometryPlatform'
 export * from './geometryPlatformBulkCreateOperationExperimentalRelease'
-export * from './geometryPlatformContainers'
 export * from './geometryPlatformExperimentalFeatures'
 export * from './geometryPlatformTags'
-export * from './getBoards400Response'
-export * from './getTagsFromItem400Response'
+export * from './getBoardItemContentLogsResponse'
+export * from './getBoardUserInfoLastOpenedBy'
 export * from './getTagsResponse'
 export * from './imageCreateRequest'
 export * from './imageData'
-export * from './imageDataPlatformTags'
+export * from './imageDataPlatform'
 export * from './imageDataResponse'
 export * from './imageItem'
 export * from './imageUpdateRequest'
 export * from './imageUrlData'
 export * from './imageUrlDataChanges'
-export * from './imageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease'
-export * from './imageUrlDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './imageUrlDataChangesPlatform'
+export * from './imageUrlDataPlatform'
 export * from './invitationError'
 export * from './invitationResult'
 export * from './item'
@@ -137,15 +150,21 @@ export * from './itemStyle'
 export * from './itemTypeChange'
 export * from './items'
 export * from './itemsPage'
+export * from './mindmapCreateRequest'
 export * from './mindmapCursorPaged'
 export * from './mindmapData'
+export * from './mindmapDataForCreate'
 export * from './mindmapItem'
-export * from './mindmapItemPlatformContainersExperimental'
+export * from './mindmapNode'
+export * from './mindmapNodeStyle'
+export * from './mindmapNodeTextData'
 export * from './mindmapNodeView'
+export * from './mindmapStyle'
 export * from './mindmapWidgetDataOutput'
 export * from './modelError'
 export * from './modifiedBy'
-export * from './modifiedByPlatformContainers'
+export * from './modifiedByPlatform'
+export * from './modifiedByPlatformBulkCreateOperationExperimentalRelease'
 export * from './modifiedByPlatformTags'
 export * from './organization'
 export * from './organizationInformation'
@@ -153,9 +172,8 @@ export * from './organizationMember'
 export * from './organizationMembersSearchByEmailsResponse'
 export * from './organizationMembersSearchResponse'
 export * from './pageLinks'
-export * from './pageLinksPlatformContainers'
+export * from './pageLinksPlatform'
 export * from './pageLinksPlatformExperimentalFeatures'
-export * from './pageLinksPlatformTags'
 export * from './parent'
 export * from './parentLinksEnvelope'
 export * from './parentWithLinks'
@@ -171,14 +189,13 @@ export * from './projectRoleToAdd'
 export * from './projectSettings'
 export * from './relativeOffset'
 export * from './selfLink'
-export * from './selfLinkPlatformContainers'
+export * from './selfLinkPlatform'
 export * from './selfLinkPlatformExperimentalFeatures'
-export * from './selfLinkPlatformTags'
 export * from './shapeCreateRequest'
 export * from './shapeData'
 export * from './shapeDataForCreate'
 export * from './shapeDataForUpdate'
-export * from './shapeDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './shapeDataPlatformTags'
 export * from './shapeItem'
 export * from './shapeStyle'
 export * from './shapeStyleForCreate'
@@ -187,11 +204,11 @@ export * from './shapeUpdateRequest'
 export * from './sharingPolicySettings'
 export * from './stickyNoteCreateRequest'
 export * from './stickyNoteData'
-export * from './stickyNoteDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './stickyNoteDataPlatform'
 export * from './stickyNoteDataPlatformTags'
 export * from './stickyNoteItem'
 export * from './stickyNoteStyle'
-export * from './stickyNoteStylePlatformBulkCreateOperationExperimentalRelease'
+export * from './stickyNoteStylePlatform'
 export * from './stickyNoteUpdateRequest'
 export * from './subscriptionData'
 export * from './tag'
@@ -222,6 +239,7 @@ export * from './teamSharingPolicySettingsChanges'
 export * from './teamsPage'
 export * from './textCreateRequest'
 export * from './textData'
+export * from './textDataPlatform'
 export * from './textDataPlatformTags'
 export * from './textItem'
 export * from './textStyle'
@@ -234,12 +252,14 @@ export * from './updateProjectMemberRequest'
 export * from './updateProjectRequest'
 export * from './updateProjectSettingsRequest'
 export * from './updateTeamSettingsRequest'
+export * from './user'
+export * from './userInfoLastOpenedBy'
 export * from './userInfoShort'
 export * from './userInformation'
 export * from './widgetDataOutput'
-export * from './widgetDataOutputPlatformTags'
+export * from './widgetDataOutputPlatform'
 export * from './widgetLinks'
-export * from './widgetLinksPlatformContainers'
+export * from './widgetLinksPlatform'
 export * from './widgetLinksPlatformExperimentalFeatures'
 export * from './widthOnlyAdjustableGeometry'
 
@@ -257,22 +277,32 @@ import {AddProjectMemberRequest} from './addProjectMemberRequest'
 import {AppCardCreateRequest} from './appCardCreateRequest'
 import {AppCardData} from './appCardData'
 import {AppCardDataChanges} from './appCardDataChanges'
-import {AppCardDataPlatformTags} from './appCardDataPlatformTags'
+import {AppCardDataPlatform} from './appCardDataPlatform'
 import {AppCardDataResponse} from './appCardDataResponse'
 import {AppCardItem} from './appCardItem'
 import {AppCardStyle} from './appCardStyle'
-import {AppCardStylePlatformBulkCreateOperationExperimentalRelease} from './appCardStylePlatformBulkCreateOperationExperimentalRelease'
+import {AppCardStylePlatform} from './appCardStylePlatform'
 import {AppCardUpdateRequest} from './appCardUpdateRequest'
+import {AttachTagToItem400Response} from './attachTagToItem400Response'
+import {AuditContext} from './auditContext'
+import {AuditCreatedBy} from './auditCreatedBy'
+import {AuditEvent} from './auditEvent'
+import {AuditObject} from './auditObject'
+import {AuditOrganization} from './auditOrganization'
+import {AuditPage} from './auditPage'
+import {AuditTeam} from './auditTeam'
 import {BasicError} from './basicError'
-import {BasicErrorBoardExportJobEnterprisePlan} from './basicErrorBoardExportJobEnterprisePlan'
-import {BasicErrorOrganizationsEnterprisePlan} from './basicErrorOrganizationsEnterprisePlan'
+import {BasicErrorEnterpriseUserSessionsExpirationEnterprisePlan} from './basicErrorEnterpriseUserSessionsExpirationEnterprisePlan'
+import {BasicErrorTeamsEnterprisePlan} from './basicErrorTeamsEnterprisePlan'
 import {Board} from './board'
 import {BoardChanges} from './boardChanges'
+import {BoardContentLogData} from './boardContentLogData'
 import {BoardDataClassificationLabel} from './boardDataClassificationLabel'
 import {BoardExportJobId} from './boardExportJobId'
 import {BoardExportJobStatus} from './boardExportJobStatus'
 import {BoardExportResult} from './boardExportResult'
 import {BoardExportTaskResult} from './boardExportTaskResult'
+import {BoardItemContentLog} from './boardItemContentLog'
 import {BoardLinks} from './boardLinks'
 import {BoardMember} from './boardMember'
 import {BoardMemberChanges} from './boardMemberChanges'
@@ -287,6 +317,7 @@ import {BoardSharingPolicyChange} from './boardSharingPolicyChange'
 import {BoardSubscription} from './boardSubscription'
 import {BoardSubscriptionData} from './boardSubscriptionData'
 import {BoardWithLinks} from './boardWithLinks'
+import {BoardWithLinksAndLastOpened} from './boardWithLinksAndLastOpened'
 import {BoardWithLinksAndWithoutProject} from './boardWithLinksAndWithoutProject'
 import {BoardsPagedResponse} from './boardsPagedResponse'
 import {BulkOperationError} from './bulkOperationError'
@@ -297,7 +328,7 @@ import {CardCreateRequest} from './cardCreateRequest'
 import {CardData} from './cardData'
 import {CardItem} from './cardItem'
 import {CardStyle} from './cardStyle'
-import {CardStylePlatformBulkCreateOperationExperimentalRelease} from './cardStylePlatformBulkCreateOperationExperimentalRelease'
+import {CardStylePlatform} from './cardStylePlatform'
 import {CardUpdateRequest} from './cardUpdateRequest'
 import {ConnectorChangesData} from './connectorChangesData'
 import {ConnectorCreationData} from './connectorCreationData'
@@ -307,13 +338,15 @@ import {ConnectorsCursorPaged} from './connectorsCursorPaged'
 import {CopyBoardChanges} from './copyBoardChanges'
 import {CreateBoardExportRequest} from './createBoardExportRequest'
 import {CreateBoardSubscriptionRequest} from './createBoardSubscriptionRequest'
+import {CreateFrameItem400Response} from './createFrameItem400Response'
 import {CreateProjectRequest} from './createProjectRequest'
 import {CreateTeamRequest} from './createTeamRequest'
 import {CreatedBy} from './createdBy'
-import {CreatedByPlatformContainers} from './createdByPlatformContainers'
+import {CreatedByPlatform} from './createdByPlatform'
+import {CreatedByPlatformBulkCreateOperationExperimentalRelease} from './createdByPlatformBulkCreateOperationExperimentalRelease'
 import {CreatedByPlatformTags} from './createdByPlatformTags'
 import {CustomField} from './customField'
-import {CustomFieldPlatformBulkCreateOperationExperimentalRelease} from './customFieldPlatformBulkCreateOperationExperimentalRelease'
+import {CustomFieldPlatform} from './customFieldPlatform'
 import {CustomFieldPlatformTags} from './customFieldPlatformTags'
 import {DataClassificationLabel} from './dataClassificationLabel'
 import {DataClassificationLabelId} from './dataClassificationLabelId'
@@ -321,13 +354,13 @@ import {DataClassificationOrganizationSettings} from './dataClassificationOrgani
 import {DataClassificationTeamSettings} from './dataClassificationTeamSettings'
 import {DocumentCreateRequest} from './documentCreateRequest'
 import {DocumentData} from './documentData'
-import {DocumentDataPlatformTags} from './documentDataPlatformTags'
+import {DocumentDataPlatform} from './documentDataPlatform'
 import {DocumentDataResponse} from './documentDataResponse'
 import {DocumentItem} from './documentItem'
 import {DocumentUpdateRequest} from './documentUpdateRequest'
 import {DocumentUrlData} from './documentUrlData'
 import {DocumentUrlDataChanges} from './documentUrlDataChanges'
-import {DocumentUrlDataPlatformBulkCreateOperationExperimentalRelease} from './documentUrlDataPlatformBulkCreateOperationExperimentalRelease'
+import {DocumentUrlDataPlatform} from './documentUrlDataPlatform'
 import {EmbedCreateRequest} from './embedCreateRequest'
 import {EmbedData} from './embedData'
 import {EmbedDataResponse} from './embedDataResponse'
@@ -335,7 +368,7 @@ import {EmbedItem} from './embedItem'
 import {EmbedUpdateRequest} from './embedUpdateRequest'
 import {EmbedUrlData} from './embedUrlData'
 import {EmbedUrlDataChanges} from './embedUrlDataChanges'
-import {EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease} from './embedUrlDataPlatformBulkCreateOperationExperimentalRelease'
+import {EmbedUrlDataPlatform} from './embedUrlDataPlatform'
 import {EnterpriseGetOrganizationMembers200Response} from './enterpriseGetOrganizationMembers200Response'
 import {Error400} from './error400'
 import {Error401} from './error401'
@@ -348,7 +381,7 @@ import {FixedRatioNoRotationGeometry} from './fixedRatioNoRotationGeometry'
 import {FrameChanges} from './frameChanges'
 import {FrameCreateRequest} from './frameCreateRequest'
 import {FrameData} from './frameData'
-import {FrameDataPlatformTags} from './frameDataPlatformTags'
+import {FrameDataPlatform} from './frameDataPlatform'
 import {FrameItem} from './frameItem'
 import {FrameStyle} from './frameStyle'
 import {FrameUpdateRequest} from './frameUpdateRequest'
@@ -359,23 +392,23 @@ import {GenericSubscription} from './genericSubscription'
 import {GenericSubscriptionsCursorPaged} from './genericSubscriptionsCursorPaged'
 import {Geometry} from './geometry'
 import {GeometryNoRotation} from './geometryNoRotation'
+import {GeometryPlatform} from './geometryPlatform'
 import {GeometryPlatformBulkCreateOperationExperimentalRelease} from './geometryPlatformBulkCreateOperationExperimentalRelease'
-import {GeometryPlatformContainers} from './geometryPlatformContainers'
 import {GeometryPlatformExperimentalFeatures} from './geometryPlatformExperimentalFeatures'
 import {GeometryPlatformTags} from './geometryPlatformTags'
-import {GetBoards400Response} from './getBoards400Response'
-import {GetTagsFromItem400Response} from './getTagsFromItem400Response'
+import {GetBoardItemContentLogsResponse} from './getBoardItemContentLogsResponse'
+import {GetBoardUserInfoLastOpenedBy} from './getBoardUserInfoLastOpenedBy'
 import {GetTagsResponse} from './getTagsResponse'
 import {ImageCreateRequest} from './imageCreateRequest'
 import {ImageData} from './imageData'
-import {ImageDataPlatformTags} from './imageDataPlatformTags'
+import {ImageDataPlatform} from './imageDataPlatform'
 import {ImageDataResponse} from './imageDataResponse'
 import {ImageItem} from './imageItem'
 import {ImageUpdateRequest} from './imageUpdateRequest'
 import {ImageUrlData} from './imageUrlData'
 import {ImageUrlDataChanges} from './imageUrlDataChanges'
-import {ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease} from './imageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease'
-import {ImageUrlDataPlatformBulkCreateOperationExperimentalRelease} from './imageUrlDataPlatformBulkCreateOperationExperimentalRelease'
+import {ImageUrlDataChangesPlatform} from './imageUrlDataChangesPlatform'
+import {ImageUrlDataPlatform} from './imageUrlDataPlatform'
 import {InvitationError} from './invitationError'
 import {InvitationResult} from './invitationResult'
 import {Item} from './item'
@@ -392,15 +425,21 @@ import {ItemStyle} from './itemStyle'
 import {ItemTypeChange} from './itemTypeChange'
 import {Items} from './items'
 import {ItemsPage} from './itemsPage'
+import {MindmapCreateRequest} from './mindmapCreateRequest'
 import {MindmapCursorPaged} from './mindmapCursorPaged'
 import {MindmapData} from './mindmapData'
+import {MindmapDataForCreate} from './mindmapDataForCreate'
 import {MindmapItem} from './mindmapItem'
-import {MindmapItemPlatformContainersExperimental} from './mindmapItemPlatformContainersExperimental'
+import {MindmapNode} from './mindmapNode'
+import {MindmapNodeStyle} from './mindmapNodeStyle'
+import {MindmapNodeTextData} from './mindmapNodeTextData'
 import {MindmapNodeView} from './mindmapNodeView'
+import {MindmapStyle} from './mindmapStyle'
 import {MindmapWidgetDataOutput} from './mindmapWidgetDataOutput'
 import {ModelError} from './modelError'
 import {ModifiedBy} from './modifiedBy'
-import {ModifiedByPlatformContainers} from './modifiedByPlatformContainers'
+import {ModifiedByPlatform} from './modifiedByPlatform'
+import {ModifiedByPlatformBulkCreateOperationExperimentalRelease} from './modifiedByPlatformBulkCreateOperationExperimentalRelease'
 import {ModifiedByPlatformTags} from './modifiedByPlatformTags'
 import {Organization} from './organization'
 import {OrganizationInformation} from './organizationInformation'
@@ -408,9 +447,8 @@ import {OrganizationMember} from './organizationMember'
 import {OrganizationMembersSearchByEmailsResponse} from './organizationMembersSearchByEmailsResponse'
 import {OrganizationMembersSearchResponse} from './organizationMembersSearchResponse'
 import {PageLinks} from './pageLinks'
-import {PageLinksPlatformContainers} from './pageLinksPlatformContainers'
+import {PageLinksPlatform} from './pageLinksPlatform'
 import {PageLinksPlatformExperimentalFeatures} from './pageLinksPlatformExperimentalFeatures'
-import {PageLinksPlatformTags} from './pageLinksPlatformTags'
 import {Parent} from './parent'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
 import {ParentWithLinks} from './parentWithLinks'
@@ -426,14 +464,13 @@ import {ProjectRoleToAdd} from './projectRoleToAdd'
 import {ProjectSettings} from './projectSettings'
 import {RelativeOffset} from './relativeOffset'
 import {SelfLink} from './selfLink'
-import {SelfLinkPlatformContainers} from './selfLinkPlatformContainers'
+import {SelfLinkPlatform} from './selfLinkPlatform'
 import {SelfLinkPlatformExperimentalFeatures} from './selfLinkPlatformExperimentalFeatures'
-import {SelfLinkPlatformTags} from './selfLinkPlatformTags'
 import {ShapeCreateRequest} from './shapeCreateRequest'
 import {ShapeData} from './shapeData'
 import {ShapeDataForCreate} from './shapeDataForCreate'
 import {ShapeDataForUpdate} from './shapeDataForUpdate'
-import {ShapeDataPlatformBulkCreateOperationExperimentalRelease} from './shapeDataPlatformBulkCreateOperationExperimentalRelease'
+import {ShapeDataPlatformTags} from './shapeDataPlatformTags'
 import {ShapeItem} from './shapeItem'
 import {ShapeStyle} from './shapeStyle'
 import {ShapeStyleForCreate} from './shapeStyleForCreate'
@@ -442,11 +479,11 @@ import {ShapeUpdateRequest} from './shapeUpdateRequest'
 import {SharingPolicySettings} from './sharingPolicySettings'
 import {StickyNoteCreateRequest} from './stickyNoteCreateRequest'
 import {StickyNoteData} from './stickyNoteData'
-import {StickyNoteDataPlatformBulkCreateOperationExperimentalRelease} from './stickyNoteDataPlatformBulkCreateOperationExperimentalRelease'
+import {StickyNoteDataPlatform} from './stickyNoteDataPlatform'
 import {StickyNoteDataPlatformTags} from './stickyNoteDataPlatformTags'
 import {StickyNoteItem} from './stickyNoteItem'
 import {StickyNoteStyle} from './stickyNoteStyle'
-import {StickyNoteStylePlatformBulkCreateOperationExperimentalRelease} from './stickyNoteStylePlatformBulkCreateOperationExperimentalRelease'
+import {StickyNoteStylePlatform} from './stickyNoteStylePlatform'
 import {StickyNoteUpdateRequest} from './stickyNoteUpdateRequest'
 import {SubscriptionData} from './subscriptionData'
 import {Tag} from './tag'
@@ -477,6 +514,7 @@ import {TeamSharingPolicySettingsChanges} from './teamSharingPolicySettingsChang
 import {TeamsPage} from './teamsPage'
 import {TextCreateRequest} from './textCreateRequest'
 import {TextData} from './textData'
+import {TextDataPlatform} from './textDataPlatform'
 import {TextDataPlatformTags} from './textDataPlatformTags'
 import {TextItem} from './textItem'
 import {TextStyle} from './textStyle'
@@ -489,12 +527,14 @@ import {UpdateProjectMemberRequest} from './updateProjectMemberRequest'
 import {UpdateProjectRequest} from './updateProjectRequest'
 import {UpdateProjectSettingsRequest} from './updateProjectSettingsRequest'
 import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
+import {User} from './user'
+import {UserInfoLastOpenedBy} from './userInfoLastOpenedBy'
 import {UserInfoShort} from './userInfoShort'
 import {UserInformation} from './userInformation'
 import {WidgetDataOutput} from './widgetDataOutput'
-import {WidgetDataOutputPlatformTags} from './widgetDataOutputPlatformTags'
+import {WidgetDataOutputPlatform} from './widgetDataOutputPlatform'
 import {WidgetLinks} from './widgetLinks'
-import {WidgetLinksPlatformContainers} from './widgetLinksPlatformContainers'
+import {WidgetLinksPlatform} from './widgetLinksPlatform'
 import {WidgetLinksPlatformExperimentalFeatures} from './widgetLinksPlatformExperimentalFeatures'
 import {WidthOnlyAdjustableGeometry} from './widthOnlyAdjustableGeometry'
 
@@ -504,8 +544,9 @@ let primitives = ['string', 'boolean', 'double', 'integer', 'long', 'float', 'nu
 let enumsMap: {[index: string]: any} = {
   'AppCardData.StatusEnum': AppCardData.StatusEnum,
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
-  'AppCardDataPlatformTags.StatusEnum': AppCardDataPlatformTags.StatusEnum,
+  'AppCardDataPlatform.StatusEnum': AppCardDataPlatform.StatusEnum,
   'AppCardDataResponse.StatusEnum': AppCardDataResponse.StatusEnum,
+  'AuditCreatedBy.TypeEnum': AuditCreatedBy.TypeEnum,
   'BoardMember.RoleEnum': BoardMember.RoleEnum,
   'BoardMemberChanges.RoleEnum': BoardMemberChanges.RoleEnum,
   'BoardMemberWithLinks.RoleEnum': BoardMemberWithLinks.RoleEnum,
@@ -533,21 +574,19 @@ let enumsMap: {[index: string]: any} = {
   'ConnectorWithLinks.ShapeEnum': ConnectorWithLinks.ShapeEnum,
   'CreateBoardSubscriptionRequest.StatusEnum': CreateBoardSubscriptionRequest.StatusEnum,
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
-  'CustomFieldPlatformBulkCreateOperationExperimentalRelease.IconShapeEnum':
-    CustomFieldPlatformBulkCreateOperationExperimentalRelease.IconShapeEnum,
+  'CustomFieldPlatform.IconShapeEnum': CustomFieldPlatform.IconShapeEnum,
   'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
   'EmbedData.ModeEnum': EmbedData.ModeEnum,
   'EmbedDataResponse.ModeEnum': EmbedDataResponse.ModeEnum,
   'EmbedUrlData.ModeEnum': EmbedUrlData.ModeEnum,
   'EmbedUrlDataChanges.ModeEnum': EmbedUrlDataChanges.ModeEnum,
-  'EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease.ModeEnum':
-    EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease.ModeEnum,
+  'EmbedUrlDataPlatform.ModeEnum': EmbedUrlDataPlatform.ModeEnum,
   'FrameChanges.FormatEnum': FrameChanges.FormatEnum,
   'FrameChanges.TypeEnum': FrameChanges.TypeEnum,
   'FrameData.FormatEnum': FrameData.FormatEnum,
   'FrameData.TypeEnum': FrameData.TypeEnum,
-  'FrameDataPlatformTags.FormatEnum': FrameDataPlatformTags.FormatEnum,
-  'FrameDataPlatformTags.TypeEnum': FrameDataPlatformTags.TypeEnum,
+  'FrameDataPlatform.FormatEnum': FrameDataPlatform.FormatEnum,
+  'FrameDataPlatform.TypeEnum': FrameDataPlatform.TypeEnum,
   'GenericSubscription.StatusEnum': GenericSubscription.StatusEnum,
   'ItemConnectionChangesData.SnapToEnum': ItemConnectionChangesData.SnapToEnum,
   'ItemConnectionCreationData.SnapToEnum': ItemConnectionCreationData.SnapToEnum,
@@ -563,6 +602,8 @@ let enumsMap: {[index: string]: any} = {
   'ItemStyle.TextAlignEnum': ItemStyle.TextAlignEnum,
   'ItemStyle.TextAlignVerticalEnum': ItemStyle.TextAlignVerticalEnum,
   ItemTypeChange: ItemTypeChange,
+  'MindmapData.DirectionEnum': MindmapData.DirectionEnum,
+  'MindmapStyle.ShapeEnum': MindmapStyle.ShapeEnum,
   'Organization.PlanEnum': Organization.PlanEnum,
   'OrganizationMember.LicenseEnum': OrganizationMember.LicenseEnum,
   'OrganizationMember.RoleEnum': OrganizationMember.RoleEnum,
@@ -571,8 +612,7 @@ let enumsMap: {[index: string]: any} = {
   ProjectRole: ProjectRole,
   ProjectRoleToAdd: ProjectRoleToAdd,
   'ShapeData.ShapeEnum': ShapeData.ShapeEnum,
-  'ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum':
-    ShapeDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum,
+  'ShapeDataPlatformTags.ShapeEnum': ShapeDataPlatformTags.ShapeEnum,
   'ShapeStyle.BorderStyleEnum': ShapeStyle.BorderStyleEnum,
   'ShapeStyle.FontFamilyEnum': ShapeStyle.FontFamilyEnum,
   'ShapeStyle.TextAlignEnum': ShapeStyle.TextAlignEnum,
@@ -586,18 +626,14 @@ let enumsMap: {[index: string]: any} = {
   'ShapeStyleForUpdate.TextAlignEnum': ShapeStyleForUpdate.TextAlignEnum,
   'ShapeStyleForUpdate.TextAlignVerticalEnum': ShapeStyleForUpdate.TextAlignVerticalEnum,
   'StickyNoteData.ShapeEnum': StickyNoteData.ShapeEnum,
-  'StickyNoteDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum':
-    StickyNoteDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum,
+  'StickyNoteDataPlatform.ShapeEnum': StickyNoteDataPlatform.ShapeEnum,
   'StickyNoteDataPlatformTags.ShapeEnum': StickyNoteDataPlatformTags.ShapeEnum,
   'StickyNoteStyle.FillColorEnum': StickyNoteStyle.FillColorEnum,
   'StickyNoteStyle.TextAlignEnum': StickyNoteStyle.TextAlignEnum,
   'StickyNoteStyle.TextAlignVerticalEnum': StickyNoteStyle.TextAlignVerticalEnum,
-  'StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.FillColorEnum':
-    StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.FillColorEnum,
-  'StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum':
-    StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum,
-  'StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignVerticalEnum':
-    StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignVerticalEnum,
+  'StickyNoteStylePlatform.FillColorEnum': StickyNoteStylePlatform.FillColorEnum,
+  'StickyNoteStylePlatform.TextAlignEnum': StickyNoteStylePlatform.TextAlignEnum,
+  'StickyNoteStylePlatform.TextAlignVerticalEnum': StickyNoteStylePlatform.TextAlignVerticalEnum,
   'Tag.FillColorEnum': Tag.FillColorEnum,
   'TagCreateRequest.FillColorEnum': TagCreateRequest.FillColorEnum,
   'TagUpdateRequest.FillColorEnum': TagUpdateRequest.FillColorEnum,
@@ -647,11 +683,16 @@ let enumsMap: {[index: string]: any} = {
   'TextStyle.FontFamilyEnum': TextStyle.FontFamilyEnum,
   'TextStyle.TextAlignEnum': TextStyle.TextAlignEnum,
   'UpdateBoardSubscriptionRequest.StatusEnum': UpdateBoardSubscriptionRequest.StatusEnum,
-  'WidgetDataOutputPlatformTags.ModeEnum': WidgetDataOutputPlatformTags.ModeEnum,
-  'WidgetDataOutputPlatformTags.StatusEnum': WidgetDataOutputPlatformTags.StatusEnum,
-  'WidgetDataOutputPlatformTags.ShapeEnum': WidgetDataOutputPlatformTags.ShapeEnum,
-  'WidgetDataOutputPlatformTags.FormatEnum': WidgetDataOutputPlatformTags.FormatEnum,
-  'WidgetDataOutputPlatformTags.TypeEnum': WidgetDataOutputPlatformTags.TypeEnum,
+  'WidgetDataOutput.ModeEnum': WidgetDataOutput.ModeEnum,
+  'WidgetDataOutput.StatusEnum': WidgetDataOutput.StatusEnum,
+  'WidgetDataOutput.ShapeEnum': WidgetDataOutput.ShapeEnum,
+  'WidgetDataOutput.FormatEnum': WidgetDataOutput.FormatEnum,
+  'WidgetDataOutput.TypeEnum': WidgetDataOutput.TypeEnum,
+  'WidgetDataOutputPlatform.ModeEnum': WidgetDataOutputPlatform.ModeEnum,
+  'WidgetDataOutputPlatform.StatusEnum': WidgetDataOutputPlatform.StatusEnum,
+  'WidgetDataOutputPlatform.ShapeEnum': WidgetDataOutputPlatform.ShapeEnum,
+  'WidgetDataOutputPlatform.FormatEnum': WidgetDataOutputPlatform.FormatEnum,
+  'WidgetDataOutputPlatform.TypeEnum': WidgetDataOutputPlatform.TypeEnum,
 }
 
 let typeMap: {[index: string]: any} = {
@@ -659,23 +700,32 @@ let typeMap: {[index: string]: any} = {
   AppCardCreateRequest: AppCardCreateRequest,
   AppCardData: AppCardData,
   AppCardDataChanges: AppCardDataChanges,
-  AppCardDataPlatformTags: AppCardDataPlatformTags,
+  AppCardDataPlatform: AppCardDataPlatform,
   AppCardDataResponse: AppCardDataResponse,
   AppCardItem: AppCardItem,
   AppCardStyle: AppCardStyle,
-  AppCardStylePlatformBulkCreateOperationExperimentalRelease:
-    AppCardStylePlatformBulkCreateOperationExperimentalRelease,
+  AppCardStylePlatform: AppCardStylePlatform,
   AppCardUpdateRequest: AppCardUpdateRequest,
+  AttachTagToItem400Response: AttachTagToItem400Response,
+  AuditContext: AuditContext,
+  AuditCreatedBy: AuditCreatedBy,
+  AuditEvent: AuditEvent,
+  AuditObject: AuditObject,
+  AuditOrganization: AuditOrganization,
+  AuditPage: AuditPage,
+  AuditTeam: AuditTeam,
   BasicError: BasicError,
-  BasicErrorBoardExportJobEnterprisePlan: BasicErrorBoardExportJobEnterprisePlan,
-  BasicErrorOrganizationsEnterprisePlan: BasicErrorOrganizationsEnterprisePlan,
+  BasicErrorEnterpriseUserSessionsExpirationEnterprisePlan: BasicErrorEnterpriseUserSessionsExpirationEnterprisePlan,
+  BasicErrorTeamsEnterprisePlan: BasicErrorTeamsEnterprisePlan,
   Board: Board,
   BoardChanges: BoardChanges,
+  BoardContentLogData: BoardContentLogData,
   BoardDataClassificationLabel: BoardDataClassificationLabel,
   BoardExportJobId: BoardExportJobId,
   BoardExportJobStatus: BoardExportJobStatus,
   BoardExportResult: BoardExportResult,
   BoardExportTaskResult: BoardExportTaskResult,
+  BoardItemContentLog: BoardItemContentLog,
   BoardLinks: BoardLinks,
   BoardMember: BoardMember,
   BoardMemberChanges: BoardMemberChanges,
@@ -690,6 +740,7 @@ let typeMap: {[index: string]: any} = {
   BoardSubscription: BoardSubscription,
   BoardSubscriptionData: BoardSubscriptionData,
   BoardWithLinks: BoardWithLinks,
+  BoardWithLinksAndLastOpened: BoardWithLinksAndLastOpened,
   BoardWithLinksAndWithoutProject: BoardWithLinksAndWithoutProject,
   BoardsPagedResponse: BoardsPagedResponse,
   BulkOperationError: BulkOperationError,
@@ -700,7 +751,7 @@ let typeMap: {[index: string]: any} = {
   CardData: CardData,
   CardItem: CardItem,
   CardStyle: CardStyle,
-  CardStylePlatformBulkCreateOperationExperimentalRelease: CardStylePlatformBulkCreateOperationExperimentalRelease,
+  CardStylePlatform: CardStylePlatform,
   CardUpdateRequest: CardUpdateRequest,
   ConnectorChangesData: ConnectorChangesData,
   ConnectorCreationData: ConnectorCreationData,
@@ -710,13 +761,15 @@ let typeMap: {[index: string]: any} = {
   CopyBoardChanges: CopyBoardChanges,
   CreateBoardExportRequest: CreateBoardExportRequest,
   CreateBoardSubscriptionRequest: CreateBoardSubscriptionRequest,
+  CreateFrameItem400Response: CreateFrameItem400Response,
   CreateProjectRequest: CreateProjectRequest,
   CreateTeamRequest: CreateTeamRequest,
   CreatedBy: CreatedBy,
-  CreatedByPlatformContainers: CreatedByPlatformContainers,
+  CreatedByPlatform: CreatedByPlatform,
+  CreatedByPlatformBulkCreateOperationExperimentalRelease: CreatedByPlatformBulkCreateOperationExperimentalRelease,
   CreatedByPlatformTags: CreatedByPlatformTags,
   CustomField: CustomField,
-  CustomFieldPlatformBulkCreateOperationExperimentalRelease: CustomFieldPlatformBulkCreateOperationExperimentalRelease,
+  CustomFieldPlatform: CustomFieldPlatform,
   CustomFieldPlatformTags: CustomFieldPlatformTags,
   DataClassificationLabel: DataClassificationLabel,
   DataClassificationLabelId: DataClassificationLabelId,
@@ -724,14 +777,13 @@ let typeMap: {[index: string]: any} = {
   DataClassificationTeamSettings: DataClassificationTeamSettings,
   DocumentCreateRequest: DocumentCreateRequest,
   DocumentData: DocumentData,
-  DocumentDataPlatformTags: DocumentDataPlatformTags,
+  DocumentDataPlatform: DocumentDataPlatform,
   DocumentDataResponse: DocumentDataResponse,
   DocumentItem: DocumentItem,
   DocumentUpdateRequest: DocumentUpdateRequest,
   DocumentUrlData: DocumentUrlData,
   DocumentUrlDataChanges: DocumentUrlDataChanges,
-  DocumentUrlDataPlatformBulkCreateOperationExperimentalRelease:
-    DocumentUrlDataPlatformBulkCreateOperationExperimentalRelease,
+  DocumentUrlDataPlatform: DocumentUrlDataPlatform,
   EmbedCreateRequest: EmbedCreateRequest,
   EmbedData: EmbedData,
   EmbedDataResponse: EmbedDataResponse,
@@ -739,8 +791,7 @@ let typeMap: {[index: string]: any} = {
   EmbedUpdateRequest: EmbedUpdateRequest,
   EmbedUrlData: EmbedUrlData,
   EmbedUrlDataChanges: EmbedUrlDataChanges,
-  EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease:
-    EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease,
+  EmbedUrlDataPlatform: EmbedUrlDataPlatform,
   EnterpriseGetOrganizationMembers200Response: EnterpriseGetOrganizationMembers200Response,
   Error400: Error400,
   Error401: Error401,
@@ -753,7 +804,7 @@ let typeMap: {[index: string]: any} = {
   FrameChanges: FrameChanges,
   FrameCreateRequest: FrameCreateRequest,
   FrameData: FrameData,
-  FrameDataPlatformTags: FrameDataPlatformTags,
+  FrameDataPlatform: FrameDataPlatform,
   FrameItem: FrameItem,
   FrameStyle: FrameStyle,
   FrameUpdateRequest: FrameUpdateRequest,
@@ -764,25 +815,23 @@ let typeMap: {[index: string]: any} = {
   GenericSubscriptionsCursorPaged: GenericSubscriptionsCursorPaged,
   Geometry: Geometry,
   GeometryNoRotation: GeometryNoRotation,
+  GeometryPlatform: GeometryPlatform,
   GeometryPlatformBulkCreateOperationExperimentalRelease: GeometryPlatformBulkCreateOperationExperimentalRelease,
-  GeometryPlatformContainers: GeometryPlatformContainers,
   GeometryPlatformExperimentalFeatures: GeometryPlatformExperimentalFeatures,
   GeometryPlatformTags: GeometryPlatformTags,
-  GetBoards400Response: GetBoards400Response,
-  GetTagsFromItem400Response: GetTagsFromItem400Response,
+  GetBoardItemContentLogsResponse: GetBoardItemContentLogsResponse,
+  GetBoardUserInfoLastOpenedBy: GetBoardUserInfoLastOpenedBy,
   GetTagsResponse: GetTagsResponse,
   ImageCreateRequest: ImageCreateRequest,
   ImageData: ImageData,
-  ImageDataPlatformTags: ImageDataPlatformTags,
+  ImageDataPlatform: ImageDataPlatform,
   ImageDataResponse: ImageDataResponse,
   ImageItem: ImageItem,
   ImageUpdateRequest: ImageUpdateRequest,
   ImageUrlData: ImageUrlData,
   ImageUrlDataChanges: ImageUrlDataChanges,
-  ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease:
-    ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease,
-  ImageUrlDataPlatformBulkCreateOperationExperimentalRelease:
-    ImageUrlDataPlatformBulkCreateOperationExperimentalRelease,
+  ImageUrlDataChangesPlatform: ImageUrlDataChangesPlatform,
+  ImageUrlDataPlatform: ImageUrlDataPlatform,
   InvitationError: InvitationError,
   InvitationResult: InvitationResult,
   Item: Item,
@@ -798,15 +847,21 @@ let typeMap: {[index: string]: any} = {
   ItemStyle: ItemStyle,
   Items: Items,
   ItemsPage: ItemsPage,
+  MindmapCreateRequest: MindmapCreateRequest,
   MindmapCursorPaged: MindmapCursorPaged,
   MindmapData: MindmapData,
+  MindmapDataForCreate: MindmapDataForCreate,
   MindmapItem: MindmapItem,
-  MindmapItemPlatformContainersExperimental: MindmapItemPlatformContainersExperimental,
+  MindmapNode: MindmapNode,
+  MindmapNodeStyle: MindmapNodeStyle,
+  MindmapNodeTextData: MindmapNodeTextData,
   MindmapNodeView: MindmapNodeView,
+  MindmapStyle: MindmapStyle,
   MindmapWidgetDataOutput: MindmapWidgetDataOutput,
   ModelError: ModelError,
   ModifiedBy: ModifiedBy,
-  ModifiedByPlatformContainers: ModifiedByPlatformContainers,
+  ModifiedByPlatform: ModifiedByPlatform,
+  ModifiedByPlatformBulkCreateOperationExperimentalRelease: ModifiedByPlatformBulkCreateOperationExperimentalRelease,
   ModifiedByPlatformTags: ModifiedByPlatformTags,
   Organization: Organization,
   OrganizationInformation: OrganizationInformation,
@@ -814,9 +869,8 @@ let typeMap: {[index: string]: any} = {
   OrganizationMembersSearchByEmailsResponse: OrganizationMembersSearchByEmailsResponse,
   OrganizationMembersSearchResponse: OrganizationMembersSearchResponse,
   PageLinks: PageLinks,
-  PageLinksPlatformContainers: PageLinksPlatformContainers,
+  PageLinksPlatform: PageLinksPlatform,
   PageLinksPlatformExperimentalFeatures: PageLinksPlatformExperimentalFeatures,
-  PageLinksPlatformTags: PageLinksPlatformTags,
   Parent: Parent,
   ParentLinksEnvelope: ParentLinksEnvelope,
   ParentWithLinks: ParentWithLinks,
@@ -830,14 +884,13 @@ let typeMap: {[index: string]: any} = {
   ProjectSettings: ProjectSettings,
   RelativeOffset: RelativeOffset,
   SelfLink: SelfLink,
-  SelfLinkPlatformContainers: SelfLinkPlatformContainers,
+  SelfLinkPlatform: SelfLinkPlatform,
   SelfLinkPlatformExperimentalFeatures: SelfLinkPlatformExperimentalFeatures,
-  SelfLinkPlatformTags: SelfLinkPlatformTags,
   ShapeCreateRequest: ShapeCreateRequest,
   ShapeData: ShapeData,
   ShapeDataForCreate: ShapeDataForCreate,
   ShapeDataForUpdate: ShapeDataForUpdate,
-  ShapeDataPlatformBulkCreateOperationExperimentalRelease: ShapeDataPlatformBulkCreateOperationExperimentalRelease,
+  ShapeDataPlatformTags: ShapeDataPlatformTags,
   ShapeItem: ShapeItem,
   ShapeStyle: ShapeStyle,
   ShapeStyleForCreate: ShapeStyleForCreate,
@@ -846,13 +899,11 @@ let typeMap: {[index: string]: any} = {
   SharingPolicySettings: SharingPolicySettings,
   StickyNoteCreateRequest: StickyNoteCreateRequest,
   StickyNoteData: StickyNoteData,
-  StickyNoteDataPlatformBulkCreateOperationExperimentalRelease:
-    StickyNoteDataPlatformBulkCreateOperationExperimentalRelease,
+  StickyNoteDataPlatform: StickyNoteDataPlatform,
   StickyNoteDataPlatformTags: StickyNoteDataPlatformTags,
   StickyNoteItem: StickyNoteItem,
   StickyNoteStyle: StickyNoteStyle,
-  StickyNoteStylePlatformBulkCreateOperationExperimentalRelease:
-    StickyNoteStylePlatformBulkCreateOperationExperimentalRelease,
+  StickyNoteStylePlatform: StickyNoteStylePlatform,
   StickyNoteUpdateRequest: StickyNoteUpdateRequest,
   SubscriptionData: SubscriptionData,
   Tag: Tag,
@@ -882,6 +933,7 @@ let typeMap: {[index: string]: any} = {
   TeamsPage: TeamsPage,
   TextCreateRequest: TextCreateRequest,
   TextData: TextData,
+  TextDataPlatform: TextDataPlatform,
   TextDataPlatformTags: TextDataPlatformTags,
   TextItem: TextItem,
   TextStyle: TextStyle,
@@ -894,12 +946,14 @@ let typeMap: {[index: string]: any} = {
   UpdateProjectRequest: UpdateProjectRequest,
   UpdateProjectSettingsRequest: UpdateProjectSettingsRequest,
   UpdateTeamSettingsRequest: UpdateTeamSettingsRequest,
+  User: User,
+  UserInfoLastOpenedBy: UserInfoLastOpenedBy,
   UserInfoShort: UserInfoShort,
   UserInformation: UserInformation,
   WidgetDataOutput: WidgetDataOutput,
-  WidgetDataOutputPlatformTags: WidgetDataOutputPlatformTags,
+  WidgetDataOutputPlatform: WidgetDataOutputPlatform,
   WidgetLinks: WidgetLinks,
-  WidgetLinksPlatformContainers: WidgetLinksPlatformContainers,
+  WidgetLinksPlatform: WidgetLinksPlatform,
   WidgetLinksPlatformExperimentalFeatures: WidgetLinksPlatformExperimentalFeatures,
   WidthOnlyAdjustableGeometry: WidthOnlyAdjustableGeometry,
 }

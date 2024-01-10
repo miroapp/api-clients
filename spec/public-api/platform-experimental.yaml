@@ -522,6 +522,144 @@ paths:
       summary: Delete webhook subscription
       tags:
       - Webhooks (experimental)
+  /v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}:
+    get:
+      x-settings: null
+      description: Retrieves information for a specific mind map node on a board.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a><br/>
+      operationId: get-mindmap-node-experimental
+      parameters:
+      - schema:
+          type: string
+        name: board_id
+        in: path
+        required: true
+        description: Unique identifier (ID) of the board from which you want to retrieve
+          a mind map node.
+      - schema:
+          type: string
+        name: item_id
+        in: path
+        required: true
+        description: Unique identifier (ID) of the mind map node that you want to
+          retrieve.
+      responses:
+        '200':
+          description: Mind map node retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MindmapItem'
+      summary: Get specific mind map node
+      tags:
+      - Mind map nodes (experimental)
+    delete:
+      x-settings: null
+      description: Deletes a mind map node item and its child nodes from the board.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 3</a><br/>
+      operationId: delete-mindmap-node-experimental
+      parameters:
+      - description: Unique identifier (ID) of the board from which you want to delete
+          the mind map node.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier (ID) of the mind map node that you want to
+          delete.
+        in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Mind map node deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Delete mind map node
+      tags:
+      - Mind map nodes (experimental)
   /v2-experimental/boards/{board_id}/mindmap_nodes:
     parameters:
     - schema:
@@ -531,6 +669,946 @@ paths:
       required: true
       description: Unique identifier (ID) of the board from which you want to retrieve
         mind map nodes.
+    get:
+      x-settings: null
+      summary: Get mind map nodes
+      tags:
+      - Mind map nodes (experimental)
+      responses:
+        '200':
+          description: Mind map nodes retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MindmapCursorPaged'
+      operationId: get-mindmap-nodes-experimental
+      description: 'Retrieves a list of mind map nodes for a specific board.
+
+
+        This method returns results using a cursor-based approach. A cursor-paginated
+        method returns a portion of the total set of results based on the limit specified
+        and a cursor that points to the next portion of the results. To retrieve the
+        next portion of the collection, on your next call to the same method, set
+        the `cursor` parameter equal to the `cursor` value you received in the response
+        of the previous request. For example, if you set the `limit` query parameter
+        to `10` and the board contains 20 objects, the first call will return information
+        about the first 10 objects in the response along with a cursor parameter and
+        value. In this example, let''s say the cursor parameter value returned in
+        the response is `foo`. If you want to retrieve the next set of objects, on
+        your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a><br/>'
+      parameters:
+      - schema:
+          type: string
+        in: query
+        name: limit
+        description: Maximum number of results returned
+      - schema:
+          type: string
+        in: query
+        name: cursor
+        description: Points to the next portion of the results set
+    post:
+      x-settings: null
+      description: 'Adds a mind map node to a board. A root node is the starting point
+        of a mind map. A node that is created under a root node is a child node. For
+        information on mind maps, use cases, mind map structure, and more, see the
+        <a href="https://developers.miro.com/docs/mind-maps" target="blank">Mind Map
+        Overview</a> page. <br/><h3>Required scope</h3> <a target="blank" href="/reference/scopes">boards:write</a>
+        <br/><h3>Rate limiting</h3> <a target="blank" href="/reference/ratelimiting">Level
+        2</a><br/><br/> <b>Known limitations on node placement: </b> Currently, the
+        create API supports explicit positions for nodes. This means that users can
+        only place nodes based on the x, y coordinates provided in the position parameters.
+        If the position is not provided in the request, nodes default to coordinates
+        x=0, y=0, effectively placing them at the center of the board. <br /><br /><b>Upcoming
+        changes:</b> We understand the importance of flexibility in node placement.
+        We are actively working on implementing changes to support positioning nodes
+        relative to their parent node as well. This enhancement offers a more dynamic
+        and intuitive mind mapping experience. <br /><br />Additionally, we are actively
+        working on providing the update API, further enhancing the functionality of
+        mind map APIs.'
+      operationId: create-mindmap-nodes-experimental
+      parameters:
+      - description: Unique identifier (ID) of the board where you want to create
+          the item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MindmapCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MindmapItem'
+          description: Mind map node created
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Create mind map node
+      tags:
+      - Mind map nodes (experimental)
+  /v2-experimental/boards/{board_id}/items:
+    get:
+      x-settings: null
+      description: 'Retrieves a list of items for a specific board. You can retrieve
+        all items on the board, a list of child items inside a parent item, or a list
+        of specific types of items by specifying URL query parameter values.
+
+
+        This method returns results using a cursor-based approach. A cursor-paginated
+        method returns a portion of the total set of results based on the limit specified
+        and a cursor that points to the next portion of the results. To retrieve the
+        next portion of the collection, on your next call to the same method, set
+        the `cursor` parameter equal to the `cursor` value you received in the response
+        of the previous request. For example, if you set the `limit` query parameter
+        to `10` and the board contains 20 objects, the first call will return information
+        about the first 10 objects in the response along with a cursor parameter and
+        value. In this example, let''s say the cursor parameter value returned in
+        the response is `foo`. If you want to retrieve the next set of objects, on
+        your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a><br/>'
+      operationId: get-items-experimental
+      parameters:
+      - in: query
+        name: limit
+        schema:
+          type: string
+          default: '10'
+          description: The maximum number of results to return per call. If the number
+            of items in the response is greater than the limit specified, the response
+            returns the cursor parameter with a value.
+          maximum: 50
+          minimum: 10
+      - in: query
+        name: type
+        schema:
+          type: string
+          enum:
+          - shape
+      - in: query
+        name: cursor
+        schema:
+          type: string
+          description: A cursor-paginated method returns a portion of the total set
+            of results based on the limit specified and a `cursor` that points to
+            the next portion of the results. To retrieve the next portion of the collection,
+            set the `cursor` parameter equal to the `cursor` value you received in
+            the response of the previous request.
+      - description: Unique identifier (ID) of the board for which you want to retrieve
+          the list of available items.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericItemCursorPaged'
+          description: Items retrieved
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Get items on board
+      tags:
+      - Flowchart shapes (experimental)
+  /v2-experimental/boards/{board_id}/items/{item_id}:
+    get:
+      x-settings: null
+      description: Retrieves information for a specific item on a board.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a><br/>
+      operationId: get-specific-item-experimental
+      parameters:
+      - description: Unique identifier (ID) of the board from which you want to retrieve
+          a specific item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier (ID) of the item that you want to retrieve.
+        in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericItem'
+          description: Item retrieved
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Get specific item on board
+      tags:
+      - Flowchart shapes (experimental)
+      - Mind map nodes (experimental)
+    delete:
+      x-settings: null
+      description: Deletes an item from a board.<br/><h3>Required scope</h3> <a target="blank"
+        href="/reference/scopes">boards:write</a> <br/><h3>Rate limiting</h3> <a target="blank"
+        href="/reference/ratelimiting">Level 3</a><br/>
+      operationId: delete-item-experimental
+      parameters:
+      - description: Unique identifier (ID) of the board from which you want to delete
+          the item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier (ID) of the item that you want to delete.
+        in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Item deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Delete item
+      tags:
+      - items
+  /v2-experimental/boards/{board_id}/shapes:
+    post:
+      x-settings: null
+      description: Adds a flowchart shape item to a board.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">boards:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a><br/>
+      operationId: create-shape-item-flowchart
+      parameters:
+      - description: Unique identifier (ID) of the board where you want to create
+          the item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShapeCreateRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShapeItem'
+          description: Shape item created
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Create shape item
+      tags:
+      - Flowchart shapes (experimental)
+  /v2-experimental/boards/{board_id}/shapes/{item_id}:
+    get:
+      x-settings: null
+      description: Retrieves information for a specific shape item on a board.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:read</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 1</a><br/>
+      operationId: get-shape-item-flowchart
+      parameters:
+      - description: Unique identifier (ID) of the board from which you want to retrieve
+          a specific item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier (ID) of the item that you want to retrieve.
+        in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShapeItem'
+          description: Shape item retrieved
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Get shape item
+      tags:
+      - Flowchart shapes (experimental)
+    patch:
+      x-settings: null
+      description: Updates a flowchart shape item on a board based on the data and
+        style properties provided in the request body.<br/><h3>Required scope</h3>
+        <a target="blank" href="/reference/scopes">boards:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 2</a><br/>
+      operationId: update-shape-item-flowchart
+      parameters:
+      - description: Unique identifier (ID) of the board where you want to update
+          the item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier (ID) of the item that you want to update.
+        in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShapeUpdateRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShapeItem'
+          description: Shape item updated
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Update shape item
+      tags:
+      - Flowchart shapes (experimental)
+    delete:
+      x-settings: null
+      description: Deletes a flowchart shape item from the board.<br/><h3>Required
+        scope</h3> <a target="blank" href="/reference/scopes">boards:write</a> <br/><h3>Rate
+        limiting</h3> <a target="blank" href="/reference/ratelimiting">Level 3</a><br/>
+      operationId: delete-shape-item-flowchart
+      parameters:
+      - description: Unique identifier (ID) of the board from which you want to delete
+          the item.
+        in: path
+        name: board_id
+        required: true
+        schema:
+          type: string
+      - description: Unique identifier (ID) of the item that you want to delete.
+        in: path
+        name: item_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Shape item deleted
+        '400':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Malformed request
+        '404':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Not found
+        '429':
+          content:
+            application/json:
+              schema:
+                type: object
+                description: Test error obj
+                properties:
+                  code:
+                    type: string
+                    description: Code of the error
+                    example: error
+                  message:
+                    type: string
+                    description: Description of the error
+                    example: Error message
+                  status:
+                    type: integer
+                    format: int32
+                    description: Status code of the error
+                    example: 400
+                  type:
+                    type: string
+                    description: Type of the error
+                    example: error
+          description: Too many requests
+      summary: Delete shape item
+      tags:
+      - Flowchart shapes (experimental)
 components:
   schemas:
     BoardSubscription:
@@ -768,6 +1846,48 @@ components:
           enum:
           - enabled
           - disabled
+    MindmapCreateRequest:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MindmapDataForCreate'
+        position:
+          $ref: '#/components/schemas/PositionChange'
+        geometry:
+          $ref: '#/components/schemas/Geometry'
+        parent:
+          $ref: '#/components/schemas/Parent'
+      required:
+      - data
+    MindmapDataForCreate:
+      type: object
+      description: Contains mind map node data, such as the title, content, or description.
+      properties:
+        nodeView:
+          $ref: '#/components/schemas/MindmapNode'
+      required:
+      - nodeView
+    MindmapNode:
+      type: object
+      description: Contains information like data about the mind map node.
+      properties:
+        data:
+          $ref: '#/components/schemas/MindmapNodeTextData'
+    MindmapNodeTextData:
+      type: object
+      description: Contains the information about the mind map text.
+      properties:
+        type:
+          type: string
+          description: Type of item used as mind map node. Currently, `type` can only
+            be equal to `text`.
+          example: text
+        content:
+          type: string
+          description: The actual text (content) that appears in the mind map node.
+          example: Sample text
+      required:
+      - type
     MindmapData:
       type: object
       description: Contains mind map node data, such as `nodeView` or `isRoot`.
@@ -777,6 +1897,16 @@ components:
         isRoot:
           type: boolean
           description: Indicates whether this node is the root of the mind map.
+        direction:
+          type: string
+          description: Indicates where this node is positioned relative to the root
+            node. `start` indicates that this node must be positioned at the start
+            of the root node, which is either the left or top of the root node. `end`
+            indicates that this node must be positioned at the emd of the root node,
+            which is either the right or bottom of the root node.
+          enum:
+          - start
+          - end
     MindmapNodeView:
       type: object
       description: Contains the information about the mind map node.
@@ -785,8 +1915,11 @@ components:
           type: string
           description: Type of item used as mind map node. Currently, `type` can only
             be equal to `text`.
+          example: text
         data:
           $ref: '#/components/schemas/MindmapWidgetDataOutput'
+        style:
+          $ref: '#/components/schemas/MindmapNodeStyle'
     MindmapItem:
       type: object
       properties:
@@ -820,6 +1953,8 @@ components:
         type:
           type: string
           description: Type of item that is returned.
+        style:
+          $ref: '#/components/schemas/MindmapStyle'
       required:
       - id
       - type
@@ -1029,6 +2164,7 @@ components:
         content:
           type: string
           description: The actual text (content) that appears in the text item.
+          example: Sample text
     Parent:
       type: object
       description: Contains information about the parent this item must be attached
@@ -1596,6 +2732,59 @@ components:
           format: double
           description: Width of the item, in pixels.
           example: 320
+    MindmapNodeStyle:
+      type: object
+      description: Contains information about the node style, such as the node color
+        or fillOpacity.
+      properties:
+        color:
+          type: string
+          description: Hex value representing the color for the text within the node.
+          example: '#1a1a1a'
+        fillOpacity:
+          type: string
+          description: 'It sets the opacity level of the background fill color.
+
+
+            Allowed values: any number between 0.0 and 1.0 included.
+
+
+            If the value is 0.0, the background fill color is completely transparent
+            or invisible.
+
+            If the value is 1.0, the background fill color is completely opaque or
+            solid.
+
+            Default: 0 (transparent)'
+        fontSize:
+          type: string
+          description: 'Defines the font size, in dp, for the text on the node.
+
+            Default: `14`.'
+          maximum: 288
+          minimum: 10
+    MindmapStyle:
+      type: object
+      description: Contains information about the node style, such as the widget's
+        border color or shape type.
+      properties:
+        nodeColor:
+          type: string
+          description: Hex value representing the color of the widget's border.
+          example: '#1a1a1a'
+        shape:
+          type: string
+          description: Shape type of the widget.
+          enum:
+          - pill
+          - rectangle
+          - rounded_rectangle
+          - none
+        fontSize:
+          type: string
+          description: The same font size as in MindmapNodeStyle.
+          maximum: 288
+          minimum: 10
   securitySchemes:
     bearerAuth:
       scheme: bearer

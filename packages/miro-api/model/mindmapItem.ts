@@ -12,6 +12,7 @@
 
 import {CreatedBy} from './createdBy'
 import {MindmapData} from './mindmapData'
+import {MindmapStyle} from './mindmapStyle'
 import {ModifiedBy} from './modifiedBy'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
 import {WidgetLinks} from './widgetLinks'
@@ -38,6 +39,7 @@ export class MindmapItem {
    * Type of item that is returned.
    */
   'type': string
+  'style'?: MindmapStyle
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -88,6 +90,11 @@ export class MindmapItem {
       name: 'type',
       baseName: 'type',
       type: 'string',
+    },
+    {
+      name: 'style',
+      baseName: 'style',
+      type: 'MindmapStyle',
     },
   ]
 

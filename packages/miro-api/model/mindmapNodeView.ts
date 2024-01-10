@@ -10,18 +10,20 @@
  * Do not edit the class manually.
  */
 
-import {WidgetDataOutput} from './widgetDataOutput'
+import {MindmapNodeStyle} from './mindmapNodeStyle'
+import {MindmapWidgetDataOutput} from './mindmapWidgetDataOutput'
 
 /**
  * @internal
- * Contains information about the item used as a mind map node.
+ * Contains the information about the mind map node.
  */
 export class MindmapNodeView {
   /**
-   * Type of mind map node. Currently, `type` can only be set to `text`.
+   * Type of item used as mind map node. Currently, `type` can only be equal to `text`.
    */
   'type'?: string
-  'data'?: WidgetDataOutput
+  'data'?: MindmapWidgetDataOutput
+  'style'?: MindmapNodeStyle
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -36,7 +38,12 @@ export class MindmapNodeView {
     {
       name: 'data',
       baseName: 'data',
-      type: 'WidgetDataOutput',
+      type: 'MindmapWidgetDataOutput',
+    },
+    {
+      name: 'style',
+      baseName: 'style',
+      type: 'MindmapNodeStyle',
     },
   ]
 

@@ -28,10 +28,13 @@ export class ItemDataChanges {
    */
   'fields'?: Array<CustomField>
   /**
+   * Defines whether the card is owned by the application making the call.
+   */
+  'owned'?: boolean
+  /**
    * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
    */
-  'status'?: string | (typeof ItemDataChanges.StatusEnum)[keyof typeof ItemDataChanges.StatusEnum] =
-    ItemDataChanges.StatusEnum.Disconnected
+  'status'?: string | (typeof ItemDataChanges.StatusEnum)[keyof typeof ItemDataChanges.StatusEnum]
   /**
    * A short text header to identify the image.
    */
@@ -55,6 +58,11 @@ export class ItemDataChanges {
       name: 'fields',
       baseName: 'fields',
       type: 'Array<CustomField>',
+    },
+    {
+      name: 'owned',
+      baseName: 'owned',
+      type: 'boolean',
     },
     {
       name: 'status',

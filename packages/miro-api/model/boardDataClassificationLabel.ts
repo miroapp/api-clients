@@ -12,25 +12,29 @@
 
 export class BoardDataClassificationLabel {
   /**
-   * Label color
+   * Label color.
    */
   'color'?: string
   /**
-   * Label description
+   * Label description.
    */
   'description'?: string
   /**
-   * Label id
+   * Label id.
    */
   'id'?: string
   /**
-   * Label name
+   * Label name.
    */
   'name'?: string
   /**
-   * Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS )
+   * Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).
    */
   'sharingRecommendation'?: string
+  /**
+   * Indicates the URL for the board classification label guidelines.
+   */
+  'guidelineUrl'?: string
   /**
    * Type of the object returned.
    */
@@ -64,6 +68,11 @@ export class BoardDataClassificationLabel {
     {
       name: 'sharingRecommendation',
       baseName: 'sharingRecommendation',
+      type: 'string',
+    },
+    {
+      name: 'guidelineUrl',
+      baseName: 'guidelineUrl',
       type: 'string',
     },
     {

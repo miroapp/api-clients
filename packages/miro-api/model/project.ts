@@ -10,19 +10,15 @@
  * Do not edit the class manually.
  */
 
+/**
+ * @internal
+ * Contains information about the project with which the board is associated.
+ */
 export class Project {
   /**
-   * Project ID.
+   * Unique identifier (ID) of the project.
    */
-  'id': string
-  /**
-   * Name of the project.
-   */
-  'name': string
-  /**
-   * Type of the object returned.
-   */
-  'type': string = 'project'
+  'id'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -32,16 +28,6 @@ export class Project {
     {
       name: 'id',
       baseName: 'id',
-      type: 'string',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
       type: 'string',
     },
   ]

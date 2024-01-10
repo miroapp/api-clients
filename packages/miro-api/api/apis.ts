@@ -5,7 +5,7 @@ import FormData = require('form-data')
 import {AppCardCreateRequest} from '../model/appCardCreateRequest'
 import {AppCardItem} from '../model/appCardItem'
 import {AppCardUpdateRequest} from '../model/appCardUpdateRequest'
-import {GetBoards400Response} from '../model/getBoards400Response'
+import {CreateFrameItem400Response} from '../model/createFrameItem400Response'
 
 import {BoardDataClassificationLabel} from '../model/boardDataClassificationLabel'
 import {DataClassificationLabelId} from '../model/dataClassificationLabelId'
@@ -16,6 +16,8 @@ import {DataClassificationTeamSettings} from '../model/dataClassificationTeamSet
 import {UpdateBoardsDataClassificationLabel} from '../model/updateBoardsDataClassificationLabel'
 import {UpdateBoardsDataClassificationLabelRequest} from '../model/updateBoardsDataClassificationLabelRequest'
 import {UpdateTeamSettingsRequest} from '../model/updateTeamSettingsRequest'
+
+import {GetBoardItemContentLogsResponse} from '../model/getBoardItemContentLogsResponse'
 
 import {BoardExportJobId} from '../model/boardExportJobId'
 import {BoardExportJobStatus} from '../model/boardExportJobStatus'
@@ -30,6 +32,7 @@ import {InvitationResult} from '../model/invitationResult'
 
 import {BoardChanges} from '../model/boardChanges'
 import {BoardWithLinks} from '../model/boardWithLinks'
+import {BoardWithLinksAndLastOpened} from '../model/boardWithLinksAndLastOpened'
 import {BoardWithLinksAndWithoutProject} from '../model/boardWithLinksAndWithoutProject'
 import {BoardsPagedResponse} from '../model/boardsPagedResponse'
 import {CopyBoardChanges} from '../model/copyBoardChanges'
@@ -55,6 +58,12 @@ import {EmbedCreateRequest} from '../model/embedCreateRequest'
 import {EmbedItem} from '../model/embedItem'
 import {EmbedUpdateRequest} from '../model/embedUpdateRequest'
 
+import {GenericItem} from '../model/genericItem'
+import {GenericItemCursorPaged} from '../model/genericItemCursorPaged'
+import {ShapeCreateRequest} from '../model/shapeCreateRequest'
+import {ShapeItem} from '../model/shapeItem'
+import {ShapeUpdateRequest} from '../model/shapeUpdateRequest'
+
 import {FrameCreateRequest} from '../model/frameCreateRequest'
 import {FrameItem} from '../model/frameItem'
 import {FrameUpdateRequest} from '../model/frameUpdateRequest'
@@ -63,9 +72,11 @@ import {ImageCreateRequest} from '../model/imageCreateRequest'
 import {ImageItem} from '../model/imageItem'
 import {ImageUpdateRequest} from '../model/imageUpdateRequest'
 
-import {GenericItem} from '../model/genericItem'
-import {GenericItemCursorPaged} from '../model/genericItemCursorPaged'
 import {GenericItemUpdate} from '../model/genericItemUpdate'
+
+import {MindmapCreateRequest} from '../model/mindmapCreateRequest'
+import {MindmapCursorPaged} from '../model/mindmapCursorPaged'
+import {MindmapItem} from '../model/mindmapItem'
 
 import {EnterpriseGetOrganizationMembers200Response} from '../model/enterpriseGetOrganizationMembers200Response'
 import {OrganizationMember} from '../model/organizationMember'
@@ -91,15 +102,11 @@ import {Project} from '../model/project'
 import {ProjectPage} from '../model/projectPage'
 import {UpdateProjectRequest} from '../model/updateProjectRequest'
 
-import {ShapeCreateRequest} from '../model/shapeCreateRequest'
-import {ShapeItem} from '../model/shapeItem'
-import {ShapeUpdateRequest} from '../model/shapeUpdateRequest'
-
 import {StickyNoteCreateRequest} from '../model/stickyNoteCreateRequest'
 import {StickyNoteItem} from '../model/stickyNoteItem'
 import {StickyNoteUpdateRequest} from '../model/stickyNoteUpdateRequest'
 
-import {GetTagsFromItem400Response} from '../model/getTagsFromItem400Response'
+import {AttachTagToItem400Response} from '../model/attachTagToItem400Response'
 import {GetTagsResponse} from '../model/getTagsResponse'
 import {ItemPagedResponse} from '../model/itemPagedResponse'
 import {TagCreateRequest} from '../model/tagCreateRequest'
@@ -596,7 +603,102 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the result of the board export job. The response provides more information about the board export job, such as the S3 link to the files created.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * Retrieves content changes for board items within your organization. Content changes are actions that users can perform on board items, such as updating a sticky note\'s text. You can retrieve results for a specific time period. You can also filter results based on the board IDs and the emails of users who created, modified, or deleted a board item. Additionally, results can be paginated for easier viewing and processing. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>contentlogs:export</a>  <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a>  <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Retrieve content change logs of board items
+   * @param orgId Unique identifier of the organization.
+   * @param from Filter content logs based on the date and time when the board item was last modified. This is the start date and time for the modified date duration.  Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
+   * @param to Filter content logs based on the date and time when the board item was last modified. This is the end date and time for the modified date duration. Format: UTC, adheres to  [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
+   * @param boardIds List of board IDs for which you want to retrieve the content logs.
+   * @param emails Filter content logs based on the list of emails of users who created, modified, or deleted the board item.
+   * @param cursor A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request.
+   * @param limit The maximum number of results to return per call. If the number of logs in the response is greater than the limit specified, the response returns the cursor parameter with a value.
+   * @param sorting Sort order in which you want to view the result set based on the modified date. To sort by an ascending modified date, specify &#x60;asc&#x60;. To sort by a descending modified date, specify &#x60;desc&#x60;.
+   */
+  async enterpriseBoardContentItemLogsFetch(
+    orgId: string,
+    from: Date,
+    to: Date,
+    query?: {
+      boardIds?: Array<string>
+
+      emails?: Array<string>
+
+      cursor?: string
+
+      limit?: number
+
+      sorting?: 'asc' | 'desc'
+    },
+  ): Promise<{response: Response; body: GetBoardItemContentLogsResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/content-logs/items'.replace(
+      '{' + 'org_id' + '}',
+      encodeURIComponent(String(orgId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error(
+        'Required parameter orgId was null or undefined when calling enterpriseBoardContentItemLogsFetch.',
+      )
+    }
+
+    if (query?.boardIds !== undefined) {
+      localVarQueryParameters.append('board_ids', ObjectSerializer.serialize(query?.boardIds, 'Array<string>'))
+    }
+
+    if (query?.emails !== undefined) {
+      localVarQueryParameters.append('emails', ObjectSerializer.serialize(query?.emails, 'Array<string>'))
+    }
+
+    // verify required parameter 'from' is not null or undefined
+    if (from === null || from === undefined) {
+      throw new Error('Required parameter from was null or undefined when calling enterpriseBoardContentItemLogsFetch.')
+    }
+
+    if (from !== undefined) {
+      localVarQueryParameters.append('from', ObjectSerializer.serialize(from, 'Date'))
+    }
+
+    // verify required parameter 'to' is not null or undefined
+    if (to === null || to === undefined) {
+      throw new Error('Required parameter to was null or undefined when calling enterpriseBoardContentItemLogsFetch.')
+    }
+
+    if (to !== undefined) {
+      localVarQueryParameters.append('to', ObjectSerializer.serialize(to, 'Date'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.sorting !== undefined) {
+      localVarQueryParameters.append('sorting', ObjectSerializer.serialize(query?.sorting, "'asc' | 'desc'"))
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GetBoardItemContentLogsResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves the result of the board export job. The response provides more information about the board export job, such as the S3 link to the files created.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get results for board export job
    * @param orgId Unique identifier of the organization.
    * @param jobId Unique identifier of the job.
@@ -636,7 +738,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the status of the board export job.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * Retrieves the status of the board export job.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get board export job status
    * @param orgId Unique identifier of the organization.
    * @param jobId Unique identifier of the board export job.
@@ -676,7 +778,7 @@ export class MiroApi {
   }
 
   /**
-   * Creates an export job for one or more boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * Creates an export job for one or more boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Create board export job
    * @param orgId Unique identifier of the organization.
    * @param requestId Unique identifier of the board export job.
@@ -1110,7 +1212,7 @@ export class MiroApi {
    * @summary Get specific board
    * @param boardId Unique identifier (ID) of the board that you want to retrieve.
    */
-  async getSpecificBoard(boardId: string): Promise<{response: Response; body: BoardWithLinks}> {
+  async getSpecificBoard(boardId: string): Promise<{response: Response; body: BoardWithLinksAndLastOpened}> {
     const localVarPath = '/v2/boards/{board_id}'.replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
     let localVarQueryParameters = new URLSearchParams()
     // verify required parameter 'boardId' is not null or undefined
@@ -1130,7 +1232,7 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinks')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinksAndLastOpened')
 
     return {response, body}
   }
@@ -1863,6 +1965,255 @@ export class MiroApi {
   }
 
   /**
+   * Adds a flowchart shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Create shape item
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param shapeCreateRequest
+   */
+  async createShapeItemFlowchart(
+    boardId: string,
+    shapeCreateRequest: ShapeCreateRequest,
+  ): Promise<{response: Response; body: ShapeItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/shapes'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling createShapeItemFlowchart.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      resource,
+      JSON.stringify(ObjectSerializer.serialize(shapeCreateRequest, 'ShapeCreateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ShapeItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Deletes a flowchart shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
+   * @summary Delete shape item
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
+   * @param itemId Unique identifier (ID) of the item that you want to delete.
+   */
+  async deleteShapeItemFlowchart(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/shapes/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteShapeItemFlowchart.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling deleteShapeItemFlowchart.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Get items on board
+   * @param boardIdPlatformExperimentalFeatures Unique identifier (ID) of the board for which you want to retrieve the list of available items.
+   * @param limit
+   * @param type
+   * @param cursor
+   */
+  async getItemsExperimental(
+    boardIdPlatformExperimentalFeatures: string,
+    query?: {
+      limit?: string
+
+      type?: 'shape'
+
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: GenericItemCursorPaged}> {
+    const localVarPath = '/v2-experimental/boards/{board_id_PlatformExperimentalFeatures}/items'.replace(
+      '{' + 'board_id_PlatformExperimentalFeatures' + '}',
+      encodeURIComponent(String(boardIdPlatformExperimentalFeatures)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformExperimentalFeatures' is not null or undefined
+    if (boardIdPlatformExperimentalFeatures === null || boardIdPlatformExperimentalFeatures === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformExperimentalFeatures was null or undefined when calling getItemsExperimental.',
+      )
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'string'))
+    }
+
+    if (query?.type !== undefined) {
+      localVarQueryParameters.append('type', ObjectSerializer.serialize(query?.type, "'shape'"))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItemCursorPaged')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
+   * @summary Get shape item
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
+   */
+  async getShapeItemFlowchart(boardId: string, itemId: string): Promise<{response: Response; body: ShapeItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/shapes/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getShapeItemFlowchart.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling getShapeItemFlowchart.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ShapeItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
+   * @summary Get specific item on board
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
+   */
+  async getSpecificItemExperimental(boardId: string, itemId: string): Promise<{response: Response; body: GenericItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getSpecificItemExperimental.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling getSpecificItemExperimental.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates a flowchart shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Update shape item
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param shapeUpdateRequest
+   */
+  async updateShapeItemFlowchart(
+    boardId: string,
+    itemId: string,
+    shapeUpdateRequest: ShapeUpdateRequest,
+  ): Promise<{response: Response; body: ShapeItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/shapes/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateShapeItemFlowchart.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling updateShapeItemFlowchart.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      resource,
+      JSON.stringify(ObjectSerializer.serialize(shapeUpdateRequest, 'ShapeUpdateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ShapeItem')
+
+    return {response, body}
+  }
+
+  /**
    * Adds a frame to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create frame
    * @param boardId Unique identifier (ID) of the board where you want to create a frame.
@@ -2171,17 +2522,17 @@ export class MiroApi {
   /**
    * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Delete item
-   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
+   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
    */
-  async deleteItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+  async deleteItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
+      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling deleteItem.')
+    // verify required parameter 'boardIdPlatform' is not null or undefined
+    if (boardIdPlatform === null || boardIdPlatform === undefined) {
+      throw new Error('Required parameter boardIdPlatform was null or undefined when calling deleteItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -2206,15 +2557,52 @@ export class MiroApi {
   }
 
   /**
+   * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
+   * @summary Delete item
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
+   * @param itemId Unique identifier (ID) of the item that you want to delete.
+   */
+  async deleteItemExperimental(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteItemExperimental.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling deleteItemExperimental.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
+
+    return {response, body}
+  }
+
+  /**
    * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items on board
-   * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
+   * @param boardIdPlatform Unique identifier (ID) of the board for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItems(
-    boardId: string,
+    boardIdPlatform: string,
     query?: {
       limit?: string
 
@@ -2233,14 +2621,14 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2/boards/{board_id}/items'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
+    const localVarPath = '/v2/boards/{board_id_Platform}/items'.replace(
+      '{' + 'board_id_Platform' + '}',
+      encodeURIComponent(String(boardIdPlatform)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getItems.')
+    // verify required parameter 'boardIdPlatform' is not null or undefined
+    if (boardIdPlatform === null || boardIdPlatform === undefined) {
+      throw new Error('Required parameter boardIdPlatform was null or undefined when calling getItems.')
     }
 
     if (query?.limit !== undefined) {
@@ -2281,14 +2669,14 @@ export class MiroApi {
   /**
    * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items within frame
-   * @param boardIdPlatformContainers Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.
+   * @param boardId Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.
    * @param parentItemId ID of the frame for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItemsWithinFrame(
-    boardIdPlatformContainers: string,
+    boardId: string,
     parentItemId: string,
     query?: {
       limit?: string
@@ -2298,16 +2686,14 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2/boards/{board_id_PlatformContainers}/items'.replace(
-      '{' + 'board_id_PlatformContainers' + '}',
-      encodeURIComponent(String(boardIdPlatformContainers)),
+    const localVarPath = '/v2/boards/{board_id}/items'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformContainers' is not null or undefined
-    if (boardIdPlatformContainers === null || boardIdPlatformContainers === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatformContainers was null or undefined when calling getItemsWithinFrame.',
-      )
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getItemsWithinFrame.')
     }
 
     // verify required parameter 'parentItemId' is not null or undefined
@@ -2351,17 +2737,17 @@ export class MiroApi {
   /**
    * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get specific item on board
-   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
+   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
-  async getSpecificItem(boardId: string, itemId: string): Promise<{response: Response; body: GenericItem}> {
-    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+  async getSpecificItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: GenericItem}> {
+    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
+      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getSpecificItem.')
+    // verify required parameter 'boardIdPlatform' is not null or undefined
+    if (boardIdPlatform === null || boardIdPlatform === undefined) {
+      throw new Error('Required parameter boardIdPlatform was null or undefined when calling getSpecificItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -2388,22 +2774,24 @@ export class MiroApi {
   /**
    * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update item position or parent
-   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param boardIdPlatform Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param genericItemUpdate
    */
   async updateItemPositionOrParent(
-    boardId: string,
+    boardIdPlatform: string,
     itemId: string,
     genericItemUpdate: GenericItemUpdate,
   ): Promise<{response: Response; body: GenericItem}> {
-    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
+      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling updateItemPositionOrParent.')
+    // verify required parameter 'boardIdPlatform' is not null or undefined
+    if (boardIdPlatform === null || boardIdPlatform === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatform was null or undefined when calling updateItemPositionOrParent.',
+      )
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -2423,6 +2811,167 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds a mind map node to a board. A root node is the starting point of a mind map. A node that is created under a root node is a child node. For information on mind maps, use cases, mind map structure, and more, see the <a href=\"https://developers.miro.com/docs/mind-maps\" target=_blank>Mind Map Overview</a> page. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/><br/> <b>Known limitations on node placement: </b> Currently, the create API supports explicit positions for nodes. This means that users can only place nodes based on the x, y coordinates provided in the position parameters. If the position is not provided in the request, nodes default to coordinates x=0, y=0, effectively placing them at the center of the board. <br /><br /><b>Upcoming changes:</b> We understand the importance of flexibility in node placement. We are actively working on implementing changes to support positioning nodes relative to their parent node as well. This enhancement offers a more dynamic and intuitive mind mapping experience. <br /><br />Additionally, we are actively working on providing the update API, further enhancing the functionality of mind map APIs.
+   * @summary Create mind map node
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param mindmapCreateRequest
+   */
+  async createMindmapNodesExperimental(
+    boardId: string,
+    mindmapCreateRequest: MindmapCreateRequest,
+  ): Promise<{response: Response; body: MindmapItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/mindmap_nodes'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling createMindmapNodesExperimental.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      resource,
+      JSON.stringify(ObjectSerializer.serialize(mindmapCreateRequest, 'MindmapCreateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'MindmapItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Deletes a mind map node item and its child nodes from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
+   * @summary Delete mind map node
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the mind map node.
+   * @param itemId Unique identifier (ID) of the mind map node that you want to delete.
+   */
+  async deleteMindmapNodeExperimental(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteMindmapNodeExperimental.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling deleteMindmapNodeExperimental.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information for a specific mind map node on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
+   * @summary Get specific mind map node
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a mind map node.
+   * @param itemId Unique identifier (ID) of the mind map node that you want to retrieve.
+   */
+  async getMindmapNodeExperimental(boardId: string, itemId: string): Promise<{response: Response; body: MindmapItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getMindmapNodeExperimental.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling getMindmapNodeExperimental.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'MindmapItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves a list of mind map nodes for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Get mind map nodes
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve mind map nodes.
+   * @param limit Maximum number of results returned
+   * @param cursor Points to the next portion of the results set
+   */
+  async getMindmapNodesExperimental(
+    boardId: string,
+    query?: {
+      limit?: string
+
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: MindmapCursorPaged}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/mindmap_nodes'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getMindmapNodesExperimental.')
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'string'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'MindmapCursorPaged')
 
     return {response, body}
   }
@@ -3511,22 +4060,18 @@ export class MiroApi {
   /**
    * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Attach tag to item
-   * @param boardIdPlatformTags Unique identifier (ID) of the board with the item that you want to add a tag to.
+   * @param boardId Unique identifier (ID) of the board with the item that you want to add a tag to.
    * @param itemId Unique identifier (ID) of the item to which you want to add a tag.
    * @param tagId Unique identifier (ID) of the tag you want to add to the item.
    */
-  async attachTagToItem(
-    boardIdPlatformTags: string,
-    itemId: string,
-    tagId: string,
-  ): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
-      .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
+  async attachTagToItem(boardId: string, itemId: string, tagId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformTags' is not null or undefined
-    if (boardIdPlatformTags === null || boardIdPlatformTags === undefined) {
-      throw new Error('Required parameter boardIdPlatformTags was null or undefined when calling attachTagToItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling attachTagToItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -3821,22 +4366,18 @@ export class MiroApi {
   /**
    * Removes the specified tag from the specified item. The tag still exists on the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Remove tag from item
-   * @param boardIdPlatformTags Unique identifier (ID) of the board with the item that you want to remove a tag from.
+   * @param boardId Unique identifier (ID) of the board with the item that you want to remove a tag from.
    * @param itemId Unique identifier (ID) of the item that you want to remove the tag from.
    * @param tagId Unique identifier (ID) of the tag that you want to remove from the item.
    */
-  async removeTagFromItem(
-    boardIdPlatformTags: string,
-    itemId: string,
-    tagId: string,
-  ): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
-      .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
+  async removeTagFromItem(boardId: string, itemId: string, tagId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformTags' is not null or undefined
-    if (boardIdPlatformTags === null || boardIdPlatformTags === undefined) {
-      throw new Error('Required parameter boardIdPlatformTags was null or undefined when calling removeTagFromItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling removeTagFromItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -4683,6 +5224,41 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TokenInformation')
+
+    return {response, body}
+  }
+
+  /**
+   * Delete all user sessions.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. This API is only available for preconfigured organizations. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * @summary Delete user sessions
+   * @param email Emails of the users for whom you want to delete the sessions. Example: &#x60;email&#x3D;john.smith@example.com&#x60;
+   */
+  async enterprisePostUserSessionsReset(email: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/sessions/reset_all'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'email' is not null or undefined
+    if (email === null || email === undefined) {
+      throw new Error('Required parameter email was null or undefined when calling enterprisePostUserSessionsReset.')
+    }
+
+    if (email !== undefined) {
+      localVarQueryParameters.append('email', ObjectSerializer.serialize(email, 'string'))
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      resource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
 
     return {response, body}
   }

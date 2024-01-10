@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains shape item data, such as the content or shape type of the shape.
+ * Contains shape item data, such as the content or the type of the shape.
  */
 export class ShapeData {
   /**

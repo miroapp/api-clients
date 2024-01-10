@@ -15,6 +15,7 @@ import {BoardPolicy} from './boardPolicy'
 import {Picture} from './picture'
 import {Project} from './project'
 import {Team} from './team'
+import {UserInfoLastOpenedBy} from './userInfoLastOpenedBy'
 import {UserInfoShort} from './userInfoShort'
 
 /**
@@ -36,6 +37,11 @@ export class Board {
    * Unique identifier (ID) of the board.
    */
   'id': string
+  /**
+   * Date and time when the board was last opened by any user. This information is only available when the boards are sorted by `last_opened`. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
+   */
+  'lastOpenedAt'?: Date
+  'lastOpenedBy'?: UserInfoLastOpenedBy
   /**
    * Date and time when the board was last modified. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
@@ -88,6 +94,16 @@ export class Board {
       name: 'id',
       baseName: 'id',
       type: 'string',
+    },
+    {
+      name: 'lastOpenedAt',
+      baseName: 'lastOpenedAt',
+      type: 'Date',
+    },
+    {
+      name: 'lastOpenedBy',
+      baseName: 'lastOpenedBy',
+      type: 'UserInfoLastOpenedBy',
     },
     {
       name: 'modifiedAt',
