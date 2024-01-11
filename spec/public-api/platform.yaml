@@ -400,7 +400,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BoardWithLinks'
+                $ref: '#/components/schemas/BoardWithLinksAndLastOpened'
           description: Board retrieved
         '400':
           content:
@@ -5654,7 +5654,7 @@ paths:
                     type: string
                     description: Type of the error
                     example: error
-          description: Too many requests
+          description: Too many requests.
       summary: Delete text item
       tags:
       - texts
@@ -5826,6 +5826,15 @@ components:
           type: string
           description: Unique identifier (ID) of the board.
           example: uXjVOD6LSME=
+        lastOpenedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the board was last opened by any user.
+            This information is only available when the boards are sorted by `last_opened`.
+            Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),
+            includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+        lastOpenedBy:
+          $ref: '#/components/schemas/UserInfoLastOpenedBy'
         modifiedAt:
           type: string
           format: date-time
@@ -6286,6 +6295,73 @@ components:
       - id
       - name
       - type
+    BoardWithLinksAndLastOpened:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier (ID) of the board.
+          example: uXjVOD6LSME=
+        name:
+          type: string
+          description: Name of the board.
+          example: Sample board name
+        description:
+          type: string
+          description: Description of the board.
+          example: Sample board description
+        team:
+          $ref: '#/components/schemas/Team'
+        project:
+          $ref: '#/components/schemas/Project'
+        picture:
+          $ref: '#/components/schemas/Picture'
+        policy:
+          $ref: '#/components/schemas/BoardPolicy'
+        viewLink:
+          type: string
+          description: URL to view the board.
+          example: https://miro.com/app/board/uXjVOD6LSME=
+        owner:
+          $ref: '#/components/schemas/UserInfoShort'
+        currentUserMembership:
+          $ref: '#/components/schemas/BoardMember'
+        createdAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the board was created. Format: UTC, adheres
+            to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing
+            Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+        createdBy:
+          $ref: '#/components/schemas/UserInfoShort'
+        lastOpenedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the board was last opened by any user.
+            Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),
+            includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+        lastOpenedBy:
+          $ref: '#/components/schemas/GetBoardUserInfoLastOpenedBy'
+        modifiedAt:
+          type: string
+          format: date-time
+          description: 'Date and time when the board was last modified. Format: UTC,
+            adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
+            a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).'
+        modifiedBy:
+          $ref: '#/components/schemas/UserInfoShort'
+        links:
+          $ref: '#/components/schemas/BoardLinks'
+        type:
+          type: string
+          description: Type of the object that is returned. In this case, type returns
+            `board`.
+          example: board
+      required:
+      - description
+      - id
+      - name
+      - type
     BoardWithLinksAndWithoutProject:
       type: object
       properties:
@@ -6613,12 +6689,12 @@ components:
           - none
           - stealth
           - diamond
-          - diamond_filled
+          - filled_diamond
           - oval
-          - oval_filled
+          - filled_oval
           - arrow
           - triangle
-          - triangle_filled
+          - filled_triangle
           - erd_one
           - erd_many
           - erd_only_one
@@ -6640,12 +6716,12 @@ components:
           - none
           - stealth
           - diamond
-          - diamond_filled
+          - filled_diamond
           - oval
-          - oval_filled
+          - filled_oval
           - arrow
           - triangle
-          - triangle_filled
+          - filled_triangle
           - erd_one
           - erd_many
           - erd_only_one
@@ -8049,6 +8125,9 @@ components:
         parent:
           $ref: '#/components/schemas/Parent'
     Team:
+      required:
+      - id
+      - name
       type: object
       description: Contains information about the team with which the board is associated.
       properties:
@@ -8229,6 +8308,45 @@ components:
     UserInfoShort:
       type: object
       description: Contains information about the user who created the board.
+      properties:
+        id:
+          type: string
+          description: Unique identifier (ID) of the user.
+          example: 3074457353169356300
+        name:
+          type: string
+          description: Name of the user.
+          example: John Smith
+        type:
+          type: string
+          description: Indicates the type of object returned. In this case, `type`
+            returns `user`.
+          example: user
+      required:
+      - id
+      - name
+      - type
+    UserInfoLastOpenedBy:
+      type: object
+      description: Contains information about the user who opened the board last.
+        This information is only available when the boards are sorted by `last_opened`.
+      properties:
+        id:
+          type: string
+          description: Unique identifier (ID) of the user.
+          example: 3074457353169356300
+        name:
+          type: string
+          description: Name of the user.
+          example: John Smith
+        type:
+          type: string
+          description: Indicates the type of object returned. In this case, `type`
+            returns `user`.
+          example: user
+    GetBoardUserInfoLastOpenedBy:
+      type: object
+      description: Contains information about the user who last opened the board.
       properties:
         id:
           type: string

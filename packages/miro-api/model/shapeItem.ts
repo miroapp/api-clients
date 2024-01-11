@@ -15,8 +15,8 @@ import {Geometry} from './geometry'
 import {ModifiedBy} from './modifiedBy'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
 import {Position} from './position'
-import {ShapeDataForCreate} from './shapeDataForCreate'
-import {ShapeStyleForCreate} from './shapeStyleForCreate'
+import {ShapeData} from './shapeData'
+import {ShapeStyle} from './shapeStyle'
 import {WidgetLinks} from './widgetLinks'
 
 export class ShapeItem {
@@ -24,8 +24,8 @@ export class ShapeItem {
    * Unique identifier (ID) of an item.
    */
   'id': string
-  'data'?: ShapeDataForCreate
-  'style'?: ShapeStyleForCreate
+  'data'?: ShapeData
+  'style'?: ShapeStyle
   'position'?: Position
   'geometry'?: Geometry
   /**
@@ -58,12 +58,12 @@ export class ShapeItem {
     {
       name: 'data',
       baseName: 'data',
-      type: 'ShapeDataForCreate',
+      type: 'ShapeData',
     },
     {
       name: 'style',
       baseName: 'style',
-      type: 'ShapeStyleForCreate',
+      type: 'ShapeStyle',
     },
     {
       name: 'position',

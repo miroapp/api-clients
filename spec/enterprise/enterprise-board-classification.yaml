@@ -334,25 +334,29 @@ components:
       properties:
         color:
           type: string
-          description: Label color
+          description: Label color.
           example: blue
         description:
           type: string
-          description: Label description
+          description: Label description.
           example: Board could not be shared publicly
         id:
           type: string
-          description: Label id
+          description: Label id.
           example: '3000457366756290996'
         name:
           type: string
-          description: Label name
+          description: Label name.
           example: internal
         sharingRecommendation:
           type: string
-          description: 'Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION,
-            ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ) '
+          description: Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION,
+            ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).
           example: NO_SHARING_RESTRICTIONS
+        guidelineUrl:
+          type: string
+          description: Indicates the URL for the board classification label guidelines.
+          example: https://miro.com
         type:
           type: string
           description: Type of the object returned.
@@ -363,34 +367,38 @@ components:
       properties:
         id:
           type: string
-          description: Label id
+          description: Label id.
           example: '3000457366756290996'
         color:
           type: string
-          description: Label color
+          description: Label color.
           example: '#F5DC80'
         default:
           type: boolean
-          description: Label is default
+          description: Label is default.
           example: false
         description:
           type: string
-          description: Label description
+          description: Label description.
           example: Board could not be shared publicly
         name:
           type: string
-          description: Label name
+          description: Label name.
           example: internal
         orderNumber:
           type: integer
-          description: Label order number
+          description: Label order number.
           format: int32
           example: 2
         sharingRecommendation:
           type: string
-          description: 'Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION,
-            ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ) '
+          description: Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION,
+            ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).
           example: NO_SHARING_RESTRICTIONS
+        guidelineUrl:
+          type: string
+          description: Indicates the URL for the board classification label guidelines.
+          example: https://miro.com
         type:
           type: string
           description: Type of the object returned.

@@ -23,6 +23,9 @@ export class BasicError {
    * Explanation for the error
    */
   'message'?: string
+  /**
+   * Type of the object returned.
+   */
   'type'?: string = 'error'
 
   /** @ignore */

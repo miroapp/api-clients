@@ -9,72 +9,7 @@ security:
 tags:
 - description: Audit Logs API for reading audit logs of an organization.
   name: Audit Logs
-paths:
-  /v2/audit/logs:
-    get:
-      description: Retrieves a page of audit events.<br/><h3>Required scope</h3> <a
-        target="blank" href="/reference/scopes">auditlogs:read</a> <br/><h3>Rate limiting</h3>
-        <a target="blank" href="/reference/ratelimiting">Level 2</a>
-      operationId: enterprise-get-audit-logs
-      parameters:
-      - description: yyyy-MM-ddThh:mm:ss.SSSZ
-        example: 2023-01-01 00:00:00+00:00
-        in: query
-        name: createdAfter
-        required: true
-        schema:
-          type: string
-          format: date
-      - description: yyyy-MM-ddThh:mm:ss.SSSZ
-        example: 2024-01-01 00:00:00+00:00
-        in: query
-        name: createdBefore
-        required: true
-        schema:
-          type: string
-          format: date
-      - description: The cursor output from the previous page, to fetch the next page
-        in: query
-        name: cursor
-        schema:
-          type: string
-      - description: The item limit to fetch per page, defaults to 100
-        example: 100
-        in: query
-        name: limit
-        schema:
-          type: integer
-      - description: Sorting mode. Accepted values are ASC and DESC, defaults to ASC
-        example: ASC
-        in: query
-        name: sorting
-        schema:
-          type: string
-          enum:
-          - ASC
-          - DESC
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuditPage'
-          description: Audit logs fetched
-        '400':
-          $ref: '#/components/responses/400'
-        '401':
-          $ref: '#/components/responses/401'
-        '403':
-          $ref: '#/components/responses/403'
-        '404':
-          $ref: '#/components/responses/404'
-        '409':
-          $ref: '#/components/responses/409'
-        '429':
-          $ref: '#/components/responses/429'
-      summary: Get audit logs
-      tags:
-      - Audit Logs
+paths: {}
 components:
   schemas:
     BasicError:
@@ -96,13 +31,23 @@ components:
     AuditPage:
       type: object
       properties:
+        type:
+          type: string
+          description: Type of the response, in this case it's always 'cursor-list'
+          example: cursor-list
         limit:
           type: integer
           description: Page limit
+          example: 10
+        size:
+          type: integer
+          description: Item count in current page
+          example: 2
         cursor:
           type: string
           description: The key that should be used as the cursor request parameter
             to fetch the next page
+          example: 2023-09-01T09:30:10.840687Z#1234567890123456789-DDB
         content:
           type: array
           items:
@@ -114,6 +59,7 @@ components:
         id:
           type: string
           description: Audit event id
+          example: 2023-09-01T09:30:10.840687Z#1234567890123456789-DDB
         context:
           $ref: '#/components/schemas/AuditContext'
         object:
@@ -122,14 +68,17 @@ components:
           type: string
           description: Time when the audit event has been created
           format: date-time
+          example: 2023-09-01T09:30:10.840+0000
         details:
           type: object
           description: Details json related to the audit event
+          example: '{ "authType": "SSO", "mfaFactorType": "NONE" }'
         createdBy:
           $ref: '#/components/schemas/AuditCreatedBy'
         event:
           type: string
           description: Event type of the audit event
+          example: sign_in_succeeded
     AuditContext:
       type: object
       description: Audit context
@@ -137,6 +86,7 @@ components:
         ip:
           type: string
           description: Ip address associated with the audit context
+          example: 0.0.0.0
         team:
           $ref: '#/components/schemas/AuditTeam'
         organization:
@@ -148,9 +98,11 @@ components:
         id:
           type: string
           description: Id of the team
+          example: 1234567890123456789
         name:
           type: string
           description: Name of the team
+          example: Example Team
     AuditOrganization:
       type: object
       description: Organization associated with the audit context
@@ -158,9 +110,11 @@ components:
         id:
           type: string
           description: Id of the organization
+          example: 1234567890123456789
         name:
           type: string
           description: Name of the organization
+          example: Example Organization
     AuditObject:
       type: object
       description: The object related with the audit event
@@ -168,9 +122,11 @@ components:
         id:
           type: string
           description: Id of the object
+          example: 1234567890123456789
         name:
           type: string
           description: Name of the object
+          example: Example Object
     AuditCreatedBy:
       type: object
       description: The details regarding the creator of the audit event
@@ -178,6 +134,7 @@ components:
         type:
           type: string
           description: Type of the creator
+          example: user
           enum:
           - user
           - application
@@ -186,12 +143,15 @@ components:
         id:
           type: string
           description: Id of the creator
+          example: 1234567890123456789
         name:
           type: string
           description: Name of the creator
+          example: John Smith
         email:
           type: string
           description: Email of the creator
+          example: john.smith@miro.com
   responses:
     '400':
       description: Malformed request
