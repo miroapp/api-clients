@@ -384,7 +384,7 @@
           {
             "name": "from",
             "description": "Filter content logs based on the date and time when the board item was last modified. This is the start date and time for the modified date duration. \nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
-            "example": "2022-03-30T17:26:50.000Z",
+            "example": "2022-03-30T17:26:50Z",
             "in": "query",
             "required": true,
             "schema": {
@@ -395,7 +395,7 @@
           {
             "name": "to",
             "description": "Filter content logs based on the date and time when the board item was last modified. This is the end date and time for the modified date duration. Format: UTC, adheres to \n[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
-            "example": "2022-03-30T17:26:50.000Z",
+            "example": "2023-03-30T17:26:50Z",
             "in": "query",
             "required": true,
             "schema": {
@@ -15216,7 +15216,7 @@
           "createdAt": {
             "type": "string",
             "format": "date-time",
-            "example": "2023-06-24T17:32:28.000Z",
+            "example": "2023-06-24T17:32:28Z",
             "description": "Date and time when the board item was created.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n"
           },
           "createdBy": {
@@ -15225,7 +15225,7 @@
           "modifiedAt": {
             "type": "string",
             "format": "date-time",
-            "example": "2023-06-24T17:32:28.000Z",
+            "example": "2023-06-24T17:32:28Z",
             "description": "Date and time when the board item was last modified.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n"
           },
           "modifiedBy": {
