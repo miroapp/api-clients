@@ -229,7 +229,7 @@ paths:
           \ item was last modified. This is the start date and time for the modified\
           \ date duration. \nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),\
           \ includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n"
-        example: 2022-03-30 17:26:50+00:00
+        example: '2022-03-30T17:26:50Z'
         in: query
         required: true
         schema:
@@ -240,7 +240,7 @@ paths:
           \ item was last modified. This is the end date and time for the modified\
           \ date duration. Format: UTC, adheres to \n[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601),\
           \ includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n"
-        example: 2022-03-30 17:26:50+00:00
+        example: '2023-03-30T17:26:50Z'
         in: query
         required: true
         schema:
@@ -494,7 +494,7 @@ components:
         createdAt:
           type: string
           format: date-time
-          example: 2023-06-24 17:32:28+00:00
+          example: '2023-06-24T17:32:28Z'
           description: 'Date and time when the board item was created.<br>Format:
             UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
             a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
@@ -505,7 +505,7 @@ components:
         modifiedAt:
           type: string
           format: date-time
-          example: 2023-06-24 17:32:28+00:00
+          example: '2023-06-24T17:32:28Z'
           description: 'Date and time when the board item was last modified.<br>Format:
             UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes
             a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
