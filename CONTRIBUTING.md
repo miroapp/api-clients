@@ -16,16 +16,7 @@ yarn prepare
 
 API clients are generated using `@openapitools/openapi-generator-cli`. They are generated based on the API specifications defined in the `spec.json` file.
 
-Specification file are loaded from `api-specification` repository which is supposed to be in the same parent directory as this repository. \
-The `update-spec` command loads separate OpenAPI specification files and merges them into a single file. \
-The `./scripts/fetch-spec.mjs` script will pull the yaml files from `api-specification` repository. \
 Each endpoint in the specification must have a unique `operationId`, because the client method names are derived from it.
-
-To update the `spec.json` specs file, run the following command:
-
-```bash
-yarn update-spec
-```
 
 ## Generate the `miro-api` client
 
