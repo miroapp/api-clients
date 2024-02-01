@@ -10,7 +10,6 @@
     "apps/*"
   ],
   "scripts": {
-    "update-spec": "scripts/update-spec.ts",
     "build": "yarn workspace generator generate && yarn workspace @mirohq/miro-api build",
     "dev": "yarn workspace client-test-app dev",
     "pretest": "yarn build",
@@ -24,7 +23,6 @@
   "dependencies": {
     "fast-glob": "^3.3.2",
     "jest": "^29.7.0",
-    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "prettier": "^2.8.7",
     "tsx": "^4.7.0"
@@ -32,7 +30,6 @@
   "devDependencies": {
     "@mirohq/prettier-config": "^2.0.0",
     "@types/jest": "^29.5.11",
-    "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.14.202",
     "esbuild": "^0.20.0",
     "esbuild-jest": "^0.5.0",

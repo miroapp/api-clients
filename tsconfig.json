@@ -10,6 +10,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "files": ["scripts/update-spec.ts"],
   "exclude": ["dist", "api", "model", "__tests__", ".turbo", ".openapi-generator", "node_modules"]
 }
