@@ -4,6 +4,6 @@
   "main": "fastify.js",
   "type": "module",
   "dependencies": {
-    "fastify": "^4.25.2"
+    "fastify": "^4.26.0"
   }
 }
