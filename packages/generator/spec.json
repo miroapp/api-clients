@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "description": "Miro API",
-    "title": "Miro API",
-    "version": "0.1"
+    "title": "Miro Developer Platform",
+    "version": "v2.0",
+    "description": "<img src=\"https://content.pstmn.io/47449ea6-0ef7-4af2-bac1-e58a70e61c58/aW1hZ2UucG5n\" width=\"1685\" height=\"593\">\n\n### Miro Developer Platform concepts\n\n- New to the Miro Developer Platform? Interested in learning more about platform concepts?\n[Read our introduction page](https://beta.developers.miro.com/docs/introduction) and familiarize yourself with the Miro Developer Platform capabilities in a few minutes.\n\n\n### Getting started with the Miro REST API\n\n- [Quickstart (video):](https://beta.developers.miro.com/docs/try-out-the-rest-api-in-less-than-3-minutes) try the REST API in less than 3 minutes.\n- [Quickstart (article):](https://beta.developers.miro.com/docs/build-your-first-hello-world-app-1) get started and try the REST API in less than 3 minutes.\n\n\n### Miro REST API tutorials\n\nCheck out our how-to articles with step-by-step instructions and code examples so you can:\n\n- [Get started with OAuth 2.0 and Miro](https://beta.developers.miro.com/docs/getting-started-with-oauth)\n\n\n### Miro App Examples\n\nClone our [Miro App Examples repository](https://github.com/miroapp/app-examples) to get inspiration, customize, and explore apps built on top of Miro's Developer Platform 2.0.\n"
   },
   "servers": [
     {
@@ -148,7 +148,7 @@
         "parameters": [
           {
             "description": "Unique identifier of the organization.",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -219,7 +219,7 @@
         "parameters": [
           {
             "description": "Unique identifier of the organization.",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -280,7 +280,7 @@
         "parameters": [
           {
             "description": "Unique identifier of the organization.",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -336,13 +336,13 @@
         "x-settings": {
           "skip-tests": true
         },
-        "description": "Retrieves content changes for board items within your organization. Content changes are actions that users can perform on board items, such as updating a sticky note's text. You can retrieve results for a specific time period. You can also filter results based on the board IDs and the emails of users who created, modified, or deleted a board item. Additionally, results can be paginated for easier viewing and processing.\n<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>contentlogs:export</a> \n<br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> \n<br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>\n",
+        "description": "Retrieves content changes for board items within your organization. Content changes are actions that users can perform on board items, such as updating a sticky note's text. You can retrieve results for a specific time period. You can also filter results based on the board IDs and the emails of users who created, modified, or deleted a board item. Additionally, results can be paginated for easier viewing and processing.\n<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>contentlogs:export</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a>\n<br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>\n",
         "operationId": "enterprise-board-content-item-logs-fetch",
         "parameters": [
           {
             "name": "org_id",
             "description": "Unique identifier of the organization.",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "required": true,
             "schema": {
@@ -383,7 +383,7 @@
           },
           {
             "name": "from",
-            "description": "Filter content logs based on the date and time when the board item was last modified. This is the start date and time for the modified date duration. \nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
+            "description": "Filter content logs based on the date and time when the board item was last modified. This is the start date and time for the modified date duration.\nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
             "example": "2022-03-30T17:26:50Z",
             "in": "query",
             "required": true,
@@ -394,7 +394,7 @@
           },
           {
             "name": "to",
-            "description": "Filter content logs based on the date and time when the board item was last modified. This is the end date and time for the modified date duration. Format: UTC, adheres to \n[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
+            "description": "Filter content logs based on the date and time when the board item was last modified. This is the end date and time for the modified date duration. Format: UTC, adheres to\n[ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
             "example": "2023-03-30T17:26:50Z",
             "in": "query",
             "required": true,
@@ -478,7 +478,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -525,7 +525,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -535,7 +535,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -592,7 +592,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -602,7 +602,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -647,7 +647,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -657,7 +657,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -714,7 +714,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -724,7 +724,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -779,7 +779,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -789,7 +789,7 @@
           },
           {
             "description": "id of the team",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "team_id",
             "required": true,
@@ -856,7 +856,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -950,7 +950,7 @@
             "schema": {
               "type": "string",
               "description": "The ID of the organization member used as the reference for pagination. To retrieve the first portion of the collection don't pass a cursor value. To retrieve the next portion of the collection, set the `cursor` parameter value to the ID of the last organization member you received in the response of the previous request.",
-              "example": 3055557345821141000
+              "example": "3055557345821141000"
             }
           },
           {
@@ -968,7 +968,7 @@
           },
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -1025,7 +1025,7 @@
         "parameters": [
           {
             "description": "id of the organization",
-            "example": 3074457345821141000,
+            "example": "3074457345821141000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -1035,7 +1035,7 @@
           },
           {
             "description": "id of the organization member",
-            "example": 3055557345821141000,
+            "example": "3055557345821141000",
             "in": "path",
             "name": "member_id",
             "required": true,
@@ -1233,7 +1233,7 @@
             "schema": {
               "type": "string"
             },
-            "example": 3074457345618265000
+            "example": "3074457345618265000"
           }
         ],
         "responses": {
@@ -2024,7 +2024,7 @@
             "schema": {
               "type": "string"
             },
-            "example": 3074457345618265000
+            "example": "3074457345618265000"
           }
         ],
         "responses": {
@@ -2539,7 +2539,7 @@
           },
           {
             "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.",
-            "example": 3055557345821140500,
+            "example": "3055557345821140500",
             "in": "query",
             "name": "cursor",
             "schema": {
@@ -2795,7 +2795,7 @@
           },
           {
             "description": "An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.",
-            "example": 3055557345821140500,
+            "example": "3055557345821140500",
             "in": "query",
             "name": "cursor",
             "schema": {
@@ -2803,7 +2803,7 @@
             }
           },
           {
-            "description": "\nRole query. Filters members by role using full word match. Accepted values are:            \n* \"member\":     Team member with full member permissions.\n* \"admin\":      Admin of a team. Team member with permission to manage team.\n* \"non_team\":   External user, non-team user.\n* \"team_guest\": Team-guest user, user with access only to a team without access to organization.\n",
+            "description": "\nRole query. Filters members by role using full word match. Accepted values are:\n* \"member\":     Team member with full member permissions.\n* \"admin\":      Admin of a team. Team member with permission to manage team.\n* \"non_team\":   External user, non-team user.\n* \"team_guest\": Team-guest user, user with access only to a team without access to organization.\n",
             "in": "query",
             "name": "role",
             "schema": {
@@ -2986,7 +2986,7 @@
         "parameters": [
           {
             "description": "The id of an Organization.",
-            "example": 3074457345618265000,
+            "example": "3074457345618265000",
             "in": "path",
             "name": "org_id",
             "required": true,
@@ -14989,7 +14989,7 @@
           "id": {
             "type": "string",
             "description": "Id of the team",
-            "example": 1234567890123456800
+            "example": "1234567890123456789"
           },
           "name": {
             "type": "string",
@@ -15005,7 +15005,7 @@
           "id": {
             "type": "string",
             "description": "Id of the organization",
-            "example": 1234567890123456800
+            "example": "1234567890123456789"
           },
           "name": {
             "type": "string",
@@ -15021,7 +15021,7 @@
           "id": {
             "type": "string",
             "description": "Id of the object",
-            "example": 1234567890123456800
+            "example": "1234567890123456789"
           },
           "name": {
             "type": "string",
@@ -15043,7 +15043,7 @@
           "id": {
             "type": "string",
             "description": "Id of the creator",
-            "example": 1234567890123456800
+            "example": "1234567890123456789"
           },
           "name": {
             "type": "string",
@@ -15147,7 +15147,7 @@
         "properties": {
           "limit": {
             "type": "integer",
-            "description": "The maximum number of results to return per call. If the number of logs in the response is \ngreater than the limit specified, the response returns the cursor parameter with a value.\n",
+            "description": "The maximum number of results to return per call. If the number of logs in the response is\ngreater than the limit specified, the response returns the cursor parameter with a value.\n",
             "format": "int32",
             "example": 20
           },
@@ -15191,7 +15191,7 @@
           "itemId": {
             "type": "string",
             "description": "Unique identifier of the board item.",
-            "example": 3458764549483493000
+            "example": "3458764549483493025"
           },
           "type": {
             "format": "string",
@@ -15243,7 +15243,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier of the user.",
-            "example": 3458764517517852700
+            "example": "3458764517517852417"
           },
           "email": {
             "type": "string",
@@ -16111,7 +16111,7 @@
           "id": {
             "type": "string",
             "description": "Team member id.",
-            "example": 3074457345618264000
+            "example": "3074457345618264000"
           },
           "role": {
             "type": "string",
@@ -16126,7 +16126,7 @@
           "createdBy": {
             "type": "string",
             "description": "Id of the user who invited the team member.",
-            "example": 3074457345618264000
+            "example": "3074457345618264000"
           },
           "modifiedAt": {
             "type": "string",
@@ -16136,12 +16136,12 @@
           "modifiedBy": {
             "type": "string",
             "description": "Id of the user who last updated the user's membership.",
-            "example": 3074457345618264000
+            "example": "3074457345618264000"
           },
           "teamId": {
             "type": "string",
             "description": "Team id",
-            "example": 3074457345618265000
+            "example": "3074457345618265000"
           },
           "type": {
             "description": "Type of the object returned.",
@@ -16184,7 +16184,7 @@
           "organizationId": {
             "type": "string",
             "description": "Organization id",
-            "example": 3074457345618265000
+            "example": "3074457345618265000"
           },
           "teamAccountDiscoverySettings": {
             "$ref": "#/components/schemas/TeamAccountDiscoverySettings"
@@ -16527,7 +16527,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/FrameData"
@@ -16893,7 +16893,7 @@
             "type": "string",
             "format": "int64",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3074457362577955300
+            "example": "3074457362577955300"
           },
           "data": {
             "$ref": "#/components/schemas/MindmapData"
@@ -17083,7 +17083,7 @@
           },
           "fillOpacity": {
             "type": "string",
-            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault:  `Flowchart` shapes: `1.0`. `Basic` shapes: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.\n",
+            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault: `Flowchart` shapes: `1.0`. `Basic` shapes: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.\n",
             "maximum": 1,
             "minimum": 0
           },
@@ -17131,12 +17131,12 @@
           },
           "textAlign": {
             "type": "string",
-            "description": "Defines how the shape text is horizontally aligned.\nDefault: \nFlowchart shapes: `center`.\nBasic shapes: `left`.\n\n`unknown` is returned for unsupported shapes.",
+            "description": "Defines how the shape text is horizontally aligned.\nDefault:\nFlowchart shapes: `center`.\nBasic shapes: `left`.\n\n`unknown` is returned for unsupported shapes.",
             "enum": ["left", "right", "center", "unknown"]
           },
           "textAlignVertical": {
             "type": "string",
-            "description": "Defines how the shape text is vertically aligned.\nDefault: \nFlowchart shapes: `middle`.\nBasic shapes: `top`.\n\n`unknown` is returned for unsupported shapes.",
+            "description": "Defines how the shape text is vertically aligned.\nDefault:\nFlowchart shapes: `middle`.\nBasic shapes: `top`.\n\n`unknown` is returned for unsupported shapes.",
             "enum": ["top", "middle", "bottom", "unknown"]
           }
         }
@@ -17178,7 +17178,7 @@
           },
           "fillOpacity": {
             "type": "string",
-            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault:  Flowchart shapes: `1.0`. Basic shapes: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.\n",
+            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault: Flowchart shapes: `1.0`. Basic shapes: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.\n",
             "maximum": 1,
             "minimum": 0
           },
@@ -17226,12 +17226,12 @@
           },
           "textAlign": {
             "type": "string",
-            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: \nFlowchart shapes: `center`.\nBasic shapes: `left`.",
+            "description": "Defines how the sticky note text is horizontally aligned.\nDefault:\nFlowchart shapes: `center`.\nBasic shapes: `left`.",
             "enum": ["left", "right", "center"]
           },
           "textAlignVertical": {
             "type": "string",
-            "description": "Defines how the sticky note text is vertically aligned.\nDefault: \nFlowchart shapes: `middle`.\nBasic shapes: `top`.",
+            "description": "Defines how the sticky note text is vertically aligned.\nDefault:\nFlowchart shapes: `middle`.\nBasic shapes: `top`.",
             "enum": ["top", "middle", "bottom"]
           }
         }
@@ -18101,7 +18101,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier of the tag.",
-            "example": 3074457363306854000
+            "example": "3074457363306854000"
           },
           "title": {
             "type": "string",
@@ -18184,7 +18184,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier of the tag.",
-            "example": 3074457363306854000
+            "example": "3074457363306854000"
           },
           "title": {
             "type": "string",
@@ -18393,7 +18393,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/AppCardData"
@@ -18621,7 +18621,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of the user.",
-            "example": 3074457353169356300
+            "example": "3074457353169356300"
           },
           "name": {
             "type": "string",
@@ -18658,7 +18658,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of the user.",
-            "example": 3074457353169356300
+            "example": "3074457353169356300"
           },
           "name": {
             "type": "string",
@@ -19160,7 +19160,7 @@
             "type": "string",
             "format": "int64",
             "description": "Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing numbers, and it is automatically assigned to a user when they first sign up.",
-            "example": 3074457362577955300
+            "example": "3074457362577955300"
           },
           "description": {
             "type": "string",
@@ -19187,7 +19187,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/CardData"
@@ -19582,7 +19582,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/DocumentData"
@@ -19749,7 +19749,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/EmbedData"
@@ -20069,7 +20069,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/ImageData"
@@ -20307,7 +20307,7 @@
             "type": "string",
             "format": "int64",
             "description": "Unique identifier (ID) of the parent frame for the item.",
-            "example": 3074457362577955300
+            "example": "3074457362577955300"
           },
           "links": {
             "$ref": "#/components/schemas/SelfLink"
@@ -20385,7 +20385,7 @@
             "type": "string",
             "format": "int64",
             "description": "Unique identifier (ID) of the project.",
-            "example": 3088887345710756000
+            "example": "3088887345710756000"
           }
         }
       },
@@ -20481,7 +20481,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/ShapeData"
@@ -20685,7 +20685,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/StickyNoteData"
@@ -20798,7 +20798,7 @@
             "type": "string",
             "format": "int64",
             "description": "Unique identifier (ID) of the team.",
-            "example": 3088887345710753000
+            "example": "3088887345710753000"
           },
           "name": {
             "type": "string",
@@ -20846,7 +20846,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of an item.",
-            "example": 3458764517517819000
+            "example": "3458764517517819000"
           },
           "data": {
             "$ref": "#/components/schemas/TextData"
@@ -20987,7 +20987,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of the user.",
-            "example": 3074457353169356300
+            "example": "3074457353169356300"
           },
           "name": {
             "type": "string",
@@ -21009,7 +21009,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of the user.",
-            "example": 3074457353169356300
+            "example": "3074457353169356300"
           },
           "name": {
             "type": "string",
@@ -21030,7 +21030,7 @@
           "id": {
             "type": "string",
             "description": "Unique identifier (ID) of the user.",
-            "example": 3074457353169356300
+            "example": "3074457353169356300"
           },
           "name": {
             "type": "string",
