@@ -12,17 +12,29 @@
 
 /**
  * @internal
- * Organization associated with the audit context
+ * Contains pagination links for the collection.
  */
-export class AuditOrganization {
+export class PageLinksPlatformTags {
   /**
-   * Id of the organization
+   * Link to retrieve information in the first page of the collection.
    */
-  'id'?: string
+  'first'?: string
   /**
-   * Name of the organization
+   * Link to the retrieve information in the last page of the collection.
    */
-  'name'?: string
+  'last'?: string
+  /**
+   * Link to retrieve information in the next page of the collection.
+   */
+  'next'?: string
+  /**
+   * Link to retrieve information in the previous page of the collection.
+   */
+  'prev'?: string
+  /**
+   * Link to retrieve information in the current page of the collection.
+   */
+  'self'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -30,19 +42,34 @@ export class AuditOrganization {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'id',
-      baseName: 'id',
+      name: 'first',
+      baseName: 'first',
       type: 'string',
     },
     {
-      name: 'name',
-      baseName: 'name',
+      name: 'last',
+      baseName: 'last',
+      type: 'string',
+    },
+    {
+      name: 'next',
+      baseName: 'next',
+      type: 'string',
+    },
+    {
+      name: 'prev',
+      baseName: 'prev',
+      type: 'string',
+    },
+    {
+      name: 'self',
+      baseName: 'self',
       type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return AuditOrganization.attributeTypeMap
+    return PageLinksPlatformTags.attributeTypeMap
   }
 }

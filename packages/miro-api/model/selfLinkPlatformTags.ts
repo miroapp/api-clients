@@ -12,16 +12,28 @@
 
 /**
  * @internal
- * Type of item that you want to create.
+ * Contains applicable links for the current object.
  */
-export enum ItemTypeChange {
-  AppCard = <any>'app_card',
-  Text = <any>'text',
-  Shape = <any>'shape',
-  StickyNote = <any>'sticky_note',
-  Image = <any>'image',
-  Document = <any>'document',
-  Card = <any>'card',
-  Frame = <any>'frame',
-  Embed = <any>'embed',
+export class SelfLinkPlatformTags {
+  /**
+   * Link to obtain more information about the current object.
+   */
+  'self'?: string
+
+  /** @ignore */
+  static discriminator: string | undefined = undefined
+
+  /** @ignore */
+  static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
+    {
+      name: 'self',
+      baseName: 'self',
+      type: 'string',
+    },
+  ]
+
+  /** @ignore */
+  static getAttributeTypeMap() {
+    return SelfLinkPlatformTags.attributeTypeMap
+  }
 }

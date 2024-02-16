@@ -3,21 +3,11 @@ export * from './appCardCreateRequest'
 export * from './appCardData'
 export * from './appCardDataChanges'
 export * from './appCardDataPlatform'
-export * from './appCardDataResponse'
 export * from './appCardItem'
 export * from './appCardStyle'
-export * from './appCardStylePlatform'
 export * from './appCardUpdateRequest'
 export * from './attachTagToItem400Response'
-export * from './auditContext'
-export * from './auditCreatedBy'
-export * from './auditEvent'
-export * from './auditObject'
-export * from './auditOrganization'
-export * from './auditPage'
-export * from './auditTeam'
 export * from './basicError'
-export * from './basicErrorEnterpriseUserSessionsExpirationEnterprisePlan'
 export * from './basicErrorTeamsEnterprisePlan'
 export * from './board'
 export * from './boardChanges'
@@ -45,15 +35,11 @@ export * from './boardWithLinks'
 export * from './boardWithLinksAndLastOpened'
 export * from './boardWithLinksAndWithoutProject'
 export * from './boardsPagedResponse'
-export * from './bulkOperationError'
-export * from './bulkOperationErrorContext'
-export * from './bulkSubOperationError'
 export * from './caption'
 export * from './cardCreateRequest'
 export * from './cardData'
 export * from './cardItem'
 export * from './cardStyle'
-export * from './cardStylePlatform'
 export * from './cardUpdateRequest'
 export * from './connectorChangesData'
 export * from './connectorCreationData'
@@ -68,11 +54,9 @@ export * from './createProjectRequest'
 export * from './createTeamRequest'
 export * from './createdBy'
 export * from './createdByPlatform'
-export * from './createdByPlatformBulkCreateOperationExperimentalRelease'
 export * from './createdByPlatformTags'
 export * from './customField'
 export * from './customFieldPlatform'
-export * from './customFieldPlatformTags'
 export * from './dataClassificationLabel'
 export * from './dataClassificationLabelId'
 export * from './dataClassificationOrganizationSettings'
@@ -80,20 +64,16 @@ export * from './dataClassificationTeamSettings'
 export * from './documentCreateRequest'
 export * from './documentData'
 export * from './documentDataPlatform'
-export * from './documentDataResponse'
 export * from './documentItem'
 export * from './documentUpdateRequest'
 export * from './documentUrlData'
 export * from './documentUrlDataChanges'
-export * from './documentUrlDataPlatform'
 export * from './embedCreateRequest'
 export * from './embedData'
-export * from './embedDataResponse'
 export * from './embedItem'
 export * from './embedUpdateRequest'
 export * from './embedUrlData'
 export * from './embedUrlDataChanges'
-export * from './embedUrlDataPlatform'
 export * from './enterpriseGetOrganizationMembers200Response'
 export * from './error400'
 export * from './error401'
@@ -118,7 +98,6 @@ export * from './genericSubscriptionsCursorPaged'
 export * from './geometry'
 export * from './geometryNoRotation'
 export * from './geometryPlatform'
-export * from './geometryPlatformBulkCreateOperationExperimentalRelease'
 export * from './geometryPlatformExperimentalFeatures'
 export * from './geometryPlatformTags'
 export * from './getBoardItemContentLogsResponse'
@@ -127,29 +106,16 @@ export * from './getTagsResponse'
 export * from './imageCreateRequest'
 export * from './imageData'
 export * from './imageDataPlatform'
-export * from './imageDataResponse'
 export * from './imageItem'
 export * from './imageUpdateRequest'
 export * from './imageUrlData'
 export * from './imageUrlDataChanges'
-export * from './imageUrlDataChangesPlatform'
-export * from './imageUrlDataPlatform'
 export * from './invitationError'
 export * from './invitationResult'
-export * from './item'
-export * from './itemChanges'
 export * from './itemConnectionChangesData'
 export * from './itemConnectionCreationData'
 export * from './itemConnectionWithLinks'
-export * from './itemCreate'
-export * from './itemData'
-export * from './itemDataChanges'
-export * from './itemDataCreate'
 export * from './itemPagedResponse'
-export * from './itemStyle'
-export * from './itemTypeChange'
-export * from './items'
-export * from './itemsPage'
 export * from './mindmapCreateRequest'
 export * from './mindmapCursorPaged'
 export * from './mindmapData'
@@ -161,10 +127,8 @@ export * from './mindmapNodeTextData'
 export * from './mindmapNodeView'
 export * from './mindmapStyle'
 export * from './mindmapWidgetDataOutput'
-export * from './modelError'
 export * from './modifiedBy'
 export * from './modifiedByPlatform'
-export * from './modifiedByPlatformBulkCreateOperationExperimentalRelease'
 export * from './modifiedByPlatformTags'
 export * from './organization'
 export * from './organizationInformation'
@@ -174,9 +138,9 @@ export * from './organizationMembersSearchResponse'
 export * from './pageLinks'
 export * from './pageLinksPlatform'
 export * from './pageLinksPlatformExperimentalFeatures'
+export * from './pageLinksPlatformTags'
 export * from './parent'
 export * from './parentLinksEnvelope'
-export * from './parentWithLinks'
 export * from './picture'
 export * from './position'
 export * from './positionChange'
@@ -191,11 +155,11 @@ export * from './relativeOffset'
 export * from './selfLink'
 export * from './selfLinkPlatform'
 export * from './selfLinkPlatformExperimentalFeatures'
+export * from './selfLinkPlatformTags'
 export * from './shapeCreateRequest'
 export * from './shapeData'
 export * from './shapeDataForCreate'
 export * from './shapeDataForUpdate'
-export * from './shapeDataPlatformTags'
 export * from './shapeItem'
 export * from './shapeStyle'
 export * from './shapeStyleForCreate'
@@ -205,10 +169,8 @@ export * from './sharingPolicySettings'
 export * from './stickyNoteCreateRequest'
 export * from './stickyNoteData'
 export * from './stickyNoteDataPlatform'
-export * from './stickyNoteDataPlatformTags'
 export * from './stickyNoteItem'
 export * from './stickyNoteStyle'
-export * from './stickyNoteStylePlatform'
 export * from './stickyNoteUpdateRequest'
 export * from './subscriptionData'
 export * from './tag'
@@ -240,7 +202,6 @@ export * from './teamsPage'
 export * from './textCreateRequest'
 export * from './textData'
 export * from './textDataPlatform'
-export * from './textDataPlatformTags'
 export * from './textItem'
 export * from './textStyle'
 export * from './textUpdateRequest'
@@ -278,21 +239,11 @@ import {AppCardCreateRequest} from './appCardCreateRequest'
 import {AppCardData} from './appCardData'
 import {AppCardDataChanges} from './appCardDataChanges'
 import {AppCardDataPlatform} from './appCardDataPlatform'
-import {AppCardDataResponse} from './appCardDataResponse'
 import {AppCardItem} from './appCardItem'
 import {AppCardStyle} from './appCardStyle'
-import {AppCardStylePlatform} from './appCardStylePlatform'
 import {AppCardUpdateRequest} from './appCardUpdateRequest'
 import {AttachTagToItem400Response} from './attachTagToItem400Response'
-import {AuditContext} from './auditContext'
-import {AuditCreatedBy} from './auditCreatedBy'
-import {AuditEvent} from './auditEvent'
-import {AuditObject} from './auditObject'
-import {AuditOrganization} from './auditOrganization'
-import {AuditPage} from './auditPage'
-import {AuditTeam} from './auditTeam'
 import {BasicError} from './basicError'
-import {BasicErrorEnterpriseUserSessionsExpirationEnterprisePlan} from './basicErrorEnterpriseUserSessionsExpirationEnterprisePlan'
 import {BasicErrorTeamsEnterprisePlan} from './basicErrorTeamsEnterprisePlan'
 import {Board} from './board'
 import {BoardChanges} from './boardChanges'
@@ -320,15 +271,11 @@ import {BoardWithLinks} from './boardWithLinks'
 import {BoardWithLinksAndLastOpened} from './boardWithLinksAndLastOpened'
 import {BoardWithLinksAndWithoutProject} from './boardWithLinksAndWithoutProject'
 import {BoardsPagedResponse} from './boardsPagedResponse'
-import {BulkOperationError} from './bulkOperationError'
-import {BulkOperationErrorContext} from './bulkOperationErrorContext'
-import {BulkSubOperationError} from './bulkSubOperationError'
 import {Caption} from './caption'
 import {CardCreateRequest} from './cardCreateRequest'
 import {CardData} from './cardData'
 import {CardItem} from './cardItem'
 import {CardStyle} from './cardStyle'
-import {CardStylePlatform} from './cardStylePlatform'
 import {CardUpdateRequest} from './cardUpdateRequest'
 import {ConnectorChangesData} from './connectorChangesData'
 import {ConnectorCreationData} from './connectorCreationData'
@@ -343,11 +290,9 @@ import {CreateProjectRequest} from './createProjectRequest'
 import {CreateTeamRequest} from './createTeamRequest'
 import {CreatedBy} from './createdBy'
 import {CreatedByPlatform} from './createdByPlatform'
-import {CreatedByPlatformBulkCreateOperationExperimentalRelease} from './createdByPlatformBulkCreateOperationExperimentalRelease'
 import {CreatedByPlatformTags} from './createdByPlatformTags'
 import {CustomField} from './customField'
 import {CustomFieldPlatform} from './customFieldPlatform'
-import {CustomFieldPlatformTags} from './customFieldPlatformTags'
 import {DataClassificationLabel} from './dataClassificationLabel'
 import {DataClassificationLabelId} from './dataClassificationLabelId'
 import {DataClassificationOrganizationSettings} from './dataClassificationOrganizationSettings'
@@ -355,20 +300,16 @@ import {DataClassificationTeamSettings} from './dataClassificationTeamSettings'
 import {DocumentCreateRequest} from './documentCreateRequest'
 import {DocumentData} from './documentData'
 import {DocumentDataPlatform} from './documentDataPlatform'
-import {DocumentDataResponse} from './documentDataResponse'
 import {DocumentItem} from './documentItem'
 import {DocumentUpdateRequest} from './documentUpdateRequest'
 import {DocumentUrlData} from './documentUrlData'
 import {DocumentUrlDataChanges} from './documentUrlDataChanges'
-import {DocumentUrlDataPlatform} from './documentUrlDataPlatform'
 import {EmbedCreateRequest} from './embedCreateRequest'
 import {EmbedData} from './embedData'
-import {EmbedDataResponse} from './embedDataResponse'
 import {EmbedItem} from './embedItem'
 import {EmbedUpdateRequest} from './embedUpdateRequest'
 import {EmbedUrlData} from './embedUrlData'
 import {EmbedUrlDataChanges} from './embedUrlDataChanges'
-import {EmbedUrlDataPlatform} from './embedUrlDataPlatform'
 import {EnterpriseGetOrganizationMembers200Response} from './enterpriseGetOrganizationMembers200Response'
 import {Error400} from './error400'
 import {Error401} from './error401'
@@ -393,7 +334,6 @@ import {GenericSubscriptionsCursorPaged} from './genericSubscriptionsCursorPaged
 import {Geometry} from './geometry'
 import {GeometryNoRotation} from './geometryNoRotation'
 import {GeometryPlatform} from './geometryPlatform'
-import {GeometryPlatformBulkCreateOperationExperimentalRelease} from './geometryPlatformBulkCreateOperationExperimentalRelease'
 import {GeometryPlatformExperimentalFeatures} from './geometryPlatformExperimentalFeatures'
 import {GeometryPlatformTags} from './geometryPlatformTags'
 import {GetBoardItemContentLogsResponse} from './getBoardItemContentLogsResponse'
@@ -402,29 +342,16 @@ import {GetTagsResponse} from './getTagsResponse'
 import {ImageCreateRequest} from './imageCreateRequest'
 import {ImageData} from './imageData'
 import {ImageDataPlatform} from './imageDataPlatform'
-import {ImageDataResponse} from './imageDataResponse'
 import {ImageItem} from './imageItem'
 import {ImageUpdateRequest} from './imageUpdateRequest'
 import {ImageUrlData} from './imageUrlData'
 import {ImageUrlDataChanges} from './imageUrlDataChanges'
-import {ImageUrlDataChangesPlatform} from './imageUrlDataChangesPlatform'
-import {ImageUrlDataPlatform} from './imageUrlDataPlatform'
 import {InvitationError} from './invitationError'
 import {InvitationResult} from './invitationResult'
-import {Item} from './item'
-import {ItemChanges} from './itemChanges'
 import {ItemConnectionChangesData} from './itemConnectionChangesData'
 import {ItemConnectionCreationData} from './itemConnectionCreationData'
 import {ItemConnectionWithLinks} from './itemConnectionWithLinks'
-import {ItemCreate} from './itemCreate'
-import {ItemData} from './itemData'
-import {ItemDataChanges} from './itemDataChanges'
-import {ItemDataCreate} from './itemDataCreate'
 import {ItemPagedResponse} from './itemPagedResponse'
-import {ItemStyle} from './itemStyle'
-import {ItemTypeChange} from './itemTypeChange'
-import {Items} from './items'
-import {ItemsPage} from './itemsPage'
 import {MindmapCreateRequest} from './mindmapCreateRequest'
 import {MindmapCursorPaged} from './mindmapCursorPaged'
 import {MindmapData} from './mindmapData'
@@ -436,10 +363,8 @@ import {MindmapNodeTextData} from './mindmapNodeTextData'
 import {MindmapNodeView} from './mindmapNodeView'
 import {MindmapStyle} from './mindmapStyle'
 import {MindmapWidgetDataOutput} from './mindmapWidgetDataOutput'
-import {ModelError} from './modelError'
 import {ModifiedBy} from './modifiedBy'
 import {ModifiedByPlatform} from './modifiedByPlatform'
-import {ModifiedByPlatformBulkCreateOperationExperimentalRelease} from './modifiedByPlatformBulkCreateOperationExperimentalRelease'
 import {ModifiedByPlatformTags} from './modifiedByPlatformTags'
 import {Organization} from './organization'
 import {OrganizationInformation} from './organizationInformation'
@@ -449,9 +374,9 @@ import {OrganizationMembersSearchResponse} from './organizationMembersSearchResp
 import {PageLinks} from './pageLinks'
 import {PageLinksPlatform} from './pageLinksPlatform'
 import {PageLinksPlatformExperimentalFeatures} from './pageLinksPlatformExperimentalFeatures'
+import {PageLinksPlatformTags} from './pageLinksPlatformTags'
 import {Parent} from './parent'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
-import {ParentWithLinks} from './parentWithLinks'
 import {Picture} from './picture'
 import {Position} from './position'
 import {PositionChange} from './positionChange'
@@ -466,11 +391,11 @@ import {RelativeOffset} from './relativeOffset'
 import {SelfLink} from './selfLink'
 import {SelfLinkPlatform} from './selfLinkPlatform'
 import {SelfLinkPlatformExperimentalFeatures} from './selfLinkPlatformExperimentalFeatures'
+import {SelfLinkPlatformTags} from './selfLinkPlatformTags'
 import {ShapeCreateRequest} from './shapeCreateRequest'
 import {ShapeData} from './shapeData'
 import {ShapeDataForCreate} from './shapeDataForCreate'
 import {ShapeDataForUpdate} from './shapeDataForUpdate'
-import {ShapeDataPlatformTags} from './shapeDataPlatformTags'
 import {ShapeItem} from './shapeItem'
 import {ShapeStyle} from './shapeStyle'
 import {ShapeStyleForCreate} from './shapeStyleForCreate'
@@ -480,10 +405,8 @@ import {SharingPolicySettings} from './sharingPolicySettings'
 import {StickyNoteCreateRequest} from './stickyNoteCreateRequest'
 import {StickyNoteData} from './stickyNoteData'
 import {StickyNoteDataPlatform} from './stickyNoteDataPlatform'
-import {StickyNoteDataPlatformTags} from './stickyNoteDataPlatformTags'
 import {StickyNoteItem} from './stickyNoteItem'
 import {StickyNoteStyle} from './stickyNoteStyle'
-import {StickyNoteStylePlatform} from './stickyNoteStylePlatform'
 import {StickyNoteUpdateRequest} from './stickyNoteUpdateRequest'
 import {SubscriptionData} from './subscriptionData'
 import {Tag} from './tag'
@@ -515,7 +438,6 @@ import {TeamsPage} from './teamsPage'
 import {TextCreateRequest} from './textCreateRequest'
 import {TextData} from './textData'
 import {TextDataPlatform} from './textDataPlatform'
-import {TextDataPlatformTags} from './textDataPlatformTags'
 import {TextItem} from './textItem'
 import {TextStyle} from './textStyle'
 import {TextUpdateRequest} from './textUpdateRequest'
@@ -545,8 +467,6 @@ let enumsMap: {[index: string]: any} = {
   'AppCardData.StatusEnum': AppCardData.StatusEnum,
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
   'AppCardDataPlatform.StatusEnum': AppCardDataPlatform.StatusEnum,
-  'AppCardDataResponse.StatusEnum': AppCardDataResponse.StatusEnum,
-  'AuditCreatedBy.TypeEnum': AuditCreatedBy.TypeEnum,
   'BoardMember.RoleEnum': BoardMember.RoleEnum,
   'BoardMemberChanges.RoleEnum': BoardMemberChanges.RoleEnum,
   'BoardMemberWithLinks.RoleEnum': BoardMemberWithLinks.RoleEnum,
@@ -575,12 +495,9 @@ let enumsMap: {[index: string]: any} = {
   'CreateBoardSubscriptionRequest.StatusEnum': CreateBoardSubscriptionRequest.StatusEnum,
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
   'CustomFieldPlatform.IconShapeEnum': CustomFieldPlatform.IconShapeEnum,
-  'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
   'EmbedData.ModeEnum': EmbedData.ModeEnum,
-  'EmbedDataResponse.ModeEnum': EmbedDataResponse.ModeEnum,
   'EmbedUrlData.ModeEnum': EmbedUrlData.ModeEnum,
   'EmbedUrlDataChanges.ModeEnum': EmbedUrlDataChanges.ModeEnum,
-  'EmbedUrlDataPlatform.ModeEnum': EmbedUrlDataPlatform.ModeEnum,
   'FrameChanges.FormatEnum': FrameChanges.FormatEnum,
   'FrameChanges.TypeEnum': FrameChanges.TypeEnum,
   'FrameData.FormatEnum': FrameData.FormatEnum,
@@ -590,18 +507,6 @@ let enumsMap: {[index: string]: any} = {
   'GenericSubscription.StatusEnum': GenericSubscription.StatusEnum,
   'ItemConnectionChangesData.SnapToEnum': ItemConnectionChangesData.SnapToEnum,
   'ItemConnectionCreationData.SnapToEnum': ItemConnectionCreationData.SnapToEnum,
-  'ItemData.StatusEnum': ItemData.StatusEnum,
-  'ItemData.ModeEnum': ItemData.ModeEnum,
-  'ItemData.ShapeEnum': ItemData.ShapeEnum,
-  'ItemDataChanges.StatusEnum': ItemDataChanges.StatusEnum,
-  'ItemDataCreate.StatusEnum': ItemDataCreate.StatusEnum,
-  'ItemDataCreate.ModeEnum': ItemDataCreate.ModeEnum,
-  'ItemDataCreate.ShapeEnum': ItemDataCreate.ShapeEnum,
-  'ItemStyle.BorderStyleEnum': ItemStyle.BorderStyleEnum,
-  'ItemStyle.FontFamilyEnum': ItemStyle.FontFamilyEnum,
-  'ItemStyle.TextAlignEnum': ItemStyle.TextAlignEnum,
-  'ItemStyle.TextAlignVerticalEnum': ItemStyle.TextAlignVerticalEnum,
-  ItemTypeChange: ItemTypeChange,
   'MindmapData.DirectionEnum': MindmapData.DirectionEnum,
   'MindmapStyle.ShapeEnum': MindmapStyle.ShapeEnum,
   'Organization.PlanEnum': Organization.PlanEnum,
@@ -612,7 +517,6 @@ let enumsMap: {[index: string]: any} = {
   ProjectRole: ProjectRole,
   ProjectRoleToAdd: ProjectRoleToAdd,
   'ShapeData.ShapeEnum': ShapeData.ShapeEnum,
-  'ShapeDataPlatformTags.ShapeEnum': ShapeDataPlatformTags.ShapeEnum,
   'ShapeStyle.BorderStyleEnum': ShapeStyle.BorderStyleEnum,
   'ShapeStyle.FontFamilyEnum': ShapeStyle.FontFamilyEnum,
   'ShapeStyle.TextAlignEnum': ShapeStyle.TextAlignEnum,
@@ -627,13 +531,9 @@ let enumsMap: {[index: string]: any} = {
   'ShapeStyleForUpdate.TextAlignVerticalEnum': ShapeStyleForUpdate.TextAlignVerticalEnum,
   'StickyNoteData.ShapeEnum': StickyNoteData.ShapeEnum,
   'StickyNoteDataPlatform.ShapeEnum': StickyNoteDataPlatform.ShapeEnum,
-  'StickyNoteDataPlatformTags.ShapeEnum': StickyNoteDataPlatformTags.ShapeEnum,
   'StickyNoteStyle.FillColorEnum': StickyNoteStyle.FillColorEnum,
   'StickyNoteStyle.TextAlignEnum': StickyNoteStyle.TextAlignEnum,
   'StickyNoteStyle.TextAlignVerticalEnum': StickyNoteStyle.TextAlignVerticalEnum,
-  'StickyNoteStylePlatform.FillColorEnum': StickyNoteStylePlatform.FillColorEnum,
-  'StickyNoteStylePlatform.TextAlignEnum': StickyNoteStylePlatform.TextAlignEnum,
-  'StickyNoteStylePlatform.TextAlignVerticalEnum': StickyNoteStylePlatform.TextAlignVerticalEnum,
   'Tag.FillColorEnum': Tag.FillColorEnum,
   'TagCreateRequest.FillColorEnum': TagCreateRequest.FillColorEnum,
   'TagUpdateRequest.FillColorEnum': TagUpdateRequest.FillColorEnum,
@@ -701,21 +601,11 @@ let typeMap: {[index: string]: any} = {
   AppCardData: AppCardData,
   AppCardDataChanges: AppCardDataChanges,
   AppCardDataPlatform: AppCardDataPlatform,
-  AppCardDataResponse: AppCardDataResponse,
   AppCardItem: AppCardItem,
   AppCardStyle: AppCardStyle,
-  AppCardStylePlatform: AppCardStylePlatform,
   AppCardUpdateRequest: AppCardUpdateRequest,
   AttachTagToItem400Response: AttachTagToItem400Response,
-  AuditContext: AuditContext,
-  AuditCreatedBy: AuditCreatedBy,
-  AuditEvent: AuditEvent,
-  AuditObject: AuditObject,
-  AuditOrganization: AuditOrganization,
-  AuditPage: AuditPage,
-  AuditTeam: AuditTeam,
   BasicError: BasicError,
-  BasicErrorEnterpriseUserSessionsExpirationEnterprisePlan: BasicErrorEnterpriseUserSessionsExpirationEnterprisePlan,
   BasicErrorTeamsEnterprisePlan: BasicErrorTeamsEnterprisePlan,
   Board: Board,
   BoardChanges: BoardChanges,
@@ -743,15 +633,11 @@ let typeMap: {[index: string]: any} = {
   BoardWithLinksAndLastOpened: BoardWithLinksAndLastOpened,
   BoardWithLinksAndWithoutProject: BoardWithLinksAndWithoutProject,
   BoardsPagedResponse: BoardsPagedResponse,
-  BulkOperationError: BulkOperationError,
-  BulkOperationErrorContext: BulkOperationErrorContext,
-  BulkSubOperationError: BulkSubOperationError,
   Caption: Caption,
   CardCreateRequest: CardCreateRequest,
   CardData: CardData,
   CardItem: CardItem,
   CardStyle: CardStyle,
-  CardStylePlatform: CardStylePlatform,
   CardUpdateRequest: CardUpdateRequest,
   ConnectorChangesData: ConnectorChangesData,
   ConnectorCreationData: ConnectorCreationData,
@@ -766,11 +652,9 @@ let typeMap: {[index: string]: any} = {
   CreateTeamRequest: CreateTeamRequest,
   CreatedBy: CreatedBy,
   CreatedByPlatform: CreatedByPlatform,
-  CreatedByPlatformBulkCreateOperationExperimentalRelease: CreatedByPlatformBulkCreateOperationExperimentalRelease,
   CreatedByPlatformTags: CreatedByPlatformTags,
   CustomField: CustomField,
   CustomFieldPlatform: CustomFieldPlatform,
-  CustomFieldPlatformTags: CustomFieldPlatformTags,
   DataClassificationLabel: DataClassificationLabel,
   DataClassificationLabelId: DataClassificationLabelId,
   DataClassificationOrganizationSettings: DataClassificationOrganizationSettings,
@@ -778,20 +662,16 @@ let typeMap: {[index: string]: any} = {
   DocumentCreateRequest: DocumentCreateRequest,
   DocumentData: DocumentData,
   DocumentDataPlatform: DocumentDataPlatform,
-  DocumentDataResponse: DocumentDataResponse,
   DocumentItem: DocumentItem,
   DocumentUpdateRequest: DocumentUpdateRequest,
   DocumentUrlData: DocumentUrlData,
   DocumentUrlDataChanges: DocumentUrlDataChanges,
-  DocumentUrlDataPlatform: DocumentUrlDataPlatform,
   EmbedCreateRequest: EmbedCreateRequest,
   EmbedData: EmbedData,
-  EmbedDataResponse: EmbedDataResponse,
   EmbedItem: EmbedItem,
   EmbedUpdateRequest: EmbedUpdateRequest,
   EmbedUrlData: EmbedUrlData,
   EmbedUrlDataChanges: EmbedUrlDataChanges,
-  EmbedUrlDataPlatform: EmbedUrlDataPlatform,
   EnterpriseGetOrganizationMembers200Response: EnterpriseGetOrganizationMembers200Response,
   Error400: Error400,
   Error401: Error401,
@@ -816,7 +696,6 @@ let typeMap: {[index: string]: any} = {
   Geometry: Geometry,
   GeometryNoRotation: GeometryNoRotation,
   GeometryPlatform: GeometryPlatform,
-  GeometryPlatformBulkCreateOperationExperimentalRelease: GeometryPlatformBulkCreateOperationExperimentalRelease,
   GeometryPlatformExperimentalFeatures: GeometryPlatformExperimentalFeatures,
   GeometryPlatformTags: GeometryPlatformTags,
   GetBoardItemContentLogsResponse: GetBoardItemContentLogsResponse,
@@ -825,28 +704,16 @@ let typeMap: {[index: string]: any} = {
   ImageCreateRequest: ImageCreateRequest,
   ImageData: ImageData,
   ImageDataPlatform: ImageDataPlatform,
-  ImageDataResponse: ImageDataResponse,
   ImageItem: ImageItem,
   ImageUpdateRequest: ImageUpdateRequest,
   ImageUrlData: ImageUrlData,
   ImageUrlDataChanges: ImageUrlDataChanges,
-  ImageUrlDataChangesPlatform: ImageUrlDataChangesPlatform,
-  ImageUrlDataPlatform: ImageUrlDataPlatform,
   InvitationError: InvitationError,
   InvitationResult: InvitationResult,
-  Item: Item,
-  ItemChanges: ItemChanges,
   ItemConnectionChangesData: ItemConnectionChangesData,
   ItemConnectionCreationData: ItemConnectionCreationData,
   ItemConnectionWithLinks: ItemConnectionWithLinks,
-  ItemCreate: ItemCreate,
-  ItemData: ItemData,
-  ItemDataChanges: ItemDataChanges,
-  ItemDataCreate: ItemDataCreate,
   ItemPagedResponse: ItemPagedResponse,
-  ItemStyle: ItemStyle,
-  Items: Items,
-  ItemsPage: ItemsPage,
   MindmapCreateRequest: MindmapCreateRequest,
   MindmapCursorPaged: MindmapCursorPaged,
   MindmapData: MindmapData,
@@ -858,10 +725,8 @@ let typeMap: {[index: string]: any} = {
   MindmapNodeView: MindmapNodeView,
   MindmapStyle: MindmapStyle,
   MindmapWidgetDataOutput: MindmapWidgetDataOutput,
-  ModelError: ModelError,
   ModifiedBy: ModifiedBy,
   ModifiedByPlatform: ModifiedByPlatform,
-  ModifiedByPlatformBulkCreateOperationExperimentalRelease: ModifiedByPlatformBulkCreateOperationExperimentalRelease,
   ModifiedByPlatformTags: ModifiedByPlatformTags,
   Organization: Organization,
   OrganizationInformation: OrganizationInformation,
@@ -871,9 +736,9 @@ let typeMap: {[index: string]: any} = {
   PageLinks: PageLinks,
   PageLinksPlatform: PageLinksPlatform,
   PageLinksPlatformExperimentalFeatures: PageLinksPlatformExperimentalFeatures,
+  PageLinksPlatformTags: PageLinksPlatformTags,
   Parent: Parent,
   ParentLinksEnvelope: ParentLinksEnvelope,
-  ParentWithLinks: ParentWithLinks,
   Picture: Picture,
   Position: Position,
   PositionChange: PositionChange,
@@ -886,11 +751,11 @@ let typeMap: {[index: string]: any} = {
   SelfLink: SelfLink,
   SelfLinkPlatform: SelfLinkPlatform,
   SelfLinkPlatformExperimentalFeatures: SelfLinkPlatformExperimentalFeatures,
+  SelfLinkPlatformTags: SelfLinkPlatformTags,
   ShapeCreateRequest: ShapeCreateRequest,
   ShapeData: ShapeData,
   ShapeDataForCreate: ShapeDataForCreate,
   ShapeDataForUpdate: ShapeDataForUpdate,
-  ShapeDataPlatformTags: ShapeDataPlatformTags,
   ShapeItem: ShapeItem,
   ShapeStyle: ShapeStyle,
   ShapeStyleForCreate: ShapeStyleForCreate,
@@ -900,10 +765,8 @@ let typeMap: {[index: string]: any} = {
   StickyNoteCreateRequest: StickyNoteCreateRequest,
   StickyNoteData: StickyNoteData,
   StickyNoteDataPlatform: StickyNoteDataPlatform,
-  StickyNoteDataPlatformTags: StickyNoteDataPlatformTags,
   StickyNoteItem: StickyNoteItem,
   StickyNoteStyle: StickyNoteStyle,
-  StickyNoteStylePlatform: StickyNoteStylePlatform,
   StickyNoteUpdateRequest: StickyNoteUpdateRequest,
   SubscriptionData: SubscriptionData,
   Tag: Tag,
@@ -934,7 +797,6 @@ let typeMap: {[index: string]: any} = {
   TextCreateRequest: TextCreateRequest,
   TextData: TextData,
   TextDataPlatform: TextDataPlatform,
-  TextDataPlatformTags: TextDataPlatformTags,
   TextItem: TextItem,
   TextStyle: TextStyle,
   TextUpdateRequest: TextUpdateRequest,
