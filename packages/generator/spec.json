@@ -3123,60 +3123,6 @@
         "tags": ["Team Settings"]
       }
     },
-    "/v2/sessions/reset_all": {
-      "post": {
-        "description": "Delete all user sessions.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. This API is only available for preconfigured organizations. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
-        "operationId": "enterprise-post-user-sessions-reset",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "email",
-            "required": true,
-            "description": "Emails of the users for whom you want to delete the sessions. Example: `email=john.smith@example.com`",
-            "example": "john.smith@example.com",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "User Sessions Deleted",
-            "content": {}
-          },
-          "400": {
-            "$ref": "#/components/responses/400"
-          },
-          "401": {
-            "$ref": "#/components/responses/401"
-          },
-          "403": {
-            "$ref": "#/components/responses/403"
-          },
-          "404": {
-            "$ref": "#/components/responses/404"
-          },
-          "429": {
-            "$ref": "#/components/responses/429"
-          }
-        },
-        "summary": "Delete user sessions",
-        "tags": ["User sessions"]
-      }
-    },
-    "/v2-experimental/boards/{board_id}/items": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string"
-          },
-          "name": "board_id",
-          "in": "path",
-          "required": true,
-          "description": "Unique identifier (ID) of the board from which you want to retrieve the child nodes of a mind map node."
-        }
-      ]
-    },
     "/v2/boards/{board_id}/frames": {
       "post": {
         "description": "Adds a frame to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
@@ -4607,7 +4553,6 @@
     },
     "/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}": {
       "get": {
-        "x-settings": null,
         "description": "Retrieves information for a specific mind map node on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
         "operationId": "get-mindmap-node-experimental",
         "parameters": [
@@ -4646,7 +4591,6 @@
         "tags": ["Mind map nodes (experimental)"]
       },
       "delete": {
-        "x-settings": null,
         "description": "Deletes a mind map node item and its child nodes from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
         "operationId": "delete-mindmap-node-experimental",
         "parameters": [
@@ -4800,7 +4744,6 @@
         }
       ],
       "get": {
-        "x-settings": null,
         "summary": "Get mind map nodes",
         "tags": ["Mind map nodes (experimental)"],
         "responses": {
@@ -4837,7 +4780,6 @@
         ]
       },
       "post": {
-        "x-settings": null,
         "description": "Adds a mind map node to a board. A root node is the starting point of a mind map. A node that is created under a root node is a child node. For information on mind maps, use cases, mind map structure, and more, see the <a href=\"https://developers.miro.com/docs/mind-maps\" target=_blank>Mind Map Overview</a> page. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/><br/> <b>Known limitations on node placement: </b> Currently, the create API supports explicit positions for nodes. This means that users can only place nodes based on the x, y coordinates provided in the position parameters. If the position is not provided in the request, nodes default to coordinates x=0, y=0, effectively placing them at the center of the board. <br /><br /><b>Upcoming changes:</b> We understand the importance of flexibility in node placement. We are actively working on implementing changes to support positioning nodes relative to their parent node as well. This enhancement offers a more dynamic and intuitive mind mapping experience. <br /><br />Additionally, we are actively working on providing the update API, further enhancing the functionality of mind map APIs.",
         "operationId": "create-mindmap-nodes-experimental",
         "parameters": [
@@ -4979,9 +4921,168 @@
         "tags": ["Mind map nodes (experimental)"]
       }
     },
+    "/v2-experimental/boards/{board_id}/items": {
+      "get": {
+        "description": "Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
+        "operationId": "get-items-experimental",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "string",
+              "default": "10",
+              "description": "The maximum number of results to return per call. If the number of items in the response is greater than the limit specified, the response returns the cursor parameter with a value.",
+              "maximum": 50,
+              "minimum": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "type",
+            "schema": {
+              "type": "string",
+              "enum": ["shape"]
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string",
+              "description": "A cursor-paginated method returns a portion of the total set of results based on the limit specified and a `cursor` that points to the next portion of the results. To retrieve the next portion of the collection, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request."
+            }
+          },
+          {
+            "description": "Unique identifier (ID) of the board for which you want to retrieve the list of available items.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericItemCursorPaged"
+                }
+              }
+            },
+            "description": "Items retrieved"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get items on board",
+        "tags": ["Flowchart shapes (experimental)"]
+      }
+    },
     "/v2-experimental/boards/{board_id}/items/{item_id}": {
       "get": {
-        "x-settings": null,
         "description": "Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
         "operationId": "get-specific-item-experimental",
         "parameters": [
@@ -5122,7 +5223,6 @@
         "tags": ["Flowchart shapes (experimental)"]
       },
       "delete": {
-        "x-settings": null,
         "description": "Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
         "operationId": "delete-item-experimental",
         "parameters": [
@@ -5265,7 +5365,6 @@
     },
     "/v2-experimental/boards/{board_id}/shapes": {
       "post": {
-        "x-settings": null,
         "description": "Adds a flowchart shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
         "operationId": "create-shape-item-flowchart",
         "parameters": [
@@ -5409,7 +5508,6 @@
     },
     "/v2-experimental/boards/{board_id}/shapes/{item_id}": {
       "get": {
-        "x-settings": null,
         "description": "Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>",
         "operationId": "get-shape-item-flowchart",
         "parameters": [
@@ -5550,7 +5648,6 @@
         "tags": ["Flowchart shapes (experimental)"]
       },
       "patch": {
-        "x-settings": null,
         "description": "Updates a flowchart shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
         "operationId": "update-shape-item-flowchart",
         "parameters": [
@@ -5701,7 +5798,6 @@
         "tags": ["Flowchart shapes (experimental)"]
       },
       "delete": {
-        "x-settings": null,
         "description": "Deletes a flowchart shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>",
         "operationId": "delete-shape-item-flowchart",
         "parameters": [
@@ -5841,236 +5937,6 @@
         "summary": "Delete shape item",
         "tags": ["Flowchart shapes (experimental)"]
       }
-    },
-    "/v2-experimental/boards/{board_id_PlatformExperimentalFeatures}/items": {
-      "get": {
-        "x-settings": null,
-        "description": "Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>",
-        "operationId": "get-items-experimental",
-        "parameters": [
-          {
-            "in": "query",
-            "name": "limit",
-            "schema": {
-              "type": "string",
-              "default": "10",
-              "description": "The maximum number of results to return per call. If the number of items in the response is greater than the limit specified, the response returns the cursor parameter with a value.",
-              "maximum": 50,
-              "minimum": 10
-            }
-          },
-          {
-            "in": "query",
-            "name": "type",
-            "schema": {
-              "type": "string",
-              "enum": ["shape"]
-            }
-          },
-          {
-            "in": "query",
-            "name": "cursor",
-            "schema": {
-              "type": "string",
-              "description": "A cursor-paginated method returns a portion of the total set of results based on the limit specified and a `cursor` that points to the next portion of the results. To retrieve the next portion of the collection, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request."
-            }
-          },
-          {
-            "description": "Unique identifier (ID) of the board for which you want to retrieve the list of available items.",
-            "in": "path",
-            "name": "board_id_PlatformExperimentalFeatures",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenericItemCursorPaged"
-                }
-              }
-            },
-            "description": "Items retrieved"
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Malformed request"
-          },
-          "404": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Not found"
-          },
-          "429": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "Test error obj",
-                  "properties": {
-                    "code": {
-                      "type": "string",
-                      "description": "Code of the error",
-                      "example": "error"
-                    },
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error",
-                      "example": "Error message"
-                    },
-                    "status": {
-                      "type": "integer",
-                      "format": "int32",
-                      "description": "Status code of the error",
-                      "example": 400
-                    },
-                    "type": {
-                      "type": "string",
-                      "description": "Type of the error",
-                      "example": "error"
-                    }
-                  }
-                }
-              }
-            },
-            "description": "Too many requests"
-          }
-        },
-        "summary": "Get items on board",
-        "tags": ["Flowchart shapes (experimental)"]
-      }
-    },
-    "/v2-experimental/boards/{board_id}/items/bulk": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/boardId"
-        }
-      ],
-      "post": {
-        "x-settings": {
-          "skip-tests": true
-        },
-        "description": "Adds different types of items to a board. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item's create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.",
-        "operationId": "create-items",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/ItemCreate"
-                },
-                "minItems": 1,
-                "maxItems": 20
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "description": "Items created",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Items"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Malformed request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BulkOperationError"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too many requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        },
-        "summary": "Create items in bulk"
-      }
-    },
-    "/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalRelease}/items": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/boardId"
-        }
-      ]
     },
     "/v2/boards/{board_id}/items/{item_id}": {
       "post": {
@@ -14898,165 +14764,6 @@
   },
   "components": {
     "schemas": {
-      "AuditPage": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of the response, in this case it's always 'cursor-list'",
-            "example": "cursor-list"
-          },
-          "limit": {
-            "type": "integer",
-            "description": "Page limit",
-            "example": 10
-          },
-          "size": {
-            "type": "integer",
-            "description": "Item count in current page",
-            "example": 2
-          },
-          "cursor": {
-            "type": "string",
-            "description": "The key that should be used as the cursor request parameter to fetch the next page",
-            "example": "2023-09-01T09:30:10.840687Z#1234567890123456789-DDB"
-          },
-          "content": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AuditEvent"
-            },
-            "description": "Audit events list"
-          }
-        }
-      },
-      "AuditEvent": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Audit event id",
-            "example": "2023-09-01T09:30:10.840687Z#1234567890123456789-DDB"
-          },
-          "context": {
-            "$ref": "#/components/schemas/AuditContext"
-          },
-          "object": {
-            "$ref": "#/components/schemas/AuditObject"
-          },
-          "createdAt": {
-            "type": "string",
-            "description": "Time when the audit event has been created",
-            "format": "date-time",
-            "example": "2023-09-01T09:30:10.840+0000"
-          },
-          "details": {
-            "type": "object",
-            "description": "Details json related to the audit event",
-            "example": "{ \"authType\": \"SSO\", \"mfaFactorType\": \"NONE\" }"
-          },
-          "createdBy": {
-            "$ref": "#/components/schemas/AuditCreatedBy"
-          },
-          "event": {
-            "type": "string",
-            "description": "Event type of the audit event",
-            "example": "sign_in_succeeded"
-          }
-        }
-      },
-      "AuditContext": {
-        "type": "object",
-        "description": "Audit context",
-        "properties": {
-          "ip": {
-            "type": "string",
-            "description": "Ip address associated with the audit context",
-            "example": "0.0.0.0"
-          },
-          "team": {
-            "$ref": "#/components/schemas/AuditTeam"
-          },
-          "organization": {
-            "$ref": "#/components/schemas/AuditOrganization"
-          }
-        }
-      },
-      "AuditTeam": {
-        "type": "object",
-        "description": "Team associated with the audit context",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Id of the team",
-            "example": "1234567890123456789"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the team",
-            "example": "Example Team"
-          }
-        }
-      },
-      "AuditOrganization": {
-        "type": "object",
-        "description": "Organization associated with the audit context",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Id of the organization",
-            "example": "1234567890123456789"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the organization",
-            "example": "Example Organization"
-          }
-        }
-      },
-      "AuditObject": {
-        "type": "object",
-        "description": "The object related with the audit event",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Id of the object",
-            "example": "1234567890123456789"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the object",
-            "example": "Example Object"
-          }
-        }
-      },
-      "AuditCreatedBy": {
-        "type": "object",
-        "description": "The details regarding the creator of the audit event",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of the creator",
-            "example": "user",
-            "enum": ["user", "application", "scim_provisioner", "miro_automation"]
-          },
-          "id": {
-            "type": "string",
-            "description": "Id of the creator",
-            "example": "1234567890123456789"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the creator",
-            "example": "John Smith"
-          },
-          "email": {
-            "type": "string",
-            "description": "Email of the creator",
-            "example": "john.smith@miro.com"
-          }
-        }
-      },
       "BoardExportJobId": {
         "required": ["jobId"],
         "type": "object",
@@ -16431,28 +16138,6 @@
           }
         }
       },
-      "BasicErrorEnterpriseUserSessionsExpirationEnterprisePlan": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "number",
-            "description": "HTTP status code."
-          },
-          "code": {
-            "type": "string",
-            "description": "Description of the status code."
-          },
-          "message": {
-            "type": "string",
-            "description": "Explanation for the error"
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object returned.",
-            "default": "error"
-          }
-        }
-      },
       "BasicError": {
         "type": "object",
         "properties": {
@@ -16964,6 +16649,38 @@
           }
         }
       },
+      "CreatedBy": {
+        "type": "object",
+        "description": "Contains information about the user who created the item.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier (ID) of the user.",
+            "example": "3458764517517852417"
+          },
+          "type": {
+            "type": "string",
+            "description": "Indicates the type of object returned. In this case, `type` returns `user`.",
+            "example": "user"
+          }
+        }
+      },
+      "ModifiedBy": {
+        "type": "object",
+        "description": "Contains information about the user who last modified the item.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier (ID) of the user.",
+            "example": "3458764517517852417"
+          },
+          "type": {
+            "type": "string",
+            "description": "Indicates the type of object returned. In this case, `type` returns `user`.",
+            "example": "user"
+          }
+        }
+      },
       "PageLinksPlatformExperimentalFeatures": {
         "type": "object",
         "description": "Contains pagination links for the collection.",
@@ -17318,628 +17035,6 @@
           }
         }
       },
-      "AppCardDataResponse": {
-        "type": "object",
-        "description": "Contains app card item data, such as the title, description, or fields.",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "A short text description to add context about the app card.",
-            "example": "Sample app card description"
-          },
-          "fields": {
-            "type": "array",
-            "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
-            "items": {
-              "$ref": "#/components/schemas/CustomField"
-            }
-          },
-          "owned": {
-            "type": "boolean",
-            "description": "Defines whether the card is owned by the application making the call."
-          },
-          "status": {
-            "type": "string",
-            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
-            "enum": ["disconnected", "connected", "disabled"]
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the app card.",
-            "example": "sample app card item"
-          }
-        }
-      },
-      "DocumentDataResponse": {
-        "type": "object",
-        "properties": {
-          "documentUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false"
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the document.",
-            "example": "Sample document title"
-          }
-        }
-      },
-      "EmbedDataResponse": {
-        "type": "object",
-        "properties": {
-          "contentType": {
-            "type": "string",
-            "description": "Type of the embedded item's content.",
-            "example": "video"
-          },
-          "description": {
-            "type": "string",
-            "description": "Short description of the embedded item.",
-            "example": "So this is how to organize your life with Miro (a virtual whiteboard) for collaboration, brainstorming, and project management. Students, designers, agile en..."
-          },
-          "html": {
-            "type": "string",
-            "description": "HTML code of the embedded item.",
-            "example": "<iframe class=\\\"embedly-embed\\\" src=\\\"//cdn.embedly.com/widgets/media.html?src=...&display_name=YouTube&url=...&schema=youtube\\\" width=\\\"854\\\" height=\\\"480\\\" scrolling=\\\"no\\\" title=\\\"YouTube embed\\\" frameborder=\\\"0\\\" allow=\\\"autoplay; fullscreen\\\" allowfullscreen=\\\"true\\\"></iframe>"
-          },
-          "mode": {
-            "type": "string",
-            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
-            "enum": ["inline", "modal"]
-          },
-          "previewUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL.\nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
-          },
-          "providerName": {
-            "type": "string",
-            "description": "Name of the content's provider.",
-            "example": "YouTube"
-          },
-          "providerUrl": {
-            "type": "string",
-            "description": "Url of the content's provider.",
-            "example": "https://www.youtube.com/"
-          },
-          "title": {
-            "type": "string",
-            "description": "Title of the embedded item.",
-            "example": "HOW TO ORGANIZE YOUR LIFE WITH MIRO! ?? Virtual Whiteboard Tour"
-          },
-          "url": {
-            "type": "string",
-            "description": "A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.",
-            "example": "https://www.youtube.com/watch?v=HlVSNEiFCBk"
-          }
-        }
-      },
-      "GeometryPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Contains geometrical information about the item, such as its width or height.",
-        "properties": {
-          "height": {
-            "type": "number",
-            "format": "double",
-            "description": "Height of the item, in pixels.",
-            "example": 60
-          },
-          "rotation": {
-            "type": "number",
-            "format": "double",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
-          },
-          "width": {
-            "type": "number",
-            "format": "double",
-            "description": "Width of the item, in pixels.",
-            "example": 320
-          }
-        }
-      },
-      "Item": {
-        "type": "object",
-        "description": "Contains information about an item.",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/ItemId"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ItemData"
-          },
-          "style": {
-            "$ref": "#/components/schemas/ItemStyle"
-          },
-          "position": {
-            "$ref": "#/components/schemas/Position"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/ParentWithLinks"
-          },
-          "isSupported": {
-            "type": "boolean"
-          },
-          "createdBy": {
-            "$ref": "#/components/schemas/CreatedBy"
-          },
-          "createdAt": {
-            "$ref": "#/components/schemas/CreationTime"
-          },
-          "modifiedBy": {
-            "$ref": "#/components/schemas/ModifiedBy"
-          },
-          "modifiedAt": {
-            "$ref": "#/components/schemas/ModificationTime"
-          },
-          "links": {
-            "$ref": "#/components/schemas/SelfLink"
-          }
-        },
-        "required": ["id", "type", "links"]
-      },
-      "ItemChanges": {
-        "type": "object",
-        "description": "Updates one or more items in one request. You can update up to 20 items per request.",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/ItemId"
-          },
-          "type": {
-            "$ref": "#/components/schemas/ItemTypeChange"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ItemDataChanges"
-          },
-          "style": {
-            "$ref": "#/components/schemas/ItemStyle"
-          },
-          "position": {
-            "$ref": "#/components/schemas/PositionChange"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/Parent"
-          }
-        }
-      },
-      "ItemCreate": {
-        "type": "object",
-        "description": "Creates one or more items in one request. You can create up to 20 items per request.",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/ItemTypeChange"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ItemDataCreate"
-          },
-          "style": {
-            "$ref": "#/components/schemas/ItemStyle"
-          },
-          "position": {
-            "$ref": "#/components/schemas/PositionChange"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/Parent"
-          }
-        },
-        "required": ["type"]
-      },
-      "ItemData": {
-        "type": "object",
-        "description": "Contains information about item-specific data.",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AppCardDataResponse"
-          },
-          {
-            "$ref": "#/components/schemas/CardData"
-          },
-          {
-            "$ref": "#/components/schemas/DocumentDataResponse"
-          },
-          {
-            "$ref": "#/components/schemas/EmbedDataResponse"
-          },
-          {
-            "$ref": "#/components/schemas/ImageDataResponse"
-          },
-          {
-            "$ref": "#/components/schemas/ShapeData"
-          },
-          {
-            "$ref": "#/components/schemas/StickyNoteData"
-          },
-          {
-            "$ref": "#/components/schemas/TextData"
-          }
-        ]
-      },
-      "ItemDataChanges": {
-        "type": "object",
-        "description": "Provides information about item-specific fields for update request.",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AppCardData"
-          },
-          {
-            "$ref": "#/components/schemas/ImageUrlDataChanges"
-          }
-        ]
-      },
-      "ItemDataCreate": {
-        "type": "object",
-        "description": "Contains data information applicable for each item type.",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AppCardData"
-          },
-          {
-            "$ref": "#/components/schemas/CardData"
-          },
-          {
-            "$ref": "#/components/schemas/DocumentUrlData"
-          },
-          {
-            "$ref": "#/components/schemas/EmbedUrlData"
-          },
-          {
-            "$ref": "#/components/schemas/ImageUrlData"
-          },
-          {
-            "$ref": "#/components/schemas/ShapeData"
-          },
-          {
-            "$ref": "#/components/schemas/StickyNoteData"
-          },
-          {
-            "$ref": "#/components/schemas/TextData"
-          }
-        ]
-      },
-      "ItemId": {
-        "type": "string",
-        "description": "Unique identifier (ID) of an item.",
-        "format": "int64",
-        "example": "3458764517517819000"
-      },
-      "Items": {
-        "type": "object",
-        "description": "Contains items resulting from a bulk create or update operation.",
-        "properties": {
-          "data": {
-            "type": "array",
-            "description": "Contains the result data.",
-            "items": {
-              "$ref": "#/components/schemas/Item"
-            }
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object.",
-            "example": "fixed-list"
-          }
-        },
-        "required": ["type", "data"]
-      },
-      "ItemsPage": {
-        "type": "object",
-        "description": "Contains cursor-based items page information.",
-        "properties": {
-          "size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.",
-            "example": 1
-          },
-          "limit": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.",
-            "example": 10
-          },
-          "total": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Total number of results available for the given request.",
-            "example": 11
-          },
-          "data": {
-            "type": "array",
-            "description": "Contains the result data.",
-            "items": {
-              "$ref": "#/components/schemas/Item"
-            }
-          },
-          "links": {
-            "$ref": "#/components/schemas/PageLinks"
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object.",
-            "example": "cursor-list"
-          }
-        },
-        "required": ["type", "size", "limit", "total", "data", "links"]
-      },
-      "ItemStyle": {
-        "type": "object",
-        "description": "Contains information about item-specific styles.",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AppCardStyle"
-          },
-          {
-            "$ref": "#/components/schemas/CardStyle"
-          },
-          {
-            "$ref": "#/components/schemas/ShapeStyle"
-          },
-          {
-            "$ref": "#/components/schemas/StickyNoteStyle"
-          },
-          {
-            "$ref": "#/components/schemas/TextStyle"
-          }
-        ]
-      },
-      "ItemTypeChange": {
-        "type": "string",
-        "description": "Type of item that you want to create.",
-        "enum": ["app_card", "text", "shape", "sticky_note", "image", "document", "card", "frame", "embed"],
-        "example": "text"
-      },
-      "ImageDataResponse": {
-        "type": "object",
-        "properties": {
-          "imageUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Sample image title"
-          }
-        }
-      },
-      "CreationTime": {
-        "type": "string",
-        "format": "date-time",
-        "description": "Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
-        "example": "2022-03-30T17:26:50.000Z"
-      },
-      "ModificationTime": {
-        "type": "string",
-        "format": "date-time",
-        "description": "Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
-        "example": "2022-03-30T17:26:50.000Z"
-      },
-      "CreatedByPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Contains information about the user who created the item.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier (ID) of the user.",
-            "example": "3458764517517852417"
-          },
-          "type": {
-            "type": "string",
-            "description": "Indicates the type of object returned. In this case, `type` returns `user`.",
-            "example": "user"
-          }
-        }
-      },
-      "ModifiedByPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Contains information about the user who last modified the item.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier (ID) of the user.",
-            "example": "3458764517517852417"
-          },
-          "type": {
-            "type": "string",
-            "description": "Indicates the type of object returned. In this case, `type` returns `user`.",
-            "example": "user"
-          }
-        }
-      },
-      "ParentWithLinks": {
-        "type": "object",
-        "description": "Contains information about the parent this item attached to.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "int64",
-            "example": "3458764517517819001",
-            "description": "Unique identifier (ID) of a container item."
-          },
-          "links": {
-            "$ref": "#/components/schemas/SelfLink"
-          }
-        }
-      },
-      "XCoordinate": {
-        "type": "number",
-        "format": "double",
-        "description": "X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
-        "example": 100
-      },
-      "YCoordinate": {
-        "type": "number",
-        "format": "double",
-        "description": "Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
-        "example": 100
-      },
-      "Error": {
-        "type": "object",
-        "description": "Error information",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Code of the error",
-            "example": 2.074
-          },
-          "message": {
-            "type": "string",
-            "description": "Description of the error",
-            "example": "Error message"
-          },
-          "context": {
-            "type": "object"
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Status code of the error",
-            "example": 400
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of entity that is returned.",
-            "example": "error"
-          }
-        },
-        "required": ["message", "type"]
-      },
-      "BulkOperationError": {
-        "type": "object",
-        "description": "Error information with details about operation failure",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of the error",
-            "example": "error"
-          },
-          "code": {
-            "type": "string",
-            "description": "Code of the error",
-            "example": 2.074
-          },
-          "message": {
-            "type": "string",
-            "description": "Description of the error",
-            "example": "Error message"
-          },
-          "context": {
-            "type": "object",
-            "properties": {
-              "fields": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/BulkSubOperationError"
-                }
-              }
-            }
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Status code of the error",
-            "example": 400
-          }
-        },
-        "required": ["message"]
-      },
-      "BulkSubOperationError": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string",
-            "description": "0-based index indicating a sub-operations from the input that caused a failure followed by parameter name"
-          },
-          "message": {
-            "type": "string",
-            "description": "Description of the sub-operation related error",
-            "example": "Invalid parameters"
-          },
-          "context": {
-            "type": "object"
-          }
-        },
-        "required": ["field", "message"]
-      },
-      "CreatedBy": {
-        "type": "object",
-        "description": "Contains information about the user who created the item.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier (ID) of the user.",
-            "example": "3458764517517852417"
-          },
-          "type": {
-            "type": "string",
-            "description": "Indicates the type of object returned. In this case, `type` returns `user`.",
-            "example": "user"
-          }
-        }
-      },
-      "ModifiedBy": {
-        "type": "object",
-        "description": "Contains information about the user who last modified the item.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier (ID) of the user.",
-            "example": "3458764517517852417"
-          },
-          "type": {
-            "type": "string",
-            "description": "Indicates the type of object returned. In this case, `type` returns `user`.",
-            "example": "user"
-          }
-        }
-      },
-      "CustomFieldPlatformTags": {
-        "type": "object",
-        "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
-        "properties": {
-          "fillColor": {
-            "type": "string",
-            "description": "Hex value representing the color that fills the background area of the preview field, when it's displayed on the app card.",
-            "example": "#2fa9e3"
-          },
-          "iconShape": {
-            "type": "string",
-            "default": "round",
-            "description": "The shape of the icon on the preview field.",
-            "enum": ["round", "square"]
-          },
-          "iconUrl": {
-            "type": "string",
-            "description": "A valid URL pointing to an image available online.\nThe transport protocol must be HTTPS.\nPossible image file formats: JPG/JPEG, PNG, SVG.",
-            "example": "https://cdn-icons-png.flaticon.com/512/5695/5695864.png"
-          },
-          "textColor": {
-            "type": "string",
-            "description": "Hex value representing the color of the text string assigned to `value`.",
-            "example": "#1a1a1a"
-          },
-          "tooltip": {
-            "type": "string",
-            "description": "A short text displayed in a tooltip when clicking or hovering over the preview field.",
-            "example": "Completion status indicator"
-          },
-          "value": {
-            "type": "string",
-            "description": "The actual data value of the custom field.\nIt can be any type of information that you want to convey.",
-            "example": "Status: in progress"
-          }
-        }
-      },
       "EmptyStyle": {
         "type": "object",
         "description": "Contains information about the style of an item, such as the color, font, or border style."
@@ -18020,59 +17115,45 @@
           }
         }
       },
-      "ShapeDataPlatformTags": {
+      "PageLinksPlatformTags": {
         "type": "object",
-        "description": "Contains shape item data, such as the content or shape type of the shape.",
+        "description": "Contains pagination links for the collection.",
         "properties": {
-          "content": {
+          "first": {
             "type": "string",
-            "description": "The text you want to display on the shape.",
-            "example": "Hello"
+            "description": "Link to retrieve information in the first page of the collection.",
+            "example": "http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=MzQ1ODc2NaSDN&#RDMDA3MzYyOX=="
           },
-          "shape": {
+          "last": {
             "type": "string",
-            "default": "rectangle",
-            "description": "Defines the geometric shape of the item when it is rendered on the board.",
-            "enum": [
-              "rectangle",
-              "round_rectangle",
-              "circle",
-              "triangle",
-              "rhombus",
-              "parallelogram",
-              "trapezoid",
-              "pentagon",
-              "hexagon",
-              "octagon",
-              "wedge_round_rectangle_callout",
-              "star",
-              "flow_chart_predefined_process",
-              "cloud",
-              "cross",
-              "can",
-              "right_arrow",
-              "left_arrow",
-              "left_right_arrow",
-              "left_brace",
-              "right_brace"
-            ]
+            "description": "Link to the retrieve information in the last page of the collection.",
+            "example": "http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=MzQ1ODc2NDUyNDUyMDA3MzYyOX=="
+          },
+          "next": {
+            "type": "string",
+            "description": "Link to retrieve information in the next page of the collection.",
+            "example": "http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=MzQ1ODc2NDUyNDsdgsFEwfFJCw=="
+          },
+          "prev": {
+            "type": "string",
+            "description": "Link to retrieve information in the previous page of the collection.",
+            "example": "http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor="
+          },
+          "self": {
+            "type": "string",
+            "description": "Link to retrieve information in the current page of the collection.",
+            "example": "http://api.miro.com/v2/boards/o9J_lJWSHdg=/items?limit=10&cursor=MzQ1OD1245643FWUyMDA3MzYyOX=="
           }
         }
       },
-      "StickyNoteDataPlatformTags": {
+      "SelfLinkPlatformTags": {
         "type": "object",
-        "description": "Contains sticky note item data, such as the content or shape of the sticky note.",
+        "description": "Contains applicable links for the current object.",
         "properties": {
-          "content": {
+          "self": {
             "type": "string",
-            "description": "The actual text (content) that appears in the sticky note item.",
-            "example": "Hello"
-          },
-          "shape": {
-            "type": "string",
-            "default": "square",
-            "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
-            "enum": ["square", "rectangle"]
+            "description": "Link to obtain more information about the current object.",
+            "example": "http://api.miro.com/v2/boards/o9J_koQspF4=/object_type/3074457349143649487"
           }
         }
       },
@@ -18262,18 +17343,6 @@
           }
         }
       },
-      "TextDataPlatformTags": {
-        "type": "object",
-        "description": "Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).",
-        "properties": {
-          "content": {
-            "type": "string",
-            "description": "The actual text (content) that appears in the text item.",
-            "example": "Hello"
-          }
-        },
-        "required": ["content"]
-      },
       "createdByPlatformTags": {
         "type": "object",
         "description": "Contains information about the user who created the item.",
@@ -18439,7 +17508,7 @@
         },
         "required": ["id", "type"]
       },
-      "AppCardStylePlatform": {
+      "AppCardStyle": {
         "type": "object",
         "description": "Contains information about the style of an app card item, such as the fill color.",
         "properties": {
@@ -19233,7 +18302,7 @@
         },
         "required": ["id", "type"]
       },
-      "CardStylePlatform": {
+      "CardStyle": {
         "type": "object",
         "description": "Contains information about the style of a card item, such as the card theme.",
         "properties": {
@@ -19642,7 +18711,7 @@
           }
         }
       },
-      "DocumentUrlDataPlatform": {
+      "DocumentUrlData": {
         "type": "object",
         "description": "Contains information about the document URL.",
         "properties": {
@@ -19809,7 +18878,7 @@
           }
         }
       },
-      "EmbedUrlDataPlatform": {
+      "EmbedUrlData": {
         "type": "object",
         "description": "Contains information about the embed URL.",
         "properties": {
@@ -20129,7 +19198,7 @@
           }
         }
       },
-      "ImageUrlDataPlatform": {
+      "ImageUrlData": {
         "type": "object",
         "description": "Contains information about the image URL.",
         "properties": {
@@ -20147,7 +19216,7 @@
         },
         "required": ["url"]
       },
-      "ImageUrlDataChangesPlatform": {
+      "ImageUrlDataChanges": {
         "type": "object",
         "description": "Contains information about the image URL.",
         "properties": {
@@ -20731,7 +19800,7 @@
         },
         "required": ["id", "type"]
       },
-      "StickyNoteStylePlatform": {
+      "StickyNoteStyle": {
         "type": "object",
         "description": "Contains information about the style of a sticky note item, such as the fill color or text alignment.",
         "properties": {
@@ -21174,28 +20243,6 @@
           }
         }
       },
-      "AppCardStyle": {
-        "type": "object",
-        "description": "Contains information about the style of an app card item, such as the fill color.",
-        "properties": {
-          "fillColor": {
-            "type": "string",
-            "description": "Hex value of the border color of the app card.\nDefault: `#2d9bf0`.",
-            "example": "#2d9bf0"
-          }
-        }
-      },
-      "CardStyle": {
-        "type": "object",
-        "description": "Contains information about the style of a card item, such as the card theme.",
-        "properties": {
-          "cardTheme": {
-            "type": "string",
-            "description": "Hex value of the border color of the card.\nDefault: `#2d9bf0`.",
-            "example": "#2d9bf0"
-          }
-        }
-      },
       "CustomField": {
         "type": "object",
         "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
@@ -21247,45 +20294,6 @@
             "example": "Sample document title"
           }
         }
-      },
-      "DocumentUrlData": {
-        "type": "object",
-        "description": "Contains information about the document URL.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the document.",
-            "example": "Sample document title"
-          },
-          "url": {
-            "type": "string",
-            "default": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-            "description": "URL where the document is hosted.",
-            "example": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-          }
-        },
-        "required": ["url"]
-      },
-      "EmbedUrlData": {
-        "type": "object",
-        "description": "Contains information about the embed URL.",
-        "properties": {
-          "mode": {
-            "type": "string",
-            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
-            "enum": ["inline", "modal"]
-          },
-          "previewUrl": {
-            "type": "string",
-            "description": "URL of the image to be used as the preview image for the embedded item."
-          },
-          "url": {
-            "type": "string",
-            "default": "https://www.youtube.com/watch?v=HlVSNEiFCBk",
-            "description": "A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS."
-          }
-        },
-        "required": ["url"]
       },
       "FrameData": {
         "type": "object",
@@ -21348,40 +20356,6 @@
           }
         }
       },
-      "ImageUrlData": {
-        "type": "object",
-        "description": "Contains information about the image URL.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Sample image title"
-          },
-          "url": {
-            "type": "string",
-            "default": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png",
-            "description": "URL of the image.",
-            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
-          }
-        },
-        "required": ["url"]
-      },
-      "ImageUrlDataChanges": {
-        "type": "object",
-        "description": "Contains information about the image URL.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Test image title"
-          },
-          "url": {
-            "type": "string",
-            "description": "URL of the image.",
-            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
-          }
-        }
-      },
       "PageLinks": {
         "type": "object",
         "description": "Contains pagination links for the collection.",
@@ -21438,44 +20412,6 @@
             "default": "square",
             "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
             "enum": ["square", "rectangle"]
-          }
-        }
-      },
-      "StickyNoteStyle": {
-        "type": "object",
-        "description": "Contains information about the style of a sticky note item, such as the fill color or text alignment.",
-        "properties": {
-          "fillColor": {
-            "type": "string",
-            "description": "Fill color for the sticky note.\nDefault: `light_yellow`.",
-            "enum": [
-              "gray",
-              "light_yellow",
-              "yellow",
-              "orange",
-              "light_green",
-              "green",
-              "dark_green",
-              "cyan",
-              "light_pink",
-              "pink",
-              "violet",
-              "red",
-              "light_blue",
-              "blue",
-              "dark_blue",
-              "black"
-            ]
-          },
-          "textAlign": {
-            "type": "string",
-            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
-            "enum": ["left", "right", "center"]
-          },
-          "textAlignVertical": {
-            "type": "string",
-            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
-            "enum": ["top", "middle", "bottom"]
           }
         }
       },
@@ -21603,15 +20539,6 @@
           "type": "string"
         },
         "example": "3074457345618265000"
-      },
-      "boardId": {
-        "description": "Unique identifier (ID) of the board where you want to create the item.",
-        "required": true,
-        "in": "path",
-        "name": "board_id",
-        "schema": {
-          "type": "string"
-        }
       }
     },
     "securitySchemes": {

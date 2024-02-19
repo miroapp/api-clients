@@ -46,10 +46,6 @@ import {ConnectorCreationData} from '../model/connectorCreationData'
 import {ConnectorWithLinks} from '../model/connectorWithLinks'
 import {ConnectorsCursorPaged} from '../model/connectorsCursorPaged'
 
-import {BulkOperationError} from '../model/bulkOperationError'
-import {ItemCreate} from '../model/itemCreate'
-import {Items} from '../model/items'
-
 import {DocumentCreateRequest} from '../model/documentCreateRequest'
 import {DocumentItem} from '../model/documentItem'
 import {DocumentUpdateRequest} from '../model/documentUpdateRequest'
@@ -1625,40 +1621,6 @@ export class MiroApi {
   }
 
   /**
-   * Adds different types of items to a board. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
-   * @summary Create items in bulk
-   * @param boardId Unique identifier (ID) of the board where you want to create the item.
-   * @param itemCreate
-   */
-  async createItems(boardId: string, itemCreate: Array<ItemCreate>): Promise<{response: Response; body: Items}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/items/bulk'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling createItems.')
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'POST',
-      resource,
-      JSON.stringify(ObjectSerializer.serialize(itemCreate, 'Array<ItemCreate>')),
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'Items')
-
-    return {response, body}
-  }
-
-  /**
    * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create document item using URL
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
@@ -2041,13 +2003,13 @@ export class MiroApi {
   /**
    * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items on board
-   * @param boardIdPlatformExperimentalFeatures Unique identifier (ID) of the board for which you want to retrieve the list of available items.
+   * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItemsExperimental(
-    boardIdPlatformExperimentalFeatures: string,
+    boardId: string,
     query?: {
       limit?: string
 
@@ -2056,16 +2018,14 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2-experimental/boards/{board_id_PlatformExperimentalFeatures}/items'.replace(
-      '{' + 'board_id_PlatformExperimentalFeatures' + '}',
-      encodeURIComponent(String(boardIdPlatformExperimentalFeatures)),
+    const localVarPath = '/v2-experimental/boards/{board_id}/items'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformExperimentalFeatures' is not null or undefined
-    if (boardIdPlatformExperimentalFeatures === null || boardIdPlatformExperimentalFeatures === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatformExperimentalFeatures was null or undefined when calling getItemsExperimental.',
-      )
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getItemsExperimental.')
     }
 
     if (query?.limit !== undefined) {
@@ -5224,41 +5184,6 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'TokenInformation')
-
-    return {response, body}
-  }
-
-  /**
-   * Delete all user sessions.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. This API is only available for preconfigured organizations. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
-   * @summary Delete user sessions
-   * @param email Emails of the users for whom you want to delete the sessions. Example: &#x60;email&#x3D;john.smith@example.com&#x60;
-   */
-  async enterprisePostUserSessionsReset(email: string): Promise<{response: Response; body?: any}> {
-    const localVarPath = '/v2/sessions/reset_all'
-    let localVarQueryParameters = new URLSearchParams()
-
-    // verify required parameter 'email' is not null or undefined
-    if (email === null || email === undefined) {
-      throw new Error('Required parameter email was null or undefined when calling enterprisePostUserSessionsReset.')
-    }
-
-    if (email !== undefined) {
-      localVarQueryParameters.append('email', ObjectSerializer.serialize(email, 'string'))
-    }
-
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'POST',
-      resource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = bodyAsJson
 
     return {response, body}
   }
