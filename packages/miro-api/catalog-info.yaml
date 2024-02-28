@@ -14,7 +14,7 @@ metadata:
 
 spec:
   type: library
-  owner: developer-experience
+  owner: partner-enablement
   criticality: low
   lifecycle: production
   operations:
