@@ -1,0 +1,32 @@
+# WidgetDataOutput
+
+Contains the item data, such as the item title, content, or description.
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**content_type** | **str** | Type of the embedded item&#39;s content. | [optional] 
+**description** | **str** | A short text description to add context about the app card. | [optional] 
+**html** | **str** | Html code of the embedded item. | [optional] 
+**mode** | **str** | Defines how the content in the embed item is displayed on the board. &#x60;inline&#x60;: The embedded content is displayed directly on the board. &#x60;modal&#x60;: The embedded content is displayed inside a modal overlay on the board. | [optional] 
+**preview_url** | **str** | The URL to download the resource. You must use your access token to access the URL. The URL contains the &#x60;redirect&#x60; parameter and the &#x60;format&#x60; parameter to control the request execution as described in the following parameters: &#x60;format&#x60; parameter: By default, the image format is set to the preview image. If you want to download the original image, set the &#x60;format&#x60; parameter in the URL to &#x60;original&#x60;. &#x60;redirect&#x60;: By default, the &#x60;redirect&#x60; parameter is set to &#x60;false&#x60; and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the &#x60;redirect&#x60; parameter is set to &#x60;true&#x60;, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be &#x60;image/png&#x60;, &#39;image/svg&#39;, or &#39;image/jpg&#39;, depending on the original image type. | [optional] 
+**provider_name** | **str** | Name of the content&#39;s provider. | [optional] 
+**provider_url** | **str** | Url of the content&#39;s provider. | [optional] 
+**title** | **str** | Title of the frame. This title appears at the top of the frame. | [optional] 
+**url** | **str** | A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS. | [optional] 
+**assignee_id** | **str** | Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing numbers, and it is automatically assigned to a user when they first sign up. | [optional] 
+**due_date** | **datetime** | The date when the task or activity described in the card is due to be completed. In the GUI, users can select the due date from a calendar. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). | [optional] 
+**fields** | [**[CustomField]**](CustomField.md) | Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view. | [optional] 
+**owned** | **bool** | Defines whether the card is owned by the application making the call. | [optional] 
+**status** | **str** | Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns &#x60;disabled&#x60;. | [optional] 
+**image_url** | **str** | The URL to download the resource. You must use your access token to access the URL. The URL contains the &#x60;redirect&#x60; parameter and the &#x60;format&#x60; parameter to control the request execution as described in the following parameters: &#x60;format&#x60; parameter: By default, the image format is set to the preview image. If you want to download the original image, set the &#x60;format&#x60; parameter in the URL to &#x60;original&#x60;. &#x60;redirect&#x60;: By default, the &#x60;redirect&#x60; parameter is set to &#x60;false&#x60; and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the &#x60;redirect&#x60; parameter is set to &#x60;true&#x60;, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be &#x60;image/png&#x60;, &#39;image/svg&#39;, or &#39;image/jpg&#39;, depending on the original image type. | [optional] 
+**document_url** | **str** | The URL to download the resource. You must use your access token to access the URL. The URL contains the &#x60;redirect&#x60; parameter to control the request execution. &#x60;redirect&#x60;: By default, the &#x60;redirect&#x60; parameter is set to &#x60;false&#x60; and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the &#x60;redirect&#x60; parameter is set to &#x60;true&#x60;, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is &#x60;application/octet-stream&#x60;. | [optional] 
+**shape** | **str** | Defines the geometric shape of the sticky note and aspect ratio for its dimensions. | [optional]  if omitted the server will use the default value of "square"
+**format** | **str** | Only custom frames are supported at the moment. | [optional]  if omitted the server will use the default value of "custom"
+**type** | **str** | Only free form frames are supported at the moment. | [optional]  if omitted the server will use the default value of "freeform"
+**content** | **str** | The actual text (content) that appears in the sticky note item. | [optional] 
+**any string name** | **bool, date, datetime, dict, float, int, list, str, none_type** | any string name can be used but the value must be the correct type | [optional]
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

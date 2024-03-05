@@ -8,7 +8,7 @@
     "test": "jest",
     "coverage": "jest --coverage --coverageDirectory coverage",
     "validate_commited": "./test/generator_test.sh",
-    "generate": "./scripts/generate-node-client.sh"
+    "generate": "./scripts/generate-python-client.sh && ./scripts/generate-node-client.sh"
   },
   "dependencies": {
     "@openapitools/openapi-generator-cli": "^2.10.0"
