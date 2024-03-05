@@ -133,7 +133,6 @@ export * from './modifiedByPlatformTags'
 export * from './organization'
 export * from './organizationInformation'
 export * from './organizationMember'
-export * from './organizationMembersSearchByEmailsResponse'
 export * from './organizationMembersSearchResponse'
 export * from './pageLinks'
 export * from './pageLinksPlatform'
@@ -369,7 +368,6 @@ import {ModifiedByPlatformTags} from './modifiedByPlatformTags'
 import {Organization} from './organization'
 import {OrganizationInformation} from './organizationInformation'
 import {OrganizationMember} from './organizationMember'
-import {OrganizationMembersSearchByEmailsResponse} from './organizationMembersSearchByEmailsResponse'
 import {OrganizationMembersSearchResponse} from './organizationMembersSearchResponse'
 import {PageLinks} from './pageLinks'
 import {PageLinksPlatform} from './pageLinksPlatform'
@@ -731,7 +729,6 @@ let typeMap: {[index: string]: any} = {
   Organization: Organization,
   OrganizationInformation: OrganizationInformation,
   OrganizationMember: OrganizationMember,
-  OrganizationMembersSearchByEmailsResponse: OrganizationMembersSearchByEmailsResponse,
   OrganizationMembersSearchResponse: OrganizationMembersSearchResponse,
   PageLinks: PageLinks,
   PageLinksPlatform: PageLinksPlatform,
