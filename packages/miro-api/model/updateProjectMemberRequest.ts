@@ -32,3 +32,5 @@ export class UpdateProjectMemberRequest {
     return UpdateProjectMemberRequest.attributeTypeMap
   }
 }
+
+export namespace UpdateProjectMemberRequest {}

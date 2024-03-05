@@ -19,4 +19,12 @@ import {OrganizationMember} from './organizationMember'
 export class OrganizationMembersSearchByEmailsResponse extends Array<OrganizationMember> {
   /** @ignore */
   static discriminator: string | undefined = undefined
+
+  /** @ignore */
+  static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = []
+
+  /** @ignore */
+  static getAttributeTypeMap() {
+    return super.getAttributeTypeMap().concat(OrganizationMembersSearchByEmailsResponse.attributeTypeMap)
+  }
 }
