@@ -32,3 +32,5 @@ export class SharingPolicySettings {
     return SharingPolicySettings.attributeTypeMap
   }
 }
+
+export namespace SharingPolicySettings {}

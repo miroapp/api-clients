@@ -41,3 +41,5 @@ export class AddProjectMemberRequest {
     return AddProjectMemberRequest.attributeTypeMap
   }
 }
+
+export namespace AddProjectMemberRequest {}

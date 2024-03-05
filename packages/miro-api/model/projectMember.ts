@@ -59,3 +59,5 @@ export class ProjectMember {
     return ProjectMember.attributeTypeMap
   }
 }
+
+export namespace ProjectMember {}

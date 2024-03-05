@@ -15,7 +15,7 @@ openapi-generator-cli generate \
 
 echo "Removing duplicate imports"
 
-./scripts/remove_duplicate_imports.sh
+./scripts/remove_duplicate_imports.sh "${target}/api/apis.ts"
 
 echo "Generating highlevel models"
 
