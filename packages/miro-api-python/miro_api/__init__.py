@@ -22,5 +22,5 @@ from miro_api.api_client import ApiClient
 def MiroApi(access_token: str) -> MiroApiEndpoints:
     client = ApiClient()
     client.set_default_header('Authorization', f'Bearer {access_token}')
-    client.user_agent = 'miro-api-py:2.1.0'
+    client.user_agent = 'miro-api-python:2.1.0'
     return MiroApiEndpoints(client)

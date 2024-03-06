@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-target=../miro-api-py
+target=../miro-api-python
 
 rm -rf "${target}/miro_api/"
 
