@@ -29,6 +29,7 @@ class BoardPermissionsPolicy(BaseModel):
     collaboration_tools_start_access: Optional[StrictStr] = Field(default='all_editors', description="Defines who can start or stop timer, voting, video chat, screen sharing, attention management. Others will only be able to join. To change the value for the `collaborationToolsStartAccess` parameter, contact Miro Customer Support.", alias="collaborationToolsStartAccess")
     copy_access: Optional[StrictStr] = Field(default='anyone', description="Defines who can copy the board, copy objects, download images, and save the board as a template or PDF.", alias="copyAccess")
     sharing_access: Optional[StrictStr] = Field(default='team_members_with_editing_rights', description="Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support.", alias="sharingAccess")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["collaborationToolsStartAccess", "copyAccess", "sharingAccess"]
 
     @field_validator('collaboration_tools_start_access')
@@ -91,8 +92,10 @@ class BoardPermissionsPolicy(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -100,6 +103,11 @@ class BoardPermissionsPolicy(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -116,6 +124,11 @@ class BoardPermissionsPolicy(BaseModel):
             "copyAccess": obj.get("copyAccess") if obj.get("copyAccess") is not None else 'anyone',
             "sharingAccess": obj.get("sharingAccess") if obj.get("sharingAccess") is not None else 'team_members_with_editing_rights'
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

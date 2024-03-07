@@ -20309,7 +20309,10 @@
             "type": "string",
             "default": "freeform",
             "description": "Only free form frames are supported at the moment.",
-            "enum": ["freeform", "heap", "grid", "rows", "columns"]
+            "enum": ["freeform", "heap", "grid", "rows", "columns", "unknown"]
+          },
+          "showContent": {
+            "type": "boolean"
           }
         }
       },

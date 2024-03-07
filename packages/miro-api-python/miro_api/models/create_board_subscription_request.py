@@ -30,6 +30,7 @@ class CreateBoardSubscriptionRequest(BaseModel):
     board_id: Optional[StrictStr] = Field(default=None, description="[Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to associate with the webhook subscription.", alias="boardId")
     callback_url: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=256)]] = Field(default=None, description="Indicates the HTTPS URL to which Miro sends a webhook when an event occurs.", alias="callbackUrl")
     status: Optional[StrictStr] = Field(default='enabled', description="Indicates whether the status of the webhook subscription.`enabled`: Miro sends a webhook when an event occurs in the associated board. `disabled`: Miro does not send a webhook even when an event occurs in the associated board. `lost_access`: The user with which the webhook subscription is associated has lost access to the board. The user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["boardId", "callbackUrl", "status"]
 
     @field_validator('callback_url')
@@ -82,8 +83,10 @@ class CreateBoardSubscriptionRequest(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -91,6 +94,11 @@ class CreateBoardSubscriptionRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -107,6 +115,11 @@ class CreateBoardSubscriptionRequest(BaseModel):
             "callbackUrl": obj.get("callbackUrl"),
             "status": obj.get("status") if obj.get("status") is not None else 'enabled'
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

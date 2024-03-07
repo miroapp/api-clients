@@ -27,6 +27,7 @@ class AppCardStyle(BaseModel):
     Contains information about the style of an app card item, such as the fill color.
     """ # noqa: E501
     fill_color: Optional[StrictStr] = Field(default=None, description="Hex value of the border color of the app card. Default: `#2d9bf0`.", alias="fillColor")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["fillColor"]
 
     model_config = {
@@ -59,8 +60,10 @@ class AppCardStyle(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -68,6 +71,11 @@ class AppCardStyle(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -82,6 +90,11 @@ class AppCardStyle(BaseModel):
         _obj = cls.model_validate({
             "fillColor": obj.get("fillColor")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

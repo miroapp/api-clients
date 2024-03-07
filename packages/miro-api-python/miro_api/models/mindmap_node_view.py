@@ -31,6 +31,7 @@ class MindmapNodeView(BaseModel):
     type: Optional[StrictStr] = Field(default=None, description="Type of item used as mind map node. Currently, `type` can only be equal to `text`.")
     data: Optional[MindmapWidgetDataOutput] = None
     style: Optional[MindmapNodeStyle] = None
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["type", "data", "style"]
 
     model_config = {
@@ -63,8 +64,10 @@ class MindmapNodeView(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -78,6 +81,11 @@ class MindmapNodeView(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
             _dict['style'] = self.style.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -94,6 +102,11 @@ class MindmapNodeView(BaseModel):
             "data": MindmapWidgetDataOutput.from_dict(obj["data"]) if obj.get("data") is not None else None,
             "style": MindmapNodeStyle.from_dict(obj["style"]) if obj.get("style") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

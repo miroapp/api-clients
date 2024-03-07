@@ -29,6 +29,7 @@ class GeometryPlatformExperimentalFeatures(BaseModel):
     height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Height of the item, in pixels.")
     rotation: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.")
     width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Width of the item, in pixels.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["height", "rotation", "width"]
 
     model_config = {
@@ -61,8 +62,10 @@ class GeometryPlatformExperimentalFeatures(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -70,6 +73,11 @@ class GeometryPlatformExperimentalFeatures(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -86,6 +94,11 @@ class GeometryPlatformExperimentalFeatures(BaseModel):
             "rotation": obj.get("rotation"),
             "width": obj.get("width")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

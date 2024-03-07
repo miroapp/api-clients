@@ -28,6 +28,7 @@ class TeamCopyAccessLevelSettings(BaseModel):
     """ # noqa: E501
     copy_access_level: Optional[StrictStr] = Field(default=None, description=" * \"anyone\":       Anyone with the board access can copy board content on newly created boards. * \"team_members\": Team members can copy board content on newly created boards. * \"team_editors\": Team members with editing rights can copy board content on newly created boards. * \"board_owner\":  Board owners only can copy board content on newly created boards. ", alias="copyAccessLevel")
     copy_access_level_limitation: Optional[StrictStr] = Field(default=None, description=" * \"anyone\":       Team members and users outside team can be given permission to copy board content. * \"team_members\": Only team members can be given permission to copy board content. ", alias="copyAccessLevelLimitation")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["copyAccessLevel", "copyAccessLevelLimitation"]
 
     @field_validator('copy_access_level')
@@ -80,8 +81,10 @@ class TeamCopyAccessLevelSettings(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -89,6 +92,11 @@ class TeamCopyAccessLevelSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -104,6 +112,11 @@ class TeamCopyAccessLevelSettings(BaseModel):
             "copyAccessLevel": obj.get("copyAccessLevel"),
             "copyAccessLevelLimitation": obj.get("copyAccessLevelLimitation")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

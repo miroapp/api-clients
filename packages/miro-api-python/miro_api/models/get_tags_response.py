@@ -28,6 +28,7 @@ class GetTagsResponse(BaseModel):
     GetTagsResponse
     """ # noqa: E501
     tags: Optional[List[Tag]] = None
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["tags"]
 
     model_config = {
@@ -60,8 +61,10 @@ class GetTagsResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -76,6 +79,11 @@ class GetTagsResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['tags'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -90,6 +98,11 @@ class GetTagsResponse(BaseModel):
         _obj = cls.model_validate({
             "tags": [Tag.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

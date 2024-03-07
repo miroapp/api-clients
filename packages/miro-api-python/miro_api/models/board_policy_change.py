@@ -30,6 +30,7 @@ class BoardPolicyChange(BaseModel):
     """ # noqa: E501
     permissions_policy: Optional[BoardPermissionsPolicy] = Field(default=None, alias="permissionsPolicy")
     sharing_policy: Optional[BoardSharingPolicyChange] = Field(default=None, alias="sharingPolicy")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["permissionsPolicy", "sharingPolicy"]
 
     model_config = {
@@ -62,8 +63,10 @@ class BoardPolicyChange(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -77,6 +80,11 @@ class BoardPolicyChange(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of sharing_policy
         if self.sharing_policy:
             _dict['sharingPolicy'] = self.sharing_policy.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -92,6 +100,11 @@ class BoardPolicyChange(BaseModel):
             "permissionsPolicy": BoardPermissionsPolicy.from_dict(obj["permissionsPolicy"]) if obj.get("permissionsPolicy") is not None else None,
             "sharingPolicy": BoardSharingPolicyChange.from_dict(obj["sharingPolicy"]) if obj.get("sharingPolicy") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

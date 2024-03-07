@@ -30,6 +30,7 @@ class BoardSharingPolicy(BaseModel):
     invite_to_account_and_board_link_access: Optional[StrictStr] = Field(default='no_access', description="Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.", alias="inviteToAccountAndBoardLinkAccess")
     organization_access: Optional[StrictStr] = Field(default='private', description="Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.", alias="organizationAccess")
     team_access: Optional[StrictStr] = Field(default=None, description="Defines the team-level access to the board.", alias="teamAccess")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["access", "inviteToAccountAndBoardLinkAccess", "organizationAccess", "teamAccess"]
 
     @field_validator('access')
@@ -102,8 +103,10 @@ class BoardSharingPolicy(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -111,6 +114,11 @@ class BoardSharingPolicy(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -128,6 +136,11 @@ class BoardSharingPolicy(BaseModel):
             "organizationAccess": obj.get("organizationAccess") if obj.get("organizationAccess") is not None else 'private',
             "teamAccess": obj.get("teamAccess")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

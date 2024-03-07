@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr, field_validator
+from pydantic import BaseModel, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +29,9 @@ class FrameData(BaseModel):
     format: Optional[StrictStr] = Field(default='custom', description="Only custom frames are supported at the moment.")
     title: Optional[StrictStr] = Field(default=None, description="Title of the frame. This title appears at the top of the frame.")
     type: Optional[StrictStr] = Field(default='freeform', description="Only free form frames are supported at the moment.")
-    __properties: ClassVar[List[str]] = ["format", "title", "type"]
+    show_content: Optional[StrictBool] = Field(default=None, alias="showContent")
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = ["format", "title", "type", "showContent"]
 
     @field_validator('format')
     def format_validate_enum(cls, value):
@@ -47,8 +49,8 @@ class FrameData(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['freeform', 'heap', 'grid', 'rows', 'columns']):
-            raise ValueError("must be one of enum values ('freeform', 'heap', 'grid', 'rows', 'columns')")
+        if value not in set(['freeform', 'heap', 'grid', 'rows', 'columns', 'unknown']):
+            raise ValueError("must be one of enum values ('freeform', 'heap', 'grid', 'rows', 'columns', 'unknown')")
         return value
 
     model_config = {
@@ -81,8 +83,10 @@ class FrameData(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -90,6 +94,11 @@ class FrameData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -104,8 +113,14 @@ class FrameData(BaseModel):
         _obj = cls.model_validate({
             "format": obj.get("format") if obj.get("format") is not None else 'custom',
             "title": obj.get("title"),
-            "type": obj.get("type") if obj.get("type") is not None else 'freeform'
+            "type": obj.get("type") if obj.get("type") is not None else 'freeform',
+            "showContent": obj.get("showContent")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -38,6 +38,7 @@ class ShapeStyleForCreate(BaseModel):
     font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the font size, in dp, for the text on the shape. Default: `14`.", alias="fontSize")
     text_align: Optional[StrictStr] = Field(default=None, description="Defines how the shape text is horizontally aligned. Default: Flowchart shapes: `center`. Basic shapes: `left`.  `unknown` is returned for unsupported shapes.", alias="textAlign")
     text_align_vertical: Optional[StrictStr] = Field(default=None, description="Defines how the shape text is vertically aligned. Default: Flowchart shapes: `middle`. Basic shapes: `top`.  `unknown` is returned for unsupported shapes.", alias="textAlignVertical")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["borderColor", "borderOpacity", "borderStyle", "borderWidth", "color", "fillColor", "fillOpacity", "fontFamily", "fontSize", "textAlign", "textAlignVertical"]
 
     @field_validator('border_style')
@@ -110,8 +111,10 @@ class ShapeStyleForCreate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -119,6 +122,11 @@ class ShapeStyleForCreate(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -143,6 +151,11 @@ class ShapeStyleForCreate(BaseModel):
             "textAlign": obj.get("textAlign"),
             "textAlignVertical": obj.get("textAlignVertical")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

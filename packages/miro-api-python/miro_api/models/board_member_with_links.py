@@ -32,6 +32,7 @@ class BoardMemberWithLinks(BaseModel):
     role: Optional[StrictStr] = Field(default=None, description="Role of the board member.")
     links: Optional[SelfLink] = None
     type: StrictStr = Field(description="Type of the object that is returned. In this case, `type` returns `board_member`.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "role", "links", "type"]
 
     @field_validator('role')
@@ -74,8 +75,10 @@ class BoardMemberWithLinks(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -86,6 +89,11 @@ class BoardMemberWithLinks(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             _dict['links'] = self.links.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -104,6 +112,11 @@ class BoardMemberWithLinks(BaseModel):
             "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None,
             "type": obj.get("type")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

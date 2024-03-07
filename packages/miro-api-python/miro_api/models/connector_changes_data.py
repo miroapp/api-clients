@@ -35,6 +35,7 @@ class ConnectorChangesData(BaseModel):
     shape: Optional[StrictStr] = Field(default=None, description="The path type of the connector line, defines curvature. Default: curved.")
     captions: Optional[Annotated[List[Caption], Field(min_length=0, max_length=20)]] = Field(default=None, description="Blocks of text you want to display on the connector.")
     style: Optional[ConnectorStyle] = None
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["startItem", "endItem", "shape", "captions", "style"]
 
     @field_validator('shape')
@@ -77,8 +78,10 @@ class ConnectorChangesData(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -102,6 +105,11 @@ class ConnectorChangesData(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
             _dict['style'] = self.style.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -120,6 +128,11 @@ class ConnectorChangesData(BaseModel):
             "captions": [Caption.from_dict(_item) for _item in obj["captions"]] if obj.get("captions") is not None else None,
             "style": ConnectorStyle.from_dict(obj["style"]) if obj.get("style") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -28,6 +28,7 @@ class TeamMemberInvite(BaseModel):
     """ # noqa: E501
     email: StrictStr = Field(description="User email to add to a team")
     role: Optional[StrictStr] = Field(default=None, description=" Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"team_guest\": Team-guest user, user with access only to a team without access to organization. ")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["email", "role"]
 
     @field_validator('role')
@@ -70,8 +71,10 @@ class TeamMemberInvite(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -79,6 +82,11 @@ class TeamMemberInvite(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -94,6 +102,11 @@ class TeamMemberInvite(BaseModel):
             "email": obj.get("email"),
             "role": obj.get("role")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

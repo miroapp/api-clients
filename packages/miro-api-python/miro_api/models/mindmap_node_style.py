@@ -30,6 +30,7 @@ class MindmapNodeStyle(BaseModel):
     color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color for the text within the node.")
     fill_opacity: Optional[StrictStr] = Field(default=None, description="It sets the opacity level of the background fill color.  Allowed values: any number between 0.0 and 1.0 included.  If the value is 0.0, the background fill color is completely transparent or invisible. If the value is 1.0, the background fill color is completely opaque or solid. Default: 0 (transparent)", alias="fillOpacity")
     font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the font size, in dp, for the text on the node. Default: `14`.", alias="fontSize")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["color", "fillOpacity", "fontSize"]
 
     model_config = {
@@ -62,8 +63,10 @@ class MindmapNodeStyle(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -71,6 +74,11 @@ class MindmapNodeStyle(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -87,6 +95,11 @@ class MindmapNodeStyle(BaseModel):
             "fillOpacity": obj.get("fillOpacity"),
             "fontSize": obj.get("fontSize")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

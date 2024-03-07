@@ -28,6 +28,7 @@ class MindmapDataForCreate(BaseModel):
     Contains mind map node data, such as the title, content, or description.
     """ # noqa: E501
     node_view: MindmapNode = Field(alias="nodeView")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["nodeView"]
 
     model_config = {
@@ -60,8 +61,10 @@ class MindmapDataForCreate(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -72,6 +75,11 @@ class MindmapDataForCreate(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of node_view
         if self.node_view:
             _dict['nodeView'] = self.node_view.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -86,6 +94,11 @@ class MindmapDataForCreate(BaseModel):
         _obj = cls.model_validate({
             "nodeView": MindmapNode.from_dict(obj["nodeView"]) if obj.get("nodeView") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

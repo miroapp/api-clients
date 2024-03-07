@@ -109,6 +109,7 @@ export class WidgetDataOutput {
    */
   'type'?: string | (typeof WidgetDataOutput.TypeEnum)[keyof typeof WidgetDataOutput.TypeEnum] =
     WidgetDataOutput.TypeEnum.Freeform
+  'showContent'?: boolean
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -215,6 +216,11 @@ export class WidgetDataOutput {
       baseName: 'type',
       type: 'WidgetDataOutput.TypeEnum',
     },
+    {
+      name: 'showContent',
+      baseName: 'showContent',
+      type: 'boolean',
+    },
   ]
 
   /** @ignore */
@@ -254,5 +260,6 @@ export namespace WidgetDataOutput {
     Grid: 'grid',
     Rows: 'rows',
     Columns: 'columns',
+    Unknown: 'unknown',
   } as const
 }

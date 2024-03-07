@@ -32,6 +32,7 @@ class AppCardDataPlatform(BaseModel):
     owned: Optional[StrictBool] = Field(default=None, description="Defines whether the card is owned by the application making the call.")
     status: Optional[StrictStr] = Field(default=None, description="Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.")
     title: Optional[StrictStr] = Field(default=None, description="A short text header to identify the app card.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["description", "fields", "owned", "status", "title"]
 
     @field_validator('status')
@@ -74,8 +75,10 @@ class AppCardDataPlatform(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -90,6 +93,11 @@ class AppCardDataPlatform(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['fields'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -108,6 +116,11 @@ class AppCardDataPlatform(BaseModel):
             "status": obj.get("status"),
             "title": obj.get("title")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

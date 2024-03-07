@@ -40,6 +40,7 @@ class BoardItemContentLog(BaseModel):
     modified_at: Optional[datetime] = Field(default=None, description="Date and time when the board item was last modified.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ", alias="modifiedAt")
     modified_by: Optional[User] = Field(default=None, alias="modifiedBy")
     log_data: Optional[BoardContentLogData] = Field(default=None, alias="logData")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "itemId", "type", "action", "boardKey", "hidden", "createdAt", "createdBy", "modifiedAt", "modifiedBy", "logData"]
 
     model_config = {
@@ -72,8 +73,10 @@ class BoardItemContentLog(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -90,6 +93,11 @@ class BoardItemContentLog(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of log_data
         if self.log_data:
             _dict['logData'] = self.log_data.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         # set to None if type (nullable) is None
         # and model_fields_set contains the field
         if self.type is None and "type" in self.model_fields_set:
@@ -119,6 +127,11 @@ class BoardItemContentLog(BaseModel):
             "modifiedBy": User.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
             "logData": BoardContentLogData.from_dict(obj["logData"]) if obj.get("logData") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

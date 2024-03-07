@@ -30,6 +30,7 @@ class ItemConnectionChangesData(BaseModel):
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the item to which you want to attach the connector. Note that Frames are not supported at the moment.")
     position: Optional[RelativeOffset] = None
     snap_to: Optional[StrictStr] = Field(default=None, description="The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.", alias="snapTo")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "position", "snapTo"]
 
     @field_validator('snap_to')
@@ -72,8 +73,10 @@ class ItemConnectionChangesData(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -84,6 +87,11 @@ class ItemConnectionChangesData(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of position
         if self.position:
             _dict['position'] = self.position.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -100,6 +108,11 @@ class ItemConnectionChangesData(BaseModel):
             "position": RelativeOffset.from_dict(obj["position"]) if obj.get("position") is not None else None,
             "snapTo": obj.get("snapTo")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 
