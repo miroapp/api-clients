@@ -28,6 +28,7 @@ class DocumentDataPlatform(BaseModel):
     """ # noqa: E501
     document_url: Optional[StrictStr] = Field(default=None, description="The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.", alias="documentUrl")
     title: Optional[StrictStr] = Field(default=None, description="A short text header to identify the document.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["documentUrl", "title"]
 
     model_config = {
@@ -60,8 +61,10 @@ class DocumentDataPlatform(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -69,6 +72,11 @@ class DocumentDataPlatform(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -84,6 +92,11 @@ class DocumentDataPlatform(BaseModel):
             "documentUrl": obj.get("documentUrl"),
             "title": obj.get("title")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

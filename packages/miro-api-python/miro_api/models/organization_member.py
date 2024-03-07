@@ -35,6 +35,7 @@ class OrganizationMember(BaseModel):
     license_assigned_at: Optional[datetime] = Field(default=None, description="Time when the license was assigned to the user", alias="licenseAssignedAt")
     role: StrictStr = Field(description="Name of the user role in the organization")
     type: Optional[StrictStr] = Field(default='organization-member', description="Type of the object returned.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "active", "email", "lastActivityAt", "license", "licenseAssignedAt", "role", "type"]
 
     @field_validator('license')
@@ -81,8 +82,10 @@ class OrganizationMember(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -90,6 +93,11 @@ class OrganizationMember(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -111,6 +119,11 @@ class OrganizationMember(BaseModel):
             "role": obj.get("role"),
             "type": obj.get("type") if obj.get("type") is not None else 'organization-member'
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

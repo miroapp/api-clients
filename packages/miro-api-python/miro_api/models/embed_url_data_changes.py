@@ -29,6 +29,7 @@ class EmbedUrlDataChanges(BaseModel):
     mode: Optional[StrictStr] = Field(default=None, description="Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.")
     preview_url: Optional[StrictStr] = Field(default=None, description="URL of the image to be used as the preview image for the embedded item.", alias="previewUrl")
     url: Optional[StrictStr] = Field(default=None, description="A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["mode", "previewUrl", "url"]
 
     @field_validator('mode')
@@ -71,8 +72,10 @@ class EmbedUrlDataChanges(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -80,6 +83,11 @@ class EmbedUrlDataChanges(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -96,6 +104,11 @@ class EmbedUrlDataChanges(BaseModel):
             "previewUrl": obj.get("previewUrl"),
             "url": obj.get("url")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

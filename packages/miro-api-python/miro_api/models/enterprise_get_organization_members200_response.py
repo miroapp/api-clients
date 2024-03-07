@@ -82,16 +82,16 @@ class EnterpriseGetOrganizationMembers200Response(BaseModel):
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Self:
+    def from_json(cls, json_str: str) -> Union[List[OrganizationMember], OrganizationMembersSearchResponse]:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
-        match = 0
+        matches = []
 
         # deserialize data into OrganizationMembersSearchResponse
         try:
             instance.actual_instance = OrganizationMembersSearchResponse.from_json(json_str)
-            match += 1
+            matches.append(instance.actual_instance)
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
         # deserialize data into List[OrganizationMember]
@@ -100,18 +100,19 @@ class EnterpriseGetOrganizationMembers200Response(BaseModel):
             instance.oneof_schema_2_validator = json.loads(json_str)
             # assign value to actual_instance
             instance.actual_instance = instance.oneof_schema_2_validator
-            match += 1
+            matches.append(instance.actual_instance)
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
 
-        if match > 1:
-            # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into EnterpriseGetOrganizationMembers200Response with oneOf schemas: List[OrganizationMember], OrganizationMembersSearchResponse. Details: " + ", ".join(error_messages))
-        elif match == 0:
+        if not matches:
             # no match
             raise ValueError("No match found when deserializing the JSON string into EnterpriseGetOrganizationMembers200Response with oneOf schemas: List[OrganizationMember], OrganizationMembersSearchResponse. Details: " + ", ".join(error_messages))
-        else:
-            return instance
+
+        # Return one match that has least additional_properties
+        if len(matches) > 1:
+            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
+
+        return instance
 
     def to_json(self) -> str:
         """Returns the JSON representation of the actual instance"""

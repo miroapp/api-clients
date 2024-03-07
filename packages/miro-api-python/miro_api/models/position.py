@@ -30,6 +30,7 @@ class Position(BaseModel):
     relative_to: Optional[StrictStr] = Field(default=None, alias="relativeTo")
     x: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.")
     y: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["origin", "relativeTo", "x", "y"]
 
     @field_validator('origin')
@@ -82,8 +83,10 @@ class Position(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -91,6 +94,11 @@ class Position(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -108,6 +116,11 @@ class Position(BaseModel):
             "x": obj.get("x"),
             "y": obj.get("y")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

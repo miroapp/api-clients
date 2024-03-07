@@ -33,6 +33,7 @@ class TextStyle(BaseModel):
     font_family: Optional[StrictStr] = Field(default=None, description="Font type for the text in the text item. Default: `arial`.", alias="fontFamily")
     font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Font size, in dp. Default: `14`.", alias="fontSize")
     text_align: Optional[StrictStr] = Field(default=None, description="Horizontal alignment for the item's content. Default: `center.`", alias="textAlign")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["color", "fillColor", "fillOpacity", "fontFamily", "fontSize", "textAlign"]
 
     @field_validator('font_family')
@@ -85,8 +86,10 @@ class TextStyle(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -94,6 +97,11 @@ class TextStyle(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -113,6 +121,11 @@ class TextStyle(BaseModel):
             "fontSize": obj.get("fontSize"),
             "textAlign": obj.get("textAlign")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

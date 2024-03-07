@@ -36,6 +36,7 @@ class TeamSettingsChanges(BaseModel):
     team_copy_access_level_settings: Optional[TeamCopyAccessLevelSettingsChanges] = Field(default=None, alias="teamCopyAccessLevelSettings")
     team_invitation_settings: Optional[TeamInvitationSettingsChanges] = Field(default=None, alias="teamInvitationSettings")
     team_sharing_policy_settings: Optional[TeamSharingPolicySettingsChanges] = Field(default=None, alias="teamSharingPolicySettings")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["teamAccountDiscoverySettings", "teamCollaborationSettings", "teamCopyAccessLevelSettings", "teamInvitationSettings", "teamSharingPolicySettings"]
 
     model_config = {
@@ -68,8 +69,10 @@ class TeamSettingsChanges(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -92,6 +95,11 @@ class TeamSettingsChanges(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of team_sharing_policy_settings
         if self.team_sharing_policy_settings:
             _dict['teamSharingPolicySettings'] = self.team_sharing_policy_settings.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -110,6 +118,11 @@ class TeamSettingsChanges(BaseModel):
             "teamInvitationSettings": TeamInvitationSettingsChanges.from_dict(obj["teamInvitationSettings"]) if obj.get("teamInvitationSettings") is not None else None,
             "teamSharingPolicySettings": TeamSharingPolicySettingsChanges.from_dict(obj["teamSharingPolicySettings"]) if obj.get("teamSharingPolicySettings") is not None else None
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -29,6 +29,7 @@ class StickyNoteStyle(BaseModel):
     fill_color: Optional[StrictStr] = Field(default=None, description="Fill color for the sticky note. Default: `light_yellow`.", alias="fillColor")
     text_align: Optional[StrictStr] = Field(default=None, description="Defines how the sticky note text is horizontally aligned. Default: `center`.", alias="textAlign")
     text_align_vertical: Optional[StrictStr] = Field(default=None, description="Defines how the sticky note text is vertically aligned. Default: `top`.", alias="textAlignVertical")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["fillColor", "textAlign", "textAlignVertical"]
 
     @field_validator('fill_color')
@@ -91,8 +92,10 @@ class StickyNoteStyle(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -100,6 +103,11 @@ class StickyNoteStyle(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -116,6 +124,11 @@ class StickyNoteStyle(BaseModel):
             "textAlign": obj.get("textAlign"),
             "textAlignVertical": obj.get("textAlignVertical")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

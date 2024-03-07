@@ -28,6 +28,7 @@ class ShapeData(BaseModel):
     """ # noqa: E501
     content: Optional[StrictStr] = Field(default=None, description="The text you want to display on the shape.")
     shape: Optional[StrictStr] = Field(default='rectangle', description="Defines the geometric shape of the item when it is rendered on the board.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content", "shape"]
 
     @field_validator('shape')
@@ -70,8 +71,10 @@ class ShapeData(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -79,6 +82,11 @@ class ShapeData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -94,6 +102,11 @@ class ShapeData(BaseModel):
             "content": obj.get("content"),
             "shape": obj.get("shape") if obj.get("shape") is not None else 'rectangle'
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

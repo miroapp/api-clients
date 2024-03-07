@@ -30,6 +30,7 @@ class BoardExportTaskResult(BaseModel):
     error_message: Optional[StrictStr] = Field(default=None, description="Contains the description of the error that occurred during a board export task.", alias="errorMessage")
     export_link: Optional[StrictStr] = Field(default=None, description="URL of the S3 bucket that contains the exported files.", alias="exportLink")
     status: StrictStr = Field(description="Indicates the status of the individual board export task. Possible values: `SUCCESS`: the board export task was completed successfully and the results are available. `ERROR`: the board export task encountered an error and failed to complete. The `errorMessage` field provides more information on the error.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["boardId", "errorMessage", "exportLink", "status"]
 
     model_config = {
@@ -62,8 +63,10 @@ class BoardExportTaskResult(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -71,6 +74,11 @@ class BoardExportTaskResult(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -88,6 +96,11 @@ class BoardExportTaskResult(BaseModel):
             "exportLink": obj.get("exportLink"),
             "status": obj.get("status")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

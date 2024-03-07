@@ -28,6 +28,7 @@ class TeamInvitationSettings(BaseModel):
     """ # noqa: E501
     invite_external_users: Optional[StrictStr] = Field(default=None, description=" * \"allowed\": Allow non-team collaborators for team * \"not_allowed\": Not Allow non-team collaborators for team ", alias="inviteExternalUsers")
     who_can_invite: Optional[StrictStr] = Field(default=None, description=" * \"only_org_admins\": Company admins only can invite * \"admins\":          Company admins and team admins can invite * \"all_members\":     All team members can invite ", alias="whoCanInvite")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["inviteExternalUsers", "whoCanInvite"]
 
     @field_validator('invite_external_users')
@@ -80,8 +81,10 @@ class TeamInvitationSettings(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -89,6 +92,11 @@ class TeamInvitationSettings(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -104,6 +112,11 @@ class TeamInvitationSettings(BaseModel):
             "inviteExternalUsers": obj.get("inviteExternalUsers"),
             "whoCanInvite": obj.get("whoCanInvite")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

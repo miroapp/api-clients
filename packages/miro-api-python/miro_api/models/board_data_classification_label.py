@@ -33,6 +33,7 @@ class BoardDataClassificationLabel(BaseModel):
     sharing_recommendation: Optional[StrictStr] = Field(default=None, description="Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).", alias="sharingRecommendation")
     guideline_url: Optional[StrictStr] = Field(default=None, description="Indicates the URL for the board classification label guidelines.", alias="guidelineUrl")
     type: Optional[StrictStr] = Field(default='board-data-classification-label', description="Type of the object returned.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["color", "description", "id", "name", "sharingRecommendation", "guidelineUrl", "type"]
 
     model_config = {
@@ -65,8 +66,10 @@ class BoardDataClassificationLabel(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -74,6 +77,11 @@ class BoardDataClassificationLabel(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -94,6 +102,11 @@ class BoardDataClassificationLabel(BaseModel):
             "guidelineUrl": obj.get("guidelineUrl"),
             "type": obj.get("type") if obj.get("type") is not None else 'board-data-classification-label'
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

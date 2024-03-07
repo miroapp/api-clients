@@ -31,6 +31,7 @@ class CardData(BaseModel):
     description: Optional[StrictStr] = Field(default=None, description="A short text description to add context about the card.")
     due_date: Optional[datetime] = Field(default=None, description="The date when the task or activity described in the card is due to be completed. In the GUI, users can select the due date from a calendar. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="dueDate")
     title: Optional[StrictStr] = Field(default='sample card item', description="A short text header for the card.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["assigneeId", "description", "dueDate", "title"]
 
     model_config = {
@@ -63,8 +64,10 @@ class CardData(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -72,6 +75,11 @@ class CardData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -89,6 +97,11 @@ class CardData(BaseModel):
             "dueDate": obj.get("dueDate"),
             "title": obj.get("title") if obj.get("title") is not None else 'sample card item'
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

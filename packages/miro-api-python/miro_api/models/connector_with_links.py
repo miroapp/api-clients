@@ -46,6 +46,7 @@ class ConnectorWithLinks(BaseModel):
     start_item: Optional[ItemConnectionWithLinks] = Field(default=None, alias="startItem")
     style: Optional[ConnectorStyle] = None
     type: Optional[StrictStr] = Field(default=None, description="Type of board object that is returned.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["captions", "createdAt", "createdBy", "endItem", "id", "isSupported", "links", "modifiedAt", "modifiedBy", "shape", "startItem", "style", "type"]
 
     @field_validator('shape')
@@ -88,8 +89,10 @@ class ConnectorWithLinks(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -122,6 +125,11 @@ class ConnectorWithLinks(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
             _dict['style'] = self.style.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -148,6 +156,11 @@ class ConnectorWithLinks(BaseModel):
             "style": ConnectorStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
             "type": obj.get("type")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

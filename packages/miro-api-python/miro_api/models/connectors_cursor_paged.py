@@ -34,6 +34,7 @@ class ConnectorsCursorPaged(BaseModel):
     links: Optional[PageLinks] = None
     size: Optional[StrictInt] = Field(default=None, description="Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.")
     total: Optional[StrictInt] = None
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["cursor", "data", "limit", "links", "size", "total"]
 
     model_config = {
@@ -66,8 +67,10 @@ class ConnectorsCursorPaged(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -85,6 +88,11 @@ class ConnectorsCursorPaged(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             _dict['links'] = self.links.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -104,6 +112,11 @@ class ConnectorsCursorPaged(BaseModel):
             "size": obj.get("size"),
             "total": obj.get("total")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

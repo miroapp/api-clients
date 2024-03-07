@@ -30,6 +30,7 @@ class BoardMembersInvite(BaseModel):
     emails: Annotated[List[StrictStr], Field(min_length=1, max_length=20)] = Field(description="Email IDs of the users you want to invite to the board. You can invite up to 20 members per call.")
     role: Optional[StrictStr] = Field(default='commenter', description="Role of the board member.")
     message: Optional[StrictStr] = Field(default=None, description="The message that will be sent in the invitation email.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["emails", "role", "message"]
 
     @field_validator('role')
@@ -72,8 +73,10 @@ class BoardMembersInvite(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -81,6 +84,11 @@ class BoardMembersInvite(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -97,6 +105,11 @@ class BoardMembersInvite(BaseModel):
             "role": obj.get("role") if obj.get("role") is not None else 'commenter',
             "message": obj.get("message")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -30,6 +30,7 @@ class Caption(BaseModel):
     content: Annotated[str, Field(min_length=0, strict=True, max_length=200)] = Field(description="The text you want to display on the connector. Supports inline HTML tags.")
     position: Optional[StrictStr] = Field(default=None, description="The relative position of the text on the connector, in percentage, minimum 0%, maximum 100%. With 50% value, the text will be placed in the middle of the connector line. Default: 50%")
     text_align_vertical: Optional[StrictStr] = Field(default=None, description="The vertical position of the text on the connector. Default: middle", alias="textAlignVertical")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content", "position", "textAlignVertical"]
 
     @field_validator('text_align_vertical')
@@ -72,8 +73,10 @@ class Caption(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -81,6 +84,11 @@ class Caption(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -97,6 +105,11 @@ class Caption(BaseModel):
             "position": obj.get("position"),
             "textAlignVertical": obj.get("textAlignVertical")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

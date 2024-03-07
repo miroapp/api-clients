@@ -30,6 +30,7 @@ class Tag(BaseModel):
     id: StrictStr = Field(description="Unique identifier of the tag.")
     title: StrictStr = Field(description="Text of the tag.")
     type: StrictStr = Field(description="Type of the object that is returned. In this case, type returns `tag`.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["fillColor", "id", "title", "type"]
 
     @field_validator('fill_color')
@@ -69,8 +70,10 @@ class Tag(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -78,6 +81,11 @@ class Tag(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -95,6 +103,11 @@ class Tag(BaseModel):
             "title": obj.get("title"),
             "type": obj.get("type")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

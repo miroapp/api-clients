@@ -35,6 +35,7 @@ class BoardSubscription(BaseModel):
     modified_at: Optional[datetime] = Field(default=None, description="Date and time when the webhook subscription was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="modifiedAt")
     status: Optional[StrictStr] = Field(default='enabled', description="Indicates whether the status of the webhook subscription. `enabled`: Miro sends a webhook when an event occurs in the associated board. `disabled`: Miro does not send a webhook even when an event occurs in the associated board. `lost_access`: The user with which the webhook subscription is associated has lost access to the board. The user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.")
     type: Optional[StrictStr] = Field(default=None, description="The type of object associated with the webhook subscription.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["callbackUrl", "createdAt", "data", "id", "modifiedAt", "status", "type"]
 
     @field_validator('status')
@@ -77,8 +78,10 @@ class BoardSubscription(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -89,6 +92,11 @@ class BoardSubscription(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
             _dict['data'] = self.data.to_dict()
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -109,6 +117,11 @@ class BoardSubscription(BaseModel):
             "status": obj.get("status") if obj.get("status") is not None else 'enabled',
             "type": obj.get("type")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

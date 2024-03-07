@@ -27,6 +27,7 @@ class Parent(BaseModel):
     Contains information about the parent this item must be attached to. A maximum of 1000 items can be attached to a frame. Passing `null` for `parent.id` directly attaches an item to the canvas.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the parent frame for the item.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id"]
 
     model_config = {
@@ -59,8 +60,10 @@ class Parent(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -68,6 +71,11 @@ class Parent(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -82,6 +90,11 @@ class Parent(BaseModel):
         _obj = cls.model_validate({
             "id": obj.get("id")
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 

@@ -11,11 +11,11 @@ openapi-generator-cli generate \
     -g 'python' \
     -p 'generateSourceCodeOnly=true' \
     -p 'packageName=miro_api' \
+    -p 'disallowAdditionalPropertiesIfNotPresent=false' \
     -p "packageVersion=$(jq .version < ../../packages/miro-api/package.json)" \
     -t './python-template' \
     | grep -v 'writing file' \
     | sed 's/^/  openapi-generator > /'
-
 
 echo "Removing duplicate imports"
 ./scripts/remove_duplicate_imports.sh "${target}/miro_api/api/__init__.py"

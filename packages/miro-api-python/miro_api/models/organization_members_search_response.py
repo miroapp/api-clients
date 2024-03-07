@@ -32,6 +32,7 @@ class OrganizationMembersSearchResponse(BaseModel):
     data: Optional[List[OrganizationMember]] = None
     cursor: Optional[StrictStr] = Field(default=None, description="Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.")
     type: Optional[StrictStr] = Field(default='cursor-list', description="Type of the object returned.")
+    additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["limit", "size", "data", "cursor", "type"]
 
     model_config = {
@@ -64,8 +65,10 @@ class OrganizationMembersSearchResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
+        * Fields in `self.additional_properties` are added to the output dict.
         """
         excluded_fields: Set[str] = set([
+            "additional_properties",
         ])
 
         _dict = self.model_dump(
@@ -80,6 +83,11 @@ class OrganizationMembersSearchResponse(BaseModel):
                 if _item:
                     _items.append(_item.to_dict())
             _dict['data'] = _items
+        # puts key-value pairs in additional_properties in the top level
+        if self.additional_properties is not None:
+            for _key, _value in self.additional_properties.items():
+                _dict[_key] = _value
+
         return _dict
 
     @classmethod
@@ -98,6 +106,11 @@ class OrganizationMembersSearchResponse(BaseModel):
             "cursor": obj.get("cursor"),
             "type": obj.get("type") if obj.get("type") is not None else 'cursor-list'
         })
+        # store additional fields in additional_properties
+        for _key in obj.keys():
+            if _key not in cls.__properties:
+                _obj.additional_properties[_key] = obj.get(_key)
+
         return _obj
 
 
