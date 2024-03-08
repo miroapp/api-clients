@@ -17,18 +17,29 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel
 from typing import Any, ClassVar, Dict, List, Optional
+from miro_api.models.geometry import Geometry
+from miro_api.models.item_data_create import ItemDataCreate
+from miro_api.models.item_style import ItemStyle
+from miro_api.models.item_type_change import ItemTypeChange
+from miro_api.models.parent import Parent
+from miro_api.models.position_change import PositionChange
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SelfLinkPlatformTags(BaseModel):
+class ItemCreate(BaseModel):
     """
-    Contains applicable links for the current object.
+    Creates one or more items in one request. You can create up to 20 items per request.
     """ # noqa: E501
-    var_self: Optional[StrictStr] = Field(default=None, description="Link to obtain more information about the current object.", alias="self")
+    type: ItemTypeChange
+    data: Optional[ItemDataCreate] = None
+    style: Optional[ItemStyle] = None
+    position: Optional[PositionChange] = None
+    geometry: Optional[Geometry] = None
+    parent: Optional[Parent] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["self"]
+    __properties: ClassVar[List[str]] = ["type", "data", "style", "position", "geometry", "parent"]
 
     model_config = {
         "populate_by_name": True,
@@ -48,7 +59,7 @@ class SelfLinkPlatformTags(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SelfLinkPlatformTags from a JSON string"""
+        """Create an instance of ItemCreate from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,6 +82,21 @@ class SelfLinkPlatformTags(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of data
+        if self.data:
+            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of style
+        if self.style:
+            _dict['style'] = self.style.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of position
+        if self.position:
+            _dict['position'] = self.position.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of geometry
+        if self.geometry:
+            _dict['geometry'] = self.geometry.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of parent
+        if self.parent:
+            _dict['parent'] = self.parent.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -80,7 +106,7 @@ class SelfLinkPlatformTags(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SelfLinkPlatformTags from a dict"""
+        """Create an instance of ItemCreate from a dict"""
         if obj is None:
             return None
 
@@ -88,7 +114,12 @@ class SelfLinkPlatformTags(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "self": obj.get("self")
+            "type": obj.get("type"),
+            "data": ItemDataCreate.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "style": ItemStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+            "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
+            "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
+            "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

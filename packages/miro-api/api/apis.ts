@@ -46,6 +46,10 @@ import {ConnectorCreationData} from '../model/connectorCreationData'
 import {ConnectorWithLinks} from '../model/connectorWithLinks'
 import {ConnectorsCursorPaged} from '../model/connectorsCursorPaged'
 
+import {BulkOperationError} from '../model/bulkOperationError'
+import {ItemCreate} from '../model/itemCreate'
+import {Items} from '../model/items'
+
 import {DocumentCreateRequest} from '../model/documentCreateRequest'
 import {DocumentItem} from '../model/documentItem'
 import {DocumentUpdateRequest} from '../model/documentUpdateRequest'
@@ -1616,6 +1620,40 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ConnectorWithLinks')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds different types of items to a board. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
+   * @summary Create items in bulk
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param itemCreate
+   */
+  async createItems(boardId: string, itemCreate: Array<ItemCreate>): Promise<{response: Response; body: Items}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/items/bulk'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling createItems.')
+    }
+
+    const resource = new URL(localVarPath, this.basePath)
+    resource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      resource,
+      JSON.stringify(ObjectSerializer.serialize(itemCreate, 'Array<ItemCreate>')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'Items')
 
     return {response, body}
   }

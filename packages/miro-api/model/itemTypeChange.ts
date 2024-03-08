@@ -12,64 +12,16 @@
 
 /**
  * @internal
- * Contains pagination links for the collection.
+ * Type of item that you want to create.
  */
-export class PageLinksPlatformTags {
-  /**
-   * Link to retrieve information in the first page of the collection.
-   */
-  'first'?: string
-  /**
-   * Link to the retrieve information in the last page of the collection.
-   */
-  'last'?: string
-  /**
-   * Link to retrieve information in the next page of the collection.
-   */
-  'next'?: string
-  /**
-   * Link to retrieve information in the previous page of the collection.
-   */
-  'prev'?: string
-  /**
-   * Link to retrieve information in the current page of the collection.
-   */
-  'self'?: string
-
-  /** @ignore */
-  static discriminator: string | undefined = undefined
-
-  /** @ignore */
-  static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
-    {
-      name: 'first',
-      baseName: 'first',
-      type: 'string',
-    },
-    {
-      name: 'last',
-      baseName: 'last',
-      type: 'string',
-    },
-    {
-      name: 'next',
-      baseName: 'next',
-      type: 'string',
-    },
-    {
-      name: 'prev',
-      baseName: 'prev',
-      type: 'string',
-    },
-    {
-      name: 'self',
-      baseName: 'self',
-      type: 'string',
-    },
-  ]
-
-  /** @ignore */
-  static getAttributeTypeMap() {
-    return PageLinksPlatformTags.attributeTypeMap
-  }
+export enum ItemTypeChange {
+  AppCard = <any>'app_card',
+  Text = <any>'text',
+  Shape = <any>'shape',
+  StickyNote = <any>'sticky_note',
+  Image = <any>'image',
+  Document = <any>'document',
+  Card = <any>'card',
+  Frame = <any>'frame',
+  Embed = <any>'embed',
 }

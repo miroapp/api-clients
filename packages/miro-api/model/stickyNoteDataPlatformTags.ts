@@ -12,23 +12,18 @@
 
 /**
  * @internal
- * Contains frame item data, such as the title, frame type, or frame format.
+ * Contains sticky note item data, such as the content or shape of the sticky note.
  */
-export class FrameDataPlatform {
+export class StickyNoteDataPlatformTags {
   /**
-   * Only custom frames are supported at the moment.
+   * The actual text (content) that appears in the sticky note item.
    */
-  'format'?: string | (typeof FrameDataPlatform.FormatEnum)[keyof typeof FrameDataPlatform.FormatEnum] =
-    FrameDataPlatform.FormatEnum.Custom
+  'content'?: string
   /**
-   * Title of the frame. This title appears at the top of the frame.
+   * Defines the geometric shape of the sticky note and aspect ratio for its dimensions.
    */
-  'title'?: string
-  /**
-   * Only free form frames are supported at the moment.
-   */
-  'type'?: string | (typeof FrameDataPlatform.TypeEnum)[keyof typeof FrameDataPlatform.TypeEnum] =
-    FrameDataPlatform.TypeEnum.Freeform
+  'shape'?: string | (typeof StickyNoteDataPlatformTags.ShapeEnum)[keyof typeof StickyNoteDataPlatformTags.ShapeEnum] =
+    StickyNoteDataPlatformTags.ShapeEnum.Square
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -36,45 +31,26 @@ export class FrameDataPlatform {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'format',
-      baseName: 'format',
-      type: 'FrameDataPlatform.FormatEnum',
-    },
-    {
-      name: 'title',
-      baseName: 'title',
+      name: 'content',
+      baseName: 'content',
       type: 'string',
     },
     {
-      name: 'type',
-      baseName: 'type',
-      type: 'FrameDataPlatform.TypeEnum',
+      name: 'shape',
+      baseName: 'shape',
+      type: 'StickyNoteDataPlatformTags.ShapeEnum',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return FrameDataPlatform.attributeTypeMap
+    return StickyNoteDataPlatformTags.attributeTypeMap
   }
 }
 
-export namespace FrameDataPlatform {
-  export const FormatEnum = {
-    Custom: 'custom',
-    Desktop: 'desktop',
-    Phone: 'phone',
-    Tablet: 'tablet',
-    A4: 'a4',
-    Letter: 'letter',
-    Ratio1x1: 'ratio_1x1',
-    Ratio4x3: 'ratio_4x3',
-    Ratio16x9: 'ratio_16x9',
-  } as const
-  export const TypeEnum = {
-    Freeform: 'freeform',
-    Heap: 'heap',
-    Grid: 'grid',
-    Rows: 'rows',
-    Columns: 'columns',
+export namespace StickyNoteDataPlatformTags {
+  export const ShapeEnum = {
+    Square: 'square',
+    Rectangle: 'rectangle',
   } as const
 }

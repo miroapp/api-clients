@@ -17,40 +17,32 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class FrameData(BaseModel):
+class CustomFieldPlatformTags(BaseModel):
     """
-    Contains frame item data, such as the title, frame type, or frame format.
+    Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.
     """ # noqa: E501
-    format: Optional[StrictStr] = Field(default='custom', description="Only custom frames are supported at the moment.")
-    title: Optional[StrictStr] = Field(default=None, description="Title of the frame. This title appears at the top of the frame.")
-    type: Optional[StrictStr] = Field(default='freeform', description="Only free form frames are supported at the moment.")
-    show_content: Optional[StrictBool] = Field(default=True, description="Hide or reveal the content inside a frame (Enterprise plan only).", alias="showContent")
+    fill_color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color that fills the background area of the preview field, when it's displayed on the app card.", alias="fillColor")
+    icon_shape: Optional[StrictStr] = Field(default='round', description="The shape of the icon on the preview field.", alias="iconShape")
+    icon_url: Optional[StrictStr] = Field(default=None, description="A valid URL pointing to an image available online. The transport protocol must be HTTPS. Possible image file formats: JPG/JPEG, PNG, SVG.", alias="iconUrl")
+    text_color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color of the text string assigned to `value`.", alias="textColor")
+    tooltip: Optional[StrictStr] = Field(default=None, description="A short text displayed in a tooltip when clicking or hovering over the preview field.")
+    value: Optional[StrictStr] = Field(default=None, description="The actual data value of the custom field. It can be any type of information that you want to convey.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["format", "title", "type", "showContent"]
+    __properties: ClassVar[List[str]] = ["fillColor", "iconShape", "iconUrl", "textColor", "tooltip", "value"]
 
-    @field_validator('format')
-    def format_validate_enum(cls, value):
+    @field_validator('icon_shape')
+    def icon_shape_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9']):
-            raise ValueError("must be one of enum values ('custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9')")
-        return value
-
-    @field_validator('type')
-    def type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['freeform', 'heap', 'grid', 'rows', 'columns', 'unknown']):
-            raise ValueError("must be one of enum values ('freeform', 'heap', 'grid', 'rows', 'columns', 'unknown')")
+        if value not in set(['round', 'square']):
+            raise ValueError("must be one of enum values ('round', 'square')")
         return value
 
     model_config = {
@@ -71,7 +63,7 @@ class FrameData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FrameData from a JSON string"""
+        """Create an instance of CustomFieldPlatformTags from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -103,7 +95,7 @@ class FrameData(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FrameData from a dict"""
+        """Create an instance of CustomFieldPlatformTags from a dict"""
         if obj is None:
             return None
 
@@ -111,10 +103,12 @@ class FrameData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "format": obj.get("format") if obj.get("format") is not None else 'custom',
-            "title": obj.get("title"),
-            "type": obj.get("type") if obj.get("type") is not None else 'freeform',
-            "showContent": obj.get("showContent") if obj.get("showContent") is not None else True
+            "fillColor": obj.get("fillColor"),
+            "iconShape": obj.get("iconShape") if obj.get("iconShape") is not None else 'round',
+            "iconUrl": obj.get("iconUrl"),
+            "textColor": obj.get("textColor"),
+            "tooltip": obj.get("tooltip"),
+            "value": obj.get("value")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

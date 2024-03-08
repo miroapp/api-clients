@@ -10,27 +10,33 @@
  * Do not edit the class manually.
  */
 
+import {CustomField} from './customField'
+
 /**
  * @internal
- * Contains frame item data, such as the title, frame type, or frame format.
+ * Contains app card item data, such as the title, description, or fields.
  */
-export class FrameData {
+export class AppCardDataResponse {
   /**
-   * Only custom frames are supported at the moment.
+   * A short text description to add context about the app card.
    */
-  'format'?: string | (typeof FrameData.FormatEnum)[keyof typeof FrameData.FormatEnum] = FrameData.FormatEnum.Custom
+  'description'?: string
   /**
-   * Title of the frame. This title appears at the top of the frame.
+   * Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.
+   */
+  'fields'?: Array<CustomField>
+  /**
+   * Defines whether the card is owned by the application making the call.
+   */
+  'owned'?: boolean
+  /**
+   * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
+   */
+  'status'?: string | (typeof AppCardDataResponse.StatusEnum)[keyof typeof AppCardDataResponse.StatusEnum]
+  /**
+   * A short text header to identify the app card.
    */
   'title'?: string
-  /**
-   * Only free form frames are supported at the moment.
-   */
-  'type'?: string | (typeof FrameData.TypeEnum)[keyof typeof FrameData.TypeEnum] = FrameData.TypeEnum.Freeform
-  /**
-   * Hide or reveal the content inside a frame (Enterprise plan only).
-   */
-  'showContent'?: boolean = true
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,51 +44,42 @@ export class FrameData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'format',
-      baseName: 'format',
-      type: 'FrameData.FormatEnum',
+      name: 'description',
+      baseName: 'description',
+      type: 'string',
+    },
+    {
+      name: 'fields',
+      baseName: 'fields',
+      type: 'Array<CustomField>',
+    },
+    {
+      name: 'owned',
+      baseName: 'owned',
+      type: 'boolean',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'AppCardDataResponse.StatusEnum',
     },
     {
       name: 'title',
       baseName: 'title',
       type: 'string',
     },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'FrameData.TypeEnum',
-    },
-    {
-      name: 'showContent',
-      baseName: 'showContent',
-      type: 'boolean',
-    },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return FrameData.attributeTypeMap
+    return AppCardDataResponse.attributeTypeMap
   }
 }
 
-export namespace FrameData {
-  export const FormatEnum = {
-    Custom: 'custom',
-    Desktop: 'desktop',
-    Phone: 'phone',
-    Tablet: 'tablet',
-    A4: 'a4',
-    Letter: 'letter',
-    Ratio1x1: 'ratio_1x1',
-    Ratio4x3: 'ratio_4x3',
-    Ratio16x9: 'ratio_16x9',
-  } as const
-  export const TypeEnum = {
-    Freeform: 'freeform',
-    Heap: 'heap',
-    Grid: 'grid',
-    Rows: 'rows',
-    Columns: 'columns',
-    Unknown: 'unknown',
+export namespace AppCardDataResponse {
+  export const StatusEnum = {
+    Disconnected: 'disconnected',
+    Connected: 'connected',
+    Disabled: 'disabled',
   } as const
 }

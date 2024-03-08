@@ -17,40 +17,28 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class FrameData(BaseModel):
+class ShapeDataPlatformTags(BaseModel):
     """
-    Contains frame item data, such as the title, frame type, or frame format.
+    Contains shape item data, such as the content or shape type of the shape.
     """ # noqa: E501
-    format: Optional[StrictStr] = Field(default='custom', description="Only custom frames are supported at the moment.")
-    title: Optional[StrictStr] = Field(default=None, description="Title of the frame. This title appears at the top of the frame.")
-    type: Optional[StrictStr] = Field(default='freeform', description="Only free form frames are supported at the moment.")
-    show_content: Optional[StrictBool] = Field(default=True, description="Hide or reveal the content inside a frame (Enterprise plan only).", alias="showContent")
+    content: Optional[StrictStr] = Field(default=None, description="The text you want to display on the shape.")
+    shape: Optional[StrictStr] = Field(default='rectangle', description="Defines the geometric shape of the item when it is rendered on the board.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["format", "title", "type", "showContent"]
+    __properties: ClassVar[List[str]] = ["content", "shape"]
 
-    @field_validator('format')
-    def format_validate_enum(cls, value):
+    @field_validator('shape')
+    def shape_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9']):
-            raise ValueError("must be one of enum values ('custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9')")
-        return value
-
-    @field_validator('type')
-    def type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['freeform', 'heap', 'grid', 'rows', 'columns', 'unknown']):
-            raise ValueError("must be one of enum values ('freeform', 'heap', 'grid', 'rows', 'columns', 'unknown')")
+        if value not in set(['rectangle', 'round_rectangle', 'circle', 'triangle', 'rhombus', 'parallelogram', 'trapezoid', 'pentagon', 'hexagon', 'octagon', 'wedge_round_rectangle_callout', 'star', 'flow_chart_predefined_process', 'cloud', 'cross', 'can', 'right_arrow', 'left_arrow', 'left_right_arrow', 'left_brace', 'right_brace']):
+            raise ValueError("must be one of enum values ('rectangle', 'round_rectangle', 'circle', 'triangle', 'rhombus', 'parallelogram', 'trapezoid', 'pentagon', 'hexagon', 'octagon', 'wedge_round_rectangle_callout', 'star', 'flow_chart_predefined_process', 'cloud', 'cross', 'can', 'right_arrow', 'left_arrow', 'left_right_arrow', 'left_brace', 'right_brace')")
         return value
 
     model_config = {
@@ -71,7 +59,7 @@ class FrameData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FrameData from a JSON string"""
+        """Create an instance of ShapeDataPlatformTags from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -103,7 +91,7 @@ class FrameData(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FrameData from a dict"""
+        """Create an instance of ShapeDataPlatformTags from a dict"""
         if obj is None:
             return None
 
@@ -111,10 +99,8 @@ class FrameData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "format": obj.get("format") if obj.get("format") is not None else 'custom',
-            "title": obj.get("title"),
-            "type": obj.get("type") if obj.get("type") is not None else 'freeform',
-            "showContent": obj.get("showContent") if obj.get("showContent") is not None else True
+            "content": obj.get("content"),
+            "shape": obj.get("shape") if obj.get("shape") is not None else 'rectangle'
         })
         # store additional fields in additional_properties
         for _key in obj.keys():
