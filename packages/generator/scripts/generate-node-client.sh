@@ -11,7 +11,9 @@ openapi-generator-cli generate \
     -t './typescript-node-template' \
     -p 'npmName=@mirohq/miro-api' \
     -p "npmVersion=$(jq .version < ../../packages/miro-api/package.json)" \
-    | grep -v 'Renamed to ModelError' | grep -v 'o.o.codegen.TemplateManager' # ignore some noise in output
+    | grep -v 'Renamed to ModelError' | grep -v 'o.o.codegen.TemplateManager' | grep -v 'writing file' \
+    | sed 's/^/  openapi-generator > /'
+
 
 echo "Removing duplicate imports"
 
