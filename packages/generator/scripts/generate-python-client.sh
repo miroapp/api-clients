@@ -3,8 +3,6 @@ set -euo pipefail
 
 target=../miro-api-python
 
-rm -rf "${target}/miro_api/"
-
 openapi-generator-cli generate \
     -i 'spec.json' \
     -o "${target}" \
