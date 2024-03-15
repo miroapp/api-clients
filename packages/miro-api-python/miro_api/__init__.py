@@ -17,4 +17,4 @@
 __version__ = "2.1.0"
 
 
-from miro_api.miro_api_wrapper import MiroApi
+from miro_api.miro_api_wrapper import MiroApi, Miro
