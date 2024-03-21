@@ -17,22 +17,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from miro_api.models.bulk_operation_error_context import BulkOperationErrorContext
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PageLinksPlatformTags(BaseModel):
+class BulkOperationError(BaseModel):
     """
-    Contains pagination links for the collection.
+    Error information with details about operation failure
     """ # noqa: E501
-    first: Optional[StrictStr] = Field(default=None, description="Link to retrieve information in the first page of the collection.")
-    last: Optional[StrictStr] = Field(default=None, description="Link to the retrieve information in the last page of the collection.")
-    next: Optional[StrictStr] = Field(default=None, description="Link to retrieve information in the next page of the collection.")
-    prev: Optional[StrictStr] = Field(default=None, description="Link to retrieve information in the previous page of the collection.")
-    var_self: Optional[StrictStr] = Field(default=None, description="Link to retrieve information in the current page of the collection.", alias="self")
+    type: Optional[StrictStr] = Field(default=None, description="Type of the error")
+    code: Optional[StrictStr] = Field(default=None, description="Code of the error")
+    message: StrictStr = Field(description="Description of the error")
+    context: Optional[BulkOperationErrorContext] = None
+    status: Optional[StrictInt] = Field(default=None, description="Status code of the error")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["first", "last", "next", "prev", "self"]
+    __properties: ClassVar[List[str]] = ["type", "code", "message", "context", "status"]
 
     model_config = {
         "populate_by_name": True,
@@ -52,7 +53,7 @@ class PageLinksPlatformTags(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PageLinksPlatformTags from a JSON string"""
+        """Create an instance of BulkOperationError from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -75,6 +76,9 @@ class PageLinksPlatformTags(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of context
+        if self.context:
+            _dict['context'] = self.context.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -84,7 +88,7 @@ class PageLinksPlatformTags(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PageLinksPlatformTags from a dict"""
+        """Create an instance of BulkOperationError from a dict"""
         if obj is None:
             return None
 
@@ -92,11 +96,11 @@ class PageLinksPlatformTags(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "first": obj.get("first"),
-            "last": obj.get("last"),
-            "next": obj.get("next"),
-            "prev": obj.get("prev"),
-            "self": obj.get("self")
+            "type": obj.get("type"),
+            "code": obj.get("code"),
+            "message": obj.get("message"),
+            "context": BulkOperationErrorContext.from_dict(obj["context"]) if obj.get("context") is not None else None,
+            "status": obj.get("status")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

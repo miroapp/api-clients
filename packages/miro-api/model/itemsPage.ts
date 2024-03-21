@@ -10,27 +10,35 @@
  * Do not edit the class manually.
  */
 
+import {Item} from './item'
+import {PageLinks} from './pageLinks'
+
 /**
  * @internal
- * Contains frame item data, such as the title, frame type, or frame format.
+ * Contains cursor-based items page information.
  */
-export class FrameData {
+export class ItemsPage {
   /**
-   * Only custom frames are supported at the moment.
+   * Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.
    */
-  'format'?: string | (typeof FrameData.FormatEnum)[keyof typeof FrameData.FormatEnum] = FrameData.FormatEnum.Custom
+  'size': number
   /**
-   * Title of the frame. This title appears at the top of the frame.
+   * Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.
    */
-  'title'?: string
+  'limit': number
   /**
-   * Only free form frames are supported at the moment.
+   * Total number of results available for the given request.
    */
-  'type'?: string | (typeof FrameData.TypeEnum)[keyof typeof FrameData.TypeEnum] = FrameData.TypeEnum.Freeform
+  'total': number
   /**
-   * Hide or reveal the content inside a frame (Enterprise plan only).
+   * Contains the result data.
    */
-  'showContent'?: boolean = true
+  'data': Array<Item>
+  'links': PageLinks
+  /**
+   * Type of the object.
+   */
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,51 +46,39 @@ export class FrameData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'format',
-      baseName: 'format',
-      type: 'FrameData.FormatEnum',
+      name: 'size',
+      baseName: 'size',
+      type: 'number',
     },
     {
-      name: 'title',
-      baseName: 'title',
-      type: 'string',
+      name: 'limit',
+      baseName: 'limit',
+      type: 'number',
+    },
+    {
+      name: 'total',
+      baseName: 'total',
+      type: 'number',
+    },
+    {
+      name: 'data',
+      baseName: 'data',
+      type: 'Array<Item>',
+    },
+    {
+      name: 'links',
+      baseName: 'links',
+      type: 'PageLinks',
     },
     {
       name: 'type',
       baseName: 'type',
-      type: 'FrameData.TypeEnum',
-    },
-    {
-      name: 'showContent',
-      baseName: 'showContent',
-      type: 'boolean',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return FrameData.attributeTypeMap
+    return ItemsPage.attributeTypeMap
   }
-}
-
-export namespace FrameData {
-  export const FormatEnum = {
-    Custom: 'custom',
-    Desktop: 'desktop',
-    Phone: 'phone',
-    Tablet: 'tablet',
-    A4: 'a4',
-    Letter: 'letter',
-    Ratio1x1: 'ratio_1x1',
-    Ratio4x3: 'ratio_4x3',
-    Ratio16x9: 'ratio_16x9',
-  } as const
-  export const TypeEnum = {
-    Freeform: 'freeform',
-    Heap: 'heap',
-    Grid: 'grid',
-    Rows: 'rows',
-    Columns: 'columns',
-    Unknown: 'unknown',
-  } as const
 }

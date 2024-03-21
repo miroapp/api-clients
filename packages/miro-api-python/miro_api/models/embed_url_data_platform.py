@@ -22,34 +22,24 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class FrameDataPlatform(BaseModel):
+class EmbedUrlDataPlatform(BaseModel):
     """
-    Contains frame item data, such as the title, frame type, or frame format.
+    Contains information about the embed URL.
     """ # noqa: E501
-    format: Optional[StrictStr] = Field(default='custom', description="Only custom frames are supported at the moment.")
-    title: Optional[StrictStr] = Field(default=None, description="Title of the frame. This title appears at the top of the frame.")
-    type: Optional[StrictStr] = Field(default='freeform', description="Only free form frames are supported at the moment.")
+    mode: Optional[StrictStr] = Field(default=None, description="Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.")
+    preview_url: Optional[StrictStr] = Field(default=None, description="URL of the image to be used as the preview image for the embedded item.", alias="previewUrl")
+    url: StrictStr = Field(description="A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["format", "title", "type"]
+    __properties: ClassVar[List[str]] = ["mode", "previewUrl", "url"]
 
-    @field_validator('format')
-    def format_validate_enum(cls, value):
+    @field_validator('mode')
+    def mode_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9']):
-            raise ValueError("must be one of enum values ('custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9')")
-        return value
-
-    @field_validator('type')
-    def type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['freeform', 'heap', 'grid', 'rows', 'columns']):
-            raise ValueError("must be one of enum values ('freeform', 'heap', 'grid', 'rows', 'columns')")
+        if value not in set(['inline', 'modal']):
+            raise ValueError("must be one of enum values ('inline', 'modal')")
         return value
 
     model_config = {
@@ -70,7 +60,7 @@ class FrameDataPlatform(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FrameDataPlatform from a JSON string"""
+        """Create an instance of EmbedUrlDataPlatform from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -102,7 +92,7 @@ class FrameDataPlatform(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FrameDataPlatform from a dict"""
+        """Create an instance of EmbedUrlDataPlatform from a dict"""
         if obj is None:
             return None
 
@@ -110,9 +100,9 @@ class FrameDataPlatform(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "format": obj.get("format") if obj.get("format") is not None else 'custom',
-            "title": obj.get("title"),
-            "type": obj.get("type") if obj.get("type") is not None else 'freeform'
+            "mode": obj.get("mode"),
+            "previewUrl": obj.get("previewUrl"),
+            "url": obj.get("url") if obj.get("url") is not None else 'https://www.youtube.com/watch?v=HlVSNEiFCBk'
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

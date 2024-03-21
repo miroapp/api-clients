@@ -12,25 +12,26 @@
 
 /**
  * @internal
- * Contains frame item data, such as the title, frame type, or frame format.
+ * Error information
  */
-export class FrameData {
+export class ModelError {
   /**
-   * Only custom frames are supported at the moment.
+   * Code of the error
    */
-  'format'?: string | (typeof FrameData.FormatEnum)[keyof typeof FrameData.FormatEnum] = FrameData.FormatEnum.Custom
+  'code'?: string
   /**
-   * Title of the frame. This title appears at the top of the frame.
+   * Description of the error
    */
-  'title'?: string
+  'message': string
+  'context'?: object
   /**
-   * Only free form frames are supported at the moment.
+   * Status code of the error
    */
-  'type'?: string | (typeof FrameData.TypeEnum)[keyof typeof FrameData.TypeEnum] = FrameData.TypeEnum.Freeform
+  'status'?: number
   /**
-   * Hide or reveal the content inside a frame (Enterprise plan only).
+   * Type of entity that is returned.
    */
-  'showContent'?: boolean = true
+  'type': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,51 +39,34 @@ export class FrameData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'format',
-      baseName: 'format',
-      type: 'FrameData.FormatEnum',
+      name: 'code',
+      baseName: 'code',
+      type: 'string',
     },
     {
-      name: 'title',
-      baseName: 'title',
+      name: 'message',
+      baseName: 'message',
       type: 'string',
+    },
+    {
+      name: 'context',
+      baseName: 'context',
+      type: 'object',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
     },
     {
       name: 'type',
       baseName: 'type',
-      type: 'FrameData.TypeEnum',
-    },
-    {
-      name: 'showContent',
-      baseName: 'showContent',
-      type: 'boolean',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return FrameData.attributeTypeMap
+    return ModelError.attributeTypeMap
   }
-}
-
-export namespace FrameData {
-  export const FormatEnum = {
-    Custom: 'custom',
-    Desktop: 'desktop',
-    Phone: 'phone',
-    Tablet: 'tablet',
-    A4: 'a4',
-    Letter: 'letter',
-    Ratio1x1: 'ratio_1x1',
-    Ratio4x3: 'ratio_4x3',
-    Ratio16x9: 'ratio_16x9',
-  } as const
-  export const TypeEnum = {
-    Freeform: 'freeform',
-    Heap: 'heap',
-    Grid: 'grid',
-    Rows: 'rows',
-    Columns: 'columns',
-    Unknown: 'unknown',
-  } as const
 }

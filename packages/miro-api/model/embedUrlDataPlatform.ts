@@ -12,25 +12,21 @@
 
 /**
  * @internal
- * Contains frame item data, such as the title, frame type, or frame format.
+ * Contains information about the embed URL.
  */
-export class FrameData {
+export class EmbedUrlDataPlatform {
   /**
-   * Only custom frames are supported at the moment.
+   * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
    */
-  'format'?: string | (typeof FrameData.FormatEnum)[keyof typeof FrameData.FormatEnum] = FrameData.FormatEnum.Custom
+  'mode'?: string | (typeof EmbedUrlDataPlatform.ModeEnum)[keyof typeof EmbedUrlDataPlatform.ModeEnum]
   /**
-   * Title of the frame. This title appears at the top of the frame.
+   * URL of the image to be used as the preview image for the embedded item.
    */
-  'title'?: string
+  'previewUrl'?: string
   /**
-   * Only free form frames are supported at the moment.
+   * A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.
    */
-  'type'?: string | (typeof FrameData.TypeEnum)[keyof typeof FrameData.TypeEnum] = FrameData.TypeEnum.Freeform
-  /**
-   * Hide or reveal the content inside a frame (Enterprise plan only).
-   */
-  'showContent'?: boolean = true
+  'url': string = 'https://www.youtube.com/watch?v=HlVSNEiFCBk'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,51 +34,31 @@ export class FrameData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'format',
-      baseName: 'format',
-      type: 'FrameData.FormatEnum',
+      name: 'mode',
+      baseName: 'mode',
+      type: 'EmbedUrlDataPlatform.ModeEnum',
     },
     {
-      name: 'title',
-      baseName: 'title',
+      name: 'previewUrl',
+      baseName: 'previewUrl',
       type: 'string',
     },
     {
-      name: 'type',
-      baseName: 'type',
-      type: 'FrameData.TypeEnum',
-    },
-    {
-      name: 'showContent',
-      baseName: 'showContent',
-      type: 'boolean',
+      name: 'url',
+      baseName: 'url',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return FrameData.attributeTypeMap
+    return EmbedUrlDataPlatform.attributeTypeMap
   }
 }
 
-export namespace FrameData {
-  export const FormatEnum = {
-    Custom: 'custom',
-    Desktop: 'desktop',
-    Phone: 'phone',
-    Tablet: 'tablet',
-    A4: 'a4',
-    Letter: 'letter',
-    Ratio1x1: 'ratio_1x1',
-    Ratio4x3: 'ratio_4x3',
-    Ratio16x9: 'ratio_16x9',
-  } as const
-  export const TypeEnum = {
-    Freeform: 'freeform',
-    Heap: 'heap',
-    Grid: 'grid',
-    Rows: 'rows',
-    Columns: 'columns',
-    Unknown: 'unknown',
+export namespace EmbedUrlDataPlatform {
+  export const ModeEnum = {
+    Inline: 'inline',
+    Modal: 'modal',
   } as const
 }

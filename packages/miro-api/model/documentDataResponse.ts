@@ -10,27 +10,15 @@
  * Do not edit the class manually.
  */
 
-/**
- * @internal
- * Contains frame item data, such as the title, frame type, or frame format.
- */
-export class FrameData {
+export class DocumentDataResponse {
   /**
-   * Only custom frames are supported at the moment.
+   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.
    */
-  'format'?: string | (typeof FrameData.FormatEnum)[keyof typeof FrameData.FormatEnum] = FrameData.FormatEnum.Custom
+  'documentUrl'?: string
   /**
-   * Title of the frame. This title appears at the top of the frame.
+   * A short text header to identify the document.
    */
   'title'?: string
-  /**
-   * Only free form frames are supported at the moment.
-   */
-  'type'?: string | (typeof FrameData.TypeEnum)[keyof typeof FrameData.TypeEnum] = FrameData.TypeEnum.Freeform
-  /**
-   * Hide or reveal the content inside a frame (Enterprise plan only).
-   */
-  'showContent'?: boolean = true
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,51 +26,19 @@ export class FrameData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'format',
-      baseName: 'format',
-      type: 'FrameData.FormatEnum',
+      name: 'documentUrl',
+      baseName: 'documentUrl',
+      type: 'string',
     },
     {
       name: 'title',
       baseName: 'title',
       type: 'string',
     },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'FrameData.TypeEnum',
-    },
-    {
-      name: 'showContent',
-      baseName: 'showContent',
-      type: 'boolean',
-    },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return FrameData.attributeTypeMap
+    return DocumentDataResponse.attributeTypeMap
   }
-}
-
-export namespace FrameData {
-  export const FormatEnum = {
-    Custom: 'custom',
-    Desktop: 'desktop',
-    Phone: 'phone',
-    Tablet: 'tablet',
-    A4: 'a4',
-    Letter: 'letter',
-    Ratio1x1: 'ratio_1x1',
-    Ratio4x3: 'ratio_4x3',
-    Ratio16x9: 'ratio_16x9',
-  } as const
-  export const TypeEnum = {
-    Freeform: 'freeform',
-    Heap: 'heap',
-    Grid: 'grid',
-    Rows: 'rows',
-    Columns: 'columns',
-    Unknown: 'unknown',
-  } as const
 }

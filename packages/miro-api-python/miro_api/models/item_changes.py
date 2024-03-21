@@ -17,41 +17,30 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from miro_api.models.geometry import Geometry
+from miro_api.models.item_data_changes import ItemDataChanges
+from miro_api.models.item_style import ItemStyle
+from miro_api.models.item_type_change import ItemTypeChange
+from miro_api.models.parent import Parent
+from miro_api.models.position_change import PositionChange
 from typing import Optional, Set
 from typing_extensions import Self
 
-class FrameData(BaseModel):
+class ItemChanges(BaseModel):
     """
-    Contains frame item data, such as the title, frame type, or frame format.
+    Updates one or more items in one request. You can update up to 20 items per request.
     """ # noqa: E501
-    format: Optional[StrictStr] = Field(default='custom', description="Only custom frames are supported at the moment.")
-    title: Optional[StrictStr] = Field(default=None, description="Title of the frame. This title appears at the top of the frame.")
-    type: Optional[StrictStr] = Field(default='freeform', description="Only free form frames are supported at the moment.")
-    show_content: Optional[StrictBool] = Field(default=True, description="Hide or reveal the content inside a frame (Enterprise plan only).", alias="showContent")
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of an item.")
+    type: Optional[ItemTypeChange] = None
+    data: Optional[ItemDataChanges] = None
+    style: Optional[ItemStyle] = None
+    position: Optional[PositionChange] = None
+    geometry: Optional[Geometry] = None
+    parent: Optional[Parent] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["format", "title", "type", "showContent"]
-
-    @field_validator('format')
-    def format_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9']):
-            raise ValueError("must be one of enum values ('custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9')")
-        return value
-
-    @field_validator('type')
-    def type_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['freeform', 'heap', 'grid', 'rows', 'columns', 'unknown']):
-            raise ValueError("must be one of enum values ('freeform', 'heap', 'grid', 'rows', 'columns', 'unknown')")
-        return value
+    __properties: ClassVar[List[str]] = ["id", "type", "data", "style", "position", "geometry", "parent"]
 
     model_config = {
         "populate_by_name": True,
@@ -71,7 +60,7 @@ class FrameData(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of FrameData from a JSON string"""
+        """Create an instance of ItemChanges from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -94,6 +83,21 @@ class FrameData(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of data
+        if self.data:
+            _dict['data'] = self.data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of style
+        if self.style:
+            _dict['style'] = self.style.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of position
+        if self.position:
+            _dict['position'] = self.position.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of geometry
+        if self.geometry:
+            _dict['geometry'] = self.geometry.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of parent
+        if self.parent:
+            _dict['parent'] = self.parent.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -103,7 +107,7 @@ class FrameData(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of FrameData from a dict"""
+        """Create an instance of ItemChanges from a dict"""
         if obj is None:
             return None
 
@@ -111,10 +115,13 @@ class FrameData(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "format": obj.get("format") if obj.get("format") is not None else 'custom',
-            "title": obj.get("title"),
-            "type": obj.get("type") if obj.get("type") is not None else 'freeform',
-            "showContent": obj.get("showContent") if obj.get("showContent") is not None else True
+            "id": obj.get("id"),
+            "type": obj.get("type"),
+            "data": ItemDataChanges.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "style": ItemStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+            "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
+            "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
+            "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

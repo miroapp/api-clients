@@ -12,25 +12,36 @@
 
 /**
  * @internal
- * Contains frame item data, such as the title, frame type, or frame format.
+ * Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.
  */
-export class FrameData {
+export class CustomFieldPlatformTags {
   /**
-   * Only custom frames are supported at the moment.
+   * Hex value representing the color that fills the background area of the preview field, when it\'s displayed on the app card.
    */
-  'format'?: string | (typeof FrameData.FormatEnum)[keyof typeof FrameData.FormatEnum] = FrameData.FormatEnum.Custom
+  'fillColor'?: string
   /**
-   * Title of the frame. This title appears at the top of the frame.
+   * The shape of the icon on the preview field.
    */
-  'title'?: string
+  'iconShape'?:
+    | string
+    | (typeof CustomFieldPlatformTags.IconShapeEnum)[keyof typeof CustomFieldPlatformTags.IconShapeEnum] =
+    CustomFieldPlatformTags.IconShapeEnum.Round
   /**
-   * Only free form frames are supported at the moment.
+   * A valid URL pointing to an image available online. The transport protocol must be HTTPS. Possible image file formats: JPG/JPEG, PNG, SVG.
    */
-  'type'?: string | (typeof FrameData.TypeEnum)[keyof typeof FrameData.TypeEnum] = FrameData.TypeEnum.Freeform
+  'iconUrl'?: string
   /**
-   * Hide or reveal the content inside a frame (Enterprise plan only).
+   * Hex value representing the color of the text string assigned to `value`.
    */
-  'showContent'?: boolean = true
+  'textColor'?: string
+  /**
+   * A short text displayed in a tooltip when clicking or hovering over the preview field.
+   */
+  'tooltip'?: string
+  /**
+   * The actual data value of the custom field. It can be any type of information that you want to convey.
+   */
+  'value'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -38,51 +49,46 @@ export class FrameData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'format',
-      baseName: 'format',
-      type: 'FrameData.FormatEnum',
-    },
-    {
-      name: 'title',
-      baseName: 'title',
+      name: 'fillColor',
+      baseName: 'fillColor',
       type: 'string',
     },
     {
-      name: 'type',
-      baseName: 'type',
-      type: 'FrameData.TypeEnum',
+      name: 'iconShape',
+      baseName: 'iconShape',
+      type: 'CustomFieldPlatformTags.IconShapeEnum',
     },
     {
-      name: 'showContent',
-      baseName: 'showContent',
-      type: 'boolean',
+      name: 'iconUrl',
+      baseName: 'iconUrl',
+      type: 'string',
+    },
+    {
+      name: 'textColor',
+      baseName: 'textColor',
+      type: 'string',
+    },
+    {
+      name: 'tooltip',
+      baseName: 'tooltip',
+      type: 'string',
+    },
+    {
+      name: 'value',
+      baseName: 'value',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return FrameData.attributeTypeMap
+    return CustomFieldPlatformTags.attributeTypeMap
   }
 }
 
-export namespace FrameData {
-  export const FormatEnum = {
-    Custom: 'custom',
-    Desktop: 'desktop',
-    Phone: 'phone',
-    Tablet: 'tablet',
-    A4: 'a4',
-    Letter: 'letter',
-    Ratio1x1: 'ratio_1x1',
-    Ratio4x3: 'ratio_4x3',
-    Ratio16x9: 'ratio_16x9',
-  } as const
-  export const TypeEnum = {
-    Freeform: 'freeform',
-    Heap: 'heap',
-    Grid: 'grid',
-    Rows: 'rows',
-    Columns: 'columns',
-    Unknown: 'unknown',
+export namespace CustomFieldPlatformTags {
+  export const IconShapeEnum = {
+    Round: 'round',
+    Square: 'square',
   } as const
 }
