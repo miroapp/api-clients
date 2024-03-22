@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients/tree/main/apps,38,12
+/miroapp/api-clients,30,24
+/miroapp/api-clients/tree/main/apps/client-test-app,25,10
+/miroapp/api-clients/tree/main/apps/client-test-app/views,16,6
+/miroapp/api-clients/tree/main/apps/fastify,13,4
+/miroapp/api-clients/issues/258,12,2
+/miroapp/api-clients/blob/main/packages/generator/spec.json,11,3
+/miroapp/api-clients/tree/main/packages,9,4
+/miroapp/api-clients/blob/main/packages/miro-api/api/apis.ts,9,2
+/miroapp/api-clients/tree/main/packages/miro-api,8,3
