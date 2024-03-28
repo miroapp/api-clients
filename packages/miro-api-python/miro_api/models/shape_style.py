@@ -28,7 +28,7 @@ class ShapeStyle(BaseModel):
     Contains information about the shape style, such as the border color or opacity.
     """ # noqa: E501
     border_color: Optional[StrictStr] = Field(default=None, description="Defines the color of the border of the shape. Default: `#1a1a1a` (dark gray).", alias="borderColor")
-    border_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the opacity level of the shape border. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: `1.0` (solid color).", alias="borderOpacity")
+    border_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the opacity level of the shape border. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: If a value for `borderColor` is passed, the default value for `borderColor` is `1.0`. If a value for `borderColor` is not passed, the default value is `0.0`.", alias="borderOpacity")
     border_style: Optional[StrictStr] = Field(default=None, description="Defines the style used to represent the border of the shape. Default: `normal`.", alias="borderStyle")
     border_width: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the thickness of the shape border, in dp. Default: `2.0`.", alias="borderWidth")
     color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color for the text within the shape item. Default: `#1a1a1a`.")

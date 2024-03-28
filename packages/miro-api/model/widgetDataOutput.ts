@@ -109,6 +109,10 @@ export class WidgetDataOutput {
    */
   'type'?: string | (typeof WidgetDataOutput.TypeEnum)[keyof typeof WidgetDataOutput.TypeEnum] =
     WidgetDataOutput.TypeEnum.Freeform
+  /**
+   * Hide or reveal the content inside a frame (Enterprise plan only).
+   */
+  'showContent'?: boolean = true
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -215,6 +219,11 @@ export class WidgetDataOutput {
       baseName: 'type',
       type: 'WidgetDataOutput.TypeEnum',
     },
+    {
+      name: 'showContent',
+      baseName: 'showContent',
+      type: 'boolean',
+    },
   ]
 
   /** @ignore */
@@ -254,5 +263,6 @@ export namespace WidgetDataOutput {
     Grid: 'grid',
     Rows: 'rows',
     Columns: 'columns',
+    Unknown: 'unknown',
   } as const
 }

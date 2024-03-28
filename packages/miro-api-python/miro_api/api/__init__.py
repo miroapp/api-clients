@@ -36,6 +36,11 @@ from miro_api.models.board_export_job_status import BoardExportJobStatus
 from miro_api.models.board_export_result import BoardExportResult
 from miro_api.models.create_board_export_request import CreateBoardExportRequest
 
+from pydantic import Field, StrictBytes, StrictStr
+from typing import List, Optional, Union
+from miro_api.models.item_create import ItemCreate
+from miro_api.models.items import Items
+
 from typing import Optional
 from miro_api.models.generic_item import GenericItem
 from miro_api.models.generic_item_cursor_paged import GenericItemCursorPaged
@@ -111,9 +116,12 @@ from miro_api.models.connector_creation_data import ConnectorCreationData
 from miro_api.models.connector_with_links import ConnectorWithLinks
 from miro_api.models.connectors_cursor_paged import ConnectorsCursorPaged
 
+from typing import Optional, Union
+from miro_api.models.create_document_item_using_file_from_device_request_data import CreateDocumentItemUsingFileFromDeviceRequestData
 from miro_api.models.document_create_request import DocumentCreateRequest
 from miro_api.models.document_item import DocumentItem
 from miro_api.models.document_update_request import DocumentUpdateRequest
+from miro_api.models.upload_file_from_device_data import UploadFileFromDeviceData
 
 from miro_api.models.embed_create_request import EmbedCreateRequest
 from miro_api.models.embed_item import EmbedItem
@@ -1703,6 +1711,309 @@ class MiroApiEndpoints:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/v2/orgs/{org_id}/boards/export/jobs',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+
+    @validate_call
+    def create_items(
+        self,
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        item_create: Annotated[List[ItemCreate], Field(min_length=1, max_length=20)],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Items:
+        """Create items in bulk
+
+        Adds different types of items to a board. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item's create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
+
+        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id: str
+        :param item_create: (required)
+        :type item_create: List[ItemCreate]
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_items_serialize(
+            board_id=board_id,
+            item_create=item_create,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Items",
+            '400': "BulkOperationError",
+            '429': "Error",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _create_items_serialize(
+        self,
+        board_id,
+        item_create,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+            'ItemCreate': '',
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if board_id is not None:
+            _path_params['board_id'] = board_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+        if item_create is not None:
+            _body_params = item_create
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalRelease}/items/bulk',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def create_items_in_bulk_using_file_from_device(
+        self,
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        data: Annotated[Optional[Union[StrictBytes, StrictStr]], Field(description="Select a file containing json object describing files to upload")] = None,
+        resources: Annotated[Optional[Union[StrictBytes, StrictStr]], Field(description="Select files to upload")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Items:
+        """Create items in bulk using file from device
+
+        Adds different types of items to a board using files from device. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item's create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
+
+        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id: str
+        :param data: Select a file containing json object describing files to upload
+        :type data: bytearray
+        :param resources: Select files to upload
+        :type resources: bytearray
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_items_in_bulk_using_file_from_device_serialize(
+            board_id=board_id,
+            data=data,
+            resources=resources,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "Items",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _create_items_in_bulk_using_file_from_device_serialize(
+        self,
+        board_id,
+        data,
+        resources,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if board_id is not None:
+            _path_params['board_id'] = board_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if data is not None:
+            _files['data'] = data
+        if resources is not None:
+            _files['resources'] = resources
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v2-experimental/boards/{board_id}/items/bulk',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11630,9 +11941,162 @@ class MiroApiEndpoints:
 
 
     @validate_call
-    def create_document_item_using_url(
+    def create_document_item_using_file_from_device(
         self,
         board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
+        data: Optional[CreateDocumentItemUsingFileFromDeviceRequestData] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DocumentItem:
+        """Create document item using file from device
+
+        Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+
+        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id: str
+        :param resource: Select a file to upload (required)
+        :type resource: bytearray
+        :param data:
+        :type data: CreateDocumentItemUsingFileFromDeviceRequestData
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_document_item_using_file_from_device_serialize(
+            board_id=board_id,
+            resource=resource,
+            data=data,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "DocumentItem",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _create_document_item_using_file_from_device_serialize(
+        self,
+        board_id,
+        resource,
+        data,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if board_id is not None:
+            _path_params['board_id'] = board_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if data is not None:
+            _form_params.append(('data', data))
+        if resource is not None:
+            _files['resource'] = resource
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v2/boards/{board_id}/documents',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def create_document_item_using_url(
+        self,
+        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
         document_create_request: DocumentCreateRequest,
         _request_timeout: Union[
             None,
@@ -11651,8 +12115,8 @@ class MiroApiEndpoints:
 
         Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id_platform: str
         :param document_create_request: (required)
         :type document_create_request: DocumentCreateRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -11678,7 +12142,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._create_document_item_using_url_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             document_create_request=document_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -11704,7 +12168,7 @@ class MiroApiEndpoints:
 
     def _create_document_item_using_url_serialize(
         self,
-        board_id,
+        board_id_platform,
         document_create_request,
         _request_auth,
         _content_type,
@@ -11725,8 +12189,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params['board_id_Platform'] = board_id_platform
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -11762,7 +12226,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id}/documents',
+            resource_path='/v2/boards/{board_id_Platform}/documents',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11781,7 +12245,7 @@ class MiroApiEndpoints:
     @validate_call
     def delete_document_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
+        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
         _request_timeout: Union[
             None,
@@ -11800,8 +12264,8 @@ class MiroApiEndpoints:
 
         Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board from which you want to delete the item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board from which you want to delete the item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to delete. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -11827,7 +12291,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._delete_document_item_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -11853,7 +12317,7 @@ class MiroApiEndpoints:
 
     def _delete_document_item_serialize(
         self,
-        board_id,
+        board_id_platform,
         item_id,
         _request_auth,
         _content_type,
@@ -11874,8 +12338,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params['board_id_Platform'] = board_id_platform
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -11898,7 +12362,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v2/boards/{board_id}/documents/{item_id}',
+            resource_path='/v2/boards/{board_id_Platform}/documents/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11917,7 +12381,7 @@ class MiroApiEndpoints:
     @validate_call
     def get_document_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
+        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
         _request_timeout: Union[
             None,
@@ -11936,8 +12400,8 @@ class MiroApiEndpoints:
 
         Retrieves information for a specific document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to retrieve. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -11963,7 +12427,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._get_document_item_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -11989,8 +12453,151 @@ class MiroApiEndpoints:
 
     def _get_document_item_serialize(
         self,
+        board_id_platform,
+        item_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if board_id_platform is not None:
+            _path_params['board_id_Platform'] = board_id_platform
+        if item_id is not None:
+            _path_params['item_id'] = item_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v2/boards/{board_id_Platform}/documents/{item_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_document_item_using_file_from_device(
+        self,
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
+        data: Optional[UploadFileFromDeviceData] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> DocumentItem:
+        """Update document item using file from device
+
+        Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+
+        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id: str
+        :param item_id: Unique identifier (ID) of the item that you want to update. (required)
+        :type item_id: str
+        :param resource: Select a file to upload (required)
+        :type resource: bytearray
+        :param data:
+        :type data: UploadFileFromDeviceData
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_document_item_using_file_from_device_serialize(
+            board_id=board_id,
+            item_id=item_id,
+            resource=resource,
+            data=data,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "DocumentItem",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _update_document_item_using_file_from_device_serialize(
+        self,
         board_id,
         item_id,
+        resource,
+        data,
         _request_auth,
         _content_type,
         _headers,
@@ -12017,6 +12624,10 @@ class MiroApiEndpoints:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if data is not None:
+            _form_params.append(('data', data))
+        if resource is not None:
+            _files['resource'] = resource
         # process the body parameter
 
 
@@ -12027,13 +12638,26 @@ class MiroApiEndpoints:
             ]
         )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
         ]
 
         return self.api_client.param_serialize(
-            method='GET',
+            method='PATCH',
             resource_path='/v2/boards/{board_id}/documents/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
@@ -12053,7 +12677,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_document_item_using_url(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         document_update_request: DocumentUpdateRequest,
         _request_timeout: Union[
@@ -12073,8 +12697,8 @@ class MiroApiEndpoints:
 
         Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param document_update_request: (required)
@@ -12102,7 +12726,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_document_item_using_url_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             document_update_request=document_update_request,
             _request_auth=_request_auth,
@@ -12129,7 +12753,7 @@ class MiroApiEndpoints:
 
     def _update_document_item_using_url_serialize(
         self,
-        board_id,
+        board_id_platform,
         item_id,
         document_update_request,
         _request_auth,
@@ -12151,8 +12775,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params['board_id_Platform'] = board_id_platform
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -12190,7 +12814,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id}/documents/{item_id}',
+            resource_path='/v2/boards/{board_id_Platform}/documents/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13364,9 +13988,162 @@ class MiroApiEndpoints:
 
 
     @validate_call
-    def create_image_item_using_url(
+    def create_image_item_using_local_file(
         self,
         board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
+        data: Optional[UploadFileFromDeviceData] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ImageItem:
+        """Create image item using file from device
+
+        Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+
+        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id: str
+        :param resource: Select a file to upload (required)
+        :type resource: bytearray
+        :param data:
+        :type data: UploadFileFromDeviceData
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._create_image_item_using_local_file_serialize(
+            board_id=board_id,
+            resource=resource,
+            data=data,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ImageItem",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _create_image_item_using_local_file_serialize(
+        self,
+        board_id,
+        resource,
+        data,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if board_id is not None:
+            _path_params['board_id'] = board_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        if data is not None:
+            _form_params.append(('data', data))
+        if resource is not None:
+            _files['resource'] = resource
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v2/boards/{board_id}/images',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def create_image_item_using_url(
+        self,
+        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
         image_create_request: ImageCreateRequest,
         _request_timeout: Union[
             None,
@@ -13385,8 +14162,8 @@ class MiroApiEndpoints:
 
         Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id_platform: str
         :param image_create_request: (required)
         :type image_create_request: ImageCreateRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -13412,7 +14189,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._create_image_item_using_url_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             image_create_request=image_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -13438,7 +14215,7 @@ class MiroApiEndpoints:
 
     def _create_image_item_using_url_serialize(
         self,
-        board_id,
+        board_id_platform,
         image_create_request,
         _request_auth,
         _content_type,
@@ -13459,8 +14236,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params['board_id_Platform'] = board_id_platform
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -13496,7 +14273,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id}/images',
+            resource_path='/v2/boards/{board_id_Platform}/images',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13515,7 +14292,7 @@ class MiroApiEndpoints:
     @validate_call
     def delete_image_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
+        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
         _request_timeout: Union[
             None,
@@ -13534,8 +14311,8 @@ class MiroApiEndpoints:
 
         Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board from which you want to delete the item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board from which you want to delete the item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to delete. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -13561,7 +14338,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._delete_image_item_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -13587,7 +14364,7 @@ class MiroApiEndpoints:
 
     def _delete_image_item_serialize(
         self,
-        board_id,
+        board_id_platform,
         item_id,
         _request_auth,
         _content_type,
@@ -13608,8 +14385,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params['board_id_Platform'] = board_id_platform
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -13632,7 +14409,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v2/boards/{board_id}/images/{item_id}',
+            resource_path='/v2/boards/{board_id_Platform}/images/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13651,7 +14428,7 @@ class MiroApiEndpoints:
     @validate_call
     def get_image_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
+        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
         _request_timeout: Union[
             None,
@@ -13670,8 +14447,8 @@ class MiroApiEndpoints:
 
         Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to retrieve. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -13697,7 +14474,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._get_image_item_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -13723,8 +14500,151 @@ class MiroApiEndpoints:
 
     def _get_image_item_serialize(
         self,
+        board_id_platform,
+        item_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if board_id_platform is not None:
+            _path_params['board_id_Platform'] = board_id_platform
+        if item_id is not None:
+            _path_params['item_id'] = item_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v2/boards/{board_id_Platform}/images/{item_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
+    def update_image_item_using_file_from_device(
+        self,
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
+        data: Optional[UploadFileFromDeviceData] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ImageItem:
+        """Update image item using file from device
+
+        Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+
+        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id: str
+        :param item_id: Unique identifier (ID) of the item that you want to update. (required)
+        :type item_id: str
+        :param resource: Select a file to upload (required)
+        :type resource: bytearray
+        :param data:
+        :type data: UploadFileFromDeviceData
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._update_image_item_using_file_from_device_serialize(
+            board_id=board_id,
+            item_id=item_id,
+            resource=resource,
+            data=data,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ImageItem",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _update_image_item_using_file_from_device_serialize(
+        self,
         board_id,
         item_id,
+        resource,
+        data,
         _request_auth,
         _content_type,
         _headers,
@@ -13751,6 +14671,10 @@ class MiroApiEndpoints:
         # process the query parameters
         # process the header parameters
         # process the form parameters
+        if data is not None:
+            _form_params.append(('data', data))
+        if resource is not None:
+            _files['resource'] = resource
         # process the body parameter
 
 
@@ -13761,13 +14685,26 @@ class MiroApiEndpoints:
             ]
         )
 
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.api_client.select_header_content_type(
+                    [
+                        'multipart/form-data'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
 
         # authentication setting
         _auth_settings: List[str] = [
         ]
 
         return self.api_client.param_serialize(
-            method='GET',
+            method='PATCH',
             resource_path='/v2/boards/{board_id}/images/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
@@ -13787,7 +14724,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_image_item_using_url(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         image_update_request: ImageUpdateRequest,
         _request_timeout: Union[
@@ -13807,8 +14744,8 @@ class MiroApiEndpoints:
 
         Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param image_update_request: (required)
@@ -13836,7 +14773,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_image_item_using_url_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             image_update_request=image_update_request,
             _request_auth=_request_auth,
@@ -13863,7 +14800,7 @@ class MiroApiEndpoints:
 
     def _update_image_item_using_url_serialize(
         self,
-        board_id,
+        board_id_platform,
         item_id,
         image_update_request,
         _request_auth,
@@ -13885,8 +14822,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params['board_id_Platform'] = board_id_platform
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -13924,7 +14861,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id}/images/{item_id}',
+            resource_path='/v2/boards/{board_id_Platform}/images/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
