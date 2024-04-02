@@ -1333,15 +1333,20 @@ export class MiroApi {
 
     const formData = new FormData()
     let extension = ''
-    if ('createItemsInBulkUsingFileFromDevice'.includes('Image')) {
-      extension = '.png'
-    } else if ('createItemsInBulkUsingFileFromDevice'.includes('Document')) {
-      extension = '.pdf'
-    }
     if (data) {
+      if ('createItemsInBulkUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('createItemsInBulkUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
       formData.append('data', data, 'file' + extension)
     }
     if (resources) {
+      if ('createItemsInBulkUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('createItemsInBulkUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
       formData.append('resources', resources, 'file' + extension)
     }
 
@@ -1745,15 +1750,18 @@ export class MiroApi {
 
     const formData = new FormData()
     let extension = ''
-    if ('createDocumentItemUsingFileFromDevice'.includes('Image')) {
-      extension = '.png'
-    } else if ('createDocumentItemUsingFileFromDevice'.includes('Document')) {
-      extension = '.pdf'
-    }
     if (data) {
-      formData.append('data', data)
+      formData.append(
+        'data',
+        JSON.stringify(ObjectSerializer.serialize(data, 'CreateDocumentItemUsingFileFromDeviceRequestData')),
+      )
     }
     if (resource) {
+      if ('createDocumentItemUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('createDocumentItemUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
       formData.append('resource', resource, 'file' + extension)
     }
 
@@ -1921,15 +1929,15 @@ export class MiroApi {
 
     const formData = new FormData()
     let extension = ''
-    if ('updateDocumentItemUsingFileFromDevice'.includes('Image')) {
-      extension = '.png'
-    } else if ('updateDocumentItemUsingFileFromDevice'.includes('Document')) {
-      extension = '.pdf'
-    }
     if (data) {
-      formData.append('data', data)
+      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
     }
     if (resource) {
+      if ('updateDocumentItemUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('updateDocumentItemUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
       formData.append('resource', resource, 'file' + extension)
     }
 
@@ -2572,15 +2580,15 @@ export class MiroApi {
 
     const formData = new FormData()
     let extension = ''
-    if ('createImageItemUsingLocalFile'.includes('Image')) {
-      extension = '.png'
-    } else if ('createImageItemUsingLocalFile'.includes('Document')) {
-      extension = '.pdf'
-    }
     if (data) {
-      formData.append('data', data)
+      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
     }
     if (resource) {
+      if ('createImageItemUsingLocalFile'.includes('Image')) {
+        extension = '.png'
+      } else if ('createImageItemUsingLocalFile'.includes('Document')) {
+        extension = '.pdf'
+      }
       formData.append('resource', resource, 'file' + extension)
     }
 
@@ -2746,15 +2754,15 @@ export class MiroApi {
 
     const formData = new FormData()
     let extension = ''
-    if ('updateImageItemUsingFileFromDevice'.includes('Image')) {
-      extension = '.png'
-    } else if ('updateImageItemUsingFileFromDevice'.includes('Document')) {
-      extension = '.pdf'
-    }
     if (data) {
-      formData.append('data', data)
+      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
     }
     if (resource) {
+      if ('updateImageItemUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('updateImageItemUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
       formData.append('resource', resource, 'file' + extension)
     }
 
