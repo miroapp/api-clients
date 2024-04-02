@@ -18,48 +18,67 @@ import pprint
 from pydantic import BaseModel, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
 from miro_api.models.organization_member import OrganizationMember
-from miro_api.models.organization_members_search_response import OrganizationMembersSearchResponse
+from miro_api.models.organization_members_search_response import (
+    OrganizationMembersSearchResponse,
+)
 from pydantic import StrictStr, Field
 from typing import Union, List, Optional, Dict
 from typing_extensions import Literal, Self
 
-ENTERPRISEGETORGANIZATIONMEMBERS200RESPONSE_ONE_OF_SCHEMAS = ["List[OrganizationMember]", "OrganizationMembersSearchResponse"]
+ENTERPRISEGETORGANIZATIONMEMBERS200RESPONSE_ONE_OF_SCHEMAS = [
+    "List[OrganizationMember]",
+    "OrganizationMembersSearchResponse",
+]
+
 
 class EnterpriseGetOrganizationMembers200Response(BaseModel):
     """
     EnterpriseGetOrganizationMembers200Response
     """
+
     # data type: OrganizationMembersSearchResponse
     oneof_schema_1_validator: Optional[OrganizationMembersSearchResponse] = None
     # data type: List[OrganizationMember]
-    oneof_schema_2_validator: Optional[List[OrganizationMember]] = Field(default=None, description="Response for search organization members by user emails")
-    actual_instance: Optional[Union[List[OrganizationMember], OrganizationMembersSearchResponse]] = None
-    one_of_schemas: List[str] = Field(default=Literal["List[OrganizationMember]", "OrganizationMembersSearchResponse"])
+    oneof_schema_2_validator: Optional[List[OrganizationMember]] = Field(
+        default=None,
+        description="Response for search organization members by user emails",
+    )
+    actual_instance: Optional[
+        Union[List[OrganizationMember], OrganizationMembersSearchResponse]
+    ] = None
+    one_of_schemas: List[str] = Field(
+        default=Literal["List[OrganizationMember]", "OrganizationMembersSearchResponse"]
+    )
 
     model_config = {
         "validate_assignment": True,
         "protected_namespaces": (),
     }
 
-
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
             if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
 
-    @field_validator('actual_instance')
+    @field_validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
         instance = EnterpriseGetOrganizationMembers200Response.model_construct()
         error_messages = []
         match = 0
         # validate data type: OrganizationMembersSearchResponse
         if not isinstance(v, OrganizationMembersSearchResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `OrganizationMembersSearchResponse`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `OrganizationMembersSearchResponse`"
+            )
         else:
             match += 1
         # validate data type: List[OrganizationMember]
@@ -70,10 +89,16 @@ class EnterpriseGetOrganizationMembers200Response(BaseModel):
             error_messages.append(str(e))
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in EnterpriseGetOrganizationMembers200Response with oneOf schemas: List[OrganizationMember], OrganizationMembersSearchResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in EnterpriseGetOrganizationMembers200Response with oneOf schemas: List[OrganizationMember], OrganizationMembersSearchResponse. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in EnterpriseGetOrganizationMembers200Response with oneOf schemas: List[OrganizationMember], OrganizationMembersSearchResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in EnterpriseGetOrganizationMembers200Response with oneOf schemas: List[OrganizationMember], OrganizationMembersSearchResponse. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -82,7 +107,9 @@ class EnterpriseGetOrganizationMembers200Response(BaseModel):
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union[List[OrganizationMember], OrganizationMembersSearchResponse]:
+    def from_json(
+        cls, json_str: str
+    ) -> Union[List[OrganizationMember], OrganizationMembersSearchResponse]:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
@@ -90,7 +117,9 @@ class EnterpriseGetOrganizationMembers200Response(BaseModel):
 
         # deserialize data into OrganizationMembersSearchResponse
         try:
-            instance.actual_instance = OrganizationMembersSearchResponse.from_json(json_str)
+            instance.actual_instance = OrganizationMembersSearchResponse.from_json(
+                json_str
+            )
             matches.append(instance.actual_instance)
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -106,11 +135,16 @@ class EnterpriseGetOrganizationMembers200Response(BaseModel):
 
         if not matches:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into EnterpriseGetOrganizationMembers200Response with oneOf schemas: List[OrganizationMember], OrganizationMembersSearchResponse. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into EnterpriseGetOrganizationMembers200Response with oneOf schemas: List[OrganizationMember], OrganizationMembersSearchResponse. Details: "
+                + ", ".join(error_messages)
+            )
 
         # Return one match that has least additional_properties
         if len(matches) > 1:
-            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
+            instance.actual_instance = sorted(
+                matches, key=lambda m: len(m.additional_properties)
+            )[0]
 
         return instance
 
@@ -119,17 +153,27 @@ class EnterpriseGetOrganizationMembers200Response(BaseModel):
         if self.actual_instance is None:
             return "null"
 
-        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
+        if hasattr(self.actual_instance, "to_json") and callable(
+            self.actual_instance.to_json
+        ):
             return self.actual_instance.to_json()
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], List[OrganizationMember], OrganizationMembersSearchResponse]]:
+    def to_dict(
+        self,
+    ) -> Optional[
+        Union[
+            Dict[str, Any], List[OrganizationMember], OrganizationMembersSearchResponse
+        ]
+    ]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
 
-        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
+        if hasattr(self.actual_instance, "to_dict") and callable(
+            self.actual_instance.to_dict
+        ):
             return self.actual_instance.to_dict()
         else:
             # primitive type
@@ -138,5 +182,3 @@ class EnterpriseGetOrganizationMembers200Response(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

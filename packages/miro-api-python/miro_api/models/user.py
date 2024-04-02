@@ -22,14 +22,22 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class User(BaseModel):
     """
     Contains user information.
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the user.")
+    """  # noqa: E501
+
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier of the user."
+    )
     email: Optional[StrictStr] = Field(default=None, description="Email of the user.")
-    first_name: Optional[StrictStr] = Field(default=None, description="First name of the user.", alias="firstName")
-    last_name: Optional[StrictStr] = Field(default=None, description="Last name of the user.", alias="lastName")
+    first_name: Optional[StrictStr] = Field(
+        default=None, description="First name of the user.", alias="firstName"
+    )
+    last_name: Optional[StrictStr] = Field(
+        default=None, description="Last name of the user.", alias="lastName"
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "email", "firstName", "lastName"]
 
@@ -38,7 +46,6 @@ class User(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -65,9 +72,11 @@ class User(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -90,17 +99,17 @@ class User(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "email": obj.get("email"),
-            "firstName": obj.get("firstName"),
-            "lastName": obj.get("lastName")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "email": obj.get("email"),
+                "firstName": obj.get("firstName"),
+                "lastName": obj.get("lastName"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

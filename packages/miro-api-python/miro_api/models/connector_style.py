@@ -23,58 +23,142 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ConnectorStyle(BaseModel):
     """
     Contains information about the style of a connector, such as the color or caption font size
-    """ # noqa: E501
-    color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color for the captions on the connector. Default: `#1a1a1a`")
-    end_stroke_cap: Optional[StrictStr] = Field(default=None, description="The decoration cap of the connector end, like an arrow or circle. Default: stealth.", alias="endStrokeCap")
-    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the font size, in dp, for the captions on the connector. Default: 14", alias="fontSize")
-    start_stroke_cap: Optional[StrictStr] = Field(default=None, description="The decoration cap of the connector end, like an arrow or circle. Default: none.", alias="startStrokeCap")
-    stroke_color: Optional[StrictStr] = Field(default=None, description="Hex value of the color of the connector line. Default: #000000.", alias="strokeColor")
-    stroke_style: Optional[StrictStr] = Field(default=None, description="The stroke pattern of the connector line. Default: normal.", alias="strokeStyle")
-    stroke_width: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The thickness of the connector line, in dp. Default: 1.0.", alias="strokeWidth")
-    text_orientation: Optional[StrictStr] = Field(default=None, description="The captions orientation relatively to the connector line curvature. Default: aligned.", alias="textOrientation")
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["color", "endStrokeCap", "fontSize", "startStrokeCap", "strokeColor", "strokeStyle", "strokeWidth", "textOrientation"]
+    """  # noqa: E501
 
-    @field_validator('end_stroke_cap')
+    color: Optional[StrictStr] = Field(
+        default=None,
+        description="Hex value representing the color for the captions on the connector. Default: `#1a1a1a`",
+    )
+    end_stroke_cap: Optional[StrictStr] = Field(
+        default=None,
+        description="The decoration cap of the connector end, like an arrow or circle. Default: stealth.",
+        alias="endStrokeCap",
+    )
+    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="Defines the font size, in dp, for the captions on the connector. Default: 14",
+        alias="fontSize",
+    )
+    start_stroke_cap: Optional[StrictStr] = Field(
+        default=None,
+        description="The decoration cap of the connector end, like an arrow or circle. Default: none.",
+        alias="startStrokeCap",
+    )
+    stroke_color: Optional[StrictStr] = Field(
+        default=None,
+        description="Hex value of the color of the connector line. Default: #000000.",
+        alias="strokeColor",
+    )
+    stroke_style: Optional[StrictStr] = Field(
+        default=None,
+        description="The stroke pattern of the connector line. Default: normal.",
+        alias="strokeStyle",
+    )
+    stroke_width: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="The thickness of the connector line, in dp. Default: 1.0.",
+        alias="strokeWidth",
+    )
+    text_orientation: Optional[StrictStr] = Field(
+        default=None,
+        description="The captions orientation relatively to the connector line curvature. Default: aligned.",
+        alias="textOrientation",
+    )
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = [
+        "color",
+        "endStrokeCap",
+        "fontSize",
+        "startStrokeCap",
+        "strokeColor",
+        "strokeStyle",
+        "strokeWidth",
+        "textOrientation",
+    ]
+
+    @field_validator("end_stroke_cap")
     def end_stroke_cap_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many']):
-            raise ValueError("must be one of enum values ('none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many')")
+        if value not in set(
+            [
+                "none",
+                "stealth",
+                "diamond",
+                "filled_diamond",
+                "oval",
+                "filled_oval",
+                "arrow",
+                "triangle",
+                "filled_triangle",
+                "erd_one",
+                "erd_many",
+                "erd_only_one",
+                "erd_zero_or_one",
+                "erd_one_or_many",
+                "erd_zero_or_many",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many')"
+            )
         return value
 
-    @field_validator('start_stroke_cap')
+    @field_validator("start_stroke_cap")
     def start_stroke_cap_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many']):
-            raise ValueError("must be one of enum values ('none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many')")
+        if value not in set(
+            [
+                "none",
+                "stealth",
+                "diamond",
+                "filled_diamond",
+                "oval",
+                "filled_oval",
+                "arrow",
+                "triangle",
+                "filled_triangle",
+                "erd_one",
+                "erd_many",
+                "erd_only_one",
+                "erd_zero_or_one",
+                "erd_one_or_many",
+                "erd_zero_or_many",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many')"
+            )
         return value
 
-    @field_validator('stroke_style')
+    @field_validator("stroke_style")
     def stroke_style_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['normal', 'dotted', 'dashed']):
-            raise ValueError("must be one of enum values ('normal', 'dotted', 'dashed')")
+        if value not in set(["normal", "dotted", "dashed"]):
+            raise ValueError(
+                "must be one of enum values ('normal', 'dotted', 'dashed')"
+            )
         return value
 
-    @field_validator('text_orientation')
+    @field_validator("text_orientation")
     def text_orientation_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['horizontal', 'aligned']):
+        if value not in set(["horizontal", "aligned"]):
             raise ValueError("must be one of enum values ('horizontal', 'aligned')")
         return value
 
@@ -83,7 +167,6 @@ class ConnectorStyle(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -110,9 +193,11 @@ class ConnectorStyle(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -135,21 +220,21 @@ class ConnectorStyle(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "color": obj.get("color"),
-            "endStrokeCap": obj.get("endStrokeCap"),
-            "fontSize": obj.get("fontSize"),
-            "startStrokeCap": obj.get("startStrokeCap"),
-            "strokeColor": obj.get("strokeColor"),
-            "strokeStyle": obj.get("strokeStyle"),
-            "strokeWidth": obj.get("strokeWidth"),
-            "textOrientation": obj.get("textOrientation")
-        })
+        _obj = cls.model_validate(
+            {
+                "color": obj.get("color"),
+                "endStrokeCap": obj.get("endStrokeCap"),
+                "fontSize": obj.get("fontSize"),
+                "startStrokeCap": obj.get("startStrokeCap"),
+                "strokeColor": obj.get("strokeColor"),
+                "strokeStyle": obj.get("strokeStyle"),
+                "strokeWidth": obj.get("strokeWidth"),
+                "textOrientation": obj.get("textOrientation"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

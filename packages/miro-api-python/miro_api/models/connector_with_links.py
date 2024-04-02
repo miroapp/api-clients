@@ -29,34 +29,73 @@ from miro_api.models.self_link import SelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ConnectorWithLinks(BaseModel):
     """
     Contains the result data.
-    """ # noqa: E501
-    captions: Optional[List[Caption]] = Field(default=None, description="Blocks of text you want to display on the connector.")
-    created_at: Optional[datetime] = Field(default=None, description="Date and time when the connector was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="createdAt")
+    """  # noqa: E501
+
+    captions: Optional[List[Caption]] = Field(
+        default=None, description="Blocks of text you want to display on the connector."
+    )
+    created_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the connector was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        alias="createdAt",
+    )
     created_by: Optional[CreatedBy] = Field(default=None, alias="createdBy")
     end_item: Optional[ItemConnectionWithLinks] = Field(default=None, alias="endItem")
     id: StrictStr = Field(description="Unique identifier (ID) of a connector.")
-    is_supported: Optional[StrictBool] = Field(default=None, description="Indicates whether the connector is supported at the moment. If this parameter returns `false`, we do not support the connector at the moment. We do not allow updates for unsupported connectors and we might not return all data about the connector, such as intermediate points and connection points to the canvas.", alias="isSupported")
+    is_supported: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the connector is supported at the moment. If this parameter returns `false`, we do not support the connector at the moment. We do not allow updates for unsupported connectors and we might not return all data about the connector, such as intermediate points and connection points to the canvas.",
+        alias="isSupported",
+    )
     links: Optional[SelfLink] = None
-    modified_at: Optional[datetime] = Field(default=None, description="Date and time when the connector was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="modifiedAt")
+    modified_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the connector was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        alias="modifiedAt",
+    )
     modified_by: Optional[ModifiedBy] = Field(default=None, alias="modifiedBy")
-    shape: Optional[StrictStr] = Field(default='curved', description="The path type of the connector line, defines curvature. Default: curved.")
-    start_item: Optional[ItemConnectionWithLinks] = Field(default=None, alias="startItem")
+    shape: Optional[StrictStr] = Field(
+        default="curved",
+        description="The path type of the connector line, defines curvature. Default: curved.",
+    )
+    start_item: Optional[ItemConnectionWithLinks] = Field(
+        default=None, alias="startItem"
+    )
     style: Optional[ConnectorStyle] = None
-    type: Optional[StrictStr] = Field(default=None, description="Type of board object that is returned.")
+    type: Optional[StrictStr] = Field(
+        default=None, description="Type of board object that is returned."
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["captions", "createdAt", "createdBy", "endItem", "id", "isSupported", "links", "modifiedAt", "modifiedBy", "shape", "startItem", "style", "type"]
+    __properties: ClassVar[List[str]] = [
+        "captions",
+        "createdAt",
+        "createdBy",
+        "endItem",
+        "id",
+        "isSupported",
+        "links",
+        "modifiedAt",
+        "modifiedBy",
+        "shape",
+        "startItem",
+        "style",
+        "type",
+    ]
 
-    @field_validator('shape')
+    @field_validator("shape")
     def shape_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['straight', 'elbowed', 'curved']):
-            raise ValueError("must be one of enum values ('straight', 'elbowed', 'curved')")
+        if value not in set(["straight", "elbowed", "curved"]):
+            raise ValueError(
+                "must be one of enum values ('straight', 'elbowed', 'curved')"
+            )
         return value
 
     model_config = {
@@ -64,7 +103,6 @@ class ConnectorWithLinks(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -91,9 +129,11 @@ class ConnectorWithLinks(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -106,25 +146,25 @@ class ConnectorWithLinks(BaseModel):
             for _item in self.captions:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['captions'] = _items
+            _dict["captions"] = _items
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
-            _dict['createdBy'] = self.created_by.to_dict()
+            _dict["createdBy"] = self.created_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of end_item
         if self.end_item:
-            _dict['endItem'] = self.end_item.to_dict()
+            _dict["endItem"] = self.end_item.to_dict()
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
-            _dict['links'] = self.links.to_dict()
+            _dict["links"] = self.links.to_dict()
         # override the default output from pydantic by calling `to_dict()` of modified_by
         if self.modified_by:
-            _dict['modifiedBy'] = self.modified_by.to_dict()
+            _dict["modifiedBy"] = self.modified_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of start_item
         if self.start_item:
-            _dict['startItem'] = self.start_item.to_dict()
+            _dict["startItem"] = self.start_item.to_dict()
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
-            _dict['style'] = self.style.to_dict()
+            _dict["style"] = self.style.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -141,26 +181,54 @@ class ConnectorWithLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "captions": [Caption.from_dict(_item) for _item in obj["captions"]] if obj.get("captions") is not None else None,
-            "createdAt": obj.get("createdAt"),
-            "createdBy": CreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "endItem": ItemConnectionWithLinks.from_dict(obj["endItem"]) if obj.get("endItem") is not None else None,
-            "id": obj.get("id"),
-            "isSupported": obj.get("isSupported"),
-            "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None,
-            "modifiedAt": obj.get("modifiedAt"),
-            "modifiedBy": ModifiedBy.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
-            "shape": obj.get("shape") if obj.get("shape") is not None else 'curved',
-            "startItem": ItemConnectionWithLinks.from_dict(obj["startItem"]) if obj.get("startItem") is not None else None,
-            "style": ConnectorStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "captions": (
+                    [Caption.from_dict(_item) for _item in obj["captions"]]
+                    if obj.get("captions") is not None
+                    else None
+                ),
+                "createdAt": obj.get("createdAt"),
+                "createdBy": (
+                    CreatedBy.from_dict(obj["createdBy"])
+                    if obj.get("createdBy") is not None
+                    else None
+                ),
+                "endItem": (
+                    ItemConnectionWithLinks.from_dict(obj["endItem"])
+                    if obj.get("endItem") is not None
+                    else None
+                ),
+                "id": obj.get("id"),
+                "isSupported": obj.get("isSupported"),
+                "links": (
+                    SelfLink.from_dict(obj["links"])
+                    if obj.get("links") is not None
+                    else None
+                ),
+                "modifiedAt": obj.get("modifiedAt"),
+                "modifiedBy": (
+                    ModifiedBy.from_dict(obj["modifiedBy"])
+                    if obj.get("modifiedBy") is not None
+                    else None
+                ),
+                "shape": obj.get("shape") if obj.get("shape") is not None else "curved",
+                "startItem": (
+                    ItemConnectionWithLinks.from_dict(obj["startItem"])
+                    if obj.get("startItem") is not None
+                    else None
+                ),
+                "style": (
+                    ConnectorStyle.from_dict(obj["style"])
+                    if obj.get("style") is not None
+                    else None
+                ),
+                "type": obj.get("type"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

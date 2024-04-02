@@ -24,7 +24,9 @@ from miro_api.models.app_card_style import AppCardStyle
 from miro_api.models.app_card_update_request import AppCardUpdateRequest
 from miro_api.models.attach_tag_to_item400_response import AttachTagToItem400Response
 from miro_api.models.basic_error import BasicError
-from miro_api.models.basic_error_teams_enterprise_plan import BasicErrorTeamsEnterprisePlan
+from miro_api.models.basic_error_teams_enterprise_plan import (
+    BasicErrorTeamsEnterprisePlan,
+)
 from miro_api.models.board import Board
 from miro_api.models.board_changes import BoardChanges
 from miro_api.models.board_content_log_data import BoardContentLogData
@@ -49,7 +51,9 @@ from miro_api.models.board_subscription import BoardSubscription
 from miro_api.models.board_subscription_data import BoardSubscriptionData
 from miro_api.models.board_with_links import BoardWithLinks
 from miro_api.models.board_with_links_and_last_opened import BoardWithLinksAndLastOpened
-from miro_api.models.board_with_links_and_without_project import BoardWithLinksAndWithoutProject
+from miro_api.models.board_with_links_and_without_project import (
+    BoardWithLinksAndWithoutProject,
+)
 from miro_api.models.boards_paged_response import BoardsPagedResponse
 from miro_api.models.caption import Caption
 from miro_api.models.card_create_request import CardCreateRequest
@@ -64,7 +68,9 @@ from miro_api.models.connector_with_links import ConnectorWithLinks
 from miro_api.models.connectors_cursor_paged import ConnectorsCursorPaged
 from miro_api.models.copy_board_changes import CopyBoardChanges
 from miro_api.models.create_board_export_request import CreateBoardExportRequest
-from miro_api.models.create_board_subscription_request import CreateBoardSubscriptionRequest
+from miro_api.models.create_board_subscription_request import (
+    CreateBoardSubscriptionRequest,
+)
 from miro_api.models.create_frame_item400_response import CreateFrameItem400Response
 from miro_api.models.create_project_request import CreateProjectRequest
 from miro_api.models.create_team_request import CreateTeamRequest
@@ -75,8 +81,12 @@ from miro_api.models.custom_field import CustomField
 from miro_api.models.custom_field_platform import CustomFieldPlatform
 from miro_api.models.data_classification_label import DataClassificationLabel
 from miro_api.models.data_classification_label_id import DataClassificationLabelId
-from miro_api.models.data_classification_organization_settings import DataClassificationOrganizationSettings
-from miro_api.models.data_classification_team_settings import DataClassificationTeamSettings
+from miro_api.models.data_classification_organization_settings import (
+    DataClassificationOrganizationSettings,
+)
+from miro_api.models.data_classification_team_settings import (
+    DataClassificationTeamSettings,
+)
 from miro_api.models.document_create_request import DocumentCreateRequest
 from miro_api.models.document_data import DocumentData
 from miro_api.models.document_data_platform import DocumentDataPlatform
@@ -90,7 +100,9 @@ from miro_api.models.embed_item import EmbedItem
 from miro_api.models.embed_update_request import EmbedUpdateRequest
 from miro_api.models.embed_url_data import EmbedUrlData
 from miro_api.models.embed_url_data_changes import EmbedUrlDataChanges
-from miro_api.models.enterprise_get_organization_members200_response import EnterpriseGetOrganizationMembers200Response
+from miro_api.models.enterprise_get_organization_members200_response import (
+    EnterpriseGetOrganizationMembers200Response,
+)
 from miro_api.models.error400 import Error400
 from miro_api.models.error401 import Error401
 from miro_api.models.error403 import Error403
@@ -98,7 +110,9 @@ from miro_api.models.error404 import Error404
 from miro_api.models.error409 import Error409
 from miro_api.models.error429 import Error429
 from miro_api.models.fixed_ratio_geometry import FixedRatioGeometry
-from miro_api.models.fixed_ratio_no_rotation_geometry import FixedRatioNoRotationGeometry
+from miro_api.models.fixed_ratio_no_rotation_geometry import (
+    FixedRatioNoRotationGeometry,
+)
 from miro_api.models.frame_changes import FrameChanges
 from miro_api.models.frame_create_request import FrameCreateRequest
 from miro_api.models.frame_data import FrameData
@@ -110,14 +124,22 @@ from miro_api.models.generic_item import GenericItem
 from miro_api.models.generic_item_cursor_paged import GenericItemCursorPaged
 from miro_api.models.generic_item_update import GenericItemUpdate
 from miro_api.models.generic_subscription import GenericSubscription
-from miro_api.models.generic_subscriptions_cursor_paged import GenericSubscriptionsCursorPaged
+from miro_api.models.generic_subscriptions_cursor_paged import (
+    GenericSubscriptionsCursorPaged,
+)
 from miro_api.models.geometry import Geometry
 from miro_api.models.geometry_no_rotation import GeometryNoRotation
 from miro_api.models.geometry_platform import GeometryPlatform
-from miro_api.models.geometry_platform_experimental_features import GeometryPlatformExperimentalFeatures
+from miro_api.models.geometry_platform_experimental_features import (
+    GeometryPlatformExperimentalFeatures,
+)
 from miro_api.models.geometry_platform_tags import GeometryPlatformTags
-from miro_api.models.get_board_item_content_logs_response import GetBoardItemContentLogsResponse
-from miro_api.models.get_board_user_info_last_opened_by import GetBoardUserInfoLastOpenedBy
+from miro_api.models.get_board_item_content_logs_response import (
+    GetBoardItemContentLogsResponse,
+)
+from miro_api.models.get_board_user_info_last_opened_by import (
+    GetBoardUserInfoLastOpenedBy,
+)
 from miro_api.models.get_tags_response import GetTagsResponse
 from miro_api.models.image_create_request import ImageCreateRequest
 from miro_api.models.image_data import ImageData
@@ -149,10 +171,14 @@ from miro_api.models.modified_by_platform_tags import ModifiedByPlatformTags
 from miro_api.models.organization import Organization
 from miro_api.models.organization_information import OrganizationInformation
 from miro_api.models.organization_member import OrganizationMember
-from miro_api.models.organization_members_search_response import OrganizationMembersSearchResponse
+from miro_api.models.organization_members_search_response import (
+    OrganizationMembersSearchResponse,
+)
 from miro_api.models.page_links import PageLinks
 from miro_api.models.page_links_platform import PageLinksPlatform
-from miro_api.models.page_links_platform_experimental_features import PageLinksPlatformExperimentalFeatures
+from miro_api.models.page_links_platform_experimental_features import (
+    PageLinksPlatformExperimentalFeatures,
+)
 from miro_api.models.page_links_platform_tags import PageLinksPlatformTags
 from miro_api.models.parent import Parent
 from miro_api.models.parent_links_envelope import ParentLinksEnvelope
@@ -169,7 +195,9 @@ from miro_api.models.project_settings import ProjectSettings
 from miro_api.models.relative_offset import RelativeOffset
 from miro_api.models.self_link import SelfLink
 from miro_api.models.self_link_platform import SelfLinkPlatform
-from miro_api.models.self_link_platform_experimental_features import SelfLinkPlatformExperimentalFeatures
+from miro_api.models.self_link_platform_experimental_features import (
+    SelfLinkPlatformExperimentalFeatures,
+)
 from miro_api.models.self_link_platform_tags import SelfLinkPlatformTags
 from miro_api.models.shape_create_request import ShapeCreateRequest
 from miro_api.models.shape_data import ShapeData
@@ -196,15 +224,23 @@ from miro_api.models.tags_paged_response import TagsPagedResponse
 from miro_api.models.team import Team
 from miro_api.models.team_access import TeamAccess
 from miro_api.models.team_account_discovery_settings import TeamAccountDiscoverySettings
-from miro_api.models.team_account_discovery_settings_changes import TeamAccountDiscoverySettingsChanges
+from miro_api.models.team_account_discovery_settings_changes import (
+    TeamAccountDiscoverySettingsChanges,
+)
 from miro_api.models.team_changes import TeamChanges
 from miro_api.models.team_collaboration_settings import TeamCollaborationSettings
-from miro_api.models.team_collaboration_settings_changes import TeamCollaborationSettingsChanges
+from miro_api.models.team_collaboration_settings_changes import (
+    TeamCollaborationSettingsChanges,
+)
 from miro_api.models.team_copy_access_level_settings import TeamCopyAccessLevelSettings
-from miro_api.models.team_copy_access_level_settings_changes import TeamCopyAccessLevelSettingsChanges
+from miro_api.models.team_copy_access_level_settings_changes import (
+    TeamCopyAccessLevelSettingsChanges,
+)
 from miro_api.models.team_information import TeamInformation
 from miro_api.models.team_invitation_settings import TeamInvitationSettings
-from miro_api.models.team_invitation_settings_changes import TeamInvitationSettingsChanges
+from miro_api.models.team_invitation_settings_changes import (
+    TeamInvitationSettingsChanges,
+)
 from miro_api.models.team_member import TeamMember
 from miro_api.models.team_member_changes import TeamMemberChanges
 from miro_api.models.team_member_invite import TeamMemberInvite
@@ -212,7 +248,9 @@ from miro_api.models.team_members_page import TeamMembersPage
 from miro_api.models.team_settings import TeamSettings
 from miro_api.models.team_settings_changes import TeamSettingsChanges
 from miro_api.models.team_sharing_policy_settings import TeamSharingPolicySettings
-from miro_api.models.team_sharing_policy_settings_changes import TeamSharingPolicySettingsChanges
+from miro_api.models.team_sharing_policy_settings_changes import (
+    TeamSharingPolicySettingsChanges,
+)
 from miro_api.models.teams_page import TeamsPage
 from miro_api.models.text_create_request import TextCreateRequest
 from miro_api.models.text_data import TextData
@@ -221,9 +259,15 @@ from miro_api.models.text_item import TextItem
 from miro_api.models.text_style import TextStyle
 from miro_api.models.text_update_request import TextUpdateRequest
 from miro_api.models.token_information import TokenInformation
-from miro_api.models.update_board_subscription_request import UpdateBoardSubscriptionRequest
-from miro_api.models.update_boards_data_classification_label import UpdateBoardsDataClassificationLabel
-from miro_api.models.update_boards_data_classification_label_request import UpdateBoardsDataClassificationLabelRequest
+from miro_api.models.update_board_subscription_request import (
+    UpdateBoardSubscriptionRequest,
+)
+from miro_api.models.update_boards_data_classification_label import (
+    UpdateBoardsDataClassificationLabel,
+)
+from miro_api.models.update_boards_data_classification_label_request import (
+    UpdateBoardsDataClassificationLabelRequest,
+)
 from miro_api.models.update_project_member_request import UpdateProjectMemberRequest
 from miro_api.models.update_project_request import UpdateProjectRequest
 from miro_api.models.update_project_settings_request import UpdateProjectSettingsRequest
@@ -236,5 +280,7 @@ from miro_api.models.widget_data_output import WidgetDataOutput
 from miro_api.models.widget_data_output_platform import WidgetDataOutputPlatform
 from miro_api.models.widget_links import WidgetLinks
 from miro_api.models.widget_links_platform import WidgetLinksPlatform
-from miro_api.models.widget_links_platform_experimental_features import WidgetLinksPlatformExperimentalFeatures
+from miro_api.models.widget_links_platform_experimental_features import (
+    WidgetLinksPlatformExperimentalFeatures,
+)
 from miro_api.models.width_only_adjustable_geometry import WidthOnlyAdjustableGeometry

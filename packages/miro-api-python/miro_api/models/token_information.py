@@ -25,10 +25,12 @@ from miro_api.models.user_information import UserInformation
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TokenInformation(BaseModel):
     """
     TokenInformation
-    """ # noqa: E501
+    """  # noqa: E501
+
     type: StrictStr
     organization: Optional[OrganizationInformation] = None
     team: TeamInformation
@@ -36,14 +38,20 @@ class TokenInformation(BaseModel):
     user: UserInformation
     scopes: Optional[List[StrictStr]] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["type", "organization", "team", "createdBy", "user", "scopes"]
+    __properties: ClassVar[List[str]] = [
+        "type",
+        "organization",
+        "team",
+        "createdBy",
+        "user",
+        "scopes",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,9 +78,11 @@ class TokenInformation(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -81,16 +91,16 @@ class TokenInformation(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of organization
         if self.organization:
-            _dict['organization'] = self.organization.to_dict()
+            _dict["organization"] = self.organization.to_dict()
         # override the default output from pydantic by calling `to_dict()` of team
         if self.team:
-            _dict['team'] = self.team.to_dict()
+            _dict["team"] = self.team.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
-            _dict['createdBy'] = self.created_by.to_dict()
+            _dict["createdBy"] = self.created_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of user
         if self.user:
-            _dict['user'] = self.user.to_dict()
+            _dict["user"] = self.user.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -107,19 +117,35 @@ class TokenInformation(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "organization": OrganizationInformation.from_dict(obj["organization"]) if obj.get("organization") is not None else None,
-            "team": TeamInformation.from_dict(obj["team"]) if obj.get("team") is not None else None,
-            "createdBy": UserInformation.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "user": UserInformation.from_dict(obj["user"]) if obj.get("user") is not None else None,
-            "scopes": obj.get("scopes")
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type"),
+                "organization": (
+                    OrganizationInformation.from_dict(obj["organization"])
+                    if obj.get("organization") is not None
+                    else None
+                ),
+                "team": (
+                    TeamInformation.from_dict(obj["team"])
+                    if obj.get("team") is not None
+                    else None
+                ),
+                "createdBy": (
+                    UserInformation.from_dict(obj["createdBy"])
+                    if obj.get("createdBy") is not None
+                    else None
+                ),
+                "user": (
+                    UserInformation.from_dict(obj["user"])
+                    if obj.get("user") is not None
+                    else None
+                ),
+                "scopes": obj.get("scopes"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

@@ -22,12 +22,20 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ShapeDataForCreate(BaseModel):
     """
     Contains shape item data, such as the content or the type of the shape.
-    """ # noqa: E501
-    content: Optional[StrictStr] = Field(default=None, description="The text you want to display on the shape. <br>**Not supported for shapes:** <ul>   <li>flow_chart_or</li>   <li>flow_chart_summing_junction</li> </ul>")
-    shape: Optional[StrictStr] = Field(default='rectangle', description="Defines the geometric shape of the item when it is rendered on the board. <details>   <summary>Basic shapes</summary>   <ul>     <li>rectangle</li>     <li>round_rectangle</li>     <li>circle</li>     <li>triangle</li>     <li>rhombus</li>     <li>parallelogram</li>     <li>trapezoid</li>     <li>pentagon</li>     <li>hexagon</li>     <li>octagon</li>     <li>wedge_round_rectangle_callout</li>     <li>star</li>     <li>flow_chart_predefined_process</li>     <li>cloud</li>     <li>cross</li>     <li>can</li>     <li>right_arrow</li>     <li>left_arrow</li>     <li>left_right_arrow</li>     <li>left_brace</li>     <li>right_brace</li>   </ul> </details> <details>   <summary>Flowchart shapes</summary>   <ul>     <li>flow_chart_connector</li>     <li>flow_chart_magnetic_disk</li>     <li>flow_chart_input_output</li>     <li>flow_chart_decision</li>     <li>flow_chart_delay</li>     <li>flow_chart_display</li>     <li>flow_chart_document</li>     <li>flow_chart_magnetic_drum</li>     <li>flow_chart_internal_storage</li>     <li>flow_chart_manual_input</li>     <li>flow_chart_manual_operation</li>     <li>flow_chart_merge</li>     <li>flow_chart_multidocuments</li>     <li>flow_chart_note_curly_left</li>     <li>flow_chart_note_curly_right</li>     <li>flow_chart_note_square</li>     <li>flow_chart_offpage_connector</li>     <li>flow_chart_or</li>     <li>flow_chart_predefined_process_2</li>     <li>flow_chart_preparation</li>     <li>flow_chart_process</li>     <li>flow_chart_online_storage</li>     <li>flow_chart_summing_junction</li>     <li>flow_chart_terminator</li>   </ul> </details>")
+    """  # noqa: E501
+
+    content: Optional[StrictStr] = Field(
+        default=None,
+        description="The text you want to display on the shape. <br>**Not supported for shapes:** <ul>   <li>flow_chart_or</li>   <li>flow_chart_summing_junction</li> </ul>",
+    )
+    shape: Optional[StrictStr] = Field(
+        default="rectangle",
+        description="Defines the geometric shape of the item when it is rendered on the board. <details>   <summary>Basic shapes</summary>   <ul>     <li>rectangle</li>     <li>round_rectangle</li>     <li>circle</li>     <li>triangle</li>     <li>rhombus</li>     <li>parallelogram</li>     <li>trapezoid</li>     <li>pentagon</li>     <li>hexagon</li>     <li>octagon</li>     <li>wedge_round_rectangle_callout</li>     <li>star</li>     <li>flow_chart_predefined_process</li>     <li>cloud</li>     <li>cross</li>     <li>can</li>     <li>right_arrow</li>     <li>left_arrow</li>     <li>left_right_arrow</li>     <li>left_brace</li>     <li>right_brace</li>   </ul> </details> <details>   <summary>Flowchart shapes</summary>   <ul>     <li>flow_chart_connector</li>     <li>flow_chart_magnetic_disk</li>     <li>flow_chart_input_output</li>     <li>flow_chart_decision</li>     <li>flow_chart_delay</li>     <li>flow_chart_display</li>     <li>flow_chart_document</li>     <li>flow_chart_magnetic_drum</li>     <li>flow_chart_internal_storage</li>     <li>flow_chart_manual_input</li>     <li>flow_chart_manual_operation</li>     <li>flow_chart_merge</li>     <li>flow_chart_multidocuments</li>     <li>flow_chart_note_curly_left</li>     <li>flow_chart_note_curly_right</li>     <li>flow_chart_note_square</li>     <li>flow_chart_offpage_connector</li>     <li>flow_chart_or</li>     <li>flow_chart_predefined_process_2</li>     <li>flow_chart_preparation</li>     <li>flow_chart_process</li>     <li>flow_chart_online_storage</li>     <li>flow_chart_summing_junction</li>     <li>flow_chart_terminator</li>   </ul> </details>",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content", "shape"]
 
@@ -36,7 +44,6 @@ class ShapeDataForCreate(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -63,9 +70,11 @@ class ShapeDataForCreate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -88,15 +97,17 @@ class ShapeDataForCreate(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "content": obj.get("content"),
-            "shape": obj.get("shape") if obj.get("shape") is not None else 'rectangle'
-        })
+        _obj = cls.model_validate(
+            {
+                "content": obj.get("content"),
+                "shape": (
+                    obj.get("shape") if obj.get("shape") is not None else "rectangle"
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

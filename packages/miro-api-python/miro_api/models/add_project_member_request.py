@@ -23,10 +23,12 @@ from miro_api.models.project_role import ProjectRole
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AddProjectMemberRequest(BaseModel):
     """
     AddProjectMemberRequest
-    """ # noqa: E501
+    """  # noqa: E501
+
     email: StrictStr = Field(description="Email ID of the user.")
     role: ProjectRole
     additional_properties: Dict[str, Any] = {}
@@ -37,7 +39,6 @@ class AddProjectMemberRequest(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,9 +65,11 @@ class AddProjectMemberRequest(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,15 +92,10 @@ class AddProjectMemberRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "email": obj.get("email"),
-            "role": obj.get("role")
-        })
+        _obj = cls.model_validate({"email": obj.get("email"), "role": obj.get("role")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-
