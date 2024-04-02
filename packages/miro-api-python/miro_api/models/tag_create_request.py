@@ -23,23 +23,46 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TagCreateRequest(BaseModel):
     """
     TagCreateRequest
-    """ # noqa: E501
-    fill_color: Optional[StrictStr] = Field(default='red', description="Fill color for the tag.", alias="fillColor")
-    title: Annotated[str, Field(min_length=0, strict=True, max_length=120)] = Field(description="Text of the tag. Case-sensitive. Must be unique.")
+    """  # noqa: E501
+
+    fill_color: Optional[StrictStr] = Field(
+        default="red", description="Fill color for the tag.", alias="fillColor"
+    )
+    title: Annotated[str, Field(min_length=0, strict=True, max_length=120)] = Field(
+        description="Text of the tag. Case-sensitive. Must be unique."
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["fillColor", "title"]
 
-    @field_validator('fill_color')
+    @field_validator("fill_color")
     def fill_color_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['red', 'light_green', 'cyan', 'yellow', 'magenta', 'green', 'blue', 'gray', 'violet', 'dark_green', 'dark_blue', 'black']):
-            raise ValueError("must be one of enum values ('red', 'light_green', 'cyan', 'yellow', 'magenta', 'green', 'blue', 'gray', 'violet', 'dark_green', 'dark_blue', 'black')")
+        if value not in set(
+            [
+                "red",
+                "light_green",
+                "cyan",
+                "yellow",
+                "magenta",
+                "green",
+                "blue",
+                "gray",
+                "violet",
+                "dark_green",
+                "dark_blue",
+                "black",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('red', 'light_green', 'cyan', 'yellow', 'magenta', 'green', 'blue', 'gray', 'violet', 'dark_green', 'dark_blue', 'black')"
+            )
         return value
 
     model_config = {
@@ -47,7 +70,6 @@ class TagCreateRequest(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -74,9 +96,11 @@ class TagCreateRequest(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -99,15 +123,17 @@ class TagCreateRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "fillColor": obj.get("fillColor") if obj.get("fillColor") is not None else 'red',
-            "title": obj.get("title")
-        })
+        _obj = cls.model_validate(
+            {
+                "fillColor": (
+                    obj.get("fillColor") if obj.get("fillColor") is not None else "red"
+                ),
+                "title": obj.get("title"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

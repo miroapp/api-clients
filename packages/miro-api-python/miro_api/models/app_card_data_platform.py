@@ -23,26 +23,50 @@ from miro_api.models.custom_field import CustomField
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppCardDataPlatform(BaseModel):
     """
     Contains app card item data, such as the title, description, or fields.
-    """ # noqa: E501
-    description: Optional[StrictStr] = Field(default=None, description="A short text description to add context about the app card.")
-    fields: Optional[List[CustomField]] = Field(default=None, description="Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.")
-    owned: Optional[StrictBool] = Field(default=None, description="Defines whether the card is owned by the application making the call.")
-    status: Optional[StrictStr] = Field(default=None, description="Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.")
-    title: Optional[StrictStr] = Field(default=None, description="A short text header to identify the app card.")
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["description", "fields", "owned", "status", "title"]
+    """  # noqa: E501
 
-    @field_validator('status')
+    description: Optional[StrictStr] = Field(
+        default=None,
+        description="A short text description to add context about the app card.",
+    )
+    fields: Optional[List[CustomField]] = Field(
+        default=None,
+        description="Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
+    )
+    owned: Optional[StrictBool] = Field(
+        default=None,
+        description="Defines whether the card is owned by the application making the call.",
+    )
+    status: Optional[StrictStr] = Field(
+        default=None,
+        description="Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
+    )
+    title: Optional[StrictStr] = Field(
+        default=None, description="A short text header to identify the app card."
+    )
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = [
+        "description",
+        "fields",
+        "owned",
+        "status",
+        "title",
+    ]
+
+    @field_validator("status")
     def status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['disconnected', 'connected', 'disabled']):
-            raise ValueError("must be one of enum values ('disconnected', 'connected', 'disabled')")
+        if value not in set(["disconnected", "connected", "disabled"]):
+            raise ValueError(
+                "must be one of enum values ('disconnected', 'connected', 'disabled')"
+            )
         return value
 
     model_config = {
@@ -50,7 +74,6 @@ class AppCardDataPlatform(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -77,9 +100,11 @@ class AppCardDataPlatform(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -92,7 +117,7 @@ class AppCardDataPlatform(BaseModel):
             for _item in self.fields:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['fields'] = _items
+            _dict["fields"] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -109,18 +134,22 @@ class AppCardDataPlatform(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "fields": [CustomField.from_dict(_item) for _item in obj["fields"]] if obj.get("fields") is not None else None,
-            "owned": obj.get("owned"),
-            "status": obj.get("status"),
-            "title": obj.get("title")
-        })
+        _obj = cls.model_validate(
+            {
+                "description": obj.get("description"),
+                "fields": (
+                    [CustomField.from_dict(_item) for _item in obj["fields"]]
+                    if obj.get("fields") is not None
+                    else None
+                ),
+                "owned": obj.get("owned"),
+                "status": obj.get("status"),
+                "title": obj.get("title"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

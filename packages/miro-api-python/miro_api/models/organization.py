@@ -22,23 +22,51 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Organization(BaseModel):
     """
     Organization
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: StrictStr = Field(description="Id of the organization")
-    full_licenses_purchased: StrictInt = Field(description="Purchased FULL licenses", alias="fullLicensesPurchased")
+    full_licenses_purchased: StrictInt = Field(
+        description="Purchased FULL licenses", alias="fullLicensesPurchased"
+    )
     name: StrictStr = Field(description="Name of the organization")
     plan: StrictStr = Field(description="Organization plan type")
-    type: Optional[StrictStr] = Field(default='organization', description="Type of the object returned.")
+    type: Optional[StrictStr] = Field(
+        default="organization", description="Type of the object returned."
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "fullLicensesPurchased", "name", "plan", "type"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "fullLicensesPurchased",
+        "name",
+        "plan",
+        "type",
+    ]
 
-    @field_validator('plan')
+    @field_validator("plan")
     def plan_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['company', 'consultant', 'consultant_slf', 'business', 'paid_team_org', 'integration_org', 'professional_2022', 'edu_team_org', 'free_team_org', 'dev_team_org', 'unknown']):
-            raise ValueError("must be one of enum values ('company', 'consultant', 'consultant_slf', 'business', 'paid_team_org', 'integration_org', 'professional_2022', 'edu_team_org', 'free_team_org', 'dev_team_org', 'unknown')")
+        if value not in set(
+            [
+                "company",
+                "consultant",
+                "consultant_slf",
+                "business",
+                "paid_team_org",
+                "integration_org",
+                "professional_2022",
+                "edu_team_org",
+                "free_team_org",
+                "dev_team_org",
+                "unknown",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('company', 'consultant', 'consultant_slf', 'business', 'paid_team_org', 'integration_org', 'professional_2022', 'edu_team_org', 'free_team_org', 'dev_team_org', 'unknown')"
+            )
         return value
 
     model_config = {
@@ -46,7 +74,6 @@ class Organization(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -73,9 +100,11 @@ class Organization(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -98,18 +127,20 @@ class Organization(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "fullLicensesPurchased": obj.get("fullLicensesPurchased"),
-            "name": obj.get("name"),
-            "plan": obj.get("plan"),
-            "type": obj.get("type") if obj.get("type") is not None else 'organization'
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "fullLicensesPurchased": obj.get("fullLicensesPurchased"),
+                "name": obj.get("name"),
+                "plan": obj.get("plan"),
+                "type": (
+                    obj.get("type") if obj.get("type") is not None else "organization"
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

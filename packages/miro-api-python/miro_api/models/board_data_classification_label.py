@@ -22,26 +22,48 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BoardDataClassificationLabel(BaseModel):
     """
     BoardDataClassificationLabel
-    """ # noqa: E501
+    """  # noqa: E501
+
     color: Optional[StrictStr] = Field(default=None, description="Label color.")
-    description: Optional[StrictStr] = Field(default=None, description="Label description.")
+    description: Optional[StrictStr] = Field(
+        default=None, description="Label description."
+    )
     id: Optional[StrictStr] = Field(default=None, description="Label id.")
     name: Optional[StrictStr] = Field(default=None, description="Label name.")
-    sharing_recommendation: Optional[StrictStr] = Field(default=None, description="Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).", alias="sharingRecommendation")
-    guideline_url: Optional[StrictStr] = Field(default=None, description="Indicates the URL for the board classification label guidelines.", alias="guidelineUrl")
-    type: Optional[StrictStr] = Field(default='board-data-classification-label', description="Type of the object returned.")
+    sharing_recommendation: Optional[StrictStr] = Field(
+        default=None,
+        description="Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).",
+        alias="sharingRecommendation",
+    )
+    guideline_url: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicates the URL for the board classification label guidelines.",
+        alias="guidelineUrl",
+    )
+    type: Optional[StrictStr] = Field(
+        default="board-data-classification-label",
+        description="Type of the object returned.",
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["color", "description", "id", "name", "sharingRecommendation", "guidelineUrl", "type"]
+    __properties: ClassVar[List[str]] = [
+        "color",
+        "description",
+        "id",
+        "name",
+        "sharingRecommendation",
+        "guidelineUrl",
+        "type",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -68,9 +90,11 @@ class BoardDataClassificationLabel(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -93,20 +117,24 @@ class BoardDataClassificationLabel(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "color": obj.get("color"),
-            "description": obj.get("description"),
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "sharingRecommendation": obj.get("sharingRecommendation"),
-            "guidelineUrl": obj.get("guidelineUrl"),
-            "type": obj.get("type") if obj.get("type") is not None else 'board-data-classification-label'
-        })
+        _obj = cls.model_validate(
+            {
+                "color": obj.get("color"),
+                "description": obj.get("description"),
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "sharingRecommendation": obj.get("sharingRecommendation"),
+                "guidelineUrl": obj.get("guidelineUrl"),
+                "type": (
+                    obj.get("type")
+                    if obj.get("type") is not None
+                    else "board-data-classification-label"
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

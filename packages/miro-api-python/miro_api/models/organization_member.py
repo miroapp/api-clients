@@ -23,33 +23,70 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class OrganizationMember(BaseModel):
     """
     Organization member
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: StrictStr = Field(description="Id of the user")
     active: StrictBool = Field(description="Flag is user active")
     email: StrictStr = Field(description="User email")
-    last_activity_at: Optional[datetime] = Field(default=None, description="Last time when the user was active", alias="lastActivityAt")
-    license: StrictStr = Field(description="Name of the current user license in the organization")
-    license_assigned_at: Optional[datetime] = Field(default=None, description="Time when the license was assigned to the user", alias="licenseAssignedAt")
+    last_activity_at: Optional[datetime] = Field(
+        default=None,
+        description="Last time when the user was active",
+        alias="lastActivityAt",
+    )
+    license: StrictStr = Field(
+        description="Name of the current user license in the organization"
+    )
+    license_assigned_at: Optional[datetime] = Field(
+        default=None,
+        description="Time when the license was assigned to the user",
+        alias="licenseAssignedAt",
+    )
     role: StrictStr = Field(description="Name of the user role in the organization")
-    type: Optional[StrictStr] = Field(default='organization-member', description="Type of the object returned.")
+    type: Optional[StrictStr] = Field(
+        default="organization-member", description="Type of the object returned."
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "active", "email", "lastActivityAt", "license", "licenseAssignedAt", "role", "type"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "active",
+        "email",
+        "lastActivityAt",
+        "license",
+        "licenseAssignedAt",
+        "role",
+        "type",
+    ]
 
-    @field_validator('license')
+    @field_validator("license")
     def license_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['full', 'occasional', 'free', 'free_restricted', 'full_trial', 'unknown']):
-            raise ValueError("must be one of enum values ('full', 'occasional', 'free', 'free_restricted', 'full_trial', 'unknown')")
+        if value not in set(
+            ["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
+        ):
+            raise ValueError(
+                "must be one of enum values ('full', 'occasional', 'free', 'free_restricted', 'full_trial', 'unknown')"
+            )
         return value
 
-    @field_validator('role')
+    @field_validator("role")
     def role_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['organization_internal_admin', 'organization_internal_user', 'organization_external_user', 'organization_team_guest_user', 'unknown']):
-            raise ValueError("must be one of enum values ('organization_internal_admin', 'organization_internal_user', 'organization_external_user', 'organization_team_guest_user', 'unknown')")
+        if value not in set(
+            [
+                "organization_internal_admin",
+                "organization_internal_user",
+                "organization_external_user",
+                "organization_team_guest_user",
+                "unknown",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('organization_internal_admin', 'organization_internal_user', 'organization_external_user', 'organization_team_guest_user', 'unknown')"
+            )
         return value
 
     model_config = {
@@ -57,7 +94,6 @@ class OrganizationMember(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -84,9 +120,11 @@ class OrganizationMember(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -109,21 +147,25 @@ class OrganizationMember(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "active": obj.get("active"),
-            "email": obj.get("email"),
-            "lastActivityAt": obj.get("lastActivityAt"),
-            "license": obj.get("license"),
-            "licenseAssignedAt": obj.get("licenseAssignedAt"),
-            "role": obj.get("role"),
-            "type": obj.get("type") if obj.get("type") is not None else 'organization-member'
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "active": obj.get("active"),
+                "email": obj.get("email"),
+                "lastActivityAt": obj.get("lastActivityAt"),
+                "license": obj.get("license"),
+                "licenseAssignedAt": obj.get("licenseAssignedAt"),
+                "role": obj.get("role"),
+                "type": (
+                    obj.get("type")
+                    if obj.get("type") is not None
+                    else "organization-member"
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

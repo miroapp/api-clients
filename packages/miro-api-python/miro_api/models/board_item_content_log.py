@@ -25,30 +25,65 @@ from miro_api.models.user import User
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BoardItemContentLog(BaseModel):
     """
     Contains information about the content log of for a board item.
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the content log.")
-    item_id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the board item.", alias="itemId")
+    """  # noqa: E501
+
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier of the content log."
+    )
+    item_id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier of the board item.", alias="itemId"
+    )
     type: Optional[Any] = Field(default=None, description="Type of the board item.")
-    action: Optional[StrictStr] = Field(default=None, description="User action in the form of insert, update, or delete.")
-    board_key: Optional[StrictStr] = Field(default=None, description="Unique identification of the board to which the item belongs.", alias="boardKey")
-    hidden: Optional[StrictBool] = Field(default=None, description="Indicates if the board is a hidden board. Returns `true` if board item is hidden.")
-    created_at: Optional[datetime] = Field(default=None, description="Date and time when the board item was created.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ", alias="createdAt")
+    action: Optional[StrictStr] = Field(
+        default=None,
+        description="User action in the form of insert, update, or delete.",
+    )
+    board_key: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identification of the board to which the item belongs.",
+        alias="boardKey",
+    )
+    hidden: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates if the board is a hidden board. Returns `true` if board item is hidden.",
+    )
+    created_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the board item was created.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ",
+        alias="createdAt",
+    )
     created_by: Optional[User] = Field(default=None, alias="createdBy")
-    modified_at: Optional[datetime] = Field(default=None, description="Date and time when the board item was last modified.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ", alias="modifiedAt")
+    modified_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the board item was last modified.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ",
+        alias="modifiedAt",
+    )
     modified_by: Optional[User] = Field(default=None, alias="modifiedBy")
     log_data: Optional[BoardContentLogData] = Field(default=None, alias="logData")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "itemId", "type", "action", "boardKey", "hidden", "createdAt", "createdBy", "modifiedAt", "modifiedBy", "logData"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "itemId",
+        "type",
+        "action",
+        "boardKey",
+        "hidden",
+        "createdAt",
+        "createdBy",
+        "modifiedAt",
+        "modifiedBy",
+        "logData",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -75,9 +110,11 @@ class BoardItemContentLog(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -86,13 +123,13 @@ class BoardItemContentLog(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
-            _dict['createdBy'] = self.created_by.to_dict()
+            _dict["createdBy"] = self.created_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of modified_by
         if self.modified_by:
-            _dict['modifiedBy'] = self.modified_by.to_dict()
+            _dict["modifiedBy"] = self.modified_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of log_data
         if self.log_data:
-            _dict['logData'] = self.log_data.to_dict()
+            _dict["logData"] = self.log_data.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -101,7 +138,7 @@ class BoardItemContentLog(BaseModel):
         # set to None if type (nullable) is None
         # and model_fields_set contains the field
         if self.type is None and "type" in self.model_fields_set:
-            _dict['type'] = None
+            _dict["type"] = None
 
         return _dict
 
@@ -114,24 +151,36 @@ class BoardItemContentLog(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "itemId": obj.get("itemId"),
-            "type": obj.get("type"),
-            "action": obj.get("action"),
-            "boardKey": obj.get("boardKey"),
-            "hidden": obj.get("hidden"),
-            "createdAt": obj.get("createdAt"),
-            "createdBy": User.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "modifiedAt": obj.get("modifiedAt"),
-            "modifiedBy": User.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
-            "logData": BoardContentLogData.from_dict(obj["logData"]) if obj.get("logData") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "itemId": obj.get("itemId"),
+                "type": obj.get("type"),
+                "action": obj.get("action"),
+                "boardKey": obj.get("boardKey"),
+                "hidden": obj.get("hidden"),
+                "createdAt": obj.get("createdAt"),
+                "createdBy": (
+                    User.from_dict(obj["createdBy"])
+                    if obj.get("createdBy") is not None
+                    else None
+                ),
+                "modifiedAt": obj.get("modifiedAt"),
+                "modifiedBy": (
+                    User.from_dict(obj["modifiedBy"])
+                    if obj.get("modifiedBy") is not None
+                    else None
+                ),
+                "logData": (
+                    BoardContentLogData.from_dict(obj["logData"])
+                    if obj.get("logData") is not None
+                    else None
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

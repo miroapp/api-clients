@@ -22,26 +22,57 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class CustomFieldPlatform(BaseModel):
     """
     Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.
-    """ # noqa: E501
-    fill_color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color that fills the background area of the preview field, when it's displayed on the app card.", alias="fillColor")
-    icon_shape: Optional[StrictStr] = Field(default='round', description="The shape of the icon on the preview field.", alias="iconShape")
-    icon_url: Optional[StrictStr] = Field(default=None, description="A valid URL pointing to an image available online. The transport protocol must be HTTPS. Possible image file formats: JPG/JPEG, PNG, SVG.", alias="iconUrl")
-    text_color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color of the text string assigned to `value`.", alias="textColor")
-    tooltip: Optional[StrictStr] = Field(default=None, description="A short text displayed in a tooltip when clicking or hovering over the preview field.")
-    value: Optional[StrictStr] = Field(default=None, description="The actual data value of the custom field. It can be any type of information that you want to convey.")
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["fillColor", "iconShape", "iconUrl", "textColor", "tooltip", "value"]
+    """  # noqa: E501
 
-    @field_validator('icon_shape')
+    fill_color: Optional[StrictStr] = Field(
+        default=None,
+        description="Hex value representing the color that fills the background area of the preview field, when it's displayed on the app card.",
+        alias="fillColor",
+    )
+    icon_shape: Optional[StrictStr] = Field(
+        default="round",
+        description="The shape of the icon on the preview field.",
+        alias="iconShape",
+    )
+    icon_url: Optional[StrictStr] = Field(
+        default=None,
+        description="A valid URL pointing to an image available online. The transport protocol must be HTTPS. Possible image file formats: JPG/JPEG, PNG, SVG.",
+        alias="iconUrl",
+    )
+    text_color: Optional[StrictStr] = Field(
+        default=None,
+        description="Hex value representing the color of the text string assigned to `value`.",
+        alias="textColor",
+    )
+    tooltip: Optional[StrictStr] = Field(
+        default=None,
+        description="A short text displayed in a tooltip when clicking or hovering over the preview field.",
+    )
+    value: Optional[StrictStr] = Field(
+        default=None,
+        description="The actual data value of the custom field. It can be any type of information that you want to convey.",
+    )
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = [
+        "fillColor",
+        "iconShape",
+        "iconUrl",
+        "textColor",
+        "tooltip",
+        "value",
+    ]
+
+    @field_validator("icon_shape")
     def icon_shape_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['round', 'square']):
+        if value not in set(["round", "square"]):
             raise ValueError("must be one of enum values ('round', 'square')")
         return value
 
@@ -50,7 +81,6 @@ class CustomFieldPlatform(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -77,9 +107,11 @@ class CustomFieldPlatform(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -102,19 +134,23 @@ class CustomFieldPlatform(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "fillColor": obj.get("fillColor"),
-            "iconShape": obj.get("iconShape") if obj.get("iconShape") is not None else 'round',
-            "iconUrl": obj.get("iconUrl"),
-            "textColor": obj.get("textColor"),
-            "tooltip": obj.get("tooltip"),
-            "value": obj.get("value")
-        })
+        _obj = cls.model_validate(
+            {
+                "fillColor": obj.get("fillColor"),
+                "iconShape": (
+                    obj.get("iconShape")
+                    if obj.get("iconShape") is not None
+                    else "round"
+                ),
+                "iconUrl": obj.get("iconUrl"),
+                "textColor": obj.get("textColor"),
+                "tooltip": obj.get("tooltip"),
+                "value": obj.get("value"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

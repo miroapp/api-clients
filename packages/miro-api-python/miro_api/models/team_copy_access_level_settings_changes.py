@@ -22,32 +22,44 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TeamCopyAccessLevelSettingsChanges(BaseModel):
     """
     Team copy access settings
-    """ # noqa: E501
-    copy_access_level: Optional[StrictStr] = Field(default=None, description=" * \"anyone\":       Anyone with the board access can copy board content on newly created boards. * \"team_members\": Team members can copy board content on newly created boards. * \"team_editors\": Team members with editing rights can copy board content on newly created boards. * \"board_owner\":  Board owners only can copy board content on newly created boards. ", alias="copyAccessLevel")
-    copy_access_level_limitation: Optional[StrictStr] = Field(default=None, description=" * \"anyone\":       Team members and users outside team can be given permission to copy board content. * \"team_members\": Only team members can be given permission to copy board content. ", alias="copyAccessLevelLimitation")
+    """  # noqa: E501
+
+    copy_access_level: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "anyone":       Anyone with the board access can copy board content on newly created boards. * "team_members": Team members can copy board content on newly created boards. * "team_editors": Team members with editing rights can copy board content on newly created boards. * "board_owner":  Board owners only can copy board content on newly created boards. ',
+        alias="copyAccessLevel",
+    )
+    copy_access_level_limitation: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "anyone":       Team members and users outside team can be given permission to copy board content. * "team_members": Only team members can be given permission to copy board content. ',
+        alias="copyAccessLevelLimitation",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["copyAccessLevel", "copyAccessLevelLimitation"]
 
-    @field_validator('copy_access_level')
+    @field_validator("copy_access_level")
     def copy_access_level_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['anyone', 'team_members', 'team_editors', 'board_owner']):
-            raise ValueError("must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner')")
+        if value not in set(["anyone", "team_members", "team_editors", "board_owner"]):
+            raise ValueError(
+                "must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner')"
+            )
         return value
 
-    @field_validator('copy_access_level_limitation')
+    @field_validator("copy_access_level_limitation")
     def copy_access_level_limitation_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['anyone', 'team_members']):
+        if value not in set(["anyone", "team_members"]):
             raise ValueError("must be one of enum values ('anyone', 'team_members')")
         return value
 
@@ -56,7 +68,6 @@ class TeamCopyAccessLevelSettingsChanges(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -83,9 +94,11 @@ class TeamCopyAccessLevelSettingsChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -108,15 +121,15 @@ class TeamCopyAccessLevelSettingsChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "copyAccessLevel": obj.get("copyAccessLevel"),
-            "copyAccessLevelLimitation": obj.get("copyAccessLevelLimitation")
-        })
+        _obj = cls.model_validate(
+            {
+                "copyAccessLevel": obj.get("copyAccessLevel"),
+                "copyAccessLevelLimitation": obj.get("copyAccessLevelLimitation"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

@@ -33,7 +33,9 @@ class MiroApiClient(ApiClient):
         }
 
 
-def MiroApi(access_token: Union[str, Callable[[], str]]) -> MiroApiEndpointsWithAutoPagination:
+def MiroApi(
+    access_token: Union[str, Callable[[], str]]
+) -> MiroApiEndpointsWithAutoPagination:
     client = MiroApiClient(access_token)
     return MiroApiEndpointsWithAutoPagination(client)
 
@@ -79,8 +81,12 @@ class Miro:
         base_path: str = "https://api.miro.com",
     ):
         self.client_id: str = client_id or os.environ.get("MIRO_CLIENT_ID") or ""
-        self.client_secret: str = client_secret or os.environ.get('MIRO_CLIENT_SECRET') or ""
-        self.redirect_url: str = redirect_url or os.environ.get("MIRO_REDIRECT_URL") or ""
+        self.client_secret: str = (
+            client_secret or os.environ.get("MIRO_CLIENT_SECRET") or ""
+        )
+        self.redirect_url: str = (
+            redirect_url or os.environ.get("MIRO_REDIRECT_URL") or ""
+        )
 
         if not self.client_id:
             raise Exception(
@@ -103,6 +109,7 @@ class Miro:
     def api(self):
         return MiroApi(lambda: self.access_token)
 
+    @property
     def is_authorized(self):
         try:
             return bool(self.access_token)
@@ -174,11 +181,13 @@ class Miro:
             payload["access_token"],
             payload.get("refresh_token"),
             (
-                datetime.datetime.now()
-                + datetime.timedelta(seconds=payload["expires_in"] - 120)
-            )
-            if payload.get("payload")
-            else None,
+                (
+                    datetime.datetime.now()
+                    + datetime.timedelta(seconds=payload["expires_in"] - 120)
+                )
+                if payload.get("payload")
+                else None
+            ),
         )
 
         self._storage.set(state)

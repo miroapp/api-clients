@@ -24,26 +24,49 @@ from miro_api.models.page_links import PageLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ItemPagedResponse(BaseModel):
     """
     ItemPagedResponse
-    """ # noqa: E501
-    data: Optional[List[GenericItem]] = Field(default=None, description="Contains the result data.")
-    limit: Optional[StrictInt] = Field(default=None, description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `30` results, and the request has the offset set to `0` and the `limit` set to `20`, the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the offset parameter. In this example, you will set the offset parameter to 20 as the offset is zero-based. ")
+    """  # noqa: E501
+
+    data: Optional[List[GenericItem]] = Field(
+        default=None, description="Contains the result data."
+    )
+    limit: Optional[StrictInt] = Field(
+        default=None,
+        description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `30` results, and the request has the offset set to `0` and the `limit` set to `20`, the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the offset parameter. In this example, you will set the offset parameter to 20 as the offset is zero-based. ",
+    )
     links: Optional[PageLinks] = None
-    offset: Optional[StrictInt] = Field(default=None, description="Zero-based index of the first item in the collection. For example, If there are `30` results, and the request has the offset set to `28`, the response will return `2` results.")
-    size: Optional[StrictInt] = Field(default=None, description="Number of results returned in the response. The `size` is the number of results returned considering the `offset` and the `limit` values sent in the request. For example, if there are `30` results, and the request has the offset set to `0` and the `limit` set to `20`, the `size` of the results will be `20`.<br>If there are `10` results, and the request has the offset set to `0` and the `limit` set to `20`, the `size` of the results will be `10`.<br>If there are `30` results, and the request has the offset set to `28` and the `limit` set to `20`, the `size` of the results will be `2` as the `offset` is the zero-based offset of the first item in the collection.")
-    total: Optional[StrictInt] = Field(default=None, description="Total number of results available. If the value of the `total` parameter is higher than the value of the `size` parameter, this means that there are more results that you can retrieve. To retrieve more results, you can make another request and set the `offset` value accordingly. For example, if there are `30` results, and the request has the `offset` set to `0` and the `limit` set to `20`, the `size` parameter will return `20` and the `total` parameter will return `30`. This means that there are 9 more results to retrieve (as the offset is zero-based).")
+    offset: Optional[StrictInt] = Field(
+        default=None,
+        description="Zero-based index of the first item in the collection. For example, If there are `30` results, and the request has the offset set to `28`, the response will return `2` results.",
+    )
+    size: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of results returned in the response. The `size` is the number of results returned considering the `offset` and the `limit` values sent in the request. For example, if there are `30` results, and the request has the offset set to `0` and the `limit` set to `20`, the `size` of the results will be `20`.<br>If there are `10` results, and the request has the offset set to `0` and the `limit` set to `20`, the `size` of the results will be `10`.<br>If there are `30` results, and the request has the offset set to `28` and the `limit` set to `20`, the `size` of the results will be `2` as the `offset` is the zero-based offset of the first item in the collection.",
+    )
+    total: Optional[StrictInt] = Field(
+        default=None,
+        description="Total number of results available. If the value of the `total` parameter is higher than the value of the `size` parameter, this means that there are more results that you can retrieve. To retrieve more results, you can make another request and set the `offset` value accordingly. For example, if there are `30` results, and the request has the `offset` set to `0` and the `limit` set to `20`, the `size` parameter will return `20` and the `total` parameter will return `30`. This means that there are 9 more results to retrieve (as the offset is zero-based).",
+    )
     type: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["data", "limit", "links", "offset", "size", "total", "type"]
+    __properties: ClassVar[List[str]] = [
+        "data",
+        "limit",
+        "links",
+        "offset",
+        "size",
+        "total",
+        "type",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,9 +93,11 @@ class ItemPagedResponse(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -85,10 +110,10 @@ class ItemPagedResponse(BaseModel):
             for _item in self.data:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['data'] = _items
+            _dict["data"] = _items
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
-            _dict['links'] = self.links.to_dict()
+            _dict["links"] = self.links.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -105,20 +130,28 @@ class ItemPagedResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "data": [GenericItem.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
-            "limit": obj.get("limit"),
-            "links": PageLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
-            "offset": obj.get("offset"),
-            "size": obj.get("size"),
-            "total": obj.get("total"),
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "data": (
+                    [GenericItem.from_dict(_item) for _item in obj["data"]]
+                    if obj.get("data") is not None
+                    else None
+                ),
+                "limit": obj.get("limit"),
+                "links": (
+                    PageLinks.from_dict(obj["links"])
+                    if obj.get("links") is not None
+                    else None
+                ),
+                "offset": obj.get("offset"),
+                "size": obj.get("size"),
+                "total": obj.get("total"),
+                "type": obj.get("type"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-
