@@ -27,10 +27,6 @@ export class FrameData {
    * Only free form frames are supported at the moment.
    */
   'type'?: string | (typeof FrameData.TypeEnum)[keyof typeof FrameData.TypeEnum] = FrameData.TypeEnum.Freeform
-  /**
-   * Hide or reveal the content inside a frame (Enterprise plan only).
-   */
-  'showContent'?: boolean = true
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -51,11 +47,6 @@ export class FrameData {
       name: 'type',
       baseName: 'type',
       type: 'FrameData.TypeEnum',
-    },
-    {
-      name: 'showContent',
-      baseName: 'showContent',
-      type: 'boolean',
     },
   ]
 
@@ -83,6 +74,5 @@ export namespace FrameData {
     Grid: 'grid',
     Rows: 'rows',
     Columns: 'columns',
-    Unknown: 'unknown',
   } as const
 }

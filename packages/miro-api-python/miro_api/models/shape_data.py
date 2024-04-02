@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class ShapeData(BaseModel):
     """
-    Contains shape item data, such as the content or the type of the shape.
+    Contains shape item data, such as the content or shape type of the shape.
     """ # noqa: E501
     content: Optional[StrictStr] = Field(default=None, description="The text you want to display on the shape.")
     shape: Optional[StrictStr] = Field(default='rectangle', description="Defines the geometric shape of the item when it is rendered on the board.")

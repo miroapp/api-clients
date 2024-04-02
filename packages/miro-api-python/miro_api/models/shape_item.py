@@ -25,8 +25,8 @@ from miro_api.models.geometry import Geometry
 from miro_api.models.modified_by import ModifiedBy
 from miro_api.models.parent_links_envelope import ParentLinksEnvelope
 from miro_api.models.position import Position
-from miro_api.models.shape_data import ShapeData
-from miro_api.models.shape_style import ShapeStyle
+from miro_api.models.shape_data_for_create import ShapeDataForCreate
+from miro_api.models.shape_style_for_create import ShapeStyleForCreate
 from miro_api.models.widget_links import WidgetLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,8 +36,8 @@ class ShapeItem(BaseModel):
     ShapeItem
     """ # noqa: E501
     id: StrictStr = Field(description="Unique identifier (ID) of an item.")
-    data: Optional[ShapeData] = None
-    style: Optional[ShapeStyle] = None
+    data: Optional[ShapeDataForCreate] = None
+    style: Optional[ShapeStyleForCreate] = None
     position: Optional[Position] = None
     geometry: Optional[Geometry] = None
     created_at: Optional[datetime] = Field(default=None, description="Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="createdAt")
@@ -133,8 +133,8 @@ class ShapeItem(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "data": ShapeData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "style": ShapeStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+            "data": ShapeDataForCreate.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "style": ShapeStyleForCreate.from_dict(obj["style"]) if obj.get("style") is not None else None,
             "position": Position.from_dict(obj["position"]) if obj.get("position") is not None else None,
             "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
             "createdAt": obj.get("createdAt"),

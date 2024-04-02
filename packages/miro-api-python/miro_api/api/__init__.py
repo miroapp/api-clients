@@ -15,6 +15,11 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 
+from datetime import date
+from pydantic import Field, StrictInt, StrictStr, field_validator
+from typing import Optional
+from miro_api.models.audit_page import AuditPage
+
 from datetime import datetime
 from pydantic import Field, StrictStr, field_validator
 from typing import List, Optional
@@ -41,7 +46,6 @@ from typing import List, Optional, Union
 from miro_api.models.item_create import ItemCreate
 from miro_api.models.items import Items
 
-from typing import Optional
 from miro_api.models.generic_item import GenericItem
 from miro_api.models.generic_item_cursor_paged import GenericItemCursorPaged
 from miro_api.models.shape_create_request import ShapeCreateRequest
@@ -70,6 +74,7 @@ from miro_api.models.create_project_request import CreateProjectRequest
 from miro_api.models.project import Project
 from miro_api.models.project_page import ProjectPage
 from miro_api.models.update_project_request import UpdateProjectRequest
+
 
 from miro_api.models.team_member import TeamMember
 from miro_api.models.team_member_changes import TeamMemberChanges
@@ -173,6 +178,195 @@ class MiroApiEndpoints:
         if api_client is None:
             api_client = ApiClient.get_default()
         self.api_client = api_client
+
+
+
+
+    @validate_call
+    def enterprise_get_audit_logs(
+        self,
+        created_after: Annotated[date, Field(description="Retrieve audit logs created after the date and time provided. This is the start date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between `2023-03-30T17:26:50.000Z` and `2023-04-30T17:26:50.000Z`, provide `2023-03-30T17:26:50.000Z` as the value for the `createdAfter` parameter.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\" ")],
+        created_before: Annotated[date, Field(description="Retrieve audit logs created before the date and time provided. This is the end date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between `2023-03-30T17:26:50.000Z` and `2023-04-30T17:26:50.000Z`, provide `2023-04-30T17:26:50.000Z` as the value for the `createdBefore` parameter.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ")],
+        cursor: Annotated[Optional[StrictStr], Field(description="A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the appropriate cursor value returned in the response.")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `30` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that  you obtained from the response.<br>Default: `100` ")] = None,
+        sorting: Annotated[Optional[StrictStr], Field(description="Sort order in which you want to view the result set. Based on the value you provide, the results are sorted in an ascending or descending order of the audit log creation date (audit log `createdAt` parameter).<br>Default: `ASC` ")] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> AuditPage:
+        """Get audit logs
+
+        Retrieves a page of audit events.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a>
+
+        :param created_after: Retrieve audit logs created after the date and time provided. This is the start date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between `2023-03-30T17:26:50.000Z` and `2023-04-30T17:26:50.000Z`, provide `2023-03-30T17:26:50.000Z` as the value for the `createdAfter` parameter.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\"  (required)
+        :type created_after: date
+        :param created_before: Retrieve audit logs created before the date and time provided. This is the end date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between `2023-03-30T17:26:50.000Z` and `2023-04-30T17:26:50.000Z`, provide `2023-04-30T17:26:50.000Z` as the value for the `createdBefore` parameter.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).  (required)
+        :type created_before: date
+        :param cursor: A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the appropriate cursor value returned in the response.
+        :type cursor: str
+        :param limit: Maximum number of results returned based on the `limit` specified in the request. For example, if there are `30` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that  you obtained from the response.<br>Default: `100` 
+        :type limit: int
+        :param sorting: Sort order in which you want to view the result set. Based on the value you provide, the results are sorted in an ascending or descending order of the audit log creation date (audit log `createdAt` parameter).<br>Default: `ASC` 
+        :type sorting: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._enterprise_get_audit_logs_serialize(
+            created_after=created_after,
+            created_before=created_before,
+            cursor=cursor,
+            limit=limit,
+            sorting=sorting,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "AuditPage",
+            '400': None,
+            '401': None,
+            '403': None,
+            '404': None,
+            '409': None,
+            '429': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _enterprise_get_audit_logs_serialize(
+        self,
+        created_after,
+        created_before,
+        cursor,
+        limit,
+        sorting,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if created_after is not None:
+            if isinstance(created_after, date):
+                _query_params.append(
+                    (
+                        'createdAfter',
+                        created_after.strftime(
+                            self.api_client.configuration.date_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('createdAfter', created_after))
+            
+        if created_before is not None:
+            if isinstance(created_before, date):
+                _query_params.append(
+                    (
+                        'createdBefore',
+                        created_before.strftime(
+                            self.api_client.configuration.date_format
+                        )
+                    )
+                )
+            else:
+                _query_params.append(('createdBefore', created_before))
+            
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if sorting is not None:
+            
+            _query_params.append(('sorting', sorting))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v2/audit/logs',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
 
 
 
@@ -5801,6 +5995,134 @@ class MiroApiEndpoints:
         return self.api_client.param_serialize(
             method='PATCH',
             resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+
+    @validate_call
+    def enterprise_post_user_sessions_reset(
+        self,
+        email: Annotated[StrictStr, Field(description="Email ID of the user whose sessions you want to reset. Note that this user will be signed out from all devices.")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Reset all sessions of a user
+
+        Reset all sessions of a user.  Admins can now take immediate action to restrict user access to company data in case of security concerns. Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again. This is useful in situations where a user leaves the company, their credentials are compromised, or there's suspicious activity on their account.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+
+        :param email: Email ID of the user whose sessions you want to reset. Note that this user will be signed out from all devices. (required)
+        :type email: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._enterprise_post_user_sessions_reset_serialize(
+            email=email,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': None,
+            '400': None,
+            '401': None,
+            '403': None,
+            '404': None,
+            '429': None,
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _enterprise_post_user_sessions_reset_serialize(
+        self,
+        email,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if email is not None:
+            
+            _query_params.append(('email', email))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='POST',
+            resource_path='/v2/sessions/reset_all',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11943,7 +12265,7 @@ class MiroApiEndpoints:
     @validate_call
     def create_document_item_using_file_from_device(
         self,
-        board_id_platform_apis_with_local_file: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id_platform_file_upload: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
         resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
         data: Optional[CreateDocumentItemUsingFileFromDeviceRequestData] = None,
         _request_timeout: Union[
@@ -11963,8 +12285,8 @@ class MiroApiEndpoints:
 
         Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform_apis_with_local_file: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id_platform_apis_with_local_file: str
+        :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id_platform_file_upload: str
         :param resource: Select a file to upload (required)
         :type resource: bytearray
         :param data:
@@ -11992,7 +12314,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._create_document_item_using_file_from_device_serialize(
-            board_id_platform_apis_with_local_file=board_id_platform_apis_with_local_file,
+            board_id_platform_file_upload=board_id_platform_file_upload,
             resource=resource,
             data=data,
             _request_auth=_request_auth,
@@ -12016,7 +12338,7 @@ class MiroApiEndpoints:
 
     def _create_document_item_using_file_from_device_serialize(
         self,
-        board_id_platform_apis_with_local_file,
+        board_id_platform_file_upload,
         resource,
         data,
         _request_auth,
@@ -12038,8 +12360,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform_apis_with_local_file is not None:
-            _path_params['board_id_platform_apis_with_local_file'] = board_id_platform_apis_with_local_file
+        if board_id_platform_file_upload is not None:
+            _path_params['board_id_PlatformFileUpload'] = board_id_platform_file_upload
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -12077,7 +12399,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id_platform_apis_with_local_file}/documents',
+            resource_path='/v2/boards/{board_id_PlatformFileUpload}/documents',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12517,7 +12839,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_document_item_using_file_from_device(
         self,
-        board_id_platform_apis_with_local_file: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id_platform_file_upload: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
         data: Optional[UploadFileFromDeviceData] = None,
@@ -12538,8 +12860,8 @@ class MiroApiEndpoints:
 
         Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform_apis_with_local_file: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id_platform_apis_with_local_file: str
+        :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id_platform_file_upload: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param resource: Select a file to upload (required)
@@ -12569,7 +12891,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_document_item_using_file_from_device_serialize(
-            board_id_platform_apis_with_local_file=board_id_platform_apis_with_local_file,
+            board_id_platform_file_upload=board_id_platform_file_upload,
             item_id=item_id,
             resource=resource,
             data=data,
@@ -12594,7 +12916,7 @@ class MiroApiEndpoints:
 
     def _update_document_item_using_file_from_device_serialize(
         self,
-        board_id_platform_apis_with_local_file,
+        board_id_platform_file_upload,
         item_id,
         resource,
         data,
@@ -12617,8 +12939,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform_apis_with_local_file is not None:
-            _path_params['board_id_platform_apis_with_local_file'] = board_id_platform_apis_with_local_file
+        if board_id_platform_file_upload is not None:
+            _path_params['board_id_PlatformFileUpload'] = board_id_platform_file_upload
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -12658,7 +12980,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id_platform_apis_with_local_file}/documents/{item_id}',
+            resource_path='/v2/boards/{board_id_PlatformFileUpload}/documents/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13990,7 +14312,7 @@ class MiroApiEndpoints:
     @validate_call
     def create_image_item_using_local_file(
         self,
-        board_id_platform_apis_with_local_file: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id_platform_file_upload: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
         resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
         data: Optional[UploadFileFromDeviceData] = None,
         _request_timeout: Union[
@@ -14010,8 +14332,8 @@ class MiroApiEndpoints:
 
         Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform_apis_with_local_file: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id_platform_apis_with_local_file: str
+        :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id_platform_file_upload: str
         :param resource: Select a file to upload (required)
         :type resource: bytearray
         :param data:
@@ -14039,7 +14361,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._create_image_item_using_local_file_serialize(
-            board_id_platform_apis_with_local_file=board_id_platform_apis_with_local_file,
+            board_id_platform_file_upload=board_id_platform_file_upload,
             resource=resource,
             data=data,
             _request_auth=_request_auth,
@@ -14063,7 +14385,7 @@ class MiroApiEndpoints:
 
     def _create_image_item_using_local_file_serialize(
         self,
-        board_id_platform_apis_with_local_file,
+        board_id_platform_file_upload,
         resource,
         data,
         _request_auth,
@@ -14085,8 +14407,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform_apis_with_local_file is not None:
-            _path_params['board_id_platform_apis_with_local_file'] = board_id_platform_apis_with_local_file
+        if board_id_platform_file_upload is not None:
+            _path_params['board_id_PlatformFileUpload'] = board_id_platform_file_upload
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -14124,7 +14446,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id_platform_apis_with_local_file}/images',
+            resource_path='/v2/boards/{board_id_PlatformFileUpload}/images',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14564,7 +14886,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_image_item_using_file_from_device(
         self,
-        board_id_platform_apis_with_local_file: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id_platform_file_upload: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
         data: Optional[UploadFileFromDeviceData] = None,
@@ -14585,8 +14907,8 @@ class MiroApiEndpoints:
 
         Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform_apis_with_local_file: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id_platform_apis_with_local_file: str
+        :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id_platform_file_upload: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param resource: Select a file to upload (required)
@@ -14616,7 +14938,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_image_item_using_file_from_device_serialize(
-            board_id_platform_apis_with_local_file=board_id_platform_apis_with_local_file,
+            board_id_platform_file_upload=board_id_platform_file_upload,
             item_id=item_id,
             resource=resource,
             data=data,
@@ -14641,7 +14963,7 @@ class MiroApiEndpoints:
 
     def _update_image_item_using_file_from_device_serialize(
         self,
-        board_id_platform_apis_with_local_file,
+        board_id_platform_file_upload,
         item_id,
         resource,
         data,
@@ -14664,8 +14986,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform_apis_with_local_file is not None:
-            _path_params['board_id_platform_apis_with_local_file'] = board_id_platform_apis_with_local_file
+        if board_id_platform_file_upload is not None:
+            _path_params['board_id_PlatformFileUpload'] = board_id_platform_file_upload
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -14705,7 +15027,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id_platform_apis_with_local_file}/images/{item_id}',
+            resource_path='/v2/boards/{board_id_PlatformFileUpload}/images/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,

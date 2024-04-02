@@ -24,7 +24,7 @@ from typing_extensions import Self
 
 class Parent(BaseModel):
     """
-    Contains information about the parent this item must be attached to. A maximum of 1000 items can be attached to a frame. Passing `null` for `parent.id` directly attaches an item to the canvas.
+    Contains information about the parent frame for the item.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the parent frame for the item.")
     additional_properties: Dict[str, Any] = {}

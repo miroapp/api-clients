@@ -13,12 +13,12 @@
 import {Geometry} from './geometry'
 import {Parent} from './parent'
 import {PositionChange} from './positionChange'
-import {ShapeData} from './shapeData'
-import {ShapeStyle} from './shapeStyle'
+import {ShapeDataForUpdate} from './shapeDataForUpdate'
+import {ShapeStyleForUpdate} from './shapeStyleForUpdate'
 
 export class ShapeUpdateRequest {
-  'data'?: ShapeData
-  'style'?: ShapeStyle
+  'data'?: ShapeDataForUpdate
+  'style'?: ShapeStyleForUpdate
   'position'?: PositionChange
   'geometry'?: Geometry
   'parent'?: Parent
@@ -31,12 +31,12 @@ export class ShapeUpdateRequest {
     {
       name: 'data',
       baseName: 'data',
-      type: 'ShapeData',
+      type: 'ShapeDataForUpdate',
     },
     {
       name: 'style',
       baseName: 'style',
-      type: 'ShapeStyle',
+      type: 'ShapeStyleForUpdate',
     },
     {
       name: 'position',

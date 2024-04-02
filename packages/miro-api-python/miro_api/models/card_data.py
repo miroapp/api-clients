@@ -27,10 +27,10 @@ class CardData(BaseModel):
     """
     Contains card item data, such as the title, description, due date, or assignee ID.
     """ # noqa: E501
-    assignee_id: Optional[StrictStr] = Field(default=None, description="Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing numbers, and it is automatically assigned to a user when they first sign up.", alias="assigneeId")
+    assignee_id: Optional[StrictStr] = Field(default=None, description="Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is numeric, and it is automatically assigned to a user when they first sign up.", alias="assigneeId")
     description: Optional[StrictStr] = Field(default=None, description="A short text description to add context about the card.")
     due_date: Optional[datetime] = Field(default=None, description="The date when the task or activity described in the card is due to be completed. In the GUI, users can select the due date from a calendar. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="dueDate")
-    title: Optional[StrictStr] = Field(default='sample card item', description="A short text header for the card.")
+    title: Optional[StrictStr] = Field(default=None, description="A short text header for the card.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["assigneeId", "description", "dueDate", "title"]
 
@@ -95,7 +95,7 @@ class CardData(BaseModel):
             "assigneeId": obj.get("assigneeId"),
             "description": obj.get("description"),
             "dueDate": obj.get("dueDate"),
-            "title": obj.get("title") if obj.get("title") is not None else 'sample card item'
+            "title": obj.get("title")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

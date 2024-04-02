@@ -29,7 +29,7 @@ class TextStyle(BaseModel):
     """ # noqa: E501
     color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color for the text within the text item. Default: `#1a1a1a`.")
     fill_color: Optional[StrictStr] = Field(default=None, description="Background color of the text item. Default: `#ffffff`.", alias="fillColor")
-    fill_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Opacity level of the background color. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: `1.0` if `fillColor` provided, `0.0` if `fillColor` is not provided.", alias="fillOpacity")
+    fill_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Opacity level of the background color. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible. `1.0`: the background color is completely opaque or solid. Default: `1.0` if `fillColor` is provided, `0.0` if `fillColor` is not provided.", alias="fillOpacity")
     font_family: Optional[StrictStr] = Field(default=None, description="Font type for the text in the text item. Default: `arial`.", alias="fontFamily")
     font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Font size, in dp. Default: `14`.", alias="fontSize")
     text_align: Optional[StrictStr] = Field(default=None, description="Horizontal alignment for the item's content. Default: `center.`", alias="textAlign")

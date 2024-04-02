@@ -23,10 +23,9 @@ from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.created_by import CreatedBy
 from miro_api.models.geometry import Geometry
 from miro_api.models.modified_by import ModifiedBy
-from miro_api.models.parent_links_envelope import ParentLinksEnvelope
+from miro_api.models.parent import Parent
 from miro_api.models.position import Position
 from miro_api.models.widget_data_output import WidgetDataOutput
-from miro_api.models.widget_links import WidgetLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -39,14 +38,13 @@ class GenericItem(BaseModel):
     data: Optional[WidgetDataOutput] = None
     geometry: Optional[Geometry] = None
     id: StrictStr = Field(description="Unique identifier (ID) of an item.")
-    links: Optional[WidgetLinks] = None
     modified_at: Optional[datetime] = Field(default=None, description="Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="modifiedAt")
     modified_by: Optional[ModifiedBy] = Field(default=None, alias="modifiedBy")
-    parent: Optional[ParentLinksEnvelope] = None
+    parent: Optional[Parent] = None
     position: Optional[Position] = None
     type: StrictStr = Field(description="Type of item that is returned.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["createdAt", "createdBy", "data", "geometry", "id", "links", "modifiedAt", "modifiedBy", "parent", "position", "type"]
+    __properties: ClassVar[List[str]] = ["createdAt", "createdBy", "data", "geometry", "id", "modifiedAt", "modifiedBy", "parent", "position", "type"]
 
     model_config = {
         "populate_by_name": True,
@@ -98,9 +96,6 @@ class GenericItem(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of geometry
         if self.geometry:
             _dict['geometry'] = self.geometry.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
-            _dict['links'] = self.links.to_dict()
         # override the default output from pydantic by calling `to_dict()` of modified_by
         if self.modified_by:
             _dict['modifiedBy'] = self.modified_by.to_dict()
@@ -132,10 +127,9 @@ class GenericItem(BaseModel):
             "data": WidgetDataOutput.from_dict(obj["data"]) if obj.get("data") is not None else None,
             "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
             "id": obj.get("id"),
-            "links": WidgetLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
             "modifiedAt": obj.get("modifiedAt"),
             "modifiedBy": ModifiedBy.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
-            "parent": ParentLinksEnvelope.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
+            "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
             "position": Position.from_dict(obj["position"]) if obj.get("position") is not None else None,
             "type": obj.get("type")
         })

@@ -26,7 +26,7 @@ class Position(BaseModel):
     """
     Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
     """ # noqa: E501
-    origin: Optional[StrictStr] = Field(default='center', description="Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported (center).")
+    origin: Optional[StrictStr] = Field(default='center', description="Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported.")
     relative_to: Optional[StrictStr] = Field(default=None, alias="relativeTo")
     x: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.")
     y: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.")

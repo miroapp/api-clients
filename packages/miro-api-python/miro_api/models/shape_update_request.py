@@ -22,8 +22,8 @@ from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.geometry import Geometry
 from miro_api.models.parent import Parent
 from miro_api.models.position_change import PositionChange
-from miro_api.models.shape_data import ShapeData
-from miro_api.models.shape_style import ShapeStyle
+from miro_api.models.shape_data_for_update import ShapeDataForUpdate
+from miro_api.models.shape_style_for_update import ShapeStyleForUpdate
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,8 +31,8 @@ class ShapeUpdateRequest(BaseModel):
     """
     ShapeUpdateRequest
     """ # noqa: E501
-    data: Optional[ShapeData] = None
-    style: Optional[ShapeStyle] = None
+    data: Optional[ShapeDataForUpdate] = None
+    style: Optional[ShapeStyleForUpdate] = None
     position: Optional[PositionChange] = None
     geometry: Optional[Geometry] = None
     parent: Optional[Parent] = None
@@ -112,8 +112,8 @@ class ShapeUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "data": ShapeData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "style": ShapeStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+            "data": ShapeDataForUpdate.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "style": ShapeStyleForUpdate.from_dict(obj["style"]) if obj.get("style") is not None else None,
             "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
             "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
             "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None

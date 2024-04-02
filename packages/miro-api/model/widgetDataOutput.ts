@@ -67,7 +67,7 @@ export class WidgetDataOutput {
    */
   'url'?: string
   /**
-   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing numbers, and it is automatically assigned to a user when they first sign up.
+   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is numeric, and it is automatically assigned to a user when they first sign up.
    */
   'assigneeId'?: string
   /**
@@ -109,10 +109,6 @@ export class WidgetDataOutput {
    */
   'type'?: string | (typeof WidgetDataOutput.TypeEnum)[keyof typeof WidgetDataOutput.TypeEnum] =
     WidgetDataOutput.TypeEnum.Freeform
-  /**
-   * Hide or reveal the content inside a frame (Enterprise plan only).
-   */
-  'showContent'?: boolean = true
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -219,11 +215,6 @@ export class WidgetDataOutput {
       baseName: 'type',
       type: 'WidgetDataOutput.TypeEnum',
     },
-    {
-      name: 'showContent',
-      baseName: 'showContent',
-      type: 'boolean',
-    },
   ]
 
   /** @ignore */
@@ -263,6 +254,5 @@ export namespace WidgetDataOutput {
     Grid: 'grid',
     Rows: 'rows',
     Columns: 'columns',
-    Unknown: 'unknown',
   } as const
 }

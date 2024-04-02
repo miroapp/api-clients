@@ -7,6 +7,8 @@ import {AppCardItem} from '../model/appCardItem'
 import {AppCardUpdateRequest} from '../model/appCardUpdateRequest'
 import {GetBoards400Response} from '../model/getBoards400Response'
 
+import {AuditPage} from '../model/auditPage'
+
 import {BoardDataClassificationLabel} from '../model/boardDataClassificationLabel'
 import {DataClassificationLabelId} from '../model/dataClassificationLabelId'
 
@@ -314,6 +316,76 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'AppCardItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves a page of audit events.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a>
+   * @summary Get audit logs
+   * @param createdAfter Retrieve audit logs created after the date and time provided. This is the start date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between &#x60;2023-03-30T17:26:50.000Z&#x60; and &#x60;2023-04-30T17:26:50.000Z&#x60;, provide &#x60;2023-03-30T17:26:50.000Z&#x60; as the value for the &#x60;createdAfter&#x60; parameter.&lt;br&gt;Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\&quot;
+   * @param createdBefore Retrieve audit logs created before the date and time provided. This is the end date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between &#x60;2023-03-30T17:26:50.000Z&#x60; and &#x60;2023-04-30T17:26:50.000Z&#x60;, provide &#x60;2023-04-30T17:26:50.000Z&#x60; as the value for the &#x60;createdBefore&#x60; parameter.&lt;br&gt;Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
+   * @param cursor A cursor-paginated method returns a portion of the total set of results based on the &#x60;limit&#x60; specified and a &#x60;cursor&#x60; that points to the next portion of the results. To retrieve the next set of results of the collection, set the &#x60;cursor&#x60; parameter in your next request to the appropriate cursor value returned in the response.
+   * @param limit Maximum number of results returned based on the &#x60;limit&#x60; specified in the request. For example, if there are &#x60;30&#x60; results, the request has no &#x60;cursor&#x60; value, and the &#x60;limit&#x60; is set to &#x60;20&#x60;,the &#x60;size&#x60; of the results will be &#x60;20&#x60;. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the &#x60;cursor&#x60; parameter value that  you obtained from the response.&lt;br&gt;Default: &#x60;100&#x60;
+   * @param sorting Sort order in which you want to view the result set. Based on the value you provide, the results are sorted in an ascending or descending order of the audit log creation date (audit log &#x60;createdAt&#x60; parameter).&lt;br&gt;Default: &#x60;ASC&#x60;
+   */
+  async enterpriseGetAuditLogs(
+    createdAfter: string,
+    createdBefore: string,
+    query?: {
+      cursor?: string
+
+      limit?: number
+
+      sorting?: 'ASC' | 'DESC'
+    },
+  ): Promise<{response: Response; body: AuditPage}> {
+    const localVarPath = '/v2/audit/logs'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'createdAfter' is not null or undefined
+    if (createdAfter === null || createdAfter === undefined) {
+      throw new Error('Required parameter createdAfter was null or undefined when calling enterpriseGetAuditLogs.')
+    }
+
+    if (createdAfter !== undefined) {
+      localVarQueryParameters.append('createdAfter', ObjectSerializer.serialize(createdAfter, 'string'))
+    }
+
+    // verify required parameter 'createdBefore' is not null or undefined
+    if (createdBefore === null || createdBefore === undefined) {
+      throw new Error('Required parameter createdBefore was null or undefined when calling enterpriseGetAuditLogs.')
+    }
+
+    if (createdBefore !== undefined) {
+      localVarQueryParameters.append('createdBefore', ObjectSerializer.serialize(createdBefore, 'string'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.sorting !== undefined) {
+      localVarQueryParameters.append('sorting', ObjectSerializer.serialize(query?.sorting, "'ASC' | 'DESC'"))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'AuditPage')
 
     return {response, body}
   }
@@ -1726,25 +1798,25 @@ export class MiroApi {
   /**
    * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create document item using file from device
-   * @param boardIdPlatformApisWithLocalFile Unique identifier (ID) of the board where you want to create the item.
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
    * @param resource Select a file to upload
    * @param data
    */
   async createDocumentItemUsingFileFromDevice(
-    boardIdPlatformApisWithLocalFile: string,
+    boardIdPlatformFileUpload: string,
     resource: RequestFile,
 
     data?: CreateDocumentItemUsingFileFromDeviceRequestData,
   ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id_platform_apis_with_local_file}/documents'.replace(
-      '{' + 'board_id_platform_apis_with_local_file' + '}',
-      encodeURIComponent(String(boardIdPlatformApisWithLocalFile)),
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/documents'.replace(
+      '{' + 'board_id_PlatformFileUpload' + '}',
+      encodeURIComponent(String(boardIdPlatformFileUpload)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformApisWithLocalFile' is not null or undefined
-    if (boardIdPlatformApisWithLocalFile === null || boardIdPlatformApisWithLocalFile === undefined) {
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
       throw new Error(
-        'Required parameter boardIdPlatformApisWithLocalFile was null or undefined when calling createDocumentItemUsingFileFromDevice.',
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createDocumentItemUsingFileFromDevice.',
       )
     }
 
@@ -1896,29 +1968,26 @@ export class MiroApi {
   /**
    * Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update document item using file from device
-   * @param boardIdPlatformApisWithLocalFile Unique identifier (ID) of the board where you want to update the item.
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param resource Select a file to upload
    * @param data
    */
   async updateDocumentItemUsingFileFromDevice(
-    boardIdPlatformApisWithLocalFile: string,
+    boardIdPlatformFileUpload: string,
     itemId: string,
     resource: RequestFile,
 
     data?: UploadFileFromDeviceData,
   ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id_platform_apis_with_local_file}/documents/{item_id}'
-      .replace(
-        '{' + 'board_id_platform_apis_with_local_file' + '}',
-        encodeURIComponent(String(boardIdPlatformApisWithLocalFile)),
-      )
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/documents/{item_id}'
+      .replace('{' + 'board_id_PlatformFileUpload' + '}', encodeURIComponent(String(boardIdPlatformFileUpload)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformApisWithLocalFile' is not null or undefined
-    if (boardIdPlatformApisWithLocalFile === null || boardIdPlatformApisWithLocalFile === undefined) {
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
       throw new Error(
-        'Required parameter boardIdPlatformApisWithLocalFile was null or undefined when calling updateDocumentItemUsingFileFromDevice.',
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling updateDocumentItemUsingFileFromDevice.',
       )
     }
     // verify required parameter 'itemId' is not null or undefined
@@ -2559,25 +2628,25 @@ export class MiroApi {
   /**
    * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create image item using file from device
-   * @param boardIdPlatformApisWithLocalFile Unique identifier (ID) of the board where you want to create the item.
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
    * @param resource Select a file to upload
    * @param data
    */
   async createImageItemUsingLocalFile(
-    boardIdPlatformApisWithLocalFile: string,
+    boardIdPlatformFileUpload: string,
     resource: RequestFile,
 
     data?: UploadFileFromDeviceData,
   ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id_platform_apis_with_local_file}/images'.replace(
-      '{' + 'board_id_platform_apis_with_local_file' + '}',
-      encodeURIComponent(String(boardIdPlatformApisWithLocalFile)),
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/images'.replace(
+      '{' + 'board_id_PlatformFileUpload' + '}',
+      encodeURIComponent(String(boardIdPlatformFileUpload)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformApisWithLocalFile' is not null or undefined
-    if (boardIdPlatformApisWithLocalFile === null || boardIdPlatformApisWithLocalFile === undefined) {
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
       throw new Error(
-        'Required parameter boardIdPlatformApisWithLocalFile was null or undefined when calling createImageItemUsingLocalFile.',
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createImageItemUsingLocalFile.',
       )
     }
 
@@ -2726,29 +2795,26 @@ export class MiroApi {
   /**
    * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update image item using file from device
-   * @param boardIdPlatformApisWithLocalFile Unique identifier (ID) of the board where you want to update the item.
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param resource Select a file to upload
    * @param data
    */
   async updateImageItemUsingFileFromDevice(
-    boardIdPlatformApisWithLocalFile: string,
+    boardIdPlatformFileUpload: string,
     itemId: string,
     resource: RequestFile,
 
     data?: UploadFileFromDeviceData,
   ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id_platform_apis_with_local_file}/images/{item_id}'
-      .replace(
-        '{' + 'board_id_platform_apis_with_local_file' + '}',
-        encodeURIComponent(String(boardIdPlatformApisWithLocalFile)),
-      )
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/images/{item_id}'
+      .replace('{' + 'board_id_PlatformFileUpload' + '}', encodeURIComponent(String(boardIdPlatformFileUpload)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformApisWithLocalFile' is not null or undefined
-    if (boardIdPlatformApisWithLocalFile === null || boardIdPlatformApisWithLocalFile === undefined) {
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
       throw new Error(
-        'Required parameter boardIdPlatformApisWithLocalFile was null or undefined when calling updateImageItemUsingFileFromDevice.',
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling updateImageItemUsingFileFromDevice.',
       )
     }
     // verify required parameter 'itemId' is not null or undefined
@@ -4059,6 +4125,41 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'Project')
+
+    return {response, body}
+  }
+
+  /**
+   * Reset all sessions of a user.  Admins can now take immediate action to restrict user access to company data in case of security concerns. Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again. This is useful in situations where a user leaves the company, their credentials are compromised, or there\'s suspicious activity on their account.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * @summary Reset all sessions of a user
+   * @param email Email ID of the user whose sessions you want to reset. Note that this user will be signed out from all devices.
+   */
+  async enterprisePostUserSessionsReset(email: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/sessions/reset_all'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'email' is not null or undefined
+    if (email === null || email === undefined) {
+      throw new Error('Required parameter email was null or undefined when calling enterprisePostUserSessionsReset.')
+    }
+
+    if (email !== undefined) {
+      localVarQueryParameters.append('email', ObjectSerializer.serialize(email, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
 
     return {response, body}
   }
