@@ -9,7 +9,7 @@ on:
       - packages/miro-api/package.json
 
 jobs:
-  publish:
+  publish-node-to-npm:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -33,3 +33,19 @@ jobs:
         with:
           token: ${{ secrets.NPM_PUBLISH_TOKEN }}
           package: packages/miro-api/package.json
+  publish-python-to-pypi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: 'poetry'
+
+      - name: Build the packages
+        run: poetry build
+        working-directory: packages/miro-api-python
+
+      - name: Publish to pypi
+        run: poetry run twine upload dist/*
+        working-directory: packages/miro-api-python
