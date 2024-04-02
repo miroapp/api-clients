@@ -1332,8 +1332,18 @@ export class MiroApi {
     }
 
     const formData = new FormData()
-    formData.append('data', data, 'file')
-    formData.append('resources', resources, 'file')
+    let extension = ''
+    if ('createItemsInBulkUsingFileFromDevice'.includes('Image')) {
+      extension = '.png'
+    } else if ('createItemsInBulkUsingFileFromDevice'.includes('Document')) {
+      extension = '.pdf'
+    }
+    if (data) {
+      formData.append('data', data, 'file' + extension)
+    }
+    if (resources) {
+      formData.append('resources', resources, 'file' + extension)
+    }
 
     const urlResource = new URL(localVarPath, this.basePath)
     urlResource.search = localVarQueryParameters.toString()
@@ -1734,8 +1744,18 @@ export class MiroApi {
     }
 
     const formData = new FormData()
-    formData.append('data', data)
-    formData.append('resource', resource, 'file')
+    let extension = ''
+    if ('createDocumentItemUsingFileFromDevice'.includes('Image')) {
+      extension = '.png'
+    } else if ('createDocumentItemUsingFileFromDevice'.includes('Document')) {
+      extension = '.pdf'
+    }
+    if (data) {
+      formData.append('data', data)
+    }
+    if (resource) {
+      formData.append('resource', resource, 'file' + extension)
+    }
 
     const urlResource = new URL(localVarPath, this.basePath)
     urlResource.search = localVarQueryParameters.toString()
@@ -1900,8 +1920,18 @@ export class MiroApi {
     }
 
     const formData = new FormData()
-    formData.append('data', data)
-    formData.append('resource', resource, 'file')
+    let extension = ''
+    if ('updateDocumentItemUsingFileFromDevice'.includes('Image')) {
+      extension = '.png'
+    } else if ('updateDocumentItemUsingFileFromDevice'.includes('Document')) {
+      extension = '.pdf'
+    }
+    if (data) {
+      formData.append('data', data)
+    }
+    if (resource) {
+      formData.append('resource', resource, 'file' + extension)
+    }
 
     const urlResource = new URL(localVarPath, this.basePath)
     urlResource.search = localVarQueryParameters.toString()
@@ -2541,8 +2571,18 @@ export class MiroApi {
     }
 
     const formData = new FormData()
-    formData.append('data', data)
-    formData.append('resource', resource, 'file')
+    let extension = ''
+    if ('createImageItemUsingLocalFile'.includes('Image')) {
+      extension = '.png'
+    } else if ('createImageItemUsingLocalFile'.includes('Document')) {
+      extension = '.pdf'
+    }
+    if (data) {
+      formData.append('data', data)
+    }
+    if (resource) {
+      formData.append('resource', resource, 'file' + extension)
+    }
 
     const urlResource = new URL(localVarPath, this.basePath)
     urlResource.search = localVarQueryParameters.toString()
@@ -2705,8 +2745,18 @@ export class MiroApi {
     }
 
     const formData = new FormData()
-    formData.append('data', data)
-    formData.append('resource', resource, 'file')
+    let extension = ''
+    if ('updateImageItemUsingFileFromDevice'.includes('Image')) {
+      extension = '.png'
+    } else if ('updateImageItemUsingFileFromDevice'.includes('Document')) {
+      extension = '.pdf'
+    }
+    if (data) {
+      formData.append('data', data)
+    }
+    if (resource) {
+      formData.append('resource', resource, 'file' + extension)
+    }
 
     const urlResource = new URL(localVarPath, this.basePath)
     urlResource.search = localVarQueryParameters.toString()

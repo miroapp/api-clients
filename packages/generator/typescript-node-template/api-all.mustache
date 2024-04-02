@@ -86,8 +86,16 @@ export class MiroApi {
 {{/queryParams}}
 {{#hasFormParams}}
         const formData = new FormData();
+        let extension = ""
+        if ('{{nickname}}'.includes('Image')) {
+            extension = '.png'
+        } else if ('{{nickname}}'.includes('Document')) {
+            extension = '.pdf'
+        }
     {{#formParams}}
-        formData.append('{{paramName}}', {{paramName}} {{#isFile}}, "file"{{/isFile}})
+        if ({{paramName}}) {
+            formData.append('{{paramName}}', {{paramName}} {{#isFile}}, "file" + extension{{/isFile}})
+        }
     {{/formParams}}
 {{/hasFormParams}}
 

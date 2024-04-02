@@ -532,6 +532,36 @@ export class Board extends BaseBoard {
   }
 
   /**
+   * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Create image item using file from device
+   * @param resource Select a file to upload
+   * @param data
+   */
+  async createImageItemUsingLocalFile(
+    resource: Parameters<MiroApi['createImageItemUsingLocalFile']>[1],
+    data: Parameters<MiroApi['createImageItemUsingLocalFile']>[2],
+  ): Promise<ImageItem> {
+    const result = (await this._api.createImageItemUsingLocalFile(this.id.toString(), resource, data)).body
+
+    return new ImageItem(this._api, this.id, result.id, result)
+  }
+
+  /**
+   * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Create document item using file from device
+   * @param resource Select a file to upload
+   * @param data
+   */
+  async createDocumentItemUsingFileFromDevice(
+    resource: Parameters<MiroApi['createDocumentItemUsingFileFromDevice']>[1],
+    data: Parameters<MiroApi['createDocumentItemUsingFileFromDevice']>[2],
+  ): Promise<DocumentItem> {
+    const result = (await this._api.createDocumentItemUsingFileFromDevice(this.id.toString(), resource, data)).body
+
+    return new DocumentItem(this._api, this.id, result.id, result)
+  }
+
+  /**
    * Retrieves information for a specific app card item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get app card item
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -932,6 +962,28 @@ export class DocumentItem extends BaseDocumentItem {
   }
 
   /**
+   * Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Update document item using file from device
+   * @param resource Select a file to upload
+   * @param data
+   */
+  async updateUsingFile(
+    resource: Parameters<MiroApi['updateDocumentItemUsingFileFromDevice']>[2],
+    data: Parameters<MiroApi['updateDocumentItemUsingFileFromDevice']>[3],
+  ): Promise<void> {
+    await this._api.updateDocumentItemUsingFileFromDevice(this.boardId.toString(), this.id.toString(), resource, data)
+  }
+
+  /**
+   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Update document item using URL
+   * @param documentUpdateRequest
+   */
+  async updateUsingUrl(documentUpdateRequest: Parameters<MiroApi['updateDocumentItemUsingUrl']>[2]): Promise<void> {
+    await this._api.updateDocumentItemUsingUrl(this.boardId.toString(), this.id.toString(), documentUpdateRequest)
+  }
+
+  /**
    * Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Delete document item
    */
@@ -1022,6 +1074,28 @@ export class ImageItem extends BaseImageItem {
     this.boardId = boardId
     this.id = id
     Object.assign(this, props)
+  }
+
+  /**
+   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Update image item using file from device
+   * @param resource Select a file to upload
+   * @param data
+   */
+  async updateUsingFile(
+    resource: Parameters<MiroApi['updateImageItemUsingFileFromDevice']>[2],
+    data: Parameters<MiroApi['updateImageItemUsingFileFromDevice']>[3],
+  ): Promise<void> {
+    await this._api.updateImageItemUsingFileFromDevice(this.boardId.toString(), this.id.toString(), resource, data)
+  }
+
+  /**
+   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Update image item using URL
+   * @param imageUpdateRequest
+   */
+  async updateUsingUrl(imageUpdateRequest: Parameters<MiroApi['updateImageItemUsingUrl']>[2]): Promise<void> {
+    await this._api.updateImageItemUsingUrl(this.boardId.toString(), this.id.toString(), imageUpdateRequest)
   }
 
   /**

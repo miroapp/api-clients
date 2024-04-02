@@ -163,6 +163,8 @@ const MODELS = {
       'createStickyNoteItem',
       'createTag',
       'createTextItem',
+      {method: 'createImageItemUsingLocalFile', returns: 'ImageItem'},
+      {method: 'createDocumentItemUsingFileFromDevice', returns: 'DocumentItem'},
 
       'getAppCardItem',
       'getCardItem',
@@ -258,7 +260,11 @@ const MODELS = {
       name: 'BaseDocumentItem',
       path: 'DocumentItem',
     },
-    methods: [{method: 'deleteDocumentItem', alias: 'delete'}],
+    methods: [
+      {method: 'updateDocumentItemUsingFileFromDevice', alias: 'updateUsingFile'},
+      {method: 'updateDocumentItemUsingUrl', alias: 'updateUsingUrl'},
+      {method: 'deleteDocumentItem', alias: 'delete'},
+    ],
   },
 
   EmbedItem: {
@@ -291,7 +297,11 @@ const MODELS = {
       name: 'BaseImageItem',
       path: 'ImageItem',
     },
-    methods: [{method: 'deleteImageItem', alias: 'delete'}],
+    methods: [
+      {method: 'updateImageItemUsingFileFromDevice', alias: 'updateUsingFile'},
+      {method: 'updateImageItemUsingUrl', alias: 'updateUsingUrl'},
+      {method: 'deleteImageItem', alias: 'delete'},
+    ],
   },
 
   ShapeItem: {

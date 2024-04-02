@@ -82,22 +82,15 @@ app.get('/boards/:boardId', async (req, res) => {
   res.render('board', {boardItems, board})
 })
 
-// app.post('/image/:boardId', async (req, res) => {
-//   const api = miro.as(USER_ID)
-//   const boardId = req.params.boardId
-//   const board = await api.getBoard(boardId)
-//   await board.createImageItem({
-//     data: {
-//       data: fs.createReadStream('./img.png')
-//     }
-//   })
-//   res.redirect(`/boards/${boardId}`)
-// })
-
 app.post('/image/:boardId', async (req, res) => {
   const api = miro.as(USER_ID)
   const boardId = req.params.boardId
-  await api.createImageItemUsingLocalFile(boardId, fs.createReadStream('./img.png'), {})
+  const board = await api.getBoard(boardId)
+  await board.createImageItem({
+    data: {
+      data: fs.createReadStream('./img.png')
+    }
+  })
   res.redirect(`/boards/${boardId}`)
 })
 
