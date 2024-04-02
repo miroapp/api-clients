@@ -5,7 +5,7 @@ import FormData = require('form-data')
 import {AppCardCreateRequest} from '../model/appCardCreateRequest'
 import {AppCardItem} from '../model/appCardItem'
 import {AppCardUpdateRequest} from '../model/appCardUpdateRequest'
-import {CreateFrameItem400Response} from '../model/createFrameItem400Response'
+import {GetBoards400Response} from '../model/getBoards400Response'
 
 import {BoardDataClassificationLabel} from '../model/boardDataClassificationLabel'
 import {DataClassificationLabelId} from '../model/dataClassificationLabelId'
@@ -108,7 +108,7 @@ import {StickyNoteCreateRequest} from '../model/stickyNoteCreateRequest'
 import {StickyNoteItem} from '../model/stickyNoteItem'
 import {StickyNoteUpdateRequest} from '../model/stickyNoteUpdateRequest'
 
-import {AttachTagToItem400Response} from '../model/attachTagToItem400Response'
+import {GetTagsFromItem400Response} from '../model/getTagsFromItem400Response'
 import {GetTagsResponse} from '../model/getTagsResponse'
 import {ItemPagedResponse} from '../model/itemPagedResponse'
 import {TagCreateRequest} from '../model/tagCreateRequest'
@@ -1277,11 +1277,10 @@ export class MiroApi {
    * @param itemCreate
    */
   async createItems(boardId: string, itemCreate: Array<ItemCreate>): Promise<{response: Response; body: Items}> {
-    const localVarPath =
-      '/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalRelease}/items/bulk'.replace(
-        '{' + 'board_id' + '}',
-        encodeURIComponent(String(boardId)),
-      )
+    const localVarPath = '/v2-experimental/boards/{board_id}/items/bulk'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
     let localVarQueryParameters = new URLSearchParams()
     // verify required parameter 'boardId' is not null or undefined
     if (boardId === null || boardId === undefined) {
@@ -1319,10 +1318,11 @@ export class MiroApi {
 
     resources?: RequestFile,
   ): Promise<{response: Response; body: Items}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/items/bulk'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
-    )
+    const localVarPath =
+      '/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice}/items/bulk'.replace(
+        '{' + 'board_id' + '}',
+        encodeURIComponent(String(boardId)),
+      )
     let localVarQueryParameters = new URLSearchParams()
     // verify required parameter 'boardId' is not null or undefined
     if (boardId === null || boardId === undefined) {
@@ -1726,25 +1726,25 @@ export class MiroApi {
   /**
    * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create document item using file from device
-   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param boardIdPlatformApisWithLocalFile Unique identifier (ID) of the board where you want to create the item.
    * @param resource Select a file to upload
    * @param data
    */
   async createDocumentItemUsingFileFromDevice(
-    boardId: string,
+    boardIdPlatformApisWithLocalFile: string,
     resource: RequestFile,
 
     data?: CreateDocumentItemUsingFileFromDeviceRequestData,
   ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id}/documents'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
+    const localVarPath = '/v2/boards/{board_id_platform_apis_with_local_file}/documents'.replace(
+      '{' + 'board_id_platform_apis_with_local_file' + '}',
+      encodeURIComponent(String(boardIdPlatformApisWithLocalFile)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
+    // verify required parameter 'boardIdPlatformApisWithLocalFile' is not null or undefined
+    if (boardIdPlatformApisWithLocalFile === null || boardIdPlatformApisWithLocalFile === undefined) {
       throw new Error(
-        'Required parameter boardId was null or undefined when calling createDocumentItemUsingFileFromDevice.',
+        'Required parameter boardIdPlatformApisWithLocalFile was null or undefined when calling createDocumentItemUsingFileFromDevice.',
       )
     }
 
@@ -1785,23 +1785,21 @@ export class MiroApi {
   /**
    * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create document item using URL
-   * @param boardIdPlatform Unique identifier (ID) of the board where you want to create the item.
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param documentCreateRequest
    */
   async createDocumentItemUsingUrl(
-    boardIdPlatform: string,
+    boardId: string,
     documentCreateRequest: DocumentCreateRequest,
   ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/documents'.replace(
-      '{' + 'board_id_Platform' + '}',
-      encodeURIComponent(String(boardIdPlatform)),
+    const localVarPath = '/v2/boards/{board_id}/documents'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatform was null or undefined when calling createDocumentItemUsingUrl.',
-      )
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling createDocumentItemUsingUrl.')
     }
 
     const urlResource = new URL(localVarPath, this.basePath)
@@ -1824,17 +1822,17 @@ export class MiroApi {
   /**
    * Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Delete document item
-   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to delete the item.
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
    */
-  async deleteDocumentItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/documents/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+  async deleteDocumentItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling deleteDocumentItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteDocumentItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -1861,17 +1859,17 @@ export class MiroApi {
   /**
    * Retrieves information for a specific document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get document item
-   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to retrieve a specific item.
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
-  async getDocumentItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/documents/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+  async getDocumentItem(boardId: string, itemId: string): Promise<{response: Response; body: DocumentItem}> {
+    const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling getDocumentItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getDocumentItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -1898,26 +1896,29 @@ export class MiroApi {
   /**
    * Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update document item using file from device
-   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param boardIdPlatformApisWithLocalFile Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param resource Select a file to upload
    * @param data
    */
   async updateDocumentItemUsingFileFromDevice(
-    boardId: string,
+    boardIdPlatformApisWithLocalFile: string,
     itemId: string,
     resource: RequestFile,
 
     data?: UploadFileFromDeviceData,
   ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+    const localVarPath = '/v2/boards/{board_id_platform_apis_with_local_file}/documents/{item_id}'
+      .replace(
+        '{' + 'board_id_platform_apis_with_local_file' + '}',
+        encodeURIComponent(String(boardIdPlatformApisWithLocalFile)),
+      )
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
+    // verify required parameter 'boardIdPlatformApisWithLocalFile' is not null or undefined
+    if (boardIdPlatformApisWithLocalFile === null || boardIdPlatformApisWithLocalFile === undefined) {
       throw new Error(
-        'Required parameter boardId was null or undefined when calling updateDocumentItemUsingFileFromDevice.',
+        'Required parameter boardIdPlatformApisWithLocalFile was null or undefined when calling updateDocumentItemUsingFileFromDevice.',
       )
     }
     // verify required parameter 'itemId' is not null or undefined
@@ -1961,24 +1962,22 @@ export class MiroApi {
   /**
    * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update document item using URL
-   * @param boardIdPlatform Unique identifier (ID) of the board where you want to update the item.
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param documentUpdateRequest
    */
   async updateDocumentItemUsingUrl(
-    boardIdPlatform: string,
+    boardId: string,
     itemId: string,
     documentUpdateRequest: DocumentUpdateRequest,
   ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/documents/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+    const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatform was null or undefined when calling updateDocumentItemUsingUrl.',
-      )
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateDocumentItemUsingUrl.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -2232,13 +2231,13 @@ export class MiroApi {
   /**
    * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items on board
-   * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
+   * @param boardIdPlatformExperimentalFeatures Unique identifier (ID) of the board for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItemsExperimental(
-    boardId: string,
+    boardIdPlatformExperimentalFeatures: string,
     query?: {
       limit?: string
 
@@ -2247,14 +2246,16 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/items'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
+    const localVarPath = '/v2-experimental/boards/{board_id_PlatformExperimentalFeatures}/items'.replace(
+      '{' + 'board_id_PlatformExperimentalFeatures' + '}',
+      encodeURIComponent(String(boardIdPlatformExperimentalFeatures)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getItemsExperimental.')
+    // verify required parameter 'boardIdPlatformExperimentalFeatures' is not null or undefined
+    if (boardIdPlatformExperimentalFeatures === null || boardIdPlatformExperimentalFeatures === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformExperimentalFeatures was null or undefined when calling getItemsExperimental.',
+      )
     }
 
     if (query?.limit !== undefined) {
@@ -2558,24 +2559,26 @@ export class MiroApi {
   /**
    * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create image item using file from device
-   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param boardIdPlatformApisWithLocalFile Unique identifier (ID) of the board where you want to create the item.
    * @param resource Select a file to upload
    * @param data
    */
   async createImageItemUsingLocalFile(
-    boardId: string,
+    boardIdPlatformApisWithLocalFile: string,
     resource: RequestFile,
 
     data?: UploadFileFromDeviceData,
   ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id}/images'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
+    const localVarPath = '/v2/boards/{board_id_platform_apis_with_local_file}/images'.replace(
+      '{' + 'board_id_platform_apis_with_local_file' + '}',
+      encodeURIComponent(String(boardIdPlatformApisWithLocalFile)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling createImageItemUsingLocalFile.')
+    // verify required parameter 'boardIdPlatformApisWithLocalFile' is not null or undefined
+    if (boardIdPlatformApisWithLocalFile === null || boardIdPlatformApisWithLocalFile === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformApisWithLocalFile was null or undefined when calling createImageItemUsingLocalFile.',
+      )
     }
 
     const formData = new FormData()
@@ -2612,21 +2615,21 @@ export class MiroApi {
   /**
    * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Create image item using URL
-   * @param boardIdPlatform Unique identifier (ID) of the board where you want to create the item.
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param imageCreateRequest
    */
   async createImageItemUsingUrl(
-    boardIdPlatform: string,
+    boardId: string,
     imageCreateRequest: ImageCreateRequest,
   ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/images'.replace(
-      '{' + 'board_id_Platform' + '}',
-      encodeURIComponent(String(boardIdPlatform)),
+    const localVarPath = '/v2/boards/{board_id}/images'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling createImageItemUsingUrl.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling createImageItemUsingUrl.')
     }
 
     const urlResource = new URL(localVarPath, this.basePath)
@@ -2649,17 +2652,17 @@ export class MiroApi {
   /**
    * Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Delete image item
-   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to delete the item.
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
    */
-  async deleteImageItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/images/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+  async deleteImageItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling deleteImageItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteImageItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -2686,17 +2689,17 @@ export class MiroApi {
   /**
    * Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get image item
-   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to retrieve a specific item.
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
-  async getImageItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/images/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+  async getImageItem(boardId: string, itemId: string): Promise<{response: Response; body: ImageItem}> {
+    const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling getImageItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getImageItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -2723,26 +2726,29 @@ export class MiroApi {
   /**
    * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update image item using file from device
-   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param boardIdPlatformApisWithLocalFile Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param resource Select a file to upload
    * @param data
    */
   async updateImageItemUsingFileFromDevice(
-    boardId: string,
+    boardIdPlatformApisWithLocalFile: string,
     itemId: string,
     resource: RequestFile,
 
     data?: UploadFileFromDeviceData,
   ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+    const localVarPath = '/v2/boards/{board_id_platform_apis_with_local_file}/images/{item_id}'
+      .replace(
+        '{' + 'board_id_platform_apis_with_local_file' + '}',
+        encodeURIComponent(String(boardIdPlatformApisWithLocalFile)),
+      )
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
+    // verify required parameter 'boardIdPlatformApisWithLocalFile' is not null or undefined
+    if (boardIdPlatformApisWithLocalFile === null || boardIdPlatformApisWithLocalFile === undefined) {
       throw new Error(
-        'Required parameter boardId was null or undefined when calling updateImageItemUsingFileFromDevice.',
+        'Required parameter boardIdPlatformApisWithLocalFile was null or undefined when calling updateImageItemUsingFileFromDevice.',
       )
     }
     // verify required parameter 'itemId' is not null or undefined
@@ -2786,22 +2792,22 @@ export class MiroApi {
   /**
    * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update image item using URL
-   * @param boardIdPlatform Unique identifier (ID) of the board where you want to update the item.
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param imageUpdateRequest
    */
   async updateImageItemUsingUrl(
-    boardIdPlatform: string,
+    boardId: string,
     itemId: string,
     imageUpdateRequest: ImageUpdateRequest,
   ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/images/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+    const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling updateImageItemUsingUrl.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateImageItemUsingUrl.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -2828,17 +2834,17 @@ export class MiroApi {
   /**
    * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Delete item
-   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to delete the item.
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
    */
-  async deleteItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+  async deleteItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling deleteItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -2902,13 +2908,13 @@ export class MiroApi {
   /**
    * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items on board
-   * @param boardIdPlatform Unique identifier (ID) of the board for which you want to retrieve the list of available items.
+   * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItems(
-    boardIdPlatform: string,
+    boardId: string,
     query?: {
       limit?: string
 
@@ -2927,14 +2933,14 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/items'.replace(
-      '{' + 'board_id_Platform' + '}',
-      encodeURIComponent(String(boardIdPlatform)),
+    const localVarPath = '/v2/boards/{board_id}/items'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling getItems.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getItems.')
     }
 
     if (query?.limit !== undefined) {
@@ -2975,14 +2981,14 @@ export class MiroApi {
   /**
    * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items within frame
-   * @param boardId Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.
+   * @param boardIdPlatformContainers Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.
    * @param parentItemId ID of the frame for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItemsWithinFrame(
-    boardId: string,
+    boardIdPlatformContainers: string,
     parentItemId: string,
     query?: {
       limit?: string
@@ -2992,14 +2998,16 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2/boards/{board_id}/items'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
+    const localVarPath = '/v2/boards/{board_id_PlatformContainers}/items'.replace(
+      '{' + 'board_id_PlatformContainers' + '}',
+      encodeURIComponent(String(boardIdPlatformContainers)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getItemsWithinFrame.')
+    // verify required parameter 'boardIdPlatformContainers' is not null or undefined
+    if (boardIdPlatformContainers === null || boardIdPlatformContainers === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformContainers was null or undefined when calling getItemsWithinFrame.',
+      )
     }
 
     // verify required parameter 'parentItemId' is not null or undefined
@@ -3043,17 +3051,17 @@ export class MiroApi {
   /**
    * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get specific item on board
-   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to retrieve a specific item.
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
-  async getSpecificItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: GenericItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+  async getSpecificItem(boardId: string, itemId: string): Promise<{response: Response; body: GenericItem}> {
+    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling getSpecificItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getSpecificItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -3080,24 +3088,22 @@ export class MiroApi {
   /**
    * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update item position or parent
-   * @param boardIdPlatform Unique identifier (ID) of the board where you want to update the item.
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param genericItemUpdate
    */
   async updateItemPositionOrParent(
-    boardIdPlatform: string,
+    boardId: string,
     itemId: string,
     genericItemUpdate: GenericItemUpdate,
   ): Promise<{response: Response; body: GenericItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatform was null or undefined when calling updateItemPositionOrParent.',
-      )
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateItemPositionOrParent.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -4366,18 +4372,22 @@ export class MiroApi {
   /**
    * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:   [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Attach tag to item
-   * @param boardId Unique identifier (ID) of the board with the item that you want to add a tag to.
+   * @param boardIdPlatformTags Unique identifier (ID) of the board with the item that you want to add a tag to.
    * @param itemId Unique identifier (ID) of the item to which you want to add a tag.
    * @param tagId Unique identifier (ID) of the tag you want to add to the item.
    */
-  async attachTagToItem(boardId: string, itemId: string, tagId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+  async attachTagToItem(
+    boardIdPlatformTags: string,
+    itemId: string,
+    tagId: string,
+  ): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
+      .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling attachTagToItem.')
+    // verify required parameter 'boardIdPlatformTags' is not null or undefined
+    if (boardIdPlatformTags === null || boardIdPlatformTags === undefined) {
+      throw new Error('Required parameter boardIdPlatformTags was null or undefined when calling attachTagToItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -4672,18 +4682,22 @@ export class MiroApi {
   /**
    * Removes the specified tag from the specified item. The tag still exists on the board. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),   [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Remove tag from item
-   * @param boardId Unique identifier (ID) of the board with the item that you want to remove a tag from.
+   * @param boardIdPlatformTags Unique identifier (ID) of the board with the item that you want to remove a tag from.
    * @param itemId Unique identifier (ID) of the item that you want to remove the tag from.
    * @param tagId Unique identifier (ID) of the tag that you want to remove from the item.
    */
-  async removeTagFromItem(boardId: string, itemId: string, tagId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+  async removeTagFromItem(
+    boardIdPlatformTags: string,
+    itemId: string,
+    tagId: string,
+  ): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
+      .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling removeTagFromItem.')
+    // verify required parameter 'boardIdPlatformTags' is not null or undefined
+    if (boardIdPlatformTags === null || boardIdPlatformTags === undefined) {
+      throw new Error('Required parameter boardIdPlatformTags was null or undefined when calling removeTagFromItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {

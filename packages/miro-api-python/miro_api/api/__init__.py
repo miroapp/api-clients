@@ -1860,7 +1860,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalRelease}/items/bulk',
+            resource_path='/v2-experimental/boards/{board_id}/items/bulk',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2013,7 +2013,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2-experimental/boards/{board_id}/items/bulk',
+            resource_path='/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice}/items/bulk',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2089,9 +2089,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "ShapeItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2238,9 +2238,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2318,7 +2318,7 @@ class MiroApiEndpoints:
     @validate_call
     def get_items_experimental(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to retrieve the list of available items.")],
+        board_id_platform_experimental_features: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to retrieve the list of available items.")],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         type: Optional[StrictStr] = None,
         cursor: Optional[StrictStr] = None,
@@ -2339,8 +2339,8 @@ class MiroApiEndpoints:
 
         Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board for which you want to retrieve the list of available items. (required)
-        :type board_id: str
+        :param board_id_platform_experimental_features: Unique identifier (ID) of the board for which you want to retrieve the list of available items. (required)
+        :type board_id_platform_experimental_features: str
         :param limit:
         :type limit: str
         :param type:
@@ -2370,7 +2370,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._get_items_experimental_serialize(
-            board_id=board_id,
+            board_id_platform_experimental_features=board_id_platform_experimental_features,
             limit=limit,
             type=type,
             cursor=cursor,
@@ -2382,9 +2382,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GenericItemCursorPaged",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2398,7 +2398,7 @@ class MiroApiEndpoints:
 
     def _get_items_experimental_serialize(
         self,
-        board_id,
+        board_id_platform_experimental_features,
         limit,
         type,
         cursor,
@@ -2421,8 +2421,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform_experimental_features is not None:
+            _path_params['board_id_PlatformExperimentalFeatures'] = board_id_platform_experimental_features
         # process the query parameters
         if limit is not None:
             
@@ -2455,7 +2455,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v2-experimental/boards/{board_id}/items',
+            resource_path='/v2-experimental/boards/{board_id_PlatformExperimentalFeatures}/items',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2530,9 +2530,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ShapeItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2666,9 +2666,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GenericItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2806,9 +2806,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ShapeItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -2959,9 +2959,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "MindmapItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -3108,9 +3108,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7813,9 +7813,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "BoardSubscription",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -7955,9 +7955,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8084,9 +8084,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GenericSubscription",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8217,9 +8217,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GenericSubscriptionsCursorPaged",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8357,9 +8357,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BoardSubscription",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8507,9 +8507,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "AppCardItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8656,9 +8656,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8792,9 +8792,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppCardItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -8932,9 +8932,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "AppCardItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9089,9 +9089,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BoardMembersPagedResponse",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9232,9 +9232,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BoardMemberWithLinks",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9368,9 +9368,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9504,9 +9504,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "InvitationResult",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9657,9 +9657,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BoardMemberWithLinks",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9810,9 +9810,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "BoardWithLinksAndWithoutProject",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -9957,9 +9957,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "BoardWithLinks",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10099,9 +10099,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10252,9 +10252,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BoardsPagedResponse",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10413,9 +10413,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BoardWithLinksAndLastOpened",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10546,9 +10546,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BoardWithLinks",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10696,9 +10696,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "CardItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10845,9 +10845,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -10981,9 +10981,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CardItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11121,9 +11121,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CardItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11274,9 +11274,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConnectorWithLinks",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11423,9 +11423,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11559,9 +11559,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConnectorWithLinks",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11699,9 +11699,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConnectorsCursorPaged",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11846,9 +11846,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ConnectorWithLinks",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -11943,7 +11943,7 @@ class MiroApiEndpoints:
     @validate_call
     def create_document_item_using_file_from_device(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id_platform_apis_with_local_file: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
         resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
         data: Optional[CreateDocumentItemUsingFileFromDeviceRequestData] = None,
         _request_timeout: Union[
@@ -11963,8 +11963,8 @@ class MiroApiEndpoints:
 
         Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id: str
+        :param board_id_platform_apis_with_local_file: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id_platform_apis_with_local_file: str
         :param resource: Select a file to upload (required)
         :type resource: bytearray
         :param data:
@@ -11992,7 +11992,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._create_document_item_using_file_from_device_serialize(
-            board_id=board_id,
+            board_id_platform_apis_with_local_file=board_id_platform_apis_with_local_file,
             resource=resource,
             data=data,
             _request_auth=_request_auth,
@@ -12016,7 +12016,7 @@ class MiroApiEndpoints:
 
     def _create_document_item_using_file_from_device_serialize(
         self,
-        board_id,
+        board_id_platform_apis_with_local_file,
         resource,
         data,
         _request_auth,
@@ -12038,8 +12038,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform_apis_with_local_file is not None:
+            _path_params['board_id_platform_apis_with_local_file'] = board_id_platform_apis_with_local_file
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -12077,7 +12077,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id}/documents',
+            resource_path='/v2/boards/{board_id_platform_apis_with_local_file}/documents',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12096,7 +12096,7 @@ class MiroApiEndpoints:
     @validate_call
     def create_document_item_using_url(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
         document_create_request: DocumentCreateRequest,
         _request_timeout: Union[
             None,
@@ -12115,8 +12115,8 @@ class MiroApiEndpoints:
 
         Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id: str
         :param document_create_request: (required)
         :type document_create_request: DocumentCreateRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -12142,7 +12142,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._create_document_item_using_url_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             document_create_request=document_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -12152,9 +12152,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "DocumentItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -12168,7 +12168,7 @@ class MiroApiEndpoints:
 
     def _create_document_item_using_url_serialize(
         self,
-        board_id_platform,
+        board_id,
         document_create_request,
         _request_auth,
         _content_type,
@@ -12189,8 +12189,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -12226,7 +12226,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id_Platform}/documents',
+            resource_path='/v2/boards/{board_id}/documents',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12245,7 +12245,7 @@ class MiroApiEndpoints:
     @validate_call
     def delete_document_item(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
         _request_timeout: Union[
             None,
@@ -12264,8 +12264,8 @@ class MiroApiEndpoints:
 
         Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board from which you want to delete the item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board from which you want to delete the item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to delete. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -12291,7 +12291,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._delete_document_item_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -12301,9 +12301,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -12317,7 +12317,7 @@ class MiroApiEndpoints:
 
     def _delete_document_item_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         _request_auth,
         _content_type,
@@ -12338,8 +12338,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -12362,7 +12362,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v2/boards/{board_id_Platform}/documents/{item_id}',
+            resource_path='/v2/boards/{board_id}/documents/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12381,7 +12381,7 @@ class MiroApiEndpoints:
     @validate_call
     def get_document_item(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
         _request_timeout: Union[
             None,
@@ -12400,8 +12400,8 @@ class MiroApiEndpoints:
 
         Retrieves information for a specific document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to retrieve. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -12427,7 +12427,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._get_document_item_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -12437,9 +12437,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -12453,7 +12453,7 @@ class MiroApiEndpoints:
 
     def _get_document_item_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         _request_auth,
         _content_type,
@@ -12474,8 +12474,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -12498,7 +12498,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v2/boards/{board_id_Platform}/documents/{item_id}',
+            resource_path='/v2/boards/{board_id}/documents/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12517,7 +12517,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_document_item_using_file_from_device(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id_platform_apis_with_local_file: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
         data: Optional[UploadFileFromDeviceData] = None,
@@ -12538,8 +12538,8 @@ class MiroApiEndpoints:
 
         Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id: str
+        :param board_id_platform_apis_with_local_file: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id_platform_apis_with_local_file: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param resource: Select a file to upload (required)
@@ -12569,7 +12569,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_document_item_using_file_from_device_serialize(
-            board_id=board_id,
+            board_id_platform_apis_with_local_file=board_id_platform_apis_with_local_file,
             item_id=item_id,
             resource=resource,
             data=data,
@@ -12594,7 +12594,7 @@ class MiroApiEndpoints:
 
     def _update_document_item_using_file_from_device_serialize(
         self,
-        board_id,
+        board_id_platform_apis_with_local_file,
         item_id,
         resource,
         data,
@@ -12617,8 +12617,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform_apis_with_local_file is not None:
+            _path_params['board_id_platform_apis_with_local_file'] = board_id_platform_apis_with_local_file
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -12658,7 +12658,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id}/documents/{item_id}',
+            resource_path='/v2/boards/{board_id_platform_apis_with_local_file}/documents/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12677,7 +12677,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_document_item_using_url(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         document_update_request: DocumentUpdateRequest,
         _request_timeout: Union[
@@ -12697,8 +12697,8 @@ class MiroApiEndpoints:
 
         Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param document_update_request: (required)
@@ -12726,7 +12726,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_document_item_using_url_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             document_update_request=document_update_request,
             _request_auth=_request_auth,
@@ -12737,9 +12737,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "DocumentItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -12753,7 +12753,7 @@ class MiroApiEndpoints:
 
     def _update_document_item_using_url_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         document_update_request,
         _request_auth,
@@ -12775,8 +12775,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -12814,7 +12814,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id_Platform}/documents/{item_id}',
+            resource_path='/v2/boards/{board_id}/documents/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12890,9 +12890,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "EmbedItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -13039,9 +13039,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -13175,9 +13175,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmbedItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -13315,9 +13315,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EmbedItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -13468,9 +13468,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "FrameItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -13617,9 +13617,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -13753,9 +13753,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FrameItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -13893,9 +13893,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "FrameItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -13990,7 +13990,7 @@ class MiroApiEndpoints:
     @validate_call
     def create_image_item_using_local_file(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id_platform_apis_with_local_file: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
         resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
         data: Optional[UploadFileFromDeviceData] = None,
         _request_timeout: Union[
@@ -14010,8 +14010,8 @@ class MiroApiEndpoints:
 
         Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id: str
+        :param board_id_platform_apis_with_local_file: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id_platform_apis_with_local_file: str
         :param resource: Select a file to upload (required)
         :type resource: bytearray
         :param data:
@@ -14039,7 +14039,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._create_image_item_using_local_file_serialize(
-            board_id=board_id,
+            board_id_platform_apis_with_local_file=board_id_platform_apis_with_local_file,
             resource=resource,
             data=data,
             _request_auth=_request_auth,
@@ -14063,7 +14063,7 @@ class MiroApiEndpoints:
 
     def _create_image_item_using_local_file_serialize(
         self,
-        board_id,
+        board_id_platform_apis_with_local_file,
         resource,
         data,
         _request_auth,
@@ -14085,8 +14085,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform_apis_with_local_file is not None:
+            _path_params['board_id_platform_apis_with_local_file'] = board_id_platform_apis_with_local_file
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -14124,7 +14124,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id}/images',
+            resource_path='/v2/boards/{board_id_platform_apis_with_local_file}/images',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14143,7 +14143,7 @@ class MiroApiEndpoints:
     @validate_call
     def create_image_item_using_url(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
         image_create_request: ImageCreateRequest,
         _request_timeout: Union[
             None,
@@ -14162,8 +14162,8 @@ class MiroApiEndpoints:
 
         Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
+        :type board_id: str
         :param image_create_request: (required)
         :type image_create_request: ImageCreateRequest
         :param _request_timeout: timeout setting for this request. If one
@@ -14189,7 +14189,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._create_image_item_using_url_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             image_create_request=image_create_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -14199,9 +14199,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "ImageItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -14215,7 +14215,7 @@ class MiroApiEndpoints:
 
     def _create_image_item_using_url_serialize(
         self,
-        board_id_platform,
+        board_id,
         image_create_request,
         _request_auth,
         _content_type,
@@ -14236,8 +14236,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -14273,7 +14273,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id_Platform}/images',
+            resource_path='/v2/boards/{board_id}/images',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14292,7 +14292,7 @@ class MiroApiEndpoints:
     @validate_call
     def delete_image_item(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
         _request_timeout: Union[
             None,
@@ -14311,8 +14311,8 @@ class MiroApiEndpoints:
 
         Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board from which you want to delete the item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board from which you want to delete the item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to delete. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -14338,7 +14338,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._delete_image_item_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -14348,9 +14348,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -14364,7 +14364,7 @@ class MiroApiEndpoints:
 
     def _delete_image_item_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         _request_auth,
         _content_type,
@@ -14385,8 +14385,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -14409,7 +14409,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v2/boards/{board_id_Platform}/images/{item_id}',
+            resource_path='/v2/boards/{board_id}/images/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14428,7 +14428,7 @@ class MiroApiEndpoints:
     @validate_call
     def get_image_item(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
         _request_timeout: Union[
             None,
@@ -14447,8 +14447,8 @@ class MiroApiEndpoints:
 
         Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to retrieve. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -14474,7 +14474,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._get_image_item_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -14484,9 +14484,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ImageItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -14500,7 +14500,7 @@ class MiroApiEndpoints:
 
     def _get_image_item_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         _request_auth,
         _content_type,
@@ -14521,8 +14521,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -14545,7 +14545,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v2/boards/{board_id_Platform}/images/{item_id}',
+            resource_path='/v2/boards/{board_id}/images/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14564,7 +14564,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_image_item_using_file_from_device(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id_platform_apis_with_local_file: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
         data: Optional[UploadFileFromDeviceData] = None,
@@ -14585,8 +14585,8 @@ class MiroApiEndpoints:
 
         Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id: str
+        :param board_id_platform_apis_with_local_file: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id_platform_apis_with_local_file: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param resource: Select a file to upload (required)
@@ -14616,7 +14616,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_image_item_using_file_from_device_serialize(
-            board_id=board_id,
+            board_id_platform_apis_with_local_file=board_id_platform_apis_with_local_file,
             item_id=item_id,
             resource=resource,
             data=data,
@@ -14641,7 +14641,7 @@ class MiroApiEndpoints:
 
     def _update_image_item_using_file_from_device_serialize(
         self,
-        board_id,
+        board_id_platform_apis_with_local_file,
         item_id,
         resource,
         data,
@@ -14664,8 +14664,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform_apis_with_local_file is not None:
+            _path_params['board_id_platform_apis_with_local_file'] = board_id_platform_apis_with_local_file
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -14705,7 +14705,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id}/images/{item_id}',
+            resource_path='/v2/boards/{board_id_platform_apis_with_local_file}/images/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14724,7 +14724,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_image_item_using_url(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         image_update_request: ImageUpdateRequest,
         _request_timeout: Union[
@@ -14744,8 +14744,8 @@ class MiroApiEndpoints:
 
         Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param image_update_request: (required)
@@ -14773,7 +14773,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_image_item_using_url_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             image_update_request=image_update_request,
             _request_auth=_request_auth,
@@ -14784,9 +14784,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ImageItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -14800,7 +14800,7 @@ class MiroApiEndpoints:
 
     def _update_image_item_using_url_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         image_update_request,
         _request_auth,
@@ -14822,8 +14822,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -14861,7 +14861,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id_Platform}/images/{item_id}',
+            resource_path='/v2/boards/{board_id}/images/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14881,7 +14881,7 @@ class MiroApiEndpoints:
     @validate_call
     def delete_item(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
         _request_timeout: Union[
             None,
@@ -14900,8 +14900,8 @@ class MiroApiEndpoints:
 
         Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board from which you want to delete the item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board from which you want to delete the item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to delete. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -14927,7 +14927,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._delete_item_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -14937,9 +14937,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -14953,7 +14953,7 @@ class MiroApiEndpoints:
 
     def _delete_item_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         _request_auth,
         _content_type,
@@ -14974,8 +14974,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -14998,7 +14998,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v2/boards/{board_id_Platform}/items/{item_id}',
+            resource_path='/v2/boards/{board_id}/items/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15073,9 +15073,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -15153,7 +15153,7 @@ class MiroApiEndpoints:
     @validate_call
     def get_items(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to retrieve the list of available items.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to retrieve the list of available items.")],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         type: Optional[StrictStr] = None,
         cursor: Optional[StrictStr] = None,
@@ -15174,8 +15174,8 @@ class MiroApiEndpoints:
 
         Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board for which you want to retrieve the list of available items. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board for which you want to retrieve the list of available items. (required)
+        :type board_id: str
         :param limit:
         :type limit: str
         :param type:
@@ -15205,7 +15205,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._get_items_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             limit=limit,
             type=type,
             cursor=cursor,
@@ -15217,9 +15217,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GenericItemCursorPaged",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -15233,168 +15233,7 @@ class MiroApiEndpoints:
 
     def _get_items_serialize(
         self,
-        board_id_platform,
-        limit,
-        type,
-        cursor,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
-        # process the query parameters
-        if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
-        if type is not None:
-            
-            _query_params.append(('type', type))
-            
-        if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id_Platform}/items',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def get_items_within_frame(
-        self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.")],
-        parent_item_id: Annotated[str, Field(strict=True, description="ID of the frame for which you want to retrieve the list of available items.")],
-        limit: Optional[Annotated[str, Field(strict=True)]] = None,
-        type: Optional[StrictStr] = None,
-        cursor: Optional[StrictStr] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> GenericItemCursorPaged:
-        """Get items within frame
-
-        Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-
-        :param board_id: Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items. (required)
-        :type board_id: str
-        :param parent_item_id: ID of the frame for which you want to retrieve the list of available items. (required)
-        :type parent_item_id: str
-        :param limit:
-        :type limit: str
-        :param type:
-        :type type: str
-        :param cursor:
-        :type cursor: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._get_items_within_frame_serialize(
-            board_id=board_id,
-            parent_item_id=parent_item_id,
-            limit=limit,
-            type=type,
-            cursor=cursor,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericItemCursorPaged",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _get_items_within_frame_serialize(
-        self,
         board_id,
-        parent_item_id,
         limit,
         type,
         cursor,
@@ -15420,10 +15259,6 @@ class MiroApiEndpoints:
         if board_id is not None:
             _path_params['board_id'] = board_id
         # process the query parameters
-        if parent_item_id is not None:
-            
-            _query_params.append(('parent_item_id', parent_item_id))
-            
         if limit is not None:
             
             _query_params.append(('limit', limit))
@@ -15472,9 +15307,174 @@ class MiroApiEndpoints:
 
 
     @validate_call
+    def get_items_within_frame(
+        self,
+        board_id_platform_containers: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.")],
+        parent_item_id: Annotated[str, Field(strict=True, description="ID of the frame for which you want to retrieve the list of available items.")],
+        limit: Optional[Annotated[str, Field(strict=True)]] = None,
+        type: Optional[StrictStr] = None,
+        cursor: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> GenericItemCursorPaged:
+        """Get items within frame
+
+        Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+
+        :param board_id_platform_containers: Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items. (required)
+        :type board_id_platform_containers: str
+        :param parent_item_id: ID of the frame for which you want to retrieve the list of available items. (required)
+        :type parent_item_id: str
+        :param limit:
+        :type limit: str
+        :param type:
+        :type type: str
+        :param cursor:
+        :type cursor: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        _param = self._get_items_within_frame_serialize(
+            board_id_platform_containers=board_id_platform_containers,
+            parent_item_id=parent_item_id,
+            limit=limit,
+            type=type,
+            cursor=cursor,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "GenericItemCursorPaged",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
+        }
+        response_data = self.api_client.call_api(
+            *_param,
+            _request_timeout=_request_timeout
+        )
+        response_data.read()
+        return self.api_client.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        ).data
+
+    def _get_items_within_frame_serialize(
+        self,
+        board_id_platform_containers,
+        parent_item_id,
+        limit,
+        type,
+        cursor,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, str] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if board_id_platform_containers is not None:
+            _path_params['board_id_PlatformContainers'] = board_id_platform_containers
+        # process the query parameters
+        if parent_item_id is not None:
+            
+            _query_params.append(('parent_item_id', parent_item_id))
+            
+        if limit is not None:
+            
+            _query_params.append(('limit', limit))
+            
+        if type is not None:
+            
+            _query_params.append(('type', type))
+            
+        if cursor is not None:
+            
+            _query_params.append(('cursor', cursor))
+            
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+        ]
+
+        return self.api_client.param_serialize(
+            method='GET',
+            resource_path='/v2/boards/{board_id_PlatformContainers}/items',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+
+
+    @validate_call
     def get_specific_item(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
         _request_timeout: Union[
             None,
@@ -15493,8 +15493,8 @@ class MiroApiEndpoints:
 
         Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to retrieve. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -15520,7 +15520,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._get_specific_item_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -15530,9 +15530,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GenericItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -15546,7 +15546,7 @@ class MiroApiEndpoints:
 
     def _get_specific_item_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         _request_auth,
         _content_type,
@@ -15567,8 +15567,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -15591,7 +15591,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='GET',
-            resource_path='/v2/boards/{board_id_Platform}/items/{item_id}',
+            resource_path='/v2/boards/{board_id}/items/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15610,7 +15610,7 @@ class MiroApiEndpoints:
     @validate_call
     def update_item_position_or_parent(
         self,
-        board_id_platform: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
+        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
         generic_item_update: GenericItemUpdate,
         _request_timeout: Union[
@@ -15630,8 +15630,8 @@ class MiroApiEndpoints:
 
         Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id_platform: str
+        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param generic_item_update: (required)
@@ -15659,7 +15659,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._update_item_position_or_parent_serialize(
-            board_id_platform=board_id_platform,
+            board_id=board_id,
             item_id=item_id,
             generic_item_update=generic_item_update,
             _request_auth=_request_auth,
@@ -15670,9 +15670,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GenericItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -15686,7 +15686,7 @@ class MiroApiEndpoints:
 
     def _update_item_position_or_parent_serialize(
         self,
-        board_id_platform,
+        board_id,
         item_id,
         generic_item_update,
         _request_auth,
@@ -15708,8 +15708,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform is not None:
-            _path_params['board_id_Platform'] = board_id_platform
+        if board_id is not None:
+            _path_params['board_id'] = board_id
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -15747,7 +15747,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='PATCH',
-            resource_path='/v2/boards/{board_id_Platform}/items/{item_id}',
+            resource_path='/v2/boards/{board_id}/items/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15823,9 +15823,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "ShapeItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -15972,9 +15972,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -16108,9 +16108,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ShapeItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -16248,9 +16248,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ShapeItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -16401,9 +16401,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "StickyNoteItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -16550,9 +16550,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -16686,9 +16686,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StickyNoteItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -16826,9 +16826,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StickyNoteItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -16923,7 +16923,7 @@ class MiroApiEndpoints:
     @validate_call
     def attach_tag_to_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board with the item that you want to add a tag to.")],
+        board_id_platform_tags: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board with the item that you want to add a tag to.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item to which you want to add a tag.")],
         tag_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the tag you want to add to the item.")],
         _request_timeout: Union[
@@ -16943,8 +16943,8 @@ class MiroApiEndpoints:
 
         Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:   [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board with the item that you want to add a tag to. (required)
-        :type board_id: str
+        :param board_id_platform_tags: Unique identifier (ID) of the board with the item that you want to add a tag to. (required)
+        :type board_id_platform_tags: str
         :param item_id: Unique identifier (ID) of the item to which you want to add a tag. (required)
         :type item_id: str
         :param tag_id: Unique identifier (ID) of the tag you want to add to the item. (required)
@@ -16972,7 +16972,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._attach_tag_to_item_serialize(
-            board_id=board_id,
+            board_id_platform_tags=board_id_platform_tags,
             item_id=item_id,
             tag_id=tag_id,
             _request_auth=_request_auth,
@@ -16983,9 +16983,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -16999,7 +16999,7 @@ class MiroApiEndpoints:
 
     def _attach_tag_to_item_serialize(
         self,
-        board_id,
+        board_id_platform_tags,
         item_id,
         tag_id,
         _request_auth,
@@ -17021,8 +17021,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform_tags is not None:
+            _path_params['board_id_PlatformTags'] = board_id_platform_tags
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -17049,7 +17049,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='POST',
-            resource_path='/v2/boards/{board_id}/items/{item_id}',
+            resource_path='/v2/boards/{board_id_PlatformTags}/items/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -17124,9 +17124,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "TagWithLinks",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -17273,9 +17273,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -17417,9 +17417,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ItemPagedResponse",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -17565,9 +17565,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TagWithLinks",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -17705,9 +17705,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TagsPagedResponse",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -17848,9 +17848,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "GetTagsResponse",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -17928,7 +17928,7 @@ class MiroApiEndpoints:
     @validate_call
     def remove_tag_from_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board with the item that you want to remove a tag from.")],
+        board_id_platform_tags: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board with the item that you want to remove a tag from.")],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to remove the tag from.")],
         tag_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the tag that you want to remove from the item.")],
         _request_timeout: Union[
@@ -17948,8 +17948,8 @@ class MiroApiEndpoints:
 
         Removes the specified tag from the specified item. The tag still exists on the board. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),   [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board with the item that you want to remove a tag from. (required)
-        :type board_id: str
+        :param board_id_platform_tags: Unique identifier (ID) of the board with the item that you want to remove a tag from. (required)
+        :type board_id_platform_tags: str
         :param item_id: Unique identifier (ID) of the item that you want to remove the tag from. (required)
         :type item_id: str
         :param tag_id: Unique identifier (ID) of the tag that you want to remove from the item. (required)
@@ -17977,7 +17977,7 @@ class MiroApiEndpoints:
         """ # noqa: E501
 
         _param = self._remove_tag_from_item_serialize(
-            board_id=board_id,
+            board_id_platform_tags=board_id_platform_tags,
             item_id=item_id,
             tag_id=tag_id,
             _request_auth=_request_auth,
@@ -17988,9 +17988,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -18004,7 +18004,7 @@ class MiroApiEndpoints:
 
     def _remove_tag_from_item_serialize(
         self,
-        board_id,
+        board_id_platform_tags,
         item_id,
         tag_id,
         _request_auth,
@@ -18026,8 +18026,8 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform_tags is not None:
+            _path_params['board_id_PlatformTags'] = board_id_platform_tags
         if item_id is not None:
             _path_params['item_id'] = item_id
         # process the query parameters
@@ -18054,7 +18054,7 @@ class MiroApiEndpoints:
 
         return self.api_client.param_serialize(
             method='DELETE',
-            resource_path='/v2/boards/{board_id}/items/{item_id}',
+            resource_path='/v2/boards/{board_id_PlatformTags}/items/{item_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18133,9 +18133,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TagWithLinks",
-            '400': "AttachTagToItem400Response",
-            '404': "AttachTagToItem400Response",
-            '429': "AttachTagToItem400Response",
+            '400': "GetTagsFromItem400Response",
+            '404': "GetTagsFromItem400Response",
+            '429': "GetTagsFromItem400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -18286,9 +18286,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '201': "TextItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -18435,9 +18435,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '204': "object",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -18571,9 +18571,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TextItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -18711,9 +18711,9 @@ class MiroApiEndpoints:
 
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TextItem",
-            '400': "CreateFrameItem400Response",
-            '404': "CreateFrameItem400Response",
-            '429': "CreateFrameItem400Response",
+            '400': "GetBoards400Response",
+            '404': "GetBoards400Response",
+            '429': "GetBoards400Response",
         }
         response_data = self.api_client.call_api(
             *_param,

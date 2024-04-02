@@ -17,21 +17,19 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Picture(BaseModel):
     """
-    Picture
+    Contains information about the cover picture of the board.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Id of the picture")
-    image_url: Optional[StrictStr] = Field(default=None, description="Url of the picture", alias="imageURL")
-    original_url: Optional[StrictStr] = Field(default=None, description="Original team picture url for icon generation", alias="originalUrl")
-    type: Optional[StrictStr] = Field(default='picture', description="Type of the object returned.")
+    id: Optional[StrictInt] = Field(default=None, description="Unique identifier (ID) of the cover picture for the board.")
+    image_url: Optional[StrictStr] = Field(default=None, description="URL of the cover picture of the board.", alias="imageURL")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "imageURL", "originalUrl", "type"]
+    __properties: ClassVar[List[str]] = ["id", "imageURL"]
 
     model_config = {
         "populate_by_name": True,
@@ -92,9 +90,7 @@ class Picture(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "imageURL": obj.get("imageURL"),
-            "originalUrl": obj.get("originalUrl"),
-            "type": obj.get("type") if obj.get("type") is not None else 'picture'
+            "imageURL": obj.get("imageURL")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

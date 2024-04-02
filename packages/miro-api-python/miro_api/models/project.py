@@ -18,19 +18,17 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
 class Project(BaseModel):
     """
-    Project
+    Contains information about the project with which the board is associated.
     """ # noqa: E501
-    id: StrictStr = Field(description="Project ID.")
-    name: StrictStr = Field(description="Name of the project.")
-    type: StrictStr = Field(description="Type of the object returned.")
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the project.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "type"]
+    __properties: ClassVar[List[str]] = ["id"]
 
     model_config = {
         "populate_by_name": True,
@@ -90,9 +88,7 @@ class Project(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "type": obj.get("type") if obj.get("type") is not None else 'project'
+            "id": obj.get("id")
         })
         # store additional fields in additional_properties
         for _key in obj.keys():

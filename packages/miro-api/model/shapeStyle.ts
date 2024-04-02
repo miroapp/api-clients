@@ -20,7 +20,7 @@ export class ShapeStyle {
    */
   'borderColor'?: string
   /**
-   * Defines the opacity level of the shape border. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: If a value for `borderColor` is passed, the default value for `borderColor` is `1.0`. If a value for `borderColor` is not passed, the default value is `0.0`.
+   * Defines the opacity level of the shape border. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: `1.0` (solid color).
    */
   'borderOpacity'?: string
   /**
