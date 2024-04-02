@@ -1,0 +1,24 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "miro_api"
+version = "2.1.0"
+description = "Miro API client"
+authors = ["Josip Janzic <josip@miro.com>"]
+readme = "README.md"
+packages = [{include = "miro_api"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9"
+urllib3 = "^1"
+python-dateutil = "^2.9.0.post0"
+pydantic = "^2.6.4"
+
+[tool.poetry.group.dev.dependencies]
+twine = "^5.0.0"
+
+[project.urls]
+Homepage = "https://github.com/miroapp/api-clients"
+Issues = "https://github.com/miroapp/api-clients/issues"

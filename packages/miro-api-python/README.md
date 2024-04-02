@@ -1,27 +1,21 @@
-# Miro api python client
+# Miro API python client
 
 ## Requirements.
 
-Python 3.7+
+Python 3.9+
 
 ## Installation & Usage
 
-This python library package is generated without supporting files like setup.py or requirements files
+Install the `miro_api` package to your project. Example using [poetry](https://python-poetry.org/docs/):
 
-To be able to use it, you will need these dependencies in your own package that uses this library:
-
-- urllib3 >= 1.25.3
-- python-dateutil
-- pydantic
+    poetry add miro_api
 
 ## Getting Started
-
-In your own code, to use this library to connect and interact with miro-api, you can run the following:
 
 ```python
 import miro_api
 
 client = miro_api.MiroApi('your access token')
 
-client.create_board()
+print(client.create_board())
 ```
