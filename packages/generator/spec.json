@@ -17679,38 +17679,6 @@
           }
         }
       },
-      "AppCardDataResponse": {
-        "type": "object",
-        "description": "Contains app card item data, such as the title, description, or fields.",
-        "properties": {
-          "description": {
-            "type": "string",
-            "description": "A short text description to add context about the app card.",
-            "example": "Sample app card description"
-          },
-          "fields": {
-            "type": "array",
-            "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
-            "items": {
-              "$ref": "#/components/schemas/CustomField"
-            }
-          },
-          "owned": {
-            "type": "boolean",
-            "description": "Defines whether the card is owned by the application making the call."
-          },
-          "status": {
-            "type": "string",
-            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
-            "enum": ["disconnected", "connected", "disabled"]
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the app card.",
-            "example": "sample app card item"
-          }
-        }
-      },
       "AppCardStylePlatformBulkCreateOperationExperimentalRelease": {
         "type": "object",
         "description": "Contains information about the style of an app card item, such as the fill color.",
@@ -17780,21 +17748,6 @@
         },
         "required": ["url"]
       },
-      "DocumentDataResponse": {
-        "type": "object",
-        "properties": {
-          "documentUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false"
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the document.",
-            "example": "Sample document title"
-          }
-        }
-      },
       "EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease": {
         "type": "object",
         "description": "Contains information about the embed URL.",
@@ -17815,6 +17768,1252 @@
           }
         },
         "required": ["url"]
+      },
+      "StickyNoteDataPlatformBulkCreateOperationExperimentalRelease": {
+        "type": "object",
+        "description": "Contains sticky note item data, such as the content or shape of the sticky note.",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The actual text (content) that appears in the sticky note item.",
+            "example": "Hello"
+          },
+          "shape": {
+            "type": "string",
+            "default": "square",
+            "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
+            "enum": ["square", "rectangle"]
+          }
+        }
+      },
+      "StickyNoteStylePlatformBulkCreateOperationExperimentalRelease": {
+        "type": "object",
+        "description": "Contains information about the style of a sticky note item, such as the fill color or text alignment.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Fill color for the sticky note.\nDefault: `light_yellow`.",
+            "enum": [
+              "gray",
+              "light_yellow",
+              "yellow",
+              "orange",
+              "light_green",
+              "green",
+              "dark_green",
+              "cyan",
+              "light_pink",
+              "pink",
+              "violet",
+              "red",
+              "light_blue",
+              "blue",
+              "dark_blue",
+              "black"
+            ]
+          },
+          "textAlign": {
+            "type": "string",
+            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
+            "enum": ["left", "right", "center"]
+          },
+          "textAlignVertical": {
+            "type": "string",
+            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
+            "enum": ["top", "middle", "bottom"]
+          }
+        }
+      },
+      "TextDataPlatformBulkCreateOperationExperimentalRelease": {
+        "type": "object",
+        "description": "Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The actual text (content) that appears in the text item.",
+            "example": "Hello"
+          }
+        },
+        "required": ["content"]
+      },
+      "CustomFieldPlatformBulkCreateOperationExperimentalRelease": {
+        "type": "object",
+        "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Hex value representing the color that fills the background area of the preview field, when it's displayed on the app card.",
+            "example": "#2fa9e3"
+          },
+          "iconShape": {
+            "type": "string",
+            "default": "round",
+            "description": "The shape of the icon on the preview field.",
+            "enum": ["round", "square"]
+          },
+          "iconUrl": {
+            "type": "string",
+            "description": "A valid URL pointing to an image available online.\nThe transport protocol must be HTTPS.\nPossible image file formats: JPG/JPEG, PNG, SVG.",
+            "example": "https://cdn-icons-png.flaticon.com/512/5695/5695864.png"
+          },
+          "textColor": {
+            "type": "string",
+            "description": "Hex value representing the color of the text string assigned to `value`.",
+            "example": "#1a1a1a"
+          },
+          "tooltip": {
+            "type": "string",
+            "description": "A short text displayed in a tooltip when clicking or hovering over the preview field.",
+            "example": "Completion status indicator"
+          },
+          "value": {
+            "type": "string",
+            "description": "The actual data value of the custom field.\nIt can be any type of information that you want to convey.",
+            "example": "Status: in progress"
+          }
+        }
+      },
+      "GeometryPlatformBulkCreateOperationExperimentalRelease": {
+        "type": "object",
+        "description": "Contains geometrical information about the item, such as its width or height.",
+        "properties": {
+          "height": {
+            "type": "number",
+            "format": "double",
+            "description": "Height of the item, in pixels.",
+            "example": 60
+          },
+          "rotation": {
+            "type": "number",
+            "format": "double",
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
+          },
+          "width": {
+            "type": "number",
+            "format": "double",
+            "description": "Width of the item, in pixels.",
+            "example": 320
+          }
+        }
+      },
+      "ItemChanges": {
+        "type": "object",
+        "description": "Updates one or more items in one request. You can update up to 20 items per request.",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ItemId"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ItemTypeChange"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ItemDataChanges"
+          },
+          "style": {
+            "$ref": "#/components/schemas/ItemStyle"
+          },
+          "position": {
+            "$ref": "#/components/schemas/PositionChange"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Parent"
+          }
+        }
+      },
+      "ItemCreate": {
+        "type": "object",
+        "description": "Creates one or more items in one request. You can create up to 20 items per request.",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ItemTypeChange"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ItemDataCreate"
+          },
+          "style": {
+            "$ref": "#/components/schemas/ItemStyle"
+          },
+          "position": {
+            "$ref": "#/components/schemas/PositionChange"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Parent"
+          }
+        },
+        "required": ["type"]
+      },
+      "ItemDataChanges": {
+        "type": "object",
+        "description": "Provides information about item-specific fields for update request.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AppCardData"
+          },
+          {
+            "$ref": "#/components/schemas/ImageUrlDataChanges"
+          }
+        ]
+      },
+      "ItemDataCreate": {
+        "type": "object",
+        "description": "Contains data information applicable for each item type.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AppCardData"
+          },
+          {
+            "$ref": "#/components/schemas/CardData"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentUrlData"
+          },
+          {
+            "$ref": "#/components/schemas/EmbedUrlData"
+          },
+          {
+            "$ref": "#/components/schemas/ImageUrlData"
+          },
+          {
+            "$ref": "#/components/schemas/ShapeData"
+          },
+          {
+            "$ref": "#/components/schemas/StickyNoteData"
+          },
+          {
+            "$ref": "#/components/schemas/TextData"
+          }
+        ]
+      },
+      "ItemsPage": {
+        "type": "object",
+        "description": "Contains cursor-based items page information.",
+        "properties": {
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.",
+            "example": 1
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.",
+            "example": 10
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of results available for the given request.",
+            "example": 11
+          },
+          "data": {
+            "type": "array",
+            "description": "Contains the result data.",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          },
+          "links": {
+            "$ref": "#/components/schemas/PageLinks"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the object.",
+            "example": "cursor-list"
+          }
+        },
+        "required": ["type", "size", "limit", "total", "data", "links"]
+      },
+      "ItemTypeChange": {
+        "type": "string",
+        "description": "Type of item that you want to create.",
+        "enum": ["app_card", "text", "shape", "sticky_note", "image", "document", "card", "frame", "embed"],
+        "example": "text"
+      },
+      "ImageUrlDataPlatformBulkCreateOperationExperimentalRelease": {
+        "type": "object",
+        "description": "Contains information about the image URL.",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the image.",
+            "example": "Sample image title"
+          },
+          "url": {
+            "type": "string",
+            "default": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png",
+            "description": "URL of the image.",
+            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
+          }
+        },
+        "required": ["url"]
+      },
+      "ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease": {
+        "type": "object",
+        "description": "Contains information about the image URL.",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the image.",
+            "example": "Test image title"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the image.",
+            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "description": "Error information",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Code of the error",
+            "example": 2.074
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the error",
+            "example": "Error message"
+          },
+          "context": {
+            "type": "object"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Status code of the error",
+            "example": 400
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of entity that is returned.",
+            "example": "error"
+          }
+        },
+        "required": ["message", "type"]
+      },
+      "BulkOperationError": {
+        "type": "object",
+        "description": "Error information with details about operation failure",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of the error",
+            "example": "error"
+          },
+          "code": {
+            "type": "string",
+            "description": "Code of the error",
+            "example": 2.074
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the error",
+            "example": "Error message"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "fields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/BulkSubOperationError"
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Status code of the error",
+            "example": 400
+          }
+        },
+        "required": ["message"]
+      },
+      "BulkSubOperationError": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "0-based index indicating a sub-operations from the input that caused a failure followed by parameter name"
+          },
+          "message": {
+            "type": "string",
+            "description": "Description of the sub-operation related error",
+            "example": "Invalid parameters"
+          },
+          "context": {
+            "type": "object"
+          }
+        },
+        "required": ["field", "message"]
+      },
+      "DocumentUrlData": {
+        "type": "object",
+        "description": "Contains information about the document URL.",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the document.",
+            "example": "Sample document title"
+          },
+          "url": {
+            "type": "string",
+            "default": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+            "description": "URL where the document is hosted.",
+            "example": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+          }
+        },
+        "required": ["url"]
+      },
+      "EmbedUrlData": {
+        "type": "object",
+        "description": "Contains information about the embed URL.",
+        "properties": {
+          "mode": {
+            "type": "string",
+            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
+            "enum": ["inline", "modal"]
+          },
+          "previewUrl": {
+            "type": "string",
+            "description": "URL of the image to be used as the preview image for the embedded item."
+          },
+          "url": {
+            "type": "string",
+            "default": "https://www.youtube.com/watch?v=HlVSNEiFCBk",
+            "description": "A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS."
+          }
+        },
+        "required": ["url"]
+      },
+      "ImageUrlData": {
+        "type": "object",
+        "description": "Contains information about the image URL.",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the image.",
+            "example": "Sample image title"
+          },
+          "url": {
+            "type": "string",
+            "default": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png",
+            "description": "URL of the image.",
+            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
+          }
+        },
+        "required": ["url"]
+      },
+      "ImageUrlDataChanges": {
+        "type": "object",
+        "description": "Contains information about the image URL.",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the image.",
+            "example": "Test image title"
+          },
+          "url": {
+            "type": "string",
+            "description": "URL of the image.",
+            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
+          }
+        }
+      },
+      "AppCardDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains app card item data, such as the title, description, or fields.",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "A short text description to add context about the app card.",
+            "example": "Sample app card description"
+          },
+          "fields": {
+            "type": "array",
+            "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            }
+          },
+          "owned": {
+            "type": "boolean",
+            "description": "Defines whether the card is owned by the application making the call."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
+            "enum": ["disconnected", "connected", "disabled"]
+          },
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the app card.",
+            "example": "sample app card item"
+          }
+        }
+      },
+      "AppCardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about the style of an app card item, such as the fill color.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Hex value of the border color of the app card.\nDefault: `#2d9bf0`.",
+            "example": "#2d9bf0"
+          }
+        }
+      },
+      "CardDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains card item data, such as the title, description, due date, or assignee ID.",
+        "properties": {
+          "assigneeId": {
+            "type": "string",
+            "format": "int64",
+            "description": "Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing numbers, and it is automatically assigned to a user when they first sign up.",
+            "example": "3074457362577955300"
+          },
+          "description": {
+            "type": "string",
+            "description": "A short text description to add context about the card.",
+            "example": "sample card description"
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The date when the task or activity described in the card is due to be completed. In the GUI, users can select the due date from a calendar. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+            "example": "2023-10-12T22:00:55.000Z"
+          },
+          "title": {
+            "type": "string",
+            "default": "sample card item",
+            "description": "A short text header for the card.",
+            "example": "sample card item"
+          }
+        }
+      },
+      "CardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about the style of a card item, such as the card theme.",
+        "properties": {
+          "cardTheme": {
+            "type": "string",
+            "description": "Hex value of the border color of the card.\nDefault: `#2d9bf0`.",
+            "example": "#2d9bf0"
+          }
+        }
+      },
+      "DocumentDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "properties": {
+          "documentUrl": {
+            "type": "string",
+            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
+            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the document.",
+            "example": "Sample document title"
+          }
+        }
+      },
+      "EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "properties": {
+          "contentType": {
+            "type": "string",
+            "description": "Type of the embedded item's content.",
+            "example": "video"
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description of the embedded item.",
+            "example": "So this is how to organize your life with Miro (a virtual whiteboard) for collaboration, brainstorming, and project management. Students, designers, agile en..."
+          },
+          "html": {
+            "type": "string",
+            "description": "HTML code of the embedded item.",
+            "example": "<iframe class=\\\"embedly-embed\\\" src=\\\"//cdn.embedly.com/widgets/media.html?src=...&display_name=YouTube&url=...&schema=youtube\\\" width=\\\"854\\\" height=\\\"480\\\" scrolling=\\\"no\\\" title=\\\"YouTube embed\\\" frameborder=\\\"0\\\" allow=\\\"autoplay; fullscreen\\\" allowfullscreen=\\\"true\\\"></iframe>"
+          },
+          "mode": {
+            "type": "string",
+            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
+            "enum": ["inline", "modal"]
+          },
+          "previewUrl": {
+            "type": "string",
+            "description": "The URL to download the resource. You must use your access token to access the URL.\nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
+            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
+          },
+          "providerName": {
+            "type": "string",
+            "description": "Name of the content's provider.",
+            "example": "YouTube"
+          },
+          "providerUrl": {
+            "type": "string",
+            "description": "Url of the content's provider.",
+            "example": "https://www.youtube.com/"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title of the embedded item.",
+            "example": "HOW TO ORGANIZE YOUR LIFE WITH MIRO! ?? Virtual Whiteboard Tour"
+          },
+          "url": {
+            "type": "string",
+            "description": "A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.",
+            "example": "https://www.youtube.com/watch?v=HlVSNEiFCBk"
+          }
+        }
+      },
+      "ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains shape item data, such as the content or shape type of the shape.",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The text you want to display on the shape.",
+            "example": "Hello"
+          },
+          "shape": {
+            "type": "string",
+            "default": "rectangle",
+            "description": "Defines the geometric shape of the item when it is rendered on the board.",
+            "enum": [
+              "rectangle",
+              "round_rectangle",
+              "circle",
+              "triangle",
+              "rhombus",
+              "parallelogram",
+              "trapezoid",
+              "pentagon",
+              "hexagon",
+              "octagon",
+              "wedge_round_rectangle_callout",
+              "star",
+              "flow_chart_predefined_process",
+              "cloud",
+              "cross",
+              "can",
+              "right_arrow",
+              "left_arrow",
+              "left_right_arrow",
+              "left_brace",
+              "right_brace"
+            ]
+          }
+        }
+      },
+      "ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about the shape style, such as the border color or opacity.",
+        "properties": {
+          "borderColor": {
+            "type": "string",
+            "description": "Defines the color of the border of the shape.\nDefault: `#1a1a1a` (dark gray)."
+          },
+          "borderOpacity": {
+            "type": "string",
+            "description": "Defines the opacity level of the shape border.\nPossible values: any number between `0.0` and `1.0`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault: `1.0` (solid color).",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "borderStyle": {
+            "type": "string",
+            "description": "Defines the style used to represent the border of the shape.\nDefault: `normal`.",
+            "enum": ["normal", "dotted", "dashed"]
+          },
+          "borderWidth": {
+            "type": "string",
+            "description": "Defines the thickness of the shape border, in dp.\nDefault: `2.0`.",
+            "maximum": 24,
+            "minimum": 1
+          },
+          "color": {
+            "type": "string",
+            "description": "Hex value representing the color for the text within the shape item.\nDefault: `#1a1a1a`.",
+            "example": "#1a1a1a"
+          },
+          "fillColor": {
+            "type": "string",
+            "description": "Fill color for the shape.\nHex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000`\nDefault: #ffffff.",
+            "example": "#8fd14f"
+          },
+          "fillOpacity": {
+            "type": "string",
+            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible.\n`1.0`: the background color is completely opaque or solid.\n\n Default: `1.0` if `fillColor` is provided, `0.0` if `fillColor` is not provided.\n",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "fontFamily": {
+            "type": "string",
+            "description": "Defines the font type for the text in the shape item.\nDefault: `arial`.",
+            "enum": [
+              "arial",
+              "abril_fatface",
+              "bangers",
+              "eb_garamond",
+              "georgia",
+              "graduate",
+              "gravitas_one",
+              "fredoka_one",
+              "nixie_one",
+              "open_sans",
+              "permanent_marker",
+              "pt_sans",
+              "pt_sans_narrow",
+              "pt_serif",
+              "rammetto_one",
+              "roboto",
+              "roboto_condensed",
+              "roboto_slab",
+              "caveat",
+              "times_new_roman",
+              "titan_one",
+              "lemon_tuesday",
+              "roboto_mono",
+              "noto_sans",
+              "plex_sans",
+              "plex_serif",
+              "plex_mono",
+              "spoof",
+              "tiempos_text",
+              "formular"
+            ]
+          },
+          "fontSize": {
+            "type": "string",
+            "description": "Defines the font size, in dp, for the text on the shape.\nDefault: `14`.",
+            "maximum": 288,
+            "minimum": 10
+          },
+          "textAlign": {
+            "type": "string",
+            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
+            "enum": ["left", "right", "center"]
+          },
+          "textAlignVertical": {
+            "type": "string",
+            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
+            "enum": ["top", "middle", "bottom"]
+          }
+        }
+      },
+      "StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains sticky note item data, such as the content or shape of the sticky note.",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The actual text (content) that appears in the sticky note item.",
+            "example": "Hello"
+          },
+          "shape": {
+            "type": "string",
+            "default": "square",
+            "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
+            "enum": ["square", "rectangle"]
+          }
+        }
+      },
+      "StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about the style of a sticky note item, such as the fill color or text alignment.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Fill color for the sticky note.\nDefault: `light_yellow`.",
+            "enum": [
+              "gray",
+              "light_yellow",
+              "yellow",
+              "orange",
+              "light_green",
+              "green",
+              "dark_green",
+              "cyan",
+              "light_pink",
+              "pink",
+              "violet",
+              "red",
+              "light_blue",
+              "blue",
+              "dark_blue",
+              "black"
+            ]
+          },
+          "textAlign": {
+            "type": "string",
+            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
+            "enum": ["left", "right", "center"]
+          },
+          "textAlignVertical": {
+            "type": "string",
+            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
+            "enum": ["top", "middle", "bottom"]
+          }
+        }
+      },
+      "TextDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).",
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "The actual text (content) that appears in the text item.",
+            "example": "Hello"
+          }
+        },
+        "required": ["content"]
+      },
+      "TextStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about the style of a text item, such as the fill color or font family.",
+        "properties": {
+          "color": {
+            "type": "string",
+            "description": "Hex value representing the color for the text within the text item.\nDefault: `#1a1a1a`.",
+            "example": "#1a1a1a"
+          },
+          "fillColor": {
+            "type": "string",
+            "description": "Background color of the text item.\nDefault: `#ffffff`.",
+            "example": "#e6e6e6"
+          },
+          "fillOpacity": {
+            "type": "string",
+            "description": "Opacity level of the background color.\nPossible values: any number between `0.0` and `1.0`, where:\n`0.0`: the background color is completely transparent or invisible.\n`1.0`: the background color is completely opaque or solid.\nDefault: `1.0` if `fillColor` is provided, `0.0` if `fillColor` is not provided.",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "fontFamily": {
+            "type": "string",
+            "description": "Font type for the text in the text item.\nDefault: `arial`.",
+            "enum": [
+              "arial",
+              "abril_fatface",
+              "bangers",
+              "eb_garamond",
+              "georgia",
+              "graduate",
+              "gravitas_one",
+              "fredoka_one",
+              "nixie_one",
+              "open_sans",
+              "permanent_marker",
+              "pt_sans",
+              "pt_sans_narrow",
+              "pt_serif",
+              "rammetto_one",
+              "roboto",
+              "roboto_condensed",
+              "roboto_slab",
+              "caveat",
+              "times_new_roman",
+              "titan_one",
+              "lemon_tuesday",
+              "roboto_mono",
+              "noto_sans",
+              "plex_sans",
+              "plex_serif",
+              "plex_mono",
+              "spoof",
+              "tiempos_text",
+              "formular"
+            ]
+          },
+          "fontSize": {
+            "type": "string",
+            "description": "Font size, in dp.\nDefault: `14`.",
+            "minimum": 1
+          },
+          "textAlign": {
+            "type": "string",
+            "description": "Horizontal alignment for the item's content.\nDefault: `center.`",
+            "enum": ["left", "right", "center"]
+          }
+        }
+      },
+      "CustomFieldPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Hex value representing the color that fills the background area of the preview field, when it's displayed on the app card.",
+            "example": "#2fa9e3"
+          },
+          "iconShape": {
+            "type": "string",
+            "default": "round",
+            "description": "The shape of the icon on the preview field.",
+            "enum": ["round", "square"]
+          },
+          "iconUrl": {
+            "type": "string",
+            "description": "A valid URL pointing to an image available online.\nThe transport protocol must be HTTPS.\nPossible image file formats: JPG/JPEG, PNG, SVG.",
+            "example": "https://cdn-icons-png.flaticon.com/512/5695/5695864.png"
+          },
+          "textColor": {
+            "type": "string",
+            "description": "Hex value representing the color of the text string assigned to `value`.",
+            "example": "#1a1a1a"
+          },
+          "tooltip": {
+            "type": "string",
+            "description": "A short text displayed in a tooltip when clicking or hovering over the preview field.",
+            "example": "Completion status indicator"
+          },
+          "value": {
+            "type": "string",
+            "description": "The actual data value of the custom field.\nIt can be any type of information that you want to convey.",
+            "example": "Status: in progress"
+          }
+        }
+      },
+      "GeometryPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains geometrical information about the item, such as its width or height.",
+        "properties": {
+          "height": {
+            "type": "number",
+            "format": "double",
+            "description": "Height of the item, in pixels.",
+            "example": 60
+          },
+          "rotation": {
+            "type": "number",
+            "format": "double",
+            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
+          },
+          "width": {
+            "type": "number",
+            "format": "double",
+            "description": "Width of the item, in pixels.",
+            "example": 320
+          }
+        }
+      },
+      "ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about an item.",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/ItemId"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ItemData"
+          },
+          "style": {
+            "$ref": "#/components/schemas/ItemStyle"
+          },
+          "position": {
+            "$ref": "#/components/schemas/Position"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/ParentWithLinks"
+          },
+          "isSupported": {
+            "type": "boolean"
+          },
+          "createdBy": {
+            "$ref": "#/components/schemas/CreatedBy"
+          },
+          "createdAt": {
+            "$ref": "#/components/schemas/CreationTime"
+          },
+          "modifiedBy": {
+            "$ref": "#/components/schemas/ModifiedBy"
+          },
+          "modifiedAt": {
+            "$ref": "#/components/schemas/ModificationTime"
+          },
+          "links": {
+            "$ref": "#/components/schemas/SelfLink"
+          }
+        },
+        "required": ["id", "type", "links"]
+      },
+      "ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about item-specific data.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AppCardDataResponse"
+          },
+          {
+            "$ref": "#/components/schemas/CardData"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentDataResponse"
+          },
+          {
+            "$ref": "#/components/schemas/EmbedDataResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ImageDataResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ShapeData"
+          },
+          {
+            "$ref": "#/components/schemas/StickyNoteData"
+          },
+          {
+            "$ref": "#/components/schemas/TextData"
+          }
+        ]
+      },
+      "ItemIdPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "string",
+        "description": "Unique identifier (ID) of an item.",
+        "format": "int64",
+        "example": "3458764517517819000"
+      },
+      "ItemsPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains items resulting from a bulk create or update operation.",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "Contains the result data.",
+            "items": {
+              "$ref": "#/components/schemas/Item"
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the object.",
+            "example": "fixed-list"
+          }
+        },
+        "required": ["type", "data"]
+      },
+      "ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about item-specific styles.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AppCardStyle"
+          },
+          {
+            "$ref": "#/components/schemas/CardStyle"
+          },
+          {
+            "$ref": "#/components/schemas/ShapeStyle"
+          },
+          {
+            "$ref": "#/components/schemas/StickyNoteStyle"
+          },
+          {
+            "$ref": "#/components/schemas/TextStyle"
+          }
+        ]
+      },
+      "ImageDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "properties": {
+          "imageUrl": {
+            "type": "string",
+            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
+            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the image.",
+            "example": "Sample image title"
+          }
+        }
+      },
+      "CreationTimePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        "example": "2022-03-30T17:26:50.000Z"
+      },
+      "ModificationTimePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        "example": "2022-03-30T17:26:50.000Z"
+      },
+      "CreatedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about the user who created the item.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier (ID) of the user.",
+            "example": "3458764517517852417"
+          },
+          "type": {
+            "type": "string",
+            "description": "Indicates the type of object returned. In this case, `type` returns `user`.",
+            "example": "user"
+          }
+        }
+      },
+      "ModifiedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about the user who last modified the item.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier (ID) of the user.",
+            "example": "3458764517517852417"
+          },
+          "type": {
+            "type": "string",
+            "description": "Indicates the type of object returned. In this case, `type` returns `user`.",
+            "example": "user"
+          }
+        }
+      },
+      "ParentWithLinksPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains information about the parent this item attached to.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "int64",
+            "example": "3458764517517819001",
+            "description": "Unique identifier (ID) of a container item."
+          },
+          "links": {
+            "$ref": "#/components/schemas/SelfLink"
+          }
+        }
+      },
+      "PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.",
+        "properties": {
+          "origin": {
+            "type": "string",
+            "default": "center",
+            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported.",
+            "enum": ["center"]
+          },
+          "relativeTo": {
+            "type": "string",
+            "enum": ["canvas_center", "parent_top_left"]
+          },
+          "x": {
+            "$ref": "#/components/schemas/XCoordinate"
+          },
+          "y": {
+            "$ref": "#/components/schemas/YCoordinate"
+          }
+        }
+      },
+      "SelfLinkPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "object",
+        "description": "Contains applicable links for the current object.",
+        "properties": {
+          "self": {
+            "type": "string",
+            "description": "Link to obtain more information about the current object.",
+            "example": "https://api.miro.com/v2/boards/o9J_koQspF4=/object_type/3074457349143649487"
+          }
+        }
+      },
+      "XCoordinatePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "number",
+        "format": "double",
+        "description": "X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
+        "example": 100
+      },
+      "YCoordinatePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
+        "type": "number",
+        "format": "double",
+        "description": "Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
+        "example": 100
+      },
+      "AppCardDataResponse": {
+        "type": "object",
+        "description": "Contains app card item data, such as the title, description, or fields.",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "A short text description to add context about the app card.",
+            "example": "Sample app card description"
+          },
+          "fields": {
+            "type": "array",
+            "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
+            "items": {
+              "$ref": "#/components/schemas/CustomField"
+            }
+          },
+          "owned": {
+            "type": "boolean",
+            "description": "Defines whether the card is owned by the application making the call."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
+            "enum": ["disconnected", "connected", "disabled"]
+          },
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the app card.",
+            "example": "sample app card item"
+          }
+        }
+      },
+      "AppCardStyle": {
+        "type": "object",
+        "description": "Contains information about the style of an app card item, such as the fill color.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Hex value of the border color of the app card.\nDefault: `#2d9bf0`.",
+            "example": "#2d9bf0"
+          }
+        }
+      },
+      "CardStyle": {
+        "type": "object",
+        "description": "Contains information about the style of a card item, such as the card theme.",
+        "properties": {
+          "cardTheme": {
+            "type": "string",
+            "description": "Hex value of the border color of the card.\nDefault: `#2d9bf0`.",
+            "example": "#2d9bf0"
+          }
+        }
+      },
+      "DocumentDataResponse": {
+        "type": "object",
+        "properties": {
+          "documentUrl": {
+            "type": "string",
+            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
+            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the document.",
+            "example": "Sample document title"
+          }
+        }
       },
       "EmbedDataResponse": {
         "type": "object",
@@ -17961,24 +19160,7 @@
           }
         }
       },
-      "StickyNoteDataPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Contains sticky note item data, such as the content or shape of the sticky note.",
-        "properties": {
-          "content": {
-            "type": "string",
-            "description": "The actual text (content) that appears in the sticky note item.",
-            "example": "Hello"
-          },
-          "shape": {
-            "type": "string",
-            "default": "square",
-            "description": "Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
-            "enum": ["square", "rectangle"]
-          }
-        }
-      },
-      "StickyNoteStylePlatformBulkCreateOperationExperimentalRelease": {
+      "StickyNoteStyle": {
         "type": "object",
         "description": "Contains information about the style of a sticky note item, such as the fill color or text alignment.",
         "properties": {
@@ -18015,18 +19197,6 @@
             "enum": ["top", "middle", "bottom"]
           }
         }
-      },
-      "TextDataPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).",
-        "properties": {
-          "content": {
-            "type": "string",
-            "description": "The actual text (content) that appears in the text item.",
-            "example": "Hello"
-          }
-        },
-        "required": ["content"]
       },
       "TextStyle": {
         "type": "object",
@@ -18096,634 +19266,6 @@
           }
         }
       },
-      "CustomFieldPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
-        "properties": {
-          "fillColor": {
-            "type": "string",
-            "description": "Hex value representing the color that fills the background area of the preview field, when it's displayed on the app card.",
-            "example": "#2fa9e3"
-          },
-          "iconShape": {
-            "type": "string",
-            "default": "round",
-            "description": "The shape of the icon on the preview field.",
-            "enum": ["round", "square"]
-          },
-          "iconUrl": {
-            "type": "string",
-            "description": "A valid URL pointing to an image available online.\nThe transport protocol must be HTTPS.\nPossible image file formats: JPG/JPEG, PNG, SVG.",
-            "example": "https://cdn-icons-png.flaticon.com/512/5695/5695864.png"
-          },
-          "textColor": {
-            "type": "string",
-            "description": "Hex value representing the color of the text string assigned to `value`.",
-            "example": "#1a1a1a"
-          },
-          "tooltip": {
-            "type": "string",
-            "description": "A short text displayed in a tooltip when clicking or hovering over the preview field.",
-            "example": "Completion status indicator"
-          },
-          "value": {
-            "type": "string",
-            "description": "The actual data value of the custom field.\nIt can be any type of information that you want to convey.",
-            "example": "Status: in progress"
-          }
-        }
-      },
-      "GeometryPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Contains geometrical information about the item, such as its width or height.",
-        "properties": {
-          "height": {
-            "type": "number",
-            "format": "double",
-            "description": "Height of the item, in pixels.",
-            "example": 60
-          },
-          "rotation": {
-            "type": "number",
-            "format": "double",
-            "description": "Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively."
-          },
-          "width": {
-            "type": "number",
-            "format": "double",
-            "description": "Width of the item, in pixels.",
-            "example": 320
-          }
-        }
-      },
-      "ItemChanges": {
-        "type": "object",
-        "description": "Updates one or more items in one request. You can update up to 20 items per request.",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/ItemId"
-          },
-          "type": {
-            "$ref": "#/components/schemas/ItemTypeChange"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ItemDataChanges"
-          },
-          "style": {
-            "$ref": "#/components/schemas/ItemStyle"
-          },
-          "position": {
-            "$ref": "#/components/schemas/PositionChange"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/Parent"
-          }
-        }
-      },
-      "ItemCreate": {
-        "type": "object",
-        "description": "Creates one or more items in one request. You can create up to 20 items per request.",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/ItemTypeChange"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ItemDataCreate"
-          },
-          "style": {
-            "$ref": "#/components/schemas/ItemStyle"
-          },
-          "position": {
-            "$ref": "#/components/schemas/PositionChange"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/Parent"
-          }
-        },
-        "required": ["type"]
-      },
-      "ItemData": {
-        "type": "object",
-        "description": "Contains information about item-specific data.",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AppCardDataResponse"
-          },
-          {
-            "$ref": "#/components/schemas/CardData"
-          },
-          {
-            "$ref": "#/components/schemas/DocumentDataResponse"
-          },
-          {
-            "$ref": "#/components/schemas/EmbedDataResponse"
-          },
-          {
-            "$ref": "#/components/schemas/ImageDataResponse"
-          },
-          {
-            "$ref": "#/components/schemas/ShapeData"
-          },
-          {
-            "$ref": "#/components/schemas/StickyNoteData"
-          },
-          {
-            "$ref": "#/components/schemas/TextData"
-          }
-        ]
-      },
-      "ItemDataChanges": {
-        "type": "object",
-        "description": "Provides information about item-specific fields for update request.",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AppCardData"
-          },
-          {
-            "$ref": "#/components/schemas/ImageUrlDataChanges"
-          }
-        ]
-      },
-      "ItemDataCreate": {
-        "type": "object",
-        "description": "Contains data information applicable for each item type.",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AppCardData"
-          },
-          {
-            "$ref": "#/components/schemas/CardData"
-          },
-          {
-            "$ref": "#/components/schemas/DocumentUrlData"
-          },
-          {
-            "$ref": "#/components/schemas/EmbedUrlData"
-          },
-          {
-            "$ref": "#/components/schemas/ImageUrlData"
-          },
-          {
-            "$ref": "#/components/schemas/ShapeData"
-          },
-          {
-            "$ref": "#/components/schemas/StickyNoteData"
-          },
-          {
-            "$ref": "#/components/schemas/TextData"
-          }
-        ]
-      },
-      "ItemId": {
-        "type": "string",
-        "description": "Unique identifier (ID) of an item.",
-        "format": "int64",
-        "example": "3458764517517819000"
-      },
-      "ItemsPage": {
-        "type": "object",
-        "description": "Contains cursor-based items page information.",
-        "properties": {
-          "size": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.",
-            "example": 1
-          },
-          "limit": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.",
-            "example": 10
-          },
-          "total": {
-            "type": "integer",
-            "format": "int64",
-            "description": "Total number of results available for the given request.",
-            "example": 11
-          },
-          "data": {
-            "type": "array",
-            "description": "Contains the result data.",
-            "items": {
-              "$ref": "#/components/schemas/Item"
-            }
-          },
-          "links": {
-            "$ref": "#/components/schemas/PageLinks"
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object.",
-            "example": "cursor-list"
-          }
-        },
-        "required": ["type", "size", "limit", "total", "data", "links"]
-      },
-      "ItemStyle": {
-        "type": "object",
-        "description": "Contains information about item-specific styles.",
-        "oneOf": [
-          {
-            "$ref": "#/components/schemas/AppCardStyle"
-          },
-          {
-            "$ref": "#/components/schemas/CardStyle"
-          },
-          {
-            "$ref": "#/components/schemas/ShapeStyle"
-          },
-          {
-            "$ref": "#/components/schemas/StickyNoteStyle"
-          },
-          {
-            "$ref": "#/components/schemas/TextStyle"
-          }
-        ]
-      },
-      "ItemTypeChange": {
-        "type": "string",
-        "description": "Type of item that you want to create.",
-        "enum": ["app_card", "text", "shape", "sticky_note", "image", "document", "card", "frame", "embed"],
-        "example": "text"
-      },
-      "ImageDataResponse": {
-        "type": "object",
-        "properties": {
-          "imageUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Sample image title"
-          }
-        }
-      },
-      "ImageUrlDataPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Contains information about the image URL.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Sample image title"
-          },
-          "url": {
-            "type": "string",
-            "default": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png",
-            "description": "URL of the image.",
-            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
-          }
-        },
-        "required": ["url"]
-      },
-      "ImageUrlDataChangesPlatformBulkCreateOperationExperimentalRelease": {
-        "type": "object",
-        "description": "Contains information about the image URL.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Test image title"
-          },
-          "url": {
-            "type": "string",
-            "description": "URL of the image.",
-            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
-          }
-        }
-      },
-      "CreationTime": {
-        "type": "string",
-        "format": "date-time",
-        "description": "Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
-        "example": "2022-03-30T17:26:50.000Z"
-      },
-      "ModificationTime": {
-        "type": "string",
-        "format": "date-time",
-        "description": "Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
-        "example": "2022-03-30T17:26:50.000Z"
-      },
-      "ParentWithLinks": {
-        "type": "object",
-        "description": "Contains information about the parent this item attached to.",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "int64",
-            "example": "3458764517517819001",
-            "description": "Unique identifier (ID) of a container item."
-          },
-          "links": {
-            "$ref": "#/components/schemas/SelfLink"
-          }
-        }
-      },
-      "XCoordinate": {
-        "type": "number",
-        "format": "double",
-        "description": "X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
-        "example": 100
-      },
-      "YCoordinate": {
-        "type": "number",
-        "format": "double",
-        "description": "Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
-        "example": 100
-      },
-      "Error": {
-        "type": "object",
-        "description": "Error information",
-        "properties": {
-          "code": {
-            "type": "string",
-            "description": "Code of the error",
-            "example": 2.074
-          },
-          "message": {
-            "type": "string",
-            "description": "Description of the error",
-            "example": "Error message"
-          },
-          "context": {
-            "type": "object"
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Status code of the error",
-            "example": 400
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of entity that is returned.",
-            "example": "error"
-          }
-        },
-        "required": ["message", "type"]
-      },
-      "BulkOperationError": {
-        "type": "object",
-        "description": "Error information with details about operation failure",
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "Type of the error",
-            "example": "error"
-          },
-          "code": {
-            "type": "string",
-            "description": "Code of the error",
-            "example": 2.074
-          },
-          "message": {
-            "type": "string",
-            "description": "Description of the error",
-            "example": "Error message"
-          },
-          "context": {
-            "type": "object",
-            "properties": {
-              "fields": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/BulkSubOperationError"
-                }
-              }
-            }
-          },
-          "status": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Status code of the error",
-            "example": 400
-          }
-        },
-        "required": ["message"]
-      },
-      "BulkSubOperationError": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "string",
-            "description": "0-based index indicating a sub-operations from the input that caused a failure followed by parameter name"
-          },
-          "message": {
-            "type": "string",
-            "description": "Description of the sub-operation related error",
-            "example": "Invalid parameters"
-          },
-          "context": {
-            "type": "object"
-          }
-        },
-        "required": ["field", "message"]
-      },
-      "AppCardStyle": {
-        "type": "object",
-        "description": "Contains information about the style of an app card item, such as the fill color.",
-        "properties": {
-          "fillColor": {
-            "type": "string",
-            "description": "Hex value of the border color of the app card.\nDefault: `#2d9bf0`.",
-            "example": "#2d9bf0"
-          }
-        }
-      },
-      "CardStyle": {
-        "type": "object",
-        "description": "Contains information about the style of a card item, such as the card theme.",
-        "properties": {
-          "cardTheme": {
-            "type": "string",
-            "description": "Hex value of the border color of the card.\nDefault: `#2d9bf0`.",
-            "example": "#2d9bf0"
-          }
-        }
-      },
-      "DocumentUrlData": {
-        "type": "object",
-        "description": "Contains information about the document URL.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the document.",
-            "example": "Sample document title"
-          },
-          "url": {
-            "type": "string",
-            "default": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
-            "description": "URL where the document is hosted.",
-            "example": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-          }
-        },
-        "required": ["url"]
-      },
-      "EmbedUrlData": {
-        "type": "object",
-        "description": "Contains information about the embed URL.",
-        "properties": {
-          "mode": {
-            "type": "string",
-            "description": "Defines how the content in the embed item is displayed on the board.\n`inline`: The embedded content is displayed directly on the board.\n`modal`: The embedded content is displayed inside a modal overlay on the board.",
-            "enum": ["inline", "modal"]
-          },
-          "previewUrl": {
-            "type": "string",
-            "description": "URL of the image to be used as the preview image for the embedded item."
-          },
-          "url": {
-            "type": "string",
-            "default": "https://www.youtube.com/watch?v=HlVSNEiFCBk",
-            "description": "A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS."
-          }
-        },
-        "required": ["url"]
-      },
-      "StickyNoteStyle": {
-        "type": "object",
-        "description": "Contains information about the style of a sticky note item, such as the fill color or text alignment.",
-        "properties": {
-          "fillColor": {
-            "type": "string",
-            "description": "Fill color for the sticky note.\nDefault: `light_yellow`.",
-            "enum": [
-              "gray",
-              "light_yellow",
-              "yellow",
-              "orange",
-              "light_green",
-              "green",
-              "dark_green",
-              "cyan",
-              "light_pink",
-              "pink",
-              "violet",
-              "red",
-              "light_blue",
-              "blue",
-              "dark_blue",
-              "black"
-            ]
-          },
-          "textAlign": {
-            "type": "string",
-            "description": "Defines how the sticky note text is horizontally aligned.\nDefault: `center`.",
-            "enum": ["left", "right", "center"]
-          },
-          "textAlignVertical": {
-            "type": "string",
-            "description": "Defines how the sticky note text is vertically aligned.\nDefault: `top`.",
-            "enum": ["top", "middle", "bottom"]
-          }
-        }
-      },
-      "ImageUrlData": {
-        "type": "object",
-        "description": "Contains information about the image URL.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Sample image title"
-          },
-          "url": {
-            "type": "string",
-            "default": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png",
-            "description": "URL of the image.",
-            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
-          }
-        },
-        "required": ["url"]
-      },
-      "ImageUrlDataChanges": {
-        "type": "object",
-        "description": "Contains information about the image URL.",
-        "properties": {
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Test image title"
-          },
-          "url": {
-            "type": "string",
-            "description": "URL of the image.",
-            "example": "https://miro.com/static/images/page/mr-index/localization/en/slider/ideation_brainstorming.png"
-          }
-        }
-      },
-      "ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
-        "type": "object",
-        "description": "Contains information about an item.",
-        "properties": {
-          "id": {
-            "$ref": "#/components/schemas/ItemId"
-          },
-          "data": {
-            "$ref": "#/components/schemas/ItemData"
-          },
-          "style": {
-            "$ref": "#/components/schemas/ItemStyle"
-          },
-          "position": {
-            "$ref": "#/components/schemas/Position"
-          },
-          "geometry": {
-            "$ref": "#/components/schemas/Geometry"
-          },
-          "parent": {
-            "$ref": "#/components/schemas/ParentWithLinks"
-          },
-          "isSupported": {
-            "type": "boolean"
-          },
-          "createdBy": {
-            "$ref": "#/components/schemas/CreatedBy"
-          },
-          "createdAt": {
-            "$ref": "#/components/schemas/CreationTime"
-          },
-          "modifiedBy": {
-            "$ref": "#/components/schemas/ModifiedBy"
-          },
-          "modifiedAt": {
-            "$ref": "#/components/schemas/ModificationTime"
-          },
-          "links": {
-            "$ref": "#/components/schemas/SelfLink"
-          }
-        },
-        "required": ["id", "type", "links"]
-      },
-      "ItemsPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice": {
-        "type": "object",
-        "description": "Contains items resulting from a bulk create or update operation.",
-        "properties": {
-          "data": {
-            "type": "array",
-            "description": "Contains the result data.",
-            "items": {
-              "$ref": "#/components/schemas/Item"
-            }
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object.",
-            "example": "fixed-list"
-          }
-        },
-        "required": ["type", "data"]
-      },
       "Item": {
         "type": "object",
         "description": "Contains information about an item.",
@@ -18767,6 +19309,42 @@
         },
         "required": ["id", "type", "links"]
       },
+      "ItemData": {
+        "type": "object",
+        "description": "Contains information about item-specific data.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AppCardDataResponse"
+          },
+          {
+            "$ref": "#/components/schemas/CardData"
+          },
+          {
+            "$ref": "#/components/schemas/DocumentDataResponse"
+          },
+          {
+            "$ref": "#/components/schemas/EmbedDataResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ImageDataResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ShapeData"
+          },
+          {
+            "$ref": "#/components/schemas/StickyNoteData"
+          },
+          {
+            "$ref": "#/components/schemas/TextData"
+          }
+        ]
+      },
+      "ItemId": {
+        "type": "string",
+        "description": "Unique identifier (ID) of an item.",
+        "format": "int64",
+        "example": "3458764517517819000"
+      },
       "Items": {
         "type": "object",
         "description": "Contains items resulting from a bulk create or update operation.",
@@ -18785,6 +19363,81 @@
           }
         },
         "required": ["type", "data"]
+      },
+      "ItemStyle": {
+        "type": "object",
+        "description": "Contains information about item-specific styles.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/AppCardStyle"
+          },
+          {
+            "$ref": "#/components/schemas/CardStyle"
+          },
+          {
+            "$ref": "#/components/schemas/ShapeStyle"
+          },
+          {
+            "$ref": "#/components/schemas/StickyNoteStyle"
+          },
+          {
+            "$ref": "#/components/schemas/TextStyle"
+          }
+        ]
+      },
+      "ImageDataResponse": {
+        "type": "object",
+        "properties": {
+          "imageUrl": {
+            "type": "string",
+            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
+            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
+          },
+          "title": {
+            "type": "string",
+            "description": "A short text header to identify the image.",
+            "example": "Sample image title"
+          }
+        }
+      },
+      "CreationTime": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        "example": "2022-03-30T17:26:50.000Z"
+      },
+      "ModificationTime": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        "example": "2022-03-30T17:26:50.000Z"
+      },
+      "ParentWithLinks": {
+        "type": "object",
+        "description": "Contains information about the parent this item attached to.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "int64",
+            "example": "3458764517517819001",
+            "description": "Unique identifier (ID) of a container item."
+          },
+          "links": {
+            "$ref": "#/components/schemas/SelfLink"
+          }
+        }
+      },
+      "XCoordinate": {
+        "type": "number",
+        "format": "double",
+        "description": "X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
+        "example": 100
+      },
+      "YCoordinate": {
+        "type": "number",
+        "format": "double",
+        "description": "Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
+        "example": 100
       },
       "FrameChanges": {
         "type": "object",

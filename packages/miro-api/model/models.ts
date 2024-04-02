@@ -3,9 +3,11 @@ export * from './appCardCreateRequest'
 export * from './appCardData'
 export * from './appCardDataChanges'
 export * from './appCardDataResponse'
+export * from './appCardDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './appCardItem'
 export * from './appCardStyle'
 export * from './appCardStylePlatformBulkCreateOperationExperimentalRelease'
+export * from './appCardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './appCardUpdateRequest'
 export * from './auditContext'
 export * from './auditCreatedBy'
@@ -50,9 +52,11 @@ export * from './caption'
 export * from './cardCreateRequest'
 export * from './cardData'
 export * from './cardDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './cardDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './cardItem'
 export * from './cardStyle'
 export * from './cardStylePlatformBulkCreateOperationExperimentalRelease'
+export * from './cardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './cardUpdateRequest'
 export * from './connectorChangesData'
 export * from './connectorCreationData'
@@ -66,12 +70,14 @@ export * from './createDocumentItemUsingFileFromDeviceRequestData'
 export * from './createProjectRequest'
 export * from './createTeamRequest'
 export * from './createdBy'
+export * from './createdByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './createdByPlatformContainers'
 export * from './createdByPlatformExperimentalFeatures'
 export * from './createdByPlatformFileUpload'
 export * from './createdByPlatformTags'
 export * from './customField'
 export * from './customFieldPlatformBulkCreateOperationExperimentalRelease'
+export * from './customFieldPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './customFieldPlatformTags'
 export * from './dataClassificationLabel'
 export * from './dataClassificationLabelId'
@@ -82,6 +88,7 @@ export * from './documentData'
 export * from './documentDataPlatformFileUpload'
 export * from './documentDataPlatformTags'
 export * from './documentDataResponse'
+export * from './documentDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './documentItem'
 export * from './documentItemPlatformFileUpload'
 export * from './documentUpdateRequest'
@@ -91,6 +98,7 @@ export * from './documentUrlDataPlatformBulkCreateOperationExperimentalRelease'
 export * from './embedCreateRequest'
 export * from './embedData'
 export * from './embedDataResponse'
+export * from './embedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './embedItem'
 export * from './embedUpdateRequest'
 export * from './embedUrlData'
@@ -122,6 +130,7 @@ export * from './genericSubscriptionsCursorPaged'
 export * from './geometry'
 export * from './geometryNoRotation'
 export * from './geometryPlatformBulkCreateOperationExperimentalRelease'
+export * from './geometryPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './geometryPlatformContainers'
 export * from './geometryPlatformExperimentalFeatures'
 export * from './geometryPlatformFileUpload'
@@ -136,6 +145,7 @@ export * from './imageData'
 export * from './imageDataPlatformFileUpload'
 export * from './imageDataPlatformTags'
 export * from './imageDataResponse'
+export * from './imageDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './imageItem'
 export * from './imageItemPlatformFileUpload'
 export * from './imageUpdateRequest'
@@ -154,9 +164,11 @@ export * from './itemCreate'
 export * from './itemData'
 export * from './itemDataChanges'
 export * from './itemDataCreate'
+export * from './itemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './itemPagedResponse'
 export * from './itemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './itemStyle'
+export * from './itemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './itemTypeChange'
 export * from './items'
 export * from './itemsPage'
@@ -174,6 +186,7 @@ export * from './mindmapStyle'
 export * from './mindmapWidgetDataOutput'
 export * from './modelError'
 export * from './modifiedBy'
+export * from './modifiedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './modifiedByPlatformContainers'
 export * from './modifiedByPlatformExperimentalFeatures'
 export * from './modifiedByPlatformFileUpload'
@@ -189,9 +202,11 @@ export * from './parent'
 export * from './parentLinksEnvelope'
 export * from './parentLinksEnvelopePlatformContainers'
 export * from './parentWithLinks'
+export * from './parentWithLinksPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './picture'
 export * from './position'
 export * from './positionChange'
+export * from './positionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './positionPlatformFileUpload'
 export * from './project'
 export * from './projectMember'
@@ -202,6 +217,7 @@ export * from './projectRoleToAdd'
 export * from './projectSettings'
 export * from './relativeOffset'
 export * from './selfLink'
+export * from './selfLinkPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './selfLinkPlatformExperimentalFeatures'
 export * from './selfLinkPlatformFileUpload'
 export * from './selfLinkPlatformTags'
@@ -209,20 +225,24 @@ export * from './shapeCreateRequest'
 export * from './shapeData'
 export * from './shapeDataForCreate'
 export * from './shapeDataForUpdate'
+export * from './shapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './shapeDataPlatformTags'
 export * from './shapeItem'
 export * from './shapeStyle'
 export * from './shapeStyleForCreate'
 export * from './shapeStyleForUpdate'
+export * from './shapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './shapeUpdateRequest'
 export * from './sharingPolicySettings'
 export * from './stickyNoteCreateRequest'
 export * from './stickyNoteData'
 export * from './stickyNoteDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './stickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './stickyNoteDataPlatformTags'
 export * from './stickyNoteItem'
 export * from './stickyNoteStyle'
 export * from './stickyNoteStylePlatformBulkCreateOperationExperimentalRelease'
+export * from './stickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './stickyNoteUpdateRequest'
 export * from './subscriptionData'
 export * from './tag'
@@ -254,8 +274,10 @@ export * from './teamsPage'
 export * from './textCreateRequest'
 export * from './textData'
 export * from './textDataPlatformBulkCreateOperationExperimentalRelease'
+export * from './textDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './textItem'
 export * from './textStyle'
+export * from './textStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 export * from './textUpdateRequest'
 export * from './tokenInformation'
 export * from './updateBoardSubscriptionRequest'
@@ -293,9 +315,11 @@ import {AppCardCreateRequest} from './appCardCreateRequest'
 import {AppCardData} from './appCardData'
 import {AppCardDataChanges} from './appCardDataChanges'
 import {AppCardDataResponse} from './appCardDataResponse'
+import {AppCardDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './appCardDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {AppCardItem} from './appCardItem'
 import {AppCardStyle} from './appCardStyle'
 import {AppCardStylePlatformBulkCreateOperationExperimentalRelease} from './appCardStylePlatformBulkCreateOperationExperimentalRelease'
+import {AppCardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './appCardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {AppCardUpdateRequest} from './appCardUpdateRequest'
 import {AuditContext} from './auditContext'
 import {AuditCreatedBy} from './auditCreatedBy'
@@ -340,9 +364,11 @@ import {Caption} from './caption'
 import {CardCreateRequest} from './cardCreateRequest'
 import {CardData} from './cardData'
 import {CardDataPlatformBulkCreateOperationExperimentalRelease} from './cardDataPlatformBulkCreateOperationExperimentalRelease'
+import {CardDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './cardDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {CardItem} from './cardItem'
 import {CardStyle} from './cardStyle'
 import {CardStylePlatformBulkCreateOperationExperimentalRelease} from './cardStylePlatformBulkCreateOperationExperimentalRelease'
+import {CardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './cardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {CardUpdateRequest} from './cardUpdateRequest'
 import {ConnectorChangesData} from './connectorChangesData'
 import {ConnectorCreationData} from './connectorCreationData'
@@ -356,12 +382,14 @@ import {CreateDocumentItemUsingFileFromDeviceRequestData} from './createDocument
 import {CreateProjectRequest} from './createProjectRequest'
 import {CreateTeamRequest} from './createTeamRequest'
 import {CreatedBy} from './createdBy'
+import {CreatedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './createdByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {CreatedByPlatformContainers} from './createdByPlatformContainers'
 import {CreatedByPlatformExperimentalFeatures} from './createdByPlatformExperimentalFeatures'
 import {CreatedByPlatformFileUpload} from './createdByPlatformFileUpload'
 import {CreatedByPlatformTags} from './createdByPlatformTags'
 import {CustomField} from './customField'
 import {CustomFieldPlatformBulkCreateOperationExperimentalRelease} from './customFieldPlatformBulkCreateOperationExperimentalRelease'
+import {CustomFieldPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './customFieldPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {CustomFieldPlatformTags} from './customFieldPlatformTags'
 import {DataClassificationLabel} from './dataClassificationLabel'
 import {DataClassificationLabelId} from './dataClassificationLabelId'
@@ -372,6 +400,7 @@ import {DocumentData} from './documentData'
 import {DocumentDataPlatformFileUpload} from './documentDataPlatformFileUpload'
 import {DocumentDataPlatformTags} from './documentDataPlatformTags'
 import {DocumentDataResponse} from './documentDataResponse'
+import {DocumentDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './documentDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {DocumentItem} from './documentItem'
 import {DocumentItemPlatformFileUpload} from './documentItemPlatformFileUpload'
 import {DocumentUpdateRequest} from './documentUpdateRequest'
@@ -381,6 +410,7 @@ import {DocumentUrlDataPlatformBulkCreateOperationExperimentalRelease} from './d
 import {EmbedCreateRequest} from './embedCreateRequest'
 import {EmbedData} from './embedData'
 import {EmbedDataResponse} from './embedDataResponse'
+import {EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './embedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {EmbedItem} from './embedItem'
 import {EmbedUpdateRequest} from './embedUpdateRequest'
 import {EmbedUrlData} from './embedUrlData'
@@ -412,6 +442,7 @@ import {GenericSubscriptionsCursorPaged} from './genericSubscriptionsCursorPaged
 import {Geometry} from './geometry'
 import {GeometryNoRotation} from './geometryNoRotation'
 import {GeometryPlatformBulkCreateOperationExperimentalRelease} from './geometryPlatformBulkCreateOperationExperimentalRelease'
+import {GeometryPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './geometryPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {GeometryPlatformContainers} from './geometryPlatformContainers'
 import {GeometryPlatformExperimentalFeatures} from './geometryPlatformExperimentalFeatures'
 import {GeometryPlatformFileUpload} from './geometryPlatformFileUpload'
@@ -426,6 +457,7 @@ import {ImageData} from './imageData'
 import {ImageDataPlatformFileUpload} from './imageDataPlatformFileUpload'
 import {ImageDataPlatformTags} from './imageDataPlatformTags'
 import {ImageDataResponse} from './imageDataResponse'
+import {ImageDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './imageDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {ImageItem} from './imageItem'
 import {ImageItemPlatformFileUpload} from './imageItemPlatformFileUpload'
 import {ImageUpdateRequest} from './imageUpdateRequest'
@@ -444,9 +476,11 @@ import {ItemCreate} from './itemCreate'
 import {ItemData} from './itemData'
 import {ItemDataChanges} from './itemDataChanges'
 import {ItemDataCreate} from './itemDataCreate'
+import {ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './itemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {ItemPagedResponse} from './itemPagedResponse'
 import {ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './itemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {ItemStyle} from './itemStyle'
+import {ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './itemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {ItemTypeChange} from './itemTypeChange'
 import {Items} from './items'
 import {ItemsPage} from './itemsPage'
@@ -464,6 +498,7 @@ import {MindmapStyle} from './mindmapStyle'
 import {MindmapWidgetDataOutput} from './mindmapWidgetDataOutput'
 import {ModelError} from './modelError'
 import {ModifiedBy} from './modifiedBy'
+import {ModifiedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './modifiedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {ModifiedByPlatformContainers} from './modifiedByPlatformContainers'
 import {ModifiedByPlatformExperimentalFeatures} from './modifiedByPlatformExperimentalFeatures'
 import {ModifiedByPlatformFileUpload} from './modifiedByPlatformFileUpload'
@@ -479,9 +514,11 @@ import {Parent} from './parent'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
 import {ParentLinksEnvelopePlatformContainers} from './parentLinksEnvelopePlatformContainers'
 import {ParentWithLinks} from './parentWithLinks'
+import {ParentWithLinksPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './parentWithLinksPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {Picture} from './picture'
 import {Position} from './position'
 import {PositionChange} from './positionChange'
+import {PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './positionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {PositionPlatformFileUpload} from './positionPlatformFileUpload'
 import {Project} from './project'
 import {ProjectMember} from './projectMember'
@@ -492,6 +529,7 @@ import {ProjectRoleToAdd} from './projectRoleToAdd'
 import {ProjectSettings} from './projectSettings'
 import {RelativeOffset} from './relativeOffset'
 import {SelfLink} from './selfLink'
+import {SelfLinkPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './selfLinkPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {SelfLinkPlatformExperimentalFeatures} from './selfLinkPlatformExperimentalFeatures'
 import {SelfLinkPlatformFileUpload} from './selfLinkPlatformFileUpload'
 import {SelfLinkPlatformTags} from './selfLinkPlatformTags'
@@ -499,20 +537,24 @@ import {ShapeCreateRequest} from './shapeCreateRequest'
 import {ShapeData} from './shapeData'
 import {ShapeDataForCreate} from './shapeDataForCreate'
 import {ShapeDataForUpdate} from './shapeDataForUpdate'
+import {ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './shapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {ShapeDataPlatformTags} from './shapeDataPlatformTags'
 import {ShapeItem} from './shapeItem'
 import {ShapeStyle} from './shapeStyle'
 import {ShapeStyleForCreate} from './shapeStyleForCreate'
 import {ShapeStyleForUpdate} from './shapeStyleForUpdate'
+import {ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './shapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {ShapeUpdateRequest} from './shapeUpdateRequest'
 import {SharingPolicySettings} from './sharingPolicySettings'
 import {StickyNoteCreateRequest} from './stickyNoteCreateRequest'
 import {StickyNoteData} from './stickyNoteData'
 import {StickyNoteDataPlatformBulkCreateOperationExperimentalRelease} from './stickyNoteDataPlatformBulkCreateOperationExperimentalRelease'
+import {StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './stickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {StickyNoteDataPlatformTags} from './stickyNoteDataPlatformTags'
 import {StickyNoteItem} from './stickyNoteItem'
 import {StickyNoteStyle} from './stickyNoteStyle'
 import {StickyNoteStylePlatformBulkCreateOperationExperimentalRelease} from './stickyNoteStylePlatformBulkCreateOperationExperimentalRelease'
+import {StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './stickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {StickyNoteUpdateRequest} from './stickyNoteUpdateRequest'
 import {SubscriptionData} from './subscriptionData'
 import {Tag} from './tag'
@@ -544,8 +586,10 @@ import {TeamsPage} from './teamsPage'
 import {TextCreateRequest} from './textCreateRequest'
 import {TextData} from './textData'
 import {TextDataPlatformBulkCreateOperationExperimentalRelease} from './textDataPlatformBulkCreateOperationExperimentalRelease'
+import {TextDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './textDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {TextItem} from './textItem'
 import {TextStyle} from './textStyle'
+import {TextStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice} from './textStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice'
 import {TextUpdateRequest} from './textUpdateRequest'
 import {TokenInformation} from './tokenInformation'
 import {UpdateBoardSubscriptionRequest} from './updateBoardSubscriptionRequest'
@@ -574,6 +618,8 @@ let enumsMap: {[index: string]: any} = {
   'AppCardData.StatusEnum': AppCardData.StatusEnum,
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
   'AppCardDataResponse.StatusEnum': AppCardDataResponse.StatusEnum,
+  'AppCardDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.StatusEnum':
+    AppCardDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.StatusEnum,
   'AuditCreatedBy.TypeEnum': AuditCreatedBy.TypeEnum,
   'BoardMember.RoleEnum': BoardMember.RoleEnum,
   'BoardMemberChanges.RoleEnum': BoardMemberChanges.RoleEnum,
@@ -604,9 +650,13 @@ let enumsMap: {[index: string]: any} = {
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
   'CustomFieldPlatformBulkCreateOperationExperimentalRelease.IconShapeEnum':
     CustomFieldPlatformBulkCreateOperationExperimentalRelease.IconShapeEnum,
+  'CustomFieldPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.IconShapeEnum':
+    CustomFieldPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.IconShapeEnum,
   'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
   'EmbedData.ModeEnum': EmbedData.ModeEnum,
   'EmbedDataResponse.ModeEnum': EmbedDataResponse.ModeEnum,
+  'EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ModeEnum':
+    EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ModeEnum,
   'EmbedUrlData.ModeEnum': EmbedUrlData.ModeEnum,
   'EmbedUrlDataChanges.ModeEnum': EmbedUrlDataChanges.ModeEnum,
   'EmbedUrlDataPlatformBulkCreateOperationExperimentalRelease.ModeEnum':
@@ -627,10 +677,24 @@ let enumsMap: {[index: string]: any} = {
   'ItemDataCreate.StatusEnum': ItemDataCreate.StatusEnum,
   'ItemDataCreate.ModeEnum': ItemDataCreate.ModeEnum,
   'ItemDataCreate.ShapeEnum': ItemDataCreate.ShapeEnum,
+  'ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.StatusEnum':
+    ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.StatusEnum,
+  'ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ModeEnum':
+    ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ModeEnum,
+  'ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ShapeEnum':
+    ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ShapeEnum,
   'ItemStyle.BorderStyleEnum': ItemStyle.BorderStyleEnum,
   'ItemStyle.FontFamilyEnum': ItemStyle.FontFamilyEnum,
   'ItemStyle.TextAlignEnum': ItemStyle.TextAlignEnum,
   'ItemStyle.TextAlignVerticalEnum': ItemStyle.TextAlignVerticalEnum,
+  'ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.BorderStyleEnum':
+    ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.BorderStyleEnum,
+  'ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.FontFamilyEnum':
+    ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.FontFamilyEnum,
+  'ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignEnum':
+    ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignEnum,
+  'ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignVerticalEnum':
+    ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignVerticalEnum,
   ItemTypeChange: ItemTypeChange,
   'MindmapData.DirectionEnum': MindmapData.DirectionEnum,
   'MindmapStyle.ShapeEnum': MindmapStyle.ShapeEnum,
@@ -639,11 +703,17 @@ let enumsMap: {[index: string]: any} = {
   'OrganizationMember.RoleEnum': OrganizationMember.RoleEnum,
   'Position.OriginEnum': Position.OriginEnum,
   'Position.RelativeToEnum': Position.RelativeToEnum,
+  'PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.OriginEnum':
+    PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.OriginEnum,
+  'PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.RelativeToEnum':
+    PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.RelativeToEnum,
   'PositionPlatformFileUpload.OriginEnum': PositionPlatformFileUpload.OriginEnum,
   'PositionPlatformFileUpload.RelativeToEnum': PositionPlatformFileUpload.RelativeToEnum,
   ProjectRole: ProjectRole,
   ProjectRoleToAdd: ProjectRoleToAdd,
   'ShapeData.ShapeEnum': ShapeData.ShapeEnum,
+  'ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ShapeEnum':
+    ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ShapeEnum,
   'ShapeDataPlatformTags.ShapeEnum': ShapeDataPlatformTags.ShapeEnum,
   'ShapeStyle.BorderStyleEnum': ShapeStyle.BorderStyleEnum,
   'ShapeStyle.FontFamilyEnum': ShapeStyle.FontFamilyEnum,
@@ -657,9 +727,19 @@ let enumsMap: {[index: string]: any} = {
   'ShapeStyleForUpdate.FontFamilyEnum': ShapeStyleForUpdate.FontFamilyEnum,
   'ShapeStyleForUpdate.TextAlignEnum': ShapeStyleForUpdate.TextAlignEnum,
   'ShapeStyleForUpdate.TextAlignVerticalEnum': ShapeStyleForUpdate.TextAlignVerticalEnum,
+  'ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.BorderStyleEnum':
+    ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.BorderStyleEnum,
+  'ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.FontFamilyEnum':
+    ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.FontFamilyEnum,
+  'ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignEnum':
+    ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignEnum,
+  'ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignVerticalEnum':
+    ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignVerticalEnum,
   'StickyNoteData.ShapeEnum': StickyNoteData.ShapeEnum,
   'StickyNoteDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum':
     StickyNoteDataPlatformBulkCreateOperationExperimentalRelease.ShapeEnum,
+  'StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ShapeEnum':
+    StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.ShapeEnum,
   'StickyNoteDataPlatformTags.ShapeEnum': StickyNoteDataPlatformTags.ShapeEnum,
   'StickyNoteStyle.FillColorEnum': StickyNoteStyle.FillColorEnum,
   'StickyNoteStyle.TextAlignEnum': StickyNoteStyle.TextAlignEnum,
@@ -670,6 +750,12 @@ let enumsMap: {[index: string]: any} = {
     StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignEnum,
   'StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignVerticalEnum':
     StickyNoteStylePlatformBulkCreateOperationExperimentalRelease.TextAlignVerticalEnum,
+  'StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.FillColorEnum':
+    StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.FillColorEnum,
+  'StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignEnum':
+    StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignEnum,
+  'StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignVerticalEnum':
+    StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignVerticalEnum,
   'Tag.FillColorEnum': Tag.FillColorEnum,
   'TagCreateRequest.FillColorEnum': TagCreateRequest.FillColorEnum,
   'TagUpdateRequest.FillColorEnum': TagUpdateRequest.FillColorEnum,
@@ -718,6 +804,10 @@ let enumsMap: {[index: string]: any} = {
     TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum,
   'TextStyle.FontFamilyEnum': TextStyle.FontFamilyEnum,
   'TextStyle.TextAlignEnum': TextStyle.TextAlignEnum,
+  'TextStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.FontFamilyEnum':
+    TextStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.FontFamilyEnum,
+  'TextStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignEnum':
+    TextStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.TextAlignEnum,
   'UpdateBoardSubscriptionRequest.StatusEnum': UpdateBoardSubscriptionRequest.StatusEnum,
   'WidgetDataOutput.ModeEnum': WidgetDataOutput.ModeEnum,
   'WidgetDataOutput.StatusEnum': WidgetDataOutput.StatusEnum,
@@ -732,10 +822,14 @@ let typeMap: {[index: string]: any} = {
   AppCardData: AppCardData,
   AppCardDataChanges: AppCardDataChanges,
   AppCardDataResponse: AppCardDataResponse,
+  AppCardDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    AppCardDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   AppCardItem: AppCardItem,
   AppCardStyle: AppCardStyle,
   AppCardStylePlatformBulkCreateOperationExperimentalRelease:
     AppCardStylePlatformBulkCreateOperationExperimentalRelease,
+  AppCardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    AppCardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   AppCardUpdateRequest: AppCardUpdateRequest,
   AuditContext: AuditContext,
   AuditCreatedBy: AuditCreatedBy,
@@ -780,9 +874,13 @@ let typeMap: {[index: string]: any} = {
   CardCreateRequest: CardCreateRequest,
   CardData: CardData,
   CardDataPlatformBulkCreateOperationExperimentalRelease: CardDataPlatformBulkCreateOperationExperimentalRelease,
+  CardDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    CardDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   CardItem: CardItem,
   CardStyle: CardStyle,
   CardStylePlatformBulkCreateOperationExperimentalRelease: CardStylePlatformBulkCreateOperationExperimentalRelease,
+  CardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    CardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   CardUpdateRequest: CardUpdateRequest,
   ConnectorChangesData: ConnectorChangesData,
   ConnectorCreationData: ConnectorCreationData,
@@ -796,12 +894,16 @@ let typeMap: {[index: string]: any} = {
   CreateProjectRequest: CreateProjectRequest,
   CreateTeamRequest: CreateTeamRequest,
   CreatedBy: CreatedBy,
+  CreatedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    CreatedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   CreatedByPlatformContainers: CreatedByPlatformContainers,
   CreatedByPlatformExperimentalFeatures: CreatedByPlatformExperimentalFeatures,
   CreatedByPlatformFileUpload: CreatedByPlatformFileUpload,
   CreatedByPlatformTags: CreatedByPlatformTags,
   CustomField: CustomField,
   CustomFieldPlatformBulkCreateOperationExperimentalRelease: CustomFieldPlatformBulkCreateOperationExperimentalRelease,
+  CustomFieldPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    CustomFieldPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   CustomFieldPlatformTags: CustomFieldPlatformTags,
   DataClassificationLabel: DataClassificationLabel,
   DataClassificationLabelId: DataClassificationLabelId,
@@ -812,6 +914,8 @@ let typeMap: {[index: string]: any} = {
   DocumentDataPlatformFileUpload: DocumentDataPlatformFileUpload,
   DocumentDataPlatformTags: DocumentDataPlatformTags,
   DocumentDataResponse: DocumentDataResponse,
+  DocumentDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    DocumentDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   DocumentItem: DocumentItem,
   DocumentItemPlatformFileUpload: DocumentItemPlatformFileUpload,
   DocumentUpdateRequest: DocumentUpdateRequest,
@@ -822,6 +926,8 @@ let typeMap: {[index: string]: any} = {
   EmbedCreateRequest: EmbedCreateRequest,
   EmbedData: EmbedData,
   EmbedDataResponse: EmbedDataResponse,
+  EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   EmbedItem: EmbedItem,
   EmbedUpdateRequest: EmbedUpdateRequest,
   EmbedUrlData: EmbedUrlData,
@@ -854,6 +960,8 @@ let typeMap: {[index: string]: any} = {
   Geometry: Geometry,
   GeometryNoRotation: GeometryNoRotation,
   GeometryPlatformBulkCreateOperationExperimentalRelease: GeometryPlatformBulkCreateOperationExperimentalRelease,
+  GeometryPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    GeometryPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   GeometryPlatformContainers: GeometryPlatformContainers,
   GeometryPlatformExperimentalFeatures: GeometryPlatformExperimentalFeatures,
   GeometryPlatformFileUpload: GeometryPlatformFileUpload,
@@ -868,6 +976,8 @@ let typeMap: {[index: string]: any} = {
   ImageDataPlatformFileUpload: ImageDataPlatformFileUpload,
   ImageDataPlatformTags: ImageDataPlatformTags,
   ImageDataResponse: ImageDataResponse,
+  ImageDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    ImageDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   ImageItem: ImageItem,
   ImageItemPlatformFileUpload: ImageItemPlatformFileUpload,
   ImageUpdateRequest: ImageUpdateRequest,
@@ -888,10 +998,14 @@ let typeMap: {[index: string]: any} = {
   ItemData: ItemData,
   ItemDataChanges: ItemDataChanges,
   ItemDataCreate: ItemDataCreate,
+  ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    ItemDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   ItemPagedResponse: ItemPagedResponse,
   ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
     ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   ItemStyle: ItemStyle,
+  ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   Items: Items,
   ItemsPage: ItemsPage,
   ItemsPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
@@ -909,6 +1023,8 @@ let typeMap: {[index: string]: any} = {
   MindmapWidgetDataOutput: MindmapWidgetDataOutput,
   ModelError: ModelError,
   ModifiedBy: ModifiedBy,
+  ModifiedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    ModifiedByPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   ModifiedByPlatformContainers: ModifiedByPlatformContainers,
   ModifiedByPlatformExperimentalFeatures: ModifiedByPlatformExperimentalFeatures,
   ModifiedByPlatformFileUpload: ModifiedByPlatformFileUpload,
@@ -924,9 +1040,13 @@ let typeMap: {[index: string]: any} = {
   ParentLinksEnvelope: ParentLinksEnvelope,
   ParentLinksEnvelopePlatformContainers: ParentLinksEnvelopePlatformContainers,
   ParentWithLinks: ParentWithLinks,
+  ParentWithLinksPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    ParentWithLinksPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   Picture: Picture,
   Position: Position,
   PositionChange: PositionChange,
+  PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   PositionPlatformFileUpload: PositionPlatformFileUpload,
   Project: Project,
   ProjectMember: ProjectMember,
@@ -935,6 +1055,8 @@ let typeMap: {[index: string]: any} = {
   ProjectSettings: ProjectSettings,
   RelativeOffset: RelativeOffset,
   SelfLink: SelfLink,
+  SelfLinkPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    SelfLinkPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   SelfLinkPlatformExperimentalFeatures: SelfLinkPlatformExperimentalFeatures,
   SelfLinkPlatformFileUpload: SelfLinkPlatformFileUpload,
   SelfLinkPlatformTags: SelfLinkPlatformTags,
@@ -942,22 +1064,30 @@ let typeMap: {[index: string]: any} = {
   ShapeData: ShapeData,
   ShapeDataForCreate: ShapeDataForCreate,
   ShapeDataForUpdate: ShapeDataForUpdate,
+  ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   ShapeDataPlatformTags: ShapeDataPlatformTags,
   ShapeItem: ShapeItem,
   ShapeStyle: ShapeStyle,
   ShapeStyleForCreate: ShapeStyleForCreate,
   ShapeStyleForUpdate: ShapeStyleForUpdate,
+  ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   ShapeUpdateRequest: ShapeUpdateRequest,
   SharingPolicySettings: SharingPolicySettings,
   StickyNoteCreateRequest: StickyNoteCreateRequest,
   StickyNoteData: StickyNoteData,
   StickyNoteDataPlatformBulkCreateOperationExperimentalRelease:
     StickyNoteDataPlatformBulkCreateOperationExperimentalRelease,
+  StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   StickyNoteDataPlatformTags: StickyNoteDataPlatformTags,
   StickyNoteItem: StickyNoteItem,
   StickyNoteStyle: StickyNoteStyle,
   StickyNoteStylePlatformBulkCreateOperationExperimentalRelease:
     StickyNoteStylePlatformBulkCreateOperationExperimentalRelease,
+  StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   StickyNoteUpdateRequest: StickyNoteUpdateRequest,
   SubscriptionData: SubscriptionData,
   Tag: Tag,
@@ -988,8 +1118,12 @@ let typeMap: {[index: string]: any} = {
   TextCreateRequest: TextCreateRequest,
   TextData: TextData,
   TextDataPlatformBulkCreateOperationExperimentalRelease: TextDataPlatformBulkCreateOperationExperimentalRelease,
+  TextDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    TextDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   TextItem: TextItem,
   TextStyle: TextStyle,
+  TextStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice:
+    TextStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice,
   TextUpdateRequest: TextUpdateRequest,
   TokenInformation: TokenInformation,
   UpdateBoardSubscriptionRequest: UpdateBoardSubscriptionRequest,
