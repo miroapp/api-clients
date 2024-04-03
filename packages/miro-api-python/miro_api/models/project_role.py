@@ -26,15 +26,13 @@ class ProjectRole(str, Enum):
     """
     allowed enum values
     """
-    OWNER = 'owner'
-    EDITOR = 'editor'
-    VIEWER = 'viewer'
-    COMMENTATOR = 'commentator'
-    COOWNER = 'coowner'
+    OWNER = "owner"
+    EDITOR = "editor"
+    VIEWER = "viewer"
+    COMMENTATOR = "commentator"
+    COOWNER = "coowner"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ProjectRole from a JSON string"""
         return cls(json.loads(json_str))
-
-

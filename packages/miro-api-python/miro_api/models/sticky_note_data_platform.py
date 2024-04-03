@@ -22,22 +22,30 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StickyNoteDataPlatform(BaseModel):
     """
     Contains sticky note item data, such as the content or shape of the sticky note.
-    """ # noqa: E501
-    content: Optional[StrictStr] = Field(default=None, description="The actual text (content) that appears in the sticky note item.")
-    shape: Optional[StrictStr] = Field(default='square', description="Defines the geometric shape of the sticky note and aspect ratio for its dimensions.")
+    """  # noqa: E501
+
+    content: Optional[StrictStr] = Field(
+        default=None,
+        description="The actual text (content) that appears in the sticky note item.",
+    )
+    shape: Optional[StrictStr] = Field(
+        default="square",
+        description="Defines the geometric shape of the sticky note and aspect ratio for its dimensions.",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content", "shape"]
 
-    @field_validator('shape')
+    @field_validator("shape")
     def shape_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['square', 'rectangle']):
+        if value not in set(["square", "rectangle"]):
             raise ValueError("must be one of enum values ('square', 'rectangle')")
         return value
 
@@ -46,7 +54,6 @@ class StickyNoteDataPlatform(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -73,9 +80,11 @@ class StickyNoteDataPlatform(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -98,15 +107,15 @@ class StickyNoteDataPlatform(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "content": obj.get("content"),
-            "shape": obj.get("shape") if obj.get("shape") is not None else 'square'
-        })
+        _obj = cls.model_validate(
+            {
+                "content": obj.get("content"),
+                "shape": obj.get("shape") if obj.get("shape") is not None else "square",
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

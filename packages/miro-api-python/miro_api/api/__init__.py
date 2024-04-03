@@ -15,25 +15,30 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 
-from datetime import date
-from pydantic import Field, StrictInt, StrictStr, field_validator
-from typing import Optional
-from miro_api.models.audit_page import AuditPage
-
 from datetime import datetime
 from pydantic import Field, StrictStr, field_validator
 from typing import List, Optional
-from miro_api.models.get_board_item_content_logs_response import GetBoardItemContentLogsResponse
+from miro_api.models.get_board_item_content_logs_response import (
+    GetBoardItemContentLogsResponse,
+)
 
 from pydantic import Field, StrictStr
 from miro_api.models.board_data_classification_label import BoardDataClassificationLabel
 from miro_api.models.data_classification_label_id import DataClassificationLabelId
 
-from miro_api.models.data_classification_organization_settings import DataClassificationOrganizationSettings
+from miro_api.models.data_classification_organization_settings import (
+    DataClassificationOrganizationSettings,
+)
 
-from miro_api.models.data_classification_team_settings import DataClassificationTeamSettings
-from miro_api.models.update_boards_data_classification_label import UpdateBoardsDataClassificationLabel
-from miro_api.models.update_boards_data_classification_label_request import UpdateBoardsDataClassificationLabelRequest
+from miro_api.models.data_classification_team_settings import (
+    DataClassificationTeamSettings,
+)
+from miro_api.models.update_boards_data_classification_label import (
+    UpdateBoardsDataClassificationLabel,
+)
+from miro_api.models.update_boards_data_classification_label_request import (
+    UpdateBoardsDataClassificationLabelRequest,
+)
 from miro_api.models.update_team_settings_request import UpdateTeamSettingsRequest
 
 from miro_api.models.board_export_job_id import BoardExportJobId
@@ -41,11 +46,7 @@ from miro_api.models.board_export_job_status import BoardExportJobStatus
 from miro_api.models.board_export_result import BoardExportResult
 from miro_api.models.create_board_export_request import CreateBoardExportRequest
 
-from pydantic import Field, StrictBytes, StrictStr
-from typing import List, Optional, Union
-from miro_api.models.item_create import ItemCreate
-from miro_api.models.items import Items
-
+from typing import Optional
 from miro_api.models.generic_item import GenericItem
 from miro_api.models.generic_item_cursor_paged import GenericItemCursorPaged
 from miro_api.models.shape_create_request import ShapeCreateRequest
@@ -57,7 +58,9 @@ from miro_api.models.mindmap_cursor_paged import MindmapCursorPaged
 from miro_api.models.mindmap_item import MindmapItem
 
 from pydantic import Field, StrictBool, StrictStr, field_validator
-from miro_api.models.enterprise_get_organization_members200_response import EnterpriseGetOrganizationMembers200Response
+from miro_api.models.enterprise_get_organization_members200_response import (
+    EnterpriseGetOrganizationMembers200Response,
+)
 from miro_api.models.organization_member import OrganizationMember
 
 from miro_api.models.organization import Organization
@@ -75,7 +78,6 @@ from miro_api.models.project import Project
 from miro_api.models.project_page import ProjectPage
 from miro_api.models.update_project_request import UpdateProjectRequest
 
-
 from miro_api.models.team_member import TeamMember
 from miro_api.models.team_member_changes import TeamMemberChanges
 from miro_api.models.team_member_invite import TeamMemberInvite
@@ -90,10 +92,16 @@ from miro_api.models.team_changes import TeamChanges
 from miro_api.models.teams_page import TeamsPage
 
 from miro_api.models.board_subscription import BoardSubscription
-from miro_api.models.create_board_subscription_request import CreateBoardSubscriptionRequest
+from miro_api.models.create_board_subscription_request import (
+    CreateBoardSubscriptionRequest,
+)
 from miro_api.models.generic_subscription import GenericSubscription
-from miro_api.models.generic_subscriptions_cursor_paged import GenericSubscriptionsCursorPaged
-from miro_api.models.update_board_subscription_request import UpdateBoardSubscriptionRequest
+from miro_api.models.generic_subscriptions_cursor_paged import (
+    GenericSubscriptionsCursorPaged,
+)
+from miro_api.models.update_board_subscription_request import (
+    UpdateBoardSubscriptionRequest,
+)
 
 from miro_api.models.app_card_create_request import AppCardCreateRequest
 from miro_api.models.app_card_item import AppCardItem
@@ -108,7 +116,9 @@ from miro_api.models.invitation_result import InvitationResult
 from miro_api.models.board_changes import BoardChanges
 from miro_api.models.board_with_links import BoardWithLinks
 from miro_api.models.board_with_links_and_last_opened import BoardWithLinksAndLastOpened
-from miro_api.models.board_with_links_and_without_project import BoardWithLinksAndWithoutProject
+from miro_api.models.board_with_links_and_without_project import (
+    BoardWithLinksAndWithoutProject,
+)
 from miro_api.models.boards_paged_response import BoardsPagedResponse
 from miro_api.models.copy_board_changes import CopyBoardChanges
 
@@ -121,12 +131,9 @@ from miro_api.models.connector_creation_data import ConnectorCreationData
 from miro_api.models.connector_with_links import ConnectorWithLinks
 from miro_api.models.connectors_cursor_paged import ConnectorsCursorPaged
 
-from typing import Optional, Union
-from miro_api.models.create_document_item_using_file_from_device_request_data import CreateDocumentItemUsingFileFromDeviceRequestData
 from miro_api.models.document_create_request import DocumentCreateRequest
 from miro_api.models.document_item import DocumentItem
 from miro_api.models.document_update_request import DocumentUpdateRequest
-from miro_api.models.upload_file_from_device_data import UploadFileFromDeviceData
 
 from miro_api.models.embed_create_request import EmbedCreateRequest
 from miro_api.models.embed_item import EmbedItem
@@ -167,7 +174,6 @@ from miro_api.rest import RESTResponseType
 
 
 class MiroApiEndpoints:
-
     """NOTE: This class is auto generated by OpenAPI Generator
     Ref: https://openapi-generator.tech
 
@@ -179,216 +185,60 @@ class MiroApiEndpoints:
             api_client = ApiClient.get_default()
         self.api_client = api_client
 
-
-
-
-    @validate_call
-    def enterprise_get_audit_logs(
-        self,
-        created_after: Annotated[date, Field(description="Retrieve audit logs created after the date and time provided. This is the start date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between `2023-03-30T17:26:50.000Z` and `2023-04-30T17:26:50.000Z`, provide `2023-03-30T17:26:50.000Z` as the value for the `createdAfter` parameter.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\" ")],
-        created_before: Annotated[date, Field(description="Retrieve audit logs created before the date and time provided. This is the end date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between `2023-03-30T17:26:50.000Z` and `2023-04-30T17:26:50.000Z`, provide `2023-04-30T17:26:50.000Z` as the value for the `createdBefore` parameter.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ")],
-        cursor: Annotated[Optional[StrictStr], Field(description="A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the appropriate cursor value returned in the response.")] = None,
-        limit: Annotated[Optional[StrictInt], Field(description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `30` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that  you obtained from the response.<br>Default: `100` ")] = None,
-        sorting: Annotated[Optional[StrictStr], Field(description="Sort order in which you want to view the result set. Based on the value you provide, the results are sorted in an ascending or descending order of the audit log creation date (audit log `createdAt` parameter).<br>Default: `ASC` ")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> AuditPage:
-        """Get audit logs
-
-        Retrieves a page of audit events.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a>
-
-        :param created_after: Retrieve audit logs created after the date and time provided. This is the start date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between `2023-03-30T17:26:50.000Z` and `2023-04-30T17:26:50.000Z`, provide `2023-03-30T17:26:50.000Z` as the value for the `createdAfter` parameter.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\"  (required)
-        :type created_after: date
-        :param created_before: Retrieve audit logs created before the date and time provided. This is the end date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between `2023-03-30T17:26:50.000Z` and `2023-04-30T17:26:50.000Z`, provide `2023-04-30T17:26:50.000Z` as the value for the `createdBefore` parameter.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).  (required)
-        :type created_before: date
-        :param cursor: A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the appropriate cursor value returned in the response.
-        :type cursor: str
-        :param limit: Maximum number of results returned based on the `limit` specified in the request. For example, if there are `30` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that  you obtained from the response.<br>Default: `100` 
-        :type limit: int
-        :param sorting: Sort order in which you want to view the result set. Based on the value you provide, the results are sorted in an ascending or descending order of the audit log creation date (audit log `createdAt` parameter).<br>Default: `ASC` 
-        :type sorting: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._enterprise_get_audit_logs_serialize(
-            created_after=created_after,
-            created_before=created_before,
-            cursor=cursor,
-            limit=limit,
-            sorting=sorting,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AuditPage",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '409': None,
-            '429': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _enterprise_get_audit_logs_serialize(
-        self,
-        created_after,
-        created_before,
-        cursor,
-        limit,
-        sorting,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if created_after is not None:
-            if isinstance(created_after, date):
-                _query_params.append(
-                    (
-                        'createdAfter',
-                        created_after.strftime(
-                            self.api_client.configuration.date_format
-                        )
-                    )
-                )
-            else:
-                _query_params.append(('createdAfter', created_after))
-            
-        if created_before is not None:
-            if isinstance(created_before, date):
-                _query_params.append(
-                    (
-                        'createdBefore',
-                        created_before.strftime(
-                            self.api_client.configuration.date_format
-                        )
-                    )
-                )
-            else:
-                _query_params.append(('createdBefore', created_before))
-            
-        if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
-        if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
-        if sorting is not None:
-            
-            _query_params.append(('sorting', sorting))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/audit/logs',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-
     @validate_call
     def enterprise_board_content_item_logs_fetch(
         self,
-        org_id: Annotated[StrictStr, Field(description="Unique identifier of the organization.")],
-        var_from: Annotated[datetime, Field(description="Filter content logs based on the date and time when the board item was last modified. This is the start date and time for the modified date duration. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ")],
-        to: Annotated[datetime, Field(description="Filter content logs based on the date and time when the board item was last modified. This is the end date and time for the modified date duration. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ")],
-        board_ids: Annotated[Optional[Annotated[List[StrictStr], Field(max_length=15)]], Field(description="List of board IDs for which you want to retrieve the content logs.")] = None,
-        emails: Annotated[Optional[Annotated[List[StrictStr], Field(max_length=15)]], Field(description="Filter content logs based on the list of emails of users who created, modified, or deleted the board item.")] = None,
-        cursor: Annotated[Optional[StrictStr], Field(description="A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request. ")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]], Field(description="The maximum number of results to return per call. If the number of logs in the response is greater than the limit specified, the response returns the cursor parameter with a value. ")] = None,
-        sorting: Annotated[Optional[StrictStr], Field(description="Sort order in which you want to view the result set based on the modified date. To sort by an ascending modified date, specify `asc`. To sort by a descending modified date, specify `desc`. ")] = None,
+        org_id: Annotated[
+            StrictStr, Field(description="Unique identifier of the organization.")
+        ],
+        var_from: Annotated[
+            datetime,
+            Field(
+                description="Filter content logs based on the date and time when the board item was last modified. This is the start date and time for the modified date duration. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). "
+            ),
+        ],
+        to: Annotated[
+            datetime,
+            Field(
+                description="Filter content logs based on the date and time when the board item was last modified. This is the end date and time for the modified date duration. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). "
+            ),
+        ],
+        board_ids: Annotated[
+            Optional[Annotated[List[StrictStr], Field(max_length=15)]],
+            Field(
+                description="List of board IDs for which you want to retrieve the content logs."
+            ),
+        ] = None,
+        emails: Annotated[
+            Optional[Annotated[List[StrictStr], Field(max_length=15)]],
+            Field(
+                description="Filter content logs based on the list of emails of users who created, modified, or deleted the board item."
+            ),
+        ] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request. "
+            ),
+        ] = None,
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=1000, strict=True, ge=1)]],
+            Field(
+                description="The maximum number of results to return per call. If the number of logs in the response is greater than the limit specified, the response returns the cursor parameter with a value. "
+            ),
+        ] = None,
+        sorting: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="Sort order in which you want to view the result set based on the modified date. To sort by an ascending modified date, specify `asc`. To sort by a descending modified date, specify `desc`. "
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -397,7 +247,7 @@ class MiroApiEndpoints:
     ) -> GetBoardItemContentLogsResponse:
         """Retrieve content change logs of board items
 
-        Retrieves content changes for board items within your organization. Content changes are actions that users can perform on board items, such as updating a sticky note's text. You can retrieve results for a specific time period. You can also filter results based on the board IDs and the emails of users who created, modified, or deleted a board item. Additionally, results can be paginated for easier viewing and processing. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>contentlogs:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p> 
+        Retrieves content changes for board items within your organization. Content changes are actions that users can perform on board items, such as updating a sticky note's text. You can retrieve results for a specific time period. You can also filter results based on the board IDs and the emails of users who created, modified, or deleted a board item. Additionally, results can be paginated for easier viewing and processing. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>contentlogs:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
 
         :param org_id: Unique identifier of the organization. (required)
         :type org_id: str
@@ -409,11 +259,11 @@ class MiroApiEndpoints:
         :type board_ids: List[str]
         :param emails: Filter content logs based on the list of emails of users who created, modified, or deleted the board item.
         :type emails: List[str]
-        :param cursor: A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request. 
+        :param cursor: A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request.
         :type cursor: str
-        :param limit: The maximum number of results to return per call. If the number of logs in the response is greater than the limit specified, the response returns the cursor parameter with a value. 
+        :param limit: The maximum number of results to return per call. If the number of logs in the response is greater than the limit specified, the response returns the cursor parameter with a value.
         :type limit: int
-        :param sorting: Sort order in which you want to view the result set based on the modified date. To sort by an ascending modified date, specify `asc`. To sort by a descending modified date, specify `desc`. 
+        :param sorting: Sort order in which you want to view the result set based on the modified date. To sort by an ascending modified date, specify `asc`. To sort by a descending modified date, specify `desc`.
         :type sorting: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -435,7 +285,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_board_content_item_logs_fetch_serialize(
             org_id=org_id,
@@ -449,20 +299,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetBoardItemContentLogsResponse",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "GetBoardItemContentLogsResponse",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -489,8 +338,8 @@ class MiroApiEndpoints:
         _host = None
 
         _collection_formats: Dict[str, str] = {
-            'board_ids': 'multi',
-            'emails': 'multi',
+            "board_ids": "multi",
+            "emails": "multi",
         }
 
         _path_params: Dict[str, str] = {}
@@ -502,74 +351,64 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         # process the query parameters
         if board_ids is not None:
-            
-            _query_params.append(('board_ids', board_ids))
-            
+
+            _query_params.append(("board_ids", board_ids))
+
         if emails is not None:
-            
-            _query_params.append(('emails', emails))
-            
+
+            _query_params.append(("emails", emails))
+
         if var_from is not None:
             if isinstance(var_from, datetime):
                 _query_params.append(
                     (
-                        'from',
+                        "from",
                         var_from.strftime(
                             self.api_client.configuration.datetime_format
-                        )
+                        ),
                     )
                 )
             else:
-                _query_params.append(('from', var_from))
-            
+                _query_params.append(("from", var_from))
+
         if to is not None:
             if isinstance(to, datetime):
                 _query_params.append(
-                    (
-                        'to',
-                        to.strftime(
-                            self.api_client.configuration.datetime_format
-                        )
-                    )
+                    ("to", to.strftime(self.api_client.configuration.datetime_format))
                 )
             else:
-                _query_params.append(('to', to))
-            
+                _query_params.append(("to", to))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if sorting is not None:
-            
-            _query_params.append(('sorting', sorting))
-            
+
+            _query_params.append(("sorting", sorting))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/content-logs/items',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/content-logs/items",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -579,26 +418,26 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_dataclassification_board_get(
         self,
         org_id: Annotated[StrictStr, Field(description="id of the organization")],
         team_id: Annotated[StrictStr, Field(description="id of the team")],
-        board_id: Annotated[StrictStr, Field(description="Unique identifier of the board that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier of the board that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -635,7 +474,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_dataclassification_board_get_serialize(
             org_id=org_id,
@@ -644,20 +483,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardDataClassificationLabel",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "BoardDataClassificationLabel",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -678,8 +516,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -690,32 +527,27 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -725,26 +557,27 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_dataclassification_board_set(
         self,
         org_id: Annotated[StrictStr, Field(description="id of the organization")],
         team_id: Annotated[StrictStr, Field(description="id of the team")],
-        board_id: Annotated[StrictStr, Field(description="Unique identifier of the board that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier of the board that you want to update."
+            ),
+        ],
         data_classification_label_id: DataClassificationLabelId,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -783,7 +616,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_dataclassification_board_set_serialize(
             org_id=org_id,
@@ -793,20 +626,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardDataClassificationLabel",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "BoardDataClassificationLabel",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -828,8 +660,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -840,11 +671,11 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -852,35 +683,27 @@ class MiroApiEndpoints:
         if data_classification_label_id is not None:
             _body_params = data_classification_label_id
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification',
+            method="POST",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/boards/{board_id}/data-classification",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -890,12 +713,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_dataclassification_organization_settings_get(
@@ -905,9 +724,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -940,27 +758,28 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
-        _param = self._enterprise_dataclassification_organization_settings_get_serialize(
-            org_id=org_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+        _param = (
+            self._enterprise_dataclassification_organization_settings_get_serialize(
+                org_id=org_id,
+                _request_auth=_request_auth,
+                _content_type=_content_type,
+                _headers=_headers,
+                _host_index=_host_index,
+            )
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DataClassificationOrganizationSettings",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "DataClassificationOrganizationSettings",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -979,8 +798,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -991,28 +809,23 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/data-classification-settings',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/data-classification-settings",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1022,12 +835,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_dataclassification_team_boards_bulk(
@@ -1039,9 +848,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1078,7 +886,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_dataclassification_team_boards_bulk_serialize(
             org_id=org_id,
@@ -1087,20 +895,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "UpdateBoardsDataClassificationLabel",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "UpdateBoardsDataClassificationLabel",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1121,8 +928,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1133,9 +939,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1143,35 +949,27 @@ class MiroApiEndpoints:
         if update_boards_data_classification_label_request is not None:
             _body_params = update_boards_data_classification_label_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/data-classification',
+            method="PATCH",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/data-classification",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1181,11 +979,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_dataclassification_team_settings_get(
@@ -1196,9 +991,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1233,7 +1027,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_dataclassification_team_settings_get_serialize(
             org_id=org_id,
@@ -1241,20 +1035,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DataClassificationTeamSettings",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "DataClassificationTeamSettings",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1274,8 +1067,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1286,30 +1078,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/data-classification-settings',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/data-classification-settings",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1319,11 +1106,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_dataclassification_team_settings_set(
@@ -1335,9 +1119,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1374,7 +1157,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_dataclassification_team_settings_set_serialize(
             org_id=org_id,
@@ -1383,20 +1166,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DataClassificationTeamSettings",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "DataClassificationTeamSettings",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1417,8 +1199,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1429,9 +1210,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1439,35 +1220,27 @@ class MiroApiEndpoints:
         if update_team_settings_request is not None:
             _body_params = update_team_settings_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/data-classification-settings',
+            method="PATCH",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/data-classification-settings",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1477,25 +1250,24 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_board_export_job_results(
         self,
-        org_id: Annotated[StrictStr, Field(description="Unique identifier of the organization.")],
-        job_id: Annotated[StrictStr, Field(description="Unique identifier of the job.")],
+        org_id: Annotated[
+            StrictStr, Field(description="Unique identifier of the organization.")
+        ],
+        job_id: Annotated[
+            StrictStr, Field(description="Unique identifier of the job.")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1530,7 +1302,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_board_export_job_results_serialize(
             org_id=org_id,
@@ -1538,20 +1310,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardExportResult",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "BoardExportResult",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1571,8 +1342,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1583,30 +1353,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if job_id is not None:
-            _path_params['job_id'] = job_id
+            _path_params["job_id"] = job_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/boards/export/jobs/{job_id}/results',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/boards/export/jobs/{job_id}/results",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1616,24 +1381,24 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_board_export_job_status(
         self,
-        org_id: Annotated[StrictStr, Field(description="Unique identifier of the organization.")],
-        job_id: Annotated[StrictStr, Field(description="Unique identifier of the board export job.")],
+        org_id: Annotated[
+            StrictStr, Field(description="Unique identifier of the organization.")
+        ],
+        job_id: Annotated[
+            StrictStr, Field(description="Unique identifier of the board export job.")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1668,7 +1433,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_board_export_job_status_serialize(
             org_id=org_id,
@@ -1676,20 +1441,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardExportJobStatus",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "BoardExportJobStatus",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1709,8 +1473,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1721,30 +1484,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if job_id is not None:
-            _path_params['job_id'] = job_id
+            _path_params["job_id"] = job_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/boards/export/jobs/{job_id}',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/boards/export/jobs/{job_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1754,25 +1512,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_create_board_export(
         self,
-        org_id: Annotated[StrictStr, Field(description="Unique identifier of the organization.")],
-        request_id: Annotated[StrictStr, Field(description="Unique identifier of the board export job.")],
+        org_id: Annotated[
+            StrictStr, Field(description="Unique identifier of the organization.")
+        ],
+        request_id: Annotated[
+            StrictStr, Field(description="Unique identifier of the board export job.")
+        ],
         create_board_export_request: CreateBoardExportRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1809,7 +1567,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_create_board_export_serialize(
             org_id=org_id,
@@ -1818,20 +1576,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardExportJobId",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "BoardExportJobId",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1852,8 +1609,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1864,47 +1620,39 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         # process the query parameters
         if request_id is not None:
-            
-            _query_params.append(('request_id', request_id))
-            
+
+            _query_params.append(("request_id", request_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
         if create_board_export_request is not None:
             _body_params = create_board_export_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/orgs/{org_id}/boards/export/jobs',
+            method="POST",
+            resource_path="/v2/orgs/{org_id}/boards/export/jobs",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1914,328 +1662,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-
-    @validate_call
-    def create_items(
-        self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
-        item_create: Annotated[List[ItemCreate], Field(min_length=1, max_length=20)],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Items:
-        """Create items in bulk
-
-        Adds different types of items to a board. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item's create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
-
-        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id: str
-        :param item_create: (required)
-        :type item_create: List[ItemCreate]
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._create_items_serialize(
-            board_id=board_id,
-            item_create=item_create,
             _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
         )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Items",
-            '400': "BulkOperationError",
-            '429': "Error",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _create_items_serialize(
-        self,
-        board_id,
-        item_create,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-            'ItemCreate': '',
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if item_create is not None:
-            _body_params = item_create
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2-experimental/boards/{board_id}/items/bulk',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def create_items_in_bulk_using_file_from_device(
-        self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
-        data: Annotated[Optional[Union[StrictBytes, StrictStr]], Field(description="Select a file containing json object describing files to upload")] = None,
-        resources: Annotated[Optional[Union[StrictBytes, StrictStr]], Field(description="Select files to upload")] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Items:
-        """Create items in bulk using file from device
-
-        Adds different types of items to a board using files from device. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item's create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
-
-        :param board_id: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id: str
-        :param data: Select a file containing json object describing files to upload
-        :type data: bytearray
-        :param resources: Select files to upload
-        :type resources: bytearray
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._create_items_in_bulk_using_file_from_device_serialize(
-            board_id=board_id,
-            data=data,
-            resources=resources,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Items",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _create_items_in_bulk_using_file_from_device_serialize(
-        self,
-        board_id,
-        data,
-        resources,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        if data is not None:
-            _files['data'] = data
-        if resources is not None:
-            _files['resources'] = resources
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'multipart/form-data'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice}/items/bulk',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
 
     @validate_call
     def create_shape_item_flowchart(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         shape_create_request: ShapeCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2270,7 +1715,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_shape_item_flowchart_serialize(
             board_id=board_id,
@@ -2278,18 +1723,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "ShapeItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "ShapeItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -2309,8 +1753,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2321,7 +1764,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -2329,35 +1772,27 @@ class MiroApiEndpoints:
         if shape_create_request is not None:
             _body_params = shape_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2-experimental/boards/{board_id}/shapes',
+            method="POST",
+            resource_path="/v2-experimental/boards/{board_id}/shapes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2367,24 +1802,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_shape_item_flowchart(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2419,7 +1860,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_shape_item_flowchart_serialize(
             board_id=board_id,
@@ -2427,18 +1868,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -2458,8 +1898,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2470,30 +1909,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2-experimental/boards/{board_id}/shapes/{item_id}',
+            method="DELETE",
+            resource_path="/v2-experimental/boards/{board_id}/shapes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2503,16 +1937,18 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_items_experimental(
         self,
-        board_id_platform_experimental_features: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to retrieve the list of available items.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board for which you want to retrieve the list of available items."
+            ),
+        ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         type: Optional[StrictStr] = None,
         cursor: Optional[StrictStr] = None,
@@ -2520,9 +1956,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2533,8 +1968,8 @@ class MiroApiEndpoints:
 
         Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform_experimental_features: Unique identifier (ID) of the board for which you want to retrieve the list of available items. (required)
-        :type board_id_platform_experimental_features: str
+        :param board_id: Unique identifier (ID) of the board for which you want to retrieve the list of available items. (required)
+        :type board_id: str
         :param limit:
         :type limit: str
         :param type:
@@ -2561,28 +1996,27 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_items_experimental_serialize(
-            board_id_platform_experimental_features=board_id_platform_experimental_features,
+            board_id=board_id,
             limit=limit,
             type=type,
             cursor=cursor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericItemCursorPaged",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "GenericItemCursorPaged",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -2592,7 +2026,7 @@ class MiroApiEndpoints:
 
     def _get_items_experimental_serialize(
         self,
-        board_id_platform_experimental_features,
+        board_id,
         limit,
         type,
         cursor,
@@ -2604,8 +2038,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2615,41 +2048,36 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform_experimental_features is not None:
-            _path_params['board_id_PlatformExperimentalFeatures'] = board_id_platform_experimental_features
+        if board_id is not None:
+            _path_params["board_id"] = board_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if type is not None:
-            
-            _query_params.append(('type', type))
-            
+
+            _query_params.append(("type", type))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2-experimental/boards/{board_id_PlatformExperimentalFeatures}/items',
+            method="GET",
+            resource_path="/v2-experimental/boards/{board_id}/items",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2659,24 +2087,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_shape_item_flowchart(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2711,7 +2145,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_shape_item_flowchart_serialize(
             board_id=board_id,
@@ -2719,18 +2153,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ShapeItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ShapeItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -2750,8 +2183,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2762,30 +2194,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2-experimental/boards/{board_id}/shapes/{item_id}',
+            method="GET",
+            resource_path="/v2-experimental/boards/{board_id}/shapes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2795,24 +2222,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_specific_item_experimental(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2847,7 +2280,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_specific_item_experimental_serialize(
             board_id=board_id,
@@ -2855,18 +2288,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "GenericItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -2886,8 +2318,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2898,30 +2329,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2-experimental/boards/{board_id}/items/{item_id}',
+            method="GET",
+            resource_path="/v2-experimental/boards/{board_id}/items/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2931,25 +2357,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_shape_item_flowchart(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         shape_update_request: ShapeUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2986,7 +2418,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_shape_item_flowchart_serialize(
             board_id=board_id,
@@ -2995,18 +2427,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ShapeItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ShapeItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -3027,8 +2458,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -3039,9 +2469,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -3049,35 +2479,27 @@ class MiroApiEndpoints:
         if shape_update_request is not None:
             _body_params = shape_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2-experimental/boards/{board_id}/shapes/{item_id}',
+            method="PATCH",
+            resource_path="/v2-experimental/boards/{board_id}/shapes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3087,25 +2509,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_mindmap_nodes_experimental(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         mindmap_create_request: MindmapCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -3140,7 +2562,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_mindmap_nodes_experimental_serialize(
             board_id=board_id,
@@ -3148,18 +2570,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "MindmapItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "MindmapItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -3179,8 +2600,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -3191,7 +2611,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -3199,35 +2619,27 @@ class MiroApiEndpoints:
         if mindmap_create_request is not None:
             _body_params = mindmap_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2-experimental/boards/{board_id}/mindmap_nodes',
+            method="POST",
+            resource_path="/v2-experimental/boards/{board_id}/mindmap_nodes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3237,24 +2649,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_mindmap_node_experimental(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the mind map node.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the mind map node that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the mind map node."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the mind map node that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -3289,7 +2707,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_mindmap_node_experimental_serialize(
             board_id=board_id,
@@ -3297,18 +2715,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -3328,8 +2745,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -3340,30 +2756,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}',
+            method="DELETE",
+            resource_path="/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3373,24 +2784,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_mindmap_node_experimental(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a mind map node.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the mind map node that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a mind map node."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the mind map node that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -3425,7 +2842,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_mindmap_node_experimental_serialize(
             board_id=board_id,
@@ -3433,15 +2850,14 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MindmapItem",
+            "200": "MindmapItem",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -3461,8 +2877,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -3473,30 +2888,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}',
+            method="GET",
+            resource_path="/v2-experimental/boards/{board_id}/mindmap_nodes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3506,25 +2916,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_mindmap_nodes_experimental(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve mind map nodes.")],
-        limit: Annotated[Optional[StrictStr], Field(description="Maximum number of results returned")] = None,
-        cursor: Annotated[Optional[StrictStr], Field(description="Points to the next portion of the results set")] = None,
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve mind map nodes."
+            ),
+        ],
+        limit: Annotated[
+            Optional[StrictStr], Field(description="Maximum number of results returned")
+        ] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(description="Points to the next portion of the results set"),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -3561,7 +2977,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_mindmap_nodes_experimental_serialize(
             board_id=board_id,
@@ -3570,15 +2986,14 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "MindmapCursorPaged",
+            "200": "MindmapCursorPaged",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -3599,8 +3014,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -3611,36 +3025,31 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2-experimental/boards/{board_id}/mindmap_nodes',
+            method="GET",
+            resource_path="/v2-experimental/boards/{board_id}/mindmap_nodes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3650,25 +3059,22 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_get_organization_member(
         self,
         org_id: Annotated[StrictStr, Field(description="id of the organization")],
-        member_id: Annotated[StrictStr, Field(description="id of the organization member")],
+        member_id: Annotated[
+            StrictStr, Field(description="id of the organization member")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -3703,7 +3109,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_organization_member_serialize(
             org_id=org_id,
@@ -3711,21 +3117,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "OrganizationMember",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '409': None,
-            '429': None,
+            "200": "OrganizationMember",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "409": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -3745,8 +3150,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -3757,30 +3161,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if member_id is not None:
-            _path_params['member_id'] = member_id
+            _path_params["member_id"] = member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/members/{member_id}',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/members/{member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3790,11 +3189,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_organization_members(
@@ -3810,9 +3206,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -3857,7 +3252,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_organization_members_serialize(
             org_id=org_id,
@@ -3870,21 +3265,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EnterpriseGetOrganizationMembers200Response",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '409': None,
-            '429': None,
+            "200": "EnterpriseGetOrganizationMembers200Response",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "409": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -3909,8 +3303,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -3921,52 +3314,47 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         # process the query parameters
         if emails is not None:
-            
-            _query_params.append(('emails', emails))
-            
+
+            _query_params.append(("emails", emails))
+
         if role is not None:
-            
-            _query_params.append(('role', role))
-            
+
+            _query_params.append(("role", role))
+
         if license is not None:
-            
-            _query_params.append(('license', license))
-            
+
+            _query_params.append(("license", license))
+
         if active is not None:
-            
-            _query_params.append(('active', active))
-            
+
+            _query_params.append(("active", active))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/members',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/members",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -3976,12 +3364,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_get_organization(
@@ -3991,9 +3375,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -4026,28 +3409,27 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_organization_serialize(
             org_id=org_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Organization",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '409': None,
-            '429': None,
+            "200": "Organization",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "409": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -4066,8 +3448,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -4078,28 +3459,23 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4109,27 +3485,33 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_add_project_member(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization to which the project belongs.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team to which the project belongs.")],
-        project_id: Annotated[StrictStr, Field(description="The ID of the project to which you want to add a user.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization to which the project belongs."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the team to which the project belongs."),
+        ],
+        project_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the project to which you want to add a user."),
+        ],
         add_project_member_request: AddProjectMemberRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -4168,7 +3550,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_add_project_member_serialize(
             org_id=org_id,
@@ -4178,21 +3560,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "ProjectMember",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "201": "ProjectMember",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -4214,8 +3595,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -4226,11 +3606,11 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -4238,35 +3618,27 @@ class MiroApiEndpoints:
         if add_project_member_request is not None:
             _body_params = add_project_member_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members',
+            method="POST",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4276,26 +3648,40 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_delete_project_member(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization to which the project belongs.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team to which the project belongs.")],
-        project_id: Annotated[StrictStr, Field(description="The ID of the project from which you want to remove a member.")],
-        member_id: Annotated[StrictStr, Field(description="The ID of the member that you want to remove from a project.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization to which the project belongs."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the team to which the project belongs."),
+        ],
+        project_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the project from which you want to remove a member."
+            ),
+        ],
+        member_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the member that you want to remove from a project."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -4334,7 +3720,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_delete_project_member_serialize(
             org_id=org_id,
@@ -4344,21 +3730,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "204": None,
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -4380,8 +3765,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -4392,34 +3776,29 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         if member_id is not None:
-            _path_params['member_id'] = member_id
+            _path_params["member_id"] = member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members/{member_id}',
+            method="DELETE",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members/{member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4429,26 +3808,40 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_project_member(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization to which the project belongs.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team to which the project belongs.")],
-        project_id: Annotated[StrictStr, Field(description="The ID of the project from which you want to retrieve specific member information.")],
-        member_id: Annotated[StrictStr, Field(description="The ID of the member for which you want to retrieve information.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization to which the project belongs."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the team to which the project belongs."),
+        ],
+        project_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the project from which you want to retrieve specific member information."
+            ),
+        ],
+        member_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the member for which you want to retrieve information."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -4487,7 +3880,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_project_member_serialize(
             org_id=org_id,
@@ -4497,21 +3890,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ProjectMember",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "200": "ProjectMember",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -4533,8 +3925,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -4545,34 +3936,29 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         if member_id is not None:
-            _path_params['member_id'] = member_id
+            _path_params["member_id"] = member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members/{member_id}',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members/{member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4582,27 +3968,46 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_project_members(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization to which the project belongs.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team to which the project belongs.")],
-        project_id: Annotated[StrictStr, Field(description="The ID of the project for which you want to retrieve the list of members.")],
-        limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of results to return per call. If the number of project members in the response is greater than the limit specified, the response returns the cursor parameter with a value.")] = None,
-        cursor: Annotated[Optional[StrictStr], Field(description="An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.")] = None,
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization to which the project belongs."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the team to which the project belongs."),
+        ],
+        project_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the project for which you want to retrieve the list of members."
+            ),
+        ],
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Field(
+                description="The maximum number of results to return per call. If the number of project members in the response is greater than the limit specified, the response returns the cursor parameter with a value."
+            ),
+        ] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -4643,7 +4048,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_project_members_serialize(
             org_id=org_id,
@@ -4654,21 +4059,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ProjectMemberPage",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "200": "ProjectMemberPage",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -4691,8 +4095,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -4703,40 +4106,35 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4746,27 +4144,36 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_update_project_member(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization to which the project member belongs.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team to which the project member belongs.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization to which the project member belongs."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the team to which the project member belongs."
+            ),
+        ],
         project_id: Annotated[StrictStr, Field(description="The ID of a Project.")],
-        member_id: Annotated[StrictStr, Field(description="The ID of the member whose details you want to update.")],
+        member_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the member whose details you want to update."),
+        ],
         update_project_member_request: UpdateProjectMemberRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -4807,7 +4214,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_update_project_member_serialize(
             org_id=org_id,
@@ -4818,21 +4225,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ProjectMember",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "200": "ProjectMember",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -4855,8 +4261,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -4867,13 +4272,13 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         if member_id is not None:
-            _path_params['member_id'] = member_id
+            _path_params["member_id"] = member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -4881,35 +4286,27 @@ class MiroApiEndpoints:
         if update_project_member_request is not None:
             _body_params = update_project_member_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members/{member_id}',
+            method="PATCH",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/members/{member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -4919,26 +4316,34 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_get_project_settings(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization to which the project belongs.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team to which the project belongs.")],
-        project_id: Annotated[StrictStr, Field(description="The ID of the project for which you want to retrieve the project settings.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization to which the project belongs."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the team to which the project belongs."),
+        ],
+        project_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the project for which you want to retrieve the project settings."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -4975,7 +4380,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_project_settings_serialize(
             org_id=org_id,
@@ -4984,20 +4389,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ProjectSettings",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '429': "Error429",
+            "200": "ProjectSettings",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -5018,8 +4422,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -5030,32 +4433,27 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/settings',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/settings",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5065,26 +4463,35 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_update_project_settings(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization to which the project belongs.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team to which the project belongs.")],
-        project_id: Annotated[StrictStr, Field(description="The ID of the project whose settings you want to update.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization to which the project belongs."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the team to which the project belongs."),
+        ],
+        project_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the project whose settings you want to update."
+            ),
+        ],
         update_project_settings_request: UpdateProjectSettingsRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -5123,7 +4530,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_update_project_settings_serialize(
             org_id=org_id,
@@ -5133,21 +4540,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ProjectSettings",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "200": "ProjectSettings",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -5169,8 +4575,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -5181,11 +4586,11 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -5193,35 +4598,27 @@ class MiroApiEndpoints:
         if update_project_settings_request is not None:
             _body_params = update_project_settings_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/settings',
+            method="PATCH",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}/settings",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5231,26 +4628,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_create_project(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization within which you you want to create a project.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team within which you you want to create a project.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization within which you you want to create a project."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the team within which you you want to create a project."
+            ),
+        ],
         create_project_request: CreateProjectRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -5287,7 +4689,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_create_project_serialize(
             org_id=org_id,
@@ -5296,21 +4698,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Project",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "201": "Project",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -5331,8 +4732,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -5343,9 +4743,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -5353,35 +4753,27 @@ class MiroApiEndpoints:
         if create_project_request is not None:
             _body_params = create_project_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects',
+            method="POST",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5391,25 +4783,34 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_delete_project(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization from which you want to delete a project.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team from which you want to delete a project.")],
-        project_id: Annotated[StrictStr, Field(description="The ID of the project that you want to delete.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization from which you want to delete a project."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the team from which you want to delete a project."
+            ),
+        ],
+        project_id: Annotated[
+            StrictStr,
+            Field(description="The ID of the project that you want to delete."),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -5446,7 +4847,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_delete_project_serialize(
             org_id=org_id,
@@ -5455,21 +4856,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "204": None,
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -5490,8 +4890,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -5502,32 +4901,27 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}',
+            method="DELETE",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5537,25 +4931,36 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_project(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization from which you want to retrieve the project information.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team from which you want to retrieve the project information.")],
-        project_id: Annotated[StrictStr, Field(description="The ID of the project for which you want to retrieve the information.")],
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization from which you want to retrieve the project information."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the team from which you want to retrieve the project information."
+            ),
+        ],
+        project_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the project for which you want to retrieve the information."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -5592,7 +4997,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_project_serialize(
             org_id=org_id,
@@ -5601,20 +5006,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Project",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '429': "Error429",
+            "200": "Project",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -5635,8 +5039,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -5647,32 +5050,27 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5682,26 +5080,42 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_projects(
         self,
-        org_id: Annotated[StrictStr, Field(description="The ID of the organization from which you want to retrieve the list of available projects.")],
-        team_id: Annotated[StrictStr, Field(description="The ID of the team from which you want to retrieve the list of available projects.")],
-        limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="The maximum number of results to return per call. If the number of projects in the response is greater than the limit specified, the response returns the cursor parameter with a value.")] = None,
-        cursor: Annotated[Optional[StrictStr], Field(description="An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.")] = None,
+        org_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the organization from which you want to retrieve the list of available projects."
+            ),
+        ],
+        team_id: Annotated[
+            StrictStr,
+            Field(
+                description="The ID of the team from which you want to retrieve the list of available projects."
+            ),
+        ],
+        limit: Annotated[
+            Optional[Annotated[int, Field(le=100, strict=True, ge=1)]],
+            Field(
+                description="The maximum number of results to return per call. If the number of projects in the response is greater than the limit specified, the response returns the cursor parameter with a value."
+            ),
+        ] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request."
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -5740,7 +5154,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_projects_serialize(
             org_id=org_id,
@@ -5750,20 +5164,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ProjectPage",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '429': "Error429",
+            "200": "ProjectPage",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -5785,8 +5198,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -5797,38 +5209,33 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -5838,11 +5245,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_update_project(
@@ -5855,9 +5259,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -5896,7 +5299,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_update_project_serialize(
             org_id=org_id,
@@ -5906,21 +5309,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Project",
-            '400': "Error400",
-            '401': "Error401",
-            '403': "Error403",
-            '404': "Error404",
-            '409': "Error409",
-            '429': "Error429",
+            "200": "Project",
+            "400": "Error400",
+            "401": "Error401",
+            "403": "Error403",
+            "404": "Error404",
+            "409": "Error409",
+            "429": "Error429",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -5942,8 +5344,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -5954,11 +5355,11 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -5966,35 +5367,27 @@ class MiroApiEndpoints:
         if update_project_request is not None:
             _body_params = update_project_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}',
+            method="PATCH",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/projects/{project_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6004,140 +5397,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-
-    @validate_call
-    def enterprise_post_user_sessions_reset(
-        self,
-        email: Annotated[StrictStr, Field(description="Email ID of the user whose sessions you want to reset. Note that this user will be signed out from all devices.")],
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> None:
-        """Reset all sessions of a user
-
-        Reset all sessions of a user.  Admins can now take immediate action to restrict user access to company data in case of security concerns. Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again. This is useful in situations where a user leaves the company, their credentials are compromised, or there's suspicious activity on their account.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
-
-        :param email: Email ID of the user whose sessions you want to reset. Note that this user will be signed out from all devices. (required)
-        :type email: str
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._enterprise_post_user_sessions_reset_serialize(
-            email=email,
             _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
         )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': None,
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _enterprise_post_user_sessions_reset_serialize(
-        self,
-        email,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        # process the query parameters
-        if email is not None:
-            
-            _query_params.append(('email', email))
-            
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-
-
-
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/sessions/reset_all',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
 
     @validate_call
     def enterprise_delete_team_member(
@@ -6149,9 +5410,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -6188,7 +5448,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_delete_team_member_serialize(
             org_id=org_id,
@@ -6197,20 +5457,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "204": None,
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -6231,8 +5490,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -6243,26 +5501,22 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if member_id is not None:
-            _path_params['member_id'] = member_id
+            _path_params["member_id"] = member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
-
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}',
+            method="DELETE",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6272,11 +5526,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_team_member(
@@ -6288,9 +5539,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -6327,7 +5577,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_team_member_serialize(
             org_id=org_id,
@@ -6336,20 +5586,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TeamMember",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "TeamMember",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -6370,8 +5619,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -6382,32 +5630,27 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if member_id is not None:
-            _path_params['member_id'] = member_id
+            _path_params["member_id"] = member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6417,11 +5660,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_team_members(
@@ -6429,15 +5669,24 @@ class MiroApiEndpoints:
         org_id: Annotated[StrictStr, Field(description="The id of the Organization.")],
         team_id: Annotated[StrictStr, Field(description="The id of the Team.")],
         limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
-        cursor: Annotated[Optional[StrictStr], Field(description="An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.")] = None,
-        role: Annotated[Optional[StrictStr], Field(description=" Role query. Filters members by role using full word match. Accepted values are: * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"non_team\":   External user, non-team user. * \"team_guest\": Team-guest user, user with access only to a team without access to organization. ")] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request."
+            ),
+        ] = None,
+        role: Annotated[
+            Optional[StrictStr],
+            Field(
+                description=' Role query. Filters members by role using full word match. Accepted values are: * "member":     Team member with full member permissions. * "admin":      Admin of a team. Team member with permission to manage team. * "non_team":   External user, non-team user. * "team_guest": Team-guest user, user with access only to a team without access to organization. '
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -6456,7 +5705,7 @@ class MiroApiEndpoints:
         :type limit: int
         :param cursor: An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.
         :type cursor: str
-        :param role:  Role query. Filters members by role using full word match. Accepted values are: * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"non_team\":   External user, non-team user. * \"team_guest\": Team-guest user, user with access only to a team without access to organization. 
+        :param role:  Role query. Filters members by role using full word match. Accepted values are: * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"non_team\":   External user, non-team user. * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
         :type role: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -6478,7 +5727,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_team_members_serialize(
             org_id=org_id,
@@ -6489,20 +5738,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TeamMembersPage",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "TeamMembersPage",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -6525,8 +5773,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -6537,42 +5784,37 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         if role is not None:
-            
-            _query_params.append(('role', role))
-            
+
+            _query_params.append(("role", role))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/members',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/members",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6582,11 +5824,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_invite_team_member(
@@ -6598,9 +5837,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -6637,7 +5875,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_invite_team_member_serialize(
             org_id=org_id,
@@ -6646,21 +5884,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TeamMember",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '409': None,
-            '429': None,
+            "201": "TeamMember",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "409": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -6681,8 +5918,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -6693,9 +5929,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -6703,35 +5939,27 @@ class MiroApiEndpoints:
         if team_member_invite is not None:
             _body_params = team_member_invite
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/members',
+            method="POST",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/members",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6741,11 +5969,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_update_team_member(
@@ -6758,9 +5983,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -6799,7 +6023,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_update_team_member_serialize(
             org_id=org_id,
@@ -6809,20 +6033,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TeamMember",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "TeamMember",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -6844,8 +6067,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -6856,11 +6078,11 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         if member_id is not None:
-            _path_params['member_id'] = member_id
+            _path_params["member_id"] = member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -6868,35 +6090,27 @@ class MiroApiEndpoints:
         if team_member_changes is not None:
             _body_params = team_member_changes
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}',
+            method="PATCH",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/members/{member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -6906,12 +6120,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_get_default_team_settings(
@@ -6921,9 +6131,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -6956,27 +6165,26 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_default_team_settings_serialize(
             org_id=org_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TeamSettings",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "TeamSettings",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -6995,8 +6203,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -7007,28 +6214,23 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/default_teams_settings',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/default_teams_settings",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7038,11 +6240,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_team_settings(
@@ -7053,9 +6252,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -7090,7 +6288,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_team_settings_serialize(
             org_id=org_id,
@@ -7098,20 +6296,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TeamSettings",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "TeamSettings",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -7131,8 +6328,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -7143,30 +6339,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/settings',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/settings",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7176,11 +6367,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_update_team_settings(
@@ -7192,9 +6380,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -7231,7 +6418,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_update_team_settings_serialize(
             org_id=org_id,
@@ -7240,21 +6427,20 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TeamSettings",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '409': None,
-            '429': None,
+            "200": "TeamSettings",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "409": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -7275,8 +6461,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -7287,9 +6472,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -7297,35 +6482,27 @@ class MiroApiEndpoints:
         if team_settings_changes is not None:
             _body_params = team_settings_changes
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}/settings',
+            method="PATCH",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}/settings",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7335,12 +6512,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def enterprise_create_team(
@@ -7351,9 +6524,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -7388,7 +6560,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_create_team_serialize(
             org_id=org_id,
@@ -7396,20 +6568,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Team",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "201": "Team",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -7429,8 +6600,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -7441,7 +6611,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -7449,35 +6619,27 @@ class MiroApiEndpoints:
         if create_team_request is not None:
             _body_params = create_team_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/orgs/{org_id}/teams',
+            method="POST",
+            resource_path="/v2/orgs/{org_id}/teams",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7487,11 +6649,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_delete_team(
@@ -7502,9 +6661,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -7539,7 +6697,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_delete_team_serialize(
             org_id=org_id,
@@ -7547,20 +6705,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "204": None,
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -7580,8 +6737,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -7592,24 +6748,20 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
-
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}',
+            method="DELETE",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7619,11 +6771,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_team(
@@ -7634,9 +6783,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -7671,7 +6819,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_team_serialize(
             org_id=org_id,
@@ -7679,20 +6827,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Team",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "Team",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -7712,8 +6859,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -7724,30 +6870,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7757,26 +6898,32 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_get_teams(
         self,
         org_id: Annotated[StrictStr, Field(description="The id of the Organization.")],
         limit: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = None,
-        cursor: Annotated[Optional[StrictStr], Field(description="An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.")] = None,
-        name: Annotated[Optional[StrictStr], Field(description="Name query. Filters teams by name using case insensitive partial match. A value \"dev\" will return both \"Developer's team\" and \"Team for developers\".")] = None,
+        cursor: Annotated[
+            Optional[StrictStr],
+            Field(
+                description="An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request."
+            ),
+        ] = None,
+        name: Annotated[
+            Optional[StrictStr],
+            Field(
+                description='Name query. Filters teams by name using case insensitive partial match. A value "dev" will return both "Developer\'s team" and "Team for developers".'
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -7815,7 +6962,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_get_teams_serialize(
             org_id=org_id,
@@ -7825,20 +6972,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TeamsPage",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "TeamsPage",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -7860,8 +7006,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -7872,40 +7017,35 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         if name is not None:
-            
-            _query_params.append(('name', name))
-            
+
+            _query_params.append(("name", name))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/orgs/{org_id}/teams',
+            method="GET",
+            resource_path="/v2/orgs/{org_id}/teams",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -7915,11 +7055,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def enterprise_update_team(
@@ -7931,9 +7068,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -7970,7 +7106,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._enterprise_update_team_serialize(
             org_id=org_id,
@@ -7979,20 +7115,19 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Team",
-            '400': None,
-            '401': None,
-            '403': None,
-            '404': None,
-            '429': None,
+            "200": "Team",
+            "400": None,
+            "401": None,
+            "403": None,
+            "404": None,
+            "429": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -8013,8 +7148,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -8025,9 +7159,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if org_id is not None:
-            _path_params['org_id'] = org_id
+            _path_params["org_id"] = org_id
         if team_id is not None:
-            _path_params['team_id'] = team_id
+            _path_params["team_id"] = team_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -8035,35 +7169,27 @@ class MiroApiEndpoints:
         if team_changes is not None:
             _body_params = team_changes
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/orgs/{org_id}/teams/{team_id}',
+            method="PATCH",
+            resource_path="/v2/orgs/{org_id}/teams/{team_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8073,12 +7199,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_board_subscription(
@@ -8088,9 +7210,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -8123,25 +7244,24 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_board_subscription_serialize(
             create_board_subscription_request=create_board_subscription_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "BoardSubscription",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "BoardSubscription",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -8160,8 +7280,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -8178,35 +7297,27 @@ class MiroApiEndpoints:
         if create_board_subscription_request is not None:
             _body_params = create_board_subscription_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2-experimental/webhooks/board_subscriptions',
+            method="POST",
+            resource_path="/v2-experimental/webhooks/board_subscriptions",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8216,23 +7327,24 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_subscription_by_id(
         self,
-        subscription_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the subscription that you want to delete")],
+        subscription_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the subscription that you want to delete"
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -8265,25 +7377,24 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_subscription_by_id_serialize(
             subscription_id=subscription_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -8302,8 +7413,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -8314,28 +7424,23 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if subscription_id is not None:
-            _path_params['subscription_id'] = subscription_id
+            _path_params["subscription_id"] = subscription_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2-experimental/webhooks/subscriptions/{subscription_id}',
+            method="DELETE",
+            resource_path="/v2-experimental/webhooks/subscriptions/{subscription_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8345,23 +7450,24 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_subscription_by_id(
         self,
-        subscription_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the subscription that you want to retrieve")],
+        subscription_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the subscription that you want to retrieve"
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -8394,25 +7500,24 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_subscription_by_id_serialize(
             subscription_id=subscription_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericSubscription",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "GenericSubscription",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -8431,8 +7536,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -8443,28 +7547,23 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if subscription_id is not None:
-            _path_params['subscription_id'] = subscription_id
+            _path_params["subscription_id"] = subscription_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2-experimental/webhooks/subscriptions/{subscription_id}',
+            method="GET",
+            resource_path="/v2-experimental/webhooks/subscriptions/{subscription_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8474,11 +7573,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_user_subscriptions(
@@ -8489,9 +7585,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -8526,7 +7621,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_user_subscriptions_serialize(
             limit=limit,
@@ -8534,18 +7629,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericSubscriptionsCursorPaged",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "GenericSubscriptionsCursorPaged",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -8565,8 +7659,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -8578,33 +7671,28 @@ class MiroApiEndpoints:
         # process the path parameters
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2-experimental/webhooks/subscriptions',
+            method="GET",
+            resource_path="/v2-experimental/webhooks/subscriptions",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8614,11 +7702,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_board_subscription(
@@ -8629,9 +7714,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -8666,7 +7750,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_board_subscription_serialize(
             subscription_id=subscription_id,
@@ -8674,18 +7758,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardSubscription",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "BoardSubscription",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -8705,8 +7788,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -8717,7 +7799,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if subscription_id is not None:
-            _path_params['subscription_id'] = subscription_id
+            _path_params["subscription_id"] = subscription_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -8725,35 +7807,27 @@ class MiroApiEndpoints:
         if update_board_subscription_request is not None:
             _body_params = update_board_subscription_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2-experimental/webhooks/board_subscriptions/{subscription_id}',
+            method="PATCH",
+            resource_path="/v2-experimental/webhooks/board_subscriptions/{subscription_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8763,25 +7837,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_app_card_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         app_card_create_request: AppCardCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -8816,7 +7890,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_app_card_item_serialize(
             board_id=board_id,
@@ -8824,18 +7898,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "AppCardItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "AppCardItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -8855,8 +7928,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -8867,7 +7939,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -8875,35 +7947,27 @@ class MiroApiEndpoints:
         if app_card_create_request is not None:
             _body_params = app_card_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/app_cards',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/app_cards",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -8913,24 +7977,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_app_card_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete an item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete an item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -8965,7 +8035,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_app_card_item_serialize(
             board_id=board_id,
@@ -8973,18 +8043,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -9004,8 +8073,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -9016,30 +8084,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/app_cards/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/app_cards/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9049,24 +8112,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_app_card_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -9101,7 +8170,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_app_card_item_serialize(
             board_id=board_id,
@@ -9109,18 +8178,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AppCardItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "AppCardItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -9140,8 +8208,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -9152,30 +8219,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/app_cards/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/app_cards/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9185,25 +8247,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_app_card_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         app_card_update_request: AppCardUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -9240,7 +8308,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_app_card_item_serialize(
             board_id=board_id,
@@ -9249,18 +8317,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "AppCardItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "AppCardItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -9281,8 +8348,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -9293,9 +8359,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -9303,35 +8369,27 @@ class MiroApiEndpoints:
         if app_card_update_request is not None:
             _body_params = app_card_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/app_cards/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/app_cards/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9341,26 +8399,26 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def get_board_members(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board to which the board member belongs.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board to which the board member belongs."
+            ),
+        ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         offset: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -9397,7 +8455,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_board_members_serialize(
             board_id=board_id,
@@ -9406,18 +8464,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardMembersPagedResponse",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "BoardMembersPagedResponse",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -9438,8 +8495,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -9450,36 +8506,31 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if offset is not None:
-            
-            _query_params.append(('offset', offset))
-            
+
+            _query_params.append(("offset", offset))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/members',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/members",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9489,24 +8540,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_specific_board_member(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board to which the board member belongs.")],
-        board_member_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board member whose role you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board to which the board member belongs."
+            ),
+        ],
+        board_member_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board member whose role you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -9541,7 +8598,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_specific_board_member_serialize(
             board_id=board_id,
@@ -9549,18 +8606,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardMemberWithLinks",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "BoardMemberWithLinks",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -9580,8 +8636,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -9592,30 +8647,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if board_member_id is not None:
-            _path_params['board_member_id'] = board_member_id
+            _path_params["board_member_id"] = board_member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/members/{board_member_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/members/{board_member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9625,24 +8675,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def remove_board_member(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete an item.")],
-        board_member_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board member whose role you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete an item."
+            ),
+        ],
+        board_member_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board member whose role you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -9677,7 +8733,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._remove_board_member_serialize(
             board_id=board_id,
@@ -9685,18 +8741,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -9716,8 +8771,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -9728,30 +8782,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if board_member_id is not None:
-            _path_params['board_member_id'] = board_member_id
+            _path_params["board_member_id"] = board_member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/members/{board_member_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/members/{board_member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9761,24 +8810,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def share_board(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board to which the board member belongs.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board to which the board member belongs."
+            ),
+        ],
         board_members_invite: BoardMembersInvite,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -9813,7 +8863,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._share_board_serialize(
             board_id=board_id,
@@ -9821,18 +8871,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "InvitationResult",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "InvitationResult",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -9852,8 +8901,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -9864,7 +8912,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -9872,35 +8920,27 @@ class MiroApiEndpoints:
         if board_members_invite is not None:
             _body_params = board_members_invite
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/members',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/members",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -9910,25 +8950,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_board_member(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to update the role of the board member.")],
-        board_member_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board member whose role you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board for which you want to update the role of the board member."
+            ),
+        ],
+        board_member_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board member whose role you want to update."
+            ),
+        ],
         board_member_changes: BoardMemberChanges,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -9965,7 +9011,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_board_member_serialize(
             board_id=board_id,
@@ -9974,18 +9020,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardMemberWithLinks",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "BoardMemberWithLinks",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -10006,8 +9051,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -10018,9 +9062,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if board_member_id is not None:
-            _path_params['board_member_id'] = board_member_id
+            _path_params["board_member_id"] = board_member_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -10028,35 +9072,27 @@ class MiroApiEndpoints:
         if board_member_changes is not None:
             _body_params = board_member_changes
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/members/{board_member_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/members/{board_member_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10066,25 +9102,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def copy_board(
         self,
-        copy_from: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board that you want to copy.")],
+        copy_from: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board that you want to copy."
+            ),
+        ],
         copy_board_changes: Optional[CopyBoardChanges] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -10119,7 +9155,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._copy_board_serialize(
             copy_from=copy_from,
@@ -10127,18 +9163,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "BoardWithLinksAndWithoutProject",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "BoardWithLinksAndWithoutProject",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -10158,8 +9193,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -10171,44 +9205,36 @@ class MiroApiEndpoints:
         # process the path parameters
         # process the query parameters
         if copy_from is not None:
-            
-            _query_params.append(('copy_from', copy_from))
-            
+
+            _query_params.append(("copy_from", copy_from))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
         if copy_board_changes is not None:
             _body_params = copy_board_changes
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PUT',
-            resource_path='/v2/boards',
+            method="PUT",
+            resource_path="/v2/boards",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10218,11 +9244,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def create_board(
@@ -10232,9 +9255,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -10267,25 +9289,24 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_board_serialize(
             board_changes=board_changes,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "BoardWithLinks",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "BoardWithLinks",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -10304,8 +9325,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -10322,35 +9342,27 @@ class MiroApiEndpoints:
         if board_changes is not None:
             _body_params = board_changes
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards',
+            method="POST",
+            resource_path="/v2/boards",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10360,23 +9372,24 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_board(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -10409,25 +9422,24 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_board_serialize(
             board_id=board_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -10446,8 +9458,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -10458,28 +9469,23 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10489,11 +9495,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_boards(
@@ -10509,9 +9512,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -10556,7 +9558,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_boards_serialize(
             team_id=team_id,
@@ -10569,18 +9571,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardsPagedResponse",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "BoardsPagedResponse",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -10605,8 +9606,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -10618,53 +9618,48 @@ class MiroApiEndpoints:
         # process the path parameters
         # process the query parameters
         if team_id is not None:
-            
-            _query_params.append(('team_id', team_id))
-            
+
+            _query_params.append(("team_id", team_id))
+
         if project_id is not None:
-            
-            _query_params.append(('project_id', project_id))
-            
+
+            _query_params.append(("project_id", project_id))
+
         if query is not None:
-            
-            _query_params.append(('query', query))
-            
+
+            _query_params.append(("query", query))
+
         if owner is not None:
-            
-            _query_params.append(('owner', owner))
-            
+
+            _query_params.append(("owner", owner))
+
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if offset is not None:
-            
-            _query_params.append(('offset', offset))
-            
+
+            _query_params.append(("offset", offset))
+
         if sort is not None:
-            
-            _query_params.append(('sort', sort))
-            
+
+            _query_params.append(("sort", sort))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards',
+            method="GET",
+            resource_path="/v2/boards",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10674,23 +9669,24 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_specific_board(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -10723,25 +9719,24 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_specific_board_serialize(
             board_id=board_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardWithLinksAndLastOpened",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "BoardWithLinksAndLastOpened",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -10760,8 +9755,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -10772,28 +9766,23 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10803,24 +9792,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_board(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board that you want to update."
+            ),
+        ],
         board_changes: BoardChanges,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -10855,7 +9845,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_board_serialize(
             board_id=board_id,
@@ -10863,18 +9853,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "BoardWithLinks",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "BoardWithLinks",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -10894,8 +9883,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -10906,7 +9894,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -10914,35 +9902,27 @@ class MiroApiEndpoints:
         if board_changes is not None:
             _body_params = board_changes
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -10952,25 +9932,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_card_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         card_create_request: CardCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -11005,7 +9985,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_card_item_serialize(
             board_id=board_id,
@@ -11013,18 +9993,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "CardItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "CardItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -11044,8 +10023,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -11056,7 +10034,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -11064,35 +10042,27 @@ class MiroApiEndpoints:
         if card_create_request is not None:
             _body_params = card_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/cards',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/cards",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11102,24 +10072,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_card_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -11154,7 +10130,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_card_item_serialize(
             board_id=board_id,
@@ -11162,18 +10138,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -11193,8 +10168,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -11205,30 +10179,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/cards/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/cards/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11238,24 +10207,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_card_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -11290,7 +10265,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_card_item_serialize(
             board_id=board_id,
@@ -11298,18 +10273,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CardItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "CardItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -11329,8 +10303,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -11341,30 +10314,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/cards/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/cards/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11374,25 +10342,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_card_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         card_update_request: CardUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -11429,7 +10403,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_card_item_serialize(
             board_id=board_id,
@@ -11438,18 +10412,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "CardItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "CardItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -11470,8 +10443,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -11482,9 +10454,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -11492,35 +10464,27 @@ class MiroApiEndpoints:
         if card_update_request is not None:
             _body_params = card_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/cards/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/cards/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11530,25 +10494,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_connector(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to create the connector.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board for which you want to create the connector."
+            ),
+        ],
         connector_creation_data: ConnectorCreationData,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -11583,7 +10547,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_connector_serialize(
             board_id=board_id,
@@ -11591,18 +10555,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ConnectorWithLinks",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ConnectorWithLinks",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -11622,8 +10585,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -11634,7 +10596,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -11642,35 +10604,27 @@ class MiroApiEndpoints:
         if connector_creation_data is not None:
             _body_params = connector_creation_data
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/connectors',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/connectors",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11680,24 +10634,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_connector(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the connector.")],
-        connector_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the connector that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the connector."
+            ),
+        ],
+        connector_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the connector that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -11732,7 +10692,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_connector_serialize(
             board_id=board_id,
@@ -11740,18 +10700,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -11771,8 +10730,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -11783,30 +10741,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if connector_id is not None:
-            _path_params['connector_id'] = connector_id
+            _path_params["connector_id"] = connector_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/connectors/{connector_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/connectors/{connector_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11816,24 +10769,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_connector(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific connector.")],
-        connector_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the connector that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific connector."
+            ),
+        ],
+        connector_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the connector that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -11868,7 +10827,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_connector_serialize(
             board_id=board_id,
@@ -11876,18 +10835,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ConnectorWithLinks",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ConnectorWithLinks",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -11907,8 +10865,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -11919,30 +10876,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if connector_id is not None:
-            _path_params['connector_id'] = connector_id
+            _path_params["connector_id"] = connector_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/connectors/{connector_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/connectors/{connector_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -11952,25 +10904,26 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_connectors(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a list of connectors.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a list of connectors."
+            ),
+        ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         cursor: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -12007,7 +10960,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_connectors_serialize(
             board_id=board_id,
@@ -12016,18 +10969,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ConnectorsCursorPaged",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ConnectorsCursorPaged",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -12048,8 +11000,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -12060,36 +11011,31 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/connectors',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/connectors",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12099,25 +11045,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_connector(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to update the connector.")],
-        connector_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the connector that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board for which you want to update the connector."
+            ),
+        ],
+        connector_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the connector that you want to update."
+            ),
+        ],
         connector_changes_data: ConnectorChangesData,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -12154,7 +11106,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_connector_serialize(
             board_id=board_id,
@@ -12163,18 +11115,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ConnectorWithLinks",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ConnectorWithLinks",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -12195,8 +11146,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -12207,9 +11157,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if connector_id is not None:
-            _path_params['connector_id'] = connector_id
+            _path_params["connector_id"] = connector_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -12217,35 +11167,27 @@ class MiroApiEndpoints:
         if connector_changes_data is not None:
             _body_params = connector_changes_data
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/connectors/{connector_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/connectors/{connector_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12255,178 +11197,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-
-    @validate_call
-    def create_document_item_using_file_from_device(
-        self,
-        board_id_platform_file_upload: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
-        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
-        data: Optional[CreateDocumentItemUsingFileFromDeviceRequestData] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> DocumentItem:
-        """Create document item using file from device
-
-        Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-
-        :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id_platform_file_upload: str
-        :param resource: Select a file to upload (required)
-        :type resource: bytearray
-        :param data:
-        :type data: CreateDocumentItemUsingFileFromDeviceRequestData
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._create_document_item_using_file_from_device_serialize(
-            board_id_platform_file_upload=board_id_platform_file_upload,
-            resource=resource,
-            data=data,
             _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
         )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "DocumentItem",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _create_document_item_using_file_from_device_serialize(
-        self,
-        board_id_platform_file_upload,
-        resource,
-        data,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if board_id_platform_file_upload is not None:
-            _path_params['board_id_PlatformFileUpload'] = board_id_platform_file_upload
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        if data is not None:
-            _form_params.append(('data', data))
-        if resource is not None:
-            _files['resource'] = resource
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'multipart/form-data'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id_PlatformFileUpload}/documents',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
 
     @validate_call
     def create_document_item_using_url(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         document_create_request: DocumentCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -12461,7 +11250,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_document_item_using_url_serialize(
             board_id=board_id,
@@ -12469,18 +11258,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "DocumentItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "DocumentItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -12500,8 +11288,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -12512,7 +11299,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -12520,35 +11307,27 @@ class MiroApiEndpoints:
         if document_create_request is not None:
             _body_params = document_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/documents',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/documents",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12558,24 +11337,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_document_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -12610,7 +11395,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_document_item_serialize(
             board_id=board_id,
@@ -12618,18 +11403,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -12649,8 +11433,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -12661,30 +11444,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/documents/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/documents/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12694,24 +11472,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_document_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -12746,7 +11530,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_document_item_serialize(
             board_id=board_id,
@@ -12754,18 +11538,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "DocumentItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -12785,8 +11568,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -12797,30 +11579,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/documents/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/documents/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -12830,185 +11607,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def update_document_item_using_file_from_device(
-        self,
-        board_id_platform_file_upload: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
-        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
-        data: Optional[UploadFileFromDeviceData] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> DocumentItem:
-        """Update document item using file from device
-
-        Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-
-        :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id_platform_file_upload: str
-        :param item_id: Unique identifier (ID) of the item that you want to update. (required)
-        :type item_id: str
-        :param resource: Select a file to upload (required)
-        :type resource: bytearray
-        :param data:
-        :type data: UploadFileFromDeviceData
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._update_document_item_using_file_from_device_serialize(
-            board_id_platform_file_upload=board_id_platform_file_upload,
-            item_id=item_id,
-            resource=resource,
-            data=data,
             _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
         )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentItem",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _update_document_item_using_file_from_device_serialize(
-        self,
-        board_id_platform_file_upload,
-        item_id,
-        resource,
-        data,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if board_id_platform_file_upload is not None:
-            _path_params['board_id_PlatformFileUpload'] = board_id_platform_file_upload
-        if item_id is not None:
-            _path_params['item_id'] = item_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        if data is not None:
-            _form_params.append(('data', data))
-        if resource is not None:
-            _files['resource'] = resource
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'multipart/form-data'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id_PlatformFileUpload}/documents/{item_id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
 
     @validate_call
     def update_document_item_using_url(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         document_update_request: DocumentUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -13045,7 +11668,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_document_item_using_url_serialize(
             board_id=board_id,
@@ -13054,18 +11677,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "DocumentItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "DocumentItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -13086,8 +11708,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -13098,9 +11719,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -13108,35 +11729,27 @@ class MiroApiEndpoints:
         if document_update_request is not None:
             _body_params = document_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/documents/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/documents/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13146,25 +11759,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_embed_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         embed_create_request: EmbedCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -13199,7 +11812,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_embed_item_serialize(
             board_id=board_id,
@@ -13207,18 +11820,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "EmbedItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "EmbedItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -13238,8 +11850,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -13250,7 +11861,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -13258,35 +11869,27 @@ class MiroApiEndpoints:
         if embed_create_request is not None:
             _body_params = embed_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/embeds',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/embeds",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13296,24 +11899,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_embed_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -13348,7 +11957,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_embed_item_serialize(
             board_id=board_id,
@@ -13356,18 +11965,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -13387,8 +11995,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -13399,30 +12006,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/embeds/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/embeds/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13432,24 +12034,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_embed_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -13484,7 +12092,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_embed_item_serialize(
             board_id=board_id,
@@ -13492,18 +12100,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbedItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "EmbedItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -13523,8 +12130,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -13535,30 +12141,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/embeds/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/embeds/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13568,25 +12169,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_embed_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         embed_update_request: EmbedUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -13623,7 +12230,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_embed_item_serialize(
             board_id=board_id,
@@ -13632,18 +12239,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "EmbedItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "EmbedItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -13664,8 +12270,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -13676,9 +12281,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -13686,35 +12291,27 @@ class MiroApiEndpoints:
         if embed_update_request is not None:
             _body_params = embed_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/embeds/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/embeds/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13724,25 +12321,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_frame_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create a frame.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create a frame."
+            ),
+        ],
         frame_create_request: FrameCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -13777,7 +12374,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_frame_item_serialize(
             board_id=board_id,
@@ -13785,18 +12382,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "FrameItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "FrameItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -13816,8 +12412,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -13828,7 +12423,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -13836,35 +12431,27 @@ class MiroApiEndpoints:
         if frame_create_request is not None:
             _body_params = frame_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/frames',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/frames",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -13874,24 +12461,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_frame_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the frame.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the frame that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the frame."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the frame that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -13926,7 +12519,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_frame_item_serialize(
             board_id=board_id,
@@ -13934,18 +12527,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -13965,8 +12557,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -13977,30 +12568,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/frames/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/frames/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14010,24 +12596,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_frame_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board that contains the frame that you want to retrieve")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the frame that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board that contains the frame that you want to retrieve"
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the frame that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -14062,7 +12654,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_frame_item_serialize(
             board_id=board_id,
@@ -14070,18 +12662,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FrameItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "FrameItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -14101,8 +12692,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -14113,30 +12703,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/frames/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/frames/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14146,25 +12731,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_frame_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the frame.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the frame that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the frame."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the frame that you want to update."
+            ),
+        ],
         frame_update_request: FrameUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -14201,7 +12792,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_frame_item_serialize(
             board_id=board_id,
@@ -14210,18 +12801,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "FrameItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "FrameItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -14242,8 +12832,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -14254,9 +12843,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -14264,35 +12853,27 @@ class MiroApiEndpoints:
         if frame_update_request is not None:
             _body_params = frame_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/frames/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/frames/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14302,178 +12883,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-
-    @validate_call
-    def create_image_item_using_local_file(
-        self,
-        board_id_platform_file_upload: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
-        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
-        data: Optional[UploadFileFromDeviceData] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ImageItem:
-        """Create image item using file from device
-
-        Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-
-        :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to create the item. (required)
-        :type board_id_platform_file_upload: str
-        :param resource: Select a file to upload (required)
-        :type resource: bytearray
-        :param data:
-        :type data: UploadFileFromDeviceData
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._create_image_item_using_local_file_serialize(
-            board_id_platform_file_upload=board_id_platform_file_upload,
-            resource=resource,
-            data=data,
             _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
         )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "ImageItem",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _create_image_item_using_local_file_serialize(
-        self,
-        board_id_platform_file_upload,
-        resource,
-        data,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if board_id_platform_file_upload is not None:
-            _path_params['board_id_PlatformFileUpload'] = board_id_platform_file_upload
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        if data is not None:
-            _form_params.append(('data', data))
-        if resource is not None:
-            _files['resource'] = resource
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'multipart/form-data'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id_PlatformFileUpload}/images',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
 
     @validate_call
     def create_image_item_using_url(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         image_create_request: ImageCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -14508,7 +12936,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_image_item_using_url_serialize(
             board_id=board_id,
@@ -14516,18 +12944,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "ImageItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "ImageItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -14547,8 +12974,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -14559,7 +12985,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -14567,35 +12993,27 @@ class MiroApiEndpoints:
         if image_create_request is not None:
             _body_params = image_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/images',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/images",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14605,24 +13023,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_image_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -14657,7 +13081,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_image_item_serialize(
             board_id=board_id,
@@ -14665,18 +13089,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -14696,8 +13119,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -14708,30 +13130,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/images/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/images/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14741,24 +13158,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_image_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -14793,7 +13216,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_image_item_serialize(
             board_id=board_id,
@@ -14801,18 +13224,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ImageItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ImageItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -14832,8 +13254,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -14844,30 +13265,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/images/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/images/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -14877,185 +13293,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def update_image_item_using_file_from_device(
-        self,
-        board_id_platform_file_upload: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
-        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
-        data: Optional[UploadFileFromDeviceData] = None,
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ImageItem:
-        """Update image item using file from device
-
-        Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
-
-        :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id_platform_file_upload: str
-        :param item_id: Unique identifier (ID) of the item that you want to update. (required)
-        :type item_id: str
-        :param resource: Select a file to upload (required)
-        :type resource: bytearray
-        :param data:
-        :type data: UploadFileFromDeviceData
-        :param _request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type _host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._update_image_item_using_file_from_device_serialize(
-            board_id_platform_file_upload=board_id_platform_file_upload,
-            item_id=item_id,
-            resource=resource,
-            data=data,
             _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
         )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ImageItem",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-    def _update_image_item_using_file_from_device_serialize(
-        self,
-        board_id_platform_file_upload,
-        item_id,
-        resource,
-        data,
-        _request_auth,
-        _content_type,
-        _headers,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if board_id_platform_file_upload is not None:
-            _path_params['board_id_PlatformFileUpload'] = board_id_platform_file_upload
-        if item_id is not None:
-            _path_params['item_id'] = item_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        if data is not None:
-            _form_params.append(('data', data))
-        if resource is not None:
-            _files['resource'] = resource
-        # process the body parameter
-
-
-        # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
-        )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'multipart/form-data'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-        ]
-
-        return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id_PlatformFileUpload}/images/{item_id}',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
 
     @validate_call
     def update_image_item_using_url(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         image_update_request: ImageUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -15092,7 +13354,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_image_item_using_url_serialize(
             board_id=board_id,
@@ -15101,18 +13363,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ImageItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ImageItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -15133,8 +13394,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -15145,9 +13405,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -15155,35 +13415,27 @@ class MiroApiEndpoints:
         if image_update_request is not None:
             _body_params = image_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/images/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/images/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15193,25 +13445,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def delete_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id_platform: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -15222,8 +13479,8 @@ class MiroApiEndpoints:
 
         Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board from which you want to delete the item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board from which you want to delete the item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to delete. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -15246,26 +13503,25 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_item_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -15275,7 +13531,7 @@ class MiroApiEndpoints:
 
     def _delete_item_serialize(
         self,
-        board_id,
+        board_id_platform,
         item_id,
         _request_auth,
         _content_type,
@@ -15285,8 +13541,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -15296,31 +13551,26 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params["board_id_Platform"] = board_id_platform
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/items/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id_Platform}/items/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15330,24 +13580,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_item_experimental(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -15382,7 +13638,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_item_experimental_serialize(
             board_id=board_id,
@@ -15390,18 +13646,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -15421,8 +13676,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -15433,30 +13687,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2-experimental/boards/{board_id}/items/{item_id}',
+            method="DELETE",
+            resource_path="/v2-experimental/boards/{board_id}/items/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15466,16 +13715,18 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_items(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board for which you want to retrieve the list of available items.")],
+        board_id_platform: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board for which you want to retrieve the list of available items."
+            ),
+        ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         type: Optional[StrictStr] = None,
         cursor: Optional[StrictStr] = None,
@@ -15483,9 +13734,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -15496,8 +13746,8 @@ class MiroApiEndpoints:
 
         Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board for which you want to retrieve the list of available items. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board for which you want to retrieve the list of available items. (required)
+        :type board_id_platform: str
         :param limit:
         :type limit: str
         :param type:
@@ -15524,28 +13774,27 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_items_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             limit=limit,
             type=type,
             cursor=cursor,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericItemCursorPaged",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "GenericItemCursorPaged",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -15555,7 +13804,7 @@ class MiroApiEndpoints:
 
     def _get_items_serialize(
         self,
-        board_id,
+        board_id_platform,
         limit,
         type,
         cursor,
@@ -15567,8 +13816,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -15578,41 +13826,36 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params["board_id_Platform"] = board_id_platform
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if type is not None:
-            
-            _query_params.append(('type', type))
-            
+
+            _query_params.append(("type", type))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/items',
+            method="GET",
+            resource_path="/v2/boards/{board_id_Platform}/items",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15622,17 +13865,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_items_within_frame(
         self,
-        board_id_platform_containers: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.")],
-        parent_item_id: Annotated[str, Field(strict=True, description="ID of the frame for which you want to retrieve the list of available items.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items."
+            ),
+        ],
+        parent_item_id: Annotated[
+            str,
+            Field(
+                strict=True,
+                description="ID of the frame for which you want to retrieve the list of available items.",
+            ),
+        ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         type: Optional[StrictStr] = None,
         cursor: Optional[StrictStr] = None,
@@ -15640,9 +13891,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -15653,8 +13903,8 @@ class MiroApiEndpoints:
 
         Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id_platform_containers: Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items. (required)
-        :type board_id_platform_containers: str
+        :param board_id: Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items. (required)
+        :type board_id: str
         :param parent_item_id: ID of the frame for which you want to retrieve the list of available items. (required)
         :type parent_item_id: str
         :param limit:
@@ -15683,10 +13933,10 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_items_within_frame_serialize(
-            board_id_platform_containers=board_id_platform_containers,
+            board_id=board_id,
             parent_item_id=parent_item_id,
             limit=limit,
             type=type,
@@ -15694,18 +13944,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericItemCursorPaged",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "GenericItemCursorPaged",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -15715,7 +13964,7 @@ class MiroApiEndpoints:
 
     def _get_items_within_frame_serialize(
         self,
-        board_id_platform_containers,
+        board_id,
         parent_item_id,
         limit,
         type,
@@ -15728,8 +13977,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -15739,45 +13987,40 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform_containers is not None:
-            _path_params['board_id_PlatformContainers'] = board_id_platform_containers
+        if board_id is not None:
+            _path_params["board_id"] = board_id
         # process the query parameters
         if parent_item_id is not None:
-            
-            _query_params.append(('parent_item_id', parent_item_id))
-            
+
+            _query_params.append(("parent_item_id", parent_item_id))
+
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if type is not None:
-            
-            _query_params.append(('type', type))
-            
+
+            _query_params.append(("type", type))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id_PlatformContainers}/items',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/items",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15787,24 +14030,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_specific_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id_platform: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -15815,8 +14064,8 @@ class MiroApiEndpoints:
 
         Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board from which you want to retrieve a specific item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to retrieve. (required)
         :type item_id: str
         :param _request_timeout: timeout setting for this request. If one
@@ -15839,26 +14088,25 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_specific_item_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "GenericItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -15868,7 +14116,7 @@ class MiroApiEndpoints:
 
     def _get_specific_item_serialize(
         self,
-        board_id,
+        board_id_platform,
         item_id,
         _request_auth,
         _content_type,
@@ -15878,8 +14126,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -15889,31 +14136,26 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params["board_id_Platform"] = board_id_platform
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/items/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id_Platform}/items/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -15923,25 +14165,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_item_position_or_parent(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id_platform: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         generic_item_update: GenericItemUpdate,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -15952,8 +14200,8 @@ class MiroApiEndpoints:
 
         Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
 
-        :param board_id: Unique identifier (ID) of the board where you want to update the item. (required)
-        :type board_id: str
+        :param board_id_platform: Unique identifier (ID) of the board where you want to update the item. (required)
+        :type board_id_platform: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
         :param generic_item_update: (required)
@@ -15978,27 +14226,26 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_item_position_or_parent_serialize(
-            board_id=board_id,
+            board_id_platform=board_id_platform,
             item_id=item_id,
             generic_item_update=generic_item_update,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GenericItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "GenericItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -16008,7 +14255,7 @@ class MiroApiEndpoints:
 
     def _update_item_position_or_parent_serialize(
         self,
-        board_id,
+        board_id_platform,
         item_id,
         generic_item_update,
         _request_auth,
@@ -16019,8 +14266,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -16030,10 +14276,10 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id is not None:
-            _path_params['board_id'] = board_id
+        if board_id_platform is not None:
+            _path_params["board_id_Platform"] = board_id_platform
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -16041,35 +14287,27 @@ class MiroApiEndpoints:
         if generic_item_update is not None:
             _body_params = generic_item_update
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/items/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id_Platform}/items/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16079,25 +14317,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_shape_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         shape_create_request: ShapeCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -16132,7 +14370,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_shape_item_serialize(
             board_id=board_id,
@@ -16140,18 +14378,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "ShapeItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "ShapeItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -16171,8 +14408,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -16183,7 +14419,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -16191,35 +14427,27 @@ class MiroApiEndpoints:
         if shape_create_request is not None:
             _body_params = shape_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/shapes',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/shapes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16229,24 +14457,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_shape_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -16281,7 +14515,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_shape_item_serialize(
             board_id=board_id,
@@ -16289,18 +14523,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -16320,8 +14553,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -16332,30 +14564,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/shapes/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/shapes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16365,24 +14592,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_shape_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -16417,7 +14650,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_shape_item_serialize(
             board_id=board_id,
@@ -16425,18 +14658,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ShapeItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ShapeItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -16456,8 +14688,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -16468,30 +14699,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/shapes/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/shapes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16501,25 +14727,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_shape_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         shape_update_request: ShapeUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -16556,7 +14788,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_shape_item_serialize(
             board_id=board_id,
@@ -16565,18 +14797,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ShapeItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "ShapeItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -16597,8 +14828,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -16609,9 +14839,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -16619,35 +14849,27 @@ class MiroApiEndpoints:
         if shape_update_request is not None:
             _body_params = shape_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/shapes/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/shapes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16657,25 +14879,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_sticky_note_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         sticky_note_create_request: StickyNoteCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -16710,7 +14932,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_sticky_note_item_serialize(
             board_id=board_id,
@@ -16718,18 +14940,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "StickyNoteItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "StickyNoteItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -16749,8 +14970,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -16761,7 +14981,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -16769,35 +14989,27 @@ class MiroApiEndpoints:
         if sticky_note_create_request is not None:
             _body_params = sticky_note_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/sticky_notes',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/sticky_notes",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16807,24 +15019,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_sticky_note_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -16859,7 +15077,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_sticky_note_item_serialize(
             board_id=board_id,
@@ -16867,18 +15085,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -16898,8 +15115,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -16910,30 +15126,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/sticky_notes/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/sticky_notes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -16943,24 +15154,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_sticky_note_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -16995,7 +15212,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_sticky_note_item_serialize(
             board_id=board_id,
@@ -17003,18 +15220,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StickyNoteItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "StickyNoteItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -17034,8 +15250,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -17046,30 +15261,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/sticky_notes/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/sticky_notes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -17079,25 +15289,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_sticky_note_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         sticky_note_update_request: StickyNoteUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -17134,7 +15350,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_sticky_note_item_serialize(
             board_id=board_id,
@@ -17143,18 +15359,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "StickyNoteItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "StickyNoteItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -17175,8 +15390,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -17187,9 +15401,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -17197,35 +15411,27 @@ class MiroApiEndpoints:
         if sticky_note_update_request is not None:
             _body_params = sticky_note_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/sticky_notes/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/sticky_notes/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -17235,26 +15441,36 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def attach_tag_to_item(
         self,
-        board_id_platform_tags: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board with the item that you want to add a tag to.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item to which you want to add a tag.")],
-        tag_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the tag you want to add to the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board with the item that you want to add a tag to."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item to which you want to add a tag."
+            ),
+        ],
+        tag_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the tag you want to add to the item."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -17265,8 +15481,8 @@ class MiroApiEndpoints:
 
         Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:   [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id_platform_tags: Unique identifier (ID) of the board with the item that you want to add a tag to. (required)
-        :type board_id_platform_tags: str
+        :param board_id: Unique identifier (ID) of the board with the item that you want to add a tag to. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item to which you want to add a tag. (required)
         :type item_id: str
         :param tag_id: Unique identifier (ID) of the tag you want to add to the item. (required)
@@ -17291,27 +15507,26 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._attach_tag_to_item_serialize(
-            board_id_platform_tags=board_id_platform_tags,
+            board_id=board_id,
             item_id=item_id,
             tag_id=tag_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "204": "object",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -17321,7 +15536,7 @@ class MiroApiEndpoints:
 
     def _attach_tag_to_item_serialize(
         self,
-        board_id_platform_tags,
+        board_id,
         item_id,
         tag_id,
         _request_auth,
@@ -17332,8 +15547,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -17343,35 +15557,30 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform_tags is not None:
-            _path_params['board_id_PlatformTags'] = board_id_platform_tags
+        if board_id is not None:
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         if tag_id is not None:
-            
-            _query_params.append(('tag_id', tag_id))
-            
+
+            _query_params.append(("tag_id", tag_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id_PlatformTags}/items/{item_id}',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/items/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -17381,24 +15590,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def create_tag(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the tag.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the tag."
+            ),
+        ],
         tag_create_request: TagCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -17433,7 +15643,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_tag_serialize(
             board_id=board_id,
@@ -17441,18 +15651,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TagWithLinks",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "201": "TagWithLinks",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -17472,8 +15681,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -17484,7 +15692,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -17492,35 +15700,27 @@ class MiroApiEndpoints:
         if tag_create_request is not None:
             _body_params = tag_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/tags',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/tags",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -17530,24 +15730,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_tag(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to delete a specific tag.")],
-        tag_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the tag that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to delete a specific tag."
+            ),
+        ],
+        tag_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the tag that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -17582,7 +15788,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_tag_serialize(
             board_id=board_id,
@@ -17590,18 +15796,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "204": "object",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -17621,8 +15826,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -17633,30 +15837,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if tag_id is not None:
-            _path_params['tag_id'] = tag_id
+            _path_params["tag_id"] = tag_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/tags/{tag_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/tags/{tag_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -17666,26 +15865,32 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_items_by_tag(
         self,
-        board_id_platform_tags: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to retrieve a specific tag.")],
-        tag_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the tag that you want to retrieve.")],
+        board_id_platform_tags: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to retrieve a specific tag."
+            ),
+        ],
+        tag_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the tag that you want to retrieve."
+            ),
+        ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         offset: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -17724,7 +15929,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_items_by_tag_serialize(
             board_id_platform_tags=board_id_platform_tags,
@@ -17734,18 +15939,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ItemPagedResponse",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "200": "ItemPagedResponse",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -17767,8 +15971,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -17779,40 +15982,35 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id_platform_tags is not None:
-            _path_params['board_id_PlatformTags'] = board_id_platform_tags
+            _path_params["board_id_PlatformTags"] = board_id_platform_tags
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if offset is not None:
-            
-            _query_params.append(('offset', offset))
-            
+
+            _query_params.append(("offset", offset))
+
         if tag_id is not None:
-            
-            _query_params.append(('tag_id', tag_id))
-            
+
+            _query_params.append(("tag_id", tag_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id_PlatformTags}/items',
+            method="GET",
+            resource_path="/v2/boards/{board_id_PlatformTags}/items",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -17822,24 +16020,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_tag(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to retrieve a specific tag.")],
-        tag_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the tag that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to retrieve a specific tag."
+            ),
+        ],
+        tag_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the tag that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -17874,7 +16078,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_tag_serialize(
             board_id=board_id,
@@ -17882,18 +16086,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TagWithLinks",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "200": "TagWithLinks",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -17913,8 +16116,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -17925,30 +16127,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if tag_id is not None:
-            _path_params['tag_id'] = tag_id
+            _path_params["tag_id"] = tag_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/tags/{tag_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/tags/{tag_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -17958,25 +16155,26 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_tags_from_board(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board whose tags you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board whose tags you want to retrieve."
+            ),
+        ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
         offset: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -18013,7 +16211,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_tags_from_board_serialize(
             board_id=board_id,
@@ -18022,18 +16220,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TagsPagedResponse",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "200": "TagsPagedResponse",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -18054,8 +16251,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -18066,36 +16262,31 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if offset is not None:
-            
-            _query_params.append(('offset', offset))
-            
+
+            _query_params.append(("offset", offset))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/tags',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/tags",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18105,24 +16296,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_tags_from_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board with the item whose tags you want to retrieve.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item whose tags you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board with the item whose tags you want to retrieve."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item whose tags you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -18157,7 +16354,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_tags_from_item_serialize(
             board_id=board_id,
@@ -18165,18 +16362,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "GetTagsResponse",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "200": "GetTagsResponse",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -18196,8 +16392,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -18208,30 +16403,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/items/{item_id}/tags',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/items/{item_id}/tags",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18241,25 +16431,36 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def remove_tag_from_item(
         self,
-        board_id_platform_tags: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board with the item that you want to remove a tag from.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to remove the tag from.")],
-        tag_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the tag that you want to remove from the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board with the item that you want to remove a tag from."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to remove the tag from."
+            ),
+        ],
+        tag_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the tag that you want to remove from the item."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -18270,8 +16471,8 @@ class MiroApiEndpoints:
 
         Removes the specified tag from the specified item. The tag still exists on the board. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),   [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
 
-        :param board_id_platform_tags: Unique identifier (ID) of the board with the item that you want to remove a tag from. (required)
-        :type board_id_platform_tags: str
+        :param board_id: Unique identifier (ID) of the board with the item that you want to remove a tag from. (required)
+        :type board_id: str
         :param item_id: Unique identifier (ID) of the item that you want to remove the tag from. (required)
         :type item_id: str
         :param tag_id: Unique identifier (ID) of the tag that you want to remove from the item. (required)
@@ -18296,27 +16497,26 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._remove_tag_from_item_serialize(
-            board_id_platform_tags=board_id_platform_tags,
+            board_id=board_id,
             item_id=item_id,
             tag_id=tag_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "204": "object",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -18326,7 +16526,7 @@ class MiroApiEndpoints:
 
     def _remove_tag_from_item_serialize(
         self,
-        board_id_platform_tags,
+        board_id,
         item_id,
         tag_id,
         _request_auth,
@@ -18337,8 +16537,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -18348,35 +16547,30 @@ class MiroApiEndpoints:
         _body_params: Optional[bytes] = None
 
         # process the path parameters
-        if board_id_platform_tags is not None:
-            _path_params['board_id_PlatformTags'] = board_id_platform_tags
+        if board_id is not None:
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         if tag_id is not None:
-            
-            _query_params.append(('tag_id', tag_id))
-            
+
+            _query_params.append(("tag_id", tag_id))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id_PlatformTags}/items/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/items/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18386,25 +16580,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_tag(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update a specific tag.")],
-        tag_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the tag that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update a specific tag."
+            ),
+        ],
+        tag_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the tag that you want to update."
+            ),
+        ],
         tag_update_request: TagUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -18441,7 +16641,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_tag_serialize(
             board_id=board_id,
@@ -18450,18 +16650,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TagWithLinks",
-            '400': "GetTagsFromItem400Response",
-            '404': "GetTagsFromItem400Response",
-            '429': "GetTagsFromItem400Response",
+            "200": "TagWithLinks",
+            "400": "AttachTagToItem400Response",
+            "404": "AttachTagToItem400Response",
+            "429": "AttachTagToItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -18482,8 +16681,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -18494,9 +16692,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if tag_id is not None:
-            _path_params['tag_id'] = tag_id
+            _path_params["tag_id"] = tag_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -18504,35 +16702,27 @@ class MiroApiEndpoints:
         if tag_update_request is not None:
             _body_params = tag_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/tags/{tag_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/tags/{tag_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18542,25 +16732,25 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def create_text_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to create the item."
+            ),
+        ],
         text_create_request: TextCreateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -18595,7 +16785,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._create_text_item_serialize(
             board_id=board_id,
@@ -18603,18 +16793,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '201': "TextItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "201": "TextItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -18634,8 +16823,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -18646,7 +16834,7 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -18654,35 +16842,27 @@ class MiroApiEndpoints:
         if text_create_request is not None:
             _body_params = text_create_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/boards/{board_id}/texts',
+            method="POST",
+            resource_path="/v2/boards/{board_id}/texts",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18692,24 +16872,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def delete_text_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to delete the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to delete.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to delete the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to delete."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -18744,7 +16930,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._delete_text_item_serialize(
             board_id=board_id,
@@ -18752,18 +16938,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': "object",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "204": "object",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -18783,8 +16968,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -18795,30 +16979,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/v2/boards/{board_id}/texts/{item_id}',
+            method="DELETE",
+            resource_path="/v2/boards/{board_id}/texts/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18828,24 +17007,30 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def get_text_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board from which you want to retrieve a specific item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to retrieve.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board from which you want to retrieve a specific item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to retrieve."
+            ),
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -18880,7 +17065,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._get_text_item_serialize(
             board_id=board_id,
@@ -18888,18 +17073,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TextItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "TextItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -18919,8 +17103,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -18931,30 +17114,25 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v2/boards/{board_id}/texts/{item_id}',
+            method="GET",
+            resource_path="/v2/boards/{board_id}/texts/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -18964,25 +17142,31 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def update_text_item(
         self,
-        board_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")],
-        item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
+        board_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the board where you want to update the item."
+            ),
+        ],
+        item_id: Annotated[
+            StrictStr,
+            Field(
+                description="Unique identifier (ID) of the item that you want to update."
+            ),
+        ],
         text_update_request: TextUpdateRequest,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -19019,7 +17203,7 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._update_text_item_serialize(
             board_id=board_id,
@@ -19028,18 +17212,17 @@ class MiroApiEndpoints:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TextItem",
-            '400': "GetBoards400Response",
-            '404': "GetBoards400Response",
-            '429': "GetBoards400Response",
+            "200": "TextItem",
+            "400": "CreateFrameItem400Response",
+            "404": "CreateFrameItem400Response",
+            "429": "CreateFrameItem400Response",
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -19060,8 +17243,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -19072,9 +17254,9 @@ class MiroApiEndpoints:
 
         # process the path parameters
         if board_id is not None:
-            _path_params['board_id'] = board_id
+            _path_params["board_id"] = board_id
         if item_id is not None:
-            _path_params['item_id'] = item_id
+            _path_params["item_id"] = item_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -19082,35 +17264,27 @@ class MiroApiEndpoints:
         if text_update_request is not None:
             _body_params = text_update_request
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
         # set the HTTP header `Content-Type`
         if _content_type:
-            _header_params['Content-Type'] = _content_type
+            _header_params["Content-Type"] = _content_type
         else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
+            _default_content_type = self.api_client.select_header_content_type(
+                ["application/json"]
             )
             if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
+                _header_params["Content-Type"] = _default_content_type
 
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/v2/boards/{board_id}/texts/{item_id}',
+            method="PATCH",
+            resource_path="/v2/boards/{board_id}/texts/{item_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -19120,24 +17294,21 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
-
 
     @validate_call
     def revoke_token(
         self,
-        access_token: Annotated[StrictStr, Field(description="Access token that you want to revoke")],
+        access_token: Annotated[
+            StrictStr, Field(description="Access token that you want to revoke")
+        ],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -19170,23 +17341,22 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._revoke_token_serialize(
             access_token=access_token,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '204': None,
-            '400': None,
+            "204": None,
+            "400": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -19205,8 +17375,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -19218,23 +17387,19 @@ class MiroApiEndpoints:
         # process the path parameters
         # process the query parameters
         if access_token is not None:
-            
-            _query_params.append(('access_token', access_token))
-            
+
+            _query_params.append(("access_token", access_token))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
-
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v1/oauth/revoke',
+            method="POST",
+            resource_path="/v1/oauth/revoke",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -19244,11 +17409,8 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def token_info(
@@ -19257,9 +17419,8 @@ class MiroApiEndpoints:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -19290,22 +17451,21 @@ class MiroApiEndpoints:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._token_info_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "TokenInformation",
-            '400': None,
+            "200": "TokenInformation",
+            "400": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -19323,8 +17483,7 @@ class MiroApiEndpoints:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -19339,22 +17498,17 @@ class MiroApiEndpoints:
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                'application/json'
-            ]
+        _header_params["Accept"] = self.api_client.select_header_accept(
+            ["application/json"]
         )
 
-
         # authentication setting
-        _auth_settings: List[str] = [
-        ]
+        _auth_settings: List[str] = []
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/v1/oauth-token',
+            method="GET",
+            resource_path="/v1/oauth-token",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -19364,8 +17518,5 @@ class MiroApiEndpoints:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-

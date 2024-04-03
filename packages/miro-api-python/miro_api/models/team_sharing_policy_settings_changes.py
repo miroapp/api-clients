@@ -22,111 +22,176 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TeamSharingPolicySettingsChanges(BaseModel):
     """
     Team sharing policy settings
-    """ # noqa: E501
-    allow_listed_domains: Optional[List[StrictStr]] = Field(default=None, description="Allow listed domains", alias="allowListedDomains")
-    create_asset_access_level: Optional[StrictStr] = Field(default=None, description=" * \"company_admins\": Only company admins can create assets in a team * \"admins\": Both team and company admins can create assets in a team. * \"all_members\": all_members ", alias="createAssetAccessLevel")
-    default_board_access: Optional[StrictStr] = Field(default=None, description=" Default board access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view * \"comment\": Anyone in the team can comment * \"edit\":    Anyone in the team can edit ", alias="defaultBoardAccess")
-    default_organization_access: Optional[StrictStr] = Field(default=None, description=" Default organization access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view * \"comment\": Anyone in the team can comment * \"edit\":    Anyone in the team can edit ", alias="defaultOrganizationAccess")
-    default_project_access: Optional[StrictStr] = Field(default=None, description=" Default project access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view ", alias="defaultProjectAccess")
-    move_board_to_account: Optional[StrictStr] = Field(default=None, description=" * \"allowed\": Allow move board to team * \"not_allowed\": Not allow move board to team ", alias="moveBoardToAccount")
-    restrict_allowed_domains: Optional[StrictStr] = Field(default=None, description=" * \"enabled\": Enabled. Restrict to listed domain. * \"disabled\": Disabled. No domain restriction. * \"enabled_with_external_users_access\": Enabled. Restrict to listed domain but allows external users to access. ", alias="restrictAllowedDomains")
-    sharing_on_account: Optional[StrictStr] = Field(default=None, description=" * \"allowed\": Allow sharing on team * \"not_allowed\": Not allow sharing on team ", alias="sharingOnAccount")
-    sharing_on_organization: Optional[StrictStr] = Field(default=None, description=" * \"allowed\": Allow sharing on organization * \"allowed_with_editing\": Allow sharing with editing on organization * \"not_allowed\": Not allow sharing on organization ", alias="sharingOnOrganization")
-    sharing_via_public_link: Optional[StrictStr] = Field(default=None, description=" * \"allowed\": Allow sharing via public link * \"allowed_with_editing\": Allow sharing with editing via public link * \"not_allowed\": Not allow sharing via public link ", alias="sharingViaPublicLink")
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["allowListedDomains", "createAssetAccessLevel", "defaultBoardAccess", "defaultOrganizationAccess", "defaultProjectAccess", "moveBoardToAccount", "restrictAllowedDomains", "sharingOnAccount", "sharingOnOrganization", "sharingViaPublicLink"]
+    """  # noqa: E501
 
-    @field_validator('create_asset_access_level')
+    allow_listed_domains: Optional[List[StrictStr]] = Field(
+        default=None, description="Allow listed domains", alias="allowListedDomains"
+    )
+    create_asset_access_level: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "company_admins": Only company admins can create assets in a team * "admins": Both team and company admins can create assets in a team. * "all_members": all_members ',
+        alias="createAssetAccessLevel",
+    )
+    default_board_access: Optional[StrictStr] = Field(
+        default=None,
+        description=' Default board access * "private": Only board owners can access * "view":    Anyone in the team can view * "comment": Anyone in the team can comment * "edit":    Anyone in the team can edit ',
+        alias="defaultBoardAccess",
+    )
+    default_organization_access: Optional[StrictStr] = Field(
+        default=None,
+        description=' Default organization access * "private": Only board owners can access * "view":    Anyone in the team can view * "comment": Anyone in the team can comment * "edit":    Anyone in the team can edit ',
+        alias="defaultOrganizationAccess",
+    )
+    default_project_access: Optional[StrictStr] = Field(
+        default=None,
+        description=' Default project access * "private": Only board owners can access * "view":    Anyone in the team can view ',
+        alias="defaultProjectAccess",
+    )
+    move_board_to_account: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "allowed": Allow move board to team * "not_allowed": Not allow move board to team ',
+        alias="moveBoardToAccount",
+    )
+    restrict_allowed_domains: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "enabled": Enabled. Restrict to listed domain. * "disabled": Disabled. No domain restriction. * "enabled_with_external_users_access": Enabled. Restrict to listed domain but allows external users to access. ',
+        alias="restrictAllowedDomains",
+    )
+    sharing_on_account: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "allowed": Allow sharing on team * "not_allowed": Not allow sharing on team ',
+        alias="sharingOnAccount",
+    )
+    sharing_on_organization: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "allowed": Allow sharing on organization * "allowed_with_editing": Allow sharing with editing on organization * "not_allowed": Not allow sharing on organization ',
+        alias="sharingOnOrganization",
+    )
+    sharing_via_public_link: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "allowed": Allow sharing via public link * "allowed_with_editing": Allow sharing with editing via public link * "not_allowed": Not allow sharing via public link ',
+        alias="sharingViaPublicLink",
+    )
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = [
+        "allowListedDomains",
+        "createAssetAccessLevel",
+        "defaultBoardAccess",
+        "defaultOrganizationAccess",
+        "defaultProjectAccess",
+        "moveBoardToAccount",
+        "restrictAllowedDomains",
+        "sharingOnAccount",
+        "sharingOnOrganization",
+        "sharingViaPublicLink",
+    ]
+
+    @field_validator("create_asset_access_level")
     def create_asset_access_level_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['company_admins', 'admins', 'all_members']):
-            raise ValueError("must be one of enum values ('company_admins', 'admins', 'all_members')")
+        if value not in set(["company_admins", "admins", "all_members"]):
+            raise ValueError(
+                "must be one of enum values ('company_admins', 'admins', 'all_members')"
+            )
         return value
 
-    @field_validator('default_board_access')
+    @field_validator("default_board_access")
     def default_board_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['private', 'view', 'comment', 'edit']):
-            raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
+        if value not in set(["private", "view", "comment", "edit"]):
+            raise ValueError(
+                "must be one of enum values ('private', 'view', 'comment', 'edit')"
+            )
         return value
 
-    @field_validator('default_organization_access')
+    @field_validator("default_organization_access")
     def default_organization_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['private', 'view', 'comment', 'edit']):
-            raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
+        if value not in set(["private", "view", "comment", "edit"]):
+            raise ValueError(
+                "must be one of enum values ('private', 'view', 'comment', 'edit')"
+            )
         return value
 
-    @field_validator('default_project_access')
+    @field_validator("default_project_access")
     def default_project_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['private', 'view']):
+        if value not in set(["private", "view"]):
             raise ValueError("must be one of enum values ('private', 'view')")
         return value
 
-    @field_validator('move_board_to_account')
+    @field_validator("move_board_to_account")
     def move_board_to_account_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['allowed', 'not_allowed']):
+        if value not in set(["allowed", "not_allowed"]):
             raise ValueError("must be one of enum values ('allowed', 'not_allowed')")
         return value
 
-    @field_validator('restrict_allowed_domains')
+    @field_validator("restrict_allowed_domains")
     def restrict_allowed_domains_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['enabled', 'enabled_with_external_user_access', 'disabled']):
-            raise ValueError("must be one of enum values ('enabled', 'enabled_with_external_user_access', 'disabled')")
+        if value not in set(
+            ["enabled", "enabled_with_external_user_access", "disabled"]
+        ):
+            raise ValueError(
+                "must be one of enum values ('enabled', 'enabled_with_external_user_access', 'disabled')"
+            )
         return value
 
-    @field_validator('sharing_on_account')
+    @field_validator("sharing_on_account")
     def sharing_on_account_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['allowed', 'not_allowed']):
+        if value not in set(["allowed", "not_allowed"]):
             raise ValueError("must be one of enum values ('allowed', 'not_allowed')")
         return value
 
-    @field_validator('sharing_on_organization')
+    @field_validator("sharing_on_organization")
     def sharing_on_organization_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['allowed', 'allowed_with_editing', 'not_allowed']):
-            raise ValueError("must be one of enum values ('allowed', 'allowed_with_editing', 'not_allowed')")
+        if value not in set(["allowed", "allowed_with_editing", "not_allowed"]):
+            raise ValueError(
+                "must be one of enum values ('allowed', 'allowed_with_editing', 'not_allowed')"
+            )
         return value
 
-    @field_validator('sharing_via_public_link')
+    @field_validator("sharing_via_public_link")
     def sharing_via_public_link_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['allowed', 'allowed_with_editing', 'not_allowed']):
-            raise ValueError("must be one of enum values ('allowed', 'allowed_with_editing', 'not_allowed')")
+        if value not in set(["allowed", "allowed_with_editing", "not_allowed"]):
+            raise ValueError(
+                "must be one of enum values ('allowed', 'allowed_with_editing', 'not_allowed')"
+            )
         return value
 
     model_config = {
@@ -134,7 +199,6 @@ class TeamSharingPolicySettingsChanges(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -161,9 +225,11 @@ class TeamSharingPolicySettingsChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -186,23 +252,23 @@ class TeamSharingPolicySettingsChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "allowListedDomains": obj.get("allowListedDomains"),
-            "createAssetAccessLevel": obj.get("createAssetAccessLevel"),
-            "defaultBoardAccess": obj.get("defaultBoardAccess"),
-            "defaultOrganizationAccess": obj.get("defaultOrganizationAccess"),
-            "defaultProjectAccess": obj.get("defaultProjectAccess"),
-            "moveBoardToAccount": obj.get("moveBoardToAccount"),
-            "restrictAllowedDomains": obj.get("restrictAllowedDomains"),
-            "sharingOnAccount": obj.get("sharingOnAccount"),
-            "sharingOnOrganization": obj.get("sharingOnOrganization"),
-            "sharingViaPublicLink": obj.get("sharingViaPublicLink")
-        })
+        _obj = cls.model_validate(
+            {
+                "allowListedDomains": obj.get("allowListedDomains"),
+                "createAssetAccessLevel": obj.get("createAssetAccessLevel"),
+                "defaultBoardAccess": obj.get("defaultBoardAccess"),
+                "defaultOrganizationAccess": obj.get("defaultOrganizationAccess"),
+                "defaultProjectAccess": obj.get("defaultProjectAccess"),
+                "moveBoardToAccount": obj.get("moveBoardToAccount"),
+                "restrictAllowedDomains": obj.get("restrictAllowedDomains"),
+                "sharingOnAccount": obj.get("sharingOnAccount"),
+                "sharingOnOrganization": obj.get("sharingOnOrganization"),
+                "sharingViaPublicLink": obj.get("sharingViaPublicLink"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

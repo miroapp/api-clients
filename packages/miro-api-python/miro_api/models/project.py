@@ -18,26 +18,27 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Project(BaseModel):
     """
-    Project
-    """ # noqa: E501
-    id: StrictStr = Field(description="Project ID.")
-    name: StrictStr = Field(description="Name of the project.")
-    type: StrictStr = Field(description="Type of the object returned.")
+    Contains information about the project with which the board is associated.
+    """  # noqa: E501
+
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier (ID) of the project."
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "type"]
+    __properties: ClassVar[List[str]] = ["id"]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,9 +65,11 @@ class Project(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,16 +92,10 @@ class Project(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "type": obj.get("type") if obj.get("type") is not None else 'project'
-        })
+        _obj = cls.model_validate({"id": obj.get("id")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

@@ -30,12 +30,24 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Optional, Dict
 from typing_extensions import Literal, Self
 
-WIDGETDATAOUTPUT_ONE_OF_SCHEMAS = ["AppCardData", "CardData", "DocumentData", "EmbedData", "FrameData", "ImageData", "ShapeData", "StickyNoteData", "TextData"]
+WIDGETDATAOUTPUT_ONE_OF_SCHEMAS = [
+    "AppCardData",
+    "CardData",
+    "DocumentData",
+    "EmbedData",
+    "FrameData",
+    "ImageData",
+    "ShapeData",
+    "StickyNoteData",
+    "TextData",
+]
+
 
 class WidgetDataOutput(BaseModel):
     """
     Contains the item data, such as the item title, content, or description.
     """
+
     # data type: TextData
     oneof_schema_1_validator: Optional[TextData] = None
     # data type: EmbedData
@@ -54,26 +66,56 @@ class WidgetDataOutput(BaseModel):
     oneof_schema_8_validator: Optional[FrameData] = None
     # data type: StickyNoteData
     oneof_schema_9_validator: Optional[StickyNoteData] = None
-    actual_instance: Optional[Union[AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData]] = None
-    one_of_schemas: List[str] = Field(default=Literal["AppCardData", "CardData", "DocumentData", "EmbedData", "FrameData", "ImageData", "ShapeData", "StickyNoteData", "TextData"])
+    actual_instance: Optional[
+        Union[
+            AppCardData,
+            CardData,
+            DocumentData,
+            EmbedData,
+            FrameData,
+            ImageData,
+            ShapeData,
+            StickyNoteData,
+            TextData,
+        ]
+    ] = None
+    one_of_schemas: List[str] = Field(
+        default=Literal[
+            "AppCardData",
+            "CardData",
+            "DocumentData",
+            "EmbedData",
+            "FrameData",
+            "ImageData",
+            "ShapeData",
+            "StickyNoteData",
+            "TextData",
+        ]
+    )
 
     model_config = {
         "validate_assignment": True,
         "protected_namespaces": (),
     }
 
-
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
             if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
 
-    @field_validator('actual_instance')
+    def __getattr__(self, attr: str):
+        return getattr(self.actual_instance, attr)
+
+    @field_validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
         instance = WidgetDataOutput.model_construct()
         error_messages = []
@@ -105,7 +147,9 @@ class WidgetDataOutput(BaseModel):
             match += 1
         # validate data type: DocumentData
         if not isinstance(v, DocumentData):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `DocumentData`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `DocumentData`"
+            )
         else:
             match += 1
         # validate data type: ShapeData
@@ -120,15 +164,23 @@ class WidgetDataOutput(BaseModel):
             match += 1
         # validate data type: StickyNoteData
         if not isinstance(v, StickyNoteData):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `StickyNoteData`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `StickyNoteData`"
+            )
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in WidgetDataOutput with oneOf schemas: AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in WidgetDataOutput with oneOf schemas: AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in WidgetDataOutput with oneOf schemas: AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in WidgetDataOutput with oneOf schemas: AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -137,7 +189,17 @@ class WidgetDataOutput(BaseModel):
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union[AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData]:
+    def from_json(cls, json_str: str) -> Union[
+        AppCardData,
+        CardData,
+        DocumentData,
+        EmbedData,
+        FrameData,
+        ImageData,
+        ShapeData,
+        StickyNoteData,
+        TextData,
+    ]:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
@@ -200,11 +262,16 @@ class WidgetDataOutput(BaseModel):
 
         if not matches:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into WidgetDataOutput with oneOf schemas: AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into WidgetDataOutput with oneOf schemas: AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData. Details: "
+                + ", ".join(error_messages)
+            )
 
         # Return one match that has least additional_properties
         if len(matches) > 1:
-            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
+            instance.actual_instance = sorted(
+                matches, key=lambda m: len(m.additional_properties)
+            )[0]
 
         return instance
 
@@ -213,17 +280,36 @@ class WidgetDataOutput(BaseModel):
         if self.actual_instance is None:
             return "null"
 
-        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
+        if hasattr(self.actual_instance, "to_json") and callable(
+            self.actual_instance.to_json
+        ):
             return self.actual_instance.to_json()
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], AppCardData, CardData, DocumentData, EmbedData, FrameData, ImageData, ShapeData, StickyNoteData, TextData]]:
+    def to_dict(
+        self,
+    ) -> Optional[
+        Union[
+            Dict[str, Any],
+            AppCardData,
+            CardData,
+            DocumentData,
+            EmbedData,
+            FrameData,
+            ImageData,
+            ShapeData,
+            StickyNoteData,
+            TextData,
+        ]
+    ]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
 
-        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
+        if hasattr(self.actual_instance, "to_dict") and callable(
+            self.actual_instance.to_dict
+        ):
             return self.actual_instance.to_dict()
         else:
             # primitive type
@@ -232,5 +318,3 @@ class WidgetDataOutput(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-
