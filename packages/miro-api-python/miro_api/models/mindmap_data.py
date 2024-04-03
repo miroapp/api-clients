@@ -23,32 +23,23 @@ from miro_api.models.mindmap_node_view import MindmapNodeView
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class MindmapData(BaseModel):
     """
     Contains mind map node data, such as `nodeView` or `isRoot`.
-    """  # noqa: E501
-
+    """ # noqa: E501
     node_view: Optional[MindmapNodeView] = Field(default=None, alias="nodeView")
-    is_root: Optional[StrictBool] = Field(
-        default=None,
-        description="Indicates whether this node is the root of the mind map.",
-        alias="isRoot",
-    )
-    direction: Optional[StrictStr] = Field(
-        default=None,
-        description="Indicates where this node is positioned relative to the root node. `start` indicates that this node must be positioned at the start of the root node, which is either the left or top of the root node. `end` indicates that this node must be positioned at the emd of the root node, which is either the right or bottom of the root node.",
-    )
+    is_root: Optional[StrictBool] = Field(default=None, description="Indicates whether this node is the root of the mind map.", alias="isRoot")
+    direction: Optional[StrictStr] = Field(default=None, description="Indicates where this node is positioned relative to the root node. `start` indicates that this node must be positioned at the start of the root node, which is either the left or top of the root node. `end` indicates that this node must be positioned at the emd of the root node, which is either the right or bottom of the root node.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["nodeView", "isRoot", "direction"]
 
-    @field_validator("direction")
+    @field_validator('direction')
     def direction_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["start", "end"]):
+        if value not in set(['start', 'end']):
             raise ValueError("must be one of enum values ('start', 'end')")
         return value
 
@@ -57,6 +48,7 @@ class MindmapData(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -83,11 +75,9 @@ class MindmapData(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,7 +86,7 @@ class MindmapData(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of node_view
         if self.node_view:
-            _dict["nodeView"] = self.node_view.to_dict()
+            _dict['nodeView'] = self.node_view.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -113,20 +103,16 @@ class MindmapData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "nodeView": (
-                    MindmapNodeView.from_dict(obj["nodeView"])
-                    if obj.get("nodeView") is not None
-                    else None
-                ),
-                "isRoot": obj.get("isRoot"),
-                "direction": obj.get("direction"),
-            }
-        )
+        _obj = cls.model_validate({
+            "nodeView": MindmapNodeView.from_dict(obj["nodeView"]) if obj.get("nodeView") is not None else None,
+            "isRoot": obj.get("isRoot"),
+            "direction": obj.get("direction")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -19,59 +19,32 @@ import json
 
 from pydantic import BaseModel, Field
 from typing import Any, ClassVar, Dict, List, Optional
-from miro_api.models.team_account_discovery_settings_changes import (
-    TeamAccountDiscoverySettingsChanges,
-)
-from miro_api.models.team_collaboration_settings_changes import (
-    TeamCollaborationSettingsChanges,
-)
-from miro_api.models.team_copy_access_level_settings_changes import (
-    TeamCopyAccessLevelSettingsChanges,
-)
-from miro_api.models.team_invitation_settings_changes import (
-    TeamInvitationSettingsChanges,
-)
-from miro_api.models.team_sharing_policy_settings_changes import (
-    TeamSharingPolicySettingsChanges,
-)
+from miro_api.models.team_account_discovery_settings_changes import TeamAccountDiscoverySettingsChanges
+from miro_api.models.team_collaboration_settings_changes import TeamCollaborationSettingsChanges
+from miro_api.models.team_copy_access_level_settings_changes import TeamCopyAccessLevelSettingsChanges
+from miro_api.models.team_invitation_settings_changes import TeamInvitationSettingsChanges
+from miro_api.models.team_sharing_policy_settings_changes import TeamSharingPolicySettingsChanges
 from typing import Optional, Set
 from typing_extensions import Self
-
 
 class TeamSettingsChanges(BaseModel):
     """
     TeamSettingsChanges
-    """  # noqa: E501
-
-    team_account_discovery_settings: Optional[TeamAccountDiscoverySettingsChanges] = (
-        Field(default=None, alias="teamAccountDiscoverySettings")
-    )
-    team_collaboration_settings: Optional[TeamCollaborationSettingsChanges] = Field(
-        default=None, alias="teamCollaborationSettings"
-    )
-    team_copy_access_level_settings: Optional[TeamCopyAccessLevelSettingsChanges] = (
-        Field(default=None, alias="teamCopyAccessLevelSettings")
-    )
-    team_invitation_settings: Optional[TeamInvitationSettingsChanges] = Field(
-        default=None, alias="teamInvitationSettings"
-    )
-    team_sharing_policy_settings: Optional[TeamSharingPolicySettingsChanges] = Field(
-        default=None, alias="teamSharingPolicySettings"
-    )
+    """ # noqa: E501
+    team_account_discovery_settings: Optional[TeamAccountDiscoverySettingsChanges] = Field(default=None, alias="teamAccountDiscoverySettings")
+    team_collaboration_settings: Optional[TeamCollaborationSettingsChanges] = Field(default=None, alias="teamCollaborationSettings")
+    team_copy_access_level_settings: Optional[TeamCopyAccessLevelSettingsChanges] = Field(default=None, alias="teamCopyAccessLevelSettings")
+    team_invitation_settings: Optional[TeamInvitationSettingsChanges] = Field(default=None, alias="teamInvitationSettings")
+    team_sharing_policy_settings: Optional[TeamSharingPolicySettingsChanges] = Field(default=None, alias="teamSharingPolicySettings")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "teamAccountDiscoverySettings",
-        "teamCollaborationSettings",
-        "teamCopyAccessLevelSettings",
-        "teamInvitationSettings",
-        "teamSharingPolicySettings",
-    ]
+    __properties: ClassVar[List[str]] = ["teamAccountDiscoverySettings", "teamCollaborationSettings", "teamCopyAccessLevelSettings", "teamInvitationSettings", "teamSharingPolicySettings"]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -98,11 +71,9 @@ class TeamSettingsChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -111,27 +82,19 @@ class TeamSettingsChanges(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of team_account_discovery_settings
         if self.team_account_discovery_settings:
-            _dict["teamAccountDiscoverySettings"] = (
-                self.team_account_discovery_settings.to_dict()
-            )
+            _dict['teamAccountDiscoverySettings'] = self.team_account_discovery_settings.to_dict()
         # override the default output from pydantic by calling `to_dict()` of team_collaboration_settings
         if self.team_collaboration_settings:
-            _dict["teamCollaborationSettings"] = (
-                self.team_collaboration_settings.to_dict()
-            )
+            _dict['teamCollaborationSettings'] = self.team_collaboration_settings.to_dict()
         # override the default output from pydantic by calling `to_dict()` of team_copy_access_level_settings
         if self.team_copy_access_level_settings:
-            _dict["teamCopyAccessLevelSettings"] = (
-                self.team_copy_access_level_settings.to_dict()
-            )
+            _dict['teamCopyAccessLevelSettings'] = self.team_copy_access_level_settings.to_dict()
         # override the default output from pydantic by calling `to_dict()` of team_invitation_settings
         if self.team_invitation_settings:
-            _dict["teamInvitationSettings"] = self.team_invitation_settings.to_dict()
+            _dict['teamInvitationSettings'] = self.team_invitation_settings.to_dict()
         # override the default output from pydantic by calling `to_dict()` of team_sharing_policy_settings
         if self.team_sharing_policy_settings:
-            _dict["teamSharingPolicySettings"] = (
-                self.team_sharing_policy_settings.to_dict()
-            )
+            _dict['teamSharingPolicySettings'] = self.team_sharing_policy_settings.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -148,48 +111,18 @@ class TeamSettingsChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "teamAccountDiscoverySettings": (
-                    TeamAccountDiscoverySettingsChanges.from_dict(
-                        obj["teamAccountDiscoverySettings"]
-                    )
-                    if obj.get("teamAccountDiscoverySettings") is not None
-                    else None
-                ),
-                "teamCollaborationSettings": (
-                    TeamCollaborationSettingsChanges.from_dict(
-                        obj["teamCollaborationSettings"]
-                    )
-                    if obj.get("teamCollaborationSettings") is not None
-                    else None
-                ),
-                "teamCopyAccessLevelSettings": (
-                    TeamCopyAccessLevelSettingsChanges.from_dict(
-                        obj["teamCopyAccessLevelSettings"]
-                    )
-                    if obj.get("teamCopyAccessLevelSettings") is not None
-                    else None
-                ),
-                "teamInvitationSettings": (
-                    TeamInvitationSettingsChanges.from_dict(
-                        obj["teamInvitationSettings"]
-                    )
-                    if obj.get("teamInvitationSettings") is not None
-                    else None
-                ),
-                "teamSharingPolicySettings": (
-                    TeamSharingPolicySettingsChanges.from_dict(
-                        obj["teamSharingPolicySettings"]
-                    )
-                    if obj.get("teamSharingPolicySettings") is not None
-                    else None
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "teamAccountDiscoverySettings": TeamAccountDiscoverySettingsChanges.from_dict(obj["teamAccountDiscoverySettings"]) if obj.get("teamAccountDiscoverySettings") is not None else None,
+            "teamCollaborationSettings": TeamCollaborationSettingsChanges.from_dict(obj["teamCollaborationSettings"]) if obj.get("teamCollaborationSettings") is not None else None,
+            "teamCopyAccessLevelSettings": TeamCopyAccessLevelSettingsChanges.from_dict(obj["teamCopyAccessLevelSettings"]) if obj.get("teamCopyAccessLevelSettings") is not None else None,
+            "teamInvitationSettings": TeamInvitationSettingsChanges.from_dict(obj["teamInvitationSettings"]) if obj.get("teamInvitationSettings") is not None else None,
+            "teamSharingPolicySettings": TeamSharingPolicySettingsChanges.from_dict(obj["teamSharingPolicySettings"]) if obj.get("teamSharingPolicySettings") is not None else None
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

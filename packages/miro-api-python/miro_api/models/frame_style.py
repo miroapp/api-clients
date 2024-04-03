@@ -22,17 +22,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class FrameStyle(BaseModel):
     """
     Contains information about the style of a frame item, such as the fill color.
-    """  # noqa: E501
-
-    fill_color: Optional[StrictStr] = Field(
-        default=None,
-        description="Fill color for the frame. Hex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000` Default: #ffffffff (transparent).",
-        alias="fillColor",
-    )
+    """ # noqa: E501
+    fill_color: Optional[StrictStr] = Field(default=None, description="Fill color for the frame. Hex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000` Default: #ffffffff (transparent).", alias="fillColor")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["fillColor"]
 
@@ -41,6 +35,7 @@ class FrameStyle(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -67,11 +62,9 @@ class FrameStyle(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -94,10 +87,14 @@ class FrameStyle(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"fillColor": obj.get("fillColor")})
+        _obj = cls.model_validate({
+            "fillColor": obj.get("fillColor")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

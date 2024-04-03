@@ -23,38 +23,24 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class MindmapStyle(BaseModel):
     """
     Contains information about the node style, such as the widget's border color or shape type.
-    """  # noqa: E501
-
-    node_color: Optional[StrictStr] = Field(
-        default=None,
-        description="Hex value representing the color of the widget's border.",
-        alias="nodeColor",
-    )
-    shape: Optional[StrictStr] = Field(
-        default=None, description="Shape type of the widget."
-    )
-    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None,
-        description="The same font size as in MindmapNodeStyle.",
-        alias="fontSize",
-    )
+    """ # noqa: E501
+    node_color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color of the widget's border.", alias="nodeColor")
+    shape: Optional[StrictStr] = Field(default=None, description="Shape type of the widget.")
+    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The same font size as in MindmapNodeStyle.", alias="fontSize")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["nodeColor", "shape", "fontSize"]
 
-    @field_validator("shape")
+    @field_validator('shape')
     def shape_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["pill", "rectangle", "rounded_rectangle", "none"]):
-            raise ValueError(
-                "must be one of enum values ('pill', 'rectangle', 'rounded_rectangle', 'none')"
-            )
+        if value not in set(['pill', 'rectangle', 'rounded_rectangle', 'none']):
+            raise ValueError("must be one of enum values ('pill', 'rectangle', 'rounded_rectangle', 'none')")
         return value
 
     model_config = {
@@ -62,6 +48,7 @@ class MindmapStyle(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -88,11 +75,9 @@ class MindmapStyle(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -115,16 +100,16 @@ class MindmapStyle(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "nodeColor": obj.get("nodeColor"),
-                "shape": obj.get("shape"),
-                "fontSize": obj.get("fontSize"),
-            }
-        )
+        _obj = cls.model_validate({
+            "nodeColor": obj.get("nodeColor"),
+            "shape": obj.get("shape"),
+            "fontSize": obj.get("fontSize")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

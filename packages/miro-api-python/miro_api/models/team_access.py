@@ -20,16 +20,18 @@ from typing_extensions import Self
 
 class TeamAccess(str, Enum):
     """
-    Team access * \"private\": Only the members of the project can access the information within the project. * \"view\":    Anyone in the team can view the information in within the project.
+    Team access * \"private\": Only the members of the project can access the information within the project. * \"view\":    Anyone in the team can view the information in within the project. 
     """
 
     """
     allowed enum values
     """
-    PRIVATE = "private"
-    VIEW = "view"
+    PRIVATE = 'private'
+    VIEW = 'view'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of TeamAccess from a JSON string"""
         return cls(json.loads(json_str))
+
+

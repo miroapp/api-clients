@@ -24,24 +24,14 @@ from miro_api.models.board_policy_change import BoardPolicyChange
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class CopyBoardChanges(BaseModel):
     """
     CopyBoardChanges
-    """  # noqa: E501
-
-    description: Optional[
-        Annotated[str, Field(min_length=0, strict=True, max_length=300)]
-    ] = Field(default=None, description="Description of the board.")
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=60)]] = (
-        Field(default="Untitled", description="Name for the board.")
-    )
+    """ # noqa: E501
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=300)]] = Field(default=None, description="Description of the board.")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=60)]] = Field(default='Untitled', description="Name for the board.")
     policy: Optional[BoardPolicyChange] = None
-    team_id: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique identifier (ID) of the team where the board must be placed.",
-        alias="teamId",
-    )
+    team_id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the team where the board must be placed.", alias="teamId")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["description", "name", "policy", "teamId"]
 
@@ -50,6 +40,7 @@ class CopyBoardChanges(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -76,11 +67,9 @@ class CopyBoardChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,7 +78,7 @@ class CopyBoardChanges(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of policy
         if self.policy:
-            _dict["policy"] = self.policy.to_dict()
+            _dict['policy'] = self.policy.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -106,21 +95,17 @@ class CopyBoardChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "description": obj.get("description"),
-                "name": obj.get("name") if obj.get("name") is not None else "Untitled",
-                "policy": (
-                    BoardPolicyChange.from_dict(obj["policy"])
-                    if obj.get("policy") is not None
-                    else None
-                ),
-                "teamId": obj.get("teamId"),
-            }
-        )
+        _obj = cls.model_validate({
+            "description": obj.get("description"),
+            "name": obj.get("name") if obj.get("name") is not None else 'Untitled',
+            "policy": BoardPolicyChange.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
+            "teamId": obj.get("teamId")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -22,20 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class WidthOnlyAdjustableGeometry(BaseModel):
     """
     Contains geometrical information about the item, such as its width or rotation. You can only specify the width of the text item as the height is dynamically updated based on the content.
-    """  # noqa: E501
-
-    rotation: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
-    )
-    width: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="Width of the item, in pixels. The minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size. For example, if the font size of the `text` item is `14`, the minimum `width` is `24`.",
-    )
+    """ # noqa: E501
+    rotation: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.")
+    width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Width of the item, in pixels. The minimum `width` of a `text` widget is relative to the font size of the `text` widget. The width must be at least 1.7 times wider than the font size. For example, if the font size of the `text` item is `14`, the minimum `width` is `24`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["rotation", "width"]
 
@@ -44,6 +36,7 @@ class WidthOnlyAdjustableGeometry(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,11 +63,9 @@ class WidthOnlyAdjustableGeometry(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,12 +88,15 @@ class WidthOnlyAdjustableGeometry(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"rotation": obj.get("rotation"), "width": obj.get("width")}
-        )
+        _obj = cls.model_validate({
+            "rotation": obj.get("rotation"),
+            "width": obj.get("width")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

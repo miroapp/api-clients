@@ -24,18 +24,12 @@ from miro_api.models.board_sharing_policy_change import BoardSharingPolicyChange
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class BoardPolicyChange(BaseModel):
     """
     Defines the permissions policies and sharing policies for the board.
-    """  # noqa: E501
-
-    permissions_policy: Optional[BoardPermissionsPolicy] = Field(
-        default=None, alias="permissionsPolicy"
-    )
-    sharing_policy: Optional[BoardSharingPolicyChange] = Field(
-        default=None, alias="sharingPolicy"
-    )
+    """ # noqa: E501
+    permissions_policy: Optional[BoardPermissionsPolicy] = Field(default=None, alias="permissionsPolicy")
+    sharing_policy: Optional[BoardSharingPolicyChange] = Field(default=None, alias="sharingPolicy")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["permissionsPolicy", "sharingPolicy"]
 
@@ -44,6 +38,7 @@ class BoardPolicyChange(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,11 +65,9 @@ class BoardPolicyChange(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -83,10 +76,10 @@ class BoardPolicyChange(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of permissions_policy
         if self.permissions_policy:
-            _dict["permissionsPolicy"] = self.permissions_policy.to_dict()
+            _dict['permissionsPolicy'] = self.permissions_policy.to_dict()
         # override the default output from pydantic by calling `to_dict()` of sharing_policy
         if self.sharing_policy:
-            _dict["sharingPolicy"] = self.sharing_policy.to_dict()
+            _dict['sharingPolicy'] = self.sharing_policy.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -103,23 +96,15 @@ class BoardPolicyChange(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "permissionsPolicy": (
-                    BoardPermissionsPolicy.from_dict(obj["permissionsPolicy"])
-                    if obj.get("permissionsPolicy") is not None
-                    else None
-                ),
-                "sharingPolicy": (
-                    BoardSharingPolicyChange.from_dict(obj["sharingPolicy"])
-                    if obj.get("sharingPolicy") is not None
-                    else None
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "permissionsPolicy": BoardPermissionsPolicy.from_dict(obj["permissionsPolicy"]) if obj.get("permissionsPolicy") is not None else None,
+            "sharingPolicy": BoardSharingPolicyChange.from_dict(obj["sharingPolicy"]) if obj.get("sharingPolicy") is not None else None
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

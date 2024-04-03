@@ -24,26 +24,15 @@ from miro_api.models.team import Team
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class TeamsPage(BaseModel):
     """
     Page of teams that match the search query.
-    """  # noqa: E501
-
-    limit: Annotated[int, Field(le=100, strict=True, ge=1)] = Field(
-        description="The maximum number of results to return per call. If the number of project in the response is greater than the limit specified, the response returns the cursor parameter with a value."
-    )
-    size: Annotated[int, Field(le=100, strict=True, ge=0)] = Field(
-        description="Number of results returned in the response considering the cursor and the limit values sent in the request. For example, if there are 20 results, the request does not have a cursor value, and the limit set to 10, the size of the results will be 10. In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection."
-    )
+    """ # noqa: E501
+    limit: Annotated[int, Field(le=100, strict=True, ge=1)] = Field(description="The maximum number of results to return per call. If the number of project in the response is greater than the limit specified, the response returns the cursor parameter with a value.")
+    size: Annotated[int, Field(le=100, strict=True, ge=0)] = Field(description="Number of results returned in the response considering the cursor and the limit values sent in the request. For example, if there are 20 results, the request does not have a cursor value, and the limit set to 10, the size of the results will be 10. In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.")
     data: List[Team] = Field(description="List of teams")
-    cursor: Optional[StrictStr] = Field(
-        default=None,
-        description="Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.",
-    )
-    type: Optional[StrictStr] = Field(
-        default="cursor-list", description="Type of the object returned."
-    )
+    cursor: Optional[StrictStr] = Field(default=None, description="Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.")
+    type: Optional[StrictStr] = Field(default='cursor-list', description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["limit", "size", "data", "cursor", "type"]
 
@@ -52,6 +41,7 @@ class TeamsPage(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -78,11 +68,9 @@ class TeamsPage(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -95,7 +83,7 @@ class TeamsPage(BaseModel):
             for _item in self.data:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["data"] = _items
+            _dict['data'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -112,24 +100,18 @@ class TeamsPage(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "limit": obj.get("limit") if obj.get("limit") is not None else 100,
-                "size": obj.get("size") if obj.get("size") is not None else 100,
-                "data": (
-                    [Team.from_dict(_item) for _item in obj["data"]]
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "cursor": obj.get("cursor"),
-                "type": (
-                    obj.get("type") if obj.get("type") is not None else "cursor-list"
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "limit": obj.get("limit") if obj.get("limit") is not None else 100,
+            "size": obj.get("size") if obj.get("size") is not None else 100,
+            "data": [Team.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
+            "cursor": obj.get("cursor"),
+            "type": obj.get("type") if obj.get("type") is not None else 'cursor-list'
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -23,22 +23,13 @@ from miro_api.models.data_classification_label import DataClassificationLabel
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class DataClassificationOrganizationSettings(BaseModel):
     """
     DataClassificationOrganizationSettings
-    """  # noqa: E501
-
-    enabled: Optional[StrictBool] = Field(
-        default=None, description="Data classification enabled for organization"
-    )
-    labels: Optional[List[DataClassificationLabel]] = Field(
-        default=None, description="Data classification labels"
-    )
-    type: Optional[StrictStr] = Field(
-        default="data-classification-organization-settings",
-        description="Type of the object returned.",
-    )
+    """ # noqa: E501
+    enabled: Optional[StrictBool] = Field(default=None, description="Data classification enabled for organization")
+    labels: Optional[List[DataClassificationLabel]] = Field(default=None, description="Data classification labels")
+    type: Optional[StrictStr] = Field(default='data-classification-organization-settings', description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["enabled", "labels", "type"]
 
@@ -47,6 +38,7 @@ class DataClassificationOrganizationSettings(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -73,11 +65,9 @@ class DataClassificationOrganizationSettings(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -90,7 +80,7 @@ class DataClassificationOrganizationSettings(BaseModel):
             for _item in self.labels:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["labels"] = _items
+            _dict['labels'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -107,27 +97,16 @@ class DataClassificationOrganizationSettings(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "enabled": obj.get("enabled"),
-                "labels": (
-                    [
-                        DataClassificationLabel.from_dict(_item)
-                        for _item in obj["labels"]
-                    ]
-                    if obj.get("labels") is not None
-                    else None
-                ),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "data-classification-organization-settings"
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "enabled": obj.get("enabled"),
+            "labels": [DataClassificationLabel.from_dict(_item) for _item in obj["labels"]] if obj.get("labels") is not None else None,
+            "type": obj.get("type") if obj.get("type") is not None else 'data-classification-organization-settings'
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

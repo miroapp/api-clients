@@ -23,35 +23,24 @@ from miro_api.models.relative_offset import RelativeOffset
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class ItemConnectionCreationData(BaseModel):
     """
     The end point of the connector. endItem.id must be different from startItem.id
-    """  # noqa: E501
-
-    id: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique identifier (ID) of the item to which you want to attach the connector. Note that Frames are not supported at the moment.",
-    )
+    """ # noqa: E501
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the item to which you want to attach the connector. Note that Frames are not supported at the moment.")
     position: Optional[RelativeOffset] = None
-    snap_to: Optional[StrictStr] = Field(
-        default=None,
-        description="The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.",
-        alias="snapTo",
-    )
+    snap_to: Optional[StrictStr] = Field(default=None, description="The side of the item connector should be attached to, the connection point will be placed in the middle of that side. Option `auto` allows to pick a connection point automatically. Only either `position` or `snapTo` parameter is allowed to be set, if neither provided `snapTo: auto` will be used by default.", alias="snapTo")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "position", "snapTo"]
 
-    @field_validator("snap_to")
+    @field_validator('snap_to')
     def snap_to_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["auto", "top", "right", "bottom", "left"]):
-            raise ValueError(
-                "must be one of enum values ('auto', 'top', 'right', 'bottom', 'left')"
-            )
+        if value not in set(['auto', 'top', 'right', 'bottom', 'left']):
+            raise ValueError("must be one of enum values ('auto', 'top', 'right', 'bottom', 'left')")
         return value
 
     model_config = {
@@ -59,6 +48,7 @@ class ItemConnectionCreationData(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -85,11 +75,9 @@ class ItemConnectionCreationData(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -98,7 +86,7 @@ class ItemConnectionCreationData(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of position
         if self.position:
-            _dict["position"] = self.position.to_dict()
+            _dict['position'] = self.position.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -115,20 +103,16 @@ class ItemConnectionCreationData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "id": obj.get("id"),
-                "position": (
-                    RelativeOffset.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-                "snapTo": obj.get("snapTo"),
-            }
-        )
+        _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "position": RelativeOffset.from_dict(obj["position"]) if obj.get("position") is not None else None,
+            "snapTo": obj.get("snapTo")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

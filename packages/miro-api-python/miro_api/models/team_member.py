@@ -23,59 +23,26 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class TeamMember(BaseModel):
     """
     TeamMember
-    """  # noqa: E501
-
+    """ # noqa: E501
     id: StrictStr = Field(description="Team member id.")
-    role: StrictStr = Field(
-        description=' Role of the team member. * "member":     Team member with full member permissions. * "admin":      Admin of a team. Team member with permission to manage team. * "non_team":   External user, non-team user. * "team_guest": Team-guest user, user with access only to a team without access to organization. '
-    )
-    created_at: Optional[datetime] = Field(
-        default=None,
-        description="Date and time when member was invited to the team.",
-        alias="createdAt",
-    )
-    created_by: Optional[StrictStr] = Field(
-        default=None,
-        description="Id of the user who invited the team member.",
-        alias="createdBy",
-    )
-    modified_at: Optional[datetime] = Field(
-        default=None,
-        description="Date and time when the user's membership was last updated.",
-        alias="modifiedAt",
-    )
-    modified_by: Optional[StrictStr] = Field(
-        default=None,
-        description="Id of the user who last updated the user's membership.",
-        alias="modifiedBy",
-    )
+    role: StrictStr = Field(description=" Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"non_team\":   External user, non-team user. * \"team_guest\": Team-guest user, user with access only to a team without access to organization. ")
+    created_at: Optional[datetime] = Field(default=None, description="Date and time when member was invited to the team.", alias="createdAt")
+    created_by: Optional[StrictStr] = Field(default=None, description="Id of the user who invited the team member.", alias="createdBy")
+    modified_at: Optional[datetime] = Field(default=None, description="Date and time when the user's membership was last updated.", alias="modifiedAt")
+    modified_by: Optional[StrictStr] = Field(default=None, description="Id of the user who last updated the user's membership.", alias="modifiedBy")
     team_id: StrictStr = Field(description="Team id", alias="teamId")
-    type: Optional[StrictStr] = Field(
-        default="team-member", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default='team-member', description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "role",
-        "createdAt",
-        "createdBy",
-        "modifiedAt",
-        "modifiedBy",
-        "teamId",
-        "type",
-    ]
+    __properties: ClassVar[List[str]] = ["id", "role", "createdAt", "createdBy", "modifiedAt", "modifiedBy", "teamId", "type"]
 
-    @field_validator("role")
+    @field_validator('role')
     def role_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(["non_team", "member", "admin", "team_guest"]):
-            raise ValueError(
-                "must be one of enum values ('non_team', 'member', 'admin', 'team_guest')"
-            )
+        if value not in set(['non_team', 'member', 'admin', 'team_guest']):
+            raise ValueError("must be one of enum values ('non_team', 'member', 'admin', 'team_guest')")
         return value
 
     model_config = {
@@ -83,6 +50,7 @@ class TeamMember(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -109,11 +77,9 @@ class TeamMember(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -136,23 +102,21 @@ class TeamMember(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "id": obj.get("id"),
-                "role": obj.get("role"),
-                "createdAt": obj.get("createdAt"),
-                "createdBy": obj.get("createdBy"),
-                "modifiedAt": obj.get("modifiedAt"),
-                "modifiedBy": obj.get("modifiedBy"),
-                "teamId": obj.get("teamId"),
-                "type": (
-                    obj.get("type") if obj.get("type") is not None else "team-member"
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "role": obj.get("role"),
+            "createdAt": obj.get("createdAt"),
+            "createdBy": obj.get("createdBy"),
+            "modifiedAt": obj.get("modifiedAt"),
+            "modifiedBy": obj.get("modifiedBy"),
+            "teamId": obj.get("teamId"),
+            "type": obj.get("type") if obj.get("type") is not None else 'team-member'
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -22,17 +22,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class SelfLinkPlatformTags(BaseModel):
     """
     Contains applicable links for the current object.
-    """  # noqa: E501
-
-    var_self: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to obtain more information about the current object.",
-        alias="self",
-    )
+    """ # noqa: E501
+    var_self: Optional[StrictStr] = Field(default=None, description="Link to obtain more information about the current object.", alias="self")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["self"]
 
@@ -41,6 +35,7 @@ class SelfLinkPlatformTags(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -67,11 +62,9 @@ class SelfLinkPlatformTags(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -94,10 +87,14 @@ class SelfLinkPlatformTags(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"self": obj.get("self")})
+        _obj = cls.model_validate({
+            "self": obj.get("self")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

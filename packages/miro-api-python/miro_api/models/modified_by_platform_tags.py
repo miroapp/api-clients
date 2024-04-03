@@ -22,19 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class ModifiedByPlatformTags(BaseModel):
     """
     Contains information about the user who last modified the item.
-    """  # noqa: E501
-
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier (ID) of the user."
-    )
-    type: Optional[StrictStr] = Field(
-        default=None,
-        description="Indicates the type of object returned. In this case, `type` returns `user`.",
-    )
+    """ # noqa: E501
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the user.")
+    type: Optional[StrictStr] = Field(default=None, description="Indicates the type of object returned. In this case, `type` returns `user`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "type"]
 
@@ -43,6 +36,7 @@ class ModifiedByPlatformTags(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -69,11 +63,9 @@ class ModifiedByPlatformTags(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,10 +88,15 @@ class ModifiedByPlatformTags(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"id": obj.get("id"), "type": obj.get("type")})
+        _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "type": obj.get("type")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

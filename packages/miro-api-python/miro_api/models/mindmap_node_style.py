@@ -23,26 +23,13 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class MindmapNodeStyle(BaseModel):
     """
     Contains information about the node style, such as the node color or fillOpacity.
-    """  # noqa: E501
-
-    color: Optional[StrictStr] = Field(
-        default=None,
-        description="Hex value representing the color for the text within the node.",
-    )
-    fill_opacity: Optional[StrictStr] = Field(
-        default=None,
-        description="It sets the opacity level of the background fill color.  Allowed values: any number between 0.0 and 1.0 included.  If the value is 0.0, the background fill color is completely transparent or invisible. If the value is 1.0, the background fill color is completely opaque or solid. Default: 0 (transparent)",
-        alias="fillOpacity",
-    )
-    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None,
-        description="Defines the font size, in dp, for the text on the node. Default: `14`.",
-        alias="fontSize",
-    )
+    """ # noqa: E501
+    color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color for the text within the node.")
+    fill_opacity: Optional[StrictStr] = Field(default=None, description="It sets the opacity level of the background fill color.  Allowed values: any number between 0.0 and 1.0 included.  If the value is 0.0, the background fill color is completely transparent or invisible. If the value is 1.0, the background fill color is completely opaque or solid. Default: 0 (transparent)", alias="fillOpacity")
+    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the font size, in dp, for the text on the node. Default: `14`.", alias="fontSize")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["color", "fillOpacity", "fontSize"]
 
@@ -51,6 +38,7 @@ class MindmapNodeStyle(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -77,11 +65,9 @@ class MindmapNodeStyle(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -104,16 +90,16 @@ class MindmapNodeStyle(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "color": obj.get("color"),
-                "fillOpacity": obj.get("fillOpacity"),
-                "fontSize": obj.get("fontSize"),
-            }
-        )
+        _obj = cls.model_validate({
+            "color": obj.get("color"),
+            "fillOpacity": obj.get("fillOpacity"),
+            "fontSize": obj.get("fontSize")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

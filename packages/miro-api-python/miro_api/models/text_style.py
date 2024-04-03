@@ -23,101 +23,36 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class TextStyle(BaseModel):
     """
     Contains information about the style of a text item, such as the fill color or font family.
-    """  # noqa: E501
-
-    color: Optional[StrictStr] = Field(
-        default=None,
-        description="Hex value representing the color for the text within the text item. Default: `#1a1a1a`.",
-    )
-    fill_color: Optional[StrictStr] = Field(
-        default=None,
-        description="Background color of the text item. Default: `#ffffff`.",
-        alias="fillColor",
-    )
-    fill_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None,
-        description="Opacity level of the background color. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: `1.0` if `fillColor` provided, `0.0` if `fillColor` is not provided.",
-        alias="fillOpacity",
-    )
-    font_family: Optional[StrictStr] = Field(
-        default=None,
-        description="Font type for the text in the text item. Default: `arial`.",
-        alias="fontFamily",
-    )
-    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None, description="Font size, in dp. Default: `14`.", alias="fontSize"
-    )
-    text_align: Optional[StrictStr] = Field(
-        default=None,
-        description="Horizontal alignment for the item's content. Default: `center.`",
-        alias="textAlign",
-    )
+    """ # noqa: E501
+    color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color for the text within the text item. Default: `#1a1a1a`.")
+    fill_color: Optional[StrictStr] = Field(default=None, description="Background color of the text item. Default: `#ffffff`.", alias="fillColor")
+    fill_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Opacity level of the background color. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible. `1.0`: the background color is completely opaque or solid. Default: `1.0` if `fillColor` is provided, `0.0` if `fillColor` is not provided.", alias="fillOpacity")
+    font_family: Optional[StrictStr] = Field(default=None, description="Font type for the text in the text item. Default: `arial`.", alias="fontFamily")
+    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Font size, in dp. Default: `14`.", alias="fontSize")
+    text_align: Optional[StrictStr] = Field(default=None, description="Horizontal alignment for the item's content. Default: `center.`", alias="textAlign")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "color",
-        "fillColor",
-        "fillOpacity",
-        "fontFamily",
-        "fontSize",
-        "textAlign",
-    ]
+    __properties: ClassVar[List[str]] = ["color", "fillColor", "fillOpacity", "fontFamily", "fontSize", "textAlign"]
 
-    @field_validator("font_family")
+    @field_validator('font_family')
     def font_family_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(
-            [
-                "arial",
-                "abril_fatface",
-                "bangers",
-                "eb_garamond",
-                "georgia",
-                "graduate",
-                "gravitas_one",
-                "fredoka_one",
-                "nixie_one",
-                "open_sans",
-                "permanent_marker",
-                "pt_sans",
-                "pt_sans_narrow",
-                "pt_serif",
-                "rammetto_one",
-                "roboto",
-                "roboto_condensed",
-                "roboto_slab",
-                "caveat",
-                "times_new_roman",
-                "titan_one",
-                "lemon_tuesday",
-                "roboto_mono",
-                "noto_sans",
-                "plex_sans",
-                "plex_serif",
-                "plex_mono",
-                "spoof",
-                "tiempos_text",
-                "formular",
-            ]
-        ):
-            raise ValueError(
-                "must be one of enum values ('arial', 'abril_fatface', 'bangers', 'eb_garamond', 'georgia', 'graduate', 'gravitas_one', 'fredoka_one', 'nixie_one', 'open_sans', 'permanent_marker', 'pt_sans', 'pt_sans_narrow', 'pt_serif', 'rammetto_one', 'roboto', 'roboto_condensed', 'roboto_slab', 'caveat', 'times_new_roman', 'titan_one', 'lemon_tuesday', 'roboto_mono', 'noto_sans', 'plex_sans', 'plex_serif', 'plex_mono', 'spoof', 'tiempos_text', 'formular')"
-            )
+        if value not in set(['arial', 'abril_fatface', 'bangers', 'eb_garamond', 'georgia', 'graduate', 'gravitas_one', 'fredoka_one', 'nixie_one', 'open_sans', 'permanent_marker', 'pt_sans', 'pt_sans_narrow', 'pt_serif', 'rammetto_one', 'roboto', 'roboto_condensed', 'roboto_slab', 'caveat', 'times_new_roman', 'titan_one', 'lemon_tuesday', 'roboto_mono', 'noto_sans', 'plex_sans', 'plex_serif', 'plex_mono', 'spoof', 'tiempos_text', 'formular']):
+            raise ValueError("must be one of enum values ('arial', 'abril_fatface', 'bangers', 'eb_garamond', 'georgia', 'graduate', 'gravitas_one', 'fredoka_one', 'nixie_one', 'open_sans', 'permanent_marker', 'pt_sans', 'pt_sans_narrow', 'pt_serif', 'rammetto_one', 'roboto', 'roboto_condensed', 'roboto_slab', 'caveat', 'times_new_roman', 'titan_one', 'lemon_tuesday', 'roboto_mono', 'noto_sans', 'plex_sans', 'plex_serif', 'plex_mono', 'spoof', 'tiempos_text', 'formular')")
         return value
 
-    @field_validator("text_align")
+    @field_validator('text_align')
     def text_align_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["left", "right", "center"]):
+        if value not in set(['left', 'right', 'center']):
             raise ValueError("must be one of enum values ('left', 'right', 'center')")
         return value
 
@@ -126,6 +61,7 @@ class TextStyle(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -152,11 +88,9 @@ class TextStyle(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -179,19 +113,19 @@ class TextStyle(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "color": obj.get("color"),
-                "fillColor": obj.get("fillColor"),
-                "fillOpacity": obj.get("fillOpacity"),
-                "fontFamily": obj.get("fontFamily"),
-                "fontSize": obj.get("fontSize"),
-                "textAlign": obj.get("textAlign"),
-            }
-        )
+        _obj = cls.model_validate({
+            "color": obj.get("color"),
+            "fillColor": obj.get("fillColor"),
+            "fillOpacity": obj.get("fillOpacity"),
+            "fontFamily": obj.get("fontFamily"),
+            "fontSize": obj.get("fontSize"),
+            "textAlign": obj.get("textAlign")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -23,15 +23,11 @@ from miro_api.models.sharing_policy_settings import SharingPolicySettings
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class UpdateProjectSettingsRequest(BaseModel):
     """
     UpdateProjectSettingsRequest
-    """  # noqa: E501
-
-    sharing_policy_settings: Optional[SharingPolicySettings] = Field(
-        default=None, alias="sharingPolicySettings"
-    )
+    """ # noqa: E501
+    sharing_policy_settings: Optional[SharingPolicySettings] = Field(default=None, alias="sharingPolicySettings")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["sharingPolicySettings"]
 
@@ -40,6 +36,7 @@ class UpdateProjectSettingsRequest(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,11 +63,9 @@ class UpdateProjectSettingsRequest(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -79,7 +74,7 @@ class UpdateProjectSettingsRequest(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of sharing_policy_settings
         if self.sharing_policy_settings:
-            _dict["sharingPolicySettings"] = self.sharing_policy_settings.to_dict()
+            _dict['sharingPolicySettings'] = self.sharing_policy_settings.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -96,18 +91,14 @@ class UpdateProjectSettingsRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "sharingPolicySettings": (
-                    SharingPolicySettings.from_dict(obj["sharingPolicySettings"])
-                    if obj.get("sharingPolicySettings") is not None
-                    else None
-                )
-            }
-        )
+        _obj = cls.model_validate({
+            "sharingPolicySettings": SharingPolicySettings.from_dict(obj["sharingPolicySettings"]) if obj.get("sharingPolicySettings") is not None else None
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

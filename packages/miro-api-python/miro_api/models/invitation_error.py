@@ -22,18 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class InvitationError(BaseModel):
     """
     Contains information about the invites that failed.
-    """  # noqa: E501
-
-    email: Optional[StrictStr] = Field(
-        default=None, description="Email ID for which the invitation failed."
-    )
-    reason: Optional[StrictStr] = Field(
-        default=None, description="Reason why the invitation failed."
-    )
+    """ # noqa: E501
+    email: Optional[StrictStr] = Field(default=None, description="Email ID for which the invitation failed.")
+    reason: Optional[StrictStr] = Field(default=None, description="Reason why the invitation failed.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["email", "reason"]
 
@@ -42,6 +36,7 @@ class InvitationError(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -68,11 +63,9 @@ class InvitationError(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -95,12 +88,15 @@ class InvitationError(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"email": obj.get("email"), "reason": obj.get("reason")}
-        )
+        _obj = cls.model_validate({
+            "email": obj.get("email"),
+            "reason": obj.get("reason")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+
