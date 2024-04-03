@@ -54,6 +54,9 @@ class SubscriptionData(BaseModel):
         else:
             super().__init__(**kwargs)
 
+    def __getattr__(self, attr: str):
+        return getattr(self.actual_instance, attr)
+
     @field_validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
         instance = SubscriptionData.model_construct()
