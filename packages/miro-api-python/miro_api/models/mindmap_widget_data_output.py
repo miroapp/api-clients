@@ -24,12 +24,10 @@ from typing_extensions import Literal, Self
 
 MINDMAPWIDGETDATAOUTPUT_ONE_OF_SCHEMAS = ["TextData"]
 
-
 class MindmapWidgetDataOutput(BaseModel):
     """
     Contains the mind map node data, such as the item title, content, or description.
     """
-
     # data type: TextData
     oneof_schema_1_validator: Optional[TextData] = None
     actual_instance: Optional[Union[TextData]] = None
@@ -40,16 +38,13 @@ class MindmapWidgetDataOutput(BaseModel):
         "protected_namespaces": (),
     }
 
+
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError(
-                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
-                )
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
             if kwargs:
-                raise ValueError(
-                    "If a position argument is used, keyword arguments cannot be used."
-                )
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
@@ -57,7 +52,7 @@ class MindmapWidgetDataOutput(BaseModel):
     def __getattr__(self, attr: str):
         return getattr(self.actual_instance, attr)
 
-    @field_validator("actual_instance")
+    @field_validator('actual_instance')
     def actual_instance_must_validate_oneof(cls, v):
         instance = MindmapWidgetDataOutput.model_construct()
         error_messages = []
@@ -69,16 +64,10 @@ class MindmapWidgetDataOutput(BaseModel):
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError(
-                "Multiple matches found when setting `actual_instance` in MindmapWidgetDataOutput with oneOf schemas: TextData. Details: "
-                + ", ".join(error_messages)
-            )
+            raise ValueError("Multiple matches found when setting `actual_instance` in MindmapWidgetDataOutput with oneOf schemas: TextData. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError(
-                "No match found when setting `actual_instance` in MindmapWidgetDataOutput with oneOf schemas: TextData. Details: "
-                + ", ".join(error_messages)
-            )
+            raise ValueError("No match found when setting `actual_instance` in MindmapWidgetDataOutput with oneOf schemas: TextData. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -102,16 +91,11 @@ class MindmapWidgetDataOutput(BaseModel):
 
         if not matches:
             # no match
-            raise ValueError(
-                "No match found when deserializing the JSON string into MindmapWidgetDataOutput with oneOf schemas: TextData. Details: "
-                + ", ".join(error_messages)
-            )
+            raise ValueError("No match found when deserializing the JSON string into MindmapWidgetDataOutput with oneOf schemas: TextData. Details: " + ", ".join(error_messages))
 
         # Return one match that has least additional_properties
         if len(matches) > 1:
-            instance.actual_instance = sorted(
-                matches, key=lambda m: len(m.additional_properties)
-            )[0]
+            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
 
         return instance
 
@@ -120,9 +104,7 @@ class MindmapWidgetDataOutput(BaseModel):
         if self.actual_instance is None:
             return "null"
 
-        if hasattr(self.actual_instance, "to_json") and callable(
-            self.actual_instance.to_json
-        ):
+        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
             return self.actual_instance.to_json()
         else:
             return json.dumps(self.actual_instance)
@@ -132,9 +114,7 @@ class MindmapWidgetDataOutput(BaseModel):
         if self.actual_instance is None:
             return None
 
-        if hasattr(self.actual_instance, "to_dict") and callable(
-            self.actual_instance.to_dict
-        ):
+        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
             return self.actual_instance.to_dict()
         else:
             # primitive type
@@ -143,3 +123,5 @@ class MindmapWidgetDataOutput(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
+
+

@@ -26,46 +26,26 @@ from miro_api.models.item_connection_changes_data import ItemConnectionChangesDa
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class ConnectorChangesData(BaseModel):
     """
     If both are provided, startItem.id must be different from endItem.id
-    """  # noqa: E501
-
-    start_item: Optional[ItemConnectionChangesData] = Field(
-        default=None, alias="startItem"
-    )
+    """ # noqa: E501
+    start_item: Optional[ItemConnectionChangesData] = Field(default=None, alias="startItem")
     end_item: Optional[ItemConnectionChangesData] = Field(default=None, alias="endItem")
-    shape: Optional[StrictStr] = Field(
-        default=None,
-        description="The path type of the connector line, defines curvature. Default: curved.",
-    )
-    captions: Optional[Annotated[List[Caption], Field(min_length=0, max_length=20)]] = (
-        Field(
-            default=None,
-            description="Blocks of text you want to display on the connector.",
-        )
-    )
+    shape: Optional[StrictStr] = Field(default=None, description="The path type of the connector line, defines curvature. Default: curved.")
+    captions: Optional[Annotated[List[Caption], Field(min_length=0, max_length=20)]] = Field(default=None, description="Blocks of text you want to display on the connector.")
     style: Optional[ConnectorStyle] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "startItem",
-        "endItem",
-        "shape",
-        "captions",
-        "style",
-    ]
+    __properties: ClassVar[List[str]] = ["startItem", "endItem", "shape", "captions", "style"]
 
-    @field_validator("shape")
+    @field_validator('shape')
     def shape_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["straight", "elbowed", "curved"]):
-            raise ValueError(
-                "must be one of enum values ('straight', 'elbowed', 'curved')"
-            )
+        if value not in set(['straight', 'elbowed', 'curved']):
+            raise ValueError("must be one of enum values ('straight', 'elbowed', 'curved')")
         return value
 
     model_config = {
@@ -73,6 +53,7 @@ class ConnectorChangesData(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -99,11 +80,9 @@ class ConnectorChangesData(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -112,20 +91,20 @@ class ConnectorChangesData(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of start_item
         if self.start_item:
-            _dict["startItem"] = self.start_item.to_dict()
+            _dict['startItem'] = self.start_item.to_dict()
         # override the default output from pydantic by calling `to_dict()` of end_item
         if self.end_item:
-            _dict["endItem"] = self.end_item.to_dict()
+            _dict['endItem'] = self.end_item.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in captions (list)
         _items = []
         if self.captions:
             for _item in self.captions:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["captions"] = _items
+            _dict['captions'] = _items
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
-            _dict["style"] = self.style.to_dict()
+            _dict['style'] = self.style.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -142,34 +121,18 @@ class ConnectorChangesData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "startItem": (
-                    ItemConnectionChangesData.from_dict(obj["startItem"])
-                    if obj.get("startItem") is not None
-                    else None
-                ),
-                "endItem": (
-                    ItemConnectionChangesData.from_dict(obj["endItem"])
-                    if obj.get("endItem") is not None
-                    else None
-                ),
-                "shape": obj.get("shape"),
-                "captions": (
-                    [Caption.from_dict(_item) for _item in obj["captions"]]
-                    if obj.get("captions") is not None
-                    else None
-                ),
-                "style": (
-                    ConnectorStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "startItem": ItemConnectionChangesData.from_dict(obj["startItem"]) if obj.get("startItem") is not None else None,
+            "endItem": ItemConnectionChangesData.from_dict(obj["endItem"]) if obj.get("endItem") is not None else None,
+            "shape": obj.get("shape"),
+            "captions": [Caption.from_dict(_item) for _item in obj["captions"]] if obj.get("captions") is not None else None,
+            "style": ConnectorStyle.from_dict(obj["style"]) if obj.get("style") is not None else None
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -23,32 +23,17 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class CreateBoardSubscriptionRequest(BaseModel):
     """
     Contains the board ID associated with the webhook subscription, the webhook callback URL, and the status of the webhook subscription.
-    """  # noqa: E501
-
-    board_id: Optional[StrictStr] = Field(
-        default=None,
-        description="[Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to associate with the webhook subscription.",
-        alias="boardId",
-    )
-    callback_url: Optional[
-        Annotated[str, Field(min_length=8, strict=True, max_length=256)]
-    ] = Field(
-        default=None,
-        description="Indicates the HTTPS URL to which Miro sends a webhook when an event occurs.",
-        alias="callbackUrl",
-    )
-    status: Optional[StrictStr] = Field(
-        default="enabled",
-        description="Indicates whether the status of the webhook subscription.`enabled`: Miro sends a webhook when an event occurs in the associated board. `disabled`: Miro does not send a webhook even when an event occurs in the associated board. `lost_access`: The user with which the webhook subscription is associated has lost access to the board. The user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.",
-    )
+    """ # noqa: E501
+    board_id: Optional[StrictStr] = Field(default=None, description="[Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to associate with the webhook subscription.", alias="boardId")
+    callback_url: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=256)]] = Field(default=None, description="Indicates the HTTPS URL to which Miro sends a webhook when an event occurs.", alias="callbackUrl")
+    status: Optional[StrictStr] = Field(default='enabled', description="Indicates whether the status of the webhook subscription.`enabled`: Miro sends a webhook when an event occurs in the associated board. `disabled`: Miro does not send a webhook even when an event occurs in the associated board. `lost_access`: The user with which the webhook subscription is associated has lost access to the board. The user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["boardId", "callbackUrl", "status"]
 
-    @field_validator("callback_url")
+    @field_validator('callback_url')
     def callback_url_validate_regular_expression(cls, value):
         """Validates the regular expression"""
         if value is None:
@@ -58,13 +43,13 @@ class CreateBoardSubscriptionRequest(BaseModel):
             raise ValueError(r"must validate the regular expression /^https:\/\/(.*)/")
         return value
 
-    @field_validator("status")
+    @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["enabled", "disabled"]):
+        if value not in set(['enabled', 'disabled']):
             raise ValueError("must be one of enum values ('enabled', 'disabled')")
         return value
 
@@ -73,6 +58,7 @@ class CreateBoardSubscriptionRequest(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -99,11 +85,9 @@ class CreateBoardSubscriptionRequest(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -126,18 +110,16 @@ class CreateBoardSubscriptionRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "boardId": obj.get("boardId"),
-                "callbackUrl": obj.get("callbackUrl"),
-                "status": (
-                    obj.get("status") if obj.get("status") is not None else "enabled"
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "boardId": obj.get("boardId"),
+            "callbackUrl": obj.get("callbackUrl"),
+            "status": obj.get("status") if obj.get("status") is not None else 'enabled'
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

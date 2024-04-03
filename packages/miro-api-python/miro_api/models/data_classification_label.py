@@ -22,53 +22,28 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class DataClassificationLabel(BaseModel):
     """
     Data classification label
-    """  # noqa: E501
-
+    """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Label id.")
     color: Optional[StrictStr] = Field(default=None, description="Label color.")
     default: Optional[StrictBool] = Field(default=None, description="Label is default.")
-    description: Optional[StrictStr] = Field(
-        default=None, description="Label description."
-    )
+    description: Optional[StrictStr] = Field(default=None, description="Label description.")
     name: Optional[StrictStr] = Field(default=None, description="Label name.")
-    order_number: Optional[StrictInt] = Field(
-        default=None, description="Label order number.", alias="orderNumber"
-    )
-    sharing_recommendation: Optional[StrictStr] = Field(
-        default=None,
-        description="Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).",
-        alias="sharingRecommendation",
-    )
-    guideline_url: Optional[StrictStr] = Field(
-        default=None,
-        description="Indicates the URL for the board classification label guidelines.",
-        alias="guidelineUrl",
-    )
-    type: Optional[StrictStr] = Field(
-        default="data-classification-label", description="Type of the object returned."
-    )
+    order_number: Optional[StrictInt] = Field(default=None, description="Label order number.", alias="orderNumber")
+    sharing_recommendation: Optional[StrictStr] = Field(default=None, description="Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).", alias="sharingRecommendation")
+    guideline_url: Optional[StrictStr] = Field(default=None, description="Indicates the URL for the board classification label guidelines.", alias="guidelineUrl")
+    type: Optional[StrictStr] = Field(default='data-classification-label', description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "color",
-        "default",
-        "description",
-        "name",
-        "orderNumber",
-        "sharingRecommendation",
-        "guidelineUrl",
-        "type",
-    ]
+    __properties: ClassVar[List[str]] = ["id", "color", "default", "description", "name", "orderNumber", "sharingRecommendation", "guidelineUrl", "type"]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -95,11 +70,9 @@ class DataClassificationLabel(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -122,26 +95,22 @@ class DataClassificationLabel(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "id": obj.get("id"),
-                "color": obj.get("color"),
-                "default": obj.get("default"),
-                "description": obj.get("description"),
-                "name": obj.get("name"),
-                "orderNumber": obj.get("orderNumber"),
-                "sharingRecommendation": obj.get("sharingRecommendation"),
-                "guidelineUrl": obj.get("guidelineUrl"),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "data-classification-label"
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "color": obj.get("color"),
+            "default": obj.get("default"),
+            "description": obj.get("description"),
+            "name": obj.get("name"),
+            "orderNumber": obj.get("orderNumber"),
+            "sharingRecommendation": obj.get("sharingRecommendation"),
+            "guidelineUrl": obj.get("guidelineUrl"),
+            "type": obj.get("type") if obj.get("type") is not None else 'data-classification-label'
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -11,7 +11,7 @@ import { {{classname}} } from '{{filename}}';
 
 {{/apis}}
 
-import { ObjectSerializer } from '../model/models';
+import { ObjectSerializer, RequestFile } from '../model/models';
 
 let defaultBasePath = '{{{basePath}}}';
 
@@ -52,7 +52,7 @@ export class MiroApi {
          */
         async {{nickname}} ({{#requiredParams}}{{paramName}}: {{{dataType}}}, {{/requiredParams}}
         {{#optionalParams}}
-{{^isBodyParam}}{{#-first}} query?: { {{/-first}}{{/isBodyParam}}
+{{#isQueryParam}}{{#-first}} query?: { {{/-first}}{{/isQueryParam}}
 {{#isBodyParam}}{{^-first}} }, {{/-first}} {{/isBodyParam}}
 {{paramName}}?: {{{dataType}}},
 {{#isQueryParam}}{{#-last}} }, {{/-last}} {{/isQueryParam}}
@@ -84,19 +84,44 @@ export class MiroApi {
         }
 
 {{/queryParams}}
+{{#hasFormParams}}
+        const formData = new FormData();
+        let extension = ""
+    {{#formParams}}
+        if ({{paramName}}) {
+            {{#isFile}}
+            if ('{{nickname}}'.includes('Image')) {
+                extension = '.png'
+            } else if ('{{nickname}}'.includes('Document')) {
+                extension = '.pdf'
+            }
+            formData.append('{{paramName}}', {{paramName}} , "file" + extension)
+            {{/isFile}}
 
-        const resource = new URL(localVarPath, this.basePath)
-        resource.search = localVarQueryParameters.toString()
+            {{^isFile}}
+            formData.append('{{paramName}}', JSON.stringify(ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}")));
+            {{/isFile}}
+        }
+    {{/formParams}}
+{{/hasFormParams}}
+
+        const urlResource = new URL(localVarPath, this.basePath)
+        urlResource.search = localVarQueryParameters.toString()
 
         const {response, bodyAsJson} = await makeJsonRequest(
             typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
             '{{httpMethod}}',
-            resource,
+            urlResource,
+            {{#hasFormParams}}
+            formData,
+            {{/hasFormParams}}
             {{#bodyParam}}
             JSON.stringify(ObjectSerializer.serialize({{paramName}}, "{{{dataType}}}")),
             {{/bodyParam}}
             {{^bodyParam}}
+            {{^hasFormParams}}
             undefined,
+            {{/hasFormParams}}
             {{/bodyParam}}
 
             this.logger

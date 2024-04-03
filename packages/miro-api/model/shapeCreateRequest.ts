@@ -13,12 +13,12 @@
 import {Geometry} from './geometry'
 import {Parent} from './parent'
 import {PositionChange} from './positionChange'
-import {ShapeData} from './shapeData'
-import {ShapeStyle} from './shapeStyle'
+import {ShapeDataForCreate} from './shapeDataForCreate'
+import {ShapeStyleForCreate} from './shapeStyleForCreate'
 
 export class ShapeCreateRequest {
-  'data'?: ShapeData
-  'style'?: ShapeStyle
+  'data'?: ShapeDataForCreate
+  'style'?: ShapeStyleForCreate
   'position'?: PositionChange
   'geometry'?: Geometry
   'parent'?: Parent
@@ -31,12 +31,12 @@ export class ShapeCreateRequest {
     {
       name: 'data',
       baseName: 'data',
-      type: 'ShapeData',
+      type: 'ShapeDataForCreate',
     },
     {
       name: 'style',
       baseName: 'style',
-      type: 'ShapeStyle',
+      type: 'ShapeStyleForCreate',
     },
     {
       name: 'position',

@@ -16,7 +16,7 @@
  */
 export class CardData {
   /**
-   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is a string containing numbers, and it is automatically assigned to a user when they first sign up.
+   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is numeric, and it is automatically assigned to a user when they first sign up.
    */
   'assigneeId'?: string
   /**
@@ -30,7 +30,7 @@ export class CardData {
   /**
    * A short text header for the card.
    */
-  'title'?: string = 'sample card item'
+  'title'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined

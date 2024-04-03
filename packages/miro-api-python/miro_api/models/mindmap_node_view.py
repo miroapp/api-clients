@@ -24,16 +24,11 @@ from miro_api.models.mindmap_widget_data_output import MindmapWidgetDataOutput
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class MindmapNodeView(BaseModel):
     """
     Contains the information about the mind map node.
-    """  # noqa: E501
-
-    type: Optional[StrictStr] = Field(
-        default=None,
-        description="Type of item used as mind map node. Currently, `type` can only be equal to `text`.",
-    )
+    """ # noqa: E501
+    type: Optional[StrictStr] = Field(default=None, description="Type of item used as mind map node. Currently, `type` can only be equal to `text`.")
     data: Optional[MindmapWidgetDataOutput] = None
     style: Optional[MindmapNodeStyle] = None
     additional_properties: Dict[str, Any] = {}
@@ -44,6 +39,7 @@ class MindmapNodeView(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,11 +66,9 @@ class MindmapNodeView(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -83,10 +77,10 @@ class MindmapNodeView(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
-            _dict["data"] = self.data.to_dict()
+            _dict['data'] = self.data.to_dict()
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
-            _dict["style"] = self.style.to_dict()
+            _dict['style'] = self.style.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -103,24 +97,16 @@ class MindmapNodeView(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "type": obj.get("type"),
-                "data": (
-                    MindmapWidgetDataOutput.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    MindmapNodeStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "type": obj.get("type"),
+            "data": MindmapWidgetDataOutput.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "style": MindmapNodeStyle.from_dict(obj["style"]) if obj.get("style") is not None else None
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

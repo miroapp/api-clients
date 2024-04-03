@@ -22,17 +22,11 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class BoardSubscriptionData(BaseModel):
     """
     Contains information about a webhook subscription, such as the board ID associated with the webhook subscription, the date and time when the webhook subscription was last updated, and the type of board item that the subscription is associated with.
-    """  # noqa: E501
-
-    board_id: Optional[StrictStr] = Field(
-        default=None,
-        description="[Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with which the webhook subscription is associated.",
-        alias="boardId",
-    )
+    """ # noqa: E501
+    board_id: Optional[StrictStr] = Field(default=None, description="[Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) with which the webhook subscription is associated.", alias="boardId")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["boardId"]
 
@@ -41,6 +35,7 @@ class BoardSubscriptionData(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -67,11 +62,9 @@ class BoardSubscriptionData(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -94,10 +87,14 @@ class BoardSubscriptionData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"boardId": obj.get("boardId")})
+        _obj = cls.model_validate({
+            "boardId": obj.get("boardId")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

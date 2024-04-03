@@ -30,51 +30,30 @@ from miro_api.models.widget_links import WidgetLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class FrameItem(BaseModel):
     """
     FrameItem
-    """  # noqa: E501
-
+    """ # noqa: E501
     id: StrictStr = Field(description="Unique identifier (ID) of an item.")
     data: Optional[FrameData] = None
     style: Optional[FrameStyle] = None
     position: Optional[Position] = None
     geometry: Optional[Geometry] = None
-    created_at: Optional[datetime] = Field(
-        default=None,
-        description="Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
-        alias="createdAt",
-    )
+    created_at: Optional[datetime] = Field(default=None, description="Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="createdAt")
     created_by: Optional[CreatedBy] = Field(default=None, alias="createdBy")
-    modified_at: Optional[datetime] = Field(
-        default=None,
-        description="Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
-        alias="modifiedAt",
-    )
+    modified_at: Optional[datetime] = Field(default=None, description="Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="modifiedAt")
     modified_by: Optional[ModifiedBy] = Field(default=None, alias="modifiedBy")
     links: Optional[WidgetLinks] = None
     type: StrictStr = Field(description="Type of item that is returned.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "data",
-        "style",
-        "position",
-        "geometry",
-        "createdAt",
-        "createdBy",
-        "modifiedAt",
-        "modifiedBy",
-        "links",
-        "type",
-    ]
+    __properties: ClassVar[List[str]] = ["id", "data", "style", "position", "geometry", "createdAt", "createdBy", "modifiedAt", "modifiedBy", "links", "type"]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -101,11 +80,9 @@ class FrameItem(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -114,25 +91,25 @@ class FrameItem(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
-            _dict["data"] = self.data.to_dict()
+            _dict['data'] = self.data.to_dict()
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
-            _dict["style"] = self.style.to_dict()
+            _dict['style'] = self.style.to_dict()
         # override the default output from pydantic by calling `to_dict()` of position
         if self.position:
-            _dict["position"] = self.position.to_dict()
+            _dict['position'] = self.position.to_dict()
         # override the default output from pydantic by calling `to_dict()` of geometry
         if self.geometry:
-            _dict["geometry"] = self.geometry.to_dict()
+            _dict['geometry'] = self.geometry.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
-            _dict["createdBy"] = self.created_by.to_dict()
+            _dict['createdBy'] = self.created_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of modified_by
         if self.modified_by:
-            _dict["modifiedBy"] = self.modified_by.to_dict()
+            _dict['modifiedBy'] = self.modified_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
-            _dict["links"] = self.links.to_dict()
+            _dict['links'] = self.links.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -149,52 +126,24 @@ class FrameItem(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "id": obj.get("id"),
-                "data": (
-                    FrameData.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    FrameStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-                "position": (
-                    Position.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-                "geometry": (
-                    Geometry.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
-                ),
-                "createdAt": obj.get("createdAt"),
-                "createdBy": (
-                    CreatedBy.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
-                "modifiedAt": obj.get("modifiedAt"),
-                "modifiedBy": (
-                    ModifiedBy.from_dict(obj["modifiedBy"])
-                    if obj.get("modifiedBy") is not None
-                    else None
-                ),
-                "links": (
-                    WidgetLinks.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
-                "type": obj.get("type"),
-            }
-        )
+        _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "data": FrameData.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "style": FrameStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+            "position": Position.from_dict(obj["position"]) if obj.get("position") is not None else None,
+            "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
+            "createdAt": obj.get("createdAt"),
+            "createdBy": CreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
+            "modifiedAt": obj.get("modifiedAt"),
+            "modifiedBy": ModifiedBy.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
+            "links": WidgetLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
+            "type": obj.get("type")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

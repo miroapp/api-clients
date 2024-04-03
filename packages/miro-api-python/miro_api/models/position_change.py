@@ -22,20 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class PositionChange(BaseModel):
     """
     Contains information about the item's position on the board, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
-    """  # noqa: E501
-
-    x: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
-    )
-    y: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
-    )
+    """ # noqa: E501
+    x: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.")
+    y: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["x", "y"]
 
@@ -44,6 +36,7 @@ class PositionChange(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,11 +63,9 @@ class PositionChange(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,10 +88,15 @@ class PositionChange(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"x": obj.get("x"), "y": obj.get("y")})
+        _obj = cls.model_validate({
+            "x": obj.get("x"),
+            "y": obj.get("y")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -22,86 +22,55 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class BoardSharingPolicy(BaseModel):
     """
     Defines the public-level, organization-level, and team-level access for the board. The access level that a user gets depends on the highest level of access that results from considering the public-level, team-level, organization-level, and direct sharing access.
-    """  # noqa: E501
-
-    access: Optional[StrictStr] = Field(
-        default=None, description="Defines the public-level access to the board."
-    )
-    invite_to_account_and_board_link_access: Optional[StrictStr] = Field(
-        default="no_access",
-        description="Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.",
-        alias="inviteToAccountAndBoardLinkAccess",
-    )
-    organization_access: Optional[StrictStr] = Field(
-        default="private",
-        description="Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.",
-        alias="organizationAccess",
-    )
-    team_access: Optional[StrictStr] = Field(
-        default=None,
-        description="Defines the team-level access to the board.",
-        alias="teamAccess",
-    )
+    """ # noqa: E501
+    access: Optional[StrictStr] = Field(default=None, description="Defines the public-level access to the board.")
+    invite_to_account_and_board_link_access: Optional[StrictStr] = Field(default='no_access', description="Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.", alias="inviteToAccountAndBoardLinkAccess")
+    organization_access: Optional[StrictStr] = Field(default='private', description="Defines the organization-level access to the board. If the board is created for a team that does not belong to an organization, the `organizationAccess` parameter is always set to the default value.", alias="organizationAccess")
+    team_access: Optional[StrictStr] = Field(default=None, description="Defines the team-level access to the board.", alias="teamAccess")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "access",
-        "inviteToAccountAndBoardLinkAccess",
-        "organizationAccess",
-        "teamAccess",
-    ]
+    __properties: ClassVar[List[str]] = ["access", "inviteToAccountAndBoardLinkAccess", "organizationAccess", "teamAccess"]
 
-    @field_validator("access")
+    @field_validator('access')
     def access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["private", "view", "edit", "comment"]):
-            raise ValueError(
-                "must be one of enum values ('private', 'view', 'edit', 'comment')"
-            )
+        if value not in set(['private', 'view', 'edit', 'comment']):
+            raise ValueError("must be one of enum values ('private', 'view', 'edit', 'comment')")
         return value
 
-    @field_validator("invite_to_account_and_board_link_access")
+    @field_validator('invite_to_account_and_board_link_access')
     def invite_to_account_and_board_link_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(
-            ["viewer", "commenter", "editor", "coowner", "owner", "guest", "no_access"]
-        ):
-            raise ValueError(
-                "must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner', 'guest', 'no_access')"
-            )
+        if value not in set(['viewer', 'commenter', 'editor', 'coowner', 'owner', 'guest', 'no_access']):
+            raise ValueError("must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner', 'guest', 'no_access')")
         return value
 
-    @field_validator("organization_access")
+    @field_validator('organization_access')
     def organization_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["private", "view", "comment", "edit"]):
-            raise ValueError(
-                "must be one of enum values ('private', 'view', 'comment', 'edit')"
-            )
+        if value not in set(['private', 'view', 'comment', 'edit']):
+            raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
         return value
 
-    @field_validator("team_access")
+    @field_validator('team_access')
     def team_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["private", "view", "comment", "edit"]):
-            raise ValueError(
-                "must be one of enum values ('private', 'view', 'comment', 'edit')"
-            )
+        if value not in set(['private', 'view', 'comment', 'edit']):
+            raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
         return value
 
     model_config = {
@@ -109,6 +78,7 @@ class BoardSharingPolicy(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -135,11 +105,9 @@ class BoardSharingPolicy(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -162,25 +130,17 @@ class BoardSharingPolicy(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "access": obj.get("access"),
-                "inviteToAccountAndBoardLinkAccess": (
-                    obj.get("inviteToAccountAndBoardLinkAccess")
-                    if obj.get("inviteToAccountAndBoardLinkAccess") is not None
-                    else "no_access"
-                ),
-                "organizationAccess": (
-                    obj.get("organizationAccess")
-                    if obj.get("organizationAccess") is not None
-                    else "private"
-                ),
-                "teamAccess": obj.get("teamAccess"),
-            }
-        )
+        _obj = cls.model_validate({
+            "access": obj.get("access"),
+            "inviteToAccountAndBoardLinkAccess": obj.get("inviteToAccountAndBoardLinkAccess") if obj.get("inviteToAccountAndBoardLinkAccess") is not None else 'no_access',
+            "organizationAccess": obj.get("organizationAccess") if obj.get("organizationAccess") is not None else 'private',
+            "teamAccess": obj.get("teamAccess")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

@@ -23,28 +23,15 @@ from miro_api.models.organization_member import OrganizationMember
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class OrganizationMembersSearchResponse(BaseModel):
     """
     Response for query by cursor and filter parameters
-    """  # noqa: E501
-
-    limit: Optional[StrictInt] = Field(
-        default=None,
-        description="Maximum number of results returned based on the limit specified in the request. For example, if there are 20 results, the request has no cursor value, and the limit is set to 20, the size of the results will be 20. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the cursor parameter value.",
-    )
-    size: Optional[StrictInt] = Field(
-        default=None,
-        description="Number of results returned in the response considering the cursor and the limit values sent in the request. For example, if there are 20 results, the request does not have a cursor value, and the limit set to 10, the size of the results will be 10.",
-    )
+    """ # noqa: E501
+    limit: Optional[StrictInt] = Field(default=None, description="Maximum number of results returned based on the limit specified in the request. For example, if there are 20 results, the request has no cursor value, and the limit is set to 20, the size of the results will be 20. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the cursor parameter value.")
+    size: Optional[StrictInt] = Field(default=None, description="Number of results returned in the response considering the cursor and the limit values sent in the request. For example, if there are 20 results, the request does not have a cursor value, and the limit set to 10, the size of the results will be 10.")
     data: Optional[List[OrganizationMember]] = None
-    cursor: Optional[StrictStr] = Field(
-        default=None,
-        description="Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.",
-    )
-    type: Optional[StrictStr] = Field(
-        default="cursor-list", description="Type of the object returned."
-    )
+    cursor: Optional[StrictStr] = Field(default=None, description="Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.")
+    type: Optional[StrictStr] = Field(default='cursor-list', description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["limit", "size", "data", "cursor", "type"]
 
@@ -53,6 +40,7 @@ class OrganizationMembersSearchResponse(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -79,11 +67,9 @@ class OrganizationMembersSearchResponse(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,7 +82,7 @@ class OrganizationMembersSearchResponse(BaseModel):
             for _item in self.data:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["data"] = _items
+            _dict['data'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -113,24 +99,18 @@ class OrganizationMembersSearchResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "limit": obj.get("limit"),
-                "size": obj.get("size"),
-                "data": (
-                    [OrganizationMember.from_dict(_item) for _item in obj["data"]]
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "cursor": obj.get("cursor"),
-                "type": (
-                    obj.get("type") if obj.get("type") is not None else "cursor-list"
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "limit": obj.get("limit"),
+            "size": obj.get("size"),
+            "data": [OrganizationMember.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
+            "cursor": obj.get("cursor"),
+            "type": obj.get("type") if obj.get("type") is not None else 'cursor-list'
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

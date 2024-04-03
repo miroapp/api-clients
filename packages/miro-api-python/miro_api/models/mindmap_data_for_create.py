@@ -23,12 +23,10 @@ from miro_api.models.mindmap_node import MindmapNode
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class MindmapDataForCreate(BaseModel):
     """
     Contains mind map node data, such as the title, content, or description.
-    """  # noqa: E501
-
+    """ # noqa: E501
     node_view: MindmapNode = Field(alias="nodeView")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["nodeView"]
@@ -38,6 +36,7 @@ class MindmapDataForCreate(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,11 +63,9 @@ class MindmapDataForCreate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -77,7 +74,7 @@ class MindmapDataForCreate(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of node_view
         if self.node_view:
-            _dict["nodeView"] = self.node_view.to_dict()
+            _dict['nodeView'] = self.node_view.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -94,18 +91,14 @@ class MindmapDataForCreate(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "nodeView": (
-                    MindmapNode.from_dict(obj["nodeView"])
-                    if obj.get("nodeView") is not None
-                    else None
-                )
-            }
-        )
+        _obj = cls.model_validate({
+            "nodeView": MindmapNode.from_dict(obj["nodeView"]) if obj.get("nodeView") is not None else None
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

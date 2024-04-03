@@ -22,29 +22,22 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class TeamMemberChanges(BaseModel):
     """
     TeamMemberChanges
-    """  # noqa: E501
-
-    role: Optional[StrictStr] = Field(
-        default=None,
-        description=' Role of the team member. * "member":     Team member with full member permissions. * "admin":      Admin of a team. Team member with permission to manage team. * "team_guest": Team-guest user, user with access only to a team without access to organization. ',
-    )
+    """ # noqa: E501
+    role: Optional[StrictStr] = Field(default=None, description=" Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"team_guest\": Team-guest user, user with access only to a team without access to organization. ")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["role"]
 
-    @field_validator("role")
+    @field_validator('role')
     def role_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["member", "admin", "team_guest"]):
-            raise ValueError(
-                "must be one of enum values ('member', 'admin', 'team_guest')"
-            )
+        if value not in set(['member', 'admin', 'team_guest']):
+            raise ValueError("must be one of enum values ('member', 'admin', 'team_guest')")
         return value
 
     model_config = {
@@ -52,6 +45,7 @@ class TeamMemberChanges(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -78,11 +72,9 @@ class TeamMemberChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -105,10 +97,14 @@ class TeamMemberChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"role": obj.get("role")})
+        _obj = cls.model_validate({
+            "role": obj.get("role")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

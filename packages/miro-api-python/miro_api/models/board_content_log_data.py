@@ -22,19 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class BoardContentLogData(BaseModel):
     """
     Content log object representing the current state of the board item at the `modifiedAt` time.
-    """  # noqa: E501
-
-    text: Optional[StrictStr] = Field(
-        default=None, description="Text extracted from the board item."
-    )
-    metadata: Optional[Dict[str, StrictStr]] = Field(
-        default=None,
-        description="Metadata representing more information that might be relevant for a specific board item.",
-    )
+    """ # noqa: E501
+    text: Optional[StrictStr] = Field(default=None, description="Text extracted from the board item.")
+    metadata: Optional[Dict[str, StrictStr]] = Field(default=None, description="Metadata representing more information that might be relevant for a specific board item.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["text", "metadata"]
 
@@ -43,6 +36,7 @@ class BoardContentLogData(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -69,11 +63,9 @@ class BoardContentLogData(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -96,12 +88,15 @@ class BoardContentLogData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"text": obj.get("text"), "metadata": obj.get("metadata")}
-        )
+        _obj = cls.model_validate({
+            "text": obj.get("text"),
+            "metadata": obj.get("metadata")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

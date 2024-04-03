@@ -23,12 +23,10 @@ from miro_api.models.tag import Tag
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class GetTagsResponse(BaseModel):
     """
     GetTagsResponse
-    """  # noqa: E501
-
+    """ # noqa: E501
     tags: Optional[List[Tag]] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["tags"]
@@ -38,6 +36,7 @@ class GetTagsResponse(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,11 +63,9 @@ class GetTagsResponse(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -81,7 +78,7 @@ class GetTagsResponse(BaseModel):
             for _item in self.tags:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["tags"] = _items
+            _dict['tags'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -98,18 +95,14 @@ class GetTagsResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "tags": (
-                    [Tag.from_dict(_item) for _item in obj["tags"]]
-                    if obj.get("tags") is not None
-                    else None
-                )
-            }
-        )
+        _obj = cls.model_validate({
+            "tags": [Tag.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

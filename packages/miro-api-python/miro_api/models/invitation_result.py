@@ -23,19 +23,12 @@ from miro_api.models.invitation_error import InvitationError
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class InvitationResult(BaseModel):
     """
     InvitationResult
-    """  # noqa: E501
-
-    failed: Optional[List[InvitationError]] = Field(
-        default=None, description="Contains information about the invites that failed."
-    )
-    successful: Optional[List[StrictInt]] = Field(
-        default=None,
-        description="Contains information about the invites that were successfully sent.",
-    )
+    """ # noqa: E501
+    failed: Optional[List[InvitationError]] = Field(default=None, description="Contains information about the invites that failed.")
+    successful: Optional[List[StrictInt]] = Field(default=None, description="Contains information about the invites that were successfully sent.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["failed", "successful"]
 
@@ -44,6 +37,7 @@ class InvitationResult(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,11 +64,9 @@ class InvitationResult(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -87,7 +79,7 @@ class InvitationResult(BaseModel):
             for _item in self.failed:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["failed"] = _items
+            _dict['failed'] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -104,19 +96,15 @@ class InvitationResult(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "failed": (
-                    [InvitationError.from_dict(_item) for _item in obj["failed"]]
-                    if obj.get("failed") is not None
-                    else None
-                ),
-                "successful": obj.get("successful"),
-            }
-        )
+        _obj = cls.model_validate({
+            "failed": [InvitationError.from_dict(_item) for _item in obj["failed"]] if obj.get("failed") is not None else None,
+            "successful": obj.get("successful")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

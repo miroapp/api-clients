@@ -22,16 +22,11 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class BoardExportJobStatus(BaseModel):
     """
     BoardExportJobStatus
-    """  # noqa: E501
-
-    job_status: StrictStr = Field(
-        description="Indicates the current state of the board export job. Possible values: `CREATED`: the job has been created but not yet started. Retry the status call after some time. `IN_PROGRESS`: the job is in progress, and the results are not ready yet. Retry the status call after some time. `FINISHED`: the job is complete. You can now get results for the board export job.",
-        alias="jobStatus",
-    )
+    """ # noqa: E501
+    job_status: StrictStr = Field(description="Indicates the current state of the board export job. Possible values: `CREATED`: the job has been created but not yet started. Retry the status call after some time. `IN_PROGRESS`: the job is in progress, and the results are not ready yet. Retry the status call after some time. `FINISHED`: the job is complete. You can now get results for the board export job.", alias="jobStatus")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["jobStatus"]
 
@@ -40,6 +35,7 @@ class BoardExportJobStatus(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,11 +62,9 @@ class BoardExportJobStatus(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -93,10 +87,14 @@ class BoardExportJobStatus(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"jobStatus": obj.get("jobStatus")})
+        _obj = cls.model_validate({
+            "jobStatus": obj.get("jobStatus")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

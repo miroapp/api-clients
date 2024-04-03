@@ -5,7 +5,9 @@ import FormData = require('form-data')
 import {AppCardCreateRequest} from '../model/appCardCreateRequest'
 import {AppCardItem} from '../model/appCardItem'
 import {AppCardUpdateRequest} from '../model/appCardUpdateRequest'
-import {CreateFrameItem400Response} from '../model/createFrameItem400Response'
+import {GetBoards400Response} from '../model/getBoards400Response'
+
+import {AuditPage} from '../model/auditPage'
 
 import {BoardDataClassificationLabel} from '../model/boardDataClassificationLabel'
 import {DataClassificationLabelId} from '../model/dataClassificationLabelId'
@@ -37,6 +39,10 @@ import {BoardWithLinksAndWithoutProject} from '../model/boardWithLinksAndWithout
 import {BoardsPagedResponse} from '../model/boardsPagedResponse'
 import {CopyBoardChanges} from '../model/copyBoardChanges'
 
+import {BulkOperationError} from '../model/bulkOperationError'
+import {ItemCreate} from '../model/itemCreate'
+import {Items} from '../model/items'
+
 import {CardCreateRequest} from '../model/cardCreateRequest'
 import {CardItem} from '../model/cardItem'
 import {CardUpdateRequest} from '../model/cardUpdateRequest'
@@ -46,9 +52,11 @@ import {ConnectorCreationData} from '../model/connectorCreationData'
 import {ConnectorWithLinks} from '../model/connectorWithLinks'
 import {ConnectorsCursorPaged} from '../model/connectorsCursorPaged'
 
+import {CreateDocumentItemUsingFileFromDeviceRequestData} from '../model/createDocumentItemUsingFileFromDeviceRequestData'
 import {DocumentCreateRequest} from '../model/documentCreateRequest'
 import {DocumentItem} from '../model/documentItem'
 import {DocumentUpdateRequest} from '../model/documentUpdateRequest'
+import {UploadFileFromDeviceData} from '../model/uploadFileFromDeviceData'
 
 import {EmbedCreateRequest} from '../model/embedCreateRequest'
 import {EmbedItem} from '../model/embedItem'
@@ -102,7 +110,7 @@ import {StickyNoteCreateRequest} from '../model/stickyNoteCreateRequest'
 import {StickyNoteItem} from '../model/stickyNoteItem'
 import {StickyNoteUpdateRequest} from '../model/stickyNoteUpdateRequest'
 
-import {AttachTagToItem400Response} from '../model/attachTagToItem400Response'
+import {GetTagsFromItem400Response} from '../model/getTagsFromItem400Response'
 import {GetTagsResponse} from '../model/getTagsResponse'
 import {ItemPagedResponse} from '../model/itemPagedResponse'
 import {TagCreateRequest} from '../model/tagCreateRequest'
@@ -135,7 +143,7 @@ import {GenericSubscription} from '../model/genericSubscription'
 import {GenericSubscriptionsCursorPaged} from '../model/genericSubscriptionsCursorPaged'
 import {UpdateBoardSubscriptionRequest} from '../model/updateBoardSubscriptionRequest'
 
-import {ObjectSerializer} from '../model/models'
+import {ObjectSerializer, RequestFile} from '../model/models'
 
 let defaultBasePath = 'https://api.miro.com'
 
@@ -179,13 +187,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createAppCardItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(appCardCreateRequest, 'AppCardCreateRequest')),
 
       this.logger,
@@ -216,13 +224,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteAppCardItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -253,13 +261,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getAppCardItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -295,19 +303,89 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateAppCardItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(appCardUpdateRequest, 'AppCardUpdateRequest')),
 
       this.logger,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'AppCardItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves a page of audit events.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a>
+   * @summary Get audit logs
+   * @param createdAfter Retrieve audit logs created after the date and time provided. This is the start date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between &#x60;2023-03-30T17:26:50.000Z&#x60; and &#x60;2023-04-30T17:26:50.000Z&#x60;, provide &#x60;2023-03-30T17:26:50.000Z&#x60; as the value for the &#x60;createdAfter&#x60; parameter.&lt;br&gt;Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\&quot;
+   * @param createdBefore Retrieve audit logs created before the date and time provided. This is the end date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between &#x60;2023-03-30T17:26:50.000Z&#x60; and &#x60;2023-04-30T17:26:50.000Z&#x60;, provide &#x60;2023-04-30T17:26:50.000Z&#x60; as the value for the &#x60;createdBefore&#x60; parameter.&lt;br&gt;Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
+   * @param cursor A cursor-paginated method returns a portion of the total set of results based on the &#x60;limit&#x60; specified and a &#x60;cursor&#x60; that points to the next portion of the results. To retrieve the next set of results of the collection, set the &#x60;cursor&#x60; parameter in your next request to the appropriate cursor value returned in the response.
+   * @param limit Maximum number of results returned based on the &#x60;limit&#x60; specified in the request. For example, if there are &#x60;30&#x60; results, the request has no &#x60;cursor&#x60; value, and the &#x60;limit&#x60; is set to &#x60;20&#x60;,the &#x60;size&#x60; of the results will be &#x60;20&#x60;. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the &#x60;cursor&#x60; parameter value that  you obtained from the response.&lt;br&gt;Default: &#x60;100&#x60;
+   * @param sorting Sort order in which you want to view the result set. Based on the value you provide, the results are sorted in an ascending or descending order of the audit log creation date (audit log &#x60;createdAt&#x60; parameter).&lt;br&gt;Default: &#x60;ASC&#x60;
+   */
+  async enterpriseGetAuditLogs(
+    createdAfter: string,
+    createdBefore: string,
+    query?: {
+      cursor?: string
+
+      limit?: number
+
+      sorting?: 'ASC' | 'DESC'
+    },
+  ): Promise<{response: Response; body: AuditPage}> {
+    const localVarPath = '/v2/audit/logs'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'createdAfter' is not null or undefined
+    if (createdAfter === null || createdAfter === undefined) {
+      throw new Error('Required parameter createdAfter was null or undefined when calling enterpriseGetAuditLogs.')
+    }
+
+    if (createdAfter !== undefined) {
+      localVarQueryParameters.append('createdAfter', ObjectSerializer.serialize(createdAfter, 'string'))
+    }
+
+    // verify required parameter 'createdBefore' is not null or undefined
+    if (createdBefore === null || createdBefore === undefined) {
+      throw new Error('Required parameter createdBefore was null or undefined when calling enterpriseGetAuditLogs.')
+    }
+
+    if (createdBefore !== undefined) {
+      localVarQueryParameters.append('createdBefore', ObjectSerializer.serialize(createdBefore, 'string'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.sorting !== undefined) {
+      localVarQueryParameters.append('sorting', ObjectSerializer.serialize(query?.sorting, "'ASC' | 'DESC'"))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'AuditPage')
 
     return {response, body}
   }
@@ -348,13 +426,13 @@ export class MiroApi {
       )
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -403,13 +481,13 @@ export class MiroApi {
       )
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(dataClassificationLabelId, 'DataClassificationLabelId')),
 
       this.logger,
@@ -440,13 +518,13 @@ export class MiroApi {
       )
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -486,13 +564,13 @@ export class MiroApi {
       )
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(
         ObjectSerializer.serialize(
           updateBoardsDataClassificationLabelRequest,
@@ -535,13 +613,13 @@ export class MiroApi {
       )
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -581,13 +659,13 @@ export class MiroApi {
       )
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(updateTeamSettingsRequest, 'UpdateTeamSettingsRequest')),
 
       this.logger,
@@ -676,13 +754,13 @@ export class MiroApi {
       localVarQueryParameters.append('sorting', ObjectSerializer.serialize(query?.sorting, "'asc' | 'desc'"))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -716,13 +794,13 @@ export class MiroApi {
       throw new Error('Required parameter jobId was null or undefined when calling enterpriseBoardExportJobResults.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -756,13 +834,13 @@ export class MiroApi {
       throw new Error('Required parameter jobId was null or undefined when calling enterpriseBoardExportJobStatus.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -804,13 +882,13 @@ export class MiroApi {
       localVarQueryParameters.append('request_id', ObjectSerializer.serialize(requestId, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(createBoardExportRequest, 'CreateBoardExportRequest')),
 
       this.logger,
@@ -854,13 +932,13 @@ export class MiroApi {
       localVarQueryParameters.append('offset', ObjectSerializer.serialize(query?.offset, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -894,13 +972,13 @@ export class MiroApi {
       throw new Error('Required parameter boardMemberId was null or undefined when calling getSpecificBoardMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -931,13 +1009,13 @@ export class MiroApi {
       throw new Error('Required parameter boardMemberId was null or undefined when calling removeBoardMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -968,13 +1046,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling shareBoard.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(boardMembersInvite, 'BoardMembersInvite')),
 
       this.logger,
@@ -1010,13 +1088,13 @@ export class MiroApi {
       throw new Error('Required parameter boardMemberId was null or undefined when calling updateBoardMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(boardMemberChanges, 'BoardMemberChanges')),
 
       this.logger,
@@ -1050,13 +1128,13 @@ export class MiroApi {
       localVarQueryParameters.append('copy_from', ObjectSerializer.serialize(copyFrom, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PUT',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(copyBoardChanges, 'CopyBoardChanges')),
 
       this.logger,
@@ -1076,13 +1154,13 @@ export class MiroApi {
     const localVarPath = '/v2/boards'
     let localVarQueryParameters = new URLSearchParams()
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(boardChanges, 'BoardChanges')),
 
       this.logger,
@@ -1106,13 +1184,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling deleteBoard.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1186,13 +1264,13 @@ export class MiroApi {
       )
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1216,13 +1294,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling getSpecificBoard.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1247,19 +1325,116 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling updateBoard.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(boardChanges, 'BoardChanges')),
 
       this.logger,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardWithLinks')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds different types of items to a board. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
+   * @summary Create items in bulk
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param itemCreate
+   */
+  async createItems(boardId: string, itemCreate: Array<ItemCreate>): Promise<{response: Response; body: Items}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/items/bulk'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling createItems.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(itemCreate, 'Array<ItemCreate>')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'Items')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds different types of items to a board using files from device. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
+   * @summary Create items in bulk using file from device
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param data Select a file containing json object describing files to upload
+   * @param resources Select files to upload
+   */
+  async createItemsInBulkUsingFileFromDevice(
+    boardId: string,
+
+    data?: RequestFile,
+
+    resources?: RequestFile,
+  ): Promise<{response: Response; body: Items}> {
+    const localVarPath =
+      '/v2-experimental/boards/{board_id_PlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice}/items/bulk'.replace(
+        '{' + 'board_id' + '}',
+        encodeURIComponent(String(boardId)),
+      )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error(
+        'Required parameter boardId was null or undefined when calling createItemsInBulkUsingFileFromDevice.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      if ('createItemsInBulkUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('createItemsInBulkUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('data', data, 'file' + extension)
+    }
+    if (resources) {
+      if ('createItemsInBulkUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('createItemsInBulkUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resources', resources, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      formData,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'Items')
 
     return {response, body}
   }
@@ -1284,13 +1459,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createCardItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(cardCreateRequest, 'CardCreateRequest')),
 
       this.logger,
@@ -1321,13 +1496,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteCardItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1358,13 +1533,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getCardItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1400,13 +1575,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateCardItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(cardUpdateRequest, 'CardUpdateRequest')),
 
       this.logger,
@@ -1437,13 +1612,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createConnector.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(connectorCreationData, 'ConnectorCreationData')),
 
       this.logger,
@@ -1474,13 +1649,13 @@ export class MiroApi {
       throw new Error('Required parameter connectorId was null or undefined when calling deleteConnector.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1511,13 +1686,13 @@ export class MiroApi {
       throw new Error('Required parameter connectorId was null or undefined when calling getConnector.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1561,13 +1736,13 @@ export class MiroApi {
       localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1603,19 +1778,78 @@ export class MiroApi {
       throw new Error('Required parameter connectorId was null or undefined when calling updateConnector.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(connectorChangesData, 'ConnectorChangesData')),
 
       this.logger,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'ConnectorWithLinks')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Create document item using file from device
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
+   * @param resource Select a file to upload
+   * @param data
+   */
+  async createDocumentItemUsingFileFromDevice(
+    boardIdPlatformFileUpload: string,
+    resource: RequestFile,
+
+    data?: CreateDocumentItemUsingFileFromDeviceRequestData,
+  ): Promise<{response: Response; body: DocumentItem}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/documents'.replace(
+      '{' + 'board_id_PlatformFileUpload' + '}',
+      encodeURIComponent(String(boardIdPlatformFileUpload)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createDocumentItemUsingFileFromDevice.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      formData.append(
+        'data',
+        JSON.stringify(ObjectSerializer.serialize(data, 'CreateDocumentItemUsingFileFromDeviceRequestData')),
+      )
+    }
+    if (resource) {
+      if ('createDocumentItemUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('createDocumentItemUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resource', resource, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      formData,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
 
     return {response, body}
   }
@@ -1640,13 +1874,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createDocumentItemUsingUrl.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(documentCreateRequest, 'DocumentCreateRequest')),
 
       this.logger,
@@ -1677,13 +1911,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteDocumentItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1714,14 +1948,77 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getDocumentItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Update document item using file from device
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param resource Select a file to upload
+   * @param data
+   */
+  async updateDocumentItemUsingFileFromDevice(
+    boardIdPlatformFileUpload: string,
+    itemId: string,
+    resource: RequestFile,
+
+    data?: UploadFileFromDeviceData,
+  ): Promise<{response: Response; body: DocumentItem}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/documents/{item_id}'
+      .replace('{' + 'board_id_PlatformFileUpload' + '}', encodeURIComponent(String(boardIdPlatformFileUpload)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling updateDocumentItemUsingFileFromDevice.',
+      )
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error(
+        'Required parameter itemId was null or undefined when calling updateDocumentItemUsingFileFromDevice.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
+    }
+    if (resource) {
+      if ('updateDocumentItemUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('updateDocumentItemUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resource', resource, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      formData,
 
       this.logger,
     )
@@ -1756,13 +2053,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateDocumentItemUsingUrl.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(documentUpdateRequest, 'DocumentUpdateRequest')),
 
       this.logger,
@@ -1793,13 +2090,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createEmbedItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(embedCreateRequest, 'EmbedCreateRequest')),
 
       this.logger,
@@ -1830,13 +2127,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteEmbedItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1867,13 +2164,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getEmbedItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -1909,13 +2206,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateEmbedItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(embedUpdateRequest, 'EmbedUpdateRequest')),
 
       this.logger,
@@ -1946,13 +2243,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createShapeItemFlowchart.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(shapeCreateRequest, 'ShapeCreateRequest')),
 
       this.logger,
@@ -1983,13 +2280,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteShapeItemFlowchart.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2003,13 +2300,13 @@ export class MiroApi {
   /**
    * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items on board
-   * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
+   * @param boardIdPlatformExperimentalFeatures Unique identifier (ID) of the board for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItemsExperimental(
-    boardId: string,
+    boardIdPlatformExperimentalFeatures: string,
     query?: {
       limit?: string
 
@@ -2018,14 +2315,16 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2-experimental/boards/{board_id}/items'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
+    const localVarPath = '/v2-experimental/boards/{board_id_PlatformExperimentalFeatures}/items'.replace(
+      '{' + 'board_id_PlatformExperimentalFeatures' + '}',
+      encodeURIComponent(String(boardIdPlatformExperimentalFeatures)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getItemsExperimental.')
+    // verify required parameter 'boardIdPlatformExperimentalFeatures' is not null or undefined
+    if (boardIdPlatformExperimentalFeatures === null || boardIdPlatformExperimentalFeatures === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformExperimentalFeatures was null or undefined when calling getItemsExperimental.',
+      )
     }
 
     if (query?.limit !== undefined) {
@@ -2040,13 +2339,13 @@ export class MiroApi {
       localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2077,13 +2376,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getShapeItemFlowchart.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2114,13 +2413,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getSpecificItemExperimental.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2156,13 +2455,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateShapeItemFlowchart.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(shapeUpdateRequest, 'ShapeUpdateRequest')),
 
       this.logger,
@@ -2193,13 +2492,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createFrameItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(frameCreateRequest, 'FrameCreateRequest')),
 
       this.logger,
@@ -2230,13 +2529,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteFrameItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2267,13 +2566,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getFrameItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2309,19 +2608,75 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateFrameItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(frameUpdateRequest, 'FrameUpdateRequest')),
 
       this.logger,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'FrameItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Create image item using file from device
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
+   * @param resource Select a file to upload
+   * @param data
+   */
+  async createImageItemUsingLocalFile(
+    boardIdPlatformFileUpload: string,
+    resource: RequestFile,
+
+    data?: UploadFileFromDeviceData,
+  ): Promise<{response: Response; body: ImageItem}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/images'.replace(
+      '{' + 'board_id_PlatformFileUpload' + '}',
+      encodeURIComponent(String(boardIdPlatformFileUpload)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createImageItemUsingLocalFile.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
+    }
+    if (resource) {
+      if ('createImageItemUsingLocalFile'.includes('Image')) {
+        extension = '.png'
+      } else if ('createImageItemUsingLocalFile'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resource', resource, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      formData,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
 
     return {response, body}
   }
@@ -2346,13 +2701,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createImageItemUsingUrl.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(imageCreateRequest, 'ImageCreateRequest')),
 
       this.logger,
@@ -2383,13 +2738,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteImageItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2420,14 +2775,77 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getImageItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
+   * @summary Update image item using file from device
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param resource Select a file to upload
+   * @param data
+   */
+  async updateImageItemUsingFileFromDevice(
+    boardIdPlatformFileUpload: string,
+    itemId: string,
+    resource: RequestFile,
+
+    data?: UploadFileFromDeviceData,
+  ): Promise<{response: Response; body: ImageItem}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/images/{item_id}'
+      .replace('{' + 'board_id_PlatformFileUpload' + '}', encodeURIComponent(String(boardIdPlatformFileUpload)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling updateImageItemUsingFileFromDevice.',
+      )
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error(
+        'Required parameter itemId was null or undefined when calling updateImageItemUsingFileFromDevice.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
+    }
+    if (resource) {
+      if ('updateImageItemUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('updateImageItemUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resource', resource, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      formData,
 
       this.logger,
     )
@@ -2462,13 +2880,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateImageItemUsingUrl.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(imageUpdateRequest, 'ImageUpdateRequest')),
 
       this.logger,
@@ -2482,30 +2900,30 @@ export class MiroApi {
   /**
    * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a><br/>
    * @summary Delete item
-   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to delete the item.
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
    */
-  async deleteItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+  async deleteItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling deleteItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
       throw new Error('Required parameter itemId was null or undefined when calling deleteItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2536,13 +2954,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteItemExperimental.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2556,13 +2974,13 @@ export class MiroApi {
   /**
    * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items on board
-   * @param boardIdPlatform Unique identifier (ID) of the board for which you want to retrieve the list of available items.
+   * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItems(
-    boardIdPlatform: string,
+    boardId: string,
     query?: {
       limit?: string
 
@@ -2581,14 +2999,14 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/items'.replace(
-      '{' + 'board_id_Platform' + '}',
-      encodeURIComponent(String(boardIdPlatform)),
+    const localVarPath = '/v2/boards/{board_id}/items'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling getItems.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getItems.')
     }
 
     if (query?.limit !== undefined) {
@@ -2609,13 +3027,13 @@ export class MiroApi {
       localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2629,14 +3047,14 @@ export class MiroApi {
   /**
    * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Get items within frame
-   * @param boardId Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.
+   * @param boardIdPlatformContainers Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.
    * @param parentItemId ID of the frame for which you want to retrieve the list of available items.
    * @param limit
    * @param type
    * @param cursor
    */
   async getItemsWithinFrame(
-    boardId: string,
+    boardIdPlatformContainers: string,
     parentItemId: string,
     query?: {
       limit?: string
@@ -2646,14 +3064,16 @@ export class MiroApi {
       cursor?: string
     },
   ): Promise<{response: Response; body: GenericItemCursorPaged}> {
-    const localVarPath = '/v2/boards/{board_id}/items'.replace(
-      '{' + 'board_id' + '}',
-      encodeURIComponent(String(boardId)),
+    const localVarPath = '/v2/boards/{board_id_PlatformContainers}/items'.replace(
+      '{' + 'board_id_PlatformContainers' + '}',
+      encodeURIComponent(String(boardIdPlatformContainers)),
     )
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling getItemsWithinFrame.')
+    // verify required parameter 'boardIdPlatformContainers' is not null or undefined
+    if (boardIdPlatformContainers === null || boardIdPlatformContainers === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformContainers was null or undefined when calling getItemsWithinFrame.',
+      )
     }
 
     // verify required parameter 'parentItemId' is not null or undefined
@@ -2677,13 +3097,13 @@ export class MiroApi {
       localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2697,30 +3117,30 @@ export class MiroApi {
   /**
    * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Get specific item on board
-   * @param boardIdPlatform Unique identifier (ID) of the board from which you want to retrieve a specific item.
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
    */
-  async getSpecificItem(boardIdPlatform: string, itemId: string): Promise<{response: Response; body: GenericItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+  async getSpecificItem(boardId: string, itemId: string): Promise<{response: Response; body: GenericItem}> {
+    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error('Required parameter boardIdPlatform was null or undefined when calling getSpecificItem.')
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getSpecificItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
       throw new Error('Required parameter itemId was null or undefined when calling getSpecificItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2734,37 +3154,35 @@ export class MiroApi {
   /**
    * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 2</a><br/>
    * @summary Update item position or parent
-   * @param boardIdPlatform Unique identifier (ID) of the board where you want to update the item.
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
    * @param genericItemUpdate
    */
   async updateItemPositionOrParent(
-    boardIdPlatform: string,
+    boardId: string,
     itemId: string,
     genericItemUpdate: GenericItemUpdate,
   ): Promise<{response: Response; body: GenericItem}> {
-    const localVarPath = '/v2/boards/{board_id_Platform}/items/{item_id}'
-      .replace('{' + 'board_id_Platform' + '}', encodeURIComponent(String(boardIdPlatform)))
+    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatform' is not null or undefined
-    if (boardIdPlatform === null || boardIdPlatform === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatform was null or undefined when calling updateItemPositionOrParent.',
-      )
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateItemPositionOrParent.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
       throw new Error('Required parameter itemId was null or undefined when calling updateItemPositionOrParent.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(genericItemUpdate, 'GenericItemUpdate')),
 
       this.logger,
@@ -2795,13 +3213,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createMindmapNodesExperimental.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(mindmapCreateRequest, 'MindmapCreateRequest')),
 
       this.logger,
@@ -2832,13 +3250,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteMindmapNodeExperimental.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2869,13 +3287,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getMindmapNodeExperimental.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2919,13 +3337,13 @@ export class MiroApi {
       localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -2959,13 +3377,13 @@ export class MiroApi {
       throw new Error('Required parameter memberId was null or undefined when calling enterpriseGetOrganizationMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3051,13 +3469,13 @@ export class MiroApi {
       localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3081,13 +3499,13 @@ export class MiroApi {
       throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetOrganization.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3130,13 +3548,13 @@ export class MiroApi {
       throw new Error('Required parameter projectId was null or undefined when calling enterpriseAddProjectMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(addProjectMemberRequest, 'AddProjectMemberRequest')),
 
       this.logger,
@@ -3184,13 +3602,13 @@ export class MiroApi {
       throw new Error('Required parameter memberId was null or undefined when calling enterpriseDeleteProjectMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3238,13 +3656,13 @@ export class MiroApi {
       throw new Error('Required parameter memberId was null or undefined when calling enterpriseGetProjectMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3300,13 +3718,13 @@ export class MiroApi {
       localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3356,13 +3774,13 @@ export class MiroApi {
       throw new Error('Required parameter memberId was null or undefined when calling enterpriseUpdateProjectMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(updateProjectMemberRequest, 'UpdateProjectMemberRequest')),
 
       this.logger,
@@ -3403,13 +3821,13 @@ export class MiroApi {
       throw new Error('Required parameter projectId was null or undefined when calling enterpriseGetProjectSettings.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3454,13 +3872,13 @@ export class MiroApi {
       )
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(updateProjectSettingsRequest, 'UpdateProjectSettingsRequest')),
 
       this.logger,
@@ -3496,13 +3914,13 @@ export class MiroApi {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseCreateProject.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(createProjectRequest, 'CreateProjectRequest')),
 
       this.logger,
@@ -3543,13 +3961,13 @@ export class MiroApi {
       throw new Error('Required parameter projectId was null or undefined when calling enterpriseDeleteProject.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3590,13 +4008,13 @@ export class MiroApi {
       throw new Error('Required parameter projectId was null or undefined when calling enterpriseGetProject.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3645,13 +4063,13 @@ export class MiroApi {
       localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3694,19 +4112,54 @@ export class MiroApi {
       throw new Error('Required parameter projectId was null or undefined when calling enterpriseUpdateProject.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(updateProjectRequest, 'UpdateProjectRequest')),
 
       this.logger,
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'Project')
+
+    return {response, body}
+  }
+
+  /**
+   * Reset all sessions of a user.  Admins can now take immediate action to restrict user access to company data in case of security concerns. Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again. This is useful in situations where a user leaves the company, their credentials are compromised, or there\'s suspicious activity on their account.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * @summary Reset all sessions of a user
+   * @param email Email ID of the user whose sessions you want to reset. Note that this user will be signed out from all devices.
+   */
+  async enterprisePostUserSessionsReset(email: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/sessions/reset_all'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'email' is not null or undefined
+    if (email === null || email === undefined) {
+      throw new Error('Required parameter email was null or undefined when calling enterprisePostUserSessionsReset.')
+    }
+
+    if (email !== undefined) {
+      localVarQueryParameters.append('email', ObjectSerializer.serialize(email, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
 
     return {response, body}
   }
@@ -3731,13 +4184,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createShapeItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(shapeCreateRequest, 'ShapeCreateRequest')),
 
       this.logger,
@@ -3768,13 +4221,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteShapeItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3805,13 +4258,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getShapeItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3847,13 +4300,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateShapeItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(shapeUpdateRequest, 'ShapeUpdateRequest')),
 
       this.logger,
@@ -3884,13 +4337,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createStickyNoteItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(stickyNoteCreateRequest, 'StickyNoteCreateRequest')),
 
       this.logger,
@@ -3921,13 +4374,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteStickyNoteItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -3958,13 +4411,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getStickyNoteItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4000,13 +4453,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateStickyNoteItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(stickyNoteUpdateRequest, 'StickyNoteUpdateRequest')),
 
       this.logger,
@@ -4020,18 +4473,22 @@ export class MiroApi {
   /**
    * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:   [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Attach tag to item
-   * @param boardId Unique identifier (ID) of the board with the item that you want to add a tag to.
+   * @param boardIdPlatformTags Unique identifier (ID) of the board with the item that you want to add a tag to.
    * @param itemId Unique identifier (ID) of the item to which you want to add a tag.
    * @param tagId Unique identifier (ID) of the tag you want to add to the item.
    */
-  async attachTagToItem(boardId: string, itemId: string, tagId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+  async attachTagToItem(
+    boardIdPlatformTags: string,
+    itemId: string,
+    tagId: string,
+  ): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
+      .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling attachTagToItem.')
+    // verify required parameter 'boardIdPlatformTags' is not null or undefined
+    if (boardIdPlatformTags === null || boardIdPlatformTags === undefined) {
+      throw new Error('Required parameter boardIdPlatformTags was null or undefined when calling attachTagToItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -4047,13 +4504,13 @@ export class MiroApi {
       localVarQueryParameters.append('tag_id', ObjectSerializer.serialize(tagId, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4084,13 +4541,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createTag.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(tagCreateRequest, 'TagCreateRequest')),
 
       this.logger,
@@ -4121,13 +4578,13 @@ export class MiroApi {
       throw new Error('Required parameter tagId was null or undefined when calling deleteTag.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4182,13 +4639,13 @@ export class MiroApi {
       localVarQueryParameters.append('tag_id', ObjectSerializer.serialize(tagId, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4219,13 +4676,13 @@ export class MiroApi {
       throw new Error('Required parameter tagId was null or undefined when calling getTag.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4269,13 +4726,13 @@ export class MiroApi {
       localVarQueryParameters.append('offset', ObjectSerializer.serialize(query?.offset, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4306,13 +4763,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getTagsFromItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4326,18 +4783,22 @@ export class MiroApi {
   /**
    * Removes the specified tag from the specified item. The tag still exists on the board. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),   [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=https://developers.miro.com/reference/ratelimiting>Level 1</a><br/>
    * @summary Remove tag from item
-   * @param boardId Unique identifier (ID) of the board with the item that you want to remove a tag from.
+   * @param boardIdPlatformTags Unique identifier (ID) of the board with the item that you want to remove a tag from.
    * @param itemId Unique identifier (ID) of the item that you want to remove the tag from.
    * @param tagId Unique identifier (ID) of the tag that you want to remove from the item.
    */
-  async removeTagFromItem(boardId: string, itemId: string, tagId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2/boards/{board_id}/items/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+  async removeTagFromItem(
+    boardIdPlatformTags: string,
+    itemId: string,
+    tagId: string,
+  ): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformTags}/items/{item_id}'
+      .replace('{' + 'board_id_PlatformTags' + '}', encodeURIComponent(String(boardIdPlatformTags)))
       .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling removeTagFromItem.')
+    // verify required parameter 'boardIdPlatformTags' is not null or undefined
+    if (boardIdPlatformTags === null || boardIdPlatformTags === undefined) {
+      throw new Error('Required parameter boardIdPlatformTags was null or undefined when calling removeTagFromItem.')
     }
     // verify required parameter 'itemId' is not null or undefined
     if (itemId === null || itemId === undefined) {
@@ -4353,13 +4814,13 @@ export class MiroApi {
       localVarQueryParameters.append('tag_id', ObjectSerializer.serialize(tagId, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4395,13 +4856,13 @@ export class MiroApi {
       throw new Error('Required parameter tagId was null or undefined when calling updateTag.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(tagUpdateRequest, 'TagUpdateRequest')),
 
       this.logger,
@@ -4442,13 +4903,13 @@ export class MiroApi {
       throw new Error('Required parameter memberId was null or undefined when calling enterpriseDeleteTeamMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4489,13 +4950,13 @@ export class MiroApi {
       throw new Error('Required parameter memberId was null or undefined when calling enterpriseGetTeamMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4551,13 +5012,13 @@ export class MiroApi {
       localVarQueryParameters.append('role', ObjectSerializer.serialize(query?.role, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4593,13 +5054,13 @@ export class MiroApi {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseInviteTeamMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(teamMemberInvite, 'TeamMemberInvite')),
 
       this.logger,
@@ -4642,13 +5103,13 @@ export class MiroApi {
       throw new Error('Required parameter memberId was null or undefined when calling enterpriseUpdateTeamMember.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(teamMemberChanges, 'TeamMemberChanges')),
 
       this.logger,
@@ -4675,13 +5136,13 @@ export class MiroApi {
       throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetDefaultTeamSettings.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4712,13 +5173,13 @@ export class MiroApi {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseGetTeamSettings.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4754,13 +5215,13 @@ export class MiroApi {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseUpdateTeamSettings.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(teamSettingsChanges, 'TeamSettingsChanges')),
 
       this.logger,
@@ -4788,13 +5249,13 @@ export class MiroApi {
       throw new Error('Required parameter orgId was null or undefined when calling enterpriseCreateTeam.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(createTeamRequest, 'CreateTeamRequest')),
 
       this.logger,
@@ -4825,13 +5286,13 @@ export class MiroApi {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseDeleteTeam.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4862,13 +5323,13 @@ export class MiroApi {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseGetTeam.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4916,13 +5377,13 @@ export class MiroApi {
       localVarQueryParameters.append('name', ObjectSerializer.serialize(query?.name, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -4958,13 +5419,13 @@ export class MiroApi {
       throw new Error('Required parameter teamId was null or undefined when calling enterpriseUpdateTeam.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(teamChanges, 'TeamChanges')),
 
       this.logger,
@@ -4995,13 +5456,13 @@ export class MiroApi {
       throw new Error('Required parameter boardId was null or undefined when calling createTextItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(textCreateRequest, 'TextCreateRequest')),
 
       this.logger,
@@ -5032,13 +5493,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling deleteTextItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -5069,13 +5530,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling getTextItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -5111,13 +5572,13 @@ export class MiroApi {
       throw new Error('Required parameter itemId was null or undefined when calling updateTextItem.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(textUpdateRequest, 'TextUpdateRequest')),
 
       this.logger,
@@ -5146,13 +5607,13 @@ export class MiroApi {
       localVarQueryParameters.append('access_token', ObjectSerializer.serialize(accessToken, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -5171,13 +5632,13 @@ export class MiroApi {
     const localVarPath = '/v1/oauth-token'
     let localVarQueryParameters = new URLSearchParams()
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -5199,13 +5660,13 @@ export class MiroApi {
     const localVarPath = '/v2-experimental/webhooks/board_subscriptions'
     let localVarQueryParameters = new URLSearchParams()
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(createBoardSubscriptionRequest, 'CreateBoardSubscriptionRequest')),
 
       this.logger,
@@ -5232,13 +5693,13 @@ export class MiroApi {
       throw new Error('Required parameter subscriptionId was null or undefined when calling deleteSubscriptionById.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'DELETE',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -5265,13 +5726,13 @@ export class MiroApi {
       throw new Error('Required parameter subscriptionId was null or undefined when calling getSubscriptionById.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -5304,13 +5765,13 @@ export class MiroApi {
       localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'GET',
-      resource,
+      urlResource,
       undefined,
 
       this.logger,
@@ -5341,13 +5802,13 @@ export class MiroApi {
       throw new Error('Required parameter subscriptionId was null or undefined when calling updateBoardSubscription.')
     }
 
-    const resource = new URL(localVarPath, this.basePath)
-    resource.search = localVarQueryParameters.toString()
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
 
     const {response, bodyAsJson} = await makeJsonRequest(
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
-      resource,
+      urlResource,
       JSON.stringify(ObjectSerializer.serialize(updateBoardSubscriptionRequest, 'UpdateBoardSubscriptionRequest')),
 
       this.logger,

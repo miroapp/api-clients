@@ -22,68 +22,44 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class BoardPermissionsPolicy(BaseModel):
     """
     Defines the permissions policies for the board.
-    """  # noqa: E501
-
-    collaboration_tools_start_access: Optional[StrictStr] = Field(
-        default="all_editors",
-        description="Defines who can start or stop timer, voting, video chat, screen sharing, attention management. Others will only be able to join. To change the value for the `collaborationToolsStartAccess` parameter, contact Miro Customer Support.",
-        alias="collaborationToolsStartAccess",
-    )
-    copy_access: Optional[StrictStr] = Field(
-        default="anyone",
-        description="Defines who can copy the board, copy objects, download images, and save the board as a template or PDF.",
-        alias="copyAccess",
-    )
-    sharing_access: Optional[StrictStr] = Field(
-        default="team_members_with_editing_rights",
-        description="Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support.",
-        alias="sharingAccess",
-    )
+    """ # noqa: E501
+    collaboration_tools_start_access: Optional[StrictStr] = Field(default='all_editors', description="Defines who can start or stop timer, voting, video chat, screen sharing, attention management. Others will only be able to join. To change the value for the `collaborationToolsStartAccess` parameter, contact Miro Customer Support.", alias="collaborationToolsStartAccess")
+    copy_access: Optional[StrictStr] = Field(default='anyone', description="Defines who can copy the board, copy objects, download images, and save the board as a template or PDF.", alias="copyAccess")
+    sharing_access: Optional[StrictStr] = Field(default='team_members_with_editing_rights', description="Defines who can change access and invite users to this board. To change the value for the `sharingAccess` parameter, contact Miro Customer Support.", alias="sharingAccess")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "collaborationToolsStartAccess",
-        "copyAccess",
-        "sharingAccess",
-    ]
+    __properties: ClassVar[List[str]] = ["collaborationToolsStartAccess", "copyAccess", "sharingAccess"]
 
-    @field_validator("collaboration_tools_start_access")
+    @field_validator('collaboration_tools_start_access')
     def collaboration_tools_start_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["all_editors", "board_owners_and_coowners"]):
-            raise ValueError(
-                "must be one of enum values ('all_editors', 'board_owners_and_coowners')"
-            )
+        if value not in set(['all_editors', 'board_owners_and_coowners']):
+            raise ValueError("must be one of enum values ('all_editors', 'board_owners_and_coowners')")
         return value
 
-    @field_validator("copy_access")
+    @field_validator('copy_access')
     def copy_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["anyone", "team_members", "team_editors", "board_owner"]):
-            raise ValueError(
-                "must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner')"
-            )
+        if value not in set(['anyone', 'team_members', 'team_editors', 'board_owner']):
+            raise ValueError("must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner')")
         return value
 
-    @field_validator("sharing_access")
+    @field_validator('sharing_access')
     def sharing_access_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["team_members_with_editing_rights", "owner_and_coowners"]):
-            raise ValueError(
-                "must be one of enum values ('team_members_with_editing_rights', 'owner_and_coowners')"
-            )
+        if value not in set(['team_members_with_editing_rights', 'owner_and_coowners']):
+            raise ValueError("must be one of enum values ('team_members_with_editing_rights', 'owner_and_coowners')")
         return value
 
     model_config = {
@@ -91,6 +67,7 @@ class BoardPermissionsPolicy(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -117,11 +94,9 @@ class BoardPermissionsPolicy(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -144,28 +119,16 @@ class BoardPermissionsPolicy(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "collaborationToolsStartAccess": (
-                    obj.get("collaborationToolsStartAccess")
-                    if obj.get("collaborationToolsStartAccess") is not None
-                    else "all_editors"
-                ),
-                "copyAccess": (
-                    obj.get("copyAccess")
-                    if obj.get("copyAccess") is not None
-                    else "anyone"
-                ),
-                "sharingAccess": (
-                    obj.get("sharingAccess")
-                    if obj.get("sharingAccess") is not None
-                    else "team_members_with_editing_rights"
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "collaborationToolsStartAccess": obj.get("collaborationToolsStartAccess") if obj.get("collaborationToolsStartAccess") is not None else 'all_editors',
+            "copyAccess": obj.get("copyAccess") if obj.get("copyAccess") is not None else 'anyone',
+            "sharingAccess": obj.get("sharingAccess") if obj.get("sharingAccess") is not None else 'team_members_with_editing_rights'
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

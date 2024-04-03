@@ -10,19 +10,23 @@
  * Do not edit the class manually.
  */
 
-/**
- * @internal
- * Contains information about the cover picture of the board.
- */
 export class Picture {
   /**
-   * Unique identifier (ID) of the cover picture for the board.
+   * Id of the picture
    */
-  'id'?: number
+  'id'?: string
   /**
-   * URL of the cover picture of the board.
+   * Url of the picture
    */
   'imageURL'?: string
+  /**
+   * Original team picture url for icon generation
+   */
+  'originalUrl'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'picture'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -32,11 +36,21 @@ export class Picture {
     {
       name: 'id',
       baseName: 'id',
-      type: 'number',
+      type: 'string',
     },
     {
       name: 'imageURL',
       baseName: 'imageURL',
+      type: 'string',
+    },
+    {
+      name: 'originalUrl',
+      baseName: 'originalUrl',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
       type: 'string',
     },
   ]

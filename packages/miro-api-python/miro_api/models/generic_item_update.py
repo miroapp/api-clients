@@ -24,12 +24,10 @@ from miro_api.models.position_change import PositionChange
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class GenericItemUpdate(BaseModel):
     """
     GenericItemUpdate
-    """  # noqa: E501
-
+    """ # noqa: E501
     parent: Optional[Parent] = None
     position: Optional[PositionChange] = None
     additional_properties: Dict[str, Any] = {}
@@ -40,6 +38,7 @@ class GenericItemUpdate(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,11 +65,9 @@ class GenericItemUpdate(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -79,10 +76,10 @@ class GenericItemUpdate(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of parent
         if self.parent:
-            _dict["parent"] = self.parent.to_dict()
+            _dict['parent'] = self.parent.to_dict()
         # override the default output from pydantic by calling `to_dict()` of position
         if self.position:
-            _dict["position"] = self.position.to_dict()
+            _dict['position'] = self.position.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -99,23 +96,15 @@ class GenericItemUpdate(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "parent": (
-                    Parent.from_dict(obj["parent"])
-                    if obj.get("parent") is not None
-                    else None
-                ),
-                "position": (
-                    PositionChange.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-            }
-        )
+        _obj = cls.model_validate({
+            "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
+            "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

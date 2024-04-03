@@ -24,60 +24,28 @@ from miro_api.models.subscription_data import SubscriptionData
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class GenericSubscription(BaseModel):
     """
     GenericSubscription
-    """  # noqa: E501
-
-    callback_url: Optional[StrictStr] = Field(
-        default=None,
-        description="Indicates the HTTPS URL to which Miro sends a webhook when an event occurs.",
-        alias="callbackUrl",
-    )
-    created_at: Optional[datetime] = Field(
-        default=None,
-        description="Date and time when the webhook subscription was created.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
-        alias="createdAt",
-    )
+    """ # noqa: E501
+    callback_url: Optional[StrictStr] = Field(default=None, description="Indicates the HTTPS URL to which Miro sends a webhook when an event occurs.", alias="callbackUrl")
+    created_at: Optional[datetime] = Field(default=None, description="Date and time when the webhook subscription was created.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="createdAt")
     data: Optional[SubscriptionData] = None
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier (ID) of a webhook subscription."
-    )
-    modified_at: Optional[datetime] = Field(
-        default=None,
-        description="Date and time when the webhook subscription was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
-        alias="modifiedAt",
-    )
-    status: Optional[StrictStr] = Field(
-        default="enabled",
-        description="Indicates whether the status of the webhook subscription. `enabled`: Miro sends a webhook when an event occurs in the associated board. `disabled`: Miro does not send a webhook even when an event occurs in the associated board. `lost_access`: The user with which the webhook subscription is associated has lost access to the board. The user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.",
-    )
-    type: Optional[StrictStr] = Field(
-        default=None,
-        description="The type of object associated with the webhook subscription.",
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of a webhook subscription.")
+    modified_at: Optional[datetime] = Field(default=None, description="Date and time when the webhook subscription was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="modifiedAt")
+    status: Optional[StrictStr] = Field(default='enabled', description="Indicates whether the status of the webhook subscription. `enabled`: Miro sends a webhook when an event occurs in the associated board. `disabled`: Miro does not send a webhook even when an event occurs in the associated board. `lost_access`: The user with which the webhook subscription is associated has lost access to the board. The user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.")
+    type: Optional[StrictStr] = Field(default=None, description="The type of object associated with the webhook subscription.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "callbackUrl",
-        "createdAt",
-        "data",
-        "id",
-        "modifiedAt",
-        "status",
-        "type",
-    ]
+    __properties: ClassVar[List[str]] = ["callbackUrl", "createdAt", "data", "id", "modifiedAt", "status", "type"]
 
-    @field_validator("status")
+    @field_validator('status')
     def status_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(["enabled", "disabled", "lost_access"]):
-            raise ValueError(
-                "must be one of enum values ('enabled', 'disabled', 'lost_access')"
-            )
+        if value not in set(['enabled', 'disabled', 'lost_access']):
+            raise ValueError("must be one of enum values ('enabled', 'disabled', 'lost_access')")
         return value
 
     model_config = {
@@ -85,6 +53,7 @@ class GenericSubscription(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -111,11 +80,9 @@ class GenericSubscription(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -124,7 +91,7 @@ class GenericSubscription(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
-            _dict["data"] = self.data.to_dict()
+            _dict['data'] = self.data.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -141,26 +108,20 @@ class GenericSubscription(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "callbackUrl": obj.get("callbackUrl"),
-                "createdAt": obj.get("createdAt"),
-                "data": (
-                    SubscriptionData.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "id": obj.get("id"),
-                "modifiedAt": obj.get("modifiedAt"),
-                "status": (
-                    obj.get("status") if obj.get("status") is not None else "enabled"
-                ),
-                "type": obj.get("type"),
-            }
-        )
+        _obj = cls.model_validate({
+            "callbackUrl": obj.get("callbackUrl"),
+            "createdAt": obj.get("createdAt"),
+            "data": SubscriptionData.from_dict(obj["data"]) if obj.get("data") is not None else None,
+            "id": obj.get("id"),
+            "modifiedAt": obj.get("modifiedAt"),
+            "status": obj.get("status") if obj.get("status") is not None else 'enabled',
+            "type": obj.get("type")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

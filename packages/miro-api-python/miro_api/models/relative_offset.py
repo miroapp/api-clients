@@ -22,20 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class RelativeOffset(BaseModel):
     """
     The relative position of the point on an item where the connector is attached. Position with x=0% and y=0% correspond to the top-left corner of the item, x=100% and y=100% correspond to the right-bottom corner.
-    """  # noqa: E501
-
-    x: Optional[StrictStr] = Field(
-        default=None,
-        description="X-axis relative coordinate of the location where the connector connects with an item, in percentage, minimum 0%, maximum 100%.",
-    )
-    y: Optional[StrictStr] = Field(
-        default=None,
-        description="Y-axis relative coordinate of the location where the connector connects with an item, in percentage, minimum 0%, maximum 100%.",
-    )
+    """ # noqa: E501
+    x: Optional[StrictStr] = Field(default=None, description="X-axis relative coordinate of the location where the connector connects with an item, in percentage, minimum 0%, maximum 100%.")
+    y: Optional[StrictStr] = Field(default=None, description="Y-axis relative coordinate of the location where the connector connects with an item, in percentage, minimum 0%, maximum 100%.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["x", "y"]
 
@@ -44,6 +36,7 @@ class RelativeOffset(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,11 +63,9 @@ class RelativeOffset(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,10 +88,15 @@ class RelativeOffset(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"x": obj.get("x"), "y": obj.get("y")})
+        _obj = cls.model_validate({
+            "x": obj.get("x"),
+            "y": obj.get("y")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+

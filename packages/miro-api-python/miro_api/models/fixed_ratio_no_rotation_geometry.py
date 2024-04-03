@@ -22,18 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-
 class FixedRatioNoRotationGeometry(BaseModel):
     """
     Contains geometrical information about the item. You can set either the width or height. You cannot set both the width and height at the same time.
-    """  # noqa: E501
-
-    height: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Height of the item, in pixels."
-    )
-    width: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Width of the item, in pixels."
-    )
+    """ # noqa: E501
+    height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Height of the item, in pixels.")
+    width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Width of the item, in pixels.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["height", "width"]
 
@@ -42,6 +36,7 @@ class FixedRatioNoRotationGeometry(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -68,11 +63,9 @@ class FixedRatioNoRotationGeometry(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set(
-            [
-                "additional_properties",
-            ]
-        )
+        excluded_fields: Set[str] = set([
+            "additional_properties",
+        ])
 
         _dict = self.model_dump(
             by_alias=True,
@@ -95,12 +88,15 @@ class FixedRatioNoRotationGeometry(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"height": obj.get("height"), "width": obj.get("width")}
-        )
+        _obj = cls.model_validate({
+            "height": obj.get("height"),
+            "width": obj.get("width")
+        })
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
+
+
