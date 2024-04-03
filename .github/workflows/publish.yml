@@ -48,5 +48,7 @@ jobs:
         working-directory: packages/miro-api-python
 
       - name: Publish to pypi
-        run: poetry run twine upload dist/*
+        run: |
+          poetry install
+          poetry run twine upload dist/*
         working-directory: packages/miro-api-python
