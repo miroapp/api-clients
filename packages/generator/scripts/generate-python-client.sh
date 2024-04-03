@@ -25,7 +25,6 @@ rm -r "${target}/miro_api/test"
 rm "${target}/miro_api/api/"*"_api.py"
 rm "${target}/miro_api_README.md"
 
-# echo "Generating highlevel models"
-# TODO
 
-
+echo "Format using black"
+pipx run black ${target}/miro_api/
