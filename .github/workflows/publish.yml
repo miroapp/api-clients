@@ -52,3 +52,7 @@ jobs:
           poetry install
           poetry run twine upload dist/*
         working-directory: packages/miro-api-python
+        env:
+          TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
+
