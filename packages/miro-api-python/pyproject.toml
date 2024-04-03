@@ -19,6 +19,9 @@ pydantic = "^2.6.4"
 [tool.poetry.group.dev.dependencies]
 twine = "^5.0.0"
 
+[tool.poetry.scripts]
+build-docs = "pdoc miro_api !miro_api.rest !miro_api.api_response !miro_api.client !miro_api.configuration !miro_api.autopaginated_endpoints !miro_api.test_miro_api_wrapper !miro_api.api_client !miro_api.miro_api_wrapper !miro_api.exceptions -d markdown -t ./docs-template -o docs-out"
+
 [project.urls]
 Homepage = "https://github.com/miroapp/api-clients"
 Issues = "https://github.com/miroapp/api-clients/issues"
