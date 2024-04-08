@@ -43,7 +43,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.9'
-          cache: 'poetry'
+
+      - run: pip install poetry
 
       # install requirements
       - run: yarn
@@ -60,17 +61,18 @@ jobs:
         working-directory: packages/miro-api-python
 
       # prep docs directory
-      - run: mkdir -p docs_to_upload/node
-      - run: cp -r packages/miro-api/docs-out/* docs_to_upload/node/
+      - run: |
+          mkdir -p docs_to_upload/node
+          cp -r packages/miro-api/docs-out/* docs_to_upload/node/
 
-      - run: mkdir -p docs_to_upload/python
-      - run: cp -r packages/miro-api-python/docs-out/* docs_to_upload/python/
+          mkdir -p docs_to_upload/python
+          cp -r packages/miro-api-python/docs-out/* docs_to_upload/python/
 
       # upload and deploy docs
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "packages/miro-api/docs-out/"
+          path: "docs_to_upload/"
 
       - name: Deploy to GitHub Pages
         id: deployment
