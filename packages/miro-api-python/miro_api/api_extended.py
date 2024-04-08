@@ -12,7 +12,7 @@ from miro_api.models.team import Team
 from miro_api.models.team_member import TeamMember
 
 
-class MiroApiEndpointsWithAutoPagination(MiroApiEndpoints):
+class MiroApiExtended(MiroApiEndpoints):
     @staticmethod
     def _has_more_data(offset: Optional[int], data_length: int, total: Optional[int]):
         total = total or 0

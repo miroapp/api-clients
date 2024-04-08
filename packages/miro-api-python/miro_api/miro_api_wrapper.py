@@ -1,15 +1,14 @@
-from dataclasses import dataclass
 import json
-from typing import Callable, Any, Dict, Optional, Union
-from abc import ABC, abstractmethod
+from typing import Callable, Dict, Optional, Union
 import urllib.parse
 import os
 import datetime
 
-from miro_api.autopaginated_endpoints import MiroApiEndpointsWithAutoPagination
+from miro_api.api_extended import MiroApiExtended
 from miro_api.configuration import Configuration
 from miro_api.api_client import ApiClient
 from miro_api.rest import RESTClientObject
+from miro_api.storage import Storage, InMemoryStorage, State
 
 from . import __version__
 
@@ -33,43 +32,41 @@ class MiroApiClient(ApiClient):
         }
 
 
-def MiroApi(
-    access_token: Union[str, Callable[[], str]]
-) -> MiroApiEndpointsWithAutoPagination:
-    client = MiroApiClient(access_token)
-    return MiroApiEndpointsWithAutoPagination(client)
+class MiroApi(MiroApiExtended):
+    """
+    Exposes api endpoints as methods
+    """
 
+    def __init__(self, access_token: Union[str, Callable[[], str]]) -> None:
+        """
+        Initialize the client by passing an access token.
 
-@dataclass
-class State:
-    access_token: str
-    refresh_token: Optional[str]
-    token_expires_at: Optional[datetime.datetime]
+        ```python
+        # Import the 'MiroApi' object
+        from miro_api import MiroApi
 
+        # Create a new instance of the 'MiroApi' object,
+        # and pass the OAuth access token as a parameter
+        api = MiroApi('<access_token>')
 
-class Storage(ABC):
-    @abstractmethod
-    def set(self, state: Optional[State]) -> None:
-        pass
-
-    @abstractmethod
-    def get(self) -> Optional[State]:
-        pass
-
-
-class InMemoryStorage(Storage):
-    def __init__(self):
-        self.data: Optional[State] = None
-
-    def set(self, state: Optional[State]) -> None:
-        self.data = state
-
-    def get(self) -> Optional[State]:
-        return self.data
+        # Use the 'MiroApi' instance to send a request to the Miro REST API,
+        # and to create a new board in the team where the App is installed
+        boards = api.create_board()
+        ```
+        """
+        self.api_client = MiroApiClient(access_token)
 
 
 class Miro:
+    """
+    This is the highlevel client
+    """
+
     _api_client = ApiClient()
+    _client_id: str
+    _client_secret: str
+    _redirect_url: str
+    _storage: Storage
 
     def __init__(
         self,
@@ -77,53 +74,69 @@ class Miro:
         client_secret: Optional[str] = None,
         redirect_url: Optional[str] = None,
         storage: Storage = InMemoryStorage(),
-        logger: Optional[Callable[[Any], None]] = None,
-        base_path: str = "https://api.miro.com",
     ):
-        self.client_id: str = client_id or os.environ.get("MIRO_CLIENT_ID") or ""
-        self.client_secret: str = (
+        """
+        Initializes the Miro client with the given client id and client secret
+
+        Parameters are optional if the environment variables are defined
+
+            client_id: MIRO_CLIENT_ID
+            client_secret: MIRO_CLIENT_SECRET
+            redirect_url: MIRO_REDIRECT_URL
+
+        This method will raise an Exception if any of these are not defined.
+
+        Storage is used to persist state needed by the client (access token, refresh token).
+        By default the client uses in memory storage for state. For production usage we recommend implementing one backed up by a permanent database.
+        """
+        self._client_id: str = client_id or os.environ.get("MIRO_CLIENT_ID") or ""
+        self._client_secret: str = (
             client_secret or os.environ.get("MIRO_CLIENT_SECRET") or ""
         )
-        self.redirect_url: str = (
+        self._redirect_url: str = (
             redirect_url or os.environ.get("MIRO_REDIRECT_URL") or ""
         )
 
-        if not self.client_id:
+        if not self._client_id:
             raise Exception(
                 "miro-api: MIRO_CLIENT_ID environment variable or passing clientId is required"
             )
-        if not self.client_secret:
+        if not self._client_secret:
             raise Exception(
                 "miro-api: MIRO_CLIENT_SECRET environment variable or passing clientSecret is required"
             )
-        if not self.redirect_url:
+        if not self._redirect_url:
             raise Exception(
                 "miro-api: MIRO_REDIRECT_URL environment variable or passing redirectUrl is required"
             )
 
-        self.logger = logger or (print if os.environ.get("MIRO_DEBUG") else None)
-        self.base_path = base_path
         self._storage = storage
 
     @property
-    def api(self):
+    def api(self) -> MiroApi:
+        """Returns an instance of MiroApi using access token from given storage"""
         return MiroApi(lambda: self.access_token)
 
     @property
-    def is_authorized(self):
+    def is_authorized(self) -> bool:
+        """Returns True if there's a valid access token.
+        If this is False then you will need to run Miro.exchange_code_for_access_token(code) with code received through OAuth 2 flow.
+        """
         try:
             return bool(self.access_token)
         except Exception:
             return False
 
     @property
-    def auth_url(self):
+    def auth_url(self) -> str:
+        """Returns a URL that user should be redirected to in order to authorize the application"""
         return self.get_auth_url()
 
-    def get_auth_url(self, state=None, team_id=None):
+    def get_auth_url(self, state=None, team_id=None) -> str:
+        """Returns a URL that user should be redirected to in order to authorize the application, accepts an optional state argument and a teamId that will be used as a default"""
         auth = {
-            "client_id": self.client_id,
-            "redirect_uri": self.redirect_url,
+            "client_id": self._client_id,
+            "redirect_uri": self._redirect_url,
             "response_type": "code",
         }
         if state:
@@ -131,12 +144,10 @@ class Miro:
         if team_id:
             auth["team_id"] = team_id
 
-        return urllib.parse.urljoin(
-            self.base_path.replace("api.", ""),
-            f"/oauth/authorize?{urllib.parse.urlencode(auth)}",
-        )
+        return f"https://miro.com/oauth/authorize?{urllib.parse.urlencode(auth)}"
 
-    def exchange_code_for_access_token(self, url_or_code):
+    def exchange_code_for_access_token(self, url_or_code) -> str:
+        """Exchanges the authorization code for an access token by calling the token endpoint It will store the token information in storage for later reuse"""
         code = url_or_code
         if "?" in url_or_code:
             url = urllib.parse.urlparse(url_or_code)
@@ -149,21 +160,22 @@ class Miro:
 
         return self._get_token(code=code)
 
-    def revoke_token(self):
+    def revoke_token(self) -> None:
+        """Revokes currently stored access token"""
         self.api.revoke_token(self.access_token)
         self._storage.set(None)
 
     def _get_token(self, code: str = "", refresh_token: str = "") -> str:
-        token_url = urllib.parse.urljoin(self.base_path, "/v1/oauth/token")
+        token_url = "https://api.miro.com/v1/oauth/token"
         params = {
-            "client_id": self.client_id,
-            "client_secret": self.client_secret,
+            "client_id": self._client_id,
+            "client_secret": self._client_secret,
         }
         if code:
             params.update(
                 {
                     "code": code,
-                    "redirect_uri": self.redirect_url,
+                    "redirect_uri": self._redirect_url,
                     "grant_type": "authorization_code",
                 }
             )
@@ -196,6 +208,7 @@ class Miro:
 
     @property
     def access_token(self) -> str:
+        """Returns currently stored access token. If it has expired the client will request a new access token using the stored refresh token."""
         state = self._storage.get()
 
         if not state or not state.access_token:

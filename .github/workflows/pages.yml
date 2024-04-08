@@ -40,12 +40,31 @@ jobs:
           node-version: 20
           cache: 'yarn'
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: 'poetry'
+
+      # install requirements
       - run: yarn
         working-directory: packages/miro-api
 
-      # generate docs
+      - run: poetry install
+        working-directory: packages/miro-api-python
+
+      # build docs
       - run: yarn build:docs
         working-directory: packages/miro-api
+
+      - run: scripts/build-docs.sh
+        working-directory: packages/miro-api-python
+
+      # prep docs directory
+      - run: mkdir -p docs_to_upload/node
+      - run: cp -r packages/miro-api/docs-out/* docs_to_upload/node/
+
+      - run: mkdir -p docs_to_upload/python
+      - run: cp -r packages/miro-api-python/docs-out/* docs_to_upload/python/
 
       # upload and deploy docs
       - name: Upload artifact
