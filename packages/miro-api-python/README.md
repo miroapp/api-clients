@@ -18,7 +18,7 @@ The Miro python library makes a stateful high-level client, and stateless low-le
 - The `MiroApi` object is the stateless low-level client. \
   It contains properties and methods for backend-to-backend communication and to run automation scripts. \
   It enables passing the OAuth access token once, and then reusing it in subsequent calls. \
-  The `MiroApi` methods enable creating and getting boards associated with the current access token, performing CRUD operations on board items, as well as retrieving organization information and managing teams sand users (available on Enterprise API for users on an Enterprise plan.)
+  The `MiroApi` methods enable creating and getting boards associated with the current access token, performing CRUD operations on board items, as well as retrieving organization information and managing teams and users (available on Enterprise API for users on an Enterprise plan.)
 
 ## Prerequisites
 
