@@ -124,10 +124,9 @@ class Storage(ABC):
 >
 > For production deployments, we recommend using a custom implementation backed by a database.
 
-
 ### Reference
 
-https://miroapp.github.io/api-clients/
+https://miroapp.github.io/api-clients/node/
 
 ### Examples and Tutorials
 

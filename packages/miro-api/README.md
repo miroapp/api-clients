@@ -1,4 +1,4 @@
-[Miro Node.js client reference documentation](https://miroapp.github.io/api-clients/index.html)
+[Miro Node.js client reference documentation](https://miroapp.github.io/api-clients/node/index.html)
 
 ## Miro Node.js API client library
 
@@ -25,11 +25,11 @@ The Miro Node.js library makes a stateful high-level client, and stateless low-l
 
 - The `Miro` object is the stateful high-level client. \
   It contains properties and methods to interact with Miro users. For example, to trigger the authorization flow. \
-  The [`Miro` methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) are related to authorization and access token management.
+  The [`Miro` methods](https://miroapp.github.io/api-clients/node/classes/index.Miro.html) are related to authorization and access token management.
 - The `MiroApi` object is the stateless low-level client. \
   It contains properties and methods for backend-to-backend communication and to run automation scripts. \
   It enables passing the OAuth access token once, and then reusing it in subsequent calls. \
-  The [`MiroApi` methods](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) enable creating and getting boards associated with the current access token, performing CRUD operations on board items, as well as retrieving organization information and managing teams sand users (available on Enterprise API for users on an Enterprise plan.)
+  The [`MiroApi` methods](https://miroapp.github.io/api-clients/node/classes/index.MiroApi.html) enable creating and getting boards associated with the current access token, performing CRUD operations on board items, as well as retrieving organization information and managing teams sand users (available on Enterprise API for users on an Enterprise plan.)
 
 To start using the high-level `Miro` client, import it, and then create a new instance:
 
@@ -66,9 +66,9 @@ const boards = await api.createBoard()
 
 ## Model hierarchy
 
-- The `Miro` [`.as(userId: string)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken) class. \
-  This instance provides methods to create and get the [`Board`](https://miroapp.github.io/api-clients/classes/index.Board.html) model.
-- `Board` has methods to create and get [`Item`](https://miroapp.github.io/api-clients/classes/index.Item.html) models.
+- The `Miro` [`.as(userId: string)`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#as) method returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#exchangeCodeForAccessToken) class. \
+  This instance provides methods to create and get the [`Board`](https://miroapp.github.io/api-clients/node/classes/index.Board.html) model.
+- `Board` has methods to create and get [`Item`](https://miroapp.github.io/api-clients/node/classes/index.Item.html) models.
 - `Items` includes methods to create connectors, as well as attach and detach tags, for the board items that support these features.
 
 It's possible to access the methods, properties, and objects by traversing the hierarchy. \
@@ -98,7 +98,7 @@ Miro
 ## Pagination
 
 The client library includes helper methods that make it easy to paginate over all the resources using `for await...of` loops. \
-For example, the [`getAllBoards`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that paginates automatically.
+For example, the [`getAllBoards`](https://miroapp.github.io/api-clients/node/classes/index.MiroApi.html#getAllBoards) method is an [AsyncGenerator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncGenerator) that paginates automatically.
 
 Example:
 
@@ -118,7 +118,7 @@ for await (const board of api.getAllBoards()) {
 >
 > For production deployments, we recommend using a custom implementation backed by a database.
 
-Most methods take `userId` as their first parameter. For example: [`isAuthorized`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized), [`exchangeCodeForAccessToken`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken), [`as`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as).
+Most methods take `userId` as their first parameter. For example: [`isAuthorized`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#isAuthorized), [`exchangeCodeForAccessToken`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#exchangeCodeForAccessToken), [`as`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#as).
 `userId` corresponds to the internal ID of the user in your application. It can be either a string or a number. Usually, it's stored in session.
 
 The client library requires persistent storage for user access and refresh tokens. \
@@ -133,7 +133,7 @@ const miro = new Miro({
 })
 ```
 
-To support the client library storage functionality in your app, implement the following [get and set](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface:
+To support the client library storage functionality in your app, implement the following [get and set](https://miroapp.github.io/api-clients/node/interfaces/index._internal_.Storage.html) interface:
 
 ```typescript
 export interface Storage {
@@ -163,14 +163,14 @@ const miro = new Miro({
 })
 ```
 
-The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/interfaces/index.MiroOptions.html) to complete Miro authorization flows, and to make API calls:
+The `Miro` client features all the necessary [methods](https://miroapp.github.io/api-clients/node/classes/index.Miro.html) and [options](https://miroapp.github.io/api-clients/node/interfaces/index.MiroOptions.html) to complete Miro authorization flows, and to make API calls:
 
-1. Check if the current user has authorized the app: [`miro.isAuthorized(someUserId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized)
-2. If the user hasn't yet authorized the app, request the user to authorize the app by redirecting them to: [`miro.getAuthUrl()`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl)
-3. As part of the authorization flow, exchange the user temporary authorization code for an access token in the return URL request handler: [`await miro.exchangeCodeForAccessToken(someUserId, req.query.code)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken)
-4. Make API calls on behalf of a specific user: [`await miro.as(someUserId).getBoard(boardId)`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as)
+1. Check if the current user has authorized the app: [`miro.isAuthorized(someUserId)`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#isAuthorized)
+2. If the user hasn't yet authorized the app, request the user to authorize the app by redirecting them to: [`miro.getAuthUrl()`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#getAuthUrl)
+3. As part of the authorization flow, exchange the user temporary authorization code for an access token in the return URL request handler: [`await miro.exchangeCodeForAccessToken(someUserId, req.query.code)`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#exchangeCodeForAccessToken)
+4. Make API calls on behalf of a specific user: [`await miro.as(someUserId).getBoard(boardId)`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#as)
 
-For more information about the available options related to authorization, see the [`MiroOptions` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index.MiroOptions.html).
+For more information about the available options related to authorization, see the [`MiroOptions` interface reference documentation](https://miroapp.github.io/api-clients/node/interfaces/index.MiroOptions.html).
 
 ## Example
 

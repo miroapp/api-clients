@@ -101,7 +101,7 @@ To start the app, execute `index.js` with Node.js:
 node index.js
 ```
 
-The response in JSON format lists all the [boards](https://miroapp.github.io/api-clients/classes/index._internal_.Board.html) that the current user can access in the team that the app was installed to.
+The response in JSON format lists all the [boards](https://miroapp.github.io/api-clients/node/classes/index._internal_.Board.html) that the current user can access in the team that the app was installed to.
 
 Example response listing one board:
 
@@ -167,13 +167,13 @@ Board {
 ## Next steps
 
 - Access and use data from each `Board` as needed. \
-  For more information about the methods available through `Board`, see the [reference documentation](https://miroapp.github.io/api-clients/classes/index._internal_.Board.html).
+  For more information about the methods available through `Board`, see the [reference documentation](https://miroapp.github.io/api-clients/node/classes/index._internal_.Board.html).
 - Start integrating your data into Miro. \
-  For example, add [sticky notes](https://miroapp.github.io/api-clients/classes/index._internal_.StickyNoteItem.html), create [app cards](https://miroapp.github.io/api-clients/classes/index._internal_.AppCardItem.html), and more. \
+  For example, add [sticky notes](https://miroapp.github.io/api-clients/node/classes/index._internal_.StickyNoteItem.html), create [app cards](https://miroapp.github.io/api-clients/node/classes/index._internal_.AppCardItem.html), and more. \
   For more inspiration, see the [example app to manage sticky notes and tags](https://github.com/miroapp/app-examples/tree/main/examples/node-stickies-csv) on our GitHub repo.
 
 ## See also
 
-- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
-- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/classes/index.MiroApi.html)
-- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html)
+- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/node/classes/index.Miro.html)
+- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/node/classes/index.MiroApi.html)
+- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/node/interfaces/index._internal_.Storage.html)
