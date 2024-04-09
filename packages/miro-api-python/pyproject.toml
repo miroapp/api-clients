@@ -19,6 +19,14 @@ pydantic = "^2.6.4"
 [tool.poetry.group.dev.dependencies]
 twine = "^5.0.0"
 
+
+[tool.poetry.group.example.dependencies]
+flask = "^3.0.3"
+
 [project.urls]
 Homepage = "https://github.com/miroapp/api-clients"
 Issues = "https://github.com/miroapp/api-clients/issues"
+
+[tool.black]
+target-version = ["py39", "py310", "py311"]
+line-length = 120

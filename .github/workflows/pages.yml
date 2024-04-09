@@ -50,7 +50,7 @@ jobs:
       - run: yarn
         working-directory: packages/miro-api
 
-      - run: poetry install
+      - run: poetry install --with=dev
         working-directory: packages/miro-api-python
 
       # build docs
