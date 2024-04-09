@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/publish.yml
       - packages/miro-api/package.json
+      - packages/miro-api-python/pyproject.toml
 
 jobs:
   publish-node-to-npm:
