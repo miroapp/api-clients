@@ -126,7 +126,7 @@ class Storage(ABC):
 
 ### Reference
 
-https://miroapp.github.io/api-clients/node/
+https://miroapp.github.io/api-clients/python/
 
 ### Examples and Tutorials
 
