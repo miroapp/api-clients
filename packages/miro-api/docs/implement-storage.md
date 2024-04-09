@@ -1,6 +1,6 @@
 ## Goal
 
-This guide features two examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html) interface to add data storage functionality to the `Miro` class. \
+This guide features two examples that demonstrate how to implement a custom [`Storage`](https://miroapp.github.io/api-clients/node/interfaces/index._internal_.Storage.html) interface to add data storage functionality to the `Miro` class. \
 The default is a simple in-memory implementation.
 
 > 🚧
@@ -105,7 +105,7 @@ app.use((req, res, next) => {
 ```
 
 Instead of using a global `miro` variable, each request has a separate `Miro` instance associated with `req.miro`. \
-The client endpoints that interact with the [`Miro` API](https://miroapp.github.io/api-clients/classes/index.Miro.html) use `req.miro` to handle session data.
+The client endpoints that interact with the [`Miro` API](https://miroapp.github.io/api-clients/node/classes/index.Miro.html) use `req.miro` to handle session data.
 
 Example:
 
@@ -122,6 +122,6 @@ app.get('/', async (req, res) => {
 
 ## See also
 
-- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
-- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/classes/index.MiroApi.html)
-- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html)
+- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/node/classes/index.Miro.html)
+- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/node/classes/index.MiroApi.html)
+- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/node/interfaces/index._internal_.Storage.html)

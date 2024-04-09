@@ -3,7 +3,7 @@
   "entryPoints": ["index.ts", "api/apis.ts"],
   "gitRevision": "main",
   "markedOptions": {
-    "baseUrl": "https://miroapp.github.io/api-clients/"
+    "baseUrl": "https://miroapp.github.io/api-clients/node/"
   },
   "exclude": ["__tests__", "test", ".turbo", "../../node_modules/"],
   "excludeExternals": true,

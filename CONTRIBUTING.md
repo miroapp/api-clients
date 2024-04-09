@@ -72,5 +72,5 @@ When the version in `package.json` changes, the [`publish`](https://github.com/m
 
 ## Publish the documentation
 
-The [`pages-build-deployment`](https://github.com/miroapp/api-clients/actions/workflows/pages/pages-build-deployment) GitHub action publishes the client documentation to [GitHub pages](https://miroapp.github.io/api-clients/).
+The [`pages-build-deployment`](https://github.com/miroapp/api-clients/actions/workflows/pages/pages-build-deployment) GitHub action publishes the client documentation to [GitHub pages](https://miroapp.github.io/api-clients/node/).
 

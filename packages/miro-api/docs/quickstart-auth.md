@@ -112,8 +112,8 @@ app.use(
 ### Step 5: redirect new users to the authorization page
 
 In this step, you set up a request handler for the app's entry point. \
-First, check if the user has already authorized and installed the app. The [`isAuthorized`](https://miroapp.github.io/api-clients/classes/index.Miro.html#isAuthorized) method helps you do that. \
-If they haven't installed the app, they're redirected to the Miro authorization URL. The [`getAuthUrl`](https://miroapp.github.io/api-clients/classes/index.Miro.html#getAuthUrl) method generates this URL for you.
+First, check if the user has already authorized and installed the app. The [`isAuthorized`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#isAuthorized) method helps you do that. \
+If they haven't installed the app, they're redirected to the Miro authorization URL. The [`getAuthUrl`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#getAuthUrl) method generates this URL for you.
 
 ```javascript
 app.get('/', async (req, res) => {
@@ -131,12 +131,12 @@ app.get('/', async (req, res) => {
 After a user authorizes and installs the app, they're redirected back to the redirect URL assigned to the `MIRO_REDIRECT_URL` environment variable, and specified in the app's **Redirect URI for OAuth2.0** when [creating the app](#prerequisites) in your Miro account settings. \
 The callback URL is `http://127.0.0.1:4000/auth/miro/callback`.
 
-The [`exchangeCodeForAccessToken`](https://miroapp.github.io/api-clients/classes/index.Miro.html#exchangeCodeForAccessToken) method enables exchanging the temporary OAuth code for an access token that the app can use to send API requests. \
+The [`exchangeCodeForAccessToken`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#exchangeCodeForAccessToken) method enables exchanging the temporary OAuth code for an access token that the app can use to send API requests. \
 The method requires passing an ID and the value of the `code` URL parameter:
 
 - It exchanges the code for an access token.
 - Then, it associates the token with the ID.
-- Lastly, it stores the token internally using the client [`Storage`](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html).
+- Lastly, it stores the token internally using the client [`Storage`](https://miroapp.github.io/api-clients/node/interfaces/index._internal_.Storage.html).
 
 After authorizing the user, they're redirected back to the entry point (see Step 5).
 
@@ -150,12 +150,12 @@ app.get('/auth/miro/callback', async (req, res) => {
 ### Step 7: render a list of boards
 
 After completing the OAuth 2.0 authorization flow and obtaining an access token, the app can send requests to the API. \
-The first call invokes the [`as`](https://miroapp.github.io/api-clients/classes/index.Miro.html#as) method. The `as` method takes a user ID as an argument, and it returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html) class. \
+The first call invokes the [`as`](https://miroapp.github.io/api-clients/node/classes/index.Miro.html#as) method. The `as` method takes a user ID as an argument, and it returns an instance of the [`MiroApi`](https://miroapp.github.io/api-clients/node/classes/index.MiroApi.html) class. \
 The method also automatically initializes `MiroApi` with the access token associated with the specified user ID.
 
-The `MiroApi` instance enables retrieving board information, and the [`Board`](https://miroapp.github.io/api-clients/classes/index._internal_.Board.html) class.
+The `MiroApi` instance enables retrieving board information, and the [`Board`](https://miroapp.github.io/api-clients/node/classes/index._internal_.Board.html) class.
 
-Use the [`getAllBoards`](https://miroapp.github.io/api-clients/classes/index.MiroApi.html#getAllBoards) generator method to fetch a list of boards that the team the app was installed to can access. \
+Use the [`getAllBoards`](https://miroapp.github.io/api-clients/node/classes/index.MiroApi.html#getAllBoards) generator method to fetch a list of boards that the team the app was installed to can access. \
 Then, render each entry about a retrieved board as a list item with the name of the board, and a link to it.
 
 ```javascript
@@ -252,6 +252,6 @@ app.listen(4000, () => console.log('Started server on http://127.0.0.1:4000'))
 
 ## See also
 
-- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/classes/index.Miro.html)
-- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/classes/index.MiroApi.html)
-- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/interfaces/index._internal_.Storage.html)
+- [`Miro` object reference documentation](https://miroapp.github.io/api-clients/node/classes/index.Miro.html)
+- [`MiroApi` object reference documentation](https://miroapp.github.io/api-clients/node/classes/index.MiroApi.html)
+- [`Storage` interface reference documentation](https://miroapp.github.io/api-clients/node/interfaces/index._internal_.Storage.html)
