@@ -22,33 +22,45 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TeamInvitationSettings(BaseModel):
     """
     Team invitation settings
-    """ # noqa: E501
-    invite_external_users: Optional[StrictStr] = Field(default=None, description=" * \"allowed\": Allow non-team collaborators for team * \"not_allowed\": Not Allow non-team collaborators for team ", alias="inviteExternalUsers")
-    who_can_invite: Optional[StrictStr] = Field(default=None, description=" * \"only_org_admins\": Company admins only can invite * \"admins\":          Company admins and team admins can invite * \"all_members\":     All team members can invite ", alias="whoCanInvite")
+    """  # noqa: E501
+
+    invite_external_users: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "allowed": Allow non-team collaborators for team * "not_allowed": Not Allow non-team collaborators for team ',
+        alias="inviteExternalUsers",
+    )
+    who_can_invite: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "only_org_admins": Company admins only can invite * "admins":          Company admins and team admins can invite * "all_members":     All team members can invite ',
+        alias="whoCanInvite",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["inviteExternalUsers", "whoCanInvite"]
 
-    @field_validator('invite_external_users')
+    @field_validator("invite_external_users")
     def invite_external_users_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['allowed', 'not_allowed']):
+        if value not in set(["allowed", "not_allowed"]):
             raise ValueError("must be one of enum values ('allowed', 'not_allowed')")
         return value
 
-    @field_validator('who_can_invite')
+    @field_validator("who_can_invite")
     def who_can_invite_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['only_org_admins', 'admins', 'all_members']):
-            raise ValueError("must be one of enum values ('only_org_admins', 'admins', 'all_members')")
+        if value not in set(["only_org_admins", "admins", "all_members"]):
+            raise ValueError(
+                "must be one of enum values ('only_org_admins', 'admins', 'all_members')"
+            )
         return value
 
     model_config = {
@@ -56,7 +68,6 @@ class TeamInvitationSettings(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -83,9 +94,11 @@ class TeamInvitationSettings(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -108,15 +121,15 @@ class TeamInvitationSettings(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "inviteExternalUsers": obj.get("inviteExternalUsers"),
-            "whoCanInvite": obj.get("whoCanInvite")
-        })
+        _obj = cls.model_validate(
+            {
+                "inviteExternalUsers": obj.get("inviteExternalUsers"),
+                "whoCanInvite": obj.get("whoCanInvite"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

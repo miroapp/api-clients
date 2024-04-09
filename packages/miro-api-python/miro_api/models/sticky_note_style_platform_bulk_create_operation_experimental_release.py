@@ -22,43 +22,78 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class StickyNoteStylePlatformBulkCreateOperationExperimentalRelease(BaseModel):
     """
     Contains information about the style of a sticky note item, such as the fill color or text alignment.
-    """ # noqa: E501
-    fill_color: Optional[StrictStr] = Field(default=None, description="Fill color for the sticky note. Default: `light_yellow`.", alias="fillColor")
-    text_align: Optional[StrictStr] = Field(default=None, description="Defines how the sticky note text is horizontally aligned. Default: `center`.", alias="textAlign")
-    text_align_vertical: Optional[StrictStr] = Field(default=None, description="Defines how the sticky note text is vertically aligned. Default: `top`.", alias="textAlignVertical")
+    """  # noqa: E501
+
+    fill_color: Optional[StrictStr] = Field(
+        default=None,
+        description="Fill color for the sticky note. Default: `light_yellow`.",
+        alias="fillColor",
+    )
+    text_align: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines how the sticky note text is horizontally aligned. Default: `center`.",
+        alias="textAlign",
+    )
+    text_align_vertical: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines how the sticky note text is vertically aligned. Default: `top`.",
+        alias="textAlignVertical",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["fillColor", "textAlign", "textAlignVertical"]
 
-    @field_validator('fill_color')
+    @field_validator("fill_color")
     def fill_color_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['gray', 'light_yellow', 'yellow', 'orange', 'light_green', 'green', 'dark_green', 'cyan', 'light_pink', 'pink', 'violet', 'red', 'light_blue', 'blue', 'dark_blue', 'black']):
-            raise ValueError("must be one of enum values ('gray', 'light_yellow', 'yellow', 'orange', 'light_green', 'green', 'dark_green', 'cyan', 'light_pink', 'pink', 'violet', 'red', 'light_blue', 'blue', 'dark_blue', 'black')")
+        if value not in set(
+            [
+                "gray",
+                "light_yellow",
+                "yellow",
+                "orange",
+                "light_green",
+                "green",
+                "dark_green",
+                "cyan",
+                "light_pink",
+                "pink",
+                "violet",
+                "red",
+                "light_blue",
+                "blue",
+                "dark_blue",
+                "black",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('gray', 'light_yellow', 'yellow', 'orange', 'light_green', 'green', 'dark_green', 'cyan', 'light_pink', 'pink', 'violet', 'red', 'light_blue', 'blue', 'dark_blue', 'black')"
+            )
         return value
 
-    @field_validator('text_align')
+    @field_validator("text_align")
     def text_align_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['left', 'right', 'center']):
+        if value not in set(["left", "right", "center"]):
             raise ValueError("must be one of enum values ('left', 'right', 'center')")
         return value
 
-    @field_validator('text_align_vertical')
+    @field_validator("text_align_vertical")
     def text_align_vertical_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['top', 'middle', 'bottom']):
+        if value not in set(["top", "middle", "bottom"]):
             raise ValueError("must be one of enum values ('top', 'middle', 'bottom')")
         return value
 
@@ -67,7 +102,6 @@ class StickyNoteStylePlatformBulkCreateOperationExperimentalRelease(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -94,9 +128,11 @@ class StickyNoteStylePlatformBulkCreateOperationExperimentalRelease(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -119,16 +155,16 @@ class StickyNoteStylePlatformBulkCreateOperationExperimentalRelease(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "fillColor": obj.get("fillColor"),
-            "textAlign": obj.get("textAlign"),
-            "textAlignVertical": obj.get("textAlignVertical")
-        })
+        _obj = cls.model_validate(
+            {
+                "fillColor": obj.get("fillColor"),
+                "textAlign": obj.get("textAlign"),
+                "textAlignVertical": obj.get("textAlignVertical"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

@@ -26,19 +26,17 @@ class ItemTypeChange(str, Enum):
     """
     allowed enum values
     """
-    APP_CARD = 'app_card'
-    TEXT = 'text'
-    SHAPE = 'shape'
-    STICKY_NOTE = 'sticky_note'
-    IMAGE = 'image'
-    DOCUMENT = 'document'
-    CARD = 'card'
-    FRAME = 'frame'
-    EMBED = 'embed'
+    APP_CARD = "app_card"
+    TEXT = "text"
+    SHAPE = "shape"
+    STICKY_NOTE = "sticky_note"
+    IMAGE = "image"
+    DOCUMENT = "document"
+    CARD = "card"
+    FRAME = "frame"
+    EMBED = "embed"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ItemTypeChange from a JSON string"""
         return cls(json.loads(json_str))
-
-

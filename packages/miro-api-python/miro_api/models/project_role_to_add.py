@@ -26,14 +26,12 @@ class ProjectRoleToAdd(str, Enum):
     """
     allowed enum values
     """
-    EDITOR = 'editor'
-    VIEWER = 'viewer'
-    COMMENTATOR = 'commentator'
-    COOWNER = 'coowner'
+    EDITOR = "editor"
+    VIEWER = "viewer"
+    COMMENTATOR = "commentator"
+    COOWNER = "coowner"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ProjectRoleToAdd from a JSON string"""
         return cls(json.loads(json_str))
-
-

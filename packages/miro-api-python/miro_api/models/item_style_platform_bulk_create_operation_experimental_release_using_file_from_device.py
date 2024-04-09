@@ -26,12 +26,22 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Optional, Dict
 from typing_extensions import Literal, Self
 
-ITEMSTYLEPLATFORMBULKCREATEOPERATIONEXPERIMENTALRELEASEUSINGFILEFROMDEVICE_ONE_OF_SCHEMAS = ["AppCardStyle", "CardStyle", "ShapeStyle", "StickyNoteStyle", "TextStyle"]
+ITEMSTYLEPLATFORMBULKCREATEOPERATIONEXPERIMENTALRELEASEUSINGFILEFROMDEVICE_ONE_OF_SCHEMAS = [
+    "AppCardStyle",
+    "CardStyle",
+    "ShapeStyle",
+    "StickyNoteStyle",
+    "TextStyle",
+]
 
-class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
+
+class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
+    BaseModel
+):
     """
     Contains information about item-specific styles.
     """
+
     # data type: AppCardStyle
     oneof_schema_1_validator: Optional[AppCardStyle] = None
     # data type: CardStyle
@@ -42,21 +52,30 @@ class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
     oneof_schema_4_validator: Optional[StickyNoteStyle] = None
     # data type: TextStyle
     oneof_schema_5_validator: Optional[TextStyle] = None
-    actual_instance: Optional[Union[AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]] = None
-    one_of_schemas: List[str] = Field(default=Literal["AppCardStyle", "CardStyle", "ShapeStyle", "StickyNoteStyle", "TextStyle"])
+    actual_instance: Optional[
+        Union[AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]
+    ] = None
+    one_of_schemas: List[str] = Field(
+        default=Literal[
+            "AppCardStyle", "CardStyle", "ShapeStyle", "StickyNoteStyle", "TextStyle"
+        ]
+    )
 
     model_config = {
         "validate_assignment": True,
         "protected_namespaces": (),
     }
 
-
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
             if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
@@ -64,14 +83,18 @@ class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
     def __getattr__(self, attr: str):
         return getattr(self.actual_instance, attr)
 
-    @field_validator('actual_instance')
+    @field_validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
-        instance = ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.model_construct()
+        instance = (
+            ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice.model_construct()
+        )
         error_messages = []
         match = 0
         # validate data type: AppCardStyle
         if not isinstance(v, AppCardStyle):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `AppCardStyle`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `AppCardStyle`"
+            )
         else:
             match += 1
         # validate data type: CardStyle
@@ -86,7 +109,9 @@ class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
             match += 1
         # validate data type: StickyNoteStyle
         if not isinstance(v, StickyNoteStyle):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `StickyNoteStyle`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `StickyNoteStyle`"
+            )
         else:
             match += 1
         # validate data type: TextStyle
@@ -96,10 +121,16 @@ class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice with oneOf schemas: AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice with oneOf schemas: AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice with oneOf schemas: AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice with oneOf schemas: AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -108,7 +139,9 @@ class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union[AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]:
+    def from_json(
+        cls, json_str: str
+    ) -> Union[AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
@@ -147,11 +180,16 @@ class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
 
         if not matches:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice with oneOf schemas: AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice with oneOf schemas: AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle. Details: "
+                + ", ".join(error_messages)
+            )
 
         # Return one match that has least additional_properties
         if len(matches) > 1:
-            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
+            instance.actual_instance = sorted(
+                matches, key=lambda m: len(m.additional_properties)
+            )[0]
 
         return instance
 
@@ -160,17 +198,32 @@ class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
         if self.actual_instance is None:
             return "null"
 
-        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
+        if hasattr(self.actual_instance, "to_json") and callable(
+            self.actual_instance.to_json
+        ):
             return self.actual_instance.to_json()
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]]:
+    def to_dict(
+        self,
+    ) -> Optional[
+        Union[
+            Dict[str, Any],
+            AppCardStyle,
+            CardStyle,
+            ShapeStyle,
+            StickyNoteStyle,
+            TextStyle,
+        ]
+    ]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
 
-        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
+        if hasattr(self.actual_instance, "to_dict") and callable(
+            self.actual_instance.to_dict
+        ):
             return self.actual_instance.to_dict()
         else:
             # primitive type
@@ -179,5 +232,3 @@ class ItemStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

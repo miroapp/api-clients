@@ -24,25 +24,44 @@ from miro_api.models.page_links import PageLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ConnectorsCursorPaged(BaseModel):
     """
     ConnectorsCursorPaged
-    """ # noqa: E501
-    cursor: Optional[StrictStr] = Field(default=None, description="A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the value returned in this parameter.")
-    data: Optional[List[ConnectorWithLinks]] = Field(default=None, description="Contains the result data.")
-    limit: Optional[StrictInt] = Field(default=None, description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.")
+    """  # noqa: E501
+
+    cursor: Optional[StrictStr] = Field(
+        default=None,
+        description="A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the value returned in this parameter.",
+    )
+    data: Optional[List[ConnectorWithLinks]] = Field(
+        default=None, description="Contains the result data."
+    )
+    limit: Optional[StrictInt] = Field(
+        default=None,
+        description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.",
+    )
     links: Optional[PageLinks] = None
-    size: Optional[StrictInt] = Field(default=None, description="Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.")
+    size: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.",
+    )
     total: Optional[StrictInt] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["cursor", "data", "limit", "links", "size", "total"]
+    __properties: ClassVar[List[str]] = [
+        "cursor",
+        "data",
+        "limit",
+        "links",
+        "size",
+        "total",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -69,9 +88,11 @@ class ConnectorsCursorPaged(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -84,10 +105,10 @@ class ConnectorsCursorPaged(BaseModel):
             for _item in self.data:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['data'] = _items
+            _dict["data"] = _items
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
-            _dict['links'] = self.links.to_dict()
+            _dict["links"] = self.links.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -104,19 +125,27 @@ class ConnectorsCursorPaged(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "cursor": obj.get("cursor"),
-            "data": [ConnectorWithLinks.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
-            "limit": obj.get("limit"),
-            "links": PageLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
-            "size": obj.get("size"),
-            "total": obj.get("total")
-        })
+        _obj = cls.model_validate(
+            {
+                "cursor": obj.get("cursor"),
+                "data": (
+                    [ConnectorWithLinks.from_dict(_item) for _item in obj["data"]]
+                    if obj.get("data") is not None
+                    else None
+                ),
+                "limit": obj.get("limit"),
+                "links": (
+                    PageLinks.from_dict(obj["links"])
+                    if obj.get("links") is not None
+                    else None
+                ),
+                "size": obj.get("size"),
+                "total": obj.get("total"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

@@ -22,11 +22,17 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AppCardStylePlatformBulkCreateOperationExperimentalRelease(BaseModel):
     """
     Contains information about the style of an app card item, such as the fill color.
-    """ # noqa: E501
-    fill_color: Optional[StrictStr] = Field(default=None, description="Hex value of the border color of the app card. Default: `#2d9bf0`.", alias="fillColor")
+    """  # noqa: E501
+
+    fill_color: Optional[StrictStr] = Field(
+        default=None,
+        description="Hex value of the border color of the app card. Default: `#2d9bf0`.",
+        alias="fillColor",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["fillColor"]
 
@@ -35,7 +41,6 @@ class AppCardStylePlatformBulkCreateOperationExperimentalRelease(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -62,9 +67,11 @@ class AppCardStylePlatformBulkCreateOperationExperimentalRelease(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -87,14 +94,10 @@ class AppCardStylePlatformBulkCreateOperationExperimentalRelease(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "fillColor": obj.get("fillColor")
-        })
+        _obj = cls.model_validate({"fillColor": obj.get("fillColor")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

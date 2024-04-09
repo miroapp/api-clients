@@ -24,25 +24,39 @@ from miro_api.models.page_links import PageLinks
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ItemsPage(BaseModel):
     """
     Contains cursor-based items page information.
-    """ # noqa: E501
-    size: StrictInt = Field(description="Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.")
-    limit: StrictInt = Field(description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.")
-    total: StrictInt = Field(description="Total number of results available for the given request.")
+    """  # noqa: E501
+
+    size: StrictInt = Field(
+        description="Number of results returned in the response considering the `cursor` and the `limit` values sent in the request. For example, if there are `20` results, the request does not have a `cursor` value, and the `limit` set to `10`, the `size` of the results will be `10`.<br>In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection."
+    )
+    limit: StrictInt = Field(
+        description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response."
+    )
+    total: StrictInt = Field(
+        description="Total number of results available for the given request."
+    )
     data: List[Item] = Field(description="Contains the result data.")
     links: PageLinks
     type: StrictStr = Field(description="Type of the object.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["size", "limit", "total", "data", "links", "type"]
+    __properties: ClassVar[List[str]] = [
+        "size",
+        "limit",
+        "total",
+        "data",
+        "links",
+        "type",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -69,9 +83,11 @@ class ItemsPage(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -84,10 +100,10 @@ class ItemsPage(BaseModel):
             for _item in self.data:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['data'] = _items
+            _dict["data"] = _items
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
-            _dict['links'] = self.links.to_dict()
+            _dict["links"] = self.links.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -104,19 +120,27 @@ class ItemsPage(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "size": obj.get("size"),
-            "limit": obj.get("limit"),
-            "total": obj.get("total"),
-            "data": [Item.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
-            "links": PageLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
-            "type": obj.get("type")
-        })
+        _obj = cls.model_validate(
+            {
+                "size": obj.get("size"),
+                "limit": obj.get("limit"),
+                "total": obj.get("total"),
+                "data": (
+                    [Item.from_dict(_item) for _item in obj["data"]]
+                    if obj.get("data") is not None
+                    else None
+                ),
+                "links": (
+                    PageLinks.from_dict(obj["links"])
+                    if obj.get("links") is not None
+                    else None
+                ),
+                "type": obj.get("type"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

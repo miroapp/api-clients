@@ -31,10 +31,12 @@ from miro_api.models.self_link import SelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains information about an item.
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: StrictStr = Field(description="Unique identifier (ID) of an item.")
     data: Optional[ItemData] = None
     style: Optional[ItemStyle] = None
@@ -43,19 +45,39 @@ class ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(Base
     parent: Optional[ParentWithLinks] = None
     is_supported: Optional[StrictBool] = Field(default=None, alias="isSupported")
     created_by: Optional[CreatedBy] = Field(default=None, alias="createdBy")
-    created_at: Optional[datetime] = Field(default=None, description="Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="createdAt")
+    created_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        alias="createdAt",
+    )
     modified_by: Optional[ModifiedBy] = Field(default=None, alias="modifiedBy")
-    modified_at: Optional[datetime] = Field(default=None, description="Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="modifiedAt")
+    modified_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        alias="modifiedAt",
+    )
     links: SelfLink
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "data", "style", "position", "geometry", "parent", "isSupported", "createdBy", "createdAt", "modifiedBy", "modifiedAt", "links"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "data",
+        "style",
+        "position",
+        "geometry",
+        "parent",
+        "isSupported",
+        "createdBy",
+        "createdAt",
+        "modifiedBy",
+        "modifiedAt",
+        "links",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -82,9 +104,11 @@ class ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(Base
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -93,28 +117,28 @@ class ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(Base
         )
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
-            _dict['data'] = self.data.to_dict()
+            _dict["data"] = self.data.to_dict()
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
-            _dict['style'] = self.style.to_dict()
+            _dict["style"] = self.style.to_dict()
         # override the default output from pydantic by calling `to_dict()` of position
         if self.position:
-            _dict['position'] = self.position.to_dict()
+            _dict["position"] = self.position.to_dict()
         # override the default output from pydantic by calling `to_dict()` of geometry
         if self.geometry:
-            _dict['geometry'] = self.geometry.to_dict()
+            _dict["geometry"] = self.geometry.to_dict()
         # override the default output from pydantic by calling `to_dict()` of parent
         if self.parent:
-            _dict['parent'] = self.parent.to_dict()
+            _dict["parent"] = self.parent.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
-            _dict['createdBy'] = self.created_by.to_dict()
+            _dict["createdBy"] = self.created_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of modified_by
         if self.modified_by:
-            _dict['modifiedBy'] = self.modified_by.to_dict()
+            _dict["modifiedBy"] = self.modified_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
-            _dict['links'] = self.links.to_dict()
+            _dict["links"] = self.links.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -131,25 +155,57 @@ class ItemPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(Base
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "data": ItemData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "style": ItemStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
-            "position": Position.from_dict(obj["position"]) if obj.get("position") is not None else None,
-            "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
-            "parent": ParentWithLinks.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
-            "isSupported": obj.get("isSupported"),
-            "createdBy": CreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "createdAt": obj.get("createdAt"),
-            "modifiedBy": ModifiedBy.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
-            "modifiedAt": obj.get("modifiedAt"),
-            "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "data": (
+                    ItemData.from_dict(obj["data"])
+                    if obj.get("data") is not None
+                    else None
+                ),
+                "style": (
+                    ItemStyle.from_dict(obj["style"])
+                    if obj.get("style") is not None
+                    else None
+                ),
+                "position": (
+                    Position.from_dict(obj["position"])
+                    if obj.get("position") is not None
+                    else None
+                ),
+                "geometry": (
+                    Geometry.from_dict(obj["geometry"])
+                    if obj.get("geometry") is not None
+                    else None
+                ),
+                "parent": (
+                    ParentWithLinks.from_dict(obj["parent"])
+                    if obj.get("parent") is not None
+                    else None
+                ),
+                "isSupported": obj.get("isSupported"),
+                "createdBy": (
+                    CreatedBy.from_dict(obj["createdBy"])
+                    if obj.get("createdBy") is not None
+                    else None
+                ),
+                "createdAt": obj.get("createdAt"),
+                "modifiedBy": (
+                    ModifiedBy.from_dict(obj["modifiedBy"])
+                    if obj.get("modifiedBy") is not None
+                    else None
+                ),
+                "modifiedAt": obj.get("modifiedAt"),
+                "links": (
+                    SelfLink.from_dict(obj["links"])
+                    if obj.get("links") is not None
+                    else None
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

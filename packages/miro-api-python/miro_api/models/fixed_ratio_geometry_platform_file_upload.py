@@ -22,13 +22,22 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FixedRatioGeometryPlatformFileUpload(BaseModel):
     """
     Contains geometrical information about the item, such as its width or rotation. You can set either the width or height, you cannot set both the width and height at the same time.
-    """ # noqa: E501
-    height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Height of the item, in pixels.")
-    width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Width of the item, in pixels.")
-    rotation: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.")
+    """  # noqa: E501
+
+    height: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Height of the item, in pixels."
+    )
+    width: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None, description="Width of the item, in pixels."
+    )
+    rotation: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["height", "width", "rotation"]
 
@@ -37,7 +46,6 @@ class FixedRatioGeometryPlatformFileUpload(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,9 +72,11 @@ class FixedRatioGeometryPlatformFileUpload(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,16 +99,16 @@ class FixedRatioGeometryPlatformFileUpload(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "height": obj.get("height"),
-            "width": obj.get("width"),
-            "rotation": obj.get("rotation")
-        })
+        _obj = cls.model_validate(
+            {
+                "height": obj.get("height"),
+                "width": obj.get("width"),
+                "rotation": obj.get("rotation"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

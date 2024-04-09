@@ -22,21 +22,27 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TeamCollaborationSettingsChanges(BaseModel):
     """
     Team collaboration settings
-    """ # noqa: E501
-    co_owner_role: Optional[StrictStr] = Field(default=None, description=" * \"enabled\": Enable Co-owner role on boards and projects * \"disabled\": Disabled Co-owner role on boards and projects ", alias="coOwnerRole")
+    """  # noqa: E501
+
+    co_owner_role: Optional[StrictStr] = Field(
+        default=None,
+        description=' * "enabled": Enable Co-owner role on boards and projects * "disabled": Disabled Co-owner role on boards and projects ',
+        alias="coOwnerRole",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["coOwnerRole"]
 
-    @field_validator('co_owner_role')
+    @field_validator("co_owner_role")
     def co_owner_role_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['enabled', 'disabled']):
+        if value not in set(["enabled", "disabled"]):
             raise ValueError("must be one of enum values ('enabled', 'disabled')")
         return value
 
@@ -45,7 +51,6 @@ class TeamCollaborationSettingsChanges(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -72,9 +77,11 @@ class TeamCollaborationSettingsChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,14 +104,10 @@ class TeamCollaborationSettingsChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "coOwnerRole": obj.get("coOwnerRole")
-        })
+        _obj = cls.model_validate({"coOwnerRole": obj.get("coOwnerRole")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

@@ -28,11 +28,15 @@ from miro_api.models.position_change import PositionChange
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ItemChanges(BaseModel):
     """
     Updates one or more items in one request. You can update up to 20 items per request.
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of an item.")
+    """  # noqa: E501
+
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier (ID) of an item."
+    )
     type: Optional[ItemTypeChange] = None
     data: Optional[ItemDataChanges] = None
     style: Optional[ItemStyle] = None
@@ -40,14 +44,21 @@ class ItemChanges(BaseModel):
     geometry: Optional[Geometry] = None
     parent: Optional[Parent] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "type", "data", "style", "position", "geometry", "parent"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "type",
+        "data",
+        "style",
+        "position",
+        "geometry",
+        "parent",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -74,9 +85,11 @@ class ItemChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -85,19 +98,19 @@ class ItemChanges(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
-            _dict['data'] = self.data.to_dict()
+            _dict["data"] = self.data.to_dict()
         # override the default output from pydantic by calling `to_dict()` of style
         if self.style:
-            _dict['style'] = self.style.to_dict()
+            _dict["style"] = self.style.to_dict()
         # override the default output from pydantic by calling `to_dict()` of position
         if self.position:
-            _dict['position'] = self.position.to_dict()
+            _dict["position"] = self.position.to_dict()
         # override the default output from pydantic by calling `to_dict()` of geometry
         if self.geometry:
-            _dict['geometry'] = self.geometry.to_dict()
+            _dict["geometry"] = self.geometry.to_dict()
         # override the default output from pydantic by calling `to_dict()` of parent
         if self.parent:
-            _dict['parent'] = self.parent.to_dict()
+            _dict["parent"] = self.parent.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -114,20 +127,40 @@ class ItemChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "type": obj.get("type"),
-            "data": ItemDataChanges.from_dict(obj["data"]) if obj.get("data") is not None else None,
-            "style": ItemStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
-            "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
-            "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
-            "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "type": obj.get("type"),
+                "data": (
+                    ItemDataChanges.from_dict(obj["data"])
+                    if obj.get("data") is not None
+                    else None
+                ),
+                "style": (
+                    ItemStyle.from_dict(obj["style"])
+                    if obj.get("style") is not None
+                    else None
+                ),
+                "position": (
+                    PositionChange.from_dict(obj["position"])
+                    if obj.get("position") is not None
+                    else None
+                ),
+                "geometry": (
+                    Geometry.from_dict(obj["geometry"])
+                    if obj.get("geometry") is not None
+                    else None
+                ),
+                "parent": (
+                    Parent.from_dict(obj["parent"])
+                    if obj.get("parent") is not None
+                    else None
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

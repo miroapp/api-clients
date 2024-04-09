@@ -22,23 +22,35 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class EmbedUrlDataChanges(BaseModel):
     """
     Contains information about the embed URL.
-    """ # noqa: E501
-    mode: Optional[StrictStr] = Field(default=None, description="Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.")
-    preview_url: Optional[StrictStr] = Field(default=None, description="URL of the image to be used as the preview image for the embedded item.", alias="previewUrl")
-    url: Optional[StrictStr] = Field(default=None, description="A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.")
+    """  # noqa: E501
+
+    mode: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.",
+    )
+    preview_url: Optional[StrictStr] = Field(
+        default=None,
+        description="URL of the image to be used as the preview image for the embedded item.",
+        alias="previewUrl",
+    )
+    url: Optional[StrictStr] = Field(
+        default=None,
+        description="A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["mode", "previewUrl", "url"]
 
-    @field_validator('mode')
+    @field_validator("mode")
     def mode_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['inline', 'modal']):
+        if value not in set(["inline", "modal"]):
             raise ValueError("must be one of enum values ('inline', 'modal')")
         return value
 
@@ -47,7 +59,6 @@ class EmbedUrlDataChanges(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -74,9 +85,11 @@ class EmbedUrlDataChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -99,16 +112,16 @@ class EmbedUrlDataChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "mode": obj.get("mode"),
-            "previewUrl": obj.get("previewUrl"),
-            "url": obj.get("url")
-        })
+        _obj = cls.model_validate(
+            {
+                "mode": obj.get("mode"),
+                "previewUrl": obj.get("previewUrl"),
+                "url": obj.get("url"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-
