@@ -22414,9 +22414,10 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
+            "type": "number",
+            "format": "int64",
             "description": "Id of the picture",
-            "example": "3074457345618261500"
+            "example": 3074457345618261500
           },
           "imageURL": {
             "type": "string",

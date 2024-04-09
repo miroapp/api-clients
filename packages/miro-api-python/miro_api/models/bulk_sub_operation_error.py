@@ -22,12 +22,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BulkSubOperationError(BaseModel):
     """
     BulkSubOperationError
-    """ # noqa: E501
-    field: StrictStr = Field(description="0-based index indicating a sub-operations from the input that caused a failure followed by parameter name")
-    message: StrictStr = Field(description="Description of the sub-operation related error")
+    """  # noqa: E501
+
+    field: StrictStr = Field(
+        description="0-based index indicating a sub-operations from the input that caused a failure followed by parameter name"
+    )
+    message: StrictStr = Field(
+        description="Description of the sub-operation related error"
+    )
     context: Optional[Dict[str, Any]] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["field", "message", "context"]
@@ -37,7 +43,6 @@ class BulkSubOperationError(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,9 +69,11 @@ class BulkSubOperationError(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -89,16 +96,16 @@ class BulkSubOperationError(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "field": obj.get("field"),
-            "message": obj.get("message"),
-            "context": obj.get("context")
-        })
+        _obj = cls.model_validate(
+            {
+                "field": obj.get("field"),
+                "message": obj.get("message"),
+                "context": obj.get("context"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

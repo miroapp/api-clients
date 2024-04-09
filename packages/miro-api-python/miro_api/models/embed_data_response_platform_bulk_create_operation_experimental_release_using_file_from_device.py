@@ -22,29 +22,69 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
+
+class EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
+    BaseModel
+):
     """
     EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
-    """ # noqa: E501
-    content_type: Optional[StrictStr] = Field(default=None, description="Type of the embedded item's content.", alias="contentType")
-    description: Optional[StrictStr] = Field(default=None, description="Short description of the embedded item.")
-    html: Optional[StrictStr] = Field(default=None, description="HTML code of the embedded item.")
-    mode: Optional[StrictStr] = Field(default=None, description="Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.")
-    preview_url: Optional[StrictStr] = Field(default=None, description="The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.", alias="previewUrl")
-    provider_name: Optional[StrictStr] = Field(default=None, description="Name of the content's provider.", alias="providerName")
-    provider_url: Optional[StrictStr] = Field(default=None, description="Url of the content's provider.", alias="providerUrl")
-    title: Optional[StrictStr] = Field(default=None, description="Title of the embedded item.")
-    url: Optional[StrictStr] = Field(default=None, description="A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.")
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["contentType", "description", "html", "mode", "previewUrl", "providerName", "providerUrl", "title", "url"]
+    """  # noqa: E501
 
-    @field_validator('mode')
+    content_type: Optional[StrictStr] = Field(
+        default=None,
+        description="Type of the embedded item's content.",
+        alias="contentType",
+    )
+    description: Optional[StrictStr] = Field(
+        default=None, description="Short description of the embedded item."
+    )
+    html: Optional[StrictStr] = Field(
+        default=None, description="HTML code of the embedded item."
+    )
+    mode: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.",
+    )
+    preview_url: Optional[StrictStr] = Field(
+        default=None,
+        description="The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
+        alias="previewUrl",
+    )
+    provider_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the content's provider.",
+        alias="providerName",
+    )
+    provider_url: Optional[StrictStr] = Field(
+        default=None, description="Url of the content's provider.", alias="providerUrl"
+    )
+    title: Optional[StrictStr] = Field(
+        default=None, description="Title of the embedded item."
+    )
+    url: Optional[StrictStr] = Field(
+        default=None,
+        description="A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.",
+    )
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = [
+        "contentType",
+        "description",
+        "html",
+        "mode",
+        "previewUrl",
+        "providerName",
+        "providerUrl",
+        "title",
+        "url",
+    ]
+
+    @field_validator("mode")
     def mode_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['inline', 'modal']):
+        if value not in set(["inline", "modal"]):
             raise ValueError("must be one of enum values ('inline', 'modal')")
         return value
 
@@ -53,7 +93,6 @@ class EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFr
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -80,9 +119,11 @@ class EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFr
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -105,22 +146,22 @@ class EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFr
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "contentType": obj.get("contentType"),
-            "description": obj.get("description"),
-            "html": obj.get("html"),
-            "mode": obj.get("mode"),
-            "previewUrl": obj.get("previewUrl"),
-            "providerName": obj.get("providerName"),
-            "providerUrl": obj.get("providerUrl"),
-            "title": obj.get("title"),
-            "url": obj.get("url")
-        })
+        _obj = cls.model_validate(
+            {
+                "contentType": obj.get("contentType"),
+                "description": obj.get("description"),
+                "html": obj.get("html"),
+                "mode": obj.get("mode"),
+                "previewUrl": obj.get("previewUrl"),
+                "providerName": obj.get("providerName"),
+                "providerUrl": obj.get("providerUrl"),
+                "title": obj.get("title"),
+                "url": obj.get("url"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

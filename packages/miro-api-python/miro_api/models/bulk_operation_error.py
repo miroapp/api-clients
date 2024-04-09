@@ -23,15 +23,19 @@ from miro_api.models.bulk_operation_error_context import BulkOperationErrorConte
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BulkOperationError(BaseModel):
     """
     Error information with details about operation failure
-    """ # noqa: E501
+    """  # noqa: E501
+
     type: Optional[StrictStr] = Field(default=None, description="Type of the error")
     code: Optional[StrictStr] = Field(default=None, description="Code of the error")
     message: StrictStr = Field(description="Description of the error")
     context: Optional[BulkOperationErrorContext] = None
-    status: Optional[StrictInt] = Field(default=None, description="Status code of the error")
+    status: Optional[StrictInt] = Field(
+        default=None, description="Status code of the error"
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["type", "code", "message", "context", "status"]
 
@@ -40,7 +44,6 @@ class BulkOperationError(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -67,9 +70,11 @@ class BulkOperationError(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -78,7 +83,7 @@ class BulkOperationError(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of context
         if self.context:
-            _dict['context'] = self.context.to_dict()
+            _dict["context"] = self.context.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -95,18 +100,22 @@ class BulkOperationError(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "code": obj.get("code"),
-            "message": obj.get("message"),
-            "context": BulkOperationErrorContext.from_dict(obj["context"]) if obj.get("context") is not None else None,
-            "status": obj.get("status")
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type"),
+                "code": obj.get("code"),
+                "message": obj.get("message"),
+                "context": (
+                    BulkOperationErrorContext.from_dict(obj["context"])
+                    if obj.get("context") is not None
+                    else None
+                ),
+                "status": obj.get("status"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

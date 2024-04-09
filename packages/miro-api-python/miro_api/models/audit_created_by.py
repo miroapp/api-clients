@@ -22,10 +22,12 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuditCreatedBy(BaseModel):
     """
     The details regarding the creator of the audit event
-    """ # noqa: E501
+    """  # noqa: E501
+
     type: Optional[StrictStr] = Field(default=None, description="Type of the creator")
     id: Optional[StrictStr] = Field(default=None, description="Id of the creator")
     name: Optional[StrictStr] = Field(default=None, description="Name of the creator")
@@ -33,14 +35,18 @@ class AuditCreatedBy(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["type", "id", "name", "email"]
 
-    @field_validator('type')
+    @field_validator("type")
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['user', 'application', 'scim_provisioner', 'miro_automation']):
-            raise ValueError("must be one of enum values ('user', 'application', 'scim_provisioner', 'miro_automation')")
+        if value not in set(
+            ["user", "application", "scim_provisioner", "miro_automation"]
+        ):
+            raise ValueError(
+                "must be one of enum values ('user', 'application', 'scim_provisioner', 'miro_automation')"
+            )
         return value
 
     model_config = {
@@ -48,7 +54,6 @@ class AuditCreatedBy(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -75,9 +80,11 @@ class AuditCreatedBy(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -100,17 +107,17 @@ class AuditCreatedBy(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type"),
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "email": obj.get("email")
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type"),
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "email": obj.get("email"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

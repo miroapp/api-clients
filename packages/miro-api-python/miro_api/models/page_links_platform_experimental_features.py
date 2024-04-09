@@ -22,15 +22,33 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class PageLinksPlatformExperimentalFeatures(BaseModel):
     """
     Contains pagination links for the collection.
-    """ # noqa: E501
-    first: Optional[StrictStr] = Field(default=None, description="Link to retrieve information in the first page of the collection.")
-    last: Optional[StrictStr] = Field(default=None, description="Link to the retrieve information in the last page of the collection.")
-    next: Optional[StrictStr] = Field(default=None, description="Link to retrieve information in the next page of the collection.")
-    prev: Optional[StrictStr] = Field(default=None, description="Link to retrieve information in the previous page of the collection.")
-    var_self: Optional[StrictStr] = Field(default=None, description="Link to retrieve information in the current page of the collection.", alias="self")
+    """  # noqa: E501
+
+    first: Optional[StrictStr] = Field(
+        default=None,
+        description="Link to retrieve information in the first page of the collection.",
+    )
+    last: Optional[StrictStr] = Field(
+        default=None,
+        description="Link to the retrieve information in the last page of the collection.",
+    )
+    next: Optional[StrictStr] = Field(
+        default=None,
+        description="Link to retrieve information in the next page of the collection.",
+    )
+    prev: Optional[StrictStr] = Field(
+        default=None,
+        description="Link to retrieve information in the previous page of the collection.",
+    )
+    var_self: Optional[StrictStr] = Field(
+        default=None,
+        description="Link to retrieve information in the current page of the collection.",
+        alias="self",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["first", "last", "next", "prev", "self"]
 
@@ -39,7 +57,6 @@ class PageLinksPlatformExperimentalFeatures(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,9 +83,11 @@ class PageLinksPlatformExperimentalFeatures(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -91,18 +110,18 @@ class PageLinksPlatformExperimentalFeatures(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "first": obj.get("first"),
-            "last": obj.get("last"),
-            "next": obj.get("next"),
-            "prev": obj.get("prev"),
-            "self": obj.get("self")
-        })
+        _obj = cls.model_validate(
+            {
+                "first": obj.get("first"),
+                "last": obj.get("last"),
+                "next": obj.get("next"),
+                "prev": obj.get("prev"),
+                "self": obj.get("self"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

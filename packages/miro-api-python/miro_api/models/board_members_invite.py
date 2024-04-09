@@ -23,24 +23,35 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class BoardMembersInvite(BaseModel):
     """
     BoardMembersInvite
-    """ # noqa: E501
-    emails: Annotated[List[StrictStr], Field(min_length=1, max_length=20)] = Field(description="Email IDs of the users you want to invite to the board. You can invite up to 20 members per call.")
-    role: Optional[StrictStr] = Field(default='commenter', description="Role of the board member.")
-    message: Optional[StrictStr] = Field(default=None, description="The message that will be sent in the invitation email.")
+    """  # noqa: E501
+
+    emails: Annotated[List[StrictStr], Field(min_length=1, max_length=20)] = Field(
+        description="Email IDs of the users you want to invite to the board. You can invite up to 20 members per call."
+    )
+    role: Optional[StrictStr] = Field(
+        default="commenter", description="Role of the board member."
+    )
+    message: Optional[StrictStr] = Field(
+        default=None,
+        description="The message that will be sent in the invitation email.",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["emails", "role", "message"]
 
-    @field_validator('role')
+    @field_validator("role")
     def role_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['viewer', 'commenter', 'editor', 'coowner', 'owner']):
-            raise ValueError("must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')")
+        if value not in set(["viewer", "commenter", "editor", "coowner", "owner"]):
+            raise ValueError(
+                "must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')"
+            )
         return value
 
     model_config = {
@@ -48,7 +59,6 @@ class BoardMembersInvite(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -75,9 +85,11 @@ class BoardMembersInvite(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -100,16 +112,16 @@ class BoardMembersInvite(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "emails": obj.get("emails"),
-            "role": obj.get("role") if obj.get("role") is not None else 'commenter',
-            "message": obj.get("message")
-        })
+        _obj = cls.model_validate(
+            {
+                "emails": obj.get("emails"),
+                "role": obj.get("role") if obj.get("role") is not None else "commenter",
+                "message": obj.get("message"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

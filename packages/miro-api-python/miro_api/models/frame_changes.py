@@ -22,34 +22,48 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class FrameChanges(BaseModel):
     """
     Contains frame item data, such as the title, frame type, or frame format.
-    """ # noqa: E501
-    format: Optional[StrictStr] = Field(default='custom', description="Only custom frames are supported at the moment.")
-    title: Optional[StrictStr] = Field(default='Sample frame title', description="Title of the frame. This title appears at the top of the frame.")
-    type: Optional[StrictStr] = Field(default='freeform', description="Only free form frames are supported at the moment.")
-    show_content: Optional[StrictBool] = Field(default=True, description="Hide or reveal the content inside a frame (Enterprise plan only).", alias="showContent")
+    """  # noqa: E501
+
+    format: Optional[StrictStr] = Field(
+        default="custom", description="Only custom frames are supported at the moment."
+    )
+    title: Optional[StrictStr] = Field(
+        default="Sample frame title",
+        description="Title of the frame. This title appears at the top of the frame.",
+    )
+    type: Optional[StrictStr] = Field(
+        default="freeform",
+        description="Only free form frames are supported at the moment.",
+    )
+    show_content: Optional[StrictBool] = Field(
+        default=True,
+        description="Hide or reveal the content inside a frame (Enterprise plan only).",
+        alias="showContent",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["format", "title", "type", "showContent"]
 
-    @field_validator('format')
+    @field_validator("format")
     def format_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['custom']):
+        if value not in set(["custom"]):
             raise ValueError("must be one of enum values ('custom')")
         return value
 
-    @field_validator('type')
+    @field_validator("type")
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['freeform']):
+        if value not in set(["freeform"]):
             raise ValueError("must be one of enum values ('freeform')")
         return value
 
@@ -58,7 +72,6 @@ class FrameChanges(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -85,9 +98,11 @@ class FrameChanges(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -110,17 +125,27 @@ class FrameChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "format": obj.get("format") if obj.get("format") is not None else 'custom',
-            "title": obj.get("title") if obj.get("title") is not None else 'Sample frame title',
-            "type": obj.get("type") if obj.get("type") is not None else 'freeform',
-            "showContent": obj.get("showContent") if obj.get("showContent") is not None else True
-        })
+        _obj = cls.model_validate(
+            {
+                "format": (
+                    obj.get("format") if obj.get("format") is not None else "custom"
+                ),
+                "title": (
+                    obj.get("title")
+                    if obj.get("title") is not None
+                    else "Sample frame title"
+                ),
+                "type": obj.get("type") if obj.get("type") is not None else "freeform",
+                "showContent": (
+                    obj.get("showContent")
+                    if obj.get("showContent") is not None
+                    else True
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

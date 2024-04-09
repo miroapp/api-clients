@@ -22,23 +22,58 @@ from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
+
+class ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
+    BaseModel
+):
     """
     Contains shape item data, such as the content or shape type of the shape.
-    """ # noqa: E501
-    content: Optional[StrictStr] = Field(default=None, description="The text you want to display on the shape.")
-    shape: Optional[StrictStr] = Field(default='rectangle', description="Defines the geometric shape of the item when it is rendered on the board.")
+    """  # noqa: E501
+
+    content: Optional[StrictStr] = Field(
+        default=None, description="The text you want to display on the shape."
+    )
+    shape: Optional[StrictStr] = Field(
+        default="rectangle",
+        description="Defines the geometric shape of the item when it is rendered on the board.",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content", "shape"]
 
-    @field_validator('shape')
+    @field_validator("shape")
     def shape_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['rectangle', 'round_rectangle', 'circle', 'triangle', 'rhombus', 'parallelogram', 'trapezoid', 'pentagon', 'hexagon', 'octagon', 'wedge_round_rectangle_callout', 'star', 'flow_chart_predefined_process', 'cloud', 'cross', 'can', 'right_arrow', 'left_arrow', 'left_right_arrow', 'left_brace', 'right_brace']):
-            raise ValueError("must be one of enum values ('rectangle', 'round_rectangle', 'circle', 'triangle', 'rhombus', 'parallelogram', 'trapezoid', 'pentagon', 'hexagon', 'octagon', 'wedge_round_rectangle_callout', 'star', 'flow_chart_predefined_process', 'cloud', 'cross', 'can', 'right_arrow', 'left_arrow', 'left_right_arrow', 'left_brace', 'right_brace')")
+        if value not in set(
+            [
+                "rectangle",
+                "round_rectangle",
+                "circle",
+                "triangle",
+                "rhombus",
+                "parallelogram",
+                "trapezoid",
+                "pentagon",
+                "hexagon",
+                "octagon",
+                "wedge_round_rectangle_callout",
+                "star",
+                "flow_chart_predefined_process",
+                "cloud",
+                "cross",
+                "can",
+                "right_arrow",
+                "left_arrow",
+                "left_right_arrow",
+                "left_brace",
+                "right_brace",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('rectangle', 'round_rectangle', 'circle', 'triangle', 'rhombus', 'parallelogram', 'trapezoid', 'pentagon', 'hexagon', 'octagon', 'wedge_round_rectangle_callout', 'star', 'flow_chart_predefined_process', 'cloud', 'cross', 'can', 'right_arrow', 'left_arrow', 'left_right_arrow', 'left_brace', 'right_brace')"
+            )
         return value
 
     model_config = {
@@ -46,7 +81,6 @@ class ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -73,9 +107,11 @@ class ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -98,15 +134,17 @@ class ShapeDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "content": obj.get("content"),
-            "shape": obj.get("shape") if obj.get("shape") is not None else 'rectangle'
-        })
+        _obj = cls.model_validate(
+            {
+                "content": obj.get("content"),
+                "shape": (
+                    obj.get("shape") if obj.get("shape") is not None else "rectangle"
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

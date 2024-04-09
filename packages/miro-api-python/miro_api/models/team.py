@@ -23,14 +23,18 @@ from miro_api.models.picture import Picture
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Team(BaseModel):
     """
     Team
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: StrictStr = Field(description="Team id")
     name: StrictStr = Field(description="Team name")
     picture: Optional[Picture] = None
-    type: Optional[StrictStr] = Field(default='team', description="Type of the object returned.")
+    type: Optional[StrictStr] = Field(
+        default="team", description="Type of the object returned."
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "picture", "type"]
 
@@ -39,7 +43,6 @@ class Team(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,9 +69,11 @@ class Team(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -77,7 +82,7 @@ class Team(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of picture
         if self.picture:
-            _dict['picture'] = self.picture.to_dict()
+            _dict["picture"] = self.picture.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -94,17 +99,21 @@ class Team(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "picture": Picture.from_dict(obj["picture"]) if obj.get("picture") is not None else None,
-            "type": obj.get("type") if obj.get("type") is not None else 'team'
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "picture": (
+                    Picture.from_dict(obj["picture"])
+                    if obj.get("picture") is not None
+                    else None
+                ),
+                "type": obj.get("type") if obj.get("type") is not None else "team",
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

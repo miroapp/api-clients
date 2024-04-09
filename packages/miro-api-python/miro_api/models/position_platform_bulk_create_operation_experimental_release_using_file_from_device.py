@@ -17,40 +17,62 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, field_validator
+from pydantic import (
+    BaseModel,
+    Field,
+    StrictFloat,
+    StrictInt,
+    StrictStr,
+    field_validator,
+)
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
+
+class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
+    BaseModel
+):
     """
     Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
-    """ # noqa: E501
-    origin: Optional[StrictStr] = Field(default='center', description="Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported.")
+    """  # noqa: E501
+
+    origin: Optional[StrictStr] = Field(
+        default="center",
+        description="Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates. Currently, only one option is supported.",
+    )
     relative_to: Optional[StrictStr] = Field(default=None, alias="relativeTo")
-    x: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.")
-    y: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.")
+    x: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
+    )
+    y: Optional[Union[StrictFloat, StrictInt]] = Field(
+        default=None,
+        description="Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["origin", "relativeTo", "x", "y"]
 
-    @field_validator('origin')
+    @field_validator("origin")
     def origin_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['center']):
+        if value not in set(["center"]):
             raise ValueError("must be one of enum values ('center')")
         return value
 
-    @field_validator('relative_to')
+    @field_validator("relative_to")
     def relative_to_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['canvas_center', 'parent_top_left']):
-            raise ValueError("must be one of enum values ('canvas_center', 'parent_top_left')")
+        if value not in set(["canvas_center", "parent_top_left"]):
+            raise ValueError(
+                "must be one of enum values ('canvas_center', 'parent_top_left')"
+            )
         return value
 
     model_config = {
@@ -58,7 +80,6 @@ class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -85,9 +106,11 @@ class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -110,17 +133,19 @@ class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "origin": obj.get("origin") if obj.get("origin") is not None else 'center',
-            "relativeTo": obj.get("relativeTo"),
-            "x": obj.get("x"),
-            "y": obj.get("y")
-        })
+        _obj = cls.model_validate(
+            {
+                "origin": (
+                    obj.get("origin") if obj.get("origin") is not None else "center"
+                ),
+                "relativeTo": obj.get("relativeTo"),
+                "x": obj.get("x"),
+                "y": obj.get("y"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

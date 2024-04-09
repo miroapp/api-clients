@@ -30,18 +30,36 @@ from miro_api.models.user_info_short import UserInfoShort
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class Board(BaseModel):
     """
     Contains the result data.
-    """ # noqa: E501
-    created_at: Optional[datetime] = Field(default=None, description="Date and time when the board was created. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="createdAt")
+    """  # noqa: E501
+
+    created_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the board was created. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        alias="createdAt",
+    )
     created_by: Optional[UserInfoShort] = Field(default=None, alias="createdBy")
-    current_user_membership: Optional[BoardMember] = Field(default=None, alias="currentUserMembership")
+    current_user_membership: Optional[BoardMember] = Field(
+        default=None, alias="currentUserMembership"
+    )
     description: StrictStr = Field(description="Description of the board.")
     id: StrictStr = Field(description="Unique identifier (ID) of the board.")
-    last_opened_at: Optional[datetime] = Field(default=None, description="Date and time when the board was last opened by any user. This information is only available when the boards are sorted by `last_opened`. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="lastOpenedAt")
-    last_opened_by: Optional[UserInfoLastOpenedBy] = Field(default=None, alias="lastOpenedBy")
-    modified_at: Optional[datetime] = Field(default=None, description="Date and time when the board was last modified. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).", alias="modifiedAt")
+    last_opened_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the board was last opened by any user. This information is only available when the boards are sorted by `last_opened`. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        alias="lastOpenedAt",
+    )
+    last_opened_by: Optional[UserInfoLastOpenedBy] = Field(
+        default=None, alias="lastOpenedBy"
+    )
+    modified_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the board was last modified. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+        alias="modifiedAt",
+    )
     modified_by: Optional[UserInfoShort] = Field(default=None, alias="modifiedBy")
     name: StrictStr = Field(description="Name of the board.")
     owner: Optional[UserInfoShort] = None
@@ -49,17 +67,38 @@ class Board(BaseModel):
     policy: Optional[BoardPolicy] = None
     team: Optional[Team] = None
     project: Optional[Project] = None
-    type: StrictStr = Field(description="Type of the object that is returned. In this case, type returns `board`.")
-    view_link: Optional[StrictStr] = Field(default=None, description="URL to view the board.", alias="viewLink")
+    type: StrictStr = Field(
+        description="Type of the object that is returned. In this case, type returns `board`."
+    )
+    view_link: Optional[StrictStr] = Field(
+        default=None, description="URL to view the board.", alias="viewLink"
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["createdAt", "createdBy", "currentUserMembership", "description", "id", "lastOpenedAt", "lastOpenedBy", "modifiedAt", "modifiedBy", "name", "owner", "picture", "policy", "team", "project", "type", "viewLink"]
+    __properties: ClassVar[List[str]] = [
+        "createdAt",
+        "createdBy",
+        "currentUserMembership",
+        "description",
+        "id",
+        "lastOpenedAt",
+        "lastOpenedBy",
+        "modifiedAt",
+        "modifiedBy",
+        "name",
+        "owner",
+        "picture",
+        "policy",
+        "team",
+        "project",
+        "type",
+        "viewLink",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -86,9 +125,11 @@ class Board(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -97,31 +138,31 @@ class Board(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
-            _dict['createdBy'] = self.created_by.to_dict()
+            _dict["createdBy"] = self.created_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of current_user_membership
         if self.current_user_membership:
-            _dict['currentUserMembership'] = self.current_user_membership.to_dict()
+            _dict["currentUserMembership"] = self.current_user_membership.to_dict()
         # override the default output from pydantic by calling `to_dict()` of last_opened_by
         if self.last_opened_by:
-            _dict['lastOpenedBy'] = self.last_opened_by.to_dict()
+            _dict["lastOpenedBy"] = self.last_opened_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of modified_by
         if self.modified_by:
-            _dict['modifiedBy'] = self.modified_by.to_dict()
+            _dict["modifiedBy"] = self.modified_by.to_dict()
         # override the default output from pydantic by calling `to_dict()` of owner
         if self.owner:
-            _dict['owner'] = self.owner.to_dict()
+            _dict["owner"] = self.owner.to_dict()
         # override the default output from pydantic by calling `to_dict()` of picture
         if self.picture:
-            _dict['picture'] = self.picture.to_dict()
+            _dict["picture"] = self.picture.to_dict()
         # override the default output from pydantic by calling `to_dict()` of policy
         if self.policy:
-            _dict['policy'] = self.policy.to_dict()
+            _dict["policy"] = self.policy.to_dict()
         # override the default output from pydantic by calling `to_dict()` of team
         if self.team:
-            _dict['team'] = self.team.to_dict()
+            _dict["team"] = self.team.to_dict()
         # override the default output from pydantic by calling `to_dict()` of project
         if self.project:
-            _dict['project'] = self.project.to_dict()
+            _dict["project"] = self.project.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -138,30 +179,64 @@ class Board(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "createdAt": obj.get("createdAt"),
-            "createdBy": UserInfoShort.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "currentUserMembership": BoardMember.from_dict(obj["currentUserMembership"]) if obj.get("currentUserMembership") is not None else None,
-            "description": obj.get("description"),
-            "id": obj.get("id"),
-            "lastOpenedAt": obj.get("lastOpenedAt"),
-            "lastOpenedBy": UserInfoLastOpenedBy.from_dict(obj["lastOpenedBy"]) if obj.get("lastOpenedBy") is not None else None,
-            "modifiedAt": obj.get("modifiedAt"),
-            "modifiedBy": UserInfoShort.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
-            "name": obj.get("name"),
-            "owner": UserInfoShort.from_dict(obj["owner"]) if obj.get("owner") is not None else None,
-            "picture": Picture.from_dict(obj["picture"]) if obj.get("picture") is not None else None,
-            "policy": BoardPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
-            "team": Team.from_dict(obj["team"]) if obj.get("team") is not None else None,
-            "project": Project.from_dict(obj["project"]) if obj.get("project") is not None else None,
-            "type": obj.get("type"),
-            "viewLink": obj.get("viewLink")
-        })
+        _obj = cls.model_validate(
+            {
+                "createdAt": obj.get("createdAt"),
+                "createdBy": (
+                    UserInfoShort.from_dict(obj["createdBy"])
+                    if obj.get("createdBy") is not None
+                    else None
+                ),
+                "currentUserMembership": (
+                    BoardMember.from_dict(obj["currentUserMembership"])
+                    if obj.get("currentUserMembership") is not None
+                    else None
+                ),
+                "description": obj.get("description"),
+                "id": obj.get("id"),
+                "lastOpenedAt": obj.get("lastOpenedAt"),
+                "lastOpenedBy": (
+                    UserInfoLastOpenedBy.from_dict(obj["lastOpenedBy"])
+                    if obj.get("lastOpenedBy") is not None
+                    else None
+                ),
+                "modifiedAt": obj.get("modifiedAt"),
+                "modifiedBy": (
+                    UserInfoShort.from_dict(obj["modifiedBy"])
+                    if obj.get("modifiedBy") is not None
+                    else None
+                ),
+                "name": obj.get("name"),
+                "owner": (
+                    UserInfoShort.from_dict(obj["owner"])
+                    if obj.get("owner") is not None
+                    else None
+                ),
+                "picture": (
+                    Picture.from_dict(obj["picture"])
+                    if obj.get("picture") is not None
+                    else None
+                ),
+                "policy": (
+                    BoardPolicy.from_dict(obj["policy"])
+                    if obj.get("policy") is not None
+                    else None
+                ),
+                "team": (
+                    Team.from_dict(obj["team"]) if obj.get("team") is not None else None
+                ),
+                "project": (
+                    Project.from_dict(obj["project"])
+                    if obj.get("project") is not None
+                    else None
+                ),
+                "type": obj.get("type"),
+                "viewLink": obj.get("viewLink"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

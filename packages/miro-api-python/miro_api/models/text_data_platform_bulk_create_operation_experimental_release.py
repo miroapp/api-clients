@@ -22,11 +22,15 @@ from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class TextDataPlatformBulkCreateOperationExperimentalRelease(BaseModel):
     """
     Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).
-    """ # noqa: E501
-    content: StrictStr = Field(description="The actual text (content) that appears in the text item.")
+    """  # noqa: E501
+
+    content: StrictStr = Field(
+        description="The actual text (content) that appears in the text item."
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content"]
 
@@ -35,7 +39,6 @@ class TextDataPlatformBulkCreateOperationExperimentalRelease(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -62,9 +65,11 @@ class TextDataPlatformBulkCreateOperationExperimentalRelease(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -87,14 +92,10 @@ class TextDataPlatformBulkCreateOperationExperimentalRelease(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "content": obj.get("content")
-        })
+        _obj = cls.model_validate({"content": obj.get("content")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

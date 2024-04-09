@@ -14,7 +14,7 @@ export class Picture {
   /**
    * Id of the picture
    */
-  'id'?: string
+  'id'?: number
   /**
    * Url of the picture
    */
@@ -36,7 +36,7 @@ export class Picture {
     {
       name: 'id',
       baseName: 'id',
-      type: 'string',
+      type: 'number',
     },
     {
       name: 'imageURL',

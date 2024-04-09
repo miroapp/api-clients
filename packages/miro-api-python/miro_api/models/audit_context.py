@@ -24,11 +24,15 @@ from miro_api.models.audit_team import AuditTeam
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuditContext(BaseModel):
     """
     Audit context
-    """ # noqa: E501
-    ip: Optional[StrictStr] = Field(default=None, description="Ip address associated with the audit context")
+    """  # noqa: E501
+
+    ip: Optional[StrictStr] = Field(
+        default=None, description="Ip address associated with the audit context"
+    )
     team: Optional[AuditTeam] = None
     organization: Optional[AuditOrganization] = None
     additional_properties: Dict[str, Any] = {}
@@ -39,7 +43,6 @@ class AuditContext(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,9 +69,11 @@ class AuditContext(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -77,10 +82,10 @@ class AuditContext(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of team
         if self.team:
-            _dict['team'] = self.team.to_dict()
+            _dict["team"] = self.team.to_dict()
         # override the default output from pydantic by calling `to_dict()` of organization
         if self.organization:
-            _dict['organization'] = self.organization.to_dict()
+            _dict["organization"] = self.organization.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -97,16 +102,24 @@ class AuditContext(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "ip": obj.get("ip"),
-            "team": AuditTeam.from_dict(obj["team"]) if obj.get("team") is not None else None,
-            "organization": AuditOrganization.from_dict(obj["organization"]) if obj.get("organization") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "ip": obj.get("ip"),
+                "team": (
+                    AuditTeam.from_dict(obj["team"])
+                    if obj.get("team") is not None
+                    else None
+                ),
+                "organization": (
+                    AuditOrganization.from_dict(obj["organization"])
+                    if obj.get("organization") is not None
+                    else None
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

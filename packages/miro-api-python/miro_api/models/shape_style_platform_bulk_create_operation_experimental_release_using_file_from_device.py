@@ -23,61 +23,157 @@ from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
-class ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
+
+class ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
+    BaseModel
+):
     """
     Contains information about the shape style, such as the border color or opacity.
-    """ # noqa: E501
-    border_color: Optional[StrictStr] = Field(default=None, description="Defines the color of the border of the shape. Default: `#1a1a1a` (dark gray).", alias="borderColor")
-    border_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the opacity level of the shape border. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: `1.0` (solid color).", alias="borderOpacity")
-    border_style: Optional[StrictStr] = Field(default=None, description="Defines the style used to represent the border of the shape. Default: `normal`.", alias="borderStyle")
-    border_width: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the thickness of the shape border, in dp. Default: `2.0`.", alias="borderWidth")
-    color: Optional[StrictStr] = Field(default=None, description="Hex value representing the color for the text within the shape item. Default: `#1a1a1a`.")
-    fill_color: Optional[StrictStr] = Field(default=None, description="Fill color for the shape. Hex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000` Default: #ffffff.", alias="fillColor")
-    fill_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Opacity level of the fill color. Possible values: any number between `0` and `1`, where: `0.0`: the background color is completely transparent or invisible. `1.0`: the background color is completely opaque or solid.   Default: `1.0` if `fillColor` is provided, `0.0` if `fillColor` is not provided. ", alias="fillOpacity")
-    font_family: Optional[StrictStr] = Field(default=None, description="Defines the font type for the text in the shape item. Default: `arial`.", alias="fontFamily")
-    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="Defines the font size, in dp, for the text on the shape. Default: `14`.", alias="fontSize")
-    text_align: Optional[StrictStr] = Field(default=None, description="Defines how the sticky note text is horizontally aligned. Default: `center`.", alias="textAlign")
-    text_align_vertical: Optional[StrictStr] = Field(default=None, description="Defines how the sticky note text is vertically aligned. Default: `top`.", alias="textAlignVertical")
-    additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["borderColor", "borderOpacity", "borderStyle", "borderWidth", "color", "fillColor", "fillOpacity", "fontFamily", "fontSize", "textAlign", "textAlignVertical"]
+    """  # noqa: E501
 
-    @field_validator('border_style')
+    border_color: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines the color of the border of the shape. Default: `#1a1a1a` (dark gray).",
+        alias="borderColor",
+    )
+    border_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="Defines the opacity level of the shape border. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid Default: `1.0` (solid color).",
+        alias="borderOpacity",
+    )
+    border_style: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines the style used to represent the border of the shape. Default: `normal`.",
+        alias="borderStyle",
+    )
+    border_width: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="Defines the thickness of the shape border, in dp. Default: `2.0`.",
+        alias="borderWidth",
+    )
+    color: Optional[StrictStr] = Field(
+        default=None,
+        description="Hex value representing the color for the text within the shape item. Default: `#1a1a1a`.",
+    )
+    fill_color: Optional[StrictStr] = Field(
+        default=None,
+        description="Fill color for the shape. Hex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000` Default: #ffffff.",
+        alias="fillColor",
+    )
+    fill_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="Opacity level of the fill color. Possible values: any number between `0` and `1`, where: `0.0`: the background color is completely transparent or invisible. `1.0`: the background color is completely opaque or solid.   Default: `1.0` if `fillColor` is provided, `0.0` if `fillColor` is not provided. ",
+        alias="fillOpacity",
+    )
+    font_family: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines the font type for the text in the shape item. Default: `arial`.",
+        alias="fontFamily",
+    )
+    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None,
+        description="Defines the font size, in dp, for the text on the shape. Default: `14`.",
+        alias="fontSize",
+    )
+    text_align: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines how the sticky note text is horizontally aligned. Default: `center`.",
+        alias="textAlign",
+    )
+    text_align_vertical: Optional[StrictStr] = Field(
+        default=None,
+        description="Defines how the sticky note text is vertically aligned. Default: `top`.",
+        alias="textAlignVertical",
+    )
+    additional_properties: Dict[str, Any] = {}
+    __properties: ClassVar[List[str]] = [
+        "borderColor",
+        "borderOpacity",
+        "borderStyle",
+        "borderWidth",
+        "color",
+        "fillColor",
+        "fillOpacity",
+        "fontFamily",
+        "fontSize",
+        "textAlign",
+        "textAlignVertical",
+    ]
+
+    @field_validator("border_style")
     def border_style_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['normal', 'dotted', 'dashed']):
-            raise ValueError("must be one of enum values ('normal', 'dotted', 'dashed')")
+        if value not in set(["normal", "dotted", "dashed"]):
+            raise ValueError(
+                "must be one of enum values ('normal', 'dotted', 'dashed')"
+            )
         return value
 
-    @field_validator('font_family')
+    @field_validator("font_family")
     def font_family_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['arial', 'abril_fatface', 'bangers', 'eb_garamond', 'georgia', 'graduate', 'gravitas_one', 'fredoka_one', 'nixie_one', 'open_sans', 'permanent_marker', 'pt_sans', 'pt_sans_narrow', 'pt_serif', 'rammetto_one', 'roboto', 'roboto_condensed', 'roboto_slab', 'caveat', 'times_new_roman', 'titan_one', 'lemon_tuesday', 'roboto_mono', 'noto_sans', 'plex_sans', 'plex_serif', 'plex_mono', 'spoof', 'tiempos_text', 'formular']):
-            raise ValueError("must be one of enum values ('arial', 'abril_fatface', 'bangers', 'eb_garamond', 'georgia', 'graduate', 'gravitas_one', 'fredoka_one', 'nixie_one', 'open_sans', 'permanent_marker', 'pt_sans', 'pt_sans_narrow', 'pt_serif', 'rammetto_one', 'roboto', 'roboto_condensed', 'roboto_slab', 'caveat', 'times_new_roman', 'titan_one', 'lemon_tuesday', 'roboto_mono', 'noto_sans', 'plex_sans', 'plex_serif', 'plex_mono', 'spoof', 'tiempos_text', 'formular')")
+        if value not in set(
+            [
+                "arial",
+                "abril_fatface",
+                "bangers",
+                "eb_garamond",
+                "georgia",
+                "graduate",
+                "gravitas_one",
+                "fredoka_one",
+                "nixie_one",
+                "open_sans",
+                "permanent_marker",
+                "pt_sans",
+                "pt_sans_narrow",
+                "pt_serif",
+                "rammetto_one",
+                "roboto",
+                "roboto_condensed",
+                "roboto_slab",
+                "caveat",
+                "times_new_roman",
+                "titan_one",
+                "lemon_tuesday",
+                "roboto_mono",
+                "noto_sans",
+                "plex_sans",
+                "plex_serif",
+                "plex_mono",
+                "spoof",
+                "tiempos_text",
+                "formular",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('arial', 'abril_fatface', 'bangers', 'eb_garamond', 'georgia', 'graduate', 'gravitas_one', 'fredoka_one', 'nixie_one', 'open_sans', 'permanent_marker', 'pt_sans', 'pt_sans_narrow', 'pt_serif', 'rammetto_one', 'roboto', 'roboto_condensed', 'roboto_slab', 'caveat', 'times_new_roman', 'titan_one', 'lemon_tuesday', 'roboto_mono', 'noto_sans', 'plex_sans', 'plex_serif', 'plex_mono', 'spoof', 'tiempos_text', 'formular')"
+            )
         return value
 
-    @field_validator('text_align')
+    @field_validator("text_align")
     def text_align_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['left', 'right', 'center']):
+        if value not in set(["left", "right", "center"]):
             raise ValueError("must be one of enum values ('left', 'right', 'center')")
         return value
 
-    @field_validator('text_align_vertical')
+    @field_validator("text_align_vertical")
     def text_align_vertical_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['top', 'middle', 'bottom']):
+        if value not in set(["top", "middle", "bottom"]):
             raise ValueError("must be one of enum values ('top', 'middle', 'bottom')")
         return value
 
@@ -86,7 +182,6 @@ class ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevic
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -113,9 +208,11 @@ class ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevic
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -138,24 +235,24 @@ class ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevic
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "borderColor": obj.get("borderColor"),
-            "borderOpacity": obj.get("borderOpacity"),
-            "borderStyle": obj.get("borderStyle"),
-            "borderWidth": obj.get("borderWidth"),
-            "color": obj.get("color"),
-            "fillColor": obj.get("fillColor"),
-            "fillOpacity": obj.get("fillOpacity"),
-            "fontFamily": obj.get("fontFamily"),
-            "fontSize": obj.get("fontSize"),
-            "textAlign": obj.get("textAlign"),
-            "textAlignVertical": obj.get("textAlignVertical")
-        })
+        _obj = cls.model_validate(
+            {
+                "borderColor": obj.get("borderColor"),
+                "borderOpacity": obj.get("borderOpacity"),
+                "borderStyle": obj.get("borderStyle"),
+                "borderWidth": obj.get("borderWidth"),
+                "color": obj.get("color"),
+                "fillColor": obj.get("fillColor"),
+                "fillOpacity": obj.get("fillOpacity"),
+                "fontFamily": obj.get("fontFamily"),
+                "fontSize": obj.get("fontSize"),
+                "textAlign": obj.get("textAlign"),
+                "textAlignVertical": obj.get("textAlignVertical"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

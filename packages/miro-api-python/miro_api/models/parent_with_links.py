@@ -23,11 +23,15 @@ from miro_api.models.self_link import SelfLink
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class ParentWithLinks(BaseModel):
     """
     Contains information about the parent this item attached to.
-    """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of a container item.")
+    """  # noqa: E501
+
+    id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier (ID) of a container item."
+    )
     links: Optional[SelfLink] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "links"]
@@ -37,7 +41,6 @@ class ParentWithLinks(BaseModel):
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,9 +67,11 @@ class ParentWithLinks(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -75,7 +80,7 @@ class ParentWithLinks(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
-            _dict['links'] = self.links.to_dict()
+            _dict["links"] = self.links.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -92,15 +97,19 @@ class ParentWithLinks(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "links": (
+                    SelfLink.from_dict(obj["links"])
+                    if obj.get("links") is not None
+                    else None
+                ),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-

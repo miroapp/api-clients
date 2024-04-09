@@ -26,26 +26,43 @@ from miro_api.models.audit_object import AuditObject
 from typing import Optional, Set
 from typing_extensions import Self
 
+
 class AuditEvent(BaseModel):
     """
     AuditEvent
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: Optional[StrictStr] = Field(default=None, description="Audit event id")
     context: Optional[AuditContext] = None
     object: Optional[AuditObject] = None
-    created_at: Optional[datetime] = Field(default=None, description="Time when the audit event has been created", alias="createdAt")
-    details: Optional[Dict[str, Any]] = Field(default=None, description="Details json related to the audit event")
+    created_at: Optional[datetime] = Field(
+        default=None,
+        description="Time when the audit event has been created",
+        alias="createdAt",
+    )
+    details: Optional[Dict[str, Any]] = Field(
+        default=None, description="Details json related to the audit event"
+    )
     created_by: Optional[AuditCreatedBy] = Field(default=None, alias="createdBy")
-    event: Optional[StrictStr] = Field(default=None, description="Event type of the audit event")
+    event: Optional[StrictStr] = Field(
+        default=None, description="Event type of the audit event"
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "context", "object", "createdAt", "details", "createdBy", "event"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "context",
+        "object",
+        "createdAt",
+        "details",
+        "createdBy",
+        "event",
+    ]
 
     model_config = {
         "populate_by_name": True,
         "validate_assignment": True,
         "protected_namespaces": (),
     }
-
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -72,9 +89,11 @@ class AuditEvent(BaseModel):
           are ignored.
         * Fields in `self.additional_properties` are added to the output dict.
         """
-        excluded_fields: Set[str] = set([
-            "additional_properties",
-        ])
+        excluded_fields: Set[str] = set(
+            [
+                "additional_properties",
+            ]
+        )
 
         _dict = self.model_dump(
             by_alias=True,
@@ -83,13 +102,13 @@ class AuditEvent(BaseModel):
         )
         # override the default output from pydantic by calling `to_dict()` of context
         if self.context:
-            _dict['context'] = self.context.to_dict()
+            _dict["context"] = self.context.to_dict()
         # override the default output from pydantic by calling `to_dict()` of object
         if self.object:
-            _dict['object'] = self.object.to_dict()
+            _dict["object"] = self.object.to_dict()
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
-            _dict['createdBy'] = self.created_by.to_dict()
+            _dict["createdBy"] = self.created_by.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -106,20 +125,32 @@ class AuditEvent(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "context": AuditContext.from_dict(obj["context"]) if obj.get("context") is not None else None,
-            "object": AuditObject.from_dict(obj["object"]) if obj.get("object") is not None else None,
-            "createdAt": obj.get("createdAt"),
-            "details": obj.get("details"),
-            "createdBy": AuditCreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-            "event": obj.get("event")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "context": (
+                    AuditContext.from_dict(obj["context"])
+                    if obj.get("context") is not None
+                    else None
+                ),
+                "object": (
+                    AuditObject.from_dict(obj["object"])
+                    if obj.get("object") is not None
+                    else None
+                ),
+                "createdAt": obj.get("createdAt"),
+                "details": obj.get("details"),
+                "createdBy": (
+                    AuditCreatedBy.from_dict(obj["createdBy"])
+                    if obj.get("createdBy") is not None
+                    else None
+                ),
+                "event": obj.get("event"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
-
