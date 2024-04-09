@@ -23,6 +23,10 @@ twine = "^5.0.0"
 [tool.poetry.group.example.dependencies]
 flask = "^3.0.3"
 
+
+[tool.poetry.group.docs.dependencies]
+pdoc = "^14.4.0"
+
 [project.urls]
 Homepage = "https://github.com/miroapp/api-clients"
 Issues = "https://github.com/miroapp/api-clients/issues"
