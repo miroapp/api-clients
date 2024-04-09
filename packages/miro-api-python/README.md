@@ -1,8 +1,4 @@
-# Miro Python client
-
-## Miro python API client library
-
-The Miro python API client is a library that enables Miro REST API functionality in Miro apps based on python.
+## Miro Python API client library
 
 You can use the client to implement backend functionality in your Miro app, such as:
 

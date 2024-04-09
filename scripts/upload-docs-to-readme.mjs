@@ -50,10 +50,16 @@ await updateDoc(
   'packages/miro-api/docs/quickstart-auth.md'
 )
 
-
 await updateDoc(
   'miro-nodejs-implement-storage-for-data-persistence',
   'Implement data storage',
   categoryId,
   'packages/miro-api/docs/implement-storage.md'
+)
+
+await updateDoc(
+  'miro-python-client',
+  'Miro Python client',
+  categoryId,
+  './packages/miro-api-python/README.md'
 )
