@@ -1,5 +1,5 @@
-#!/usr/bin/env bash
-#
+#!/usr/bin/env sh
+
 poetry run pdoc miro_api \
     '!miro_api.rest' \
     '!miro_api.api_response' \

@@ -11,7 +11,7 @@ It contains properties and methods to interact with Miro users. For example, to 
 The Miro methods are related to authorization and access token management.
 """
 
-__version__ = "2.1.0"
+__version__ = "2.1.1"
 
 
 from miro_api.miro_api_wrapper import MiroApi, Miro
