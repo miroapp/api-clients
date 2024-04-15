@@ -59,6 +59,7 @@ from miro_api.models.board_members_paged_response import BoardMembersPagedRespon
 from miro_api.models.board_permissions_policy import BoardPermissionsPolicy
 from miro_api.models.board_policy import BoardPolicy
 from miro_api.models.board_policy_change import BoardPolicyChange
+from miro_api.models.board_project import BoardProject
 from miro_api.models.board_sharing_policy import BoardSharingPolicy
 from miro_api.models.board_sharing_policy_change import BoardSharingPolicyChange
 from miro_api.models.board_subscription import BoardSubscription

@@ -37,6 +37,7 @@ export * from './boardMembersPagedResponse'
 export * from './boardPermissionsPolicy'
 export * from './boardPolicy'
 export * from './boardPolicyChange'
+export * from './boardProject'
 export * from './boardSharingPolicy'
 export * from './boardSharingPolicyChange'
 export * from './boardSubscription'
@@ -349,6 +350,7 @@ import {BoardMembersPagedResponse} from './boardMembersPagedResponse'
 import {BoardPermissionsPolicy} from './boardPermissionsPolicy'
 import {BoardPolicy} from './boardPolicy'
 import {BoardPolicyChange} from './boardPolicyChange'
+import {BoardProject} from './boardProject'
 import {BoardSharingPolicy} from './boardSharingPolicy'
 import {BoardSharingPolicyChange} from './boardSharingPolicyChange'
 import {BoardSubscription} from './boardSubscription'
@@ -859,6 +861,7 @@ let typeMap: {[index: string]: any} = {
   BoardPermissionsPolicy: BoardPermissionsPolicy,
   BoardPolicy: BoardPolicy,
   BoardPolicyChange: BoardPolicyChange,
+  BoardProject: BoardProject,
   BoardSharingPolicy: BoardSharingPolicy,
   BoardSharingPolicyChange: BoardSharingPolicyChange,
   BoardSubscription: BoardSubscription,

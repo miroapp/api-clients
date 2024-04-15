@@ -39,6 +39,7 @@ model/boardMembersPagedResponse.ts
 model/boardPermissionsPolicy.ts
 model/boardPolicy.ts
 model/boardPolicyChange.ts
+model/boardProject.ts
 model/boardSharingPolicy.ts
 model/boardSharingPolicyChange.ts
 model/boardSubscription.ts

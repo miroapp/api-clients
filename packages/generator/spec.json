@@ -16150,7 +16150,7 @@
             "$ref": "#/components/schemas/Team"
           },
           "project": {
-            "$ref": "#/components/schemas/Project"
+            "$ref": "#/components/schemas/BoardProject"
           },
           "type": {
             "type": "string",
@@ -16500,7 +16500,7 @@
             "$ref": "#/components/schemas/Team"
           },
           "project": {
-            "$ref": "#/components/schemas/Project"
+            "$ref": "#/components/schemas/BoardProject"
           },
           "picture": {
             "$ref": "#/components/schemas/Picture"
@@ -16568,7 +16568,7 @@
             "$ref": "#/components/schemas/Team"
           },
           "project": {
-            "$ref": "#/components/schemas/Project"
+            "$ref": "#/components/schemas/BoardProject"
           },
           "picture": {
             "$ref": "#/components/schemas/Picture"
@@ -17394,6 +17394,18 @@
           },
           "position": {
             "$ref": "#/components/schemas/RelativeOffset"
+          }
+        }
+      },
+      "BoardProject": {
+        "type": "object",
+        "description": "Contains information about the project with which the board is associated.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "int64",
+            "description": "Unique identifier (ID) of the project.",
+            "example": "3088887345710756000"
           }
         }
       },
