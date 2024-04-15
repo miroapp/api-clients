@@ -17,7 +17,7 @@
     "@mirohq/miro-api": "*"
   },
   "devDependencies": {
-    "ejs": "^3.1.9",
+    "ejs": "^3.1.10",
     "nodemon": "^3.1.0"
   }
 }
