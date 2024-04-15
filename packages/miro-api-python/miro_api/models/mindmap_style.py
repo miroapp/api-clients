@@ -30,17 +30,11 @@ class MindmapStyle(BaseModel):
     """  # noqa: E501
 
     node_color: Optional[StrictStr] = Field(
-        default=None,
-        description="Hex value representing the color of the widget's border.",
-        alias="nodeColor",
+        default=None, description="Hex value representing the color of the widget's border.", alias="nodeColor"
     )
-    shape: Optional[StrictStr] = Field(
-        default=None, description="Shape type of the widget."
-    )
+    shape: Optional[StrictStr] = Field(default=None, description="Shape type of the widget.")
     font_size: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None,
-        description="The same font size as in MindmapNodeStyle.",
-        alias="fontSize",
+        default=None, description="The same font size as in MindmapNodeStyle.", alias="fontSize"
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["nodeColor", "shape", "fontSize"]
@@ -52,9 +46,7 @@ class MindmapStyle(BaseModel):
             return value
 
         if value not in set(["pill", "rectangle", "rounded_rectangle", "none"]):
-            raise ValueError(
-                "must be one of enum values ('pill', 'rectangle', 'rounded_rectangle', 'none')"
-            )
+            raise ValueError("must be one of enum values ('pill', 'rectangle', 'rounded_rectangle', 'none')")
         return value
 
     model_config = {
@@ -116,11 +108,7 @@ class MindmapStyle(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "nodeColor": obj.get("nodeColor"),
-                "shape": obj.get("shape"),
-                "fontSize": obj.get("fontSize"),
-            }
+            {"nodeColor": obj.get("nodeColor"), "shape": obj.get("shape"), "fontSize": obj.get("fontSize")}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

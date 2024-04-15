@@ -43,13 +43,9 @@ class BoardWithLinks(BaseModel):
     project: Optional[Project] = None
     picture: Optional[Picture] = None
     policy: Optional[BoardPolicy] = None
-    view_link: Optional[StrictStr] = Field(
-        default=None, description="URL to view the board.", alias="viewLink"
-    )
+    view_link: Optional[StrictStr] = Field(default=None, description="URL to view the board.", alias="viewLink")
     owner: Optional[UserInfoShort] = None
-    current_user_membership: Optional[BoardMember] = Field(
-        default=None, alias="currentUserMembership"
-    )
+    current_user_membership: Optional[BoardMember] = Field(default=None, alias="currentUserMembership")
     created_at: Optional[datetime] = Field(
         default=None,
         description="Date and time when the board was created. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
@@ -63,9 +59,7 @@ class BoardWithLinks(BaseModel):
     )
     modified_by: Optional[UserInfoShort] = Field(default=None, alias="modifiedBy")
     links: Optional[BoardLinks] = None
-    type: StrictStr = Field(
-        description="Type of the object that is returned. In this case, type returns `board`."
-    )
+    type: StrictStr = Field(description="Type of the object that is returned. In this case, type returns `board`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "id",
@@ -176,52 +170,22 @@ class BoardWithLinks(BaseModel):
                 "id": obj.get("id"),
                 "name": obj.get("name"),
                 "description": obj.get("description"),
-                "team": (
-                    Team.from_dict(obj["team"]) if obj.get("team") is not None else None
-                ),
-                "project": (
-                    Project.from_dict(obj["project"])
-                    if obj.get("project") is not None
-                    else None
-                ),
-                "picture": (
-                    Picture.from_dict(obj["picture"])
-                    if obj.get("picture") is not None
-                    else None
-                ),
-                "policy": (
-                    BoardPolicy.from_dict(obj["policy"])
-                    if obj.get("policy") is not None
-                    else None
-                ),
+                "team": Team.from_dict(obj["team"]) if obj.get("team") is not None else None,
+                "project": Project.from_dict(obj["project"]) if obj.get("project") is not None else None,
+                "picture": Picture.from_dict(obj["picture"]) if obj.get("picture") is not None else None,
+                "policy": BoardPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
                 "viewLink": obj.get("viewLink"),
-                "owner": (
-                    UserInfoShort.from_dict(obj["owner"])
-                    if obj.get("owner") is not None
-                    else None
-                ),
+                "owner": UserInfoShort.from_dict(obj["owner"]) if obj.get("owner") is not None else None,
                 "currentUserMembership": (
                     BoardMember.from_dict(obj["currentUserMembership"])
                     if obj.get("currentUserMembership") is not None
                     else None
                 ),
                 "createdAt": obj.get("createdAt"),
-                "createdBy": (
-                    UserInfoShort.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
+                "createdBy": UserInfoShort.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
                 "modifiedAt": obj.get("modifiedAt"),
-                "modifiedBy": (
-                    UserInfoShort.from_dict(obj["modifiedBy"])
-                    if obj.get("modifiedBy") is not None
-                    else None
-                ),
-                "links": (
-                    BoardLinks.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "modifiedBy": UserInfoShort.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
+                "links": BoardLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
                 "type": obj.get("type"),
             }
         )

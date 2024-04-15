@@ -23,24 +23,16 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice
     """  # noqa: E501
 
     content_type: Optional[StrictStr] = Field(
-        default=None,
-        description="Type of the embedded item's content.",
-        alias="contentType",
+        default=None, description="Type of the embedded item's content.", alias="contentType"
     )
-    description: Optional[StrictStr] = Field(
-        default=None, description="Short description of the embedded item."
-    )
-    html: Optional[StrictStr] = Field(
-        default=None, description="HTML code of the embedded item."
-    )
+    description: Optional[StrictStr] = Field(default=None, description="Short description of the embedded item.")
+    html: Optional[StrictStr] = Field(default=None, description="HTML code of the embedded item.")
     mode: Optional[StrictStr] = Field(
         default=None,
         description="Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.",
@@ -51,16 +43,12 @@ class EmbedDataResponsePlatformBulkCreateOperationExperimentalReleaseUsingFileFr
         alias="previewUrl",
     )
     provider_name: Optional[StrictStr] = Field(
-        default=None,
-        description="Name of the content's provider.",
-        alias="providerName",
+        default=None, description="Name of the content's provider.", alias="providerName"
     )
     provider_url: Optional[StrictStr] = Field(
         default=None, description="Url of the content's provider.", alias="providerUrl"
     )
-    title: Optional[StrictStr] = Field(
-        default=None, description="Title of the embedded item."
-    )
+    title: Optional[StrictStr] = Field(default=None, description="Title of the embedded item.")
     url: Optional[StrictStr] = Field(
         default=None,
         description="A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.",

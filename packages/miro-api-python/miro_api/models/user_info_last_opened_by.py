@@ -28,13 +28,10 @@ class UserInfoLastOpenedBy(BaseModel):
     Contains information about the user who opened the board last. This information is only available when the boards are sorted by `last_opened`.
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier (ID) of the user."
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the user.")
     name: Optional[StrictStr] = Field(default=None, description="Name of the user.")
     type: Optional[StrictStr] = Field(
-        default=None,
-        description="Indicates the type of object returned. In this case, `type` returns `user`.",
+        default=None, description="Indicates the type of object returned. In this case, `type` returns `user`."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "type"]
@@ -97,9 +94,7 @@ class UserInfoLastOpenedBy(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"id": obj.get("id"), "name": obj.get("name"), "type": obj.get("type")}
-        )
+        _obj = cls.model_validate({"id": obj.get("id"), "name": obj.get("name"), "type": obj.get("type")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

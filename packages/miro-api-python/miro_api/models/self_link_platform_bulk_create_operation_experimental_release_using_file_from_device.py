@@ -23,17 +23,13 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class SelfLinkPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class SelfLinkPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains applicable links for the current object.
     """  # noqa: E501
 
     var_self: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to obtain more information about the current object.",
-        alias="self",
+        default=None, description="Link to obtain more information about the current object.", alias="self"
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["self"]

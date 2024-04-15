@@ -33,22 +33,14 @@ class OrganizationMember(BaseModel):
     active: StrictBool = Field(description="Flag is user active")
     email: StrictStr = Field(description="User email")
     last_activity_at: Optional[datetime] = Field(
-        default=None,
-        description="Last time when the user was active",
-        alias="lastActivityAt",
+        default=None, description="Last time when the user was active", alias="lastActivityAt"
     )
-    license: StrictStr = Field(
-        description="Name of the current user license in the organization"
-    )
+    license: StrictStr = Field(description="Name of the current user license in the organization")
     license_assigned_at: Optional[datetime] = Field(
-        default=None,
-        description="Time when the license was assigned to the user",
-        alias="licenseAssignedAt",
+        default=None, description="Time when the license was assigned to the user", alias="licenseAssignedAt"
     )
     role: StrictStr = Field(description="Name of the user role in the organization")
-    type: Optional[StrictStr] = Field(
-        default="organization-member", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default="organization-member", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "id",
@@ -64,9 +56,7 @@ class OrganizationMember(BaseModel):
     @field_validator("license")
     def license_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(
-            ["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
-        ):
+        if value not in set(["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]):
             raise ValueError(
                 "must be one of enum values ('full', 'occasional', 'free', 'free_restricted', 'full_trial', 'unknown')"
             )
@@ -156,11 +146,7 @@ class OrganizationMember(BaseModel):
                 "license": obj.get("license"),
                 "licenseAssignedAt": obj.get("licenseAssignedAt"),
                 "role": obj.get("role"),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "organization-member"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "organization-member",
             }
         )
         # store additional fields in additional_properties

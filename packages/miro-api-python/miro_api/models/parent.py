@@ -29,8 +29,7 @@ class Parent(BaseModel):
     """  # noqa: E501
 
     id: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique identifier (ID) of the parent frame for the item.",
+        default=None, description="Unique identifier (ID) of the parent frame for the item."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id"]

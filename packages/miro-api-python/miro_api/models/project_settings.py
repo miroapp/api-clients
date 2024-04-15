@@ -29,9 +29,7 @@ class ProjectSettings(BaseModel):
     ProjectSettings
     """  # noqa: E501
 
-    sharing_policy_settings: SharingPolicySettings = Field(
-        alias="sharingPolicySettings"
-    )
+    sharing_policy_settings: SharingPolicySettings = Field(alias="sharingPolicySettings")
     type: StrictStr = Field(description="Type of the object")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["sharingPolicySettings", "type"]
@@ -104,11 +102,7 @@ class ProjectSettings(BaseModel):
                     if obj.get("sharingPolicySettings") is not None
                     else None
                 ),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "project_settings"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "project_settings",
             }
         )
         # store additional fields in additional_properties

@@ -35,24 +35,16 @@ class CardDataPlatformBulkCreateOperationExperimentalRelease(BaseModel):
         alias="assigneeId",
     )
     description: Optional[StrictStr] = Field(
-        default=None,
-        description="A short text description to add context about the card.",
+        default=None, description="A short text description to add context about the card."
     )
     due_date: Optional[datetime] = Field(
         default=None,
         description="The date when the task or activity described in the card is due to be completed. In the GUI, users can select the due date from a calendar. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
         alias="dueDate",
     )
-    title: Optional[StrictStr] = Field(
-        default="sample card item", description="A short text header for the card."
-    )
+    title: Optional[StrictStr] = Field(default="sample card item", description="A short text header for the card.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "assigneeId",
-        "description",
-        "dueDate",
-        "title",
-    ]
+    __properties: ClassVar[List[str]] = ["assigneeId", "description", "dueDate", "title"]
 
     model_config = {
         "populate_by_name": True,
@@ -117,11 +109,7 @@ class CardDataPlatformBulkCreateOperationExperimentalRelease(BaseModel):
                 "assigneeId": obj.get("assigneeId"),
                 "description": obj.get("description"),
                 "dueDate": obj.get("dueDate"),
-                "title": (
-                    obj.get("title")
-                    if obj.get("title") is not None
-                    else "sample card item"
-                ),
+                "title": obj.get("title") if obj.get("title") is not None else "sample card item",
             }
         )
         # store additional fields in additional_properties

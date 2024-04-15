@@ -31,13 +31,9 @@ class DataClassificationLabel(BaseModel):
     id: Optional[StrictStr] = Field(default=None, description="Label id.")
     color: Optional[StrictStr] = Field(default=None, description="Label color.")
     default: Optional[StrictBool] = Field(default=None, description="Label is default.")
-    description: Optional[StrictStr] = Field(
-        default=None, description="Label description."
-    )
+    description: Optional[StrictStr] = Field(default=None, description="Label description.")
     name: Optional[StrictStr] = Field(default=None, description="Label name.")
-    order_number: Optional[StrictInt] = Field(
-        default=None, description="Label order number.", alias="orderNumber"
-    )
+    order_number: Optional[StrictInt] = Field(default=None, description="Label order number.", alias="orderNumber")
     sharing_recommendation: Optional[StrictStr] = Field(
         default=None,
         description="Sharing Recommendation (one of NO_SHARING_RESTRICTIONS, ONLY_WITHIN_ORGANIZATION, ONLY_WITHIN_TEAM or ONLY_WITH_AUTHORIZED_TEAM_MEMBERS ).",
@@ -48,9 +44,7 @@ class DataClassificationLabel(BaseModel):
         description="Indicates the URL for the board classification label guidelines.",
         alias="guidelineUrl",
     )
-    type: Optional[StrictStr] = Field(
-        default="data-classification-label", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default="data-classification-label", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "id",
@@ -132,11 +126,7 @@ class DataClassificationLabel(BaseModel):
                 "orderNumber": obj.get("orderNumber"),
                 "sharingRecommendation": obj.get("sharingRecommendation"),
                 "guidelineUrl": obj.get("guidelineUrl"),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "data-classification-label"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "data-classification-label",
             }
         )
         # store additional fields in additional_properties

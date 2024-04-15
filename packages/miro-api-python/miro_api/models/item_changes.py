@@ -34,9 +34,7 @@ class ItemChanges(BaseModel):
     Updates one or more items in one request. You can update up to 20 items per request.
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier (ID) of an item."
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of an item.")
     type: Optional[ItemTypeChange] = None
     data: Optional[ItemDataChanges] = None
     style: Optional[ItemStyle] = None
@@ -44,15 +42,7 @@ class ItemChanges(BaseModel):
     geometry: Optional[Geometry] = None
     parent: Optional[Parent] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "type",
-        "data",
-        "style",
-        "position",
-        "geometry",
-        "parent",
-    ]
+    __properties: ClassVar[List[str]] = ["id", "type", "data", "style", "position", "geometry", "parent"]
 
     model_config = {
         "populate_by_name": True,
@@ -131,31 +121,11 @@ class ItemChanges(BaseModel):
             {
                 "id": obj.get("id"),
                 "type": obj.get("type"),
-                "data": (
-                    ItemDataChanges.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    ItemStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-                "position": (
-                    PositionChange.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-                "geometry": (
-                    Geometry.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
-                ),
-                "parent": (
-                    Parent.from_dict(obj["parent"])
-                    if obj.get("parent") is not None
-                    else None
-                ),
+                "data": ItemDataChanges.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "style": ItemStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
+                "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
+                "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
             }
         )
         # store additional fields in additional_properties

@@ -97,9 +97,7 @@ class WidthOnlyAdjustableGeometry(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"rotation": obj.get("rotation"), "width": obj.get("width")}
-        )
+        _obj = cls.model_validate({"rotation": obj.get("rotation"), "width": obj.get("width")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

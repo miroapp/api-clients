@@ -152,43 +152,15 @@ class FrameItem(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
-                "data": (
-                    FrameData.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    FrameStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-                "position": (
-                    Position.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-                "geometry": (
-                    Geometry.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
-                ),
+                "data": FrameData.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "style": FrameStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "position": Position.from_dict(obj["position"]) if obj.get("position") is not None else None,
+                "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
                 "createdAt": obj.get("createdAt"),
-                "createdBy": (
-                    CreatedBy.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
+                "createdBy": CreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
                 "modifiedAt": obj.get("modifiedAt"),
-                "modifiedBy": (
-                    ModifiedBy.from_dict(obj["modifiedBy"])
-                    if obj.get("modifiedBy") is not None
-                    else None
-                ),
-                "links": (
-                    WidgetLinks.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "modifiedBy": ModifiedBy.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
+                "links": WidgetLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
                 "type": obj.get("type"),
             }
         )

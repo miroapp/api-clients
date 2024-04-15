@@ -28,16 +28,12 @@ class GeometryPlatform(BaseModel):
     Contains geometrical information about the item, such as its width or height.
     """  # noqa: E501
 
-    height: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Height of the item, in pixels."
-    )
+    height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Height of the item, in pixels.")
     rotation: Optional[Union[StrictFloat, StrictInt]] = Field(
         default=None,
         description="Rotation angle of an item, in degrees, relative to the board. You can rotate items clockwise (right) and counterclockwise (left) by specifying positive and negative values, respectively.",
     )
-    width: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Width of the item, in pixels."
-    )
+    width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Width of the item, in pixels.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["height", "rotation", "width"]
 

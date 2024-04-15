@@ -28,9 +28,7 @@ class BoardContentLogData(BaseModel):
     Content log object representing the current state of the board item at the `modifiedAt` time.
     """  # noqa: E501
 
-    text: Optional[StrictStr] = Field(
-        default=None, description="Text extracted from the board item."
-    )
+    text: Optional[StrictStr] = Field(default=None, description="Text extracted from the board item.")
     metadata: Optional[Dict[str, StrictStr]] = Field(
         default=None,
         description="Metadata representing more information that might be relevant for a specific board item.",
@@ -96,9 +94,7 @@ class BoardContentLogData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"text": obj.get("text"), "metadata": obj.get("metadata")}
-        )
+        _obj = cls.model_validate({"text": obj.get("text"), "metadata": obj.get("metadata")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

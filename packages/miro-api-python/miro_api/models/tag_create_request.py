@@ -29,9 +29,7 @@ class TagCreateRequest(BaseModel):
     TagCreateRequest
     """  # noqa: E501
 
-    fill_color: Optional[StrictStr] = Field(
-        default="red", description="Fill color for the tag.", alias="fillColor"
-    )
+    fill_color: Optional[StrictStr] = Field(default="red", description="Fill color for the tag.", alias="fillColor")
     title: Annotated[str, Field(min_length=0, strict=True, max_length=120)] = Field(
         description="Text of the tag. Case-sensitive. Must be unique."
     )
@@ -125,9 +123,7 @@ class TagCreateRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fillColor": (
-                    obj.get("fillColor") if obj.get("fillColor") is not None else "red"
-                ),
+                "fillColor": obj.get("fillColor") if obj.get("fillColor") is not None else "red",
                 "title": obj.get("title"),
             }
         )

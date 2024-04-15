@@ -29,15 +29,10 @@ class DataClassificationOrganizationSettings(BaseModel):
     DataClassificationOrganizationSettings
     """  # noqa: E501
 
-    enabled: Optional[StrictBool] = Field(
-        default=None, description="Data classification enabled for organization"
-    )
-    labels: Optional[List[DataClassificationLabel]] = Field(
-        default=None, description="Data classification labels"
-    )
+    enabled: Optional[StrictBool] = Field(default=None, description="Data classification enabled for organization")
+    labels: Optional[List[DataClassificationLabel]] = Field(default=None, description="Data classification labels")
     type: Optional[StrictStr] = Field(
-        default="data-classification-organization-settings",
-        description="Type of the object returned.",
+        default="data-classification-organization-settings", description="Type of the object returned."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["enabled", "labels", "type"]
@@ -111,18 +106,11 @@ class DataClassificationOrganizationSettings(BaseModel):
             {
                 "enabled": obj.get("enabled"),
                 "labels": (
-                    [
-                        DataClassificationLabel.from_dict(_item)
-                        for _item in obj["labels"]
-                    ]
+                    [DataClassificationLabel.from_dict(_item) for _item in obj["labels"]]
                     if obj.get("labels") is not None
                     else None
                 ),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "data-classification-organization-settings"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "data-classification-organization-settings",
             }
         )
         # store additional fields in additional_properties

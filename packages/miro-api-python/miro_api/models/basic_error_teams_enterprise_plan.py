@@ -28,18 +28,10 @@ class BasicErrorTeamsEnterprisePlan(BaseModel):
     BasicErrorTeamsEnterprisePlan
     """  # noqa: E501
 
-    status: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="HTTP status code."
-    )
-    code: Optional[StrictStr] = Field(
-        default=None, description="Description of the status code."
-    )
-    message: Optional[StrictStr] = Field(
-        default=None, description="Explanation for the error"
-    )
-    type: Optional[StrictStr] = Field(
-        default="error", description="Type of the object returned."
-    )
+    status: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="HTTP status code.")
+    code: Optional[StrictStr] = Field(default=None, description="Description of the status code.")
+    message: Optional[StrictStr] = Field(default=None, description="Explanation for the error")
+    type: Optional[StrictStr] = Field(default="error", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["status", "code", "message", "type"]
 

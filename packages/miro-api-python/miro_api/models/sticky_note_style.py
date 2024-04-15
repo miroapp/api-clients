@@ -29,9 +29,7 @@ class StickyNoteStyle(BaseModel):
     """  # noqa: E501
 
     fill_color: Optional[StrictStr] = Field(
-        default=None,
-        description="Fill color for the sticky note. Default: `light_yellow`.",
-        alias="fillColor",
+        default=None, description="Fill color for the sticky note. Default: `light_yellow`.", alias="fillColor"
     )
     text_align: Optional[StrictStr] = Field(
         default=None,

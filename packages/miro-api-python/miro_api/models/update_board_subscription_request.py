@@ -29,9 +29,7 @@ class UpdateBoardSubscriptionRequest(BaseModel):
     Contains updated information about a subscription.
     """  # noqa: E501
 
-    callback_url: Optional[
-        Annotated[str, Field(min_length=8, strict=True, max_length=256)]
-    ] = Field(
+    callback_url: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=256)]] = Field(
         default=None,
         description="Indicates the HTTPS URL to which Miro sends a webhook when an event occurs.",
         alias="callbackUrl",
@@ -124,9 +122,7 @@ class UpdateBoardSubscriptionRequest(BaseModel):
         _obj = cls.model_validate(
             {
                 "callbackUrl": obj.get("callbackUrl"),
-                "status": (
-                    obj.get("status") if obj.get("status") is not None else "enabled"
-                ),
+                "status": obj.get("status") if obj.get("status") is not None else "enabled",
             }
         )
         # store additional fields in additional_properties

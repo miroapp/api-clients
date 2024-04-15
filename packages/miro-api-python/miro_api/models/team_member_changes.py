@@ -42,9 +42,7 @@ class TeamMemberChanges(BaseModel):
             return value
 
         if value not in set(["member", "admin", "team_guest"]):
-            raise ValueError(
-                "must be one of enum values ('member', 'admin', 'team_guest')"
-            )
+            raise ValueError("must be one of enum values ('member', 'admin', 'team_guest')")
         return value
 
     model_config = {

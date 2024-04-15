@@ -92,9 +92,7 @@ class OrganizationInformation(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"type": obj.get("type"), "name": obj.get("name"), "id": obj.get("id")}
-        )
+        _obj = cls.model_validate({"type": obj.get("type"), "name": obj.get("name"), "id": obj.get("id")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

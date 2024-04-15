@@ -101,11 +101,7 @@ class Items(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "data": (
-                    [Item.from_dict(_item) for _item in obj["data"]]
-                    if obj.get("data") is not None
-                    else None
-                ),
+                "data": [Item.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
                 "type": obj.get("type"),
             }
         )

@@ -101,13 +101,9 @@ class WidgetDataOutputPlatform(BaseModel):
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError(
-                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
-                )
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
             if kwargs:
-                raise ValueError(
-                    "If a position argument is used, keyword arguments cannot be used."
-                )
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
@@ -147,9 +143,7 @@ class WidgetDataOutputPlatform(BaseModel):
             match += 1
         # validate data type: DocumentData
         if not isinstance(v, DocumentData):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `DocumentData`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DocumentData`")
         else:
             match += 1
         # validate data type: ShapeData
@@ -164,9 +158,7 @@ class WidgetDataOutputPlatform(BaseModel):
             match += 1
         # validate data type: StickyNoteData
         if not isinstance(v, StickyNoteData):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `StickyNoteData`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `StickyNoteData`")
         else:
             match += 1
         if match > 1:
@@ -269,9 +261,7 @@ class WidgetDataOutputPlatform(BaseModel):
 
         # Return one match that has least additional_properties
         if len(matches) > 1:
-            instance.actual_instance = sorted(
-                matches, key=lambda m: len(m.additional_properties)
-            )[0]
+            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
 
         return instance
 
@@ -280,9 +270,7 @@ class WidgetDataOutputPlatform(BaseModel):
         if self.actual_instance is None:
             return "null"
 
-        if hasattr(self.actual_instance, "to_json") and callable(
-            self.actual_instance.to_json
-        ):
+        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
             return self.actual_instance.to_json()
         else:
             return json.dumps(self.actual_instance)
@@ -307,9 +295,7 @@ class WidgetDataOutputPlatform(BaseModel):
         if self.actual_instance is None:
             return None
 
-        if hasattr(self.actual_instance, "to_dict") and callable(
-            self.actual_instance.to_dict
-        ):
+        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
             return self.actual_instance.to_dict()
         else:
             # primitive type

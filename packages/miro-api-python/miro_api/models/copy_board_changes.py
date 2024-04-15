@@ -30,17 +30,15 @@ class CopyBoardChanges(BaseModel):
     CopyBoardChanges
     """  # noqa: E501
 
-    description: Optional[
-        Annotated[str, Field(min_length=0, strict=True, max_length=300)]
-    ] = Field(default=None, description="Description of the board.")
-    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=60)]] = (
-        Field(default="Untitled", description="Name for the board.")
+    description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=300)]] = Field(
+        default=None, description="Description of the board."
+    )
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=60)]] = Field(
+        default="Untitled", description="Name for the board."
     )
     policy: Optional[BoardPolicyChange] = None
     team_id: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique identifier (ID) of the team where the board must be placed.",
-        alias="teamId",
+        default=None, description="Unique identifier (ID) of the team where the board must be placed.", alias="teamId"
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["description", "name", "policy", "teamId"]
@@ -110,11 +108,7 @@ class CopyBoardChanges(BaseModel):
             {
                 "description": obj.get("description"),
                 "name": obj.get("name") if obj.get("name") is not None else "Untitled",
-                "policy": (
-                    BoardPolicyChange.from_dict(obj["policy"])
-                    if obj.get("policy") is not None
-                    else None
-                ),
+                "policy": BoardPolicyChange.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
                 "teamId": obj.get("teamId"),
             }
         )

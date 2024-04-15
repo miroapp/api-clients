@@ -33,9 +33,7 @@ class BulkOperationError(BaseModel):
     code: Optional[StrictStr] = Field(default=None, description="Code of the error")
     message: StrictStr = Field(description="Description of the error")
     context: Optional[BulkOperationErrorContext] = None
-    status: Optional[StrictInt] = Field(
-        default=None, description="Status code of the error"
-    )
+    status: Optional[StrictInt] = Field(default=None, description="Status code of the error")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["type", "code", "message", "context", "status"]
 
@@ -106,9 +104,7 @@ class BulkOperationError(BaseModel):
                 "code": obj.get("code"),
                 "message": obj.get("message"),
                 "context": (
-                    BulkOperationErrorContext.from_dict(obj["context"])
-                    if obj.get("context") is not None
-                    else None
+                    BulkOperationErrorContext.from_dict(obj["context"]) if obj.get("context") is not None else None
                 ),
                 "status": obj.get("status"),
             }

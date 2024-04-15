@@ -28,9 +28,7 @@ class DataClassificationLabelId(BaseModel):
     DataClassificationLabelId
     """  # noqa: E501
 
-    label_id: Optional[StrictStr] = Field(
-        default=None, description="Data classification label id", alias="labelId"
-    )
+    label_id: Optional[StrictStr] = Field(default=None, description="Data classification label id", alias="labelId")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["labelId"]
 

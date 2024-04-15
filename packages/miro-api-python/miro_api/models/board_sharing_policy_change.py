@@ -28,9 +28,7 @@ class BoardSharingPolicyChange(BaseModel):
     Defines the public-level, organization-level, and team-level access for the board. The access level that a user gets depends on the highest level of access that results from considering the public-level, team-level, organization-level, and direct sharing access.
     """  # noqa: E501
 
-    access: Optional[StrictStr] = Field(
-        default="private", description="Defines the public-level access to the board."
-    )
+    access: Optional[StrictStr] = Field(default="private", description="Defines the public-level access to the board.")
     invite_to_account_and_board_link_access: Optional[StrictStr] = Field(
         default="no_access",
         description="Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access` regardless of the value that you assign for this parameter.",
@@ -42,9 +40,7 @@ class BoardSharingPolicyChange(BaseModel):
         alias="organizationAccess",
     )
     team_access: Optional[StrictStr] = Field(
-        default="private",
-        description="Defines the team-level access to the board.",
-        alias="teamAccess",
+        default="private", description="Defines the team-level access to the board.", alias="teamAccess"
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
@@ -61,9 +57,7 @@ class BoardSharingPolicyChange(BaseModel):
             return value
 
         if value not in set(["private", "view", "edit", "comment"]):
-            raise ValueError(
-                "must be one of enum values ('private', 'view', 'edit', 'comment')"
-            )
+            raise ValueError("must be one of enum values ('private', 'view', 'edit', 'comment')")
         return value
 
     @field_validator("invite_to_account_and_board_link_access")
@@ -73,9 +67,7 @@ class BoardSharingPolicyChange(BaseModel):
             return value
 
         if value not in set(["viewer", "commenter", "editor", "no_access"]):
-            raise ValueError(
-                "must be one of enum values ('viewer', 'commenter', 'editor', 'no_access')"
-            )
+            raise ValueError("must be one of enum values ('viewer', 'commenter', 'editor', 'no_access')")
         return value
 
     @field_validator("organization_access")
@@ -85,9 +77,7 @@ class BoardSharingPolicyChange(BaseModel):
             return value
 
         if value not in set(["private", "view", "comment", "edit"]):
-            raise ValueError(
-                "must be one of enum values ('private', 'view', 'comment', 'edit')"
-            )
+            raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
         return value
 
     @field_validator("team_access")
@@ -97,9 +87,7 @@ class BoardSharingPolicyChange(BaseModel):
             return value
 
         if value not in set(["private", "view", "comment", "edit"]):
-            raise ValueError(
-                "must be one of enum values ('private', 'view', 'comment', 'edit')"
-            )
+            raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
         return value
 
     model_config = {
@@ -162,24 +150,16 @@ class BoardSharingPolicyChange(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "access": (
-                    obj.get("access") if obj.get("access") is not None else "private"
-                ),
+                "access": obj.get("access") if obj.get("access") is not None else "private",
                 "inviteToAccountAndBoardLinkAccess": (
                     obj.get("inviteToAccountAndBoardLinkAccess")
                     if obj.get("inviteToAccountAndBoardLinkAccess") is not None
                     else "no_access"
                 ),
                 "organizationAccess": (
-                    obj.get("organizationAccess")
-                    if obj.get("organizationAccess") is not None
-                    else "private"
+                    obj.get("organizationAccess") if obj.get("organizationAccess") is not None else "private"
                 ),
-                "teamAccess": (
-                    obj.get("teamAccess")
-                    if obj.get("teamAccess") is not None
-                    else "private"
-                ),
+                "teamAccess": obj.get("teamAccess") if obj.get("teamAccess") is not None else "private",
             }
         )
         # store additional fields in additional_properties

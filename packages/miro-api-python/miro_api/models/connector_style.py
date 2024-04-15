@@ -49,19 +49,13 @@ class ConnectorStyle(BaseModel):
         alias="startStrokeCap",
     )
     stroke_color: Optional[StrictStr] = Field(
-        default=None,
-        description="Hex value of the color of the connector line. Default: #000000.",
-        alias="strokeColor",
+        default=None, description="Hex value of the color of the connector line. Default: #000000.", alias="strokeColor"
     )
     stroke_style: Optional[StrictStr] = Field(
-        default=None,
-        description="The stroke pattern of the connector line. Default: normal.",
-        alias="strokeStyle",
+        default=None, description="The stroke pattern of the connector line. Default: normal.", alias="strokeStyle"
     )
     stroke_width: Optional[Annotated[str, Field(strict=True)]] = Field(
-        default=None,
-        description="The thickness of the connector line, in dp. Default: 1.0.",
-        alias="strokeWidth",
+        default=None, description="The thickness of the connector line, in dp. Default: 1.0.", alias="strokeWidth"
     )
     text_orientation: Optional[StrictStr] = Field(
         default=None,
@@ -147,9 +141,7 @@ class ConnectorStyle(BaseModel):
             return value
 
         if value not in set(["normal", "dotted", "dashed"]):
-            raise ValueError(
-                "must be one of enum values ('normal', 'dotted', 'dashed')"
-            )
+            raise ValueError("must be one of enum values ('normal', 'dotted', 'dashed')")
         return value
 
     @field_validator("text_orientation")

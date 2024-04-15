@@ -29,9 +29,7 @@ class CreateBoardExportRequest(BaseModel):
     List of board IDs to be exported.
     """  # noqa: E501
 
-    board_ids: Optional[
-        Annotated[List[StrictStr], Field(min_length=1, max_length=50)]
-    ] = Field(
+    board_ids: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=50)]] = Field(
         default=None, description="List of board IDs to be exported.", alias="boardIds"
     )
     additional_properties: Dict[str, Any] = {}

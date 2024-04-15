@@ -38,14 +38,7 @@ class TokenInformation(BaseModel):
     user: UserInformation
     scopes: Optional[List[StrictStr]] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "type",
-        "organization",
-        "team",
-        "createdBy",
-        "user",
-        "scopes",
-    ]
+    __properties: ClassVar[List[str]] = ["type", "organization", "team", "createdBy", "user", "scopes"]
 
     model_config = {
         "populate_by_name": True,
@@ -125,21 +118,9 @@ class TokenInformation(BaseModel):
                     if obj.get("organization") is not None
                     else None
                 ),
-                "team": (
-                    TeamInformation.from_dict(obj["team"])
-                    if obj.get("team") is not None
-                    else None
-                ),
-                "createdBy": (
-                    UserInformation.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
-                "user": (
-                    UserInformation.from_dict(obj["user"])
-                    if obj.get("user") is not None
-                    else None
-                ),
+                "team": TeamInformation.from_dict(obj["team"]) if obj.get("team") is not None else None,
+                "createdBy": UserInformation.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
+                "user": UserInformation.from_dict(obj["user"]) if obj.get("user") is not None else None,
                 "scopes": obj.get("scopes"),
             }
         )

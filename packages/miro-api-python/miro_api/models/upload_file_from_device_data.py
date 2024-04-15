@@ -31,9 +31,7 @@ class UploadFileFromDeviceData(BaseModel):
     UploadFileFromDeviceData
     """  # noqa: E501
 
-    title: Optional[StrictStr] = Field(
-        default=None, description="title for the document"
-    )
+    title: Optional[StrictStr] = Field(default=None, description="title for the document")
     position: Optional[PositionChange] = None
     geometry: Optional[FixedRatioGeometry] = None
     parent: Optional[Parent] = None
@@ -110,21 +108,9 @@ class UploadFileFromDeviceData(BaseModel):
         _obj = cls.model_validate(
             {
                 "title": obj.get("title"),
-                "position": (
-                    PositionChange.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-                "geometry": (
-                    FixedRatioGeometry.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
-                ),
-                "parent": (
-                    Parent.from_dict(obj["parent"])
-                    if obj.get("parent") is not None
-                    else None
-                ),
+                "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
+                "geometry": FixedRatioGeometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
+                "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
             }
         )
         # store additional fields in additional_properties

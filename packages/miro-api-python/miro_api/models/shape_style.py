@@ -105,9 +105,7 @@ class ShapeStyle(BaseModel):
             return value
 
         if value not in set(["normal", "dotted", "dashed"]):
-            raise ValueError(
-                "must be one of enum values ('normal', 'dotted', 'dashed')"
-            )
+            raise ValueError("must be one of enum values ('normal', 'dotted', 'dashed')")
         return value
 
     @field_validator("font_family")

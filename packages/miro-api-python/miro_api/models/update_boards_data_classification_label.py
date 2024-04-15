@@ -29,13 +29,10 @@ class UpdateBoardsDataClassificationLabel(BaseModel):
     """  # noqa: E501
 
     number_updated_boards: Optional[StrictInt] = Field(
-        default=None,
-        description="Number of boards updated in the team",
-        alias="numberUpdatedBoards",
+        default=None, description="Number of boards updated in the team", alias="numberUpdatedBoards"
     )
     type: Optional[StrictStr] = Field(
-        default="boards-data-classification-label-changed",
-        description="Type of the object returned.",
+        default="boards-data-classification-label-changed", description="Type of the object returned."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["numberUpdatedBoards", "type"]
@@ -101,11 +98,7 @@ class UpdateBoardsDataClassificationLabel(BaseModel):
         _obj = cls.model_validate(
             {
                 "numberUpdatedBoards": obj.get("numberUpdatedBoards"),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "boards-data-classification-label-changed"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "boards-data-classification-label-changed",
             }
         )
         # store additional fields in additional_properties

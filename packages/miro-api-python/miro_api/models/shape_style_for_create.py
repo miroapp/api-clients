@@ -105,9 +105,7 @@ class ShapeStyleForCreate(BaseModel):
             return value
 
         if value not in set(["normal", "dotted", "dashed"]):
-            raise ValueError(
-                "must be one of enum values ('normal', 'dotted', 'dashed')"
-            )
+            raise ValueError("must be one of enum values ('normal', 'dotted', 'dashed')")
         return value
 
     @field_validator("font_family")
@@ -162,9 +160,7 @@ class ShapeStyleForCreate(BaseModel):
             return value
 
         if value not in set(["left", "right", "center", "unknown"]):
-            raise ValueError(
-                "must be one of enum values ('left', 'right', 'center', 'unknown')"
-            )
+            raise ValueError("must be one of enum values ('left', 'right', 'center', 'unknown')")
         return value
 
     @field_validator("text_align_vertical")
@@ -174,9 +170,7 @@ class ShapeStyleForCreate(BaseModel):
             return value
 
         if value not in set(["top", "middle", "bottom", "unknown"]):
-            raise ValueError(
-                "must be one of enum values ('top', 'middle', 'bottom', 'unknown')"
-            )
+            raise ValueError("must be one of enum values ('top', 'middle', 'bottom', 'unknown')")
         return value
 
     model_config = {

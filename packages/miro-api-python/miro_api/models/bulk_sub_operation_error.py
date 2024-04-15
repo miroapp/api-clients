@@ -31,9 +31,7 @@ class BulkSubOperationError(BaseModel):
     field: StrictStr = Field(
         description="0-based index indicating a sub-operations from the input that caused a failure followed by parameter name"
     )
-    message: StrictStr = Field(
-        description="Description of the sub-operation related error"
-    )
+    message: StrictStr = Field(description="Description of the sub-operation related error")
     context: Optional[Dict[str, Any]] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["field", "message", "context"]
@@ -97,11 +95,7 @@ class BulkSubOperationError(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "field": obj.get("field"),
-                "message": obj.get("message"),
-                "context": obj.get("context"),
-            }
+            {"field": obj.get("field"), "message": obj.get("message"), "context": obj.get("context")}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

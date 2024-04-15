@@ -28,15 +28,9 @@ class Error404(BaseModel):
     Error404
     """  # noqa: E501
 
-    status: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=404, description="HTTP status code."
-    )
-    code: Optional[StrictStr] = Field(
-        default=None, description="Description of the status code."
-    )
-    message: Optional[StrictStr] = Field(
-        default=None, description="Explanation of the error."
-    )
+    status: Optional[Union[StrictFloat, StrictInt]] = Field(default=404, description="HTTP status code.")
+    code: Optional[StrictStr] = Field(default=None, description="Description of the status code.")
+    message: Optional[StrictStr] = Field(default=None, description="Explanation of the error.")
     type: Optional[StrictStr] = "error"
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["status", "code", "message", "type"]

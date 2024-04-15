@@ -26,13 +26,7 @@ from pydantic import StrictStr, Field
 from typing import Union, List, Optional, Dict
 from typing_extensions import Literal, Self
 
-ITEMSTYLE_ONE_OF_SCHEMAS = [
-    "AppCardStyle",
-    "CardStyle",
-    "ShapeStyle",
-    "StickyNoteStyle",
-    "TextStyle",
-]
+ITEMSTYLE_ONE_OF_SCHEMAS = ["AppCardStyle", "CardStyle", "ShapeStyle", "StickyNoteStyle", "TextStyle"]
 
 
 class ItemStyle(BaseModel):
@@ -50,13 +44,9 @@ class ItemStyle(BaseModel):
     oneof_schema_4_validator: Optional[StickyNoteStyle] = None
     # data type: TextStyle
     oneof_schema_5_validator: Optional[TextStyle] = None
-    actual_instance: Optional[
-        Union[AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]
-    ] = None
+    actual_instance: Optional[Union[AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]] = None
     one_of_schemas: List[str] = Field(
-        default=Literal[
-            "AppCardStyle", "CardStyle", "ShapeStyle", "StickyNoteStyle", "TextStyle"
-        ]
+        default=Literal["AppCardStyle", "CardStyle", "ShapeStyle", "StickyNoteStyle", "TextStyle"]
     )
 
     model_config = {
@@ -67,13 +57,9 @@ class ItemStyle(BaseModel):
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError(
-                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
-                )
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
             if kwargs:
-                raise ValueError(
-                    "If a position argument is used, keyword arguments cannot be used."
-                )
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
@@ -88,9 +74,7 @@ class ItemStyle(BaseModel):
         match = 0
         # validate data type: AppCardStyle
         if not isinstance(v, AppCardStyle):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `AppCardStyle`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `AppCardStyle`")
         else:
             match += 1
         # validate data type: CardStyle
@@ -105,9 +89,7 @@ class ItemStyle(BaseModel):
             match += 1
         # validate data type: StickyNoteStyle
         if not isinstance(v, StickyNoteStyle):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `StickyNoteStyle`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `StickyNoteStyle`")
         else:
             match += 1
         # validate data type: TextStyle
@@ -135,9 +117,7 @@ class ItemStyle(BaseModel):
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(
-        cls, json_str: str
-    ) -> Union[AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]:
+    def from_json(cls, json_str: str) -> Union[AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
@@ -183,9 +163,7 @@ class ItemStyle(BaseModel):
 
         # Return one match that has least additional_properties
         if len(matches) > 1:
-            instance.actual_instance = sorted(
-                matches, key=lambda m: len(m.additional_properties)
-            )[0]
+            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
 
         return instance
 
@@ -194,32 +172,19 @@ class ItemStyle(BaseModel):
         if self.actual_instance is None:
             return "null"
 
-        if hasattr(self.actual_instance, "to_json") and callable(
-            self.actual_instance.to_json
-        ):
+        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
             return self.actual_instance.to_json()
         else:
             return json.dumps(self.actual_instance)
 
     def to_dict(
         self,
-    ) -> Optional[
-        Union[
-            Dict[str, Any],
-            AppCardStyle,
-            CardStyle,
-            ShapeStyle,
-            StickyNoteStyle,
-            TextStyle,
-        ]
-    ]:
+    ) -> Optional[Union[Dict[str, Any], AppCardStyle, CardStyle, ShapeStyle, StickyNoteStyle, TextStyle]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
 
-        if hasattr(self.actual_instance, "to_dict") and callable(
-            self.actual_instance.to_dict
-        ):
+        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
             return self.actual_instance.to_dict()
         else:
             # primitive type

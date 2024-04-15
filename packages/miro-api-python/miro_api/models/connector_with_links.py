@@ -59,16 +59,11 @@ class ConnectorWithLinks(BaseModel):
     )
     modified_by: Optional[ModifiedBy] = Field(default=None, alias="modifiedBy")
     shape: Optional[StrictStr] = Field(
-        default="curved",
-        description="The path type of the connector line, defines curvature. Default: curved.",
+        default="curved", description="The path type of the connector line, defines curvature. Default: curved."
     )
-    start_item: Optional[ItemConnectionWithLinks] = Field(
-        default=None, alias="startItem"
-    )
+    start_item: Optional[ItemConnectionWithLinks] = Field(default=None, alias="startItem")
     style: Optional[ConnectorStyle] = None
-    type: Optional[StrictStr] = Field(
-        default=None, description="Type of board object that is returned."
-    )
+    type: Optional[StrictStr] = Field(default=None, description="Type of board object that is returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "captions",
@@ -93,9 +88,7 @@ class ConnectorWithLinks(BaseModel):
             return value
 
         if value not in set(["straight", "elbowed", "curved"]):
-            raise ValueError(
-                "must be one of enum values ('straight', 'elbowed', 'curved')"
-            )
+            raise ValueError("must be one of enum values ('straight', 'elbowed', 'curved')")
         return value
 
     model_config = {
@@ -184,45 +177,23 @@ class ConnectorWithLinks(BaseModel):
         _obj = cls.model_validate(
             {
                 "captions": (
-                    [Caption.from_dict(_item) for _item in obj["captions"]]
-                    if obj.get("captions") is not None
-                    else None
+                    [Caption.from_dict(_item) for _item in obj["captions"]] if obj.get("captions") is not None else None
                 ),
                 "createdAt": obj.get("createdAt"),
-                "createdBy": (
-                    CreatedBy.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
+                "createdBy": CreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
                 "endItem": (
-                    ItemConnectionWithLinks.from_dict(obj["endItem"])
-                    if obj.get("endItem") is not None
-                    else None
+                    ItemConnectionWithLinks.from_dict(obj["endItem"]) if obj.get("endItem") is not None else None
                 ),
                 "id": obj.get("id"),
                 "isSupported": obj.get("isSupported"),
-                "links": (
-                    SelfLink.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None,
                 "modifiedAt": obj.get("modifiedAt"),
-                "modifiedBy": (
-                    ModifiedBy.from_dict(obj["modifiedBy"])
-                    if obj.get("modifiedBy") is not None
-                    else None
-                ),
+                "modifiedBy": ModifiedBy.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
                 "shape": obj.get("shape") if obj.get("shape") is not None else "curved",
                 "startItem": (
-                    ItemConnectionWithLinks.from_dict(obj["startItem"])
-                    if obj.get("startItem") is not None
-                    else None
+                    ItemConnectionWithLinks.from_dict(obj["startItem"]) if obj.get("startItem") is not None else None
                 ),
-                "style": (
-                    ConnectorStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
+                "style": ConnectorStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
                 "type": obj.get("type"),
             }
         )

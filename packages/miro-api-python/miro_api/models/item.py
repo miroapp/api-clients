@@ -158,49 +158,17 @@ class Item(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
-                "data": (
-                    ItemData.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    ItemStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-                "position": (
-                    Position.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-                "geometry": (
-                    Geometry.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
-                ),
-                "parent": (
-                    ParentWithLinks.from_dict(obj["parent"])
-                    if obj.get("parent") is not None
-                    else None
-                ),
+                "data": ItemData.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "style": ItemStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "position": Position.from_dict(obj["position"]) if obj.get("position") is not None else None,
+                "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
+                "parent": ParentWithLinks.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
                 "isSupported": obj.get("isSupported"),
-                "createdBy": (
-                    CreatedBy.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
+                "createdBy": CreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
                 "createdAt": obj.get("createdAt"),
-                "modifiedBy": (
-                    ModifiedBy.from_dict(obj["modifiedBy"])
-                    if obj.get("modifiedBy") is not None
-                    else None
-                ),
+                "modifiedBy": ModifiedBy.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
                 "modifiedAt": obj.get("modifiedAt"),
-                "links": (
-                    SelfLink.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None,
             }
         )
         # store additional fields in additional_properties

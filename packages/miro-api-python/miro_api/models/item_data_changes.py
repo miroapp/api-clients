@@ -36,9 +36,7 @@ class ItemDataChanges(BaseModel):
     # data type: ImageUrlDataChanges
     oneof_schema_2_validator: Optional[ImageUrlDataChanges] = None
     actual_instance: Optional[Union[AppCardData, ImageUrlDataChanges]] = None
-    one_of_schemas: List[str] = Field(
-        default=Literal["AppCardData", "ImageUrlDataChanges"]
-    )
+    one_of_schemas: List[str] = Field(default=Literal["AppCardData", "ImageUrlDataChanges"])
 
     model_config = {
         "validate_assignment": True,
@@ -48,13 +46,9 @@ class ItemDataChanges(BaseModel):
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError(
-                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
-                )
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
             if kwargs:
-                raise ValueError(
-                    "If a position argument is used, keyword arguments cannot be used."
-                )
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
@@ -74,9 +68,7 @@ class ItemDataChanges(BaseModel):
             match += 1
         # validate data type: ImageUrlDataChanges
         if not isinstance(v, ImageUrlDataChanges):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `ImageUrlDataChanges`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ImageUrlDataChanges`")
         else:
             match += 1
         if match > 1:
@@ -127,9 +119,7 @@ class ItemDataChanges(BaseModel):
 
         # Return one match that has least additional_properties
         if len(matches) > 1:
-            instance.actual_instance = sorted(
-                matches, key=lambda m: len(m.additional_properties)
-            )[0]
+            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
 
         return instance
 
@@ -138,23 +128,17 @@ class ItemDataChanges(BaseModel):
         if self.actual_instance is None:
             return "null"
 
-        if hasattr(self.actual_instance, "to_json") and callable(
-            self.actual_instance.to_json
-        ):
+        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
             return self.actual_instance.to_json()
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(
-        self,
-    ) -> Optional[Union[Dict[str, Any], AppCardData, ImageUrlDataChanges]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], AppCardData, ImageUrlDataChanges]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None
 
-        if hasattr(self.actual_instance, "to_dict") and callable(
-            self.actual_instance.to_dict
-        ):
+        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
             return self.actual_instance.to_dict()
         else:
             # primitive type

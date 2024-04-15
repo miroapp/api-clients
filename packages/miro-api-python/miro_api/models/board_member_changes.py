@@ -28,9 +28,7 @@ class BoardMemberChanges(BaseModel):
     BoardMemberChanges
     """  # noqa: E501
 
-    role: Optional[StrictStr] = Field(
-        default="commenter", description="Role of the board member."
-    )
+    role: Optional[StrictStr] = Field(default="commenter", description="Role of the board member.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["role"]
 
@@ -41,9 +39,7 @@ class BoardMemberChanges(BaseModel):
             return value
 
         if value not in set(["viewer", "commenter", "editor", "coowner", "owner"]):
-            raise ValueError(
-                "must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')"
-            )
+            raise ValueError("must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')")
         return value
 
     model_config = {
@@ -104,9 +100,7 @@ class BoardMemberChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"role": obj.get("role") if obj.get("role") is not None else "commenter"}
-        )
+        _obj = cls.model_validate({"role": obj.get("role") if obj.get("role") is not None else "commenter"})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

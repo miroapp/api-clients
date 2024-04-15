@@ -28,16 +28,12 @@ class FrameData(BaseModel):
     Contains frame item data, such as the title, frame type, or frame format.
     """  # noqa: E501
 
-    format: Optional[StrictStr] = Field(
-        default="custom", description="Only custom frames are supported at the moment."
-    )
+    format: Optional[StrictStr] = Field(default="custom", description="Only custom frames are supported at the moment.")
     title: Optional[StrictStr] = Field(
-        default=None,
-        description="Title of the frame. This title appears at the top of the frame.",
+        default=None, description="Title of the frame. This title appears at the top of the frame."
     )
     type: Optional[StrictStr] = Field(
-        default="freeform",
-        description="Only free form frames are supported at the moment.",
+        default="freeform", description="Only free form frames are supported at the moment."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["format", "title", "type"]
@@ -49,17 +45,7 @@ class FrameData(BaseModel):
             return value
 
         if value not in set(
-            [
-                "custom",
-                "desktop",
-                "phone",
-                "tablet",
-                "a4",
-                "letter",
-                "ratio_1x1",
-                "ratio_4x3",
-                "ratio_16x9",
-            ]
+            ["custom", "desktop", "phone", "tablet", "a4", "letter", "ratio_1x1", "ratio_4x3", "ratio_16x9"]
         ):
             raise ValueError(
                 "must be one of enum values ('custom', 'desktop', 'phone', 'tablet', 'a4', 'letter', 'ratio_1x1', 'ratio_4x3', 'ratio_16x9')"
@@ -73,9 +59,7 @@ class FrameData(BaseModel):
             return value
 
         if value not in set(["freeform", "heap", "grid", "rows", "columns"]):
-            raise ValueError(
-                "must be one of enum values ('freeform', 'heap', 'grid', 'rows', 'columns')"
-            )
+            raise ValueError("must be one of enum values ('freeform', 'heap', 'grid', 'rows', 'columns')")
         return value
 
     model_config = {
@@ -138,9 +122,7 @@ class FrameData(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "format": (
-                    obj.get("format") if obj.get("format") is not None else "custom"
-                ),
+                "format": obj.get("format") if obj.get("format") is not None else "custom",
                 "title": obj.get("title"),
                 "type": obj.get("type") if obj.get("type") is not None else "freeform",
             }

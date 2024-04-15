@@ -31,13 +31,9 @@ class TagWithLinks(BaseModel):
 
     id: StrictStr = Field(description="Unique identifier of the tag.")
     title: StrictStr = Field(description="Text of the tag")
-    fill_color: StrictStr = Field(
-        description="Background color of the tag.", alias="fillColor"
-    )
+    fill_color: StrictStr = Field(description="Background color of the tag.", alias="fillColor")
     links: Optional[SelfLink] = None
-    type: StrictStr = Field(
-        description="Type of the object that is returned. In this case, type returns `tag`."
-    )
+    type: StrictStr = Field(description="Type of the object that is returned. In this case, type returns `tag`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "title", "fillColor", "links", "type"]
 
@@ -131,11 +127,7 @@ class TagWithLinks(BaseModel):
                 "id": obj.get("id"),
                 "title": obj.get("title"),
                 "fillColor": obj.get("fillColor"),
-                "links": (
-                    SelfLink.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None,
                 "type": obj.get("type"),
             }
         )

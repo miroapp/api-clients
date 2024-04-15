@@ -31,9 +31,7 @@ class MindmapData(BaseModel):
 
     node_view: Optional[MindmapNodeView] = Field(default=None, alias="nodeView")
     is_root: Optional[StrictBool] = Field(
-        default=None,
-        description="Indicates whether this node is the root of the mind map.",
-        alias="isRoot",
+        default=None, description="Indicates whether this node is the root of the mind map.", alias="isRoot"
     )
     direction: Optional[StrictStr] = Field(
         default=None,
@@ -115,11 +113,7 @@ class MindmapData(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "nodeView": (
-                    MindmapNodeView.from_dict(obj["nodeView"])
-                    if obj.get("nodeView") is not None
-                    else None
-                ),
+                "nodeView": MindmapNodeView.from_dict(obj["nodeView"]) if obj.get("nodeView") is not None else None,
                 "isRoot": obj.get("isRoot"),
                 "direction": obj.get("direction"),
             }

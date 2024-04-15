@@ -44,9 +44,7 @@ class GetBoardItemContentLogsResponse(BaseModel):
         default=None,
         description="Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch. ",
     )
-    type: Optional[StrictStr] = Field(
-        default="cursor-list", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default="cursor-list", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["limit", "size", "data", "cursor", "type"]
 
@@ -125,9 +123,7 @@ class GetBoardItemContentLogsResponse(BaseModel):
                     else None
                 ),
                 "cursor": obj.get("cursor"),
-                "type": (
-                    obj.get("type") if obj.get("type") is not None else "cursor-list"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "cursor-list",
             }
         )
         # store additional fields in additional_properties

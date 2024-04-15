@@ -29,9 +29,7 @@ class ParentWithLinks(BaseModel):
     Contains information about the parent this item attached to.
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier (ID) of a container item."
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of a container item.")
     links: Optional[SelfLink] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "links"]
@@ -98,14 +96,7 @@ class ParentWithLinks(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "id": obj.get("id"),
-                "links": (
-                    SelfLink.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
-            }
+            {"id": obj.get("id"), "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

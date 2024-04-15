@@ -109,15 +109,7 @@ class RESTClientObject:
         else:
             self.pool_manager = urllib3.PoolManager(**pool_args)
 
-    def request(
-        self,
-        method,
-        url,
-        headers=None,
-        body=None,
-        post_params=None,
-        _request_timeout=None,
-    ):
+    def request(self, method, url, headers=None, body=None, post_params=None, _request_timeout=None):
         """Perform requests.
 
         :param method: http request method
@@ -136,9 +128,7 @@ class RESTClientObject:
         assert method in ["GET", "HEAD", "DELETE", "POST", "PUT", "PATCH", "OPTIONS"]
 
         if post_params and body:
-            raise ApiValueError(
-                "body parameter cannot be used with post_params parameter."
-            )
+            raise ApiValueError("body parameter cannot be used with post_params parameter.")
 
         post_params = post_params or {}
         headers = headers or {}
@@ -148,9 +138,7 @@ class RESTClientObject:
             if isinstance(_request_timeout, (int, float)):
                 timeout = urllib3.Timeout(total=_request_timeout)
             elif isinstance(_request_timeout, tuple) and len(_request_timeout) == 2:
-                timeout = urllib3.Timeout(
-                    connect=_request_timeout[0], read=_request_timeout[1]
-                )
+                timeout = urllib3.Timeout(connect=_request_timeout[0], read=_request_timeout[1])
 
         try:
             # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
@@ -163,12 +151,7 @@ class RESTClientObject:
                     if body is not None:
                         request_body = json.dumps(body)
                     r = self.pool_manager.request(
-                        method,
-                        url,
-                        body=request_body,
-                        timeout=timeout,
-                        headers=headers,
-                        preload_content=False,
+                        method, url, body=request_body, timeout=timeout, headers=headers, preload_content=False
                     )
                 elif content_type == "application/x-www-form-urlencoded":
                     r = self.pool_manager.request(
@@ -199,22 +182,12 @@ class RESTClientObject:
                 # provided in serialized form.
                 elif isinstance(body, str) or isinstance(body, bytes):
                     r = self.pool_manager.request(
-                        method,
-                        url,
-                        body=body,
-                        timeout=timeout,
-                        headers=headers,
-                        preload_content=False,
+                        method, url, body=body, timeout=timeout, headers=headers, preload_content=False
                     )
                 elif headers["Content-Type"] == "text/plain" and isinstance(body, bool):
                     request_body = "true" if body else "false"
                     r = self.pool_manager.request(
-                        method,
-                        url,
-                        body=request_body,
-                        preload_content=False,
-                        timeout=timeout,
-                        headers=headers,
+                        method, url, body=request_body, preload_content=False, timeout=timeout, headers=headers
                     )
                 else:
                     # Cannot generate the request from given parameters
@@ -225,12 +198,7 @@ class RESTClientObject:
             # For `GET`, `HEAD`
             else:
                 r = self.pool_manager.request(
-                    method,
-                    url,
-                    fields={},
-                    timeout=timeout,
-                    headers=headers,
-                    preload_content=False,
+                    method, url, fields={}, timeout=timeout, headers=headers, preload_content=False
                 )
         except urllib3.exceptions.SSLError as e:
             msg = "\n".join([type(e).__name__, str(e)])

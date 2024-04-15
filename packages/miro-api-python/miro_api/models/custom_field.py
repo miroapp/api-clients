@@ -34,9 +34,7 @@ class CustomField(BaseModel):
         alias="fillColor",
     )
     icon_shape: Optional[StrictStr] = Field(
-        default="round",
-        description="The shape of the icon on the preview field.",
-        alias="iconShape",
+        default="round", description="The shape of the icon on the preview field.", alias="iconShape"
     )
     icon_url: Optional[StrictStr] = Field(
         default=None,
@@ -57,14 +55,7 @@ class CustomField(BaseModel):
         description="The actual data value of the custom field. It can be any type of information that you want to convey.",
     )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "fillColor",
-        "iconShape",
-        "iconUrl",
-        "textColor",
-        "tooltip",
-        "value",
-    ]
+    __properties: ClassVar[List[str]] = ["fillColor", "iconShape", "iconUrl", "textColor", "tooltip", "value"]
 
     @field_validator("icon_shape")
     def icon_shape_validate_enum(cls, value):
@@ -137,11 +128,7 @@ class CustomField(BaseModel):
         _obj = cls.model_validate(
             {
                 "fillColor": obj.get("fillColor"),
-                "iconShape": (
-                    obj.get("iconShape")
-                    if obj.get("iconShape") is not None
-                    else "round"
-                ),
+                "iconShape": obj.get("iconShape") if obj.get("iconShape") is not None else "round",
                 "iconUrl": obj.get("iconUrl"),
                 "textColor": obj.get("textColor"),
                 "tooltip": obj.get("tooltip"),

@@ -30,9 +30,7 @@ class BoardMember(BaseModel):
 
     id: StrictStr = Field(description="Unique identifier (ID) of the user.")
     name: StrictStr = Field(description="Name of the user.")
-    role: Optional[StrictStr] = Field(
-        default=None, description="Role of the board member."
-    )
+    role: Optional[StrictStr] = Field(default=None, description="Role of the board member.")
     type: StrictStr = Field(
         description="Type of the object that is returned. In this case, `type` returns `board_member`."
     )
@@ -46,9 +44,7 @@ class BoardMember(BaseModel):
             return value
 
         if value not in set(["viewer", "commenter", "editor", "coowner", "owner"]):
-            raise ValueError(
-                "must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')"
-            )
+            raise ValueError("must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')")
         return value
 
     model_config = {
@@ -110,12 +106,7 @@ class BoardMember(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "id": obj.get("id"),
-                "name": obj.get("name"),
-                "role": obj.get("role"),
-                "type": obj.get("type"),
-            }
+            {"id": obj.get("id"), "name": obj.get("name"), "role": obj.get("role"), "type": obj.get("type")}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

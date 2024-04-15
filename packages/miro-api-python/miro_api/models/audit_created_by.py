@@ -41,9 +41,7 @@ class AuditCreatedBy(BaseModel):
         if value is None:
             return value
 
-        if value not in set(
-            ["user", "application", "scim_provisioner", "miro_automation"]
-        ):
+        if value not in set(["user", "application", "scim_provisioner", "miro_automation"]):
             raise ValueError(
                 "must be one of enum values ('user', 'application', 'scim_provisioner', 'miro_automation')"
             )
@@ -108,12 +106,7 @@ class AuditCreatedBy(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "type": obj.get("type"),
-                "id": obj.get("id"),
-                "name": obj.get("name"),
-                "email": obj.get("email"),
-            }
+            {"type": obj.get("type"), "id": obj.get("id"), "name": obj.get("name"), "email": obj.get("email")}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

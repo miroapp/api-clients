@@ -29,12 +29,8 @@ class GetBoards400Response(BaseModel):
     """  # noqa: E501
 
     code: Optional[StrictStr] = Field(default=None, description="Code of the error")
-    message: Optional[StrictStr] = Field(
-        default=None, description="Description of the error"
-    )
-    status: Optional[StrictInt] = Field(
-        default=None, description="Status code of the error"
-    )
+    message: Optional[StrictStr] = Field(default=None, description="Description of the error")
+    status: Optional[StrictInt] = Field(default=None, description="Status code of the error")
     type: Optional[StrictStr] = Field(default=None, description="Type of the error")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["code", "message", "status", "type"]

@@ -30,32 +30,22 @@ class AppCardData(BaseModel):
     """  # noqa: E501
 
     description: Optional[StrictStr] = Field(
-        default=None,
-        description="A short text description to add context about the app card.",
+        default=None, description="A short text description to add context about the app card."
     )
     fields: Optional[List[CustomField]] = Field(
         default=None,
         description="Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.",
     )
     owned: Optional[StrictBool] = Field(
-        default=None,
-        description="Defines whether the card is owned by the application making the call.",
+        default=None, description="Defines whether the card is owned by the application making the call."
     )
     status: Optional[StrictStr] = Field(
         default=None,
         description="Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
     )
-    title: Optional[StrictStr] = Field(
-        default=None, description="A short text header to identify the app card."
-    )
+    title: Optional[StrictStr] = Field(default=None, description="A short text header to identify the app card.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "description",
-        "fields",
-        "owned",
-        "status",
-        "title",
-    ]
+    __properties: ClassVar[List[str]] = ["description", "fields", "owned", "status", "title"]
 
     @field_validator("status")
     def status_validate_enum(cls, value):
@@ -64,9 +54,7 @@ class AppCardData(BaseModel):
             return value
 
         if value not in set(["disconnected", "connected", "disabled"]):
-            raise ValueError(
-                "must be one of enum values ('disconnected', 'connected', 'disabled')"
-            )
+            raise ValueError("must be one of enum values ('disconnected', 'connected', 'disabled')")
         return value
 
     model_config = {
@@ -138,9 +126,7 @@ class AppCardData(BaseModel):
             {
                 "description": obj.get("description"),
                 "fields": (
-                    [CustomField.from_dict(_item) for _item in obj["fields"]]
-                    if obj.get("fields") is not None
-                    else None
+                    [CustomField.from_dict(_item) for _item in obj["fields"]] if obj.get("fields") is not None else None
                 ),
                 "owned": obj.get("owned"),
                 "status": obj.get("status"),

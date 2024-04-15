@@ -97,9 +97,7 @@ class TeamSharingPolicySettings(BaseModel):
             return value
 
         if value not in set(["company_admins", "admins", "all_members"]):
-            raise ValueError(
-                "must be one of enum values ('company_admins', 'admins', 'all_members')"
-            )
+            raise ValueError("must be one of enum values ('company_admins', 'admins', 'all_members')")
         return value
 
     @field_validator("default_board_access")
@@ -109,9 +107,7 @@ class TeamSharingPolicySettings(BaseModel):
             return value
 
         if value not in set(["private", "view", "comment", "edit"]):
-            raise ValueError(
-                "must be one of enum values ('private', 'view', 'comment', 'edit')"
-            )
+            raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
         return value
 
     @field_validator("default_organization_access")
@@ -121,9 +117,7 @@ class TeamSharingPolicySettings(BaseModel):
             return value
 
         if value not in set(["private", "view", "comment", "edit"]):
-            raise ValueError(
-                "must be one of enum values ('private', 'view', 'comment', 'edit')"
-            )
+            raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
         return value
 
     @field_validator("default_project_access")
@@ -152,12 +146,8 @@ class TeamSharingPolicySettings(BaseModel):
         if value is None:
             return value
 
-        if value not in set(
-            ["enabled", "enabled_with_external_user_access", "disabled"]
-        ):
-            raise ValueError(
-                "must be one of enum values ('enabled', 'enabled_with_external_user_access', 'disabled')"
-            )
+        if value not in set(["enabled", "enabled_with_external_user_access", "disabled"]):
+            raise ValueError("must be one of enum values ('enabled', 'enabled_with_external_user_access', 'disabled')")
         return value
 
     @field_validator("sharing_on_account")
@@ -177,9 +167,7 @@ class TeamSharingPolicySettings(BaseModel):
             return value
 
         if value not in set(["allowed", "allowed_with_editing", "not_allowed"]):
-            raise ValueError(
-                "must be one of enum values ('allowed', 'allowed_with_editing', 'not_allowed')"
-            )
+            raise ValueError("must be one of enum values ('allowed', 'allowed_with_editing', 'not_allowed')")
         return value
 
     @field_validator("sharing_via_public_link")
@@ -189,9 +177,7 @@ class TeamSharingPolicySettings(BaseModel):
             return value
 
         if value not in set(["allowed", "allowed_with_editing", "not_allowed"]):
-            raise ValueError(
-                "must be one of enum values ('allowed', 'allowed_with_editing', 'not_allowed')"
-            )
+            raise ValueError("must be one of enum values ('allowed', 'allowed_with_editing', 'not_allowed')")
         return value
 
     model_config = {

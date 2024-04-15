@@ -39,13 +39,7 @@ class TextUpdateRequest(BaseModel):
     geometry: Optional[WidthOnlyAdjustableGeometry] = None
     parent: Optional[Parent] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "data",
-        "style",
-        "position",
-        "geometry",
-        "parent",
-    ]
+    __properties: ClassVar[List[str]] = ["data", "style", "position", "geometry", "parent"]
 
     model_config = {
         "populate_by_name": True,
@@ -122,31 +116,13 @@ class TextUpdateRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "data": (
-                    TextData.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    TextStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-                "position": (
-                    PositionChange.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
+                "data": TextData.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "style": TextStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "geometry": (
-                    WidthOnlyAdjustableGeometry.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
+                    WidthOnlyAdjustableGeometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None
                 ),
-                "parent": (
-                    Parent.from_dict(obj["parent"])
-                    if obj.get("parent") is not None
-                    else None
-                ),
+                "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
             }
         )
         # store additional fields in additional_properties

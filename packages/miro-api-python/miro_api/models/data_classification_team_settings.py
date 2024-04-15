@@ -29,16 +29,11 @@ class DataClassificationTeamSettings(BaseModel):
     """  # noqa: E501
 
     default_label_id: Optional[StrictStr] = Field(
-        default=None,
-        description="Data classification default label id",
-        alias="defaultLabelId",
+        default=None, description="Data classification default label id", alias="defaultLabelId"
     )
-    enabled: Optional[StrictBool] = Field(
-        default=None, description="Data classification enabled for team"
-    )
+    enabled: Optional[StrictBool] = Field(default=None, description="Data classification enabled for team")
     type: Optional[StrictStr] = Field(
-        default="team-data-classification-settings",
-        description="Type of the object returned.",
+        default="team-data-classification-settings", description="Type of the object returned."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["defaultLabelId", "enabled", "type"]
@@ -105,11 +100,7 @@ class DataClassificationTeamSettings(BaseModel):
             {
                 "defaultLabelId": obj.get("defaultLabelId"),
                 "enabled": obj.get("enabled"),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "team-data-classification-settings"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "team-data-classification-settings",
             }
         )
         # store additional fields in additional_properties

@@ -33,8 +33,7 @@ class InvitationResult(BaseModel):
         default=None, description="Contains information about the invites that failed."
     )
     successful: Optional[List[StrictInt]] = Field(
-        default=None,
-        description="Contains information about the invites that were successfully sent.",
+        default=None, description="Contains information about the invites that were successfully sent."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["failed", "successful"]

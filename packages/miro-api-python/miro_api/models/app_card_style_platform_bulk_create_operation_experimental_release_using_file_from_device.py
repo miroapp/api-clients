@@ -23,9 +23,7 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class AppCardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class AppCardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains information about the style of an app card item, such as the fill color.
     """  # noqa: E501

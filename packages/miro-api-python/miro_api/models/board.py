@@ -42,9 +42,7 @@ class Board(BaseModel):
         alias="createdAt",
     )
     created_by: Optional[UserInfoShort] = Field(default=None, alias="createdBy")
-    current_user_membership: Optional[BoardMember] = Field(
-        default=None, alias="currentUserMembership"
-    )
+    current_user_membership: Optional[BoardMember] = Field(default=None, alias="currentUserMembership")
     description: StrictStr = Field(description="Description of the board.")
     id: StrictStr = Field(description="Unique identifier (ID) of the board.")
     last_opened_at: Optional[datetime] = Field(
@@ -52,9 +50,7 @@ class Board(BaseModel):
         description="Date and time when the board was last opened by any user. This information is only available when the boards are sorted by `last_opened`. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
         alias="lastOpenedAt",
     )
-    last_opened_by: Optional[UserInfoLastOpenedBy] = Field(
-        default=None, alias="lastOpenedBy"
-    )
+    last_opened_by: Optional[UserInfoLastOpenedBy] = Field(default=None, alias="lastOpenedBy")
     modified_at: Optional[datetime] = Field(
         default=None,
         description="Date and time when the board was last modified. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
@@ -67,12 +63,8 @@ class Board(BaseModel):
     policy: Optional[BoardPolicy] = None
     team: Optional[Team] = None
     project: Optional[Project] = None
-    type: StrictStr = Field(
-        description="Type of the object that is returned. In this case, type returns `board`."
-    )
-    view_link: Optional[StrictStr] = Field(
-        default=None, description="URL to view the board.", alias="viewLink"
-    )
+    type: StrictStr = Field(description="Type of the object that is returned. In this case, type returns `board`.")
+    view_link: Optional[StrictStr] = Field(default=None, description="URL to view the board.", alias="viewLink")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "createdAt",
@@ -182,11 +174,7 @@ class Board(BaseModel):
         _obj = cls.model_validate(
             {
                 "createdAt": obj.get("createdAt"),
-                "createdBy": (
-                    UserInfoShort.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
+                "createdBy": UserInfoShort.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
                 "currentUserMembership": (
                     BoardMember.from_dict(obj["currentUserMembership"])
                     if obj.get("currentUserMembership") is not None
@@ -196,40 +184,16 @@ class Board(BaseModel):
                 "id": obj.get("id"),
                 "lastOpenedAt": obj.get("lastOpenedAt"),
                 "lastOpenedBy": (
-                    UserInfoLastOpenedBy.from_dict(obj["lastOpenedBy"])
-                    if obj.get("lastOpenedBy") is not None
-                    else None
+                    UserInfoLastOpenedBy.from_dict(obj["lastOpenedBy"]) if obj.get("lastOpenedBy") is not None else None
                 ),
                 "modifiedAt": obj.get("modifiedAt"),
-                "modifiedBy": (
-                    UserInfoShort.from_dict(obj["modifiedBy"])
-                    if obj.get("modifiedBy") is not None
-                    else None
-                ),
+                "modifiedBy": UserInfoShort.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
                 "name": obj.get("name"),
-                "owner": (
-                    UserInfoShort.from_dict(obj["owner"])
-                    if obj.get("owner") is not None
-                    else None
-                ),
-                "picture": (
-                    Picture.from_dict(obj["picture"])
-                    if obj.get("picture") is not None
-                    else None
-                ),
-                "policy": (
-                    BoardPolicy.from_dict(obj["policy"])
-                    if obj.get("policy") is not None
-                    else None
-                ),
-                "team": (
-                    Team.from_dict(obj["team"]) if obj.get("team") is not None else None
-                ),
-                "project": (
-                    Project.from_dict(obj["project"])
-                    if obj.get("project") is not None
-                    else None
-                ),
+                "owner": UserInfoShort.from_dict(obj["owner"]) if obj.get("owner") is not None else None,
+                "picture": Picture.from_dict(obj["picture"]) if obj.get("picture") is not None else None,
+                "policy": BoardPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
+                "team": Team.from_dict(obj["team"]) if obj.get("team") is not None else None,
+                "project": Project.from_dict(obj["project"]) if obj.get("project") is not None else None,
                 "type": obj.get("type"),
                 "viewLink": obj.get("viewLink"),
             }

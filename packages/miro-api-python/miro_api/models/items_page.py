@@ -36,21 +36,12 @@ class ItemsPage(BaseModel):
     limit: StrictInt = Field(
         description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response."
     )
-    total: StrictInt = Field(
-        description="Total number of results available for the given request."
-    )
+    total: StrictInt = Field(description="Total number of results available for the given request.")
     data: List[Item] = Field(description="Contains the result data.")
     links: PageLinks
     type: StrictStr = Field(description="Type of the object.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "size",
-        "limit",
-        "total",
-        "data",
-        "links",
-        "type",
-    ]
+    __properties: ClassVar[List[str]] = ["size", "limit", "total", "data", "links", "type"]
 
     model_config = {
         "populate_by_name": True,
@@ -125,16 +116,8 @@ class ItemsPage(BaseModel):
                 "size": obj.get("size"),
                 "limit": obj.get("limit"),
                 "total": obj.get("total"),
-                "data": (
-                    [Item.from_dict(_item) for _item in obj["data"]]
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "links": (
-                    PageLinks.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "data": [Item.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
+                "links": PageLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
                 "type": obj.get("type"),
             }
         )

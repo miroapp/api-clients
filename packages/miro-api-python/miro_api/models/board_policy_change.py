@@ -30,12 +30,8 @@ class BoardPolicyChange(BaseModel):
     Defines the permissions policies and sharing policies for the board.
     """  # noqa: E501
 
-    permissions_policy: Optional[BoardPermissionsPolicy] = Field(
-        default=None, alias="permissionsPolicy"
-    )
-    sharing_policy: Optional[BoardSharingPolicyChange] = Field(
-        default=None, alias="sharingPolicy"
-    )
+    permissions_policy: Optional[BoardPermissionsPolicy] = Field(default=None, alias="permissionsPolicy")
+    sharing_policy: Optional[BoardSharingPolicyChange] = Field(default=None, alias="sharingPolicy")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["permissionsPolicy", "sharingPolicy"]
 

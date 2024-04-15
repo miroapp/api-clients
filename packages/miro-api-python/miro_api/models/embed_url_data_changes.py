@@ -112,13 +112,7 @@ class EmbedUrlDataChanges(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "mode": obj.get("mode"),
-                "previewUrl": obj.get("previewUrl"),
-                "url": obj.get("url"),
-            }
-        )
+        _obj = cls.model_validate({"mode": obj.get("mode"), "previewUrl": obj.get("previewUrl"), "url": obj.get("url")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

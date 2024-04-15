@@ -30,13 +30,9 @@ class BoardExportResult(BaseModel):
     """  # noqa: E501
 
     job_id: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique identifier of the board export job.",
-        alias="jobId",
+        default=None, description="Unique identifier of the board export job.", alias="jobId"
     )
-    results: Optional[List[BoardExportTaskResult]] = Field(
-        default=None, description="Board export task results."
-    )
+    results: Optional[List[BoardExportTaskResult]] = Field(default=None, description="Board export task results.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["jobId", "results"]
 

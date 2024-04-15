@@ -28,9 +28,7 @@ class BoardExportJobId(BaseModel):
     BoardExportJobId
     """  # noqa: E501
 
-    job_id: StrictStr = Field(
-        description="Unique identifier of the board export job.", alias="jobId"
-    )
+    job_id: StrictStr = Field(description="Unique identifier of the board export job.", alias="jobId")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["jobId"]
 

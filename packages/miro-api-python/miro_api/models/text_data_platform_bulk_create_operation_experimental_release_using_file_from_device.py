@@ -23,16 +23,12 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class TextDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class TextDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).
     """  # noqa: E501
 
-    content: StrictStr = Field(
-        description="The actual text (content) that appears in the text item."
-    )
+    content: StrictStr = Field(description="The actual text (content) that appears in the text item.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content"]
 

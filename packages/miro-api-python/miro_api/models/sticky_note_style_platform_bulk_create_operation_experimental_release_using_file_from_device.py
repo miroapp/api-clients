@@ -23,17 +23,13 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class StickyNoteStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains information about the style of a sticky note item, such as the fill color or text alignment.
     """  # noqa: E501
 
     fill_color: Optional[StrictStr] = Field(
-        default=None,
-        description="Fill color for the sticky note. Default: `light_yellow`.",
-        alias="fillColor",
+        default=None, description="Fill color for the sticky note. Default: `light_yellow`.", alias="fillColor"
     )
     text_align: Optional[StrictStr] = Field(
         default=None,

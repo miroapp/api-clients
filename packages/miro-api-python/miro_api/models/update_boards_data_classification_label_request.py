@@ -29,9 +29,7 @@ class UpdateBoardsDataClassificationLabelRequest(BaseModel):
     """  # noqa: E501
 
     label_id: Optional[StrictInt] = Field(
-        default=None,
-        description="Data classification label id for team",
-        alias="labelId",
+        default=None, description="Data classification label id for team", alias="labelId"
     )
     not_classified_only: Optional[StrictBool] = Field(
         default=None,
@@ -99,12 +97,7 @@ class UpdateBoardsDataClassificationLabelRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "labelId": obj.get("labelId"),
-                "notClassifiedOnly": obj.get("notClassifiedOnly"),
-            }
-        )
+        _obj = cls.model_validate({"labelId": obj.get("labelId"), "notClassifiedOnly": obj.get("notClassifiedOnly")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

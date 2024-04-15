@@ -30,9 +30,7 @@ class ItemPagedResponse(BaseModel):
     ItemPagedResponse
     """  # noqa: E501
 
-    data: Optional[List[GenericItem]] = Field(
-        default=None, description="Contains the result data."
-    )
+    data: Optional[List[GenericItem]] = Field(default=None, description="Contains the result data.")
     limit: Optional[StrictInt] = Field(
         default=None,
         description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `30` results, and the request has the offset set to `0` and the `limit` set to `20`, the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the offset parameter. In this example, you will set the offset parameter to 20 as the offset is zero-based. ",
@@ -52,15 +50,7 @@ class ItemPagedResponse(BaseModel):
     )
     type: Optional[StrictStr] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "data",
-        "limit",
-        "links",
-        "offset",
-        "size",
-        "total",
-        "type",
-    ]
+    __properties: ClassVar[List[str]] = ["data", "limit", "links", "offset", "size", "total", "type"]
 
     model_config = {
         "populate_by_name": True,
@@ -133,16 +123,10 @@ class ItemPagedResponse(BaseModel):
         _obj = cls.model_validate(
             {
                 "data": (
-                    [GenericItem.from_dict(_item) for _item in obj["data"]]
-                    if obj.get("data") is not None
-                    else None
+                    [GenericItem.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
                 ),
                 "limit": obj.get("limit"),
-                "links": (
-                    PageLinks.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "links": PageLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
                 "offset": obj.get("offset"),
                 "size": obj.get("size"),
                 "total": obj.get("total"),

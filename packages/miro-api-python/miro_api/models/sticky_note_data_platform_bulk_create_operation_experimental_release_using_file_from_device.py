@@ -23,16 +23,13 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains sticky note item data, such as the content or shape of the sticky note.
     """  # noqa: E501
 
     content: Optional[StrictStr] = Field(
-        default=None,
-        description="The actual text (content) that appears in the sticky note item.",
+        default=None, description="The actual text (content) that appears in the sticky note item."
     )
     shape: Optional[StrictStr] = Field(
         default="square",
@@ -110,10 +107,7 @@ class StickyNoteDataPlatformBulkCreateOperationExperimentalReleaseUsingFileFromD
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "content": obj.get("content"),
-                "shape": obj.get("shape") if obj.get("shape") is not None else "square",
-            }
+            {"content": obj.get("content"), "shape": obj.get("shape") if obj.get("shape") is not None else "square"}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

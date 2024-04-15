@@ -33,9 +33,7 @@ class GenericSubscriptionsCursorPaged(BaseModel):
         default=None,
         description="A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the value returned in this parameter.",
     )
-    data: Optional[List[GenericSubscription]] = Field(
-        default=None, description="Contains the result data."
-    )
+    data: Optional[List[GenericSubscription]] = Field(default=None, description="Contains the result data.")
     limit: Optional[StrictInt] = Field(
         default=None,
         description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.",

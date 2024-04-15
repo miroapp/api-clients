@@ -29,9 +29,7 @@ class UpdateProjectSettingsRequest(BaseModel):
     UpdateProjectSettingsRequest
     """  # noqa: E501
 
-    sharing_policy_settings: Optional[SharingPolicySettings] = Field(
-        default=None, alias="sharingPolicySettings"
-    )
+    sharing_policy_settings: Optional[SharingPolicySettings] = Field(default=None, alias="sharingPolicySettings")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["sharingPolicySettings"]
 

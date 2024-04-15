@@ -30,20 +30,14 @@ class AuditPage(BaseModel):
     """  # noqa: E501
 
     type: Optional[StrictStr] = Field(
-        default=None,
-        description="Type of the response, in this case it's always 'cursor-list'",
+        default=None, description="Type of the response, in this case it's always 'cursor-list'"
     )
     limit: Optional[StrictInt] = Field(default=None, description="Page limit")
-    size: Optional[StrictInt] = Field(
-        default=None, description="Item count in current page"
-    )
+    size: Optional[StrictInt] = Field(default=None, description="Item count in current page")
     cursor: Optional[StrictStr] = Field(
-        default=None,
-        description="The key that should be used as the cursor request parameter to fetch the next page",
+        default=None, description="The key that should be used as the cursor request parameter to fetch the next page"
     )
-    content: Optional[List[AuditEvent]] = Field(
-        default=None, description="Audit events list"
-    )
+    content: Optional[List[AuditEvent]] = Field(default=None, description="Audit events list")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["type", "limit", "size", "cursor", "content"]
 

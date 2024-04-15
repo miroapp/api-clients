@@ -28,12 +28,9 @@ class ShapeDataPlatformTags(BaseModel):
     Contains shape item data, such as the content or shape type of the shape.
     """  # noqa: E501
 
-    content: Optional[StrictStr] = Field(
-        default=None, description="The text you want to display on the shape."
-    )
+    content: Optional[StrictStr] = Field(default=None, description="The text you want to display on the shape.")
     shape: Optional[StrictStr] = Field(
-        default="rectangle",
-        description="Defines the geometric shape of the item when it is rendered on the board.",
+        default="rectangle", description="Defines the geometric shape of the item when it is rendered on the board."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["content", "shape"]
@@ -133,12 +130,7 @@ class ShapeDataPlatformTags(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "content": obj.get("content"),
-                "shape": (
-                    obj.get("shape") if obj.get("shape") is not None else "rectangle"
-                ),
-            }
+            {"content": obj.get("content"), "shape": obj.get("shape") if obj.get("shape") is not None else "rectangle"}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

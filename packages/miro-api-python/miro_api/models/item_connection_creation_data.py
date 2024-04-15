@@ -49,9 +49,7 @@ class ItemConnectionCreationData(BaseModel):
             return value
 
         if value not in set(["auto", "top", "right", "bottom", "left"]):
-            raise ValueError(
-                "must be one of enum values ('auto', 'top', 'right', 'bottom', 'left')"
-            )
+            raise ValueError("must be one of enum values ('auto', 'top', 'right', 'bottom', 'left')")
         return value
 
     model_config = {
@@ -118,11 +116,7 @@ class ItemConnectionCreationData(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
-                "position": (
-                    RelativeOffset.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
+                "position": RelativeOffset.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "snapTo": obj.get("snapTo"),
             }
         )

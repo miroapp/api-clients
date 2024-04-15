@@ -99,13 +99,7 @@ class GetTagsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "tags": (
-                    [Tag.from_dict(_item) for _item in obj["tags"]]
-                    if obj.get("tags") is not None
-                    else None
-                )
-            }
+            {"tags": [Tag.from_dict(_item) for _item in obj["tags"]] if obj.get("tags") is not None else None}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():
