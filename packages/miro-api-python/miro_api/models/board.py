@@ -22,8 +22,8 @@ from pydantic import BaseModel, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.board_member import BoardMember
 from miro_api.models.board_policy import BoardPolicy
+from miro_api.models.board_project import BoardProject
 from miro_api.models.picture import Picture
-from miro_api.models.project import Project
 from miro_api.models.team import Team
 from miro_api.models.user_info_last_opened_by import UserInfoLastOpenedBy
 from miro_api.models.user_info_short import UserInfoShort
@@ -62,7 +62,7 @@ class Board(BaseModel):
     picture: Optional[Picture] = None
     policy: Optional[BoardPolicy] = None
     team: Optional[Team] = None
-    project: Optional[Project] = None
+    project: Optional[BoardProject] = None
     type: StrictStr = Field(description="Type of the object that is returned. In this case, type returns `board`.")
     view_link: Optional[StrictStr] = Field(default=None, description="URL to view the board.", alias="viewLink")
     additional_properties: Dict[str, Any] = {}
@@ -193,7 +193,7 @@ class Board(BaseModel):
                 "picture": Picture.from_dict(obj["picture"]) if obj.get("picture") is not None else None,
                 "policy": BoardPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
                 "team": Team.from_dict(obj["team"]) if obj.get("team") is not None else None,
-                "project": Project.from_dict(obj["project"]) if obj.get("project") is not None else None,
+                "project": BoardProject.from_dict(obj["project"]) if obj.get("project") is not None else None,
                 "type": obj.get("type"),
                 "viewLink": obj.get("viewLink"),
             }

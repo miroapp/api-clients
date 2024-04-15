@@ -13,8 +13,8 @@
 import {BoardLinks} from './boardLinks'
 import {BoardMember} from './boardMember'
 import {BoardPolicy} from './boardPolicy'
+import {BoardProject} from './boardProject'
 import {Picture} from './picture'
-import {Project} from './project'
 import {Team} from './team'
 import {UserInfoShort} from './userInfoShort'
 
@@ -32,7 +32,7 @@ export class BoardWithLinks {
    */
   'description': string
   'team'?: Team
-  'project'?: Project
+  'project'?: BoardProject
   'picture'?: Picture
   'policy'?: BoardPolicy
   /**
@@ -85,7 +85,7 @@ export class BoardWithLinks {
     {
       name: 'project',
       baseName: 'project',
-      type: 'Project',
+      type: 'BoardProject',
     },
     {
       name: 'picture',

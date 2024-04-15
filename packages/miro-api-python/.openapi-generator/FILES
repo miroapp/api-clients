@@ -83,6 +83,7 @@ miro_api/docs/BoardMembersPagedResponse.md
 miro_api/docs/BoardPermissionsPolicy.md
 miro_api/docs/BoardPolicy.md
 miro_api/docs/BoardPolicyChange.md
+miro_api/docs/BoardProject.md
 miro_api/docs/BoardSharingPolicy.md
 miro_api/docs/BoardSharingPolicyChange.md
 miro_api/docs/BoardSubscription.md
@@ -411,6 +412,7 @@ miro_api/models/board_members_paged_response.py
 miro_api/models/board_permissions_policy.py
 miro_api/models/board_policy.py
 miro_api/models/board_policy_change.py
+miro_api/models/board_project.py
 miro_api/models/board_sharing_policy.py
 miro_api/models/board_sharing_policy_change.py
 miro_api/models/board_subscription.py
@@ -721,6 +723,7 @@ miro_api/test/test_board_members_paged_response.py
 miro_api/test/test_board_permissions_policy.py
 miro_api/test/test_board_policy.py
 miro_api/test/test_board_policy_change.py
+miro_api/test/test_board_project.py
 miro_api/test/test_board_sharing_policy.py
 miro_api/test/test_board_sharing_policy_change.py
 miro_api/test/test_board_subscription.py

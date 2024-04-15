@@ -23,8 +23,8 @@ from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.board_links import BoardLinks
 from miro_api.models.board_member import BoardMember
 from miro_api.models.board_policy import BoardPolicy
+from miro_api.models.board_project import BoardProject
 from miro_api.models.picture import Picture
-from miro_api.models.project import Project
 from miro_api.models.team import Team
 from miro_api.models.user_info_short import UserInfoShort
 from typing import Optional, Set
@@ -40,7 +40,7 @@ class BoardWithLinks(BaseModel):
     name: StrictStr = Field(description="Name of the board.")
     description: StrictStr = Field(description="Description of the board.")
     team: Optional[Team] = None
-    project: Optional[Project] = None
+    project: Optional[BoardProject] = None
     picture: Optional[Picture] = None
     policy: Optional[BoardPolicy] = None
     view_link: Optional[StrictStr] = Field(default=None, description="URL to view the board.", alias="viewLink")
@@ -171,7 +171,7 @@ class BoardWithLinks(BaseModel):
                 "name": obj.get("name"),
                 "description": obj.get("description"),
                 "team": Team.from_dict(obj["team"]) if obj.get("team") is not None else None,
-                "project": Project.from_dict(obj["project"]) if obj.get("project") is not None else None,
+                "project": BoardProject.from_dict(obj["project"]) if obj.get("project") is not None else None,
                 "picture": Picture.from_dict(obj["picture"]) if obj.get("picture") is not None else None,
                 "policy": BoardPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None,
                 "viewLink": obj.get("viewLink"),
