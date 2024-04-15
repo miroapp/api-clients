@@ -105,7 +105,7 @@ class MiroApiExtended(MiroApiEndpoints):
     @validate_call
     def get_all_items(
         self,
-        board_id_platform: Annotated[
+        board_id: Annotated[
             StrictStr,
             Field(
                 description="Unique identifier (ID) of the board for which you want to retrieve the list of available items."
@@ -117,7 +117,7 @@ class MiroApiExtended(MiroApiEndpoints):
         cursor = None
         while True:
             response = self.get_items(
-                board_id_platform=board_id_platform,
+                board_id=board_id,
                 limit=limit,
                 cursor=cursor,
                 type=type,
@@ -184,7 +184,7 @@ class MiroApiExtended(MiroApiEndpoints):
         cursor = None
         while True:
             response = self.get_items_within_frame(
-                board_id=board_id,
+                board_id_platform_containers=board_id,
                 parent_item_id=parent_item_id,
                 limit=limit,
                 type=type,
