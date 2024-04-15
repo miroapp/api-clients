@@ -29,22 +29,12 @@ class Organization(BaseModel):
     """  # noqa: E501
 
     id: StrictStr = Field(description="Id of the organization")
-    full_licenses_purchased: StrictInt = Field(
-        description="Purchased FULL licenses", alias="fullLicensesPurchased"
-    )
+    full_licenses_purchased: StrictInt = Field(description="Purchased FULL licenses", alias="fullLicensesPurchased")
     name: StrictStr = Field(description="Name of the organization")
     plan: StrictStr = Field(description="Organization plan type")
-    type: Optional[StrictStr] = Field(
-        default="organization", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default="organization", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "fullLicensesPurchased",
-        "name",
-        "plan",
-        "type",
-    ]
+    __properties: ClassVar[List[str]] = ["id", "fullLicensesPurchased", "name", "plan", "type"]
 
     @field_validator("plan")
     def plan_validate_enum(cls, value):
@@ -133,9 +123,7 @@ class Organization(BaseModel):
                 "fullLicensesPurchased": obj.get("fullLicensesPurchased"),
                 "name": obj.get("name"),
                 "plan": obj.get("plan"),
-                "type": (
-                    obj.get("type") if obj.get("type") is not None else "organization"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "organization",
             }
         )
         # store additional fields in additional_properties

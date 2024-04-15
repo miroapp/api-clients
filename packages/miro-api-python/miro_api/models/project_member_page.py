@@ -41,9 +41,7 @@ class ProjectMemberPage(BaseModel):
         default=None,
         description="Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.",
     )
-    type: Optional[StrictStr] = Field(
-        default="cursor-list", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default="cursor-list", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["limit", "size", "data", "cursor", "type"]
 
@@ -117,14 +115,10 @@ class ProjectMemberPage(BaseModel):
                 "limit": obj.get("limit") if obj.get("limit") is not None else 100,
                 "size": obj.get("size") if obj.get("size") is not None else 100,
                 "data": (
-                    [ProjectMember.from_dict(_item) for _item in obj["data"]]
-                    if obj.get("data") is not None
-                    else None
+                    [ProjectMember.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
                 ),
                 "cursor": obj.get("cursor"),
-                "type": (
-                    obj.get("type") if obj.get("type") is not None else "cursor-list"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "cursor-list",
             }
         )
         # store additional fields in additional_properties

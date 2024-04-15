@@ -29,25 +29,19 @@ class PageLinksPlatformExperimentalFeatures(BaseModel):
     """  # noqa: E501
 
     first: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to retrieve information in the first page of the collection.",
+        default=None, description="Link to retrieve information in the first page of the collection."
     )
     last: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to the retrieve information in the last page of the collection.",
+        default=None, description="Link to the retrieve information in the last page of the collection."
     )
     next: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to retrieve information in the next page of the collection.",
+        default=None, description="Link to retrieve information in the next page of the collection."
     )
     prev: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to retrieve information in the previous page of the collection.",
+        default=None, description="Link to retrieve information in the previous page of the collection."
     )
     var_self: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to retrieve information in the current page of the collection.",
-        alias="self",
+        default=None, description="Link to retrieve information in the current page of the collection.", alias="self"
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["first", "last", "next", "prev", "self"]

@@ -95,13 +95,7 @@ class MindmapDataForCreate(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "nodeView": (
-                    MindmapNode.from_dict(obj["nodeView"])
-                    if obj.get("nodeView") is not None
-                    else None
-                )
-            }
+            {"nodeView": MindmapNode.from_dict(obj["nodeView"]) if obj.get("nodeView") is not None else None}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

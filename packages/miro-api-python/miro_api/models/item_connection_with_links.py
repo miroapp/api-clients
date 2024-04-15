@@ -31,8 +31,7 @@ class ItemConnectionWithLinks(BaseModel):
     """  # noqa: E501
 
     id: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique identifier (ID) of the item the connector is attached to.",
+        default=None, description="Unique identifier (ID) of the item the connector is attached to."
     )
     links: Optional[SelfLink] = None
     position: Optional[RelativeOffset] = None
@@ -106,16 +105,8 @@ class ItemConnectionWithLinks(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
-                "links": (
-                    SelfLink.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
-                "position": (
-                    RelativeOffset.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
+                "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None,
+                "position": RelativeOffset.from_dict(obj["position"]) if obj.get("position") is not None else None,
             }
         )
         # store additional fields in additional_properties

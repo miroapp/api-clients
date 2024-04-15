@@ -137,11 +137,7 @@ class CustomFieldPlatform(BaseModel):
         _obj = cls.model_validate(
             {
                 "fillColor": obj.get("fillColor"),
-                "iconShape": (
-                    obj.get("iconShape")
-                    if obj.get("iconShape") is not None
-                    else "round"
-                ),
+                "iconShape": (obj.get("iconShape") if obj.get("iconShape") is not None else "round"),
                 "iconUrl": obj.get("iconUrl"),
                 "textColor": obj.get("textColor"),
                 "tooltip": obj.get("tooltip"),

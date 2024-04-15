@@ -28,16 +28,10 @@ class User(BaseModel):
     Contains user information.
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier of the user."
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the user.")
     email: Optional[StrictStr] = Field(default=None, description="Email of the user.")
-    first_name: Optional[StrictStr] = Field(
-        default=None, description="First name of the user.", alias="firstName"
-    )
-    last_name: Optional[StrictStr] = Field(
-        default=None, description="Last name of the user.", alias="lastName"
-    )
+    first_name: Optional[StrictStr] = Field(default=None, description="First name of the user.", alias="firstName")
+    last_name: Optional[StrictStr] = Field(default=None, description="Last name of the user.", alias="lastName")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "email", "firstName", "lastName"]
 

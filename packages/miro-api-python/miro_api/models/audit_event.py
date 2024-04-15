@@ -36,27 +36,13 @@ class AuditEvent(BaseModel):
     context: Optional[AuditContext] = None
     object: Optional[AuditObject] = None
     created_at: Optional[datetime] = Field(
-        default=None,
-        description="Time when the audit event has been created",
-        alias="createdAt",
+        default=None, description="Time when the audit event has been created", alias="createdAt"
     )
-    details: Optional[Dict[str, Any]] = Field(
-        default=None, description="Details json related to the audit event"
-    )
+    details: Optional[Dict[str, Any]] = Field(default=None, description="Details json related to the audit event")
     created_by: Optional[AuditCreatedBy] = Field(default=None, alias="createdBy")
-    event: Optional[StrictStr] = Field(
-        default=None, description="Event type of the audit event"
-    )
+    event: Optional[StrictStr] = Field(default=None, description="Event type of the audit event")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "context",
-        "object",
-        "createdAt",
-        "details",
-        "createdBy",
-        "event",
-    ]
+    __properties: ClassVar[List[str]] = ["id", "context", "object", "createdAt", "details", "createdBy", "event"]
 
     model_config = {
         "populate_by_name": True,
@@ -128,23 +114,11 @@ class AuditEvent(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
-                "context": (
-                    AuditContext.from_dict(obj["context"])
-                    if obj.get("context") is not None
-                    else None
-                ),
-                "object": (
-                    AuditObject.from_dict(obj["object"])
-                    if obj.get("object") is not None
-                    else None
-                ),
+                "context": AuditContext.from_dict(obj["context"]) if obj.get("context") is not None else None,
+                "object": AuditObject.from_dict(obj["object"]) if obj.get("object") is not None else None,
                 "createdAt": obj.get("createdAt"),
                 "details": obj.get("details"),
-                "createdBy": (
-                    AuditCreatedBy.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
+                "createdBy": AuditCreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
                 "event": obj.get("event"),
             }
         )

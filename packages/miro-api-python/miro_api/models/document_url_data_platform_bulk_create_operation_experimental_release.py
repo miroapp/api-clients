@@ -28,9 +28,7 @@ class DocumentUrlDataPlatformBulkCreateOperationExperimentalRelease(BaseModel):
     Contains information about the document URL.
     """  # noqa: E501
 
-    title: Optional[StrictStr] = Field(
-        default=None, description="A short text header to identify the document."
-    )
+    title: Optional[StrictStr] = Field(default=None, description="A short text header to identify the document.")
     url: StrictStr = Field(description="URL where the document is hosted.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["title", "url"]

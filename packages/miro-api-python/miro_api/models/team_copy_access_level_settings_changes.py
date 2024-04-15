@@ -48,9 +48,7 @@ class TeamCopyAccessLevelSettingsChanges(BaseModel):
             return value
 
         if value not in set(["anyone", "team_members", "team_editors", "board_owner"]):
-            raise ValueError(
-                "must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner')"
-            )
+            raise ValueError("must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner')")
         return value
 
     @field_validator("copy_access_level_limitation")

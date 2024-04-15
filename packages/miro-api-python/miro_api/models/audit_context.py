@@ -30,9 +30,7 @@ class AuditContext(BaseModel):
     Audit context
     """  # noqa: E501
 
-    ip: Optional[StrictStr] = Field(
-        default=None, description="Ip address associated with the audit context"
-    )
+    ip: Optional[StrictStr] = Field(default=None, description="Ip address associated with the audit context")
     team: Optional[AuditTeam] = None
     organization: Optional[AuditOrganization] = None
     additional_properties: Dict[str, Any] = {}
@@ -105,15 +103,9 @@ class AuditContext(BaseModel):
         _obj = cls.model_validate(
             {
                 "ip": obj.get("ip"),
-                "team": (
-                    AuditTeam.from_dict(obj["team"])
-                    if obj.get("team") is not None
-                    else None
-                ),
+                "team": AuditTeam.from_dict(obj["team"]) if obj.get("team") is not None else None,
                 "organization": (
-                    AuditOrganization.from_dict(obj["organization"])
-                    if obj.get("organization") is not None
-                    else None
+                    AuditOrganization.from_dict(obj["organization"]) if obj.get("organization") is not None else None
                 ),
             }
         )

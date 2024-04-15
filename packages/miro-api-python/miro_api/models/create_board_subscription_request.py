@@ -34,9 +34,7 @@ class CreateBoardSubscriptionRequest(BaseModel):
         description="[Unique identifier (ID) of the board](https://developers.miro.com/reference/board-model) that you want to associate with the webhook subscription.",
         alias="boardId",
     )
-    callback_url: Optional[
-        Annotated[str, Field(min_length=8, strict=True, max_length=256)]
-    ] = Field(
+    callback_url: Optional[Annotated[str, Field(min_length=8, strict=True, max_length=256)]] = Field(
         default=None,
         description="Indicates the HTTPS URL to which Miro sends a webhook when an event occurs.",
         alias="callbackUrl",
@@ -130,9 +128,7 @@ class CreateBoardSubscriptionRequest(BaseModel):
             {
                 "boardId": obj.get("boardId"),
                 "callbackUrl": obj.get("callbackUrl"),
-                "status": (
-                    obj.get("status") if obj.get("status") is not None else "enabled"
-                ),
+                "status": obj.get("status") if obj.get("status") is not None else "enabled",
             }
         )
         # store additional fields in additional_properties

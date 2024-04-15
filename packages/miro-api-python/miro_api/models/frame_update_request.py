@@ -111,26 +111,10 @@ class FrameUpdateRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "data": (
-                    FrameChanges.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    FrameStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-                "position": (
-                    PositionChange.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-                "geometry": (
-                    GeometryNoRotation.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
-                ),
+                "data": FrameChanges.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "style": FrameStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
+                "geometry": GeometryNoRotation.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
             }
         )
         # store additional fields in additional_properties

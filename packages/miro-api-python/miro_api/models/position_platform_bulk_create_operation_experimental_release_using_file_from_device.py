@@ -17,22 +17,13 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import (
-    BaseModel,
-    Field,
-    StrictFloat,
-    StrictInt,
-    StrictStr,
-    field_validator,
-)
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
     """  # noqa: E501
@@ -70,9 +61,7 @@ class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
             return value
 
         if value not in set(["canvas_center", "parent_top_left"]):
-            raise ValueError(
-                "must be one of enum values ('canvas_center', 'parent_top_left')"
-            )
+            raise ValueError("must be one of enum values ('canvas_center', 'parent_top_left')")
         return value
 
     model_config = {
@@ -135,9 +124,7 @@ class PositionPlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
 
         _obj = cls.model_validate(
             {
-                "origin": (
-                    obj.get("origin") if obj.get("origin") is not None else "center"
-                ),
+                "origin": obj.get("origin") if obj.get("origin") is not None else "center",
                 "relativeTo": obj.get("relativeTo"),
                 "x": obj.get("x"),
                 "y": obj.get("y"),

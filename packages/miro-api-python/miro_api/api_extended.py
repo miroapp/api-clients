@@ -45,9 +45,7 @@ class MiroApiExtended(MiroApiEndpoints):
                 yield board
 
             received_items_len = len(response.data or [])
-            if not self._has_more_data(
-                response.offset, received_items_len, response.total
-            ):
+            if not self._has_more_data(response.offset, received_items_len, response.total):
                 break
 
             current_offset += received_items_len
@@ -57,9 +55,7 @@ class MiroApiExtended(MiroApiEndpoints):
         self,
         board_id: Annotated[
             StrictStr,
-            Field(
-                description="Unique identifier (ID) of the board whose tags you want to retrieve."
-            ),
+            Field(description="Unique identifier (ID) of the board whose tags you want to retrieve."),
         ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
     ) -> Generator[Tag, None, None]:
@@ -75,9 +71,7 @@ class MiroApiExtended(MiroApiEndpoints):
                 yield board
 
             received_items_len = len(response.data or [])
-            if not self._has_more_data(
-                response.offset, received_items_len, response.total
-            ):
+            if not self._has_more_data(response.offset, received_items_len, response.total):
                 break
 
             current_offset += received_items_len
@@ -87,9 +81,7 @@ class MiroApiExtended(MiroApiEndpoints):
         self,
         board_id: Annotated[
             StrictStr,
-            Field(
-                description="Unique identifier (ID) of the board to which the board member belongs."
-            ),
+            Field(description="Unique identifier (ID) of the board to which the board member belongs."),
         ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
     ) -> Generator[BoardMember, None, None]:
@@ -105,9 +97,7 @@ class MiroApiExtended(MiroApiEndpoints):
                 yield member
 
             received_items_len = len(response.data or [])
-            if not self._has_more_data(
-                response.offset, received_items_len, response.total
-            ):
+            if not self._has_more_data(response.offset, received_items_len, response.total):
                 break
 
             current_offset += received_items_len
@@ -146,15 +136,11 @@ class MiroApiExtended(MiroApiEndpoints):
         self,
         board_id_platform_tags: Annotated[
             StrictStr,
-            Field(
-                description="Unique identifier (ID) of the board where you want to retrieve a specific tag."
-            ),
+            Field(description="Unique identifier (ID) of the board where you want to retrieve a specific tag."),
         ],
         tag_id: Annotated[
             StrictStr,
-            Field(
-                description="Unique identifier (ID) of the tag that you want to retrieve."
-            ),
+            Field(description="Unique identifier (ID) of the tag that you want to retrieve."),
         ],
         limit: Optional[Annotated[str, Field(strict=True)]] = None,
     ) -> Generator[GenericItem, None, None]:
@@ -171,9 +157,7 @@ class MiroApiExtended(MiroApiEndpoints):
                 yield item
 
             received_items_len = len(response.data or [])
-            if not self._has_more_data(
-                response.offset, received_items_len, response.total
-            ):
+            if not self._has_more_data(response.offset, received_items_len, response.total):
                 break
 
             current_offset += received_items_len

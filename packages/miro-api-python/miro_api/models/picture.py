@@ -28,20 +28,12 @@ class Picture(BaseModel):
     Picture
     """  # noqa: E501
 
-    id: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Id of the picture"
-    )
-    image_url: Optional[StrictStr] = Field(
-        default=None, description="Url of the picture", alias="imageURL"
-    )
+    id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Id of the picture")
+    image_url: Optional[StrictStr] = Field(default=None, description="Url of the picture", alias="imageURL")
     original_url: Optional[StrictStr] = Field(
-        default=None,
-        description="Original team picture url for icon generation",
-        alias="originalUrl",
+        default=None, description="Original team picture url for icon generation", alias="originalUrl"
     )
-    type: Optional[StrictStr] = Field(
-        default="picture", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default="picture", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "imageURL", "originalUrl", "type"]
 

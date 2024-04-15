@@ -29,12 +29,8 @@ class TagUpdateRequest(BaseModel):
     TagUpdateRequest
     """  # noqa: E501
 
-    fill_color: Optional[StrictStr] = Field(
-        default="red", description="Fill color for the tag.", alias="fillColor"
-    )
-    title: Optional[
-        Annotated[str, Field(min_length=0, strict=True, max_length=120)]
-    ] = Field(
+    fill_color: Optional[StrictStr] = Field(default="red", description="Fill color for the tag.", alias="fillColor")
+    title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=120)]] = Field(
         default=None, description="Text of the tag. Case-sensitive. Must be unique."
     )
     additional_properties: Dict[str, Any] = {}
@@ -127,9 +123,7 @@ class TagUpdateRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "fillColor": (
-                    obj.get("fillColor") if obj.get("fillColor") is not None else "red"
-                ),
+                "fillColor": obj.get("fillColor") if obj.get("fillColor") is not None else "red",
                 "title": obj.get("title"),
             }
         )

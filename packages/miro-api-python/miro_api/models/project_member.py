@@ -99,9 +99,7 @@ class ProjectMember(BaseModel):
                 "id": obj.get("id"),
                 "email": obj.get("email"),
                 "role": obj.get("role"),
-                "type": (
-                    obj.get("type") if obj.get("type") is not None else "project_member"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "project_member",
             }
         )
         # store additional fields in additional_properties

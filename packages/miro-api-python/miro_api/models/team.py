@@ -32,9 +32,7 @@ class Team(BaseModel):
     id: StrictStr = Field(description="Team id")
     name: StrictStr = Field(description="Team name")
     picture: Optional[Picture] = None
-    type: Optional[StrictStr] = Field(
-        default="team", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default="team", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "picture", "type"]
 
@@ -103,11 +101,7 @@ class Team(BaseModel):
             {
                 "id": obj.get("id"),
                 "name": obj.get("name"),
-                "picture": (
-                    Picture.from_dict(obj["picture"])
-                    if obj.get("picture") is not None
-                    else None
-                ),
+                "picture": Picture.from_dict(obj["picture"]) if obj.get("picture") is not None else None,
                 "type": obj.get("type") if obj.get("type") is not None else "team",
             }
         )

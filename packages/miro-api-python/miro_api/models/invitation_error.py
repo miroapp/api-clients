@@ -28,12 +28,8 @@ class InvitationError(BaseModel):
     Contains information about the invites that failed.
     """  # noqa: E501
 
-    email: Optional[StrictStr] = Field(
-        default=None, description="Email ID for which the invitation failed."
-    )
-    reason: Optional[StrictStr] = Field(
-        default=None, description="Reason why the invitation failed."
-    )
+    email: Optional[StrictStr] = Field(default=None, description="Email ID for which the invitation failed.")
+    reason: Optional[StrictStr] = Field(default=None, description="Reason why the invitation failed.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["email", "reason"]
 
@@ -95,9 +91,7 @@ class InvitationError(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"email": obj.get("email"), "reason": obj.get("reason")}
-        )
+        _obj = cls.model_validate({"email": obj.get("email"), "reason": obj.get("reason")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

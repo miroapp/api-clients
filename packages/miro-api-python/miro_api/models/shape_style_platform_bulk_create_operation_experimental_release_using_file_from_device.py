@@ -24,9 +24,7 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains information about the shape style, such as the border color or opacity.
     """  # noqa: E501
@@ -107,9 +105,7 @@ class ShapeStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevic
             return value
 
         if value not in set(["normal", "dotted", "dashed"]):
-            raise ValueError(
-                "must be one of enum values ('normal', 'dotted', 'dashed')"
-            )
+            raise ValueError("must be one of enum values ('normal', 'dotted', 'dashed')")
         return value
 
     @field_validator("font_family")

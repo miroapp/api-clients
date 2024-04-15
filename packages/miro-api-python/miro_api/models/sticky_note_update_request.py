@@ -19,9 +19,7 @@ import json
 
 from pydantic import BaseModel
 from typing import Any, ClassVar, Dict, List, Optional
-from miro_api.models.fixed_ratio_no_rotation_geometry import (
-    FixedRatioNoRotationGeometry,
-)
+from miro_api.models.fixed_ratio_no_rotation_geometry import FixedRatioNoRotationGeometry
 from miro_api.models.parent import Parent
 from miro_api.models.position_change import PositionChange
 from miro_api.models.sticky_note_data import StickyNoteData
@@ -41,13 +39,7 @@ class StickyNoteUpdateRequest(BaseModel):
     geometry: Optional[FixedRatioNoRotationGeometry] = None
     parent: Optional[Parent] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "data",
-        "style",
-        "position",
-        "geometry",
-        "parent",
-    ]
+    __properties: ClassVar[List[str]] = ["data", "style", "position", "geometry", "parent"]
 
     model_config = {
         "populate_by_name": True,
@@ -124,31 +116,13 @@ class StickyNoteUpdateRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "data": (
-                    StickyNoteData.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    StickyNoteStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
-                "position": (
-                    PositionChange.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
+                "data": StickyNoteData.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "style": StickyNoteStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "geometry": (
-                    FixedRatioNoRotationGeometry.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
+                    FixedRatioNoRotationGeometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None
                 ),
-                "parent": (
-                    Parent.from_dict(obj["parent"])
-                    if obj.get("parent") is not None
-                    else None
-                ),
+                "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
             }
         )
         # store additional fields in additional_properties

@@ -29,9 +29,7 @@ class AuditOrganization(BaseModel):
     """  # noqa: E501
 
     id: Optional[StrictStr] = Field(default=None, description="Id of the organization")
-    name: Optional[StrictStr] = Field(
-        default=None, description="Name of the organization"
-    )
+    name: Optional[StrictStr] = Field(default=None, description="Name of the organization")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name"]
 

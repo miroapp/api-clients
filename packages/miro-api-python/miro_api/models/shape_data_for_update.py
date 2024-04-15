@@ -98,12 +98,7 @@ class ShapeDataForUpdate(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "content": obj.get("content"),
-                "shape": (
-                    obj.get("shape") if obj.get("shape") is not None else "rectangle"
-                ),
-            }
+            {"content": obj.get("content"), "shape": obj.get("shape") if obj.get("shape") is not None else "rectangle"}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

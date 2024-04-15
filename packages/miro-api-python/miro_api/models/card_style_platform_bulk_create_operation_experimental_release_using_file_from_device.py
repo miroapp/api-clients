@@ -23,17 +23,13 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class CardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(
-    BaseModel
-):
+class CardStylePlatformBulkCreateOperationExperimentalReleaseUsingFileFromDevice(BaseModel):
     """
     Contains information about the style of a card item, such as the card theme.
     """  # noqa: E501
 
     card_theme: Optional[StrictStr] = Field(
-        default=None,
-        description="Hex value of the border color of the card. Default: `#2d9bf0`.",
-        alias="cardTheme",
+        default=None, description="Hex value of the border color of the card. Default: `#2d9bf0`.", alias="cardTheme"
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["cardTheme"]

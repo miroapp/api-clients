@@ -31,25 +31,19 @@ class BoardItemContentLog(BaseModel):
     Contains information about the content log of for a board item.
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier of the content log."
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the content log.")
     item_id: Optional[StrictStr] = Field(
         default=None, description="Unique identifier of the board item.", alias="itemId"
     )
     type: Optional[Any] = Field(default=None, description="Type of the board item.")
     action: Optional[StrictStr] = Field(
-        default=None,
-        description="User action in the form of insert, update, or delete.",
+        default=None, description="User action in the form of insert, update, or delete."
     )
     board_key: Optional[StrictStr] = Field(
-        default=None,
-        description="Unique identification of the board to which the item belongs.",
-        alias="boardKey",
+        default=None, description="Unique identification of the board to which the item belongs.", alias="boardKey"
     )
     hidden: Optional[StrictBool] = Field(
-        default=None,
-        description="Indicates if the board is a hidden board. Returns `true` if board item is hidden.",
+        default=None, description="Indicates if the board is a hidden board. Returns `true` if board item is hidden."
     )
     created_at: Optional[datetime] = Field(
         default=None,
@@ -160,22 +154,10 @@ class BoardItemContentLog(BaseModel):
                 "boardKey": obj.get("boardKey"),
                 "hidden": obj.get("hidden"),
                 "createdAt": obj.get("createdAt"),
-                "createdBy": (
-                    User.from_dict(obj["createdBy"])
-                    if obj.get("createdBy") is not None
-                    else None
-                ),
+                "createdBy": User.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
                 "modifiedAt": obj.get("modifiedAt"),
-                "modifiedBy": (
-                    User.from_dict(obj["modifiedBy"])
-                    if obj.get("modifiedBy") is not None
-                    else None
-                ),
-                "logData": (
-                    BoardContentLogData.from_dict(obj["logData"])
-                    if obj.get("logData") is not None
-                    else None
-                ),
+                "modifiedBy": User.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
+                "logData": BoardContentLogData.from_dict(obj["logData"]) if obj.get("logData") is not None else None,
             }
         )
         # store additional fields in additional_properties

@@ -29,13 +29,9 @@ class UpdateTeamSettingsRequest(BaseModel):
     """  # noqa: E501
 
     default_label_id: Optional[StrictInt] = Field(
-        default=None,
-        description="Data classification default label id",
-        alias="defaultLabelId",
+        default=None, description="Data classification default label id", alias="defaultLabelId"
     )
-    enabled: Optional[StrictBool] = Field(
-        default=None, description="Data classification enabled for team"
-    )
+    enabled: Optional[StrictBool] = Field(default=None, description="Data classification enabled for team")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["defaultLabelId", "enabled"]
 
@@ -97,9 +93,7 @@ class UpdateTeamSettingsRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"defaultLabelId": obj.get("defaultLabelId"), "enabled": obj.get("enabled")}
-        )
+        _obj = cls.model_validate({"defaultLabelId": obj.get("defaultLabelId"), "enabled": obj.get("enabled")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

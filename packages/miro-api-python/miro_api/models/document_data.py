@@ -33,9 +33,7 @@ class DocumentData(BaseModel):
         description="The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
         alias="documentUrl",
     )
-    title: Optional[StrictStr] = Field(
-        default=None, description="A short text header to identify the document."
-    )
+    title: Optional[StrictStr] = Field(default=None, description="A short text header to identify the document.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["documentUrl", "title"]
 
@@ -97,9 +95,7 @@ class DocumentData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"documentUrl": obj.get("documentUrl"), "title": obj.get("title")}
-        )
+        _obj = cls.model_validate({"documentUrl": obj.get("documentUrl"), "title": obj.get("title")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

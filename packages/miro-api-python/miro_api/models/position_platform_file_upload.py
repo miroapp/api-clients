@@ -17,14 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import (
-    BaseModel,
-    Field,
-    StrictFloat,
-    StrictInt,
-    StrictStr,
-    field_validator,
-)
+from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing import Optional, Set
 from typing_extensions import Self
@@ -68,9 +61,7 @@ class PositionPlatformFileUpload(BaseModel):
             return value
 
         if value not in set(["canvas_center", "parent_top_left"]):
-            raise ValueError(
-                "must be one of enum values ('canvas_center', 'parent_top_left')"
-            )
+            raise ValueError("must be one of enum values ('canvas_center', 'parent_top_left')")
         return value
 
     model_config = {
@@ -133,9 +124,7 @@ class PositionPlatformFileUpload(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "origin": (
-                    obj.get("origin") if obj.get("origin") is not None else "center"
-                ),
+                "origin": obj.get("origin") if obj.get("origin") is not None else "center",
                 "relativeTo": obj.get("relativeTo"),
                 "x": obj.get("x"),
                 "y": obj.get("y"),

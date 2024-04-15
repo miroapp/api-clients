@@ -31,8 +31,7 @@ class MindmapNodeView(BaseModel):
     """  # noqa: E501
 
     type: Optional[StrictStr] = Field(
-        default=None,
-        description="Type of item used as mind map node. Currently, `type` can only be equal to `text`.",
+        default=None, description="Type of item used as mind map node. Currently, `type` can only be equal to `text`."
     )
     data: Optional[MindmapWidgetDataOutput] = None
     style: Optional[MindmapNodeStyle] = None
@@ -106,16 +105,8 @@ class MindmapNodeView(BaseModel):
         _obj = cls.model_validate(
             {
                 "type": obj.get("type"),
-                "data": (
-                    MindmapWidgetDataOutput.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "style": (
-                    MindmapNodeStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
+                "data": MindmapWidgetDataOutput.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "style": MindmapNodeStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
             }
         )
         # store additional fields in additional_properties

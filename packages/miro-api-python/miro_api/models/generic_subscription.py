@@ -41,9 +41,7 @@ class GenericSubscription(BaseModel):
         alias="createdAt",
     )
     data: Optional[SubscriptionData] = None
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier (ID) of a webhook subscription."
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of a webhook subscription.")
     modified_at: Optional[datetime] = Field(
         default=None,
         description="Date and time when the webhook subscription was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
@@ -54,19 +52,10 @@ class GenericSubscription(BaseModel):
         description="Indicates whether the status of the webhook subscription. `enabled`: Miro sends a webhook when an event occurs in the associated board. `disabled`: Miro does not send a webhook even when an event occurs in the associated board. `lost_access`: The user with which the webhook subscription is associated has lost access to the board. The user needs to regain access to the board, and then reenable the webhook subscription by updating the webhook subscription status to `enabled` by using the update webhook endpoint.",
     )
     type: Optional[StrictStr] = Field(
-        default=None,
-        description="The type of object associated with the webhook subscription.",
+        default=None, description="The type of object associated with the webhook subscription."
     )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "callbackUrl",
-        "createdAt",
-        "data",
-        "id",
-        "modifiedAt",
-        "status",
-        "type",
-    ]
+    __properties: ClassVar[List[str]] = ["callbackUrl", "createdAt", "data", "id", "modifiedAt", "status", "type"]
 
     @field_validator("status")
     def status_validate_enum(cls, value):
@@ -75,9 +64,7 @@ class GenericSubscription(BaseModel):
             return value
 
         if value not in set(["enabled", "disabled", "lost_access"]):
-            raise ValueError(
-                "must be one of enum values ('enabled', 'disabled', 'lost_access')"
-            )
+            raise ValueError("must be one of enum values ('enabled', 'disabled', 'lost_access')")
         return value
 
     model_config = {
@@ -145,16 +132,10 @@ class GenericSubscription(BaseModel):
             {
                 "callbackUrl": obj.get("callbackUrl"),
                 "createdAt": obj.get("createdAt"),
-                "data": (
-                    SubscriptionData.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
+                "data": SubscriptionData.from_dict(obj["data"]) if obj.get("data") is not None else None,
                 "id": obj.get("id"),
                 "modifiedAt": obj.get("modifiedAt"),
-                "status": (
-                    obj.get("status") if obj.get("status") is not None else "enabled"
-                ),
+                "status": obj.get("status") if obj.get("status") is not None else "enabled",
                 "type": obj.get("type"),
             }
         )

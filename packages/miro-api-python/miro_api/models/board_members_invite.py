@@ -32,12 +32,9 @@ class BoardMembersInvite(BaseModel):
     emails: Annotated[List[StrictStr], Field(min_length=1, max_length=20)] = Field(
         description="Email IDs of the users you want to invite to the board. You can invite up to 20 members per call."
     )
-    role: Optional[StrictStr] = Field(
-        default="commenter", description="Role of the board member."
-    )
+    role: Optional[StrictStr] = Field(default="commenter", description="Role of the board member.")
     message: Optional[StrictStr] = Field(
-        default=None,
-        description="The message that will be sent in the invitation email.",
+        default=None, description="The message that will be sent in the invitation email."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["emails", "role", "message"]
@@ -49,9 +46,7 @@ class BoardMembersInvite(BaseModel):
             return value
 
         if value not in set(["viewer", "commenter", "editor", "coowner", "owner"]):
-            raise ValueError(
-                "must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')"
-            )
+            raise ValueError("must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')")
         return value
 
     model_config = {

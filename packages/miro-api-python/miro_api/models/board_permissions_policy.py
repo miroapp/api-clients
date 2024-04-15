@@ -44,11 +44,7 @@ class BoardPermissionsPolicy(BaseModel):
         alias="sharingAccess",
     )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "collaborationToolsStartAccess",
-        "copyAccess",
-        "sharingAccess",
-    ]
+    __properties: ClassVar[List[str]] = ["collaborationToolsStartAccess", "copyAccess", "sharingAccess"]
 
     @field_validator("collaboration_tools_start_access")
     def collaboration_tools_start_access_validate_enum(cls, value):
@@ -57,9 +53,7 @@ class BoardPermissionsPolicy(BaseModel):
             return value
 
         if value not in set(["all_editors", "board_owners_and_coowners"]):
-            raise ValueError(
-                "must be one of enum values ('all_editors', 'board_owners_and_coowners')"
-            )
+            raise ValueError("must be one of enum values ('all_editors', 'board_owners_and_coowners')")
         return value
 
     @field_validator("copy_access")
@@ -69,9 +63,7 @@ class BoardPermissionsPolicy(BaseModel):
             return value
 
         if value not in set(["anyone", "team_members", "team_editors", "board_owner"]):
-            raise ValueError(
-                "must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner')"
-            )
+            raise ValueError("must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner')")
         return value
 
     @field_validator("sharing_access")
@@ -81,9 +73,7 @@ class BoardPermissionsPolicy(BaseModel):
             return value
 
         if value not in set(["team_members_with_editing_rights", "owner_and_coowners"]):
-            raise ValueError(
-                "must be one of enum values ('team_members_with_editing_rights', 'owner_and_coowners')"
-            )
+            raise ValueError("must be one of enum values ('team_members_with_editing_rights', 'owner_and_coowners')")
         return value
 
     model_config = {
@@ -151,11 +141,7 @@ class BoardPermissionsPolicy(BaseModel):
                     if obj.get("collaborationToolsStartAccess") is not None
                     else "all_editors"
                 ),
-                "copyAccess": (
-                    obj.get("copyAccess")
-                    if obj.get("copyAccess") is not None
-                    else "anyone"
-                ),
+                "copyAccess": obj.get("copyAccess") if obj.get("copyAccess") is not None else "anyone",
                 "sharingAccess": (
                     obj.get("sharingAccess")
                     if obj.get("sharingAccess") is not None

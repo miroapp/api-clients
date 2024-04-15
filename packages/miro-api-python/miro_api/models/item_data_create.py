@@ -63,16 +63,7 @@ class ItemDataCreate(BaseModel):
     # data type: TextData
     oneof_schema_8_validator: Optional[TextData] = None
     actual_instance: Optional[
-        Union[
-            AppCardData,
-            CardData,
-            DocumentUrlData,
-            EmbedUrlData,
-            ImageUrlData,
-            ShapeData,
-            StickyNoteData,
-            TextData,
-        ]
+        Union[AppCardData, CardData, DocumentUrlData, EmbedUrlData, ImageUrlData, ShapeData, StickyNoteData, TextData]
     ] = None
     one_of_schemas: List[str] = Field(
         default=Literal[
@@ -95,13 +86,9 @@ class ItemDataCreate(BaseModel):
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError(
-                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
-                )
+                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
             if kwargs:
-                raise ValueError(
-                    "If a position argument is used, keyword arguments cannot be used."
-                )
+                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
@@ -126,23 +113,17 @@ class ItemDataCreate(BaseModel):
             match += 1
         # validate data type: DocumentUrlData
         if not isinstance(v, DocumentUrlData):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `DocumentUrlData`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `DocumentUrlData`")
         else:
             match += 1
         # validate data type: EmbedUrlData
         if not isinstance(v, EmbedUrlData):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `EmbedUrlData`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `EmbedUrlData`")
         else:
             match += 1
         # validate data type: ImageUrlData
         if not isinstance(v, ImageUrlData):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `ImageUrlData`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `ImageUrlData`")
         else:
             match += 1
         # validate data type: ShapeData
@@ -152,9 +133,7 @@ class ItemDataCreate(BaseModel):
             match += 1
         # validate data type: StickyNoteData
         if not isinstance(v, StickyNoteData):
-            error_messages.append(
-                f"Error! Input type `{type(v)}` is not `StickyNoteData`"
-            )
+            error_messages.append(f"Error! Input type `{type(v)}` is not `StickyNoteData`")
         else:
             match += 1
         # validate data type: TextData
@@ -182,16 +161,9 @@ class ItemDataCreate(BaseModel):
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union[
-        AppCardData,
-        CardData,
-        DocumentUrlData,
-        EmbedUrlData,
-        ImageUrlData,
-        ShapeData,
-        StickyNoteData,
-        TextData,
-    ]:
+    def from_json(
+        cls, json_str: str
+    ) -> Union[AppCardData, CardData, DocumentUrlData, EmbedUrlData, ImageUrlData, ShapeData, StickyNoteData, TextData]:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
@@ -255,9 +227,7 @@ class ItemDataCreate(BaseModel):
 
         # Return one match that has least additional_properties
         if len(matches) > 1:
-            instance.actual_instance = sorted(
-                matches, key=lambda m: len(m.additional_properties)
-            )[0]
+            instance.actual_instance = sorted(matches, key=lambda m: len(m.additional_properties))[0]
 
         return instance
 
@@ -266,9 +236,7 @@ class ItemDataCreate(BaseModel):
         if self.actual_instance is None:
             return "null"
 
-        if hasattr(self.actual_instance, "to_json") and callable(
-            self.actual_instance.to_json
-        ):
+        if hasattr(self.actual_instance, "to_json") and callable(self.actual_instance.to_json):
             return self.actual_instance.to_json()
         else:
             return json.dumps(self.actual_instance)
@@ -292,9 +260,7 @@ class ItemDataCreate(BaseModel):
         if self.actual_instance is None:
             return None
 
-        if hasattr(self.actual_instance, "to_dict") and callable(
-            self.actual_instance.to_dict
-        ):
+        if hasattr(self.actual_instance, "to_dict") and callable(self.actual_instance.to_dict):
             return self.actual_instance.to_dict()
         else:
             # primitive type

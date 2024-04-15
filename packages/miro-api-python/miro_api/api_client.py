@@ -70,9 +70,7 @@ class ApiClient:
     }
     _pool = None
 
-    def __init__(
-        self, configuration=None, header_name=None, header_value=None, cookie=None
-    ) -> None:
+    def __init__(self, configuration=None, header_name=None, header_value=None, cookie=None) -> None:
         # use default configuration if none is provided
         if configuration is None:
             configuration = Configuration.get_default()
@@ -177,9 +175,7 @@ class ApiClient:
             header_params["Cookie"] = self.cookie
         if header_params:
             header_params = self.sanitize_for_serialization(header_params)
-            header_params = dict(
-                self.parameters_to_tuples(header_params, collection_formats)
-            )
+            header_params = dict(self.parameters_to_tuples(header_params, collection_formats))
 
         # path parameters
         if path_params:
@@ -187,9 +183,7 @@ class ApiClient:
             path_params = self.parameters_to_tuples(path_params, collection_formats)
             for k, v in path_params:
                 # specified safe chars, encode everything
-                resource_path = resource_path.replace(
-                    "{%s}" % k, quote(str(v), safe=config.safe_chars_for_path_param)
-                )
+                resource_path = resource_path.replace("{%s}" % k, quote(str(v), safe=config.safe_chars_for_path_param))
 
         # post parameters
         if post_params or files:
@@ -200,13 +194,7 @@ class ApiClient:
 
         # auth setting
         self.update_params_for_auth(
-            header_params,
-            query_params,
-            auth_settings,
-            resource_path,
-            method,
-            body,
-            request_auth=_request_auth,
+            header_params, query_params, auth_settings, resource_path, method, body, request_auth=_request_auth
         )
 
         # body
@@ -229,13 +217,7 @@ class ApiClient:
         return method, url, header_params, body, post_params
 
     def call_api(
-        self,
-        method,
-        url,
-        header_params=None,
-        body=None,
-        post_params=None,
-        _request_timeout=None,
+        self, method, url, header_params=None, body=None, post_params=None, _request_timeout=None
     ) -> rest.RESTResponse:
         """Makes the HTTP request (synchronous)
         :param method: Method to call.
@@ -266,9 +248,7 @@ class ApiClient:
         return response_data
 
     def response_deserialize(
-        self,
-        response_data: rest.RESTResponse,
-        response_types_map: Optional[Dict[str, ApiResponseT]] = None,
+        self, response_data: rest.RESTResponse, response_types_map: Optional[Dict[str, ApiResponseT]] = None
     ) -> ApiResponse[ApiResponseT]:
         """Deserializes response into an object.
         :param response_data: RESTResponse object to be deserialized.
@@ -280,15 +260,9 @@ class ApiClient:
         assert response_data.data is not None, msg
 
         response_type = response_types_map.get(str(response_data.status), None)
-        if (
-            not response_type
-            and isinstance(response_data.status, int)
-            and 100 <= response_data.status <= 599
-        ):
+        if not response_type and isinstance(response_data.status, int) and 100 <= response_data.status <= 599:
             # if not found, look for '1XX', '2XX', etc.
-            response_type = response_types_map.get(
-                str(response_data.status)[0] + "XX", None
-            )
+            response_type = response_types_map.get(str(response_data.status)[0] + "XX", None)
 
         # deserialize response data
         response_text = None
@@ -356,9 +330,7 @@ class ApiClient:
             # model definition for request.
             obj_dict = obj.to_dict()
 
-        return {
-            key: self.sanitize_for_serialization(val) for key, val in obj_dict.items()
-        }
+        return {key: self.sanitize_for_serialization(val) for key, val in obj_dict.items()}
 
     def deserialize(self, response_text, response_type):
         """Deserializes response into an object.
@@ -481,9 +453,7 @@ class ApiClient:
                         delimiter = "|"
                     else:  # csv is the default
                         delimiter = ","
-                    new_params.append(
-                        (k, delimiter.join(quote(str(value)) for value in v))
-                    )
+                    new_params.append((k, delimiter.join(quote(str(value)) for value in v)))
             else:
                 new_params.append((k, quote(str(v))))
 
@@ -506,10 +476,7 @@ class ApiClient:
                     with open(n, "rb") as f:
                         filename = os.path.basename(f.name)
                         filedata = f.read()
-                        mimetype = (
-                            mimetypes.guess_type(filename)[0]
-                            or "application/octet-stream"
-                        )
+                        mimetype = mimetypes.guess_type(filename)[0] or "application/octet-stream"
                         params.append(tuple([k, tuple([filename, filedata, mimetype])]))
 
         return params
@@ -545,14 +512,7 @@ class ApiClient:
         return content_types[0]
 
     def update_params_for_auth(
-        self,
-        headers,
-        queries,
-        auth_settings,
-        resource_path,
-        method,
-        body,
-        request_auth=None,
+        self, headers, queries, auth_settings, resource_path, method, body, request_auth=None
     ) -> None:
         """Updates header and query params based on authentication setting.
 
@@ -570,20 +530,14 @@ class ApiClient:
             return
 
         if request_auth:
-            self._apply_auth_params(
-                headers, queries, resource_path, method, body, request_auth
-            )
+            self._apply_auth_params(headers, queries, resource_path, method, body, request_auth)
         else:
             for auth in auth_settings:
                 auth_setting = self.configuration.auth_settings().get(auth)
                 if auth_setting:
-                    self._apply_auth_params(
-                        headers, queries, resource_path, method, body, auth_setting
-                    )
+                    self._apply_auth_params(headers, queries, resource_path, method, body, auth_setting)
 
-    def _apply_auth_params(
-        self, headers, queries, resource_path, method, body, auth_setting
-    ) -> None:
+    def _apply_auth_params(self, headers, queries, resource_path, method, body, auth_setting) -> None:
         """Updates the request parameters based on a single auth_setting
 
         :param headers: Header parameters dict to be updated.
@@ -665,9 +619,7 @@ class ApiClient:
         except ImportError:
             return string
         except ValueError:
-            raise rest.ApiException(
-                status=0, reason="Failed to parse `{0}` as date object".format(string)
-            )
+            raise rest.ApiException(status=0, reason="Failed to parse `{0}` as date object".format(string))
 
     def __deserialize_datetime(self, string):
         """Deserializes string to datetime.
@@ -682,10 +634,7 @@ class ApiClient:
         except ImportError:
             return string
         except ValueError:
-            raise rest.ApiException(
-                status=0,
-                reason=("Failed to parse `{0}` as datetime object".format(string)),
-            )
+            raise rest.ApiException(status=0, reason=("Failed to parse `{0}` as datetime object".format(string)))
 
     def __deserialize_enum(self, data, klass):
         """Deserializes primitive type to enum.
@@ -697,9 +646,7 @@ class ApiClient:
         try:
             return klass(data)
         except ValueError:
-            raise rest.ApiException(
-                status=0, reason=("Failed to parse `{0}` as `{1}`".format(data, klass))
-            )
+            raise rest.ApiException(status=0, reason=("Failed to parse `{0}` as `{1}`".format(data, klass)))
 
     def __deserialize_model(self, data, klass):
         """Deserializes list or dict to model.

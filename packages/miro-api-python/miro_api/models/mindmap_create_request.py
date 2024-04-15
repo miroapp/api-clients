@@ -111,26 +111,10 @@ class MindmapCreateRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "data": (
-                    MindmapDataForCreate.from_dict(obj["data"])
-                    if obj.get("data") is not None
-                    else None
-                ),
-                "position": (
-                    PositionChange.from_dict(obj["position"])
-                    if obj.get("position") is not None
-                    else None
-                ),
-                "geometry": (
-                    Geometry.from_dict(obj["geometry"])
-                    if obj.get("geometry") is not None
-                    else None
-                ),
-                "parent": (
-                    Parent.from_dict(obj["parent"])
-                    if obj.get("parent") is not None
-                    else None
-                ),
+                "data": MindmapDataForCreate.from_dict(obj["data"]) if obj.get("data") is not None else None,
+                "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
+                "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
+                "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
             }
         )
         # store additional fields in additional_properties

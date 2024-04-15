@@ -28,9 +28,7 @@ class ImageUrlDataPlatformBulkCreateOperationExperimentalRelease(BaseModel):
     Contains information about the image URL.
     """  # noqa: E501
 
-    title: Optional[StrictStr] = Field(
-        default=None, description="A short text header to identify the image."
-    )
+    title: Optional[StrictStr] = Field(default=None, description="A short text header to identify the image.")
     url: StrictStr = Field(description="URL of the image.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["title", "url"]

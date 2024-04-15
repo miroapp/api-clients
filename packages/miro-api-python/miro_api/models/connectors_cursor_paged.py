@@ -34,9 +34,7 @@ class ConnectorsCursorPaged(BaseModel):
         default=None,
         description="A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the value returned in this parameter.",
     )
-    data: Optional[List[ConnectorWithLinks]] = Field(
-        default=None, description="Contains the result data."
-    )
+    data: Optional[List[ConnectorWithLinks]] = Field(default=None, description="Contains the result data.")
     limit: Optional[StrictInt] = Field(
         default=None,
         description="Maximum number of results returned based on the `limit` specified in the request. For example, if there are `20` results, the request has no `cursor` value, and the `limit` is set to `20`,the `size` of the results will be `20`. The rest of the results will not be returned. To retrieve the rest of the results, you must make another request and set the appropriate value for the `cursor` parameter value that you obtained from the response.",
@@ -48,14 +46,7 @@ class ConnectorsCursorPaged(BaseModel):
     )
     total: Optional[StrictInt] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "cursor",
-        "data",
-        "limit",
-        "links",
-        "size",
-        "total",
-    ]
+    __properties: ClassVar[List[str]] = ["cursor", "data", "limit", "links", "size", "total"]
 
     model_config = {
         "populate_by_name": True,
@@ -134,11 +125,7 @@ class ConnectorsCursorPaged(BaseModel):
                     else None
                 ),
                 "limit": obj.get("limit"),
-                "links": (
-                    PageLinks.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "links": PageLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
                 "size": obj.get("size"),
                 "total": obj.get("total"),
             }

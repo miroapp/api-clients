@@ -28,15 +28,9 @@ class Error400(BaseModel):
     Error400
     """  # noqa: E501
 
-    status: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=400, description="HTTP status code."
-    )
-    code: Optional[StrictStr] = Field(
-        default="invalidParameters", description="Description of the status code."
-    )
-    message: Optional[StrictStr] = Field(
-        default=None, description="Explanation of the error."
-    )
+    status: Optional[Union[StrictFloat, StrictInt]] = Field(default=400, description="HTTP status code.")
+    code: Optional[StrictStr] = Field(default="invalidParameters", description="Description of the status code.")
+    message: Optional[StrictStr] = Field(default=None, description="Explanation of the error.")
     type: Optional[StrictStr] = "error"
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["status", "code", "message", "type"]
@@ -102,11 +96,7 @@ class Error400(BaseModel):
         _obj = cls.model_validate(
             {
                 "status": obj.get("status") if obj.get("status") is not None else 400,
-                "code": (
-                    obj.get("code")
-                    if obj.get("code") is not None
-                    else "invalidParameters"
-                ),
+                "code": obj.get("code") if obj.get("code") is not None else "invalidParameters",
                 "message": obj.get("message"),
                 "type": obj.get("type") if obj.get("type") is not None else "error",
             }

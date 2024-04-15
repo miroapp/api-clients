@@ -90,25 +90,15 @@ class Miro:
         By default the client uses in memory storage for state. For production usage we recommend implementing one backed up by a permanent database.
         """
         self._client_id: str = client_id or os.environ.get("MIRO_CLIENT_ID") or ""
-        self._client_secret: str = (
-            client_secret or os.environ.get("MIRO_CLIENT_SECRET") or ""
-        )
-        self._redirect_url: str = (
-            redirect_url or os.environ.get("MIRO_REDIRECT_URL") or ""
-        )
+        self._client_secret: str = client_secret or os.environ.get("MIRO_CLIENT_SECRET") or ""
+        self._redirect_url: str = redirect_url or os.environ.get("MIRO_REDIRECT_URL") or ""
 
         if not self._client_id:
-            raise Exception(
-                "miro-api: MIRO_CLIENT_ID environment variable or passing clientId is required"
-            )
+            raise Exception("miro-api: MIRO_CLIENT_ID environment variable or passing clientId is required")
         if not self._client_secret:
-            raise Exception(
-                "miro-api: MIRO_CLIENT_SECRET environment variable or passing clientSecret is required"
-            )
+            raise Exception("miro-api: MIRO_CLIENT_SECRET environment variable or passing clientSecret is required")
         if not self._redirect_url:
-            raise Exception(
-                "miro-api: MIRO_REDIRECT_URL environment variable or passing redirectUrl is required"
-            )
+            raise Exception("miro-api: MIRO_REDIRECT_URL environment variable or passing redirectUrl is required")
 
         self._storage = storage
 
@@ -180,9 +170,7 @@ class Miro:
                 }
             )
         elif refresh_token:
-            params.update(
-                {"refresh_token": refresh_token, "grant_type": "refresh_token"}
-            )
+            params.update({"refresh_token": refresh_token, "grant_type": "refresh_token"})
 
         token_url = f"{token_url}?{urllib.parse.urlencode(params)}"
 
@@ -193,10 +181,7 @@ class Miro:
             payload["access_token"],
             payload.get("refresh_token"),
             (
-                (
-                    datetime.datetime.now()
-                    + datetime.timedelta(seconds=payload["expires_in"] - 120)
-                )
+                (datetime.datetime.now() + datetime.timedelta(seconds=payload["expires_in"] - 120))
                 if payload.get("payload")
                 else None
             ),
@@ -212,14 +197,8 @@ class Miro:
         state = self._storage.get()
 
         if not state or not state.access_token:
-            raise Exception(
-                "No access token stored, run exchangeCodeForAccessToken() first"
-            )
-        if (
-            state.refresh_token
-            and state.token_expires_at
-            and state.token_expires_at < datetime.datetime.now()
-        ):
+            raise Exception("No access token stored, run exchangeCodeForAccessToken() first")
+        if state.refresh_token and state.token_expires_at and state.token_expires_at < datetime.datetime.now():
             return self._get_token(refresh_token=state.refresh_token)
 
         return state.access_token

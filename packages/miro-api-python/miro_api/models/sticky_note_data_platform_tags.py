@@ -29,8 +29,7 @@ class StickyNoteDataPlatformTags(BaseModel):
     """  # noqa: E501
 
     content: Optional[StrictStr] = Field(
-        default=None,
-        description="The actual text (content) that appears in the sticky note item.",
+        default=None, description="The actual text (content) that appears in the sticky note item."
     )
     shape: Optional[StrictStr] = Field(
         default="square",
@@ -108,10 +107,7 @@ class StickyNoteDataPlatformTags(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "content": obj.get("content"),
-                "shape": obj.get("shape") if obj.get("shape") is not None else "square",
-            }
+            {"content": obj.get("content"), "shape": obj.get("shape") if obj.get("shape") is not None else "square"}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

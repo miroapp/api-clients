@@ -31,9 +31,7 @@ class Error(BaseModel):
     code: Optional[StrictStr] = Field(default=None, description="Code of the error")
     message: StrictStr = Field(description="Description of the error")
     context: Optional[Dict[str, Any]] = None
-    status: Optional[StrictInt] = Field(
-        default=None, description="Status code of the error"
-    )
+    status: Optional[StrictInt] = Field(default=None, description="Status code of the error")
     type: StrictStr = Field(description="Type of entity that is returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["code", "message", "context", "status", "type"]

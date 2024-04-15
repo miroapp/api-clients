@@ -28,9 +28,7 @@ class CreatedByPlatform(BaseModel):
     Contains information about the user who created the item.
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier (ID) of the user."
-    )
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the user.")
     type: Optional[StrictStr] = Field(
         default=None,
         description="Indicates the type of object returned. In this case, `type` returns `user`.",

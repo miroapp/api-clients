@@ -30,9 +30,7 @@ class GenericItemCursorPagedPlatformContainers(BaseModel):
     GenericItemCursorPagedPlatformContainers
     """  # noqa: E501
 
-    data: Optional[List[GenericItem]] = Field(
-        default=None, description="Contains the result data."
-    )
+    data: Optional[List[GenericItem]] = Field(default=None, description="Contains the result data.")
     total: Optional[StrictInt] = None
     size: Optional[StrictInt] = Field(
         default=None,
@@ -48,14 +46,7 @@ class GenericItemCursorPagedPlatformContainers(BaseModel):
     )
     links: Optional[PageLinks] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "data",
-        "total",
-        "size",
-        "cursor",
-        "limit",
-        "links",
-    ]
+    __properties: ClassVar[List[str]] = ["data", "total", "size", "cursor", "limit", "links"]
 
     model_config = {
         "populate_by_name": True,
@@ -128,19 +119,13 @@ class GenericItemCursorPagedPlatformContainers(BaseModel):
         _obj = cls.model_validate(
             {
                 "data": (
-                    [GenericItem.from_dict(_item) for _item in obj["data"]]
-                    if obj.get("data") is not None
-                    else None
+                    [GenericItem.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
                 ),
                 "total": obj.get("total"),
                 "size": obj.get("size"),
                 "cursor": obj.get("cursor"),
                 "limit": obj.get("limit"),
-                "links": (
-                    PageLinks.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "links": PageLinks.from_dict(obj["links"]) if obj.get("links") is not None else None,
             }
         )
         # store additional fields in additional_properties

@@ -28,12 +28,8 @@ class GeometryNoRotation(BaseModel):
     Contains geometrical information about the item, such as its width or height.
     """  # noqa: E501
 
-    height: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Height of the item, in pixels."
-    )
-    width: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None, description="Width of the item, in pixels."
-    )
+    height: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Height of the item, in pixels.")
+    width: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Width of the item, in pixels.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["height", "width"]
 
@@ -95,9 +91,7 @@ class GeometryNoRotation(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"height": obj.get("height"), "width": obj.get("width")}
-        )
+        _obj = cls.model_validate({"height": obj.get("height"), "width": obj.get("width")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

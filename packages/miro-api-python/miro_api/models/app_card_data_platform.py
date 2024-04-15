@@ -45,9 +45,7 @@ class AppCardDataPlatform(BaseModel):
         default=None,
         description="Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
     )
-    title: Optional[StrictStr] = Field(
-        default=None, description="A short text header to identify the app card."
-    )
+    title: Optional[StrictStr] = Field(default=None, description="A short text header to identify the app card.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "description",
@@ -64,9 +62,7 @@ class AppCardDataPlatform(BaseModel):
             return value
 
         if value not in set(["disconnected", "connected", "disabled"]):
-            raise ValueError(
-                "must be one of enum values ('disconnected', 'connected', 'disabled')"
-            )
+            raise ValueError("must be one of enum values ('disconnected', 'connected', 'disabled')")
         return value
 
     model_config = {
@@ -138,9 +134,7 @@ class AppCardDataPlatform(BaseModel):
             {
                 "description": obj.get("description"),
                 "fields": (
-                    [CustomField.from_dict(_item) for _item in obj["fields"]]
-                    if obj.get("fields") is not None
-                    else None
+                    [CustomField.from_dict(_item) for _item in obj["fields"]] if obj.get("fields") is not None else None
                 ),
                 "owned": obj.get("owned"),
                 "status": obj.get("status"),

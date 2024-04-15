@@ -28,16 +28,12 @@ class FrameChanges(BaseModel):
     Contains frame item data, such as the title, frame type, or frame format.
     """  # noqa: E501
 
-    format: Optional[StrictStr] = Field(
-        default="custom", description="Only custom frames are supported at the moment."
-    )
+    format: Optional[StrictStr] = Field(default="custom", description="Only custom frames are supported at the moment.")
     title: Optional[StrictStr] = Field(
-        default="Sample frame title",
-        description="Title of the frame. This title appears at the top of the frame.",
+        default="Sample frame title", description="Title of the frame. This title appears at the top of the frame."
     )
     type: Optional[StrictStr] = Field(
-        default="freeform",
-        description="Only free form frames are supported at the moment.",
+        default="freeform", description="Only free form frames are supported at the moment."
     )
     show_content: Optional[StrictBool] = Field(
         default=True,
@@ -127,20 +123,10 @@ class FrameChanges(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "format": (
-                    obj.get("format") if obj.get("format") is not None else "custom"
-                ),
-                "title": (
-                    obj.get("title")
-                    if obj.get("title") is not None
-                    else "Sample frame title"
-                ),
+                "format": obj.get("format") if obj.get("format") is not None else "custom",
+                "title": obj.get("title") if obj.get("title") is not None else "Sample frame title",
                 "type": obj.get("type") if obj.get("type") is not None else "freeform",
-                "showContent": (
-                    obj.get("showContent")
-                    if obj.get("showContent") is not None
-                    else True
-                ),
+                "showContent": obj.get("showContent") if obj.get("showContent") is not None else True,
             }
         )
         # store additional fields in additional_properties

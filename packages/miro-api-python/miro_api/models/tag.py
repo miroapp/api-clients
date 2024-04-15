@@ -28,14 +28,10 @@ class Tag(BaseModel):
     Tag
     """  # noqa: E501
 
-    fill_color: StrictStr = Field(
-        description="Background color of the tag.", alias="fillColor"
-    )
+    fill_color: StrictStr = Field(description="Background color of the tag.", alias="fillColor")
     id: StrictStr = Field(description="Unique identifier of the tag.")
     title: StrictStr = Field(description="Text of the tag.")
-    type: StrictStr = Field(
-        description="Type of the object that is returned. In this case, type returns `tag`."
-    )
+    type: StrictStr = Field(description="Type of the object that is returned. In this case, type returns `tag`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["fillColor", "id", "title", "type"]
 
@@ -122,12 +118,7 @@ class Tag(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "fillColor": obj.get("fillColor"),
-                "id": obj.get("id"),
-                "title": obj.get("title"),
-                "type": obj.get("type"),
-            }
+            {"fillColor": obj.get("fillColor"), "id": obj.get("id"), "title": obj.get("title"), "type": obj.get("type")}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

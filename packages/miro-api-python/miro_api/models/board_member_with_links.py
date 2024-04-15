@@ -31,9 +31,7 @@ class BoardMemberWithLinks(BaseModel):
 
     id: StrictStr = Field(description="Unique identifier (ID) of the user.")
     name: StrictStr = Field(description="Name of the user.")
-    role: Optional[StrictStr] = Field(
-        default=None, description="Role of the board member."
-    )
+    role: Optional[StrictStr] = Field(default=None, description="Role of the board member.")
     links: Optional[SelfLink] = None
     type: StrictStr = Field(
         description="Type of the object that is returned. In this case, `type` returns `board_member`."
@@ -48,9 +46,7 @@ class BoardMemberWithLinks(BaseModel):
             return value
 
         if value not in set(["viewer", "commenter", "editor", "coowner", "owner"]):
-            raise ValueError(
-                "must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')"
-            )
+            raise ValueError("must be one of enum values ('viewer', 'commenter', 'editor', 'coowner', 'owner')")
         return value
 
     model_config = {
@@ -119,11 +115,7 @@ class BoardMemberWithLinks(BaseModel):
                 "id": obj.get("id"),
                 "name": obj.get("name"),
                 "role": obj.get("role"),
-                "links": (
-                    SelfLink.from_dict(obj["links"])
-                    if obj.get("links") is not None
-                    else None
-                ),
+                "links": SelfLink.from_dict(obj["links"]) if obj.get("links") is not None else None,
                 "type": obj.get("type"),
             }
         )

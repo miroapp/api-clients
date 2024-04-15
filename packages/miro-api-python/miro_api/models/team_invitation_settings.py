@@ -58,9 +58,7 @@ class TeamInvitationSettings(BaseModel):
             return value
 
         if value not in set(["only_org_admins", "admins", "all_members"]):
-            raise ValueError(
-                "must be one of enum values ('only_org_admins', 'admins', 'all_members')"
-            )
+            raise ValueError("must be one of enum values ('only_org_admins', 'admins', 'all_members')")
         return value
 
     model_config = {
@@ -122,10 +120,7 @@ class TeamInvitationSettings(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "inviteExternalUsers": obj.get("inviteExternalUsers"),
-                "whoCanInvite": obj.get("whoCanInvite"),
-            }
+            {"inviteExternalUsers": obj.get("inviteExternalUsers"), "whoCanInvite": obj.get("whoCanInvite")}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

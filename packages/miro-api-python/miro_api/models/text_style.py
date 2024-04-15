@@ -34,9 +34,7 @@ class TextStyle(BaseModel):
         description="Hex value representing the color for the text within the text item. Default: `#1a1a1a`.",
     )
     fill_color: Optional[StrictStr] = Field(
-        default=None,
-        description="Background color of the text item. Default: `#ffffff`.",
-        alias="fillColor",
+        default=None, description="Background color of the text item. Default: `#ffffff`.", alias="fillColor"
     )
     fill_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(
         default=None,
@@ -44,27 +42,16 @@ class TextStyle(BaseModel):
         alias="fillOpacity",
     )
     font_family: Optional[StrictStr] = Field(
-        default=None,
-        description="Font type for the text in the text item. Default: `arial`.",
-        alias="fontFamily",
+        default=None, description="Font type for the text in the text item. Default: `arial`.", alias="fontFamily"
     )
     font_size: Optional[Annotated[str, Field(strict=True)]] = Field(
         default=None, description="Font size, in dp. Default: `14`.", alias="fontSize"
     )
     text_align: Optional[StrictStr] = Field(
-        default=None,
-        description="Horizontal alignment for the item's content. Default: `center.`",
-        alias="textAlign",
+        default=None, description="Horizontal alignment for the item's content. Default: `center.`", alias="textAlign"
     )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "color",
-        "fillColor",
-        "fillOpacity",
-        "fontFamily",
-        "fontSize",
-        "textAlign",
-    ]
+    __properties: ClassVar[List[str]] = ["color", "fillColor", "fillOpacity", "fontFamily", "fontSize", "textAlign"]
 
     @field_validator("font_family")
     def font_family_validate_enum(cls, value):

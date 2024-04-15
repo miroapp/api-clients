@@ -29,9 +29,7 @@ class BoardDataClassificationLabel(BaseModel):
     """  # noqa: E501
 
     color: Optional[StrictStr] = Field(default=None, description="Label color.")
-    description: Optional[StrictStr] = Field(
-        default=None, description="Label description."
-    )
+    description: Optional[StrictStr] = Field(default=None, description="Label description.")
     id: Optional[StrictStr] = Field(default=None, description="Label id.")
     name: Optional[StrictStr] = Field(default=None, description="Label name.")
     sharing_recommendation: Optional[StrictStr] = Field(
@@ -45,8 +43,7 @@ class BoardDataClassificationLabel(BaseModel):
         alias="guidelineUrl",
     )
     type: Optional[StrictStr] = Field(
-        default="board-data-classification-label",
-        description="Type of the object returned.",
+        default="board-data-classification-label", description="Type of the object returned."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
@@ -125,11 +122,7 @@ class BoardDataClassificationLabel(BaseModel):
                 "name": obj.get("name"),
                 "sharingRecommendation": obj.get("sharingRecommendation"),
                 "guidelineUrl": obj.get("guidelineUrl"),
-                "type": (
-                    obj.get("type")
-                    if obj.get("type") is not None
-                    else "board-data-classification-label"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "board-data-classification-label",
             }
         )
         # store additional fields in additional_properties

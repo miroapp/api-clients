@@ -115,11 +115,7 @@ class EmbedUrlData(BaseModel):
             {
                 "mode": obj.get("mode"),
                 "previewUrl": obj.get("previewUrl"),
-                "url": (
-                    obj.get("url")
-                    if obj.get("url") is not None
-                    else "https://www.youtube.com/watch?v=HlVSNEiFCBk"
-                ),
+                "url": obj.get("url") if obj.get("url") is not None else "https://www.youtube.com/watch?v=HlVSNEiFCBk",
             }
         )
         # store additional fields in additional_properties

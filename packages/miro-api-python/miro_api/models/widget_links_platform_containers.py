@@ -29,13 +29,10 @@ class WidgetLinksPlatformContainers(BaseModel):
     """  # noqa: E501
 
     related: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to obtain information about the child items related to the frame.",
+        default=None, description="Link to obtain information about the child items related to the frame."
     )
     var_self: Optional[StrictStr] = Field(
-        default=None,
-        description="Link to obtain information about the current item.",
-        alias="self",
+        default=None, description="Link to obtain information about the current item.", alias="self"
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["related", "self"]
@@ -98,9 +95,7 @@ class WidgetLinksPlatformContainers(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"related": obj.get("related"), "self": obj.get("self")}
-        )
+        _obj = cls.model_validate({"related": obj.get("related"), "self": obj.get("self")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

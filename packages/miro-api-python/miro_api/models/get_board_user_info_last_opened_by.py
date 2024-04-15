@@ -30,9 +30,7 @@ class GetBoardUserInfoLastOpenedBy(BaseModel):
 
     id: StrictStr = Field(description="Unique identifier (ID) of the user.")
     name: StrictStr = Field(description="Name of the user.")
-    type: StrictStr = Field(
-        description="Indicates the type of object returned. In this case, `type` returns `user`."
-    )
+    type: StrictStr = Field(description="Indicates the type of object returned. In this case, `type` returns `user`.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["id", "name", "type"]
 
@@ -94,9 +92,7 @@ class GetBoardUserInfoLastOpenedBy(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"id": obj.get("id"), "name": obj.get("name"), "type": obj.get("type")}
-        )
+        _obj = cls.model_validate({"id": obj.get("id"), "name": obj.get("name"), "type": obj.get("type")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

@@ -47,9 +47,7 @@ class TeamCopyAccessLevelSettings(BaseModel):
         if value is None:
             return value
 
-        if value not in set(
-            ["anyone", "team_members", "team_editors", "board_owner            -"]
-        ):
+        if value not in set(["anyone", "team_members", "team_editors", "board_owner            -"]):
             raise ValueError(
                 "must be one of enum values ('anyone', 'team_members', 'team_editors', 'board_owner            -')"
             )

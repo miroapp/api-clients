@@ -30,8 +30,7 @@ class MindmapNodeStyle(BaseModel):
     """  # noqa: E501
 
     color: Optional[StrictStr] = Field(
-        default=None,
-        description="Hex value representing the color for the text within the node.",
+        default=None, description="Hex value representing the color for the text within the node."
     )
     fill_opacity: Optional[StrictStr] = Field(
         default=None,
@@ -105,11 +104,7 @@ class MindmapNodeStyle(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate(
-            {
-                "color": obj.get("color"),
-                "fillOpacity": obj.get("fillOpacity"),
-                "fontSize": obj.get("fontSize"),
-            }
+            {"color": obj.get("color"), "fillOpacity": obj.get("fillOpacity"), "fontSize": obj.get("fontSize")}
         )
         # store additional fields in additional_properties
         for _key in obj.keys():

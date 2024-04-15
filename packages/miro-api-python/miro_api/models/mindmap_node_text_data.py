@@ -32,8 +32,7 @@ class MindmapNodeTextData(BaseModel):
         description="Type of item used as mind map node. Currently, `type` can only be equal to `text`."
     )
     content: Optional[StrictStr] = Field(
-        default=None,
-        description="The actual text (content) that appears in the mind map node.",
+        default=None, description="The actual text (content) that appears in the mind map node."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["type", "content"]
@@ -96,9 +95,7 @@ class MindmapNodeTextData(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"type": obj.get("type"), "content": obj.get("content")}
-        )
+        _obj = cls.model_validate({"type": obj.get("type"), "content": obj.get("content")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

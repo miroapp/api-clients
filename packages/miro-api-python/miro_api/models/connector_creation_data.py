@@ -35,24 +35,14 @@ class ConnectorCreationData(BaseModel):
     start_item: ItemConnectionCreationData = Field(alias="startItem")
     end_item: ItemConnectionCreationData = Field(alias="endItem")
     shape: Optional[StrictStr] = Field(
-        default=None,
-        description="The path type of the connector line, defines curvature. Default: curved.",
+        default=None, description="The path type of the connector line, defines curvature. Default: curved."
     )
-    captions: Optional[Annotated[List[Caption], Field(min_length=0, max_length=20)]] = (
-        Field(
-            default=None,
-            description="Blocks of text you want to display on the connector.",
-        )
+    captions: Optional[Annotated[List[Caption], Field(min_length=0, max_length=20)]] = Field(
+        default=None, description="Blocks of text you want to display on the connector."
     )
     style: Optional[ConnectorStyle] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "startItem",
-        "endItem",
-        "shape",
-        "captions",
-        "style",
-    ]
+    __properties: ClassVar[List[str]] = ["startItem", "endItem", "shape", "captions", "style"]
 
     @field_validator("shape")
     def shape_validate_enum(cls, value):
@@ -61,9 +51,7 @@ class ConnectorCreationData(BaseModel):
             return value
 
         if value not in set(["straight", "elbowed", "curved"]):
-            raise ValueError(
-                "must be one of enum values ('straight', 'elbowed', 'curved')"
-            )
+            raise ValueError("must be one of enum values ('straight', 'elbowed', 'curved')")
         return value
 
     model_config = {
@@ -143,26 +131,16 @@ class ConnectorCreationData(BaseModel):
         _obj = cls.model_validate(
             {
                 "startItem": (
-                    ItemConnectionCreationData.from_dict(obj["startItem"])
-                    if obj.get("startItem") is not None
-                    else None
+                    ItemConnectionCreationData.from_dict(obj["startItem"]) if obj.get("startItem") is not None else None
                 ),
                 "endItem": (
-                    ItemConnectionCreationData.from_dict(obj["endItem"])
-                    if obj.get("endItem") is not None
-                    else None
+                    ItemConnectionCreationData.from_dict(obj["endItem"]) if obj.get("endItem") is not None else None
                 ),
                 "shape": obj.get("shape"),
                 "captions": (
-                    [Caption.from_dict(_item) for _item in obj["captions"]]
-                    if obj.get("captions") is not None
-                    else None
+                    [Caption.from_dict(_item) for _item in obj["captions"]] if obj.get("captions") is not None else None
                 ),
-                "style": (
-                    ConnectorStyle.from_dict(obj["style"])
-                    if obj.get("style") is not None
-                    else None
-                ),
+                "style": ConnectorStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
             }
         )
         # store additional fields in additional_properties

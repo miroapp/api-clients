@@ -34,29 +34,19 @@ class TeamMember(BaseModel):
         description=' Role of the team member. * "member":     Team member with full member permissions. * "admin":      Admin of a team. Team member with permission to manage team. * "non_team":   External user, non-team user. * "team_guest": Team-guest user, user with access only to a team without access to organization. '
     )
     created_at: Optional[datetime] = Field(
-        default=None,
-        description="Date and time when member was invited to the team.",
-        alias="createdAt",
+        default=None, description="Date and time when member was invited to the team.", alias="createdAt"
     )
     created_by: Optional[StrictStr] = Field(
-        default=None,
-        description="Id of the user who invited the team member.",
-        alias="createdBy",
+        default=None, description="Id of the user who invited the team member.", alias="createdBy"
     )
     modified_at: Optional[datetime] = Field(
-        default=None,
-        description="Date and time when the user's membership was last updated.",
-        alias="modifiedAt",
+        default=None, description="Date and time when the user's membership was last updated.", alias="modifiedAt"
     )
     modified_by: Optional[StrictStr] = Field(
-        default=None,
-        description="Id of the user who last updated the user's membership.",
-        alias="modifiedBy",
+        default=None, description="Id of the user who last updated the user's membership.", alias="modifiedBy"
     )
     team_id: StrictStr = Field(description="Team id", alias="teamId")
-    type: Optional[StrictStr] = Field(
-        default="team-member", description="Type of the object returned."
-    )
+    type: Optional[StrictStr] = Field(default="team-member", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "id",
@@ -73,9 +63,7 @@ class TeamMember(BaseModel):
     def role_validate_enum(cls, value):
         """Validates the enum"""
         if value not in set(["non_team", "member", "admin", "team_guest"]):
-            raise ValueError(
-                "must be one of enum values ('non_team', 'member', 'admin', 'team_guest')"
-            )
+            raise ValueError("must be one of enum values ('non_team', 'member', 'admin', 'team_guest')")
         return value
 
     model_config = {
@@ -145,9 +133,7 @@ class TeamMember(BaseModel):
                 "modifiedAt": obj.get("modifiedAt"),
                 "modifiedBy": obj.get("modifiedBy"),
                 "teamId": obj.get("teamId"),
-                "type": (
-                    obj.get("type") if obj.get("type") is not None else "team-member"
-                ),
+                "type": obj.get("type") if obj.get("type") is not None else "team-member",
             }
         )
         # store additional fields in additional_properties

@@ -30,8 +30,7 @@ class AppCardDataChanges(BaseModel):
     """  # noqa: E501
 
     description: Optional[StrictStr] = Field(
-        default=None,
-        description="A short text description to add context about the app card.",
+        default=None, description="A short text description to add context about the app card."
     )
     fields: Optional[List[CustomField]] = Field(
         default=None,
@@ -42,8 +41,7 @@ class AppCardDataChanges(BaseModel):
         description="Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.",
     )
     title: Optional[StrictStr] = Field(
-        default="sample app card item",
-        description="A short text header to identify the app card.",
+        default="sample app card item", description="A short text header to identify the app card."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["description", "fields", "status", "title"]
@@ -55,9 +53,7 @@ class AppCardDataChanges(BaseModel):
             return value
 
         if value not in set(["disconnected", "connected", "disabled"]):
-            raise ValueError(
-                "must be one of enum values ('disconnected', 'connected', 'disabled')"
-            )
+            raise ValueError("must be one of enum values ('disconnected', 'connected', 'disabled')")
         return value
 
     model_config = {
@@ -129,20 +125,10 @@ class AppCardDataChanges(BaseModel):
             {
                 "description": obj.get("description"),
                 "fields": (
-                    [CustomField.from_dict(_item) for _item in obj["fields"]]
-                    if obj.get("fields") is not None
-                    else None
+                    [CustomField.from_dict(_item) for _item in obj["fields"]] if obj.get("fields") is not None else None
                 ),
-                "status": (
-                    obj.get("status")
-                    if obj.get("status") is not None
-                    else "disconnected"
-                ),
-                "title": (
-                    obj.get("title")
-                    if obj.get("title") is not None
-                    else "sample app card item"
-                ),
+                "status": obj.get("status") if obj.get("status") is not None else "disconnected",
+                "title": obj.get("title") if obj.get("title") is not None else "sample app card item",
             }
         )
         # store additional fields in additional_properties
