@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import fetch from 'node-fetch'
-import fs from 'fs'
+import fs from 'fs/promises'
 
 const key = process.env.README_API_KEY
 if (!key) throw new Error('Missing environment variable: README_API_KEY')
@@ -12,7 +12,16 @@ const readmeVersion = 'v2.0'
 // ID of the Miro REST API Clients category for the guides
 const categoryId = '634e7912341d20002648ef06'
 
-async function updateDoc(slug, title, category, file) {
+const titlePattern = /^# (.*)/
+
+async function updateDoc(slug, defaultTitle, category, file) {
+  const fileContents = await fs.readFile(file, 'utf-8')
+
+  const title = fileContents.match(titlePattern)?.[1] || defaultTitle
+  const body = fileContents.replace(titlePattern, '').trim()
+
+  const requestBody = { title, category, body }
+
   const res = await fetch(`https://dash.readme.com/api/v1/docs/${slug}`, {
     method: 'PUT',
     headers: {
@@ -20,7 +29,7 @@ async function updateDoc(slug, title, category, file) {
       'Content-Type': 'application/json',
       'Authorization': `Basic ${Buffer.from(key, 'utf-8').toString('base64')}`
     },
-    body: JSON.stringify({ title, category, body: fs.readFileSync(file, 'utf-8') })
+    body: JSON.stringify(requestBody)
   })
   if (res.status >= 400) {
     throw new Error(await res.text())
