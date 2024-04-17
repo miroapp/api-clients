@@ -51,7 +51,8 @@ To start using the high-level `Miro` client, import it, and then create a new in
 import miro_api
 
 miro = miro_api.Miro()
-print(miro.api.create_board())
+
+print(miro.auth_url)
 ```
 
 Or, initialize it with custom configuration:
@@ -60,10 +61,12 @@ Or, initialize it with custom configuration:
 import miro_api
 
 miro = miro_api.Miro(
-  clientId='<your_app_client_id>>',
-  clientSecret='<your_app_client_secret>',
-  redirectUrl='https://example.com/miro/redirect/url',
+  client_id='<your_app_client_id>>',
+  client_secret='<your_app_client_secret>',
+  redirect_url='https://example.com/miro/redirect/url',
 )
+
+print(miro.auth_url)
 ```
 
 To start using the low-level `MiroApi` client, import it, and then create a new instance:
@@ -72,6 +75,7 @@ To start using the low-level `MiroApi` client, import it, and then create a new 
 import miro_api
 
 api = miro_api.MiroApi('<access_token>')
+
 print(api.create_board())
 ```
 
