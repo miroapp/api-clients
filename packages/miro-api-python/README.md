@@ -76,7 +76,7 @@ import miro_api
 
 api = miro_api.MiroApi('<access_token>')
 
-print(api.create_board())
+print(api.get_boards())
 ```
 
 ## OAuth authorization
