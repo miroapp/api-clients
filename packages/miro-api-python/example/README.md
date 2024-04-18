@@ -24,7 +24,7 @@ pip install miro_api
 **Using [poetry](https://python-poetry.org/docs/)**:
 
 ```bash
-poetry add miro_api
+poetry add miro_api flask python-dotenv
 ```
 
 ## Install flask
