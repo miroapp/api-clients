@@ -11,9 +11,9 @@ https://github.com/miroapp/app-examples/assets/10428517/aea10102-9b67-4976-8f37-
 
 - Python 3.9 or higher.
 
-## Installation
+## Install dependencies
 
-To integrate the `miro_api` package into your project, you can use either **pip** or **poetry** as follows:
+This example uses `miro_api`, `flask` and `python-dotenv`. You can use either **pip** or **poetry** as follows:
 
 **Using [pip](https://github.com/pypa/pip)**:
 
@@ -25,20 +25,6 @@ pip install miro_api flask python-dotenv
 
 ```bash
 poetry add miro_api flask python-dotenv
-```
-
-## Install flask
-
-```bash
-pip install flask
-```
-
-## Install python-dotenv for env variables
-
-If you plan to use `.env` variables as shown below, make sure to install `python-dotenv`.
-
-```bash
-pip install python-dotenv
 ```
 
 ## Configuration
