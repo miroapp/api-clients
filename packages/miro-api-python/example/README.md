@@ -53,7 +53,7 @@ MIRO_CLIENT_SECRET='abcdefghijklmnopqrstuvwxyz'
 MIRO_REDIRECT_URL='http://localhost:5000'
 ```
 
-Ensure you rename the file `.env` and then save it. Run `source .env`.
+Ensure you rename the file `.env` and then save it.
 
 ### Run the app
 
