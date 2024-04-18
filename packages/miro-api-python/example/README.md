@@ -18,7 +18,7 @@ To integrate the `miro_api` package into your project, you can use either **pip*
 **Using [pip](https://github.com/pypa/pip)**:
 
 ```bash
-pip install miro_api
+pip install miro_api flask python-dotenv
 ```
 
 **Using [poetry](https://python-poetry.org/docs/)**:
