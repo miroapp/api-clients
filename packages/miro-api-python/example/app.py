@@ -2,6 +2,10 @@ from flask import Flask, session, request
 from miro_api import Miro
 from miro_api.storage import Storage
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 app = Flask(__name__)
 
 app.secret_key = b'very_random_secret'
