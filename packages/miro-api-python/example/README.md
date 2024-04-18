@@ -41,8 +41,6 @@ If you plan to use `.env` variables as shown below, make sure to install `python
 pip install python-dotenv
 ```
 
-
-
 ## Configuration
 
 We recommend using a `.env` file to store env variables. Go ahead and open the `.sample.env` file, and then add your variables in.
