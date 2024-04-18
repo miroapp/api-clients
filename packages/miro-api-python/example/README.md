@@ -3,7 +3,7 @@
 This example shows how to use Flask and Miro's Python REST API client library to create a simple web-app running locally
 which calls Miro's REST APIs to fetch boards. 
 
-## App Demo
+## App Demo 🔉 (Sound On) 🔉
 
 https://github.com/miroapp/app-examples/assets/10428517/aea10102-9b67-4976-8f37-855922b4f1cc
 
