@@ -1,7 +1,7 @@
 # Miro Python client Flask example
 
 This example shows how to use Flask and Miro's Python REST API client library to create a simple web-app running locally
-which calls Miro's REST APIs to fetch boards. 
+which calls Miro's REST APIs to fetch boards.
 
 ## App Demo 🔉 (Sound On) 🔉
 
@@ -31,7 +31,7 @@ poetry add miro_api flask python-dotenv
 
 We recommend using a `.env` file to store env variables. Go ahead and open the `.sample.env` file, and then add your variables in.
 
-Once you are done, it should look like this (*it is recommended to use http://localhost:5000*):
+Once you are done, it should look like this (_it is recommended to use http://localhost:5000_):
 
 ```bash
 MIRO_CLIENT_ID='123456789'
@@ -43,7 +43,7 @@ Ensure you rename the file `.env` and then save it.
 
 ### Run the app
 
-Run `flask --app app run` to start the dev server. 
+Run `flask --app app run` to start the dev server.
 
 Go to `localhost:5000` in your browser.
 
