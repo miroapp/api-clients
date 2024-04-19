@@ -52,7 +52,3 @@ Install the app on a team, and then you should see a list of all of the boards f
 ### Reference
 
 - [Miro Python library reference](https://miroapp.github.io/api-clients/python/)
-
-### Examples
-
-See an example of implementing a simple server using Flask library in the [example](https://github.com/miroapp/api-clients/tree/main/packages/miro-api-python/example) directory.
