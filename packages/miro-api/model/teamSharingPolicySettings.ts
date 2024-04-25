@@ -32,6 +32,12 @@ export class TeamSharingPolicySettings {
     | string
     | (typeof TeamSharingPolicySettings.DefaultBoardAccessEnum)[keyof typeof TeamSharingPolicySettings.DefaultBoardAccessEnum]
   /**
+   *  Indicates who can change board access and invite users to boards in this team, by default. * \"team_members_with_editing_rights\": Any team member with editing rights on the board. * \"owner_and_coowners\":               Only the owner and co-owners of the board.
+   */
+  'defaultBoardSharingAccess'?:
+    | string
+    | (typeof TeamSharingPolicySettings.DefaultBoardSharingAccessEnum)[keyof typeof TeamSharingPolicySettings.DefaultBoardSharingAccessEnum]
+  /**
    *  Default organization access * \"private\": Only board owners can access * \"view\":    Anyone in the team can view * \"comment\": Anyone in the team can comment * \"edit\":    Anyone in the team can edit
    */
   'defaultOrganizationAccess'?:
@@ -95,6 +101,11 @@ export class TeamSharingPolicySettings {
       type: 'TeamSharingPolicySettings.DefaultBoardAccessEnum',
     },
     {
+      name: 'defaultBoardSharingAccess',
+      baseName: 'defaultBoardSharingAccess',
+      type: 'TeamSharingPolicySettings.DefaultBoardSharingAccessEnum',
+    },
+    {
       name: 'defaultOrganizationAccess',
       baseName: 'defaultOrganizationAccess',
       type: 'TeamSharingPolicySettings.DefaultOrganizationAccessEnum',
@@ -148,6 +159,10 @@ export namespace TeamSharingPolicySettings {
     View: 'view',
     Comment: 'comment',
     Edit: 'edit',
+  } as const
+  export const DefaultBoardSharingAccessEnum = {
+    TeamMembersWithEditingRights: 'team_members_with_editing_rights',
+    OwnerAndCoowners: 'owner_and_coowners',
   } as const
   export const DefaultOrganizationAccessEnum = {
     Private: 'private',

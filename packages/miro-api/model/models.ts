@@ -782,6 +782,7 @@ let enumsMap: {[index: string]: any} = {
   'TeamMemberInvite.RoleEnum': TeamMemberInvite.RoleEnum,
   'TeamSharingPolicySettings.CreateAssetAccessLevelEnum': TeamSharingPolicySettings.CreateAssetAccessLevelEnum,
   'TeamSharingPolicySettings.DefaultBoardAccessEnum': TeamSharingPolicySettings.DefaultBoardAccessEnum,
+  'TeamSharingPolicySettings.DefaultBoardSharingAccessEnum': TeamSharingPolicySettings.DefaultBoardSharingAccessEnum,
   'TeamSharingPolicySettings.DefaultOrganizationAccessEnum': TeamSharingPolicySettings.DefaultOrganizationAccessEnum,
   'TeamSharingPolicySettings.DefaultProjectAccessEnum': TeamSharingPolicySettings.DefaultProjectAccessEnum,
   'TeamSharingPolicySettings.MoveBoardToAccountEnum': TeamSharingPolicySettings.MoveBoardToAccountEnum,
@@ -792,6 +793,8 @@ let enumsMap: {[index: string]: any} = {
   'TeamSharingPolicySettingsChanges.CreateAssetAccessLevelEnum':
     TeamSharingPolicySettingsChanges.CreateAssetAccessLevelEnum,
   'TeamSharingPolicySettingsChanges.DefaultBoardAccessEnum': TeamSharingPolicySettingsChanges.DefaultBoardAccessEnum,
+  'TeamSharingPolicySettingsChanges.DefaultBoardSharingAccessEnum':
+    TeamSharingPolicySettingsChanges.DefaultBoardSharingAccessEnum,
   'TeamSharingPolicySettingsChanges.DefaultOrganizationAccessEnum':
     TeamSharingPolicySettingsChanges.DefaultOrganizationAccessEnum,
   'TeamSharingPolicySettingsChanges.DefaultProjectAccessEnum':

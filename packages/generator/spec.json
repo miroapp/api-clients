@@ -22750,6 +22750,11 @@
             "description": "\nDefault board access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n* \"comment\": Anyone in the team can comment\n* \"edit\":    Anyone in the team can edit\n",
             "enum": ["private", "view", "comment", "edit"]
           },
+          "defaultBoardSharingAccess": {
+            "type": "string",
+            "description": "\nIndicates who can change board access and invite users to boards in this team, by default.\n* \"team_members_with_editing_rights\": Any team member with editing rights on the board.\n* \"owner_and_coowners\":               Only the owner and co-owners of the board.\n",
+            "enum": ["team_members_with_editing_rights", "owner_and_coowners"]
+          },
           "defaultOrganizationAccess": {
             "type": "string",
             "description": "\nDefault organization access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n* \"comment\": Anyone in the team can comment\n* \"edit\":    Anyone in the team can edit\n",
@@ -22808,6 +22813,12 @@
             "type": "string",
             "description": "\nDefault board access\n* \"private\": Only board owners can access\n* \"view\":    Anyone in the team can view\n* \"comment\": Anyone in the team can comment\n* \"edit\":    Anyone in the team can edit\n",
             "enum": ["private", "view", "comment", "edit"]
+          },
+          "defaultBoardSharingAccess": {
+            "type": "string",
+            "default": "team_members_with_editing_rights",
+            "description": "\nIndicates who can change board access and invite users to boards in this team, by default.\n* \"team_members_with_editing_rights\": Any team member with editing rights on the board.\n* \"owner_and_coowners\":               Only the owner and co-owners of the board.\n",
+            "enum": ["team_members_with_editing_rights", "owner_and_coowners"]
           },
           "defaultOrganizationAccess": {
             "type": "string",
