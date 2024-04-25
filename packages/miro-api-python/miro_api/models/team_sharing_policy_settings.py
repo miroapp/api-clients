@@ -41,6 +41,11 @@ class TeamSharingPolicySettings(BaseModel):
         description=' Default board access * "private": Only board owners can access * "view":    Anyone in the team can view * "comment": Anyone in the team can comment * "edit":    Anyone in the team can edit ',
         alias="defaultBoardAccess",
     )
+    default_board_sharing_access: Optional[StrictStr] = Field(
+        default=None,
+        description=' Indicates who can change board access and invite users to boards in this team, by default. * "team_members_with_editing_rights": Any team member with editing rights on the board. * "owner_and_coowners":               Only the owner and co-owners of the board. ',
+        alias="defaultBoardSharingAccess",
+    )
     default_organization_access: Optional[StrictStr] = Field(
         default=None,
         description=' Default organization access * "private": Only board owners can access * "view":    Anyone in the team can view * "comment": Anyone in the team can comment * "edit":    Anyone in the team can edit ',
@@ -81,6 +86,7 @@ class TeamSharingPolicySettings(BaseModel):
         "allowListedDomains",
         "createAssetAccessLevel",
         "defaultBoardAccess",
+        "defaultBoardSharingAccess",
         "defaultOrganizationAccess",
         "defaultProjectAccess",
         "moveBoardToAccount",
@@ -108,6 +114,16 @@ class TeamSharingPolicySettings(BaseModel):
 
         if value not in set(["private", "view", "comment", "edit"]):
             raise ValueError("must be one of enum values ('private', 'view', 'comment', 'edit')")
+        return value
+
+    @field_validator("default_board_sharing_access")
+    def default_board_sharing_access_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["team_members_with_editing_rights", "owner_and_coowners"]):
+            raise ValueError("must be one of enum values ('team_members_with_editing_rights', 'owner_and_coowners')")
         return value
 
     @field_validator("default_organization_access")
@@ -243,6 +259,7 @@ class TeamSharingPolicySettings(BaseModel):
                 "allowListedDomains": obj.get("allowListedDomains"),
                 "createAssetAccessLevel": obj.get("createAssetAccessLevel"),
                 "defaultBoardAccess": obj.get("defaultBoardAccess"),
+                "defaultBoardSharingAccess": obj.get("defaultBoardSharingAccess"),
                 "defaultOrganizationAccess": obj.get("defaultOrganizationAccess"),
                 "defaultProjectAccess": obj.get("defaultProjectAccess"),
                 "moveBoardToAccount": obj.get("moveBoardToAccount"),
