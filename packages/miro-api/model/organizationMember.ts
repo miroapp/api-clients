@@ -20,7 +20,7 @@ export class OrganizationMember {
    */
   'id': string
   /**
-   * Flag is user active
+   * Indicates if a user is active or deactivated. Learn more about <a target=\"blank\" href=\"https://help.miro.com/hc/en-us/articles/360025025894-Deactivated-users\">user deactivation</a>.
    */
   'active': boolean
   /**
@@ -28,7 +28,7 @@ export class OrganizationMember {
    */
   'email': string
   /**
-   * Last time when the user was active
+   * Date and time when the user was last active. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). If the user never logged in, the parameter value is empty.
    */
   'lastActivityAt'?: Date
   /**
