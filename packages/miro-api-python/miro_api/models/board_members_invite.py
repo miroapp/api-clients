@@ -32,7 +32,10 @@ class BoardMembersInvite(BaseModel):
     emails: Annotated[List[StrictStr], Field(min_length=1, max_length=20)] = Field(
         description="Email IDs of the users you want to invite to the board. You can invite up to 20 members per call."
     )
-    role: Optional[StrictStr] = Field(default="commenter", description="Role of the board member.")
+    role: Optional[StrictStr] = Field(
+        default="commenter",
+        description="Role of the board member. Inviting users with the role `owner` has the same effect as the role `coowner`.",
+    )
     message: Optional[StrictStr] = Field(
         default=None, description="The message that will be sent in the invitation email."
     )

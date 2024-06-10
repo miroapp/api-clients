@@ -30,10 +30,14 @@ class OrganizationMember(BaseModel):
     """  # noqa: E501
 
     id: StrictStr = Field(description="Id of the user")
-    active: StrictBool = Field(description="Flag is user active")
+    active: StrictBool = Field(
+        description='Indicates if a user is active or deactivated. Learn more about <a target="blank" href="https://help.miro.com/hc/en-us/articles/360025025894-Deactivated-users">user deactivation</a>.'
+    )
     email: StrictStr = Field(description="User email")
     last_activity_at: Optional[datetime] = Field(
-        default=None, description="Last time when the user was active", alias="lastActivityAt"
+        default=None,
+        description="Date and time when the user was last active. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). If the user never logged in, the parameter value is empty. ",
+        alias="lastActivityAt",
     )
     license: StrictStr = Field(description="Name of the current user license in the organization")
     license_assigned_at: Optional[datetime] = Field(

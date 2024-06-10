@@ -16,7 +16,7 @@ export class BoardMembersInvite {
    */
   'emails': Array<string>
   /**
-   * Role of the board member.
+   * Role of the board member. Inviting users with the role `owner` has the same effect as the role `coowner`.
    */
   'role'?: string | (typeof BoardMembersInvite.RoleEnum)[keyof typeof BoardMembersInvite.RoleEnum] =
     BoardMembersInvite.RoleEnum.Commenter
