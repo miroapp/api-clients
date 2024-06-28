@@ -35,12 +35,11 @@ export class BoardSharingPolicyChange {
     | (typeof BoardSharingPolicyChange.OrganizationAccessEnum)[keyof typeof BoardSharingPolicyChange.OrganizationAccessEnum] =
     BoardSharingPolicyChange.OrganizationAccessEnum.Private
   /**
-   * Defines the team-level access to the board.
+   * Defines the team-level access to the board. By default, **edit** for the free plan and **private** for other plans.
    */
   'teamAccess'?:
     | string
-    | (typeof BoardSharingPolicyChange.TeamAccessEnum)[keyof typeof BoardSharingPolicyChange.TeamAccessEnum] =
-    BoardSharingPolicyChange.TeamAccessEnum.Private
+    | (typeof BoardSharingPolicyChange.TeamAccessEnum)[keyof typeof BoardSharingPolicyChange.TeamAccessEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined

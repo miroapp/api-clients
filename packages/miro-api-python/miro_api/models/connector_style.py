@@ -97,10 +97,11 @@ class ConnectorStyle(BaseModel):
                 "erd_zero_or_one",
                 "erd_one_or_many",
                 "erd_zero_or_many",
+                "unknown",
             ]
         ):
             raise ValueError(
-                "must be one of enum values ('none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many')"
+                "must be one of enum values ('none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many', 'unknown')"
             )
         return value
 
@@ -127,10 +128,11 @@ class ConnectorStyle(BaseModel):
                 "erd_zero_or_one",
                 "erd_one_or_many",
                 "erd_zero_or_many",
+                "unknown",
             ]
         ):
             raise ValueError(
-                "must be one of enum values ('none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many')"
+                "must be one of enum values ('none', 'stealth', 'diamond', 'filled_diamond', 'oval', 'filled_oval', 'arrow', 'triangle', 'filled_triangle', 'erd_one', 'erd_many', 'erd_only_one', 'erd_zero_or_one', 'erd_one_or_many', 'erd_zero_or_many', 'unknown')"
             )
         return value
 

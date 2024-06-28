@@ -120,6 +120,7 @@ export namespace ConnectorStyle {
     ErdZeroOrOne: 'erd_zero_or_one',
     ErdOneOrMany: 'erd_one_or_many',
     ErdZeroOrMany: 'erd_zero_or_many',
+    Unknown: 'unknown',
   } as const
   export const StartStrokeCapEnum = {
     None: 'none',
@@ -137,6 +138,7 @@ export namespace ConnectorStyle {
     ErdZeroOrOne: 'erd_zero_or_one',
     ErdOneOrMany: 'erd_one_or_many',
     ErdZeroOrMany: 'erd_zero_or_many',
+    Unknown: 'unknown',
   } as const
   export const StrokeStyleEnum = {
     Normal: 'normal',

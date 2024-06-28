@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field
 from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,9 @@ class UpdateProjectRequest(BaseModel):
     UpdateProjectRequest
     """  # noqa: E501
 
-    name: StrictStr = Field(description="Project name")
+    name: Annotated[str, Field(min_length=1, strict=True, max_length=60)] = Field(
+        description="New name of the project."
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name"]
 

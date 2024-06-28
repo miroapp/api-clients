@@ -9419,7 +9419,7 @@ class MiroApiEndpoints:
     ) -> BoardWithLinks:
         """Create board
 
-        Creates a board with the specified name and sharing policies.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+        Creates a board with the specified name and sharing policies.<br/><h4>Note</h4> You can only create up to 3 team boards with the free plan.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
 
         :param board_changes:
         :type board_changes: BoardChanges
@@ -11219,7 +11219,9 @@ class MiroApiEndpoints:
         board_id_platform_file_upload: Annotated[
             StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")
         ],
-        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
+        resource: Annotated[
+            Union[StrictBytes, StrictStr], Field(description="Select a file to upload. Maximum file size is 6 MB.")
+        ],
         data: Optional[CreateDocumentItemUsingFileFromDeviceRequestData] = None,
         _request_timeout: Union[
             None,
@@ -11237,7 +11239,7 @@ class MiroApiEndpoints:
 
         :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to create the item. (required)
         :type board_id_platform_file_upload: str
-        :param resource: Select a file to upload (required)
+        :param resource: Select a file to upload. Maximum file size is 6 MB. (required)
         :type resource: bytearray
         :param data:
         :type data: CreateDocumentItemUsingFileFromDeviceRequestData
@@ -11727,7 +11729,9 @@ class MiroApiEndpoints:
             StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")
         ],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
-        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
+        resource: Annotated[
+            Union[StrictBytes, StrictStr], Field(description="Select a file to upload. Maximum file size is 6 MB.")
+        ],
         data: Optional[UploadFileFromDeviceData] = None,
         _request_timeout: Union[
             None,
@@ -11741,13 +11745,13 @@ class MiroApiEndpoints:
     ) -> DocumentItem:
         """Update document item using file from device
 
-        Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+        Updates a document item on a board by using file from a device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
 
         :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to update the item. (required)
         :type board_id_platform_file_upload: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
-        :param resource: Select a file to upload (required)
+        :param resource: Select a file to upload. Maximum file size is 6 MB. (required)
         :type resource: bytearray
         :param data:
         :type data: UploadFileFromDeviceData
@@ -13944,7 +13948,9 @@ class MiroApiEndpoints:
         board_id_platform_file_upload: Annotated[
             StrictStr, Field(description="Unique identifier (ID) of the board where you want to create the item.")
         ],
-        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
+        resource: Annotated[
+            Union[StrictBytes, StrictStr], Field(description="Select a file to upload. Maximum file size is 6 MB.")
+        ],
         data: Optional[UploadFileFromDeviceData] = None,
         _request_timeout: Union[
             None,
@@ -13962,7 +13968,7 @@ class MiroApiEndpoints:
 
         :param board_id_platform_file_upload: Unique identifier (ID) of the board where you want to create the item. (required)
         :type board_id_platform_file_upload: str
-        :param resource: Select a file to upload (required)
+        :param resource: Select a file to upload. Maximum file size is 6 MB. (required)
         :type resource: bytearray
         :param data:
         :type data: UploadFileFromDeviceData
@@ -14452,7 +14458,9 @@ class MiroApiEndpoints:
             StrictStr, Field(description="Unique identifier (ID) of the board where you want to update the item.")
         ],
         item_id: Annotated[StrictStr, Field(description="Unique identifier (ID) of the item that you want to update.")],
-        resource: Annotated[Union[StrictBytes, StrictStr], Field(description="Select a file to upload")],
+        resource: Annotated[
+            Union[StrictBytes, StrictStr], Field(description="Select a file to upload. Maximum file size is 6 MB.")
+        ],
         data: Optional[UploadFileFromDeviceData] = None,
         _request_timeout: Union[
             None,
@@ -14472,7 +14480,7 @@ class MiroApiEndpoints:
         :type board_id_platform_file_upload: str
         :param item_id: Unique identifier (ID) of the item that you want to update. (required)
         :type item_id: str
-        :param resource: Select a file to upload (required)
+        :param resource: Select a file to upload. Maximum file size is 6 MB. (required)
         :type resource: bytearray
         :param data:
         :type data: UploadFileFromDeviceData

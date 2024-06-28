@@ -12,7 +12,7 @@
 
 export class CreateTeamRequest {
   /**
-   * Team name
+   * Team name.
    */
   'name'?: string
 

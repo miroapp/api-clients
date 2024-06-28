@@ -25,16 +25,16 @@ from typing_extensions import Self
 
 class PositionChange(BaseModel):
     """
-    Contains information about the item's position on the board, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
+    Contains information about the item's position on the board, such as its `x` coordinate, `y` coordinate, and the origin of the `x` and `y` coordinates.
     """  # noqa: E501
 
     x: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
+        default=0,
+        description="X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: `0`. The center point of the board has `x: 0` and `y: 0` coordinates.",
     )
     y: Optional[Union[StrictFloat, StrictInt]] = Field(
-        default=None,
-        description="Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.",
+        default=0,
+        description="Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: `0`. The center point of the board has `x: 0` and `y: 0` coordinates.",
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["x", "y"]
@@ -97,7 +97,9 @@ class PositionChange(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"x": obj.get("x"), "y": obj.get("y")})
+        _obj = cls.model_validate(
+            {"x": obj.get("x") if obj.get("x") is not None else 0, "y": obj.get("y") if obj.get("y") is not None else 0}
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

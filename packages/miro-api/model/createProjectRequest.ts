@@ -12,7 +12,7 @@
 
 export class CreateProjectRequest {
   /**
-   * Project name
+   * Project name.
    */
   'name': string
 
