@@ -12,17 +12,17 @@
 
 /**
  * @internal
- * Contains information about the item\'s position on the board, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.
+ * Contains information about the item\'s position on the board, such as its `x` coordinate, `y` coordinate, and the origin of the `x` and `y` coordinates.
  */
 export class PositionChange {
   /**
-   * X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.
+   * X-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: `0`. The center point of the board has `x: 0` and `y: 0` coordinates.
    */
-  'x'?: number
+  'x'?: number = 0
   /**
-   * Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: 0. The center point of the board has `x: 0` and `y: 0` coordinates.
+   * Y-axis coordinate of the location of the item on the board. By default, all items have absolute positioning to the board, not the current viewport. Default: `0`. The center point of the board has `x: 0` and `y: 0` coordinates.
    */
-  'y'?: number
+  'y'?: number = 0
 
   /** @ignore */
   static discriminator: string | undefined = undefined

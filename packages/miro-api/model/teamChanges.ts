@@ -12,7 +12,7 @@
 
 export class TeamChanges {
   /**
-   * Team name
+   * New name for the team.
    */
   'name'?: string
 

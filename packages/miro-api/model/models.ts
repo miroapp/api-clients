@@ -87,8 +87,6 @@ export * from './dataClassificationOrganizationSettings'
 export * from './dataClassificationTeamSettings'
 export * from './documentCreateRequest'
 export * from './documentData'
-export * from './documentDataPlatformFileUpload'
-export * from './documentDataPlatformTags'
 export * from './documentDataResponse'
 export * from './documentDataResponsePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './documentItem'
@@ -159,8 +157,6 @@ export * from './groupData'
 export * from './groupResponseShort'
 export * from './imageCreateRequest'
 export * from './imageData'
-export * from './imageDataPlatformFileUpload'
-export * from './imageDataPlatformTags'
 export * from './imageDataResponse'
 export * from './imageDataResponsePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './imageItem'
@@ -224,8 +220,6 @@ export * from './parentWithLinksPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './picture'
 export * from './position'
 export * from './positionChange'
-export * from './positionPlatformFileUpload'
-export * from './positionPlatformgroups'
 export * from './project'
 export * from './projectMember'
 export * from './projectMemberPage'
@@ -419,8 +413,6 @@ import {DataClassificationOrganizationSettings} from './dataClassificationOrgani
 import {DataClassificationTeamSettings} from './dataClassificationTeamSettings'
 import {DocumentCreateRequest} from './documentCreateRequest'
 import {DocumentData} from './documentData'
-import {DocumentDataPlatformFileUpload} from './documentDataPlatformFileUpload'
-import {DocumentDataPlatformTags} from './documentDataPlatformTags'
 import {DocumentDataResponse} from './documentDataResponse'
 import {DocumentDataResponsePlatformcreateitemsinbulkusingfilefromdevice} from './documentDataResponsePlatformcreateitemsinbulkusingfilefromdevice'
 import {DocumentItem} from './documentItem'
@@ -491,8 +483,6 @@ import {GroupData} from './groupData'
 import {GroupResponseShort} from './groupResponseShort'
 import {ImageCreateRequest} from './imageCreateRequest'
 import {ImageData} from './imageData'
-import {ImageDataPlatformFileUpload} from './imageDataPlatformFileUpload'
-import {ImageDataPlatformTags} from './imageDataPlatformTags'
 import {ImageDataResponse} from './imageDataResponse'
 import {ImageDataResponsePlatformcreateitemsinbulkusingfilefromdevice} from './imageDataResponsePlatformcreateitemsinbulkusingfilefromdevice'
 import {ImageItem} from './imageItem'
@@ -556,8 +546,6 @@ import {ParentWithLinksPlatformcreateitemsinbulkusingfilefromdevice} from './par
 import {Picture} from './picture'
 import {Position} from './position'
 import {PositionChange} from './positionChange'
-import {PositionPlatformFileUpload} from './positionPlatformFileUpload'
-import {PositionPlatformgroups} from './positionPlatformgroups'
 import {Project} from './project'
 import {ProjectMember} from './projectMember'
 import {ProjectMemberPage} from './projectMemberPage'
@@ -741,10 +729,6 @@ let enumsMap: {[index: string]: any} = {
   'OrganizationMember.RoleEnum': OrganizationMember.RoleEnum,
   'Position.OriginEnum': Position.OriginEnum,
   'Position.RelativeToEnum': Position.RelativeToEnum,
-  'PositionPlatformFileUpload.OriginEnum': PositionPlatformFileUpload.OriginEnum,
-  'PositionPlatformFileUpload.RelativeToEnum': PositionPlatformFileUpload.RelativeToEnum,
-  'PositionPlatformgroups.OriginEnum': PositionPlatformgroups.OriginEnum,
-  'PositionPlatformgroups.RelativeToEnum': PositionPlatformgroups.RelativeToEnum,
   ProjectRole: ProjectRole,
   ProjectRoleToAdd: ProjectRoleToAdd,
   'ShapeData.ShapeEnum': ShapeData.ShapeEnum,
@@ -943,8 +927,6 @@ let typeMap: {[index: string]: any} = {
   DataClassificationTeamSettings: DataClassificationTeamSettings,
   DocumentCreateRequest: DocumentCreateRequest,
   DocumentData: DocumentData,
-  DocumentDataPlatformFileUpload: DocumentDataPlatformFileUpload,
-  DocumentDataPlatformTags: DocumentDataPlatformTags,
   DocumentDataResponse: DocumentDataResponse,
   DocumentDataResponsePlatformcreateitemsinbulkusingfilefromdevice:
     DocumentDataResponsePlatformcreateitemsinbulkusingfilefromdevice,
@@ -1017,8 +999,6 @@ let typeMap: {[index: string]: any} = {
   GroupResponseShort: GroupResponseShort,
   ImageCreateRequest: ImageCreateRequest,
   ImageData: ImageData,
-  ImageDataPlatformFileUpload: ImageDataPlatformFileUpload,
-  ImageDataPlatformTags: ImageDataPlatformTags,
   ImageDataResponse: ImageDataResponse,
   ImageDataResponsePlatformcreateitemsinbulkusingfilefromdevice:
     ImageDataResponsePlatformcreateitemsinbulkusingfilefromdevice,
@@ -1083,8 +1063,6 @@ let typeMap: {[index: string]: any} = {
   Picture: Picture,
   Position: Position,
   PositionChange: PositionChange,
-  PositionPlatformFileUpload: PositionPlatformFileUpload,
-  PositionPlatformgroups: PositionPlatformgroups,
   Project: Project,
   ProjectMember: ProjectMember,
   ProjectMemberPage: ProjectMemberPage,

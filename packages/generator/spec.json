@@ -1401,7 +1401,7 @@
     },
     "/v2/boards": {
       "post": {
-        "description": "Creates a board with the specified name and sharing policies.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>",
+        "description": "Creates a board with the specified name and sharing policies.<br/><h4>Note</h4> You can only create up to 3 team boards with the free plan.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>",
         "operationId": "create-board",
         "requestBody": {
           "content": {
@@ -11887,8 +11887,8 @@
                     "properties": {
                       "title": {
                         "type": "string",
-                        "description": "Title for the document",
-                        "example": "Title for the document"
+                        "description": "Title for the document.",
+                        "example": "foo.pdf"
                       },
                       "position": {
                         "$ref": "#/components/schemas/PositionChange"
@@ -11904,7 +11904,7 @@
                   "resource": {
                     "type": "string",
                     "format": "binary",
-                    "description": "Select a file to upload"
+                    "description": "Select a file to upload. Maximum file size is 6 MB."
                   }
                 },
                 "required": ["resource"]
@@ -11930,7 +11930,7 @@
     },
     "/v2/boards/{board_id_PlatformFileUpload}/documents/{item_id}": {
       "patch": {
-        "description": "Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>",
+        "description": "Updates a document item on a board by using file from a device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>",
         "operationId": "update-document-item-using-file-from-device",
         "parameters": [
           {
@@ -17753,8 +17753,7 @@
           },
           "teamAccess": {
             "type": "string",
-            "default": "private",
-            "description": "Defines the team-level access to the board.",
+            "description": "Defines the team-level access to the board. By default, **edit** for the free plan and **private** for other plans.",
             "enum": ["private", "view", "comment", "edit"]
           }
         }
@@ -18214,7 +18213,8 @@
               "erd_only_one",
               "erd_zero_or_one",
               "erd_one_or_many",
-              "erd_zero_or_many"
+              "erd_zero_or_many",
+              "unknown"
             ]
           },
           "fontSize": {
@@ -18242,7 +18242,8 @@
               "erd_only_one",
               "erd_zero_or_one",
               "erd_one_or_many",
-              "erd_zero_or_many"
+              "erd_zero_or_many",
+              "unknown"
             ]
           },
           "strokeColor": {
@@ -21874,21 +21875,6 @@
           }
         }
       },
-      "DocumentDataPlatformFileUpload": {
-        "type": "object",
-        "properties": {
-          "documentUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false"
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the document.",
-            "example": "Sample document title"
-          }
-        }
-      },
       "DocumentItemPlatformFileUpload": {
         "type": "object",
         "properties": {
@@ -21982,21 +21968,6 @@
           }
         }
       },
-      "ImageDataPlatformFileUpload": {
-        "type": "object",
-        "properties": {
-          "imageUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL.\nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Sample image title"
-          }
-        }
-      },
       "ImageItemPlatformFileUpload": {
         "type": "object",
         "properties": {
@@ -22061,48 +22032,22 @@
           }
         }
       },
-      "PositionPlatformFileUpload": {
-        "type": "object",
-        "description": "Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.",
-        "properties": {
-          "origin": {
-            "type": "string",
-            "default": "center",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported (center).",
-            "enum": ["center"]
-          },
-          "relativeTo": {
-            "type": "string",
-            "enum": ["canvas_center", "parent_top_left"]
-          },
-          "x": {
-            "type": "number",
-            "format": "double",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          },
-          "y": {
-            "type": "number",
-            "format": "double",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          }
-        }
-      },
       "PositionChange": {
         "type": "object",
-        "description": "Contains information about the item's position on the board, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.",
+        "description": "Contains information about the item's position on the board, such as its `x` coordinate, `y` coordinate, and the origin of the `x` and `y` coordinates.",
         "properties": {
           "x": {
             "type": "number",
             "format": "double",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
+            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: `0`.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
+            "default": 0,
             "example": 100
           },
           "y": {
             "type": "number",
             "format": "double",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
+            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: `0`.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
+            "default": 0,
             "example": 100
           }
         }
@@ -22174,8 +22119,8 @@
             "properties": {
               "title": {
                 "type": "string",
-                "description": "title for the document",
-                "example": "title for the document"
+                "description": "Title for the document.",
+                "example": "foo.png"
               },
               "position": {
                 "$ref": "#/components/schemas/PositionChange"
@@ -22191,7 +22136,7 @@
           "resource": {
             "type": "string",
             "format": "binary",
-            "description": "Select a file to upload"
+            "description": "Select a file to upload. Maximum file size is 6 MB."
           }
         },
         "required": ["resource"]
@@ -22442,34 +22387,6 @@
           }
         }
       },
-      "PositionPlatformgroups": {
-        "type": "object",
-        "description": "Contains location information about the item, such as its x coordinate, y coordinate, and the origin of the x and y coordinates.",
-        "properties": {
-          "origin": {
-            "type": "string",
-            "default": "center",
-            "description": "Area of the item that is referenced by its x and y coordinates. For example, an item with a center origin will have its x and y coordinates point to its center. The center point of the board has x: 0 and y: 0 coordinates.\nCurrently, only one option is supported (center).",
-            "enum": ["center"]
-          },
-          "relativeTo": {
-            "type": "string",
-            "enum": ["canvas_center", "parent_top_left"]
-          },
-          "x": {
-            "type": "number",
-            "format": "double",
-            "description": "X-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          },
-          "y": {
-            "type": "number",
-            "format": "double",
-            "description": "Y-axis coordinate of the location of the item on the board.\nBy default, all items have absolute positioning to the board, not the current viewport. Default: 0.\nThe center point of the board has `x: 0` and `y: 0` coordinates.",
-            "example": 100
-          }
-        }
-      },
       "AppCardData": {
         "type": "object",
         "description": "Contains app card item data, such as the title, description, or fields.",
@@ -22567,7 +22484,7 @@
           }
         }
       },
-      "DocumentDataPlatformTags": {
+      "DocumentData": {
         "type": "object",
         "properties": {
           "documentUrl": {
@@ -22740,7 +22657,7 @@
           }
         }
       },
-      "ImageDataPlatformTags": {
+      "ImageData": {
         "type": "object",
         "properties": {
           "imageUrl": {
@@ -23235,21 +23152,6 @@
           }
         }
       },
-      "DocumentData": {
-        "type": "object",
-        "properties": {
-          "documentUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?redirect=false"
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the document.",
-            "example": "Sample document title"
-          }
-        }
-      },
       "GenericItem": {
         "type": "object",
         "description": "Contains the result data.",
@@ -23317,21 +23219,6 @@
             "format": "double",
             "description": "Width of the item, in pixels.",
             "example": 320
-          }
-        }
-      },
-      "ImageData": {
-        "type": "object",
-        "properties": {
-          "imageUrl": {
-            "type": "string",
-            "description": "The URL to download the resource. You must use your access token to access the URL.\nThe URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters:\n`format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`.\n`redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file.\nIf the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, 'image/svg', or 'image/jpg', depending on the original image type.",
-            "example": "https://api.miro.com/v2/boards/uXjVOfjkmAk=/resources/98765467890987654?format=preview&redirect=false"
-          },
-          "title": {
-            "type": "string",
-            "description": "A short text header to identify the image.",
-            "example": "Sample image title"
           }
         }
       },
@@ -23556,8 +23443,10 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Project name",
-            "example": "Product Guild project"
+            "description": "Project name.",
+            "maxLength": 60,
+            "minLength": 1,
+            "example": "My project"
           }
         }
       },
@@ -23567,8 +23456,10 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Project name",
-            "example": "Product Guild project"
+            "description": "New name of the project.",
+            "maxLength": 60,
+            "minLength": 1,
+            "example": "My project"
           }
         }
       },
@@ -23923,7 +23814,9 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Team name",
+            "description": "Team name.",
+            "maxLength": 60,
+            "minLength": 1,
             "example": "My Team"
           }
         }
@@ -23955,7 +23848,9 @@
         "properties": {
           "name": {
             "type": "string",
-            "description": "Team name",
+            "description": "New name for the team.",
+            "maxLength": 60,
+            "minLength": 1,
             "example": "My Team"
           }
         }

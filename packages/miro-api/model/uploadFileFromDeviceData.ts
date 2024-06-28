@@ -16,7 +16,7 @@ import {PositionChange} from './positionChange'
 
 export class UploadFileFromDeviceData {
   /**
-   * title for the document
+   * Title for the document.
    */
   'title'?: string
   'position'?: PositionChange

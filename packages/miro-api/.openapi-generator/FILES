@@ -89,8 +89,6 @@ model/dataClassificationOrganizationSettings.ts
 model/dataClassificationTeamSettings.ts
 model/documentCreateRequest.ts
 model/documentData.ts
-model/documentDataPlatformFileUpload.ts
-model/documentDataPlatformTags.ts
 model/documentDataResponse.ts
 model/documentDataResponsePlatformcreateitemsinbulkusingfilefromdevice.ts
 model/documentItem.ts
@@ -161,8 +159,6 @@ model/groupData.ts
 model/groupResponseShort.ts
 model/imageCreateRequest.ts
 model/imageData.ts
-model/imageDataPlatformFileUpload.ts
-model/imageDataPlatformTags.ts
 model/imageDataResponse.ts
 model/imageDataResponsePlatformcreateitemsinbulkusingfilefromdevice.ts
 model/imageItem.ts
@@ -227,8 +223,6 @@ model/parentWithLinksPlatformcreateitemsinbulkusingfilefromdevice.ts
 model/picture.ts
 model/position.ts
 model/positionChange.ts
-model/positionPlatformFileUpload.ts
-model/positionPlatformgroups.ts
 model/project.ts
 model/projectMember.ts
 model/projectMemberPage.ts

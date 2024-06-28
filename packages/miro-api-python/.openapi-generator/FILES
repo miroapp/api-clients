@@ -140,8 +140,6 @@ miro_api/docs/DataClassificationOrganizationSettings.md
 miro_api/docs/DataClassificationTeamSettings.md
 miro_api/docs/DocumentCreateRequest.md
 miro_api/docs/DocumentData.md
-miro_api/docs/DocumentDataPlatformFileUpload.md
-miro_api/docs/DocumentDataPlatformTags.md
 miro_api/docs/DocumentDataResponse.md
 miro_api/docs/DocumentDataResponsePlatformcreateitemsinbulkusingfilefromdevice.md
 miro_api/docs/DocumentItem.md
@@ -218,8 +216,6 @@ miro_api/docs/GroupResponseShort.md
 miro_api/docs/GroupsApi.md
 miro_api/docs/ImageCreateRequest.md
 miro_api/docs/ImageData.md
-miro_api/docs/ImageDataPlatformFileUpload.md
-miro_api/docs/ImageDataPlatformTags.md
 miro_api/docs/ImageDataResponse.md
 miro_api/docs/ImageDataResponsePlatformcreateitemsinbulkusingfilefromdevice.md
 miro_api/docs/ImageItem.md
@@ -287,8 +283,6 @@ miro_api/docs/ParentWithLinksPlatformcreateitemsinbulkusingfilefromdevice.md
 miro_api/docs/Picture.md
 miro_api/docs/Position.md
 miro_api/docs/PositionChange.md
-miro_api/docs/PositionPlatformFileUpload.md
-miro_api/docs/PositionPlatformgroups.md
 miro_api/docs/Project.md
 miro_api/docs/ProjectMember.md
 miro_api/docs/ProjectMemberPage.md
@@ -485,8 +479,6 @@ miro_api/models/data_classification_organization_settings.py
 miro_api/models/data_classification_team_settings.py
 miro_api/models/document_create_request.py
 miro_api/models/document_data.py
-miro_api/models/document_data_platform_file_upload.py
-miro_api/models/document_data_platform_tags.py
 miro_api/models/document_data_response.py
 miro_api/models/document_data_response_platformcreateitemsinbulkusingfilefromdevice.py
 miro_api/models/document_item.py
@@ -558,8 +550,6 @@ miro_api/models/group_data.py
 miro_api/models/group_response_short.py
 miro_api/models/image_create_request.py
 miro_api/models/image_data.py
-miro_api/models/image_data_platform_file_upload.py
-miro_api/models/image_data_platform_tags.py
 miro_api/models/image_data_response.py
 miro_api/models/image_data_response_platformcreateitemsinbulkusingfilefromdevice.py
 miro_api/models/image_item.py
@@ -622,8 +612,6 @@ miro_api/models/parent_with_links_platformcreateitemsinbulkusingfilefromdevice.p
 miro_api/models/picture.py
 miro_api/models/position.py
 miro_api/models/position_change.py
-miro_api/models/position_platform_file_upload.py
-miro_api/models/position_platformgroups.py
 miro_api/models/project.py
 miro_api/models/project_member.py
 miro_api/models/project_member_page.py
@@ -820,8 +808,6 @@ miro_api/test/test_data_classification_organization_settings.py
 miro_api/test/test_data_classification_team_settings.py
 miro_api/test/test_document_create_request.py
 miro_api/test/test_document_data.py
-miro_api/test/test_document_data_platform_file_upload.py
-miro_api/test/test_document_data_platform_tags.py
 miro_api/test/test_document_data_response.py
 miro_api/test/test_document_data_response_platformcreateitemsinbulkusingfilefromdevice.py
 miro_api/test/test_document_item.py
@@ -898,8 +884,6 @@ miro_api/test/test_group_response_short.py
 miro_api/test/test_groups_api.py
 miro_api/test/test_image_create_request.py
 miro_api/test/test_image_data.py
-miro_api/test/test_image_data_platform_file_upload.py
-miro_api/test/test_image_data_platform_tags.py
 miro_api/test/test_image_data_response.py
 miro_api/test/test_image_data_response_platformcreateitemsinbulkusingfilefromdevice.py
 miro_api/test/test_image_item.py
@@ -967,8 +951,6 @@ miro_api/test/test_parent_with_links_platformcreateitemsinbulkusingfilefromdevic
 miro_api/test/test_picture.py
 miro_api/test/test_position.py
 miro_api/test/test_position_change.py
-miro_api/test/test_position_platform_file_upload.py
-miro_api/test/test_position_platformgroups.py
 miro_api/test/test_project.py
 miro_api/test/test_project_member.py
 miro_api/test/test_project_member_page.py

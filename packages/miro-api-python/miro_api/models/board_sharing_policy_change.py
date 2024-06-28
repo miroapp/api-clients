@@ -40,7 +40,9 @@ class BoardSharingPolicyChange(BaseModel):
         alias="organizationAccess",
     )
     team_access: Optional[StrictStr] = Field(
-        default="private", description="Defines the team-level access to the board.", alias="teamAccess"
+        default=None,
+        description="Defines the team-level access to the board. By default, **edit** for the free plan and **private** for other plans.",
+        alias="teamAccess",
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
@@ -159,7 +161,7 @@ class BoardSharingPolicyChange(BaseModel):
                 "organizationAccess": (
                     obj.get("organizationAccess") if obj.get("organizationAccess") is not None else "private"
                 ),
-                "teamAccess": obj.get("teamAccess") if obj.get("teamAccess") is not None else "private",
+                "teamAccess": obj.get("teamAccess"),
             }
         )
         # store additional fields in additional_properties

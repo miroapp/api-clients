@@ -31,7 +31,7 @@ class CreateDocumentItemUsingFileFromDeviceRequestData(BaseModel):
     CreateDocumentItemUsingFileFromDeviceRequestData
     """  # noqa: E501
 
-    title: Optional[StrictStr] = Field(default=None, description="Title for the document")
+    title: Optional[StrictStr] = Field(default=None, description="Title for the document.")
     position: Optional[PositionChange] = None
     geometry: Optional[FixedRatioGeometry] = None
     parent: Optional[Parent] = None

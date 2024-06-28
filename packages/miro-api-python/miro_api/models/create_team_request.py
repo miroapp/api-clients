@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,9 @@ class CreateTeamRequest(BaseModel):
     CreateTeamRequest
     """  # noqa: E501
 
-    name: Optional[StrictStr] = Field(default=None, description="Team name")
+    name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=60)]] = Field(
+        default=None, description="Team name."
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name"]
 

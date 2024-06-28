@@ -117,8 +117,6 @@ from miro_api.models.data_classification_organization_settings import DataClassi
 from miro_api.models.data_classification_team_settings import DataClassificationTeamSettings
 from miro_api.models.document_create_request import DocumentCreateRequest
 from miro_api.models.document_data import DocumentData
-from miro_api.models.document_data_platform_file_upload import DocumentDataPlatformFileUpload
-from miro_api.models.document_data_platform_tags import DocumentDataPlatformTags
 from miro_api.models.document_data_response import DocumentDataResponse
 from miro_api.models.document_data_response_platformcreateitemsinbulkusingfilefromdevice import (
     DocumentDataResponsePlatformcreateitemsinbulkusingfilefromdevice,
@@ -196,8 +194,6 @@ from miro_api.models.group_data import GroupData
 from miro_api.models.group_response_short import GroupResponseShort
 from miro_api.models.image_create_request import ImageCreateRequest
 from miro_api.models.image_data import ImageData
-from miro_api.models.image_data_platform_file_upload import ImageDataPlatformFileUpload
-from miro_api.models.image_data_platform_tags import ImageDataPlatformTags
 from miro_api.models.image_data_response import ImageDataResponse
 from miro_api.models.image_data_response_platformcreateitemsinbulkusingfilefromdevice import (
     ImageDataResponsePlatformcreateitemsinbulkusingfilefromdevice,
@@ -276,8 +272,6 @@ from miro_api.models.parent_with_links_platformcreateitemsinbulkusingfilefromdev
 from miro_api.models.picture import Picture
 from miro_api.models.position import Position
 from miro_api.models.position_change import PositionChange
-from miro_api.models.position_platform_file_upload import PositionPlatformFileUpload
-from miro_api.models.position_platformgroups import PositionPlatformgroups
 from miro_api.models.project import Project
 from miro_api.models.project_member import ProjectMember
 from miro_api.models.project_member_page import ProjectMemberPage

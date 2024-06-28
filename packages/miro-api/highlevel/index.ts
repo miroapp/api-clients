@@ -38,7 +38,7 @@ export class Api extends BaseApi {
   }
 
   /**
-   * Creates a board with the specified name and sharing policies.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Creates a board with the specified name and sharing policies.<br/><h4>Note</h4> You can only create up to 3 team boards with the free plan.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
    * @summary Create board
    * @param boardChanges
    */
@@ -534,7 +534,7 @@ export class Board extends BaseBoard {
   /**
    * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
    * @summary Create image item using file from device
-   * @param resource Select a file to upload
+   * @param resource Select a file to upload. Maximum file size is 6 MB.
    * @param data
    */
   async createImageItemUsingLocalFile(
@@ -549,7 +549,7 @@ export class Board extends BaseBoard {
   /**
    * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
    * @summary Create document item using file from device
-   * @param resource Select a file to upload
+   * @param resource Select a file to upload. Maximum file size is 6 MB.
    * @param data
    */
   async createDocumentItemUsingFileFromDevice(
@@ -962,9 +962,9 @@ export class DocumentItem extends BaseDocumentItem {
   }
 
   /**
-   * Updates a document item on a board by using file from a device<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a document item on a board by using file from a device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
    * @summary Update document item using file from device
-   * @param resource Select a file to upload
+   * @param resource Select a file to upload. Maximum file size is 6 MB.
    * @param data
    */
   async updateUsingFile(
@@ -1079,7 +1079,7 @@ export class ImageItem extends BaseImageItem {
   /**
    * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
    * @summary Update image item using file from device
-   * @param resource Select a file to upload
+   * @param resource Select a file to upload. Maximum file size is 6 MB.
    * @param data
    */
   async updateUsingFile(
