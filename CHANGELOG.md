@@ -1,3 +1,7 @@
+## [2.2.0]
+
+- Update api specification to latest version
+
 ## [2.1.0]
 
 - added option to change base URL for API requests
