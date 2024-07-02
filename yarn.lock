@@ -4839,10 +4839,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typedoc-plugin-missing-exports@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/typedoc-plugin-missing-exports/-/typedoc-plugin-missing-exports-1.0.0.tgz#7212a2cfaba7b48264df4b4110f3a5684b5c49a1"
-  integrity sha512-7s6znXnuAj1eD9KYPyzVzR1lBF5nwAY8IKccP5sdoO9crG4lpd16RoFpLsh2PccJM+I2NASpr0+/NMka6ThwVA==
+typedoc-plugin-missing-exports@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/typedoc-plugin-missing-exports/-/typedoc-plugin-missing-exports-3.0.0.tgz#47ab7cf9b91967f50550b7f07549ed1b743f3726"
+  integrity sha512-R7D8fYrK34mBFZSlF1EqJxfqiUSlQSmyrCiQgTQD52nNm6+kUtqwiaqaNkuJ2rA2wBgWFecUA8JzHT7x2r7ePg==
 
 typedoc@^0.23.25:
   version "0.23.28"
