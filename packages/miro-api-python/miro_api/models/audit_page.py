@@ -37,9 +37,9 @@ class AuditPage(BaseModel):
     cursor: Optional[StrictStr] = Field(
         default=None, description="The key that should be used as the cursor request parameter to fetch the next page"
     )
-    content: Optional[List[AuditEvent]] = Field(default=None, description="Audit events list")
+    data: Optional[List[AuditEvent]] = Field(default=None, description="Audit events list")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["type", "limit", "size", "cursor", "content"]
+    __properties: ClassVar[List[str]] = ["type", "limit", "size", "cursor", "data"]
 
     model_config = {
         "populate_by_name": True,
@@ -83,13 +83,13 @@ class AuditPage(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in content (list)
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
         _items = []
-        if self.content:
-            for _item in self.content:
+        if self.data:
+            for _item in self.data:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["content"] = _items
+            _dict["data"] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -112,11 +112,7 @@ class AuditPage(BaseModel):
                 "limit": obj.get("limit"),
                 "size": obj.get("size"),
                 "cursor": obj.get("cursor"),
-                "content": (
-                    [AuditEvent.from_dict(_item) for _item in obj["content"]]
-                    if obj.get("content") is not None
-                    else None
-                ),
+                "data": [AuditEvent.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
             }
         )
         # store additional fields in additional_properties

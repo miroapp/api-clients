@@ -32,7 +32,7 @@ export class AuditPage {
   /**
    * Audit events list
    */
-  'content'?: Array<AuditEvent>
+  'data'?: Array<AuditEvent>
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -60,8 +60,8 @@ export class AuditPage {
       type: 'string',
     },
     {
-      name: 'content',
-      baseName: 'content',
+      name: 'data',
+      baseName: 'data',
       type: 'Array<AuditEvent>',
     },
   ]
