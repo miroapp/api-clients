@@ -10,7 +10,7 @@ if (!key) throw new Error('Missing environment variable: README_API_KEY')
 const readmeVersion = 'v2.0'
 
 // ID of the Miro REST API Clients category for the guides
-const categoryId = '634e7912341d20002648ef06'
+const categoryId = '6628045c567473003e032e82'
 
 const titlePattern = /^# (.*)/
 
