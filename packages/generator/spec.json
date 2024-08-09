@@ -17207,6 +17207,13 @@
             "type": "string",
             "description": "Type of the object returned.",
             "default": "organization-member"
+          },
+          "adminRoles": {
+            "description": "List of admin roles assigned to the user",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AdminRole"
+            }
           }
         }
       },
@@ -17248,6 +17255,22 @@
             "type": "string",
             "description": "Type of the object returned.",
             "default": "cursor-list"
+          }
+        }
+      },
+      "AdminRole": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Type of the admin role prebuilt or custom",
+            "example": "prebuilt",
+            "enum": ["prebuilt", "custom"]
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the admin role",
+            "example": "User Admin"
           }
         }
       },
@@ -17352,6 +17375,17 @@
         },
         "required": ["id", "type"]
       },
+      "UpdateAppCardStyle": {
+        "type": "object",
+        "description": "Contains information about the style of an app card item, such as the fill color.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Hex value of the border color of the app card.",
+            "example": "#2d9bf0"
+          }
+        }
+      },
       "AppCardUpdateRequest": {
         "type": "object",
         "properties": {
@@ -17359,7 +17393,7 @@
             "$ref": "#/components/schemas/AppCardDataChanges"
           },
           "style": {
-            "$ref": "#/components/schemas/AppCardStyle"
+            "$ref": "#/components/schemas/UpdateAppCardStyle"
           },
           "position": {
             "$ref": "#/components/schemas/PositionChange"
@@ -17400,7 +17434,7 @@
           "lastOpenedAt": {
             "type": "string",
             "format": "date-time",
-            "description": "Date and time when the board was last opened by any user. This information is only available when the boards are sorted by `last_opened`. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC))."
+            "description": "Date and time when the board was last opened by any user. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC))."
           },
           "lastOpenedBy": {
             "$ref": "#/components/schemas/UserInfoLastOpenedBy"
@@ -18105,6 +18139,17 @@
         },
         "required": ["id", "type"]
       },
+      "UpdateCardStyle": {
+        "type": "object",
+        "description": "Contains information about the style of a card item, such as the card theme.",
+        "properties": {
+          "cardTheme": {
+            "type": "string",
+            "description": "Hex value of the border color of the card.",
+            "example": "#2d9bf0"
+          }
+        }
+      },
       "CardUpdateRequest": {
         "type": "object",
         "properties": {
@@ -18112,7 +18157,7 @@
             "$ref": "#/components/schemas/CardData"
           },
           "style": {
-            "$ref": "#/components/schemas/CardStyle"
+            "$ref": "#/components/schemas/UpdateCardStyle"
           },
           "position": {
             "$ref": "#/components/schemas/PositionChange"
@@ -18151,7 +18196,7 @@
             "minItems": 0
           },
           "style": {
-            "$ref": "#/components/schemas/ConnectorStyle"
+            "$ref": "#/components/schemas/UpdateConnectorStyle"
           }
         }
       },
@@ -18266,6 +18311,90 @@
           "textOrientation": {
             "type": "string",
             "description": "The captions orientation relatively to the connector line curvature. Default: aligned.",
+            "enum": ["horizontal", "aligned"]
+          }
+        }
+      },
+      "UpdateConnectorStyle": {
+        "type": "object",
+        "description": "Contains information about the style of a connector, such as the color or caption font size",
+        "properties": {
+          "color": {
+            "type": "string",
+            "description": "Hex value representing the color for the captions on the connector.",
+            "example": "#9510ac"
+          },
+          "endStrokeCap": {
+            "type": "string",
+            "description": "The decoration cap of the connector end, like an arrow or circle.",
+            "enum": [
+              "none",
+              "stealth",
+              "diamond",
+              "filled_diamond",
+              "oval",
+              "filled_oval",
+              "arrow",
+              "triangle",
+              "filled_triangle",
+              "erd_one",
+              "erd_many",
+              "erd_only_one",
+              "erd_zero_or_one",
+              "erd_one_or_many",
+              "erd_zero_or_many",
+              "unknown"
+            ]
+          },
+          "fontSize": {
+            "type": "string",
+            "description": "Defines the font size, in dp, for the captions on the connector.",
+            "example": "15",
+            "maximum": 288,
+            "minimum": 10
+          },
+          "startStrokeCap": {
+            "type": "string",
+            "description": "The decoration cap of the connector end, like an arrow or circle.",
+            "enum": [
+              "none",
+              "stealth",
+              "diamond",
+              "filled_diamond",
+              "oval",
+              "filled_oval",
+              "arrow",
+              "triangle",
+              "filled_triangle",
+              "erd_one",
+              "erd_many",
+              "erd_only_one",
+              "erd_zero_or_one",
+              "erd_one_or_many",
+              "erd_zero_or_many",
+              "unknown"
+            ]
+          },
+          "strokeColor": {
+            "type": "string",
+            "description": "Hex value of the color of the connector line.",
+            "example": "#2d9bf0"
+          },
+          "strokeStyle": {
+            "type": "string",
+            "description": "The stroke pattern of the connector line.",
+            "enum": ["normal", "dotted", "dashed"]
+          },
+          "strokeWidth": {
+            "type": "string",
+            "description": "The thickness of the connector line, in dp.",
+            "example": "2.0",
+            "maximum": 24,
+            "minimum": 1
+          },
+          "textOrientation": {
+            "type": "string",
+            "description": "The captions orientation relatively to the connector line curvature.",
             "enum": ["horizontal", "aligned"]
           }
         }
@@ -18707,6 +18836,101 @@
           }
         }
       },
+      "UpdateShapeStyle": {
+        "type": "object",
+        "description": "Contains information about the shape style, such as the border color or opacity.",
+        "properties": {
+          "borderColor": {
+            "type": "string",
+            "description": "Defines the color of the border of the shape."
+          },
+          "borderOpacity": {
+            "type": "string",
+            "description": "Defines the opacity level of the shape border.\nPossible values: any number between `0.0` and `1.0`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "borderStyle": {
+            "type": "string",
+            "description": "Defines the style used to represent the border of the shape.",
+            "enum": ["normal", "dotted", "dashed"]
+          },
+          "borderWidth": {
+            "type": "string",
+            "description": "Defines the thickness of the shape border, in dp.",
+            "maximum": 24,
+            "minimum": 1
+          },
+          "color": {
+            "type": "string",
+            "description": "Hex value representing the color for the text within the shape item.",
+            "example": "#1a1a1a"
+          },
+          "fillColor": {
+            "type": "string",
+            "description": "Fill color for the shape.\nHex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000`",
+            "example": "#8fd14f"
+          },
+          "fillOpacity": {
+            "type": "string",
+            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\n",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "fontFamily": {
+            "type": "string",
+            "description": "Defines the font type for the text in the shape item.",
+            "enum": [
+              "arial",
+              "abril_fatface",
+              "bangers",
+              "eb_garamond",
+              "georgia",
+              "graduate",
+              "gravitas_one",
+              "fredoka_one",
+              "nixie_one",
+              "open_sans",
+              "permanent_marker",
+              "pt_sans",
+              "pt_sans_narrow",
+              "pt_serif",
+              "rammetto_one",
+              "roboto",
+              "roboto_condensed",
+              "roboto_slab",
+              "caveat",
+              "times_new_roman",
+              "titan_one",
+              "lemon_tuesday",
+              "roboto_mono",
+              "noto_sans",
+              "plex_sans",
+              "plex_serif",
+              "plex_mono",
+              "spoof",
+              "tiempos_text",
+              "formular"
+            ]
+          },
+          "fontSize": {
+            "type": "string",
+            "description": "Defines the font size, in dp, for the text on the shape.",
+            "maximum": 288,
+            "minimum": 10
+          },
+          "textAlign": {
+            "type": "string",
+            "description": "Defines how the sticky note text is horizontally aligned.",
+            "enum": ["left", "right", "center"]
+          },
+          "textAlignVertical": {
+            "type": "string",
+            "description": "Defines how the sticky note text is vertically aligned.",
+            "enum": ["top", "middle", "bottom"]
+          }
+        }
+      },
       "StickyNoteCreateRequest": {
         "type": "object",
         "properties": {
@@ -18779,6 +19003,44 @@
         },
         "required": ["id", "type"]
       },
+      "UpdateStickyNoteStyle": {
+        "type": "object",
+        "description": "Contains information about the style of a sticky note item, such as the fill color or text alignment.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Fill color for the sticky note.",
+            "enum": [
+              "gray",
+              "light_yellow",
+              "yellow",
+              "orange",
+              "light_green",
+              "green",
+              "dark_green",
+              "cyan",
+              "light_pink",
+              "pink",
+              "violet",
+              "red",
+              "light_blue",
+              "blue",
+              "dark_blue",
+              "black"
+            ]
+          },
+          "textAlign": {
+            "type": "string",
+            "description": "Defines how the sticky note text is horizontally aligned.",
+            "enum": ["left", "right", "center"]
+          },
+          "textAlignVertical": {
+            "type": "string",
+            "description": "Defines how the sticky note text is vertically aligned.",
+            "enum": ["top", "middle", "bottom"]
+          }
+        }
+      },
       "StickyNoteUpdateRequest": {
         "type": "object",
         "properties": {
@@ -18786,7 +19048,7 @@
             "$ref": "#/components/schemas/StickyNoteData"
           },
           "style": {
-            "$ref": "#/components/schemas/StickyNoteStyle"
+            "$ref": "#/components/schemas/UpdateStickyNoteStyle"
           },
           "position": {
             "$ref": "#/components/schemas/PositionChange"
@@ -18872,6 +19134,74 @@
         },
         "required": ["id", "type"]
       },
+      "UpdateTextStyle": {
+        "type": "object",
+        "description": "Contains information about the style of a text item, such as the fill color or font family.",
+        "properties": {
+          "color": {
+            "type": "string",
+            "description": "Hex value representing the color for the text within the text item.",
+            "example": "#1a1a1a"
+          },
+          "fillColor": {
+            "type": "string",
+            "description": "Background color of the text item.",
+            "example": "#e6e6e6"
+          },
+          "fillOpacity": {
+            "type": "string",
+            "description": "Opacity level of the background color.\nPossible values: any number between `0.0` and `1.0`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid",
+            "maximum": 1,
+            "minimum": 0
+          },
+          "fontFamily": {
+            "type": "string",
+            "description": "Font type for the text in the text item.",
+            "enum": [
+              "arial",
+              "abril_fatface",
+              "bangers",
+              "eb_garamond",
+              "georgia",
+              "graduate",
+              "gravitas_one",
+              "fredoka_one",
+              "nixie_one",
+              "open_sans",
+              "permanent_marker",
+              "pt_sans",
+              "pt_sans_narrow",
+              "pt_serif",
+              "rammetto_one",
+              "roboto",
+              "roboto_condensed",
+              "roboto_slab",
+              "caveat",
+              "times_new_roman",
+              "titan_one",
+              "lemon_tuesday",
+              "roboto_mono",
+              "noto_sans",
+              "plex_sans",
+              "plex_serif",
+              "plex_mono",
+              "spoof",
+              "tiempos_text",
+              "formular"
+            ]
+          },
+          "fontSize": {
+            "type": "string",
+            "description": "Font size, in dp.",
+            "minimum": 1
+          },
+          "textAlign": {
+            "type": "string",
+            "description": "Horizontal alignment for the item's content.",
+            "enum": ["left", "right", "center"]
+          }
+        }
+      },
       "TextUpdateRequest": {
         "type": "object",
         "properties": {
@@ -18879,7 +19209,7 @@
             "$ref": "#/components/schemas/TextData"
           },
           "style": {
-            "$ref": "#/components/schemas/TextStyle"
+            "$ref": "#/components/schemas/UpdateTextStyle"
           },
           "position": {
             "$ref": "#/components/schemas/PositionChange"
@@ -18916,7 +19246,7 @@
       },
       "UserInfoLastOpenedBy": {
         "type": "object",
-        "description": "Contains information about the user who opened the board last. This information is only available when the boards are sorted by `last_opened`.",
+        "description": "Contains information about the user who opened the board last.",
         "properties": {
           "id": {
             "type": "string",
@@ -19659,6 +19989,17 @@
           }
         }
       },
+      "UpdateFrameStyle": {
+        "type": "object",
+        "description": "Contains information about the style of a frame item, such as the fill color.",
+        "properties": {
+          "fillColor": {
+            "type": "string",
+            "description": "Fill color for the frame.\nHex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000`",
+            "example": "#ffffffff"
+          }
+        }
+      },
       "FrameUpdateRequest": {
         "type": "object",
         "properties": {
@@ -19666,7 +20007,7 @@
             "$ref": "#/components/schemas/FrameChanges"
           },
           "style": {
-            "$ref": "#/components/schemas/FrameStyle"
+            "$ref": "#/components/schemas/UpdateFrameStyle"
           },
           "position": {
             "$ref": "#/components/schemas/PositionChange"
@@ -21652,44 +21993,44 @@
         "properties": {
           "borderColor": {
             "type": "string",
-            "description": "Defines the color of the border of the shape.\nDefault: `#1a1a1a` (dark gray)."
+            "description": "Defines the color of the border of the shape."
           },
           "borderOpacity": {
             "type": "string",
-            "description": "Defines the opacity level of the shape border.\nPossible values: any number between `0.0` and `1.0`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault: `1.0` (solid color).",
+            "description": "Defines the opacity level of the shape border.\nPossible values: any number between `0.0` and `1.0`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid",
             "maximum": 1,
             "minimum": 0
           },
           "borderStyle": {
             "type": "string",
-            "description": "Defines the style used to represent the border of the shape.\nDefault: `normal`.",
+            "description": "Defines the style used to represent the border of the shape.",
             "enum": ["normal", "dotted", "dashed"]
           },
           "borderWidth": {
             "type": "string",
-            "description": "Defines the thickness of the shape border, in dp.\nDefault: `2.0`.",
+            "description": "Defines the thickness of the shape border, in dp.",
             "maximum": 24,
             "minimum": 1
           },
           "color": {
             "type": "string",
-            "description": "Hex value representing the color for the text within the shape item.\nDefault: `#1a1a1a`.",
+            "description": "Hex value representing the color for the text within the shape item.",
             "example": "#1a1a1a"
           },
           "fillColor": {
             "type": "string",
-            "description": "Fill color for the shape.\nHex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000`\nDefault: #ffffff.",
+            "description": "Fill color for the shape.\nHex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000`",
             "example": "#8fd14f"
           },
           "fillOpacity": {
             "type": "string",
-            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\nDefault: Flowchart shapes: `1.0`. Basic shapes: `1.0` if `fillColor` provided, `0.0` if no `fillColor` provided.\n",
+            "description": "Opacity level of the fill color.\nPossible values: any number between `0` and `1`, where:\n`0.0`: the background color is completely transparent or invisible\n`1.0`: the background color is completely opaque or solid\n",
             "maximum": 1,
             "minimum": 0
           },
           "fontFamily": {
             "type": "string",
-            "description": "Defines the font type for the text in the shape item.\nDefault: `arial`.",
+            "description": "Defines the font type for the text in the shape item.",
             "enum": [
               "arial",
               "abril_fatface",
@@ -21725,18 +22066,18 @@
           },
           "fontSize": {
             "type": "string",
-            "description": "Defines the font size, in dp, for the text on the shape.\nDefault: `14`.",
+            "description": "Defines the font size, in dp, for the text on the shape.",
             "maximum": 288,
             "minimum": 10
           },
           "textAlign": {
             "type": "string",
-            "description": "Defines how the sticky note text is horizontally aligned.\nDefault:\nFlowchart shapes: `center`.\nBasic shapes: `left`.",
+            "description": "Defines how the sticky note text is horizontally aligned.",
             "enum": ["left", "right", "center"]
           },
           "textAlignVertical": {
             "type": "string",
-            "description": "Defines how the sticky note text is vertically aligned.\nDefault:\nFlowchart shapes: `middle`.\nBasic shapes: `top`.",
+            "description": "Defines how the sticky note text is vertically aligned.",
             "enum": ["top", "middle", "bottom"]
           }
         }
@@ -22928,7 +23269,6 @@
         "properties": {
           "fillColor": {
             "type": "string",
-            "default": "red",
             "description": "Fill color for the tag.",
             "enum": [
               "red",

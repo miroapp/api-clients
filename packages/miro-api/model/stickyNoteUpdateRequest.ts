@@ -14,11 +14,11 @@ import {FixedRatioNoRotationGeometry} from './fixedRatioNoRotationGeometry'
 import {Parent} from './parent'
 import {PositionChange} from './positionChange'
 import {StickyNoteData} from './stickyNoteData'
-import {StickyNoteStyle} from './stickyNoteStyle'
+import {UpdateStickyNoteStyle} from './updateStickyNoteStyle'
 
 export class StickyNoteUpdateRequest {
   'data'?: StickyNoteData
-  'style'?: StickyNoteStyle
+  'style'?: UpdateStickyNoteStyle
   'position'?: PositionChange
   'geometry'?: FixedRatioNoRotationGeometry
   'parent'?: Parent
@@ -36,7 +36,7 @@ export class StickyNoteUpdateRequest {
     {
       name: 'style',
       baseName: 'style',
-      type: 'StickyNoteStyle',
+      type: 'UpdateStickyNoteStyle',
     },
     {
       name: 'position',

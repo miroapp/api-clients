@@ -12,7 +12,7 @@
 
 /**
  * @internal
- * Contains information about the user who opened the board last. This information is only available when the boards are sorted by `last_opened`.
+ * Contains information about the user who opened the board last.
  */
 export class UserInfoLastOpenedBy {
   /**
