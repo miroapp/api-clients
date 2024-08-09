@@ -12,9 +12,9 @@
 
 /**
  * @internal
- * Contains information about the shape style, such as the border color or opacity. <br> All properties in style object are supported for shape types aren\'t listed below. <br> <table>   <tr>     <th align=\"left\">Shape type</th>     <th align=\"left\">Unsupported properties</th>   </tr>   <tr>     <td>flow_chart_or</td>     <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>   </tr>   <tr>     <td>flow_chart_summing_junction</td>     <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>   </tr>   <tr>     <td>flow_chart_note_curly_left</td>     <td>fillColor, fillOpacity</td>   </tr>   <tr>     <td>flow_chart_note_curly_right</td>     <td>fillColor, fillOpacity</td>   </tr>   <tr>     <td>flow_chart_note_square</td>     <td>fillColor, fillOpacity</td>   </tr> </table>
+ * Contains information about the shape style, such as the border color or opacity.
  */
-export class ShapeStyleForUpdate {
+export class UpdateShapeStyle {
   /**
    * Defines the color of the border of the shape.
    */
@@ -26,9 +26,7 @@ export class ShapeStyleForUpdate {
   /**
    * Defines the style used to represent the border of the shape.
    */
-  'borderStyle'?:
-    | string
-    | (typeof ShapeStyleForUpdate.BorderStyleEnum)[keyof typeof ShapeStyleForUpdate.BorderStyleEnum]
+  'borderStyle'?: string | (typeof UpdateShapeStyle.BorderStyleEnum)[keyof typeof UpdateShapeStyle.BorderStyleEnum]
   /**
    * Defines the thickness of the shape border, in dp.
    */
@@ -48,7 +46,7 @@ export class ShapeStyleForUpdate {
   /**
    * Defines the font type for the text in the shape item.
    */
-  'fontFamily'?: string | (typeof ShapeStyleForUpdate.FontFamilyEnum)[keyof typeof ShapeStyleForUpdate.FontFamilyEnum]
+  'fontFamily'?: string | (typeof UpdateShapeStyle.FontFamilyEnum)[keyof typeof UpdateShapeStyle.FontFamilyEnum]
   /**
    * Defines the font size, in dp, for the text on the shape.
    */
@@ -56,13 +54,13 @@ export class ShapeStyleForUpdate {
   /**
    * Defines how the sticky note text is horizontally aligned.
    */
-  'textAlign'?: string | (typeof ShapeStyleForUpdate.TextAlignEnum)[keyof typeof ShapeStyleForUpdate.TextAlignEnum]
+  'textAlign'?: string | (typeof UpdateShapeStyle.TextAlignEnum)[keyof typeof UpdateShapeStyle.TextAlignEnum]
   /**
    * Defines how the sticky note text is vertically aligned.
    */
   'textAlignVertical'?:
     | string
-    | (typeof ShapeStyleForUpdate.TextAlignVerticalEnum)[keyof typeof ShapeStyleForUpdate.TextAlignVerticalEnum]
+    | (typeof UpdateShapeStyle.TextAlignVerticalEnum)[keyof typeof UpdateShapeStyle.TextAlignVerticalEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -82,7 +80,7 @@ export class ShapeStyleForUpdate {
     {
       name: 'borderStyle',
       baseName: 'borderStyle',
-      type: 'ShapeStyleForUpdate.BorderStyleEnum',
+      type: 'UpdateShapeStyle.BorderStyleEnum',
     },
     {
       name: 'borderWidth',
@@ -107,7 +105,7 @@ export class ShapeStyleForUpdate {
     {
       name: 'fontFamily',
       baseName: 'fontFamily',
-      type: 'ShapeStyleForUpdate.FontFamilyEnum',
+      type: 'UpdateShapeStyle.FontFamilyEnum',
     },
     {
       name: 'fontSize',
@@ -117,22 +115,22 @@ export class ShapeStyleForUpdate {
     {
       name: 'textAlign',
       baseName: 'textAlign',
-      type: 'ShapeStyleForUpdate.TextAlignEnum',
+      type: 'UpdateShapeStyle.TextAlignEnum',
     },
     {
       name: 'textAlignVertical',
       baseName: 'textAlignVertical',
-      type: 'ShapeStyleForUpdate.TextAlignVerticalEnum',
+      type: 'UpdateShapeStyle.TextAlignVerticalEnum',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ShapeStyleForUpdate.attributeTypeMap
+    return UpdateShapeStyle.attributeTypeMap
   }
 }
 
-export namespace ShapeStyleForUpdate {
+export namespace UpdateShapeStyle {
   export const BorderStyleEnum = {
     Normal: 'normal',
     Dotted: 'dotted',

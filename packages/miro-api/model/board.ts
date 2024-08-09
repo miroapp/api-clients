@@ -38,7 +38,7 @@ export class Board {
    */
   'id': string
   /**
-   * Date and time when the board was last opened by any user. This information is only available when the boards are sorted by `last_opened`. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
+   * Date and time when the board was last opened by any user. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
    */
   'lastOpenedAt'?: Date
   'lastOpenedBy'?: UserInfoLastOpenedBy

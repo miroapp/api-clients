@@ -14,8 +14,7 @@ export class TagUpdateRequest {
   /**
    * Fill color for the tag.
    */
-  'fillColor'?: string | (typeof TagUpdateRequest.FillColorEnum)[keyof typeof TagUpdateRequest.FillColorEnum] =
-    TagUpdateRequest.FillColorEnum.Red
+  'fillColor'?: string | (typeof TagUpdateRequest.FillColorEnum)[keyof typeof TagUpdateRequest.FillColorEnum]
   /**
    * Text of the tag. Case-sensitive. Must be unique.
    */

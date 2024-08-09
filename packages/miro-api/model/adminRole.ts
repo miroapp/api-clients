@@ -10,26 +10,15 @@
  * Do not edit the class manually.
  */
 
-import {Caption} from './caption'
-import {ItemConnectionChangesData} from './itemConnectionChangesData'
-import {UpdateConnectorStyle} from './updateConnectorStyle'
-
-/**
- * @internal
- * If both are provided, startItem.id must be different from endItem.id
- */
-export class ConnectorChangesData {
-  'startItem'?: ItemConnectionChangesData
-  'endItem'?: ItemConnectionChangesData
+export class AdminRole {
   /**
-   * The path type of the connector line, defines curvature. Default: curved.
+   * Type of the admin role prebuilt or custom
    */
-  'shape'?: string | (typeof ConnectorChangesData.ShapeEnum)[keyof typeof ConnectorChangesData.ShapeEnum]
+  'type'?: string | (typeof AdminRole.TypeEnum)[keyof typeof AdminRole.TypeEnum]
   /**
-   * Blocks of text you want to display on the connector.
+   * Name of the admin role
    */
-  'captions'?: Array<Caption>
-  'style'?: UpdateConnectorStyle
+  'name'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -37,42 +26,26 @@ export class ConnectorChangesData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'startItem',
-      baseName: 'startItem',
-      type: 'ItemConnectionChangesData',
+      name: 'type',
+      baseName: 'type',
+      type: 'AdminRole.TypeEnum',
     },
     {
-      name: 'endItem',
-      baseName: 'endItem',
-      type: 'ItemConnectionChangesData',
-    },
-    {
-      name: 'shape',
-      baseName: 'shape',
-      type: 'ConnectorChangesData.ShapeEnum',
-    },
-    {
-      name: 'captions',
-      baseName: 'captions',
-      type: 'Array<Caption>',
-    },
-    {
-      name: 'style',
-      baseName: 'style',
-      type: 'UpdateConnectorStyle',
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ConnectorChangesData.attributeTypeMap
+    return AdminRole.attributeTypeMap
   }
 }
 
-export namespace ConnectorChangesData {
-  export const ShapeEnum = {
-    Straight: 'straight',
-    Elbowed: 'elbowed',
-    Curved: 'curved',
+export namespace AdminRole {
+  export const TypeEnum = {
+    Prebuilt: 'prebuilt',
+    Custom: 'custom',
   } as const
 }

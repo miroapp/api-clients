@@ -20,9 +20,9 @@ import json
 from pydantic import BaseModel
 from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.frame_changes import FrameChanges
-from miro_api.models.frame_style import FrameStyle
 from miro_api.models.geometry_no_rotation import GeometryNoRotation
 from miro_api.models.position_change import PositionChange
+from miro_api.models.update_frame_style import UpdateFrameStyle
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +33,7 @@ class FrameUpdateRequest(BaseModel):
     """  # noqa: E501
 
     data: Optional[FrameChanges] = None
-    style: Optional[FrameStyle] = None
+    style: Optional[UpdateFrameStyle] = None
     position: Optional[PositionChange] = None
     geometry: Optional[GeometryNoRotation] = None
     additional_properties: Dict[str, Any] = {}
@@ -112,7 +112,7 @@ class FrameUpdateRequest(BaseModel):
         _obj = cls.model_validate(
             {
                 "data": FrameChanges.from_dict(obj["data"]) if obj.get("data") is not None else None,
-                "style": FrameStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "style": UpdateFrameStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
                 "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "geometry": GeometryNoRotation.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
             }

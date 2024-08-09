@@ -10,26 +10,15 @@
  * Do not edit the class manually.
  */
 
-import {Caption} from './caption'
-import {ItemConnectionChangesData} from './itemConnectionChangesData'
-import {UpdateConnectorStyle} from './updateConnectorStyle'
-
 /**
  * @internal
- * If both are provided, startItem.id must be different from endItem.id
+ * Contains information about the style of a frame item, such as the fill color.
  */
-export class ConnectorChangesData {
-  'startItem'?: ItemConnectionChangesData
-  'endItem'?: ItemConnectionChangesData
+export class UpdateFrameStyle {
   /**
-   * The path type of the connector line, defines curvature. Default: curved.
+   * Fill color for the frame. Hex values: `#f5f6f8` `#d5f692` `#d0e17a` `#93d275` `#67c6c0` `#23bfe7` `#a6ccf5` `#7b92ff` `#fff9b1` `#f5d128` `#ff9d48` `#f16c7f` `#ea94bb` `#ffcee0` `#b384bb` `#000000`
    */
-  'shape'?: string | (typeof ConnectorChangesData.ShapeEnum)[keyof typeof ConnectorChangesData.ShapeEnum]
-  /**
-   * Blocks of text you want to display on the connector.
-   */
-  'captions'?: Array<Caption>
-  'style'?: UpdateConnectorStyle
+  'fillColor'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -37,42 +26,14 @@ export class ConnectorChangesData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'startItem',
-      baseName: 'startItem',
-      type: 'ItemConnectionChangesData',
-    },
-    {
-      name: 'endItem',
-      baseName: 'endItem',
-      type: 'ItemConnectionChangesData',
-    },
-    {
-      name: 'shape',
-      baseName: 'shape',
-      type: 'ConnectorChangesData.ShapeEnum',
-    },
-    {
-      name: 'captions',
-      baseName: 'captions',
-      type: 'Array<Caption>',
-    },
-    {
-      name: 'style',
-      baseName: 'style',
-      type: 'UpdateConnectorStyle',
+      name: 'fillColor',
+      baseName: 'fillColor',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ConnectorChangesData.attributeTypeMap
+    return UpdateFrameStyle.attributeTypeMap
   }
-}
-
-export namespace ConnectorChangesData {
-  export const ShapeEnum = {
-    Straight: 'straight',
-    Elbowed: 'elbowed',
-    Curved: 'curved',
-  } as const
 }
