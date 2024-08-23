@@ -22,7 +22,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.parent import Parent
 from miro_api.models.position_change import PositionChange
 from miro_api.models.text_data import TextData
-from miro_api.models.text_style import TextStyle
+from miro_api.models.update_text_style import UpdateTextStyle
 from miro_api.models.width_only_adjustable_geometry import WidthOnlyAdjustableGeometry
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,7 +34,7 @@ class TextUpdateRequest(BaseModel):
     """  # noqa: E501
 
     data: Optional[TextData] = None
-    style: Optional[TextStyle] = None
+    style: Optional[UpdateTextStyle] = None
     position: Optional[PositionChange] = None
     geometry: Optional[WidthOnlyAdjustableGeometry] = None
     parent: Optional[Parent] = None
@@ -117,7 +117,7 @@ class TextUpdateRequest(BaseModel):
         _obj = cls.model_validate(
             {
                 "data": TextData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-                "style": TextStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "style": UpdateTextStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
                 "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "geometry": (
                     WidthOnlyAdjustableGeometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None

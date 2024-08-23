@@ -17,75 +17,94 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from miro_api.models.admin_role import AdminRole
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class OrganizationMember(BaseModel):
+class UpdateTextStyle(BaseModel):
     """
-    Organization member
+    Contains information about the style of a text item, such as the fill color or font family.
     """  # noqa: E501
 
-    id: StrictStr = Field(description="Id of the user")
-    active: StrictBool = Field(
-        description='Indicates if a user is active or deactivated. Learn more about <a target="blank" href="https://help.miro.com/hc/en-us/articles/360025025894-Deactivated-users">user deactivation</a>.'
+    color: Optional[StrictStr] = Field(
+        default=None, description="Hex value representing the color for the text within the text item."
     )
-    email: StrictStr = Field(description="User email")
-    last_activity_at: Optional[datetime] = Field(
+    fill_color: Optional[StrictStr] = Field(
+        default=None, description="Background color of the text item.", alias="fillColor"
+    )
+    fill_opacity: Optional[Annotated[str, Field(strict=True)]] = Field(
         default=None,
-        description="Date and time when the user was last active. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). If the user never logged in, the parameter value is empty. ",
-        alias="lastActivityAt",
+        description="Opacity level of the background color. Possible values: any number between `0.0` and `1.0`, where: `0.0`: the background color is completely transparent or invisible `1.0`: the background color is completely opaque or solid",
+        alias="fillOpacity",
     )
-    license: StrictStr = Field(description="Name of the current user license in the organization")
-    license_assigned_at: Optional[datetime] = Field(
-        default=None, description="Time when the license was assigned to the user", alias="licenseAssignedAt"
+    font_family: Optional[StrictStr] = Field(
+        default=None, description="Font type for the text in the text item.", alias="fontFamily"
     )
-    role: StrictStr = Field(description="Name of the user role in the organization")
-    type: Optional[StrictStr] = Field(default="organization-member", description="Type of the object returned.")
-    admin_roles: Optional[List[AdminRole]] = Field(
-        default=None, description="List of admin roles assigned to the user", alias="adminRoles"
+    font_size: Optional[Annotated[str, Field(strict=True)]] = Field(
+        default=None, description="Font size, in dp.", alias="fontSize"
+    )
+    text_align: Optional[StrictStr] = Field(
+        default=None, description="Horizontal alignment for the item's content.", alias="textAlign"
     )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "active",
-        "email",
-        "lastActivityAt",
-        "license",
-        "licenseAssignedAt",
-        "role",
-        "type",
-        "adminRoles",
-    ]
+    __properties: ClassVar[List[str]] = ["color", "fillColor", "fillOpacity", "fontFamily", "fontSize", "textAlign"]
 
-    @field_validator("license")
-    def license_validate_enum(cls, value):
+    @field_validator("font_family")
+    def font_family_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]):
-            raise ValueError(
-                "must be one of enum values ('full', 'occasional', 'free', 'free_restricted', 'full_trial', 'unknown')"
-            )
-        return value
+        if value is None:
+            return value
 
-    @field_validator("role")
-    def role_validate_enum(cls, value):
-        """Validates the enum"""
         if value not in set(
             [
-                "organization_internal_admin",
-                "organization_internal_user",
-                "organization_external_user",
-                "organization_team_guest_user",
-                "unknown",
+                "arial",
+                "abril_fatface",
+                "bangers",
+                "eb_garamond",
+                "georgia",
+                "graduate",
+                "gravitas_one",
+                "fredoka_one",
+                "nixie_one",
+                "open_sans",
+                "permanent_marker",
+                "pt_sans",
+                "pt_sans_narrow",
+                "pt_serif",
+                "rammetto_one",
+                "roboto",
+                "roboto_condensed",
+                "roboto_slab",
+                "caveat",
+                "times_new_roman",
+                "titan_one",
+                "lemon_tuesday",
+                "roboto_mono",
+                "noto_sans",
+                "plex_sans",
+                "plex_serif",
+                "plex_mono",
+                "spoof",
+                "tiempos_text",
+                "formular",
             ]
         ):
             raise ValueError(
-                "must be one of enum values ('organization_internal_admin', 'organization_internal_user', 'organization_external_user', 'organization_team_guest_user', 'unknown')"
+                "must be one of enum values ('arial', 'abril_fatface', 'bangers', 'eb_garamond', 'georgia', 'graduate', 'gravitas_one', 'fredoka_one', 'nixie_one', 'open_sans', 'permanent_marker', 'pt_sans', 'pt_sans_narrow', 'pt_serif', 'rammetto_one', 'roboto', 'roboto_condensed', 'roboto_slab', 'caveat', 'times_new_roman', 'titan_one', 'lemon_tuesday', 'roboto_mono', 'noto_sans', 'plex_sans', 'plex_serif', 'plex_mono', 'spoof', 'tiempos_text', 'formular')"
             )
+        return value
+
+    @field_validator("text_align")
+    def text_align_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["left", "right", "center"]):
+            raise ValueError("must be one of enum values ('left', 'right', 'center')")
         return value
 
     model_config = {
@@ -105,7 +124,7 @@ class OrganizationMember(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of OrganizationMember from a JSON string"""
+        """Create an instance of UpdateTextStyle from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -130,13 +149,6 @@ class OrganizationMember(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in admin_roles (list)
-        _items = []
-        if self.admin_roles:
-            for _item in self.admin_roles:
-                if _item:
-                    _items.append(_item.to_dict())
-            _dict["adminRoles"] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -146,7 +158,7 @@ class OrganizationMember(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of OrganizationMember from a dict"""
+        """Create an instance of UpdateTextStyle from a dict"""
         if obj is None:
             return None
 
@@ -155,19 +167,12 @@ class OrganizationMember(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "id": obj.get("id"),
-                "active": obj.get("active"),
-                "email": obj.get("email"),
-                "lastActivityAt": obj.get("lastActivityAt"),
-                "license": obj.get("license"),
-                "licenseAssignedAt": obj.get("licenseAssignedAt"),
-                "role": obj.get("role"),
-                "type": obj.get("type") if obj.get("type") is not None else "organization-member",
-                "adminRoles": (
-                    [AdminRole.from_dict(_item) for _item in obj["adminRoles"]]
-                    if obj.get("adminRoles") is not None
-                    else None
-                ),
+                "color": obj.get("color"),
+                "fillColor": obj.get("fillColor"),
+                "fillOpacity": obj.get("fillOpacity"),
+                "fontFamily": obj.get("fontFamily"),
+                "fontSize": obj.get("fontSize"),
+                "textAlign": obj.get("textAlign"),
             }
         )
         # store additional fields in additional_properties

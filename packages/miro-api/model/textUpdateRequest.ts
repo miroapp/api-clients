@@ -13,12 +13,12 @@
 import {Parent} from './parent'
 import {PositionChange} from './positionChange'
 import {TextData} from './textData'
-import {TextStyle} from './textStyle'
+import {UpdateTextStyle} from './updateTextStyle'
 import {WidthOnlyAdjustableGeometry} from './widthOnlyAdjustableGeometry'
 
 export class TextUpdateRequest {
   'data'?: TextData
-  'style'?: TextStyle
+  'style'?: UpdateTextStyle
   'position'?: PositionChange
   'geometry'?: WidthOnlyAdjustableGeometry
   'parent'?: Parent
@@ -36,7 +36,7 @@ export class TextUpdateRequest {
     {
       name: 'style',
       baseName: 'style',
-      type: 'TextStyle',
+      type: 'UpdateTextStyle',
     },
     {
       name: 'position',

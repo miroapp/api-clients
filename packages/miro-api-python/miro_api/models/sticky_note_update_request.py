@@ -23,7 +23,7 @@ from miro_api.models.fixed_ratio_no_rotation_geometry import FixedRatioNoRotatio
 from miro_api.models.parent import Parent
 from miro_api.models.position_change import PositionChange
 from miro_api.models.sticky_note_data import StickyNoteData
-from miro_api.models.sticky_note_style import StickyNoteStyle
+from miro_api.models.update_sticky_note_style import UpdateStickyNoteStyle
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +34,7 @@ class StickyNoteUpdateRequest(BaseModel):
     """  # noqa: E501
 
     data: Optional[StickyNoteData] = None
-    style: Optional[StickyNoteStyle] = None
+    style: Optional[UpdateStickyNoteStyle] = None
     position: Optional[PositionChange] = None
     geometry: Optional[FixedRatioNoRotationGeometry] = None
     parent: Optional[Parent] = None
@@ -117,7 +117,7 @@ class StickyNoteUpdateRequest(BaseModel):
         _obj = cls.model_validate(
             {
                 "data": StickyNoteData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-                "style": StickyNoteStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "style": UpdateStickyNoteStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
                 "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "geometry": (
                     FixedRatioNoRotationGeometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None

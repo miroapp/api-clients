@@ -11,13 +11,13 @@
  */
 
 import {FrameChanges} from './frameChanges'
-import {FrameStyle} from './frameStyle'
 import {GeometryNoRotation} from './geometryNoRotation'
 import {PositionChange} from './positionChange'
+import {UpdateFrameStyle} from './updateFrameStyle'
 
 export class FrameUpdateRequest {
   'data'?: FrameChanges
-  'style'?: FrameStyle
+  'style'?: UpdateFrameStyle
   'position'?: PositionChange
   'geometry'?: GeometryNoRotation
 
@@ -34,7 +34,7 @@ export class FrameUpdateRequest {
     {
       name: 'style',
       baseName: 'style',
-      type: 'FrameStyle',
+      type: 'UpdateFrameStyle',
     },
     {
       name: 'position',

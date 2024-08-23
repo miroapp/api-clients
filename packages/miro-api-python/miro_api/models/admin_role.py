@@ -17,29 +17,31 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from miro_api.models.app_card_data_changes import AppCardDataChanges
-from miro_api.models.geometry import Geometry
-from miro_api.models.parent import Parent
-from miro_api.models.position_change import PositionChange
-from miro_api.models.update_app_card_style import UpdateAppCardStyle
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class AppCardUpdateRequest(BaseModel):
+class AdminRole(BaseModel):
     """
-    AppCardUpdateRequest
+    AdminRole
     """  # noqa: E501
 
-    data: Optional[AppCardDataChanges] = None
-    style: Optional[UpdateAppCardStyle] = None
-    position: Optional[PositionChange] = None
-    geometry: Optional[Geometry] = None
-    parent: Optional[Parent] = None
+    type: Optional[StrictStr] = Field(default=None, description="Type of the admin role prebuilt or custom")
+    name: Optional[StrictStr] = Field(default=None, description="Name of the admin role")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["data", "style", "position", "geometry", "parent"]
+    __properties: ClassVar[List[str]] = ["type", "name"]
+
+    @field_validator("type")
+    def type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["prebuilt", "custom"]):
+            raise ValueError("must be one of enum values ('prebuilt', 'custom')")
+        return value
 
     model_config = {
         "populate_by_name": True,
@@ -58,7 +60,7 @@ class AppCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AppCardUpdateRequest from a JSON string"""
+        """Create an instance of AdminRole from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -83,21 +85,6 @@ class AppCardUpdateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict["data"] = self.data.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of style
-        if self.style:
-            _dict["style"] = self.style.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of position
-        if self.position:
-            _dict["position"] = self.position.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of geometry
-        if self.geometry:
-            _dict["geometry"] = self.geometry.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of parent
-        if self.parent:
-            _dict["parent"] = self.parent.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -107,22 +94,14 @@ class AppCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AppCardUpdateRequest from a dict"""
+        """Create an instance of AdminRole from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "data": AppCardDataChanges.from_dict(obj["data"]) if obj.get("data") is not None else None,
-                "style": UpdateAppCardStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
-                "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
-                "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
-                "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
-            }
-        )
+        _obj = cls.model_validate({"type": obj.get("type"), "name": obj.get("name")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

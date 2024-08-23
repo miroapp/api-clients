@@ -11,14 +11,14 @@
  */
 
 import {AppCardDataChanges} from './appCardDataChanges'
-import {AppCardStyle} from './appCardStyle'
 import {Geometry} from './geometry'
 import {Parent} from './parent'
 import {PositionChange} from './positionChange'
+import {UpdateAppCardStyle} from './updateAppCardStyle'
 
 export class AppCardUpdateRequest {
   'data'?: AppCardDataChanges
-  'style'?: AppCardStyle
+  'style'?: UpdateAppCardStyle
   'position'?: PositionChange
   'geometry'?: Geometry
   'parent'?: Parent
@@ -36,7 +36,7 @@ export class AppCardUpdateRequest {
     {
       name: 'style',
       baseName: 'style',
-      type: 'AppCardStyle',
+      type: 'UpdateAppCardStyle',
     },
     {
       name: 'position',

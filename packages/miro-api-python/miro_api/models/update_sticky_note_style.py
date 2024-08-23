@@ -17,29 +17,79 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from miro_api.models.app_card_data_changes import AppCardDataChanges
-from miro_api.models.geometry import Geometry
-from miro_api.models.parent import Parent
-from miro_api.models.position_change import PositionChange
-from miro_api.models.update_app_card_style import UpdateAppCardStyle
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class AppCardUpdateRequest(BaseModel):
+class UpdateStickyNoteStyle(BaseModel):
     """
-    AppCardUpdateRequest
+    Contains information about the style of a sticky note item, such as the fill color or text alignment.
     """  # noqa: E501
 
-    data: Optional[AppCardDataChanges] = None
-    style: Optional[UpdateAppCardStyle] = None
-    position: Optional[PositionChange] = None
-    geometry: Optional[Geometry] = None
-    parent: Optional[Parent] = None
+    fill_color: Optional[StrictStr] = Field(
+        default=None, description="Fill color for the sticky note.", alias="fillColor"
+    )
+    text_align: Optional[StrictStr] = Field(
+        default=None, description="Defines how the sticky note text is horizontally aligned.", alias="textAlign"
+    )
+    text_align_vertical: Optional[StrictStr] = Field(
+        default=None, description="Defines how the sticky note text is vertically aligned.", alias="textAlignVertical"
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["data", "style", "position", "geometry", "parent"]
+    __properties: ClassVar[List[str]] = ["fillColor", "textAlign", "textAlignVertical"]
+
+    @field_validator("fill_color")
+    def fill_color_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(
+            [
+                "gray",
+                "light_yellow",
+                "yellow",
+                "orange",
+                "light_green",
+                "green",
+                "dark_green",
+                "cyan",
+                "light_pink",
+                "pink",
+                "violet",
+                "red",
+                "light_blue",
+                "blue",
+                "dark_blue",
+                "black",
+            ]
+        ):
+            raise ValueError(
+                "must be one of enum values ('gray', 'light_yellow', 'yellow', 'orange', 'light_green', 'green', 'dark_green', 'cyan', 'light_pink', 'pink', 'violet', 'red', 'light_blue', 'blue', 'dark_blue', 'black')"
+            )
+        return value
+
+    @field_validator("text_align")
+    def text_align_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["left", "right", "center"]):
+            raise ValueError("must be one of enum values ('left', 'right', 'center')")
+        return value
+
+    @field_validator("text_align_vertical")
+    def text_align_vertical_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["top", "middle", "bottom"]):
+            raise ValueError("must be one of enum values ('top', 'middle', 'bottom')")
+        return value
 
     model_config = {
         "populate_by_name": True,
@@ -58,7 +108,7 @@ class AppCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AppCardUpdateRequest from a JSON string"""
+        """Create an instance of UpdateStickyNoteStyle from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -83,21 +133,6 @@ class AppCardUpdateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of data
-        if self.data:
-            _dict["data"] = self.data.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of style
-        if self.style:
-            _dict["style"] = self.style.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of position
-        if self.position:
-            _dict["position"] = self.position.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of geometry
-        if self.geometry:
-            _dict["geometry"] = self.geometry.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of parent
-        if self.parent:
-            _dict["parent"] = self.parent.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -107,7 +142,7 @@ class AppCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AppCardUpdateRequest from a dict"""
+        """Create an instance of UpdateStickyNoteStyle from a dict"""
         if obj is None:
             return None
 
@@ -116,11 +151,9 @@ class AppCardUpdateRequest(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "data": AppCardDataChanges.from_dict(obj["data"]) if obj.get("data") is not None else None,
-                "style": UpdateAppCardStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
-                "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
-                "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
-                "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
+                "fillColor": obj.get("fillColor"),
+                "textAlign": obj.get("textAlign"),
+                "textAlignVertical": obj.get("textAlignVertical"),
             }
         )
         # store additional fields in additional_properties
