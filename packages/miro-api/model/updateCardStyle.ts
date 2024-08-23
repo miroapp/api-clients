@@ -10,26 +10,15 @@
  * Do not edit the class manually.
  */
 
-import {Caption} from './caption'
-import {ItemConnectionChangesData} from './itemConnectionChangesData'
-import {UpdateConnectorStyle} from './updateConnectorStyle'
-
 /**
  * @internal
- * If both are provided, startItem.id must be different from endItem.id
+ * Contains information about the style of a card item, such as the card theme.
  */
-export class ConnectorChangesData {
-  'startItem'?: ItemConnectionChangesData
-  'endItem'?: ItemConnectionChangesData
+export class UpdateCardStyle {
   /**
-   * The path type of the connector line, defines curvature. Default: curved.
+   * Hex value of the border color of the card.
    */
-  'shape'?: string | (typeof ConnectorChangesData.ShapeEnum)[keyof typeof ConnectorChangesData.ShapeEnum]
-  /**
-   * Blocks of text you want to display on the connector.
-   */
-  'captions'?: Array<Caption>
-  'style'?: UpdateConnectorStyle
+  'cardTheme'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -37,42 +26,14 @@ export class ConnectorChangesData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'startItem',
-      baseName: 'startItem',
-      type: 'ItemConnectionChangesData',
-    },
-    {
-      name: 'endItem',
-      baseName: 'endItem',
-      type: 'ItemConnectionChangesData',
-    },
-    {
-      name: 'shape',
-      baseName: 'shape',
-      type: 'ConnectorChangesData.ShapeEnum',
-    },
-    {
-      name: 'captions',
-      baseName: 'captions',
-      type: 'Array<Caption>',
-    },
-    {
-      name: 'style',
-      baseName: 'style',
-      type: 'UpdateConnectorStyle',
+      name: 'cardTheme',
+      baseName: 'cardTheme',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ConnectorChangesData.attributeTypeMap
+    return UpdateCardStyle.attributeTypeMap
   }
-}
-
-export namespace ConnectorChangesData {
-  export const ShapeEnum = {
-    Straight: 'straight',
-    Elbowed: 'elbowed',
-    Curved: 'curved',
-  } as const
 }

@@ -29,7 +29,7 @@ class TagUpdateRequest(BaseModel):
     TagUpdateRequest
     """  # noqa: E501
 
-    fill_color: Optional[StrictStr] = Field(default="red", description="Fill color for the tag.", alias="fillColor")
+    fill_color: Optional[StrictStr] = Field(default=None, description="Fill color for the tag.", alias="fillColor")
     title: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=120)]] = Field(
         default=None, description="Text of the tag. Case-sensitive. Must be unique."
     )
@@ -121,12 +121,7 @@ class TagUpdateRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "fillColor": obj.get("fillColor") if obj.get("fillColor") is not None else "red",
-                "title": obj.get("title"),
-            }
-        )
+        _obj = cls.model_validate({"fillColor": obj.get("fillColor"), "title": obj.get("title")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

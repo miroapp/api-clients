@@ -15,6 +15,7 @@
 
 # import models into model package
 from miro_api.models.add_project_member_request import AddProjectMemberRequest
+from miro_api.models.admin_role import AdminRole
 from miro_api.models.app_card_create_request import AppCardCreateRequest
 from miro_api.models.app_card_data import AppCardData
 from miro_api.models.app_card_data_changes import AppCardDataChanges
@@ -358,13 +359,20 @@ from miro_api.models.token_information import TokenInformation
 from miro_api.models.un_group400_response import UnGroup400Response
 from miro_api.models.un_group404_response import UnGroup404Response
 from miro_api.models.un_group429_response import UnGroup429Response
+from miro_api.models.update_app_card_style import UpdateAppCardStyle
 from miro_api.models.update_board_subscription_request import UpdateBoardSubscriptionRequest
 from miro_api.models.update_boards_data_classification_label import UpdateBoardsDataClassificationLabel
 from miro_api.models.update_boards_data_classification_label_request import UpdateBoardsDataClassificationLabelRequest
+from miro_api.models.update_card_style import UpdateCardStyle
+from miro_api.models.update_connector_style import UpdateConnectorStyle
+from miro_api.models.update_frame_style import UpdateFrameStyle
 from miro_api.models.update_project_member_request import UpdateProjectMemberRequest
 from miro_api.models.update_project_request import UpdateProjectRequest
 from miro_api.models.update_project_settings_request import UpdateProjectSettingsRequest
+from miro_api.models.update_shape_style import UpdateShapeStyle
+from miro_api.models.update_sticky_note_style import UpdateStickyNoteStyle
 from miro_api.models.update_team_settings_request import UpdateTeamSettingsRequest
+from miro_api.models.update_text_style import UpdateTextStyle
 from miro_api.models.upload_file_from_device_data import UploadFileFromDeviceData
 from miro_api.models.user import User
 from miro_api.models.user_info_last_opened_by import UserInfoLastOpenedBy

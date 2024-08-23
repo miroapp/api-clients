@@ -10,6 +10,8 @@
  * Do not edit the class manually.
  */
 
+import {AdminRole} from './adminRole'
+
 /**
  * @internal
  * Organization member
@@ -47,6 +49,10 @@ export class OrganizationMember {
    * Type of the object returned.
    */
   'type'?: string = 'organization-member'
+  /**
+   * List of admin roles assigned to the user
+   */
+  'adminRoles'?: Array<AdminRole>
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -92,6 +98,11 @@ export class OrganizationMember {
       name: 'type',
       baseName: 'type',
       type: 'string',
+    },
+    {
+      name: 'adminRoles',
+      baseName: 'adminRoles',
+      type: 'Array<AdminRole>',
     },
   ]
 

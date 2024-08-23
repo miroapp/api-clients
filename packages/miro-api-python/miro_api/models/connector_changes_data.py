@@ -21,8 +21,8 @@ from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from miro_api.models.caption import Caption
-from miro_api.models.connector_style import ConnectorStyle
 from miro_api.models.item_connection_changes_data import ItemConnectionChangesData
+from miro_api.models.update_connector_style import UpdateConnectorStyle
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -40,7 +40,7 @@ class ConnectorChangesData(BaseModel):
     captions: Optional[Annotated[List[Caption], Field(min_length=0, max_length=20)]] = Field(
         default=None, description="Blocks of text you want to display on the connector."
     )
-    style: Optional[ConnectorStyle] = None
+    style: Optional[UpdateConnectorStyle] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["startItem", "endItem", "shape", "captions", "style"]
 
@@ -140,7 +140,7 @@ class ConnectorChangesData(BaseModel):
                 "captions": (
                     [Caption.from_dict(_item) for _item in obj["captions"]] if obj.get("captions") is not None else None
                 ),
-                "style": ConnectorStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "style": UpdateConnectorStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
             }
         )
         # store additional fields in additional_properties

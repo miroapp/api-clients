@@ -20,10 +20,10 @@ import json
 from pydantic import BaseModel
 from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.card_data import CardData
-from miro_api.models.card_style import CardStyle
 from miro_api.models.geometry import Geometry
 from miro_api.models.parent import Parent
 from miro_api.models.position_change import PositionChange
+from miro_api.models.update_card_style import UpdateCardStyle
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,7 +34,7 @@ class CardUpdateRequest(BaseModel):
     """  # noqa: E501
 
     data: Optional[CardData] = None
-    style: Optional[CardStyle] = None
+    style: Optional[UpdateCardStyle] = None
     position: Optional[PositionChange] = None
     geometry: Optional[Geometry] = None
     parent: Optional[Parent] = None
@@ -117,7 +117,7 @@ class CardUpdateRequest(BaseModel):
         _obj = cls.model_validate(
             {
                 "data": CardData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-                "style": CardStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
+                "style": UpdateCardStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
                 "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
                 "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,

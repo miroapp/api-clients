@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class UserInfoLastOpenedBy(BaseModel):
     """
-    Contains information about the user who opened the board last. This information is only available when the boards are sorted by `last_opened`.
+    Contains information about the user who opened the board last.
     """  # noqa: E501
 
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier (ID) of the user.")

@@ -11,14 +11,14 @@
  */
 
 import {CardData} from './cardData'
-import {CardStyle} from './cardStyle'
 import {Geometry} from './geometry'
 import {Parent} from './parent'
 import {PositionChange} from './positionChange'
+import {UpdateCardStyle} from './updateCardStyle'
 
 export class CardUpdateRequest {
   'data'?: CardData
-  'style'?: CardStyle
+  'style'?: UpdateCardStyle
   'position'?: PositionChange
   'geometry'?: Geometry
   'parent'?: Parent
@@ -36,7 +36,7 @@ export class CardUpdateRequest {
     {
       name: 'style',
       baseName: 'style',
-      type: 'CardStyle',
+      type: 'UpdateCardStyle',
     },
     {
       name: 'position',

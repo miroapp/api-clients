@@ -1,4 +1,5 @@
 export * from './addProjectMemberRequest'
+export * from './adminRole'
 export * from './appCardCreateRequest'
 export * from './appCardData'
 export * from './appCardDataChanges'
@@ -294,13 +295,20 @@ export * from './tokenInformation'
 export * from './unGroup400Response'
 export * from './unGroup404Response'
 export * from './unGroup429Response'
+export * from './updateAppCardStyle'
 export * from './updateBoardSubscriptionRequest'
 export * from './updateBoardsDataClassificationLabel'
 export * from './updateBoardsDataClassificationLabelRequest'
+export * from './updateCardStyle'
+export * from './updateConnectorStyle'
+export * from './updateFrameStyle'
 export * from './updateProjectMemberRequest'
 export * from './updateProjectRequest'
 export * from './updateProjectSettingsRequest'
+export * from './updateShapeStyle'
+export * from './updateStickyNoteStyle'
 export * from './updateTeamSettingsRequest'
+export * from './updateTextStyle'
 export * from './uploadFileFromDeviceData'
 export * from './user'
 export * from './userInfoLastOpenedBy'
@@ -325,6 +333,7 @@ export interface RequestDetailedFile {
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile
 
 import {AddProjectMemberRequest} from './addProjectMemberRequest'
+import {AdminRole} from './adminRole'
 import {AppCardCreateRequest} from './appCardCreateRequest'
 import {AppCardData} from './appCardData'
 import {AppCardDataChanges} from './appCardDataChanges'
@@ -620,13 +629,20 @@ import {TokenInformation} from './tokenInformation'
 import {UnGroup400Response} from './unGroup400Response'
 import {UnGroup404Response} from './unGroup404Response'
 import {UnGroup429Response} from './unGroup429Response'
+import {UpdateAppCardStyle} from './updateAppCardStyle'
 import {UpdateBoardSubscriptionRequest} from './updateBoardSubscriptionRequest'
 import {UpdateBoardsDataClassificationLabel} from './updateBoardsDataClassificationLabel'
 import {UpdateBoardsDataClassificationLabelRequest} from './updateBoardsDataClassificationLabelRequest'
+import {UpdateCardStyle} from './updateCardStyle'
+import {UpdateConnectorStyle} from './updateConnectorStyle'
+import {UpdateFrameStyle} from './updateFrameStyle'
 import {UpdateProjectMemberRequest} from './updateProjectMemberRequest'
 import {UpdateProjectRequest} from './updateProjectRequest'
 import {UpdateProjectSettingsRequest} from './updateProjectSettingsRequest'
+import {UpdateShapeStyle} from './updateShapeStyle'
+import {UpdateStickyNoteStyle} from './updateStickyNoteStyle'
 import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
+import {UpdateTextStyle} from './updateTextStyle'
 import {UploadFileFromDeviceData} from './uploadFileFromDeviceData'
 import {User} from './user'
 import {UserInfoLastOpenedBy} from './userInfoLastOpenedBy'
@@ -643,6 +659,7 @@ import {WidthOnlyAdjustableGeometry} from './widthOnlyAdjustableGeometry'
 let primitives = ['string', 'boolean', 'double', 'integer', 'long', 'float', 'number', 'any']
 
 let enumsMap: {[index: string]: any} = {
+  'AdminRole.TypeEnum': AdminRole.TypeEnum,
   'AppCardData.StatusEnum': AppCardData.StatusEnum,
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
   'AppCardDataResponse.StatusEnum': AppCardDataResponse.StatusEnum,
@@ -829,6 +846,19 @@ let enumsMap: {[index: string]: any} = {
   'TextStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum':
     TextStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum,
   'UpdateBoardSubscriptionRequest.StatusEnum': UpdateBoardSubscriptionRequest.StatusEnum,
+  'UpdateConnectorStyle.EndStrokeCapEnum': UpdateConnectorStyle.EndStrokeCapEnum,
+  'UpdateConnectorStyle.StartStrokeCapEnum': UpdateConnectorStyle.StartStrokeCapEnum,
+  'UpdateConnectorStyle.StrokeStyleEnum': UpdateConnectorStyle.StrokeStyleEnum,
+  'UpdateConnectorStyle.TextOrientationEnum': UpdateConnectorStyle.TextOrientationEnum,
+  'UpdateShapeStyle.BorderStyleEnum': UpdateShapeStyle.BorderStyleEnum,
+  'UpdateShapeStyle.FontFamilyEnum': UpdateShapeStyle.FontFamilyEnum,
+  'UpdateShapeStyle.TextAlignEnum': UpdateShapeStyle.TextAlignEnum,
+  'UpdateShapeStyle.TextAlignVerticalEnum': UpdateShapeStyle.TextAlignVerticalEnum,
+  'UpdateStickyNoteStyle.FillColorEnum': UpdateStickyNoteStyle.FillColorEnum,
+  'UpdateStickyNoteStyle.TextAlignEnum': UpdateStickyNoteStyle.TextAlignEnum,
+  'UpdateStickyNoteStyle.TextAlignVerticalEnum': UpdateStickyNoteStyle.TextAlignVerticalEnum,
+  'UpdateTextStyle.FontFamilyEnum': UpdateTextStyle.FontFamilyEnum,
+  'UpdateTextStyle.TextAlignEnum': UpdateTextStyle.TextAlignEnum,
   'WidgetDataOutput.ModeEnum': WidgetDataOutput.ModeEnum,
   'WidgetDataOutput.StatusEnum': WidgetDataOutput.StatusEnum,
   'WidgetDataOutput.ShapeEnum': WidgetDataOutput.ShapeEnum,
@@ -838,6 +868,7 @@ let enumsMap: {[index: string]: any} = {
 
 let typeMap: {[index: string]: any} = {
   AddProjectMemberRequest: AddProjectMemberRequest,
+  AdminRole: AdminRole,
   AppCardCreateRequest: AppCardCreateRequest,
   AppCardData: AppCardData,
   AppCardDataChanges: AppCardDataChanges,
@@ -1136,13 +1167,20 @@ let typeMap: {[index: string]: any} = {
   UnGroup400Response: UnGroup400Response,
   UnGroup404Response: UnGroup404Response,
   UnGroup429Response: UnGroup429Response,
+  UpdateAppCardStyle: UpdateAppCardStyle,
   UpdateBoardSubscriptionRequest: UpdateBoardSubscriptionRequest,
   UpdateBoardsDataClassificationLabel: UpdateBoardsDataClassificationLabel,
   UpdateBoardsDataClassificationLabelRequest: UpdateBoardsDataClassificationLabelRequest,
+  UpdateCardStyle: UpdateCardStyle,
+  UpdateConnectorStyle: UpdateConnectorStyle,
+  UpdateFrameStyle: UpdateFrameStyle,
   UpdateProjectMemberRequest: UpdateProjectMemberRequest,
   UpdateProjectRequest: UpdateProjectRequest,
   UpdateProjectSettingsRequest: UpdateProjectSettingsRequest,
+  UpdateShapeStyle: UpdateShapeStyle,
+  UpdateStickyNoteStyle: UpdateStickyNoteStyle,
   UpdateTeamSettingsRequest: UpdateTeamSettingsRequest,
+  UpdateTextStyle: UpdateTextStyle,
   UploadFileFromDeviceData: UploadFileFromDeviceData,
   User: User,
   UserInfoLastOpenedBy: UserInfoLastOpenedBy,

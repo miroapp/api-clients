@@ -24,9 +24,9 @@ from typing import Optional, Set
 from typing_extensions import Self
 
 
-class ShapeStyleForUpdate(BaseModel):
+class UpdateShapeStyle(BaseModel):
     """
-    Contains information about the shape style, such as the border color or opacity. <br> All properties in style object are supported for shape types aren't listed below. <br> <table>   <tr>     <th align=\"left\">Shape type</th>     <th align=\"left\">Unsupported properties</th>   </tr>   <tr>     <td>flow_chart_or</td>     <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>   </tr>   <tr>     <td>flow_chart_summing_junction</td>     <td>fontSize, fontFamily, color, textAlign, textAlignVertical</td>   </tr>   <tr>     <td>flow_chart_note_curly_left</td>     <td>fillColor, fillOpacity</td>   </tr>   <tr>     <td>flow_chart_note_curly_right</td>     <td>fillColor, fillOpacity</td>   </tr>   <tr>     <td>flow_chart_note_square</td>     <td>fillColor, fillOpacity</td>   </tr> </table>
+    Contains information about the shape style, such as the border color or opacity.
     """  # noqa: E501
 
     border_color: Optional[StrictStr] = Field(
@@ -175,7 +175,7 @@ class ShapeStyleForUpdate(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of ShapeStyleForUpdate from a JSON string"""
+        """Create an instance of UpdateShapeStyle from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -209,7 +209,7 @@ class ShapeStyleForUpdate(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of ShapeStyleForUpdate from a dict"""
+        """Create an instance of UpdateShapeStyle from a dict"""
         if obj is None:
             return None
 

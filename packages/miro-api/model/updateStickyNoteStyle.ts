@@ -10,26 +10,25 @@
  * Do not edit the class manually.
  */
 
-import {Caption} from './caption'
-import {ItemConnectionChangesData} from './itemConnectionChangesData'
-import {UpdateConnectorStyle} from './updateConnectorStyle'
-
 /**
  * @internal
- * If both are provided, startItem.id must be different from endItem.id
+ * Contains information about the style of a sticky note item, such as the fill color or text alignment.
  */
-export class ConnectorChangesData {
-  'startItem'?: ItemConnectionChangesData
-  'endItem'?: ItemConnectionChangesData
+export class UpdateStickyNoteStyle {
   /**
-   * The path type of the connector line, defines curvature. Default: curved.
+   * Fill color for the sticky note.
    */
-  'shape'?: string | (typeof ConnectorChangesData.ShapeEnum)[keyof typeof ConnectorChangesData.ShapeEnum]
+  'fillColor'?: string | (typeof UpdateStickyNoteStyle.FillColorEnum)[keyof typeof UpdateStickyNoteStyle.FillColorEnum]
   /**
-   * Blocks of text you want to display on the connector.
+   * Defines how the sticky note text is horizontally aligned.
    */
-  'captions'?: Array<Caption>
-  'style'?: UpdateConnectorStyle
+  'textAlign'?: string | (typeof UpdateStickyNoteStyle.TextAlignEnum)[keyof typeof UpdateStickyNoteStyle.TextAlignEnum]
+  /**
+   * Defines how the sticky note text is vertically aligned.
+   */
+  'textAlignVertical'?:
+    | string
+    | (typeof UpdateStickyNoteStyle.TextAlignVerticalEnum)[keyof typeof UpdateStickyNoteStyle.TextAlignVerticalEnum]
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -37,42 +36,55 @@ export class ConnectorChangesData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'startItem',
-      baseName: 'startItem',
-      type: 'ItemConnectionChangesData',
+      name: 'fillColor',
+      baseName: 'fillColor',
+      type: 'UpdateStickyNoteStyle.FillColorEnum',
     },
     {
-      name: 'endItem',
-      baseName: 'endItem',
-      type: 'ItemConnectionChangesData',
+      name: 'textAlign',
+      baseName: 'textAlign',
+      type: 'UpdateStickyNoteStyle.TextAlignEnum',
     },
     {
-      name: 'shape',
-      baseName: 'shape',
-      type: 'ConnectorChangesData.ShapeEnum',
-    },
-    {
-      name: 'captions',
-      baseName: 'captions',
-      type: 'Array<Caption>',
-    },
-    {
-      name: 'style',
-      baseName: 'style',
-      type: 'UpdateConnectorStyle',
+      name: 'textAlignVertical',
+      baseName: 'textAlignVertical',
+      type: 'UpdateStickyNoteStyle.TextAlignVerticalEnum',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return ConnectorChangesData.attributeTypeMap
+    return UpdateStickyNoteStyle.attributeTypeMap
   }
 }
 
-export namespace ConnectorChangesData {
-  export const ShapeEnum = {
-    Straight: 'straight',
-    Elbowed: 'elbowed',
-    Curved: 'curved',
+export namespace UpdateStickyNoteStyle {
+  export const FillColorEnum = {
+    Gray: 'gray',
+    LightYellow: 'light_yellow',
+    Yellow: 'yellow',
+    Orange: 'orange',
+    LightGreen: 'light_green',
+    Green: 'green',
+    DarkGreen: 'dark_green',
+    Cyan: 'cyan',
+    LightPink: 'light_pink',
+    Pink: 'pink',
+    Violet: 'violet',
+    Red: 'red',
+    LightBlue: 'light_blue',
+    Blue: 'blue',
+    DarkBlue: 'dark_blue',
+    Black: 'black',
+  } as const
+  export const TextAlignEnum = {
+    Left: 'left',
+    Right: 'right',
+    Center: 'center',
+  } as const
+  export const TextAlignVerticalEnum = {
+    Top: 'top',
+    Middle: 'middle',
+    Bottom: 'bottom',
   } as const
 }
