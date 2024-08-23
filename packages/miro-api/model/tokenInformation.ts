@@ -16,7 +16,7 @@ import {UserInformation} from './userInformation'
 
 export class TokenInformation {
   'type': string
-  'organization'?: OrganizationInformation
+  'organization': OrganizationInformation
   'team': TeamInformation
   'createdBy': UserInformation
   'user': UserInformation

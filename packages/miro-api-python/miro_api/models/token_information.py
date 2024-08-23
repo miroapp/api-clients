@@ -32,7 +32,7 @@ class TokenInformation(BaseModel):
     """  # noqa: E501
 
     type: StrictStr
-    organization: Optional[OrganizationInformation] = None
+    organization: OrganizationInformation
     team: TeamInformation
     created_by: UserInformation = Field(alias="createdBy")
     user: UserInformation
