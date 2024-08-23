@@ -1,6 +1,10 @@
+## [2.2.1]
+
+- fixed `organization` property in `/v1/oauth-token` response is optional
+
 ## [2.2.0]
 
-- Update api specification to latest version
+- update api specification to latest version
 
 ## [2.1.0]
 
