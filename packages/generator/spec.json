@@ -55,7 +55,7 @@
                 "schema": {
                   "title": "Token information",
                   "type": "object",
-                  "required": ["type", "team", "createdBy", "user"],
+                  "required": ["type", "organization", "team", "createdBy", "user"],
                   "properties": {
                     "type": {
                       "type": "string"
