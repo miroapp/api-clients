@@ -5,7 +5,6 @@ import FormData = require('form-data')
 import {AppCardCreateRequest} from '../model/appCardCreateRequest'
 import {AppCardItem} from '../model/appCardItem'
 import {AppCardUpdateRequest} from '../model/appCardUpdateRequest'
-import {GetBoards400Response} from '../model/getBoards400Response'
 
 import {GetMetrics200ResponseInner} from '../model/getMetrics200ResponseInner'
 import {GetMetrics404Response} from '../model/getMetrics404Response'
@@ -67,6 +66,7 @@ import {EmbedCreateRequest} from '../model/embedCreateRequest'
 import {EmbedItem} from '../model/embedItem'
 import {EmbedUpdateRequest} from '../model/embedUpdateRequest'
 
+import {CreateFrameItem400Response} from '../model/createFrameItem400Response'
 import {GenericItem} from '../model/genericItem'
 import {GenericItemCursorPaged} from '../model/genericItemCursorPaged'
 import {ShapeCreateRequest} from '../model/shapeCreateRequest'
@@ -76,6 +76,7 @@ import {ShapeUpdateRequest} from '../model/shapeUpdateRequest'
 import {FrameCreateRequest} from '../model/frameCreateRequest'
 import {FrameItem} from '../model/frameItem'
 import {FrameUpdateRequest} from '../model/frameUpdateRequest'
+import {UpdateFrameItem409Response} from '../model/updateFrameItem409Response'
 
 import {GetAllGroups200Response} from '../model/getAllGroups200Response'
 import {GetAllGroups400Response} from '../model/getAllGroups400Response'
@@ -1286,7 +1287,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a board. Deleted boards go to Trash (on paid plans) and can be restored via UI within 90 days after deletion.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
    * @summary Delete board
    * @param boardId Unique identifier (ID) of the board that you want to delete.
    */
@@ -1491,17 +1492,16 @@ export class MiroApi {
   }
 
   /**
-   * Adds different types of items to a board using files from a device. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. To try out this API in our documentation: 1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1). ![add object user interface in readme](https://files.readme.io/570dac1-small-add_object.png) *Figure 1. Add object user interface in readme* 2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add. 3. Repeat steps 1 and 2 for each item that you want to add. **Required scope**: [boards:write](/reference/scopes) **Rate limiting**: Level 2 per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
+   * Adds different types of items to a board using files from a device. You can add up to 20 items of the same or different type per create call. For example, you can create 5 document items and 5 images in one create call.  The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. To try out this API in our documentation: 1. In the **BODY PARAMS** section, select **ADD FILE**, and then upload a local file. Repeat for each item that you want to add. 2. Upload a JSON file that contains the bulk data for the items you want to create.  <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/> <h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> per item<br/>
    * @summary Create items in bulk using file from device
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
-   * @param data Select a file containing JSON object describing files to upload.
-   * @param resources Select files to upload.
+   * @param data JSON file containing bulk data, where each object represents an item to be created. For details, see [JSON file example](https://developers.miro.com/reference/json-data-example).
+   * @param resources Array of items to create (PDFs, images, etc.). Maximum of 20 items.
    */
   async createItemsInBulkUsingFileFromDevice(
     boardId: string,
     data: RequestFile,
-
-    resources?: RequestFile,
+    resources: Array<RequestFile>,
   ): Promise<{response: Response; body: Items}> {
     const localVarPath = '/v2/boards/{board_id_Platformcreateitemsinbulkusingfilefromdevice}/items/bulk'.replace(
       '{' + 'board_id' + '}',

@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 
-import {Geometry} from './geometry'
+import {MindMapNodeGeometry} from './mindMapNodeGeometry'
 import {MindmapDataForCreate} from './mindmapDataForCreate'
 import {Parent} from './parent'
 import {PositionChange} from './positionChange'
@@ -18,7 +18,7 @@ import {PositionChange} from './positionChange'
 export class MindmapCreateRequest {
   'data': MindmapDataForCreate
   'position'?: PositionChange
-  'geometry'?: Geometry
+  'geometry'?: MindMapNodeGeometry
   'parent'?: Parent
 
   /** @ignore */
@@ -39,7 +39,7 @@ export class MindmapCreateRequest {
     {
       name: 'geometry',
       baseName: 'geometry',
-      type: 'Geometry',
+      type: 'MindMapNodeGeometry',
     },
     {
       name: 'parent',

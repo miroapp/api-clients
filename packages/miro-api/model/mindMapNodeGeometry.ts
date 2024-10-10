@@ -10,23 +10,15 @@
  * Do not edit the class manually.
  */
 
-export class BasicErrorTeamsEnterprisePlan {
+/**
+ * @internal
+ * Contains width of the item.
+ */
+export class MindMapNodeGeometry {
   /**
-   * HTTP status code.
+   * Width of the item, in pixels.
    */
-  'status'?: number
-  /**
-   * Description of the status code.
-   */
-  'code'?: string
-  /**
-   * Explanation for the error
-   */
-  'message'?: string
-  /**
-   * Type of the object returned.
-   */
-  'type'?: string = 'error'
+  'width'?: number
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -34,29 +26,14 @@ export class BasicErrorTeamsEnterprisePlan {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'status',
-      baseName: 'status',
+      name: 'width',
+      baseName: 'width',
       type: 'number',
-    },
-    {
-      name: 'code',
-      baseName: 'code',
-      type: 'string',
-    },
-    {
-      name: 'message',
-      baseName: 'message',
-      type: 'string',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return BasicErrorTeamsEnterprisePlan.attributeTypeMap
+    return MindMapNodeGeometry.attributeTypeMap
   }
 }
