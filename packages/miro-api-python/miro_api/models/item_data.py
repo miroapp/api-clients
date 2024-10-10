@@ -17,28 +17,13 @@ import json
 import pprint
 from pydantic import BaseModel, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
-from miro_api.models.app_card_data_response import AppCardDataResponse
-from miro_api.models.card_data import CardData
 from miro_api.models.document_data_response import DocumentDataResponse
-from miro_api.models.embed_data_response import EmbedDataResponse
 from miro_api.models.image_data_response import ImageDataResponse
-from miro_api.models.shape_data import ShapeData
-from miro_api.models.sticky_note_data import StickyNoteData
-from miro_api.models.text_data import TextData
 from pydantic import StrictStr, Field
 from typing import Union, List, Optional, Dict
 from typing_extensions import Literal, Self
 
-ITEMDATA_ONE_OF_SCHEMAS = [
-    "AppCardDataResponse",
-    "CardData",
-    "DocumentDataResponse",
-    "EmbedDataResponse",
-    "ImageDataResponse",
-    "ShapeData",
-    "StickyNoteData",
-    "TextData",
-]
+ITEMDATA_ONE_OF_SCHEMAS = ["DocumentDataResponse", "ImageDataResponse"]
 
 
 class ItemData(BaseModel):
@@ -46,46 +31,12 @@ class ItemData(BaseModel):
     Contains information about item-specific data.
     """
 
-    # data type: AppCardDataResponse
-    oneof_schema_1_validator: Optional[AppCardDataResponse] = None
-    # data type: CardData
-    oneof_schema_2_validator: Optional[CardData] = None
     # data type: DocumentDataResponse
-    oneof_schema_3_validator: Optional[DocumentDataResponse] = None
-    # data type: EmbedDataResponse
-    oneof_schema_4_validator: Optional[EmbedDataResponse] = None
+    oneof_schema_1_validator: Optional[DocumentDataResponse] = None
     # data type: ImageDataResponse
-    oneof_schema_5_validator: Optional[ImageDataResponse] = None
-    # data type: ShapeData
-    oneof_schema_6_validator: Optional[ShapeData] = None
-    # data type: StickyNoteData
-    oneof_schema_7_validator: Optional[StickyNoteData] = None
-    # data type: TextData
-    oneof_schema_8_validator: Optional[TextData] = None
-    actual_instance: Optional[
-        Union[
-            AppCardDataResponse,
-            CardData,
-            DocumentDataResponse,
-            EmbedDataResponse,
-            ImageDataResponse,
-            ShapeData,
-            StickyNoteData,
-            TextData,
-        ]
-    ] = None
-    one_of_schemas: List[str] = Field(
-        default=Literal[
-            "AppCardDataResponse",
-            "CardData",
-            "DocumentDataResponse",
-            "EmbedDataResponse",
-            "ImageDataResponse",
-            "ShapeData",
-            "StickyNoteData",
-            "TextData",
-        ]
-    )
+    oneof_schema_2_validator: Optional[ImageDataResponse] = None
+    actual_instance: Optional[Union[DocumentDataResponse, ImageDataResponse]] = None
+    one_of_schemas: List[str] = Field(default=Literal["DocumentDataResponse", "ImageDataResponse"])
 
     model_config = {
         "validate_assignment": True,
@@ -110,24 +61,9 @@ class ItemData(BaseModel):
         instance = ItemData.model_construct()
         error_messages = []
         match = 0
-        # validate data type: AppCardDataResponse
-        if not isinstance(v, AppCardDataResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `AppCardDataResponse`")
-        else:
-            match += 1
-        # validate data type: CardData
-        if not isinstance(v, CardData):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `CardData`")
-        else:
-            match += 1
         # validate data type: DocumentDataResponse
         if not isinstance(v, DocumentDataResponse):
             error_messages.append(f"Error! Input type `{type(v)}` is not `DocumentDataResponse`")
-        else:
-            match += 1
-        # validate data type: EmbedDataResponse
-        if not isinstance(v, EmbedDataResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `EmbedDataResponse`")
         else:
             match += 1
         # validate data type: ImageDataResponse
@@ -135,31 +71,16 @@ class ItemData(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `ImageDataResponse`")
         else:
             match += 1
-        # validate data type: ShapeData
-        if not isinstance(v, ShapeData):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `ShapeData`")
-        else:
-            match += 1
-        # validate data type: StickyNoteData
-        if not isinstance(v, StickyNoteData):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `StickyNoteData`")
-        else:
-            match += 1
-        # validate data type: TextData
-        if not isinstance(v, TextData):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `TextData`")
-        else:
-            match += 1
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when setting `actual_instance` in ItemData with oneOf schemas: AppCardDataResponse, CardData, DocumentDataResponse, EmbedDataResponse, ImageDataResponse, ShapeData, StickyNoteData, TextData. Details: "
+                "Multiple matches found when setting `actual_instance` in ItemData with oneOf schemas: DocumentDataResponse, ImageDataResponse. Details: "
                 + ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when setting `actual_instance` in ItemData with oneOf schemas: AppCardDataResponse, CardData, DocumentDataResponse, EmbedDataResponse, ImageDataResponse, ShapeData, StickyNoteData, TextData. Details: "
+                "No match found when setting `actual_instance` in ItemData with oneOf schemas: DocumentDataResponse, ImageDataResponse. Details: "
                 + ", ".join(error_messages)
             )
         else:
@@ -170,42 +91,15 @@ class ItemData(BaseModel):
         return cls.from_json(json.dumps(obj))
 
     @classmethod
-    def from_json(cls, json_str: str) -> Union[
-        AppCardDataResponse,
-        CardData,
-        DocumentDataResponse,
-        EmbedDataResponse,
-        ImageDataResponse,
-        ShapeData,
-        StickyNoteData,
-        TextData,
-    ]:
+    def from_json(cls, json_str: str) -> Union[DocumentDataResponse, ImageDataResponse]:
         """Returns the object represented by the json string"""
         instance = cls.model_construct()
         error_messages = []
         matches = []
 
-        # deserialize data into AppCardDataResponse
-        try:
-            instance.actual_instance = AppCardDataResponse.from_json(json_str)
-            matches.append(instance.actual_instance)
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into CardData
-        try:
-            instance.actual_instance = CardData.from_json(json_str)
-            matches.append(instance.actual_instance)
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
         # deserialize data into DocumentDataResponse
         try:
             instance.actual_instance = DocumentDataResponse.from_json(json_str)
-            matches.append(instance.actual_instance)
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into EmbedDataResponse
-        try:
-            instance.actual_instance = EmbedDataResponse.from_json(json_str)
             matches.append(instance.actual_instance)
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
@@ -215,29 +109,11 @@ class ItemData(BaseModel):
             matches.append(instance.actual_instance)
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # deserialize data into ShapeData
-        try:
-            instance.actual_instance = ShapeData.from_json(json_str)
-            matches.append(instance.actual_instance)
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into StickyNoteData
-        try:
-            instance.actual_instance = StickyNoteData.from_json(json_str)
-            matches.append(instance.actual_instance)
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
-        # deserialize data into TextData
-        try:
-            instance.actual_instance = TextData.from_json(json_str)
-            matches.append(instance.actual_instance)
-        except (ValidationError, ValueError) as e:
-            error_messages.append(str(e))
 
         if not matches:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into ItemData with oneOf schemas: AppCardDataResponse, CardData, DocumentDataResponse, EmbedDataResponse, ImageDataResponse, ShapeData, StickyNoteData, TextData. Details: "
+                "No match found when deserializing the JSON string into ItemData with oneOf schemas: DocumentDataResponse, ImageDataResponse. Details: "
                 + ", ".join(error_messages)
             )
 
@@ -257,21 +133,7 @@ class ItemData(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(
-        self,
-    ) -> Optional[
-        Union[
-            Dict[str, Any],
-            AppCardDataResponse,
-            CardData,
-            DocumentDataResponse,
-            EmbedDataResponse,
-            ImageDataResponse,
-            ShapeData,
-            StickyNoteData,
-            TextData,
-        ]
-    ]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], DocumentDataResponse, ImageDataResponse]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

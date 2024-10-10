@@ -19,6 +19,10 @@ export class UploadFileFromDeviceData {
    * Title for the document.
    */
   'title'?: string
+  /**
+   * A description (alt-text) to help people understand what is depicted here.
+   */
+  'altText'?: string
   'position'?: PositionChange
   'geometry'?: FixedRatioGeometry
   'parent'?: Parent
@@ -31,6 +35,11 @@ export class UploadFileFromDeviceData {
     {
       name: 'title',
       baseName: 'title',
+      type: 'string',
+    },
+    {
+      name: 'altText',
+      baseName: 'altText',
       type: 'string',
     },
     {

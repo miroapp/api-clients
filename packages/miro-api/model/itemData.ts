@@ -10,15 +10,8 @@
  * Do not edit the class manually.
  */
 
-import {AppCardDataResponse} from './appCardDataResponse'
-import {CardData} from './cardData'
-import {CustomField} from './customField'
 import {DocumentDataResponse} from './documentDataResponse'
-import {EmbedDataResponse} from './embedDataResponse'
 import {ImageDataResponse} from './imageDataResponse'
-import {ShapeData} from './shapeData'
-import {StickyNoteData} from './stickyNoteData'
-import {TextData} from './textData'
 
 /**
  * @internal
@@ -26,77 +19,17 @@ import {TextData} from './textData'
  */
 export class ItemData {
   /**
-   * Short description of the embedded item.
+   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.
    */
-  'description'?: string
-  /**
-   * Array where each object represents a custom preview field. Preview fields are displayed on the bottom half of the app card in the compact view.
-   */
-  'fields'?: Array<CustomField>
-  /**
-   * Defines whether the card is owned by the application making the call.
-   */
-  'owned'?: boolean
-  /**
-   * Status indicating whether an app card is connected and in sync with the source. When the source for the app card is deleted, the status returns `disabled`.
-   */
-  'status'?: string | (typeof ItemData.StatusEnum)[keyof typeof ItemData.StatusEnum]
+  'documentUrl'?: string
   /**
    * A short text header to identify the image.
    */
   'title'?: string
   /**
-   * Unique user identifier. In the GUI, the user ID is mapped to the name of the user who is assigned as the owner of the task or activity described in the card. The identifier is numeric, and it is automatically assigned to a user when they first sign up.
-   */
-  'assigneeId'?: string
-  /**
-   * The date when the task or activity described in the card is due to be completed. In the GUI, users can select the due date from a calendar. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
-   */
-  'dueDate'?: Date
-  /**
-   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter to control the request execution. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned is `application/octet-stream`.
-   */
-  'documentUrl'?: string
-  /**
-   * Type of the embedded item\'s content.
-   */
-  'contentType'?: string
-  /**
-   * HTML code of the embedded item.
-   */
-  'html'?: string
-  /**
-   * Defines how the content in the embed item is displayed on the board. `inline`: The embedded content is displayed directly on the board. `modal`: The embedded content is displayed inside a modal overlay on the board.
-   */
-  'mode'?: string | (typeof ItemData.ModeEnum)[keyof typeof ItemData.ModeEnum]
-  /**
-   * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
-   */
-  'previewUrl'?: string
-  /**
-   * Name of the content\'s provider.
-   */
-  'providerName'?: string
-  /**
-   * Url of the content\'s provider.
-   */
-  'providerUrl'?: string
-  /**
-   * A [valid URL](https://developers.miro.com/reference/data#embeddata) pointing to the content resource that you want to embed in the board. Possible transport protocols: HTTP, HTTPS.
-   */
-  'url'?: string
-  /**
    * The URL to download the resource. You must use your access token to access the URL. The URL contains the `redirect` parameter and the `format` parameter to control the request execution as described in the following parameters: `format` parameter: By default, the image format is set to the preview image. If you want to download the original image, set the `format` parameter in the URL to `original`. `redirect`: By default, the `redirect` parameter is set to `false` and the resource object containing the URL and the resource type is returned with a 200 OK HTTP code. This URL is valid for 60 seconds. You can use this URL to retrieve the resource file. If the `redirect` parameter is set to `true`, a 307 TEMPORARY_REDIRECT HTTP response is returned. If you follow HTTP 3xx responses as redirects, you will automatically be redirected to the resource file and the content type returned can be `image/png`, \'image/svg\', or \'image/jpg\', depending on the original image type.
    */
   'imageUrl'?: string
-  /**
-   * The actual text (content) that appears in the text item.
-   */
-  'content': string
-  /**
-   * Defines the geometric shape of the sticky note and aspect ratio for its dimensions.
-   */
-  'shape'?: string | (typeof ItemData.ShapeEnum)[keyof typeof ItemData.ShapeEnum] = ItemData.ShapeEnum.Square
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -104,24 +37,9 @@ export class ItemData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'description',
-      baseName: 'description',
+      name: 'documentUrl',
+      baseName: 'documentUrl',
       type: 'string',
-    },
-    {
-      name: 'fields',
-      baseName: 'fields',
-      type: 'Array<CustomField>',
-    },
-    {
-      name: 'owned',
-      baseName: 'owned',
-      type: 'boolean',
-    },
-    {
-      name: 'status',
-      baseName: 'status',
-      type: 'ItemData.StatusEnum',
     },
     {
       name: 'title',
@@ -129,69 +47,9 @@ export class ItemData {
       type: 'string',
     },
     {
-      name: 'assigneeId',
-      baseName: 'assigneeId',
-      type: 'string',
-    },
-    {
-      name: 'dueDate',
-      baseName: 'dueDate',
-      type: 'Date',
-    },
-    {
-      name: 'documentUrl',
-      baseName: 'documentUrl',
-      type: 'string',
-    },
-    {
-      name: 'contentType',
-      baseName: 'contentType',
-      type: 'string',
-    },
-    {
-      name: 'html',
-      baseName: 'html',
-      type: 'string',
-    },
-    {
-      name: 'mode',
-      baseName: 'mode',
-      type: 'ItemData.ModeEnum',
-    },
-    {
-      name: 'previewUrl',
-      baseName: 'previewUrl',
-      type: 'string',
-    },
-    {
-      name: 'providerName',
-      baseName: 'providerName',
-      type: 'string',
-    },
-    {
-      name: 'providerUrl',
-      baseName: 'providerUrl',
-      type: 'string',
-    },
-    {
-      name: 'url',
-      baseName: 'url',
-      type: 'string',
-    },
-    {
       name: 'imageUrl',
       baseName: 'imageUrl',
       type: 'string',
-    },
-    {
-      name: 'content',
-      baseName: 'content',
-      type: 'string',
-    },
-    {
-      name: 'shape',
-      baseName: 'shape',
-      type: 'ItemData.ShapeEnum',
     },
   ]
 
@@ -199,20 +57,4 @@ export class ItemData {
   static getAttributeTypeMap() {
     return ItemData.attributeTypeMap
   }
-}
-
-export namespace ItemData {
-  export const StatusEnum = {
-    Disconnected: 'disconnected',
-    Connected: 'connected',
-    Disabled: 'disabled',
-  } as const
-  export const ModeEnum = {
-    Inline: 'inline',
-    Modal: 'modal',
-  } as const
-  export const ShapeEnum = {
-    Square: 'square',
-    Rectangle: 'rectangle',
-  } as const
 }
