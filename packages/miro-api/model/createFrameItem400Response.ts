@@ -12,13 +12,25 @@
 
 /**
  * @internal
- * Contains text item data, such as the title, content, or description. For more information on the JSON properties, see [Data](https://developers.miro.com/reference/data).
+ * Test error obj
  */
-export class TextDataPlatformcreateitemsinbulkusingfilefromdevice {
+export class CreateFrameItem400Response {
   /**
-   * The actual text (content) that appears in the text item.
+   * Code of the error
    */
-  'content': string
+  'code'?: string
+  /**
+   * Description of the error
+   */
+  'message'?: string
+  /**
+   * Status code of the error
+   */
+  'status'?: number
+  /**
+   * Type of the error
+   */
+  'type'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -26,14 +38,29 @@ export class TextDataPlatformcreateitemsinbulkusingfilefromdevice {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'content',
-      baseName: 'content',
+      name: 'code',
+      baseName: 'code',
+      type: 'string',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
       type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return TextDataPlatformcreateitemsinbulkusingfilefromdevice.attributeTypeMap
+    return CreateFrameItem400Response.attributeTypeMap
   }
 }
