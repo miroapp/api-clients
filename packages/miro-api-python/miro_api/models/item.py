@@ -18,12 +18,11 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, Field, StrictBool, StrictStr
+from pydantic import BaseModel, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.created_by import CreatedBy
 from miro_api.models.geometry import Geometry
 from miro_api.models.item_data import ItemData
-from miro_api.models.item_style import ItemStyle
 from miro_api.models.modified_by import ModifiedBy
 from miro_api.models.parent_with_links import ParentWithLinks
 from miro_api.models.position import Position
@@ -38,12 +37,11 @@ class Item(BaseModel):
     """  # noqa: E501
 
     id: StrictStr = Field(description="Unique identifier (ID) of an item.")
+    type: StrictStr = Field(description="Type of item.")
     data: Optional[ItemData] = None
-    style: Optional[ItemStyle] = None
     position: Optional[Position] = None
     geometry: Optional[Geometry] = None
     parent: Optional[ParentWithLinks] = None
-    is_supported: Optional[StrictBool] = Field(default=None, alias="isSupported")
     created_by: Optional[CreatedBy] = Field(default=None, alias="createdBy")
     created_at: Optional[datetime] = Field(
         default=None,
@@ -60,12 +58,11 @@ class Item(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "id",
+        "type",
         "data",
-        "style",
         "position",
         "geometry",
         "parent",
-        "isSupported",
         "createdBy",
         "createdAt",
         "modifiedBy",
@@ -118,9 +115,6 @@ class Item(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of data
         if self.data:
             _dict["data"] = self.data.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of style
-        if self.style:
-            _dict["style"] = self.style.to_dict()
         # override the default output from pydantic by calling `to_dict()` of position
         if self.position:
             _dict["position"] = self.position.to_dict()
@@ -158,12 +152,11 @@ class Item(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
+                "type": obj.get("type"),
                 "data": ItemData.from_dict(obj["data"]) if obj.get("data") is not None else None,
-                "style": ItemStyle.from_dict(obj["style"]) if obj.get("style") is not None else None,
                 "position": Position.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
                 "parent": ParentWithLinks.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
-                "isSupported": obj.get("isSupported"),
                 "createdBy": CreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
                 "createdAt": obj.get("createdAt"),
                 "modifiedBy": ModifiedBy.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
