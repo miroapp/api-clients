@@ -19,7 +19,7 @@ import json
 
 from pydantic import BaseModel
 from typing import Any, ClassVar, Dict, List, Optional
-from miro_api.models.geometry import Geometry
+from miro_api.models.mind_map_node_geometry import MindMapNodeGeometry
 from miro_api.models.mindmap_data_for_create import MindmapDataForCreate
 from miro_api.models.parent import Parent
 from miro_api.models.position_change import PositionChange
@@ -34,7 +34,7 @@ class MindmapCreateRequest(BaseModel):
 
     data: MindmapDataForCreate
     position: Optional[PositionChange] = None
-    geometry: Optional[Geometry] = None
+    geometry: Optional[MindMapNodeGeometry] = None
     parent: Optional[Parent] = None
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["data", "position", "geometry", "parent"]
@@ -113,7 +113,7 @@ class MindmapCreateRequest(BaseModel):
             {
                 "data": MindmapDataForCreate.from_dict(obj["data"]) if obj.get("data") is not None else None,
                 "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
-                "geometry": Geometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
+                "geometry": MindMapNodeGeometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
                 "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,
             }
         )
