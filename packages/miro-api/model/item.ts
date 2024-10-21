@@ -13,7 +13,6 @@
 import {CreatedBy} from './createdBy'
 import {Geometry} from './geometry'
 import {ItemData} from './itemData'
-import {ItemStyle} from './itemStyle'
 import {ModifiedBy} from './modifiedBy'
 import {ParentWithLinks} from './parentWithLinks'
 import {Position} from './position'
@@ -28,12 +27,14 @@ export class Item {
    * Unique identifier (ID) of an item.
    */
   'id': string
+  /**
+   * Type of item.
+   */
+  'type': string
   'data'?: ItemData
-  'style'?: ItemStyle
   'position'?: Position
   'geometry'?: Geometry
   'parent'?: ParentWithLinks
-  'isSupported'?: boolean
   'createdBy'?: CreatedBy
   /**
    * Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
@@ -57,14 +58,14 @@ export class Item {
       type: 'string',
     },
     {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
+    },
+    {
       name: 'data',
       baseName: 'data',
       type: 'ItemData',
-    },
-    {
-      name: 'style',
-      baseName: 'style',
-      type: 'ItemStyle',
     },
     {
       name: 'position',
@@ -80,11 +81,6 @@ export class Item {
       name: 'parent',
       baseName: 'parent',
       type: 'ParentWithLinks',
-    },
-    {
-      name: 'isSupported',
-      baseName: 'isSupported',
-      type: 'boolean',
     },
     {
       name: 'createdBy',

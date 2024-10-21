@@ -34,6 +34,10 @@ export class AuditEvent {
    * Event type of the audit event
    */
   'event'?: string
+  /**
+   * Event category of the audit event.
+   */
+  'category'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -73,6 +77,11 @@ export class AuditEvent {
     {
       name: 'event',
       baseName: 'event',
+      type: 'string',
+    },
+    {
+      name: 'category',
+      baseName: 'category',
       type: 'string',
     },
   ]
