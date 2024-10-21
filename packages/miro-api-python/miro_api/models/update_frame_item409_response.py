@@ -17,42 +17,23 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from miro_api.models.audit_context import AuditContext
-from miro_api.models.audit_created_by import AuditCreatedBy
-from miro_api.models.audit_object import AuditObject
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class AuditEvent(BaseModel):
+class UpdateFrameItem409Response(BaseModel):
     """
-    AuditEvent
+    Test error obj
     """  # noqa: E501
 
-    id: Optional[StrictStr] = Field(default=None, description="Audit event id")
-    context: Optional[AuditContext] = None
-    object: Optional[AuditObject] = None
-    created_at: Optional[datetime] = Field(
-        default=None, description="Time when the audit event has been created", alias="createdAt"
-    )
-    details: Optional[Dict[str, Any]] = Field(default=None, description="Details json related to the audit event")
-    created_by: Optional[AuditCreatedBy] = Field(default=None, alias="createdBy")
-    event: Optional[StrictStr] = Field(default=None, description="Event type of the audit event")
-    category: Optional[StrictStr] = Field(default=None, description="Event category of the audit event.")
+    code: Optional[StrictStr] = Field(default=None, description="Code of the error")
+    message: Optional[StrictStr] = Field(default=None, description="Description of the error")
+    status: Optional[StrictInt] = Field(default=None, description="Status code of the error")
+    type: Optional[StrictStr] = Field(default=None, description="Type of the error")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = [
-        "id",
-        "context",
-        "object",
-        "createdAt",
-        "details",
-        "createdBy",
-        "event",
-        "category",
-    ]
+    __properties: ClassVar[List[str]] = ["code", "message", "status", "type"]
 
     model_config = {
         "populate_by_name": True,
@@ -71,7 +52,7 @@ class AuditEvent(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of AuditEvent from a JSON string"""
+        """Create an instance of UpdateFrameItem409Response from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -96,15 +77,6 @@ class AuditEvent(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of context
-        if self.context:
-            _dict["context"] = self.context.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of object
-        if self.object:
-            _dict["object"] = self.object.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of created_by
-        if self.created_by:
-            _dict["createdBy"] = self.created_by.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -114,7 +86,7 @@ class AuditEvent(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of AuditEvent from a dict"""
+        """Create an instance of UpdateFrameItem409Response from a dict"""
         if obj is None:
             return None
 
@@ -123,14 +95,10 @@ class AuditEvent(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "id": obj.get("id"),
-                "context": AuditContext.from_dict(obj["context"]) if obj.get("context") is not None else None,
-                "object": AuditObject.from_dict(obj["object"]) if obj.get("object") is not None else None,
-                "createdAt": obj.get("createdAt"),
-                "details": obj.get("details"),
-                "createdBy": AuditCreatedBy.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-                "event": obj.get("event"),
-                "category": obj.get("category"),
+                "code": obj.get("code"),
+                "message": obj.get("message"),
+                "status": obj.get("status"),
+                "type": obj.get("type"),
             }
         )
         # store additional fields in additional_properties

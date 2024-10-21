@@ -20,15 +20,9 @@ from miro_api.models.app_card_create_request import AppCardCreateRequest
 from miro_api.models.app_card_data import AppCardData
 from miro_api.models.app_card_data_changes import AppCardDataChanges
 from miro_api.models.app_card_data_response import AppCardDataResponse
-from miro_api.models.app_card_data_response_platformcreateitemsinbulkusingfilefromdevice import (
-    AppCardDataResponsePlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.app_card_item import AppCardItem
 from miro_api.models.app_card_style import AppCardStyle
 from miro_api.models.app_card_style_platformbulkcreateoperation import AppCardStylePlatformbulkcreateoperation
-from miro_api.models.app_card_style_platformcreateitemsinbulkusingfilefromdevice import (
-    AppCardStylePlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.app_card_update_request import AppCardUpdateRequest
 from miro_api.models.audit_context import AuditContext
 from miro_api.models.audit_created_by import AuditCreatedBy
@@ -39,7 +33,6 @@ from miro_api.models.audit_page import AuditPage
 from miro_api.models.audit_team import AuditTeam
 from miro_api.models.basic_error import BasicError
 from miro_api.models.basic_error_organizations_enterprise_plan import BasicErrorOrganizationsEnterprisePlan
-from miro_api.models.basic_error_teams_enterprise_plan import BasicErrorTeamsEnterprisePlan
 from miro_api.models.board import Board
 from miro_api.models.board_changes import BoardChanges
 from miro_api.models.board_content_log_data import BoardContentLogData
@@ -74,15 +67,9 @@ from miro_api.models.caption import Caption
 from miro_api.models.card_create_request import CardCreateRequest
 from miro_api.models.card_data import CardData
 from miro_api.models.card_data_platformbulkcreateoperation import CardDataPlatformbulkcreateoperation
-from miro_api.models.card_data_platformcreateitemsinbulkusingfilefromdevice import (
-    CardDataPlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.card_item import CardItem
 from miro_api.models.card_style import CardStyle
 from miro_api.models.card_style_platformbulkcreateoperation import CardStylePlatformbulkcreateoperation
-from miro_api.models.card_style_platformcreateitemsinbulkusingfilefromdevice import (
-    CardStylePlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.card_update_request import CardUpdateRequest
 from miro_api.models.connector_changes_data import ConnectorChangesData
 from miro_api.models.connector_creation_data import ConnectorCreationData
@@ -95,6 +82,7 @@ from miro_api.models.create_board_subscription_request import CreateBoardSubscri
 from miro_api.models.create_document_item_using_file_from_device_request_data import (
     CreateDocumentItemUsingFileFromDeviceRequestData,
 )
+from miro_api.models.create_frame_item400_response import CreateFrameItem400Response
 from miro_api.models.create_project_request import CreateProjectRequest
 from miro_api.models.create_team_request import CreateTeamRequest
 from miro_api.models.created_by import CreatedBy
@@ -109,9 +97,6 @@ from miro_api.models.created_by_platformgroups import CreatedByPlatformgroups
 from miro_api.models.custom_field import CustomField
 from miro_api.models.custom_field_platform_tags import CustomFieldPlatformTags
 from miro_api.models.custom_field_platformbulkcreateoperation import CustomFieldPlatformbulkcreateoperation
-from miro_api.models.custom_field_platformcreateitemsinbulkusingfilefromdevice import (
-    CustomFieldPlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.data_classification_label import DataClassificationLabel
 from miro_api.models.data_classification_label_id import DataClassificationLabelId
 from miro_api.models.data_classification_organization_settings import DataClassificationOrganizationSettings
@@ -131,9 +116,6 @@ from miro_api.models.document_url_data_platformbulkcreateoperation import Docume
 from miro_api.models.embed_create_request import EmbedCreateRequest
 from miro_api.models.embed_data import EmbedData
 from miro_api.models.embed_data_response import EmbedDataResponse
-from miro_api.models.embed_data_response_platformcreateitemsinbulkusingfilefromdevice import (
-    EmbedDataResponsePlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.embed_item import EmbedItem
 from miro_api.models.embed_update_request import EmbedUpdateRequest
 from miro_api.models.embed_url_data import EmbedUrlData
@@ -181,7 +163,6 @@ from miro_api.models.get_all_groups404_response import GetAllGroups404Response
 from miro_api.models.get_all_groups429_response import GetAllGroups429Response
 from miro_api.models.get_board_item_content_logs_response import GetBoardItemContentLogsResponse
 from miro_api.models.get_board_user_info_last_opened_by import GetBoardUserInfoLastOpenedBy
-from miro_api.models.get_boards400_response import GetBoards400Response
 from miro_api.models.get_items_by_group_id200_response import GetItemsByGroupId200Response
 from miro_api.models.get_items_by_group_id200_response_data import GetItemsByGroupId200ResponseData
 from miro_api.models.get_metrics200_response_inner import GetMetrics200ResponseInner
@@ -204,10 +185,6 @@ from miro_api.models.image_item_platform_file_upload import ImageItemPlatformFil
 from miro_api.models.image_update_request import ImageUpdateRequest
 from miro_api.models.image_url_data import ImageUrlData
 from miro_api.models.image_url_data_changes import ImageUrlDataChanges
-from miro_api.models.image_url_data_changes_platformbulkcreateoperation import (
-    ImageUrlDataChangesPlatformbulkcreateoperation,
-)
-from miro_api.models.image_url_data_platformbulkcreateoperation import ImageUrlDataPlatformbulkcreateoperation
 from miro_api.models.invitation_error import InvitationError
 from miro_api.models.invitation_result import InvitationResult
 from miro_api.models.item import Item
@@ -219,24 +196,13 @@ from miro_api.models.item_create import ItemCreate
 from miro_api.models.item_data import ItemData
 from miro_api.models.item_data_changes import ItemDataChanges
 from miro_api.models.item_data_create import ItemDataCreate
-from miro_api.models.item_data_platformcreateitemsinbulkusingfilefromdevice import (
-    ItemDataPlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.item_paged_response import ItemPagedResponse
 from miro_api.models.item_paged_response_platform_tags import ItemPagedResponsePlatformTags
-from miro_api.models.item_platformcreateitemsinbulkusingfilefromdevice import (
-    ItemPlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.item_style import ItemStyle
-from miro_api.models.item_style_platformcreateitemsinbulkusingfilefromdevice import (
-    ItemStylePlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.item_type_change import ItemTypeChange
 from miro_api.models.items import Items
 from miro_api.models.items_page import ItemsPage
-from miro_api.models.items_platformcreateitemsinbulkusingfilefromdevice import (
-    ItemsPlatformcreateitemsinbulkusingfilefromdevice,
-)
+from miro_api.models.mind_map_node_geometry import MindMapNodeGeometry
 from miro_api.models.mindmap_create_request import MindmapCreateRequest
 from miro_api.models.mindmap_cursor_paged import MindmapCursorPaged
 from miro_api.models.mindmap_data import MindmapData
@@ -289,31 +255,19 @@ from miro_api.models.shape_data import ShapeData
 from miro_api.models.shape_data_for_create import ShapeDataForCreate
 from miro_api.models.shape_data_for_update import ShapeDataForUpdate
 from miro_api.models.shape_data_platform_tags import ShapeDataPlatformTags
-from miro_api.models.shape_data_platformcreateitemsinbulkusingfilefromdevice import (
-    ShapeDataPlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.shape_item import ShapeItem
 from miro_api.models.shape_style import ShapeStyle
 from miro_api.models.shape_style_for_create import ShapeStyleForCreate
 from miro_api.models.shape_style_for_update import ShapeStyleForUpdate
-from miro_api.models.shape_style_platformcreateitemsinbulkusingfilefromdevice import (
-    ShapeStylePlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.shape_update_request import ShapeUpdateRequest
 from miro_api.models.sharing_policy_settings import SharingPolicySettings
 from miro_api.models.sticky_note_create_request import StickyNoteCreateRequest
 from miro_api.models.sticky_note_data import StickyNoteData
 from miro_api.models.sticky_note_data_platform_tags import StickyNoteDataPlatformTags
 from miro_api.models.sticky_note_data_platformbulkcreateoperation import StickyNoteDataPlatformbulkcreateoperation
-from miro_api.models.sticky_note_data_platformcreateitemsinbulkusingfilefromdevice import (
-    StickyNoteDataPlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.sticky_note_item import StickyNoteItem
 from miro_api.models.sticky_note_style import StickyNoteStyle
 from miro_api.models.sticky_note_style_platformbulkcreateoperation import StickyNoteStylePlatformbulkcreateoperation
-from miro_api.models.sticky_note_style_platformcreateitemsinbulkusingfilefromdevice import (
-    StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.sticky_note_update_request import StickyNoteUpdateRequest
 from miro_api.models.subscription_data import SubscriptionData
 from miro_api.models.tag import Tag
@@ -346,14 +300,8 @@ from miro_api.models.text_create_request import TextCreateRequest
 from miro_api.models.text_data import TextData
 from miro_api.models.text_data_platform_tags import TextDataPlatformTags
 from miro_api.models.text_data_platformbulkcreateoperation import TextDataPlatformbulkcreateoperation
-from miro_api.models.text_data_platformcreateitemsinbulkusingfilefromdevice import (
-    TextDataPlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.text_item import TextItem
 from miro_api.models.text_style import TextStyle
-from miro_api.models.text_style_platformcreateitemsinbulkusingfilefromdevice import (
-    TextStylePlatformcreateitemsinbulkusingfilefromdevice,
-)
 from miro_api.models.text_update_request import TextUpdateRequest
 from miro_api.models.token_information import TokenInformation
 from miro_api.models.un_group400_response import UnGroup400Response
@@ -365,6 +313,7 @@ from miro_api.models.update_boards_data_classification_label import UpdateBoards
 from miro_api.models.update_boards_data_classification_label_request import UpdateBoardsDataClassificationLabelRequest
 from miro_api.models.update_card_style import UpdateCardStyle
 from miro_api.models.update_connector_style import UpdateConnectorStyle
+from miro_api.models.update_frame_item409_response import UpdateFrameItem409Response
 from miro_api.models.update_frame_style import UpdateFrameStyle
 from miro_api.models.update_project_member_request import UpdateProjectMemberRequest
 from miro_api.models.update_project_request import UpdateProjectRequest

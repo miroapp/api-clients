@@ -4,11 +4,9 @@ export * from './appCardCreateRequest'
 export * from './appCardData'
 export * from './appCardDataChanges'
 export * from './appCardDataResponse'
-export * from './appCardDataResponsePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './appCardItem'
 export * from './appCardStyle'
 export * from './appCardStylePlatformbulkcreateoperation'
-export * from './appCardStylePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './appCardUpdateRequest'
 export * from './auditContext'
 export * from './auditCreatedBy'
@@ -19,7 +17,6 @@ export * from './auditPage'
 export * from './auditTeam'
 export * from './basicError'
 export * from './basicErrorOrganizationsEnterprisePlan'
-export * from './basicErrorTeamsEnterprisePlan'
 export * from './board'
 export * from './boardChanges'
 export * from './boardContentLogData'
@@ -54,11 +51,9 @@ export * from './caption'
 export * from './cardCreateRequest'
 export * from './cardData'
 export * from './cardDataPlatformbulkcreateoperation'
-export * from './cardDataPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './cardItem'
 export * from './cardStyle'
 export * from './cardStylePlatformbulkcreateoperation'
-export * from './cardStylePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './cardUpdateRequest'
 export * from './connectorChangesData'
 export * from './connectorCreationData'
@@ -69,6 +64,7 @@ export * from './copyBoardChanges'
 export * from './createBoardExportRequest'
 export * from './createBoardSubscriptionRequest'
 export * from './createDocumentItemUsingFileFromDeviceRequestData'
+export * from './createFrameItem400Response'
 export * from './createProjectRequest'
 export * from './createTeamRequest'
 export * from './createdBy'
@@ -81,7 +77,6 @@ export * from './createdByPlatformgroups'
 export * from './customField'
 export * from './customFieldPlatformTags'
 export * from './customFieldPlatformbulkcreateoperation'
-export * from './customFieldPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './dataClassificationLabel'
 export * from './dataClassificationLabelId'
 export * from './dataClassificationOrganizationSettings'
@@ -99,7 +94,6 @@ export * from './documentUrlDataPlatformbulkcreateoperation'
 export * from './embedCreateRequest'
 export * from './embedData'
 export * from './embedDataResponse'
-export * from './embedDataResponsePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './embedItem'
 export * from './embedUpdateRequest'
 export * from './embedUrlData'
@@ -144,7 +138,6 @@ export * from './getAllGroups404Response'
 export * from './getAllGroups429Response'
 export * from './getBoardItemContentLogsResponse'
 export * from './getBoardUserInfoLastOpenedBy'
-export * from './getBoards400Response'
 export * from './getItemsByGroupId200Response'
 export * from './getItemsByGroupId200ResponseData'
 export * from './getMetrics200ResponseInner'
@@ -165,8 +158,6 @@ export * from './imageItemPlatformFileUpload'
 export * from './imageUpdateRequest'
 export * from './imageUrlData'
 export * from './imageUrlDataChanges'
-export * from './imageUrlDataChangesPlatformbulkcreateoperation'
-export * from './imageUrlDataPlatformbulkcreateoperation'
 export * from './invitationError'
 export * from './invitationResult'
 export * from './item'
@@ -178,16 +169,13 @@ export * from './itemCreate'
 export * from './itemData'
 export * from './itemDataChanges'
 export * from './itemDataCreate'
-export * from './itemDataPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './itemPagedResponse'
 export * from './itemPagedResponsePlatformTags'
-export * from './itemPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './itemStyle'
-export * from './itemStylePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './itemTypeChange'
 export * from './items'
 export * from './itemsPage'
-export * from './itemsPlatformcreateitemsinbulkusingfilefromdevice'
+export * from './mindMapNodeGeometry'
 export * from './mindmapCreateRequest'
 export * from './mindmapCursorPaged'
 export * from './mindmapData'
@@ -237,23 +225,19 @@ export * from './shapeData'
 export * from './shapeDataForCreate'
 export * from './shapeDataForUpdate'
 export * from './shapeDataPlatformTags'
-export * from './shapeDataPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './shapeItem'
 export * from './shapeStyle'
 export * from './shapeStyleForCreate'
 export * from './shapeStyleForUpdate'
-export * from './shapeStylePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './shapeUpdateRequest'
 export * from './sharingPolicySettings'
 export * from './stickyNoteCreateRequest'
 export * from './stickyNoteData'
 export * from './stickyNoteDataPlatformTags'
 export * from './stickyNoteDataPlatformbulkcreateoperation'
-export * from './stickyNoteDataPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './stickyNoteItem'
 export * from './stickyNoteStyle'
 export * from './stickyNoteStylePlatformbulkcreateoperation'
-export * from './stickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './stickyNoteUpdateRequest'
 export * from './subscriptionData'
 export * from './tag'
@@ -286,10 +270,8 @@ export * from './textCreateRequest'
 export * from './textData'
 export * from './textDataPlatformTags'
 export * from './textDataPlatformbulkcreateoperation'
-export * from './textDataPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './textItem'
 export * from './textStyle'
-export * from './textStylePlatformcreateitemsinbulkusingfilefromdevice'
 export * from './textUpdateRequest'
 export * from './tokenInformation'
 export * from './unGroup400Response'
@@ -301,6 +283,7 @@ export * from './updateBoardsDataClassificationLabel'
 export * from './updateBoardsDataClassificationLabelRequest'
 export * from './updateCardStyle'
 export * from './updateConnectorStyle'
+export * from './updateFrameItem409Response'
 export * from './updateFrameStyle'
 export * from './updateProjectMemberRequest'
 export * from './updateProjectRequest'
@@ -338,11 +321,9 @@ import {AppCardCreateRequest} from './appCardCreateRequest'
 import {AppCardData} from './appCardData'
 import {AppCardDataChanges} from './appCardDataChanges'
 import {AppCardDataResponse} from './appCardDataResponse'
-import {AppCardDataResponsePlatformcreateitemsinbulkusingfilefromdevice} from './appCardDataResponsePlatformcreateitemsinbulkusingfilefromdevice'
 import {AppCardItem} from './appCardItem'
 import {AppCardStyle} from './appCardStyle'
 import {AppCardStylePlatformbulkcreateoperation} from './appCardStylePlatformbulkcreateoperation'
-import {AppCardStylePlatformcreateitemsinbulkusingfilefromdevice} from './appCardStylePlatformcreateitemsinbulkusingfilefromdevice'
 import {AppCardUpdateRequest} from './appCardUpdateRequest'
 import {AuditContext} from './auditContext'
 import {AuditCreatedBy} from './auditCreatedBy'
@@ -353,7 +334,6 @@ import {AuditPage} from './auditPage'
 import {AuditTeam} from './auditTeam'
 import {BasicError} from './basicError'
 import {BasicErrorOrganizationsEnterprisePlan} from './basicErrorOrganizationsEnterprisePlan'
-import {BasicErrorTeamsEnterprisePlan} from './basicErrorTeamsEnterprisePlan'
 import {Board} from './board'
 import {BoardChanges} from './boardChanges'
 import {BoardContentLogData} from './boardContentLogData'
@@ -388,11 +368,9 @@ import {Caption} from './caption'
 import {CardCreateRequest} from './cardCreateRequest'
 import {CardData} from './cardData'
 import {CardDataPlatformbulkcreateoperation} from './cardDataPlatformbulkcreateoperation'
-import {CardDataPlatformcreateitemsinbulkusingfilefromdevice} from './cardDataPlatformcreateitemsinbulkusingfilefromdevice'
 import {CardItem} from './cardItem'
 import {CardStyle} from './cardStyle'
 import {CardStylePlatformbulkcreateoperation} from './cardStylePlatformbulkcreateoperation'
-import {CardStylePlatformcreateitemsinbulkusingfilefromdevice} from './cardStylePlatformcreateitemsinbulkusingfilefromdevice'
 import {CardUpdateRequest} from './cardUpdateRequest'
 import {ConnectorChangesData} from './connectorChangesData'
 import {ConnectorCreationData} from './connectorCreationData'
@@ -403,6 +381,7 @@ import {CopyBoardChanges} from './copyBoardChanges'
 import {CreateBoardExportRequest} from './createBoardExportRequest'
 import {CreateBoardSubscriptionRequest} from './createBoardSubscriptionRequest'
 import {CreateDocumentItemUsingFileFromDeviceRequestData} from './createDocumentItemUsingFileFromDeviceRequestData'
+import {CreateFrameItem400Response} from './createFrameItem400Response'
 import {CreateProjectRequest} from './createProjectRequest'
 import {CreateTeamRequest} from './createTeamRequest'
 import {CreatedBy} from './createdBy'
@@ -415,7 +394,6 @@ import {CreatedByPlatformgroups} from './createdByPlatformgroups'
 import {CustomField} from './customField'
 import {CustomFieldPlatformTags} from './customFieldPlatformTags'
 import {CustomFieldPlatformbulkcreateoperation} from './customFieldPlatformbulkcreateoperation'
-import {CustomFieldPlatformcreateitemsinbulkusingfilefromdevice} from './customFieldPlatformcreateitemsinbulkusingfilefromdevice'
 import {DataClassificationLabel} from './dataClassificationLabel'
 import {DataClassificationLabelId} from './dataClassificationLabelId'
 import {DataClassificationOrganizationSettings} from './dataClassificationOrganizationSettings'
@@ -433,7 +411,6 @@ import {DocumentUrlDataPlatformbulkcreateoperation} from './documentUrlDataPlatf
 import {EmbedCreateRequest} from './embedCreateRequest'
 import {EmbedData} from './embedData'
 import {EmbedDataResponse} from './embedDataResponse'
-import {EmbedDataResponsePlatformcreateitemsinbulkusingfilefromdevice} from './embedDataResponsePlatformcreateitemsinbulkusingfilefromdevice'
 import {EmbedItem} from './embedItem'
 import {EmbedUpdateRequest} from './embedUpdateRequest'
 import {EmbedUrlData} from './embedUrlData'
@@ -478,7 +455,6 @@ import {GetAllGroups404Response} from './getAllGroups404Response'
 import {GetAllGroups429Response} from './getAllGroups429Response'
 import {GetBoardItemContentLogsResponse} from './getBoardItemContentLogsResponse'
 import {GetBoardUserInfoLastOpenedBy} from './getBoardUserInfoLastOpenedBy'
-import {GetBoards400Response} from './getBoards400Response'
 import {GetItemsByGroupId200Response} from './getItemsByGroupId200Response'
 import {GetItemsByGroupId200ResponseData} from './getItemsByGroupId200ResponseData'
 import {GetMetrics200ResponseInner} from './getMetrics200ResponseInner'
@@ -499,8 +475,6 @@ import {ImageItemPlatformFileUpload} from './imageItemPlatformFileUpload'
 import {ImageUpdateRequest} from './imageUpdateRequest'
 import {ImageUrlData} from './imageUrlData'
 import {ImageUrlDataChanges} from './imageUrlDataChanges'
-import {ImageUrlDataChangesPlatformbulkcreateoperation} from './imageUrlDataChangesPlatformbulkcreateoperation'
-import {ImageUrlDataPlatformbulkcreateoperation} from './imageUrlDataPlatformbulkcreateoperation'
 import {InvitationError} from './invitationError'
 import {InvitationResult} from './invitationResult'
 import {Item} from './item'
@@ -512,16 +486,13 @@ import {ItemCreate} from './itemCreate'
 import {ItemData} from './itemData'
 import {ItemDataChanges} from './itemDataChanges'
 import {ItemDataCreate} from './itemDataCreate'
-import {ItemDataPlatformcreateitemsinbulkusingfilefromdevice} from './itemDataPlatformcreateitemsinbulkusingfilefromdevice'
 import {ItemPagedResponse} from './itemPagedResponse'
 import {ItemPagedResponsePlatformTags} from './itemPagedResponsePlatformTags'
-import {ItemPlatformcreateitemsinbulkusingfilefromdevice} from './itemPlatformcreateitemsinbulkusingfilefromdevice'
 import {ItemStyle} from './itemStyle'
-import {ItemStylePlatformcreateitemsinbulkusingfilefromdevice} from './itemStylePlatformcreateitemsinbulkusingfilefromdevice'
 import {ItemTypeChange} from './itemTypeChange'
 import {Items} from './items'
 import {ItemsPage} from './itemsPage'
-import {ItemsPlatformcreateitemsinbulkusingfilefromdevice} from './itemsPlatformcreateitemsinbulkusingfilefromdevice'
+import {MindMapNodeGeometry} from './mindMapNodeGeometry'
 import {MindmapCreateRequest} from './mindmapCreateRequest'
 import {MindmapCursorPaged} from './mindmapCursorPaged'
 import {MindmapData} from './mindmapData'
@@ -571,23 +542,19 @@ import {ShapeData} from './shapeData'
 import {ShapeDataForCreate} from './shapeDataForCreate'
 import {ShapeDataForUpdate} from './shapeDataForUpdate'
 import {ShapeDataPlatformTags} from './shapeDataPlatformTags'
-import {ShapeDataPlatformcreateitemsinbulkusingfilefromdevice} from './shapeDataPlatformcreateitemsinbulkusingfilefromdevice'
 import {ShapeItem} from './shapeItem'
 import {ShapeStyle} from './shapeStyle'
 import {ShapeStyleForCreate} from './shapeStyleForCreate'
 import {ShapeStyleForUpdate} from './shapeStyleForUpdate'
-import {ShapeStylePlatformcreateitemsinbulkusingfilefromdevice} from './shapeStylePlatformcreateitemsinbulkusingfilefromdevice'
 import {ShapeUpdateRequest} from './shapeUpdateRequest'
 import {SharingPolicySettings} from './sharingPolicySettings'
 import {StickyNoteCreateRequest} from './stickyNoteCreateRequest'
 import {StickyNoteData} from './stickyNoteData'
 import {StickyNoteDataPlatformTags} from './stickyNoteDataPlatformTags'
 import {StickyNoteDataPlatformbulkcreateoperation} from './stickyNoteDataPlatformbulkcreateoperation'
-import {StickyNoteDataPlatformcreateitemsinbulkusingfilefromdevice} from './stickyNoteDataPlatformcreateitemsinbulkusingfilefromdevice'
 import {StickyNoteItem} from './stickyNoteItem'
 import {StickyNoteStyle} from './stickyNoteStyle'
 import {StickyNoteStylePlatformbulkcreateoperation} from './stickyNoteStylePlatformbulkcreateoperation'
-import {StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice} from './stickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice'
 import {StickyNoteUpdateRequest} from './stickyNoteUpdateRequest'
 import {SubscriptionData} from './subscriptionData'
 import {Tag} from './tag'
@@ -620,10 +587,8 @@ import {TextCreateRequest} from './textCreateRequest'
 import {TextData} from './textData'
 import {TextDataPlatformTags} from './textDataPlatformTags'
 import {TextDataPlatformbulkcreateoperation} from './textDataPlatformbulkcreateoperation'
-import {TextDataPlatformcreateitemsinbulkusingfilefromdevice} from './textDataPlatformcreateitemsinbulkusingfilefromdevice'
 import {TextItem} from './textItem'
 import {TextStyle} from './textStyle'
-import {TextStylePlatformcreateitemsinbulkusingfilefromdevice} from './textStylePlatformcreateitemsinbulkusingfilefromdevice'
 import {TextUpdateRequest} from './textUpdateRequest'
 import {TokenInformation} from './tokenInformation'
 import {UnGroup400Response} from './unGroup400Response'
@@ -635,6 +600,7 @@ import {UpdateBoardsDataClassificationLabel} from './updateBoardsDataClassificat
 import {UpdateBoardsDataClassificationLabelRequest} from './updateBoardsDataClassificationLabelRequest'
 import {UpdateCardStyle} from './updateCardStyle'
 import {UpdateConnectorStyle} from './updateConnectorStyle'
+import {UpdateFrameItem409Response} from './updateFrameItem409Response'
 import {UpdateFrameStyle} from './updateFrameStyle'
 import {UpdateProjectMemberRequest} from './updateProjectMemberRequest'
 import {UpdateProjectRequest} from './updateProjectRequest'
@@ -663,8 +629,6 @@ let enumsMap: {[index: string]: any} = {
   'AppCardData.StatusEnum': AppCardData.StatusEnum,
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
   'AppCardDataResponse.StatusEnum': AppCardDataResponse.StatusEnum,
-  'AppCardDataResponsePlatformcreateitemsinbulkusingfilefromdevice.StatusEnum':
-    AppCardDataResponsePlatformcreateitemsinbulkusingfilefromdevice.StatusEnum,
   'AuditCreatedBy.TypeEnum': AuditCreatedBy.TypeEnum,
   'BoardMember.RoleEnum': BoardMember.RoleEnum,
   'BoardMemberChanges.RoleEnum': BoardMemberChanges.RoleEnum,
@@ -695,12 +659,8 @@ let enumsMap: {[index: string]: any} = {
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
   'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
   'CustomFieldPlatformbulkcreateoperation.IconShapeEnum': CustomFieldPlatformbulkcreateoperation.IconShapeEnum,
-  'CustomFieldPlatformcreateitemsinbulkusingfilefromdevice.IconShapeEnum':
-    CustomFieldPlatformcreateitemsinbulkusingfilefromdevice.IconShapeEnum,
   'EmbedData.ModeEnum': EmbedData.ModeEnum,
   'EmbedDataResponse.ModeEnum': EmbedDataResponse.ModeEnum,
-  'EmbedDataResponsePlatformcreateitemsinbulkusingfilefromdevice.ModeEnum':
-    EmbedDataResponsePlatformcreateitemsinbulkusingfilefromdevice.ModeEnum,
   'EmbedUrlData.ModeEnum': EmbedUrlData.ModeEnum,
   'EmbedUrlDataChanges.ModeEnum': EmbedUrlDataChanges.ModeEnum,
   'EmbedUrlDataPlatformbulkcreateoperation.ModeEnum': EmbedUrlDataPlatformbulkcreateoperation.ModeEnum,
@@ -713,31 +673,14 @@ let enumsMap: {[index: string]: any} = {
   'GenericSubscription.StatusEnum': GenericSubscription.StatusEnum,
   'ItemConnectionChangesData.SnapToEnum': ItemConnectionChangesData.SnapToEnum,
   'ItemConnectionCreationData.SnapToEnum': ItemConnectionCreationData.SnapToEnum,
-  'ItemData.StatusEnum': ItemData.StatusEnum,
-  'ItemData.ModeEnum': ItemData.ModeEnum,
-  'ItemData.ShapeEnum': ItemData.ShapeEnum,
   'ItemDataChanges.StatusEnum': ItemDataChanges.StatusEnum,
   'ItemDataCreate.StatusEnum': ItemDataCreate.StatusEnum,
   'ItemDataCreate.ModeEnum': ItemDataCreate.ModeEnum,
   'ItemDataCreate.ShapeEnum': ItemDataCreate.ShapeEnum,
-  'ItemDataPlatformcreateitemsinbulkusingfilefromdevice.StatusEnum':
-    ItemDataPlatformcreateitemsinbulkusingfilefromdevice.StatusEnum,
-  'ItemDataPlatformcreateitemsinbulkusingfilefromdevice.ModeEnum':
-    ItemDataPlatformcreateitemsinbulkusingfilefromdevice.ModeEnum,
-  'ItemDataPlatformcreateitemsinbulkusingfilefromdevice.ShapeEnum':
-    ItemDataPlatformcreateitemsinbulkusingfilefromdevice.ShapeEnum,
   'ItemStyle.BorderStyleEnum': ItemStyle.BorderStyleEnum,
   'ItemStyle.FontFamilyEnum': ItemStyle.FontFamilyEnum,
   'ItemStyle.TextAlignEnum': ItemStyle.TextAlignEnum,
   'ItemStyle.TextAlignVerticalEnum': ItemStyle.TextAlignVerticalEnum,
-  'ItemStylePlatformcreateitemsinbulkusingfilefromdevice.BorderStyleEnum':
-    ItemStylePlatformcreateitemsinbulkusingfilefromdevice.BorderStyleEnum,
-  'ItemStylePlatformcreateitemsinbulkusingfilefromdevice.FontFamilyEnum':
-    ItemStylePlatformcreateitemsinbulkusingfilefromdevice.FontFamilyEnum,
-  'ItemStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum':
-    ItemStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum,
-  'ItemStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignVerticalEnum':
-    ItemStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignVerticalEnum,
   ItemTypeChange: ItemTypeChange,
   'MindmapData.DirectionEnum': MindmapData.DirectionEnum,
   'MindmapStyle.ShapeEnum': MindmapStyle.ShapeEnum,
@@ -750,8 +693,6 @@ let enumsMap: {[index: string]: any} = {
   ProjectRoleToAdd: ProjectRoleToAdd,
   'ShapeData.ShapeEnum': ShapeData.ShapeEnum,
   'ShapeDataPlatformTags.ShapeEnum': ShapeDataPlatformTags.ShapeEnum,
-  'ShapeDataPlatformcreateitemsinbulkusingfilefromdevice.ShapeEnum':
-    ShapeDataPlatformcreateitemsinbulkusingfilefromdevice.ShapeEnum,
   'ShapeStyle.BorderStyleEnum': ShapeStyle.BorderStyleEnum,
   'ShapeStyle.FontFamilyEnum': ShapeStyle.FontFamilyEnum,
   'ShapeStyle.TextAlignEnum': ShapeStyle.TextAlignEnum,
@@ -764,19 +705,9 @@ let enumsMap: {[index: string]: any} = {
   'ShapeStyleForUpdate.FontFamilyEnum': ShapeStyleForUpdate.FontFamilyEnum,
   'ShapeStyleForUpdate.TextAlignEnum': ShapeStyleForUpdate.TextAlignEnum,
   'ShapeStyleForUpdate.TextAlignVerticalEnum': ShapeStyleForUpdate.TextAlignVerticalEnum,
-  'ShapeStylePlatformcreateitemsinbulkusingfilefromdevice.BorderStyleEnum':
-    ShapeStylePlatformcreateitemsinbulkusingfilefromdevice.BorderStyleEnum,
-  'ShapeStylePlatformcreateitemsinbulkusingfilefromdevice.FontFamilyEnum':
-    ShapeStylePlatformcreateitemsinbulkusingfilefromdevice.FontFamilyEnum,
-  'ShapeStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum':
-    ShapeStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum,
-  'ShapeStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignVerticalEnum':
-    ShapeStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignVerticalEnum,
   'StickyNoteData.ShapeEnum': StickyNoteData.ShapeEnum,
   'StickyNoteDataPlatformTags.ShapeEnum': StickyNoteDataPlatformTags.ShapeEnum,
   'StickyNoteDataPlatformbulkcreateoperation.ShapeEnum': StickyNoteDataPlatformbulkcreateoperation.ShapeEnum,
-  'StickyNoteDataPlatformcreateitemsinbulkusingfilefromdevice.ShapeEnum':
-    StickyNoteDataPlatformcreateitemsinbulkusingfilefromdevice.ShapeEnum,
   'StickyNoteStyle.FillColorEnum': StickyNoteStyle.FillColorEnum,
   'StickyNoteStyle.TextAlignEnum': StickyNoteStyle.TextAlignEnum,
   'StickyNoteStyle.TextAlignVerticalEnum': StickyNoteStyle.TextAlignVerticalEnum,
@@ -784,12 +715,6 @@ let enumsMap: {[index: string]: any} = {
   'StickyNoteStylePlatformbulkcreateoperation.TextAlignEnum': StickyNoteStylePlatformbulkcreateoperation.TextAlignEnum,
   'StickyNoteStylePlatformbulkcreateoperation.TextAlignVerticalEnum':
     StickyNoteStylePlatformbulkcreateoperation.TextAlignVerticalEnum,
-  'StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice.FillColorEnum':
-    StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice.FillColorEnum,
-  'StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum':
-    StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum,
-  'StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignVerticalEnum':
-    StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignVerticalEnum,
   'Tag.FillColorEnum': Tag.FillColorEnum,
   'TagCreateRequest.FillColorEnum': TagCreateRequest.FillColorEnum,
   'TagUpdateRequest.FillColorEnum': TagUpdateRequest.FillColorEnum,
@@ -841,10 +766,6 @@ let enumsMap: {[index: string]: any} = {
     TeamSharingPolicySettingsChanges.SharingViaPublicLinkEnum,
   'TextStyle.FontFamilyEnum': TextStyle.FontFamilyEnum,
   'TextStyle.TextAlignEnum': TextStyle.TextAlignEnum,
-  'TextStylePlatformcreateitemsinbulkusingfilefromdevice.FontFamilyEnum':
-    TextStylePlatformcreateitemsinbulkusingfilefromdevice.FontFamilyEnum,
-  'TextStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum':
-    TextStylePlatformcreateitemsinbulkusingfilefromdevice.TextAlignEnum,
   'UpdateBoardSubscriptionRequest.StatusEnum': UpdateBoardSubscriptionRequest.StatusEnum,
   'UpdateConnectorStyle.EndStrokeCapEnum': UpdateConnectorStyle.EndStrokeCapEnum,
   'UpdateConnectorStyle.StartStrokeCapEnum': UpdateConnectorStyle.StartStrokeCapEnum,
@@ -873,12 +794,9 @@ let typeMap: {[index: string]: any} = {
   AppCardData: AppCardData,
   AppCardDataChanges: AppCardDataChanges,
   AppCardDataResponse: AppCardDataResponse,
-  AppCardDataResponsePlatformcreateitemsinbulkusingfilefromdevice:
-    AppCardDataResponsePlatformcreateitemsinbulkusingfilefromdevice,
   AppCardItem: AppCardItem,
   AppCardStyle: AppCardStyle,
   AppCardStylePlatformbulkcreateoperation: AppCardStylePlatformbulkcreateoperation,
-  AppCardStylePlatformcreateitemsinbulkusingfilefromdevice: AppCardStylePlatformcreateitemsinbulkusingfilefromdevice,
   AppCardUpdateRequest: AppCardUpdateRequest,
   AuditContext: AuditContext,
   AuditCreatedBy: AuditCreatedBy,
@@ -889,7 +807,6 @@ let typeMap: {[index: string]: any} = {
   AuditTeam: AuditTeam,
   BasicError: BasicError,
   BasicErrorOrganizationsEnterprisePlan: BasicErrorOrganizationsEnterprisePlan,
-  BasicErrorTeamsEnterprisePlan: BasicErrorTeamsEnterprisePlan,
   Board: Board,
   BoardChanges: BoardChanges,
   BoardContentLogData: BoardContentLogData,
@@ -924,11 +841,9 @@ let typeMap: {[index: string]: any} = {
   CardCreateRequest: CardCreateRequest,
   CardData: CardData,
   CardDataPlatformbulkcreateoperation: CardDataPlatformbulkcreateoperation,
-  CardDataPlatformcreateitemsinbulkusingfilefromdevice: CardDataPlatformcreateitemsinbulkusingfilefromdevice,
   CardItem: CardItem,
   CardStyle: CardStyle,
   CardStylePlatformbulkcreateoperation: CardStylePlatformbulkcreateoperation,
-  CardStylePlatformcreateitemsinbulkusingfilefromdevice: CardStylePlatformcreateitemsinbulkusingfilefromdevice,
   CardUpdateRequest: CardUpdateRequest,
   ConnectorChangesData: ConnectorChangesData,
   ConnectorCreationData: ConnectorCreationData,
@@ -939,6 +854,7 @@ let typeMap: {[index: string]: any} = {
   CreateBoardExportRequest: CreateBoardExportRequest,
   CreateBoardSubscriptionRequest: CreateBoardSubscriptionRequest,
   CreateDocumentItemUsingFileFromDeviceRequestData: CreateDocumentItemUsingFileFromDeviceRequestData,
+  CreateFrameItem400Response: CreateFrameItem400Response,
   CreateProjectRequest: CreateProjectRequest,
   CreateTeamRequest: CreateTeamRequest,
   CreatedBy: CreatedBy,
@@ -951,7 +867,6 @@ let typeMap: {[index: string]: any} = {
   CustomField: CustomField,
   CustomFieldPlatformTags: CustomFieldPlatformTags,
   CustomFieldPlatformbulkcreateoperation: CustomFieldPlatformbulkcreateoperation,
-  CustomFieldPlatformcreateitemsinbulkusingfilefromdevice: CustomFieldPlatformcreateitemsinbulkusingfilefromdevice,
   DataClassificationLabel: DataClassificationLabel,
   DataClassificationLabelId: DataClassificationLabelId,
   DataClassificationOrganizationSettings: DataClassificationOrganizationSettings,
@@ -970,8 +885,6 @@ let typeMap: {[index: string]: any} = {
   EmbedCreateRequest: EmbedCreateRequest,
   EmbedData: EmbedData,
   EmbedDataResponse: EmbedDataResponse,
-  EmbedDataResponsePlatformcreateitemsinbulkusingfilefromdevice:
-    EmbedDataResponsePlatformcreateitemsinbulkusingfilefromdevice,
   EmbedItem: EmbedItem,
   EmbedUpdateRequest: EmbedUpdateRequest,
   EmbedUrlData: EmbedUrlData,
@@ -1016,7 +929,6 @@ let typeMap: {[index: string]: any} = {
   GetAllGroups429Response: GetAllGroups429Response,
   GetBoardItemContentLogsResponse: GetBoardItemContentLogsResponse,
   GetBoardUserInfoLastOpenedBy: GetBoardUserInfoLastOpenedBy,
-  GetBoards400Response: GetBoards400Response,
   GetItemsByGroupId200Response: GetItemsByGroupId200Response,
   GetItemsByGroupId200ResponseData: GetItemsByGroupId200ResponseData,
   GetMetrics200ResponseInner: GetMetrics200ResponseInner,
@@ -1038,8 +950,6 @@ let typeMap: {[index: string]: any} = {
   ImageUpdateRequest: ImageUpdateRequest,
   ImageUrlData: ImageUrlData,
   ImageUrlDataChanges: ImageUrlDataChanges,
-  ImageUrlDataChangesPlatformbulkcreateoperation: ImageUrlDataChangesPlatformbulkcreateoperation,
-  ImageUrlDataPlatformbulkcreateoperation: ImageUrlDataPlatformbulkcreateoperation,
   InvitationError: InvitationError,
   InvitationResult: InvitationResult,
   Item: Item,
@@ -1051,15 +961,12 @@ let typeMap: {[index: string]: any} = {
   ItemData: ItemData,
   ItemDataChanges: ItemDataChanges,
   ItemDataCreate: ItemDataCreate,
-  ItemDataPlatformcreateitemsinbulkusingfilefromdevice: ItemDataPlatformcreateitemsinbulkusingfilefromdevice,
   ItemPagedResponse: ItemPagedResponse,
   ItemPagedResponsePlatformTags: ItemPagedResponsePlatformTags,
-  ItemPlatformcreateitemsinbulkusingfilefromdevice: ItemPlatformcreateitemsinbulkusingfilefromdevice,
   ItemStyle: ItemStyle,
-  ItemStylePlatformcreateitemsinbulkusingfilefromdevice: ItemStylePlatformcreateitemsinbulkusingfilefromdevice,
   Items: Items,
   ItemsPage: ItemsPage,
-  ItemsPlatformcreateitemsinbulkusingfilefromdevice: ItemsPlatformcreateitemsinbulkusingfilefromdevice,
+  MindMapNodeGeometry: MindMapNodeGeometry,
   MindmapCreateRequest: MindmapCreateRequest,
   MindmapCursorPaged: MindmapCursorPaged,
   MindmapData: MindmapData,
@@ -1108,25 +1015,19 @@ let typeMap: {[index: string]: any} = {
   ShapeDataForCreate: ShapeDataForCreate,
   ShapeDataForUpdate: ShapeDataForUpdate,
   ShapeDataPlatformTags: ShapeDataPlatformTags,
-  ShapeDataPlatformcreateitemsinbulkusingfilefromdevice: ShapeDataPlatformcreateitemsinbulkusingfilefromdevice,
   ShapeItem: ShapeItem,
   ShapeStyle: ShapeStyle,
   ShapeStyleForCreate: ShapeStyleForCreate,
   ShapeStyleForUpdate: ShapeStyleForUpdate,
-  ShapeStylePlatformcreateitemsinbulkusingfilefromdevice: ShapeStylePlatformcreateitemsinbulkusingfilefromdevice,
   ShapeUpdateRequest: ShapeUpdateRequest,
   SharingPolicySettings: SharingPolicySettings,
   StickyNoteCreateRequest: StickyNoteCreateRequest,
   StickyNoteData: StickyNoteData,
   StickyNoteDataPlatformTags: StickyNoteDataPlatformTags,
   StickyNoteDataPlatformbulkcreateoperation: StickyNoteDataPlatformbulkcreateoperation,
-  StickyNoteDataPlatformcreateitemsinbulkusingfilefromdevice:
-    StickyNoteDataPlatformcreateitemsinbulkusingfilefromdevice,
   StickyNoteItem: StickyNoteItem,
   StickyNoteStyle: StickyNoteStyle,
   StickyNoteStylePlatformbulkcreateoperation: StickyNoteStylePlatformbulkcreateoperation,
-  StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice:
-    StickyNoteStylePlatformcreateitemsinbulkusingfilefromdevice,
   StickyNoteUpdateRequest: StickyNoteUpdateRequest,
   SubscriptionData: SubscriptionData,
   Tag: Tag,
@@ -1158,10 +1059,8 @@ let typeMap: {[index: string]: any} = {
   TextData: TextData,
   TextDataPlatformTags: TextDataPlatformTags,
   TextDataPlatformbulkcreateoperation: TextDataPlatformbulkcreateoperation,
-  TextDataPlatformcreateitemsinbulkusingfilefromdevice: TextDataPlatformcreateitemsinbulkusingfilefromdevice,
   TextItem: TextItem,
   TextStyle: TextStyle,
-  TextStylePlatformcreateitemsinbulkusingfilefromdevice: TextStylePlatformcreateitemsinbulkusingfilefromdevice,
   TextUpdateRequest: TextUpdateRequest,
   TokenInformation: TokenInformation,
   UnGroup400Response: UnGroup400Response,
@@ -1173,6 +1072,7 @@ let typeMap: {[index: string]: any} = {
   UpdateBoardsDataClassificationLabelRequest: UpdateBoardsDataClassificationLabelRequest,
   UpdateCardStyle: UpdateCardStyle,
   UpdateConnectorStyle: UpdateConnectorStyle,
+  UpdateFrameItem409Response: UpdateFrameItem409Response,
   UpdateFrameStyle: UpdateFrameStyle,
   UpdateProjectMemberRequest: UpdateProjectMemberRequest,
   UpdateProjectRequest: UpdateProjectRequest,

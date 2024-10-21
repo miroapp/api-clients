@@ -32,11 +32,16 @@ class UploadFileFromDeviceData(BaseModel):
     """  # noqa: E501
 
     title: Optional[StrictStr] = Field(default=None, description="Title for the document.")
+    alt_text: Optional[StrictStr] = Field(
+        default=None,
+        description="A description (alt-text) to help people understand what is depicted here.",
+        alias="altText",
+    )
     position: Optional[PositionChange] = None
     geometry: Optional[FixedRatioGeometry] = None
     parent: Optional[Parent] = None
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["title", "position", "geometry", "parent"]
+    __properties: ClassVar[List[str]] = ["title", "altText", "position", "geometry", "parent"]
 
     model_config = {
         "populate_by_name": True,
@@ -108,6 +113,7 @@ class UploadFileFromDeviceData(BaseModel):
         _obj = cls.model_validate(
             {
                 "title": obj.get("title"),
+                "altText": obj.get("altText"),
                 "position": PositionChange.from_dict(obj["position"]) if obj.get("position") is not None else None,
                 "geometry": FixedRatioGeometry.from_dict(obj["geometry"]) if obj.get("geometry") is not None else None,
                 "parent": Parent.from_dict(obj["parent"]) if obj.get("parent") is not None else None,

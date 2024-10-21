@@ -12,13 +12,25 @@
 
 /**
  * @internal
- * Contains information about the style of a card item, such as the card theme.
+ * Test error obj
  */
-export class CardStylePlatformcreateitemsinbulkusingfilefromdevice {
+export class UpdateFrameItem409Response {
   /**
-   * Hex value of the border color of the card. Default: `#2d9bf0`.
+   * Code of the error
    */
-  'cardTheme'?: string
+  'code'?: string
+  /**
+   * Description of the error
+   */
+  'message'?: string
+  /**
+   * Status code of the error
+   */
+  'status'?: number
+  /**
+   * Type of the error
+   */
+  'type'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -26,14 +38,29 @@ export class CardStylePlatformcreateitemsinbulkusingfilefromdevice {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'cardTheme',
-      baseName: 'cardTheme',
+      name: 'code',
+      baseName: 'code',
+      type: 'string',
+    },
+    {
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
       type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return CardStylePlatformcreateitemsinbulkusingfilefromdevice.attributeTypeMap
+    return UpdateFrameItem409Response.attributeTypeMap
   }
 }
