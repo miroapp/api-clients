@@ -1,3 +1,7 @@
+## [2.2.2]
+
+- fixed `createdAfter` and `createdBefore` parameters format in `/v2/audit/logs`
+
 ## [2.2.1]
 
 - fixed `organization` property in `/v1/oauth-token` response is optional
