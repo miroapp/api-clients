@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,23,19
+/miroapp/api-clients/tree/main/packages/miro-api-python/example,20,16
+/miroapp/api-clients/tree/main/apps,8,4
+/miroapp/api-clients/tree/main/packages/miro-api,5,4
+/miroapp/api-clients/tree/main/apps/client-test-app,4,3
+/miroapp/api-clients/tree/main/apps/client-test-app/views,4,2
+/miroapp/api-clients/blob/main/README.md,3,3
+/miroapp/api-clients/tree/main/apps/fastify,3,2
+/miroapp/api-clients/blob/main/apps/client-test-app/index.js,2,2
+/miroapp/api-clients/blob/main/package.json,2,2
