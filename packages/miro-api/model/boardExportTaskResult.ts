@@ -31,6 +31,10 @@ export class BoardExportTaskResult {
    * Indicates the status of the individual board export task. Possible values: `SUCCESS`: the board export task was completed successfully and the results are available. `ERROR`: the board export task encountered an error and failed to complete. The `errorMessage` field provides more information on the error.
    */
   'status': string
+  /**
+   * Indicates the type of error encountered during the board export task. Possible values: `TEMPORARY`: the board export task encountered a temporary error. Retry the board export task after some time. `FATAL`: the board export failed and cannot be retried. This export will never succeed due to issues such as board corruption, non-existence, or other unrecoverable errors. Please verify the board\'s state or contact support if assistance is needed. `UNKNOWN`: the board export task encountered an unexpected exception. Retry the board export task after some time.
+   */
+  'errorType'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -55,6 +59,11 @@ export class BoardExportTaskResult {
     {
       name: 'status',
       baseName: 'status',
+      type: 'string',
+    },
+    {
+      name: 'errorType',
+      baseName: 'errorType',
       type: 'string',
     },
   ]

@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -32,8 +32,23 @@ class CreateBoardExportRequest(BaseModel):
     board_ids: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=50)]] = Field(
         default=None, description="List of board IDs to be exported.", alias="boardIds"
     )
+    board_format: Optional[StrictStr] = Field(
+        default="SVG",
+        description="Specifies the format of the file to which the board will be exported. Supported formats include SVG (default), HTML, and PDF.",
+        alias="boardFormat",
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["boardIds"]
+    __properties: ClassVar[List[str]] = ["boardIds", "boardFormat"]
+
+    @field_validator("board_format")
+    def board_format_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["SVG", "HTML", "PDF"]):
+            raise ValueError("must be one of enum values ('SVG', 'HTML', 'PDF')")
+        return value
 
     model_config = {
         "populate_by_name": True,
@@ -93,7 +108,12 @@ class CreateBoardExportRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"boardIds": obj.get("boardIds")})
+        _obj = cls.model_validate(
+            {
+                "boardIds": obj.get("boardIds"),
+                "boardFormat": obj.get("boardFormat") if obj.get("boardFormat") is not None else "SVG",
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:
