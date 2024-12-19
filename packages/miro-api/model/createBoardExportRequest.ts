@@ -19,6 +19,13 @@ export class CreateBoardExportRequest {
    * List of board IDs to be exported.
    */
   'boardIds'?: Array<string>
+  /**
+   * Specifies the format of the file to which the board will be exported. Supported formats include SVG (default), HTML, and PDF.
+   */
+  'boardFormat'?:
+    | string
+    | (typeof CreateBoardExportRequest.BoardFormatEnum)[keyof typeof CreateBoardExportRequest.BoardFormatEnum] =
+    CreateBoardExportRequest.BoardFormatEnum.Svg
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -30,10 +37,23 @@ export class CreateBoardExportRequest {
       baseName: 'boardIds',
       type: 'Array<string>',
     },
+    {
+      name: 'boardFormat',
+      baseName: 'boardFormat',
+      type: 'CreateBoardExportRequest.BoardFormatEnum',
+    },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
     return CreateBoardExportRequest.attributeTypeMap
   }
+}
+
+export namespace CreateBoardExportRequest {
+  export const BoardFormatEnum = {
+    Svg: 'SVG',
+    Html: 'HTML',
+    Pdf: 'PDF',
+  } as const
 }
