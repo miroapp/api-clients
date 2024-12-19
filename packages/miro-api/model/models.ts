@@ -655,6 +655,7 @@ let enumsMap: {[index: string]: any} = {
   'ConnectorStyle.StrokeStyleEnum': ConnectorStyle.StrokeStyleEnum,
   'ConnectorStyle.TextOrientationEnum': ConnectorStyle.TextOrientationEnum,
   'ConnectorWithLinks.ShapeEnum': ConnectorWithLinks.ShapeEnum,
+  'CreateBoardExportRequest.BoardFormatEnum': CreateBoardExportRequest.BoardFormatEnum,
   'CreateBoardSubscriptionRequest.StatusEnum': CreateBoardSubscriptionRequest.StatusEnum,
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
   'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
