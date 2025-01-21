@@ -10,8 +10,7 @@
  * Do not edit the class manually.
  */
 
-import {BoardContentLogData} from './boardContentLogData'
-import {User} from './user'
+import {Actor} from './actor'
 
 /**
  * @internal
@@ -23,36 +22,30 @@ export class BoardItemContentLog {
    */
   'id'?: string
   /**
-   * Unique identifier of the board item.
+   * Unique identifier of the board where the action happened.
+   */
+  'contentId'?: string
+  /**
+   * Type of action within the board, such as creation of a widget, update of a comment message, and so on.
+   */
+  'actionType'?: string | (typeof BoardItemContentLog.ActionTypeEnum)[keyof typeof BoardItemContentLog.ActionTypeEnum]
+  /**
+   * Date and time when the action happened.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
+   */
+  'actionTime'?: Date
+  'actor'?: Actor
+  /**
+   * Type of the board item on which the action happened.
+   */
+  'itemType'?: string | (typeof BoardItemContentLog.ItemTypeEnum)[keyof typeof BoardItemContentLog.ItemTypeEnum]
+  /**
+   * Unique identifier of the board item on which the action happened. For example, the widget ID.
    */
   'itemId'?: string
   /**
-   * Type of the board item.
+   * Object that contains information about the state of the board item after the action was performed.
    */
-  'type'?: any | null
-  /**
-   * User action in the form of insert, update, or delete.
-   */
-  'action'?: string
-  /**
-   * Unique identification of the board to which the item belongs.
-   */
-  'boardKey'?: string
-  /**
-   * Indicates if the board is a hidden board. Returns `true` if board item is hidden.
-   */
-  'hidden'?: boolean
-  /**
-   * Date and time when the board item was created.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
-   */
-  'createdAt'?: Date
-  'createdBy'?: User
-  /**
-   * Date and time when the board item was last modified.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
-   */
-  'modifiedAt'?: Date
-  'modifiedBy'?: User
-  'logData'?: BoardContentLogData
+  'state'?: object
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -65,54 +58,39 @@ export class BoardItemContentLog {
       type: 'string',
     },
     {
+      name: 'contentId',
+      baseName: 'contentId',
+      type: 'string',
+    },
+    {
+      name: 'actionType',
+      baseName: 'actionType',
+      type: 'BoardItemContentLog.ActionTypeEnum',
+    },
+    {
+      name: 'actionTime',
+      baseName: 'actionTime',
+      type: 'Date',
+    },
+    {
+      name: 'actor',
+      baseName: 'actor',
+      type: 'Actor',
+    },
+    {
+      name: 'itemType',
+      baseName: 'itemType',
+      type: 'BoardItemContentLog.ItemTypeEnum',
+    },
+    {
       name: 'itemId',
       baseName: 'itemId',
       type: 'string',
     },
     {
-      name: 'type',
-      baseName: 'type',
-      type: 'any',
-    },
-    {
-      name: 'action',
-      baseName: 'action',
-      type: 'string',
-    },
-    {
-      name: 'boardKey',
-      baseName: 'boardKey',
-      type: 'string',
-    },
-    {
-      name: 'hidden',
-      baseName: 'hidden',
-      type: 'boolean',
-    },
-    {
-      name: 'createdAt',
-      baseName: 'createdAt',
-      type: 'Date',
-    },
-    {
-      name: 'createdBy',
-      baseName: 'createdBy',
-      type: 'User',
-    },
-    {
-      name: 'modifiedAt',
-      baseName: 'modifiedAt',
-      type: 'Date',
-    },
-    {
-      name: 'modifiedBy',
-      baseName: 'modifiedBy',
-      type: 'User',
-    },
-    {
-      name: 'logData',
-      baseName: 'logData',
-      type: 'BoardContentLogData',
+      name: 'state',
+      baseName: 'state',
+      type: 'object',
     },
   ]
 
@@ -120,4 +98,17 @@ export class BoardItemContentLog {
   static getAttributeTypeMap() {
     return BoardItemContentLog.attributeTypeMap
   }
+}
+
+export namespace BoardItemContentLog {
+  export const ActionTypeEnum = {
+    Create: 'create',
+    Update: 'update',
+    Delete: 'delete',
+  } as const
+  export const ItemTypeEnum = {
+    Widget: 'widget',
+    CommentThread: 'comment_thread',
+    CommentMessage: 'comment_message',
+  } as const
 }

@@ -1,3 +1,4 @@
+export * from './actor'
 export * from './addProjectMemberRequest'
 export * from './adminRole'
 export * from './appCardCreateRequest'
@@ -19,7 +20,6 @@ export * from './basicError'
 export * from './basicErrorOrganizationsEnterprisePlan'
 export * from './board'
 export * from './boardChanges'
-export * from './boardContentLogData'
 export * from './boardDataClassificationLabel'
 export * from './boardExportJobId'
 export * from './boardExportJobStatus'
@@ -106,6 +106,7 @@ export * from './error403'
 export * from './error404'
 export * from './error409'
 export * from './error429'
+export * from './errorResponse'
 export * from './fixedRatioGeometry'
 export * from './fixedRatioGeometryPlatformFileUpload'
 export * from './fixedRatioNoRotationGeometry'
@@ -217,6 +218,7 @@ export * from './projectRole'
 export * from './projectRoleToAdd'
 export * from './projectSettings'
 export * from './relativeOffset'
+export * from './revokeTokenRequest'
 export * from './selfLink'
 export * from './selfLinkPlatformFileUpload'
 export * from './selfLinkPlatformTags'
@@ -293,7 +295,6 @@ export * from './updateStickyNoteStyle'
 export * from './updateTeamSettingsRequest'
 export * from './updateTextStyle'
 export * from './uploadFileFromDeviceData'
-export * from './user'
 export * from './userInfoLastOpenedBy'
 export * from './userInfoShort'
 export * from './userInformation'
@@ -315,6 +316,7 @@ export interface RequestDetailedFile {
 }
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile
 
+import {Actor} from './actor'
 import {AddProjectMemberRequest} from './addProjectMemberRequest'
 import {AdminRole} from './adminRole'
 import {AppCardCreateRequest} from './appCardCreateRequest'
@@ -336,7 +338,6 @@ import {BasicError} from './basicError'
 import {BasicErrorOrganizationsEnterprisePlan} from './basicErrorOrganizationsEnterprisePlan'
 import {Board} from './board'
 import {BoardChanges} from './boardChanges'
-import {BoardContentLogData} from './boardContentLogData'
 import {BoardDataClassificationLabel} from './boardDataClassificationLabel'
 import {BoardExportJobId} from './boardExportJobId'
 import {BoardExportJobStatus} from './boardExportJobStatus'
@@ -423,6 +424,7 @@ import {Error403} from './error403'
 import {Error404} from './error404'
 import {Error409} from './error409'
 import {Error429} from './error429'
+import {ErrorResponse} from './errorResponse'
 import {FixedRatioGeometry} from './fixedRatioGeometry'
 import {FixedRatioGeometryPlatformFileUpload} from './fixedRatioGeometryPlatformFileUpload'
 import {FixedRatioNoRotationGeometry} from './fixedRatioNoRotationGeometry'
@@ -534,6 +536,7 @@ import {ProjectRole} from './projectRole'
 import {ProjectRoleToAdd} from './projectRoleToAdd'
 import {ProjectSettings} from './projectSettings'
 import {RelativeOffset} from './relativeOffset'
+import {RevokeTokenRequest} from './revokeTokenRequest'
 import {SelfLink} from './selfLink'
 import {SelfLinkPlatformFileUpload} from './selfLinkPlatformFileUpload'
 import {SelfLinkPlatformTags} from './selfLinkPlatformTags'
@@ -610,7 +613,6 @@ import {UpdateStickyNoteStyle} from './updateStickyNoteStyle'
 import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
 import {UpdateTextStyle} from './updateTextStyle'
 import {UploadFileFromDeviceData} from './uploadFileFromDeviceData'
-import {User} from './user'
 import {UserInfoLastOpenedBy} from './userInfoLastOpenedBy'
 import {UserInfoShort} from './userInfoShort'
 import {UserInformation} from './userInformation'
@@ -630,6 +632,8 @@ let enumsMap: {[index: string]: any} = {
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
   'AppCardDataResponse.StatusEnum': AppCardDataResponse.StatusEnum,
   'AuditCreatedBy.TypeEnum': AuditCreatedBy.TypeEnum,
+  'BoardItemContentLog.ActionTypeEnum': BoardItemContentLog.ActionTypeEnum,
+  'BoardItemContentLog.ItemTypeEnum': BoardItemContentLog.ItemTypeEnum,
   'BoardMember.RoleEnum': BoardMember.RoleEnum,
   'BoardMemberChanges.RoleEnum': BoardMemberChanges.RoleEnum,
   'BoardMemberWithLinks.RoleEnum': BoardMemberWithLinks.RoleEnum,
@@ -655,6 +659,7 @@ let enumsMap: {[index: string]: any} = {
   'ConnectorStyle.StrokeStyleEnum': ConnectorStyle.StrokeStyleEnum,
   'ConnectorStyle.TextOrientationEnum': ConnectorStyle.TextOrientationEnum,
   'ConnectorWithLinks.ShapeEnum': ConnectorWithLinks.ShapeEnum,
+  'CreateBoardExportRequest.BoardFormatEnum': CreateBoardExportRequest.BoardFormatEnum,
   'CreateBoardSubscriptionRequest.StatusEnum': CreateBoardSubscriptionRequest.StatusEnum,
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
   'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
@@ -788,6 +793,7 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+  Actor: Actor,
   AddProjectMemberRequest: AddProjectMemberRequest,
   AdminRole: AdminRole,
   AppCardCreateRequest: AppCardCreateRequest,
@@ -809,7 +815,6 @@ let typeMap: {[index: string]: any} = {
   BasicErrorOrganizationsEnterprisePlan: BasicErrorOrganizationsEnterprisePlan,
   Board: Board,
   BoardChanges: BoardChanges,
-  BoardContentLogData: BoardContentLogData,
   BoardDataClassificationLabel: BoardDataClassificationLabel,
   BoardExportJobId: BoardExportJobId,
   BoardExportJobStatus: BoardExportJobStatus,
@@ -897,6 +902,7 @@ let typeMap: {[index: string]: any} = {
   Error404: Error404,
   Error409: Error409,
   Error429: Error429,
+  ErrorResponse: ErrorResponse,
   FixedRatioGeometry: FixedRatioGeometry,
   FixedRatioGeometryPlatformFileUpload: FixedRatioGeometryPlatformFileUpload,
   FixedRatioNoRotationGeometry: FixedRatioNoRotationGeometry,
@@ -1007,6 +1013,7 @@ let typeMap: {[index: string]: any} = {
   ProjectPage: ProjectPage,
   ProjectSettings: ProjectSettings,
   RelativeOffset: RelativeOffset,
+  RevokeTokenRequest: RevokeTokenRequest,
   SelfLink: SelfLink,
   SelfLinkPlatformFileUpload: SelfLinkPlatformFileUpload,
   SelfLinkPlatformTags: SelfLinkPlatformTags,
@@ -1082,7 +1089,6 @@ let typeMap: {[index: string]: any} = {
   UpdateTeamSettingsRequest: UpdateTeamSettingsRequest,
   UpdateTextStyle: UpdateTextStyle,
   UploadFileFromDeviceData: UploadFileFromDeviceData,
-  User: User,
   UserInfoLastOpenedBy: UserInfoLastOpenedBy,
   UserInfoShort: UserInfoShort,
   UserInformation: UserInformation,

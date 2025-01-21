@@ -17,9 +17,10 @@
     "/v1/oauth/revoke": {
       "post": {
         "tags": ["tokens"],
-        "summary": "Revoke token",
-        "description": "Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.",
+        "summary": "Revoke token (v1)",
+        "description": "<p><b>Please use the new revoke endpoint <code>/v2/oauth/revoke</code>. This endpoint is considered vulnerable and deprecated due to access token passed publicly in the URL.</b></p> Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.",
         "operationId": "revoke-token",
+        "deprecated": true,
         "parameters": [
           {
             "description": "Access token that you want to revoke",
@@ -141,193 +142,9 @@
         }
       }
     },
-    "/v2-experimental/apps/{app_id}/metrics": {
-      "get": {
-        "summary": "Get app metrics",
-        "description": "Returns a list of usage metrics for a specific app for a given time range, grouped by requested time period.\n\nThis endpoint requires an app management API token. It can be generated in the <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">Your Apps</a> section of Developer Hub. \n",
-        "operationId": "get-metrics",
-        "tags": ["app-management"],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "app_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID of the app to get metrics for."
-          },
-          {
-            "in": "query",
-            "name": "startDate",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            },
-            "description": "Start date of the period in UTC format. For example, 2024-12-31."
-          },
-          {
-            "in": "query",
-            "name": "endDate",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date"
-            },
-            "description": "End date of the period in UTC format. For example, 2024-12-31."
-          },
-          {
-            "in": "query",
-            "name": "period",
-            "schema": {
-              "type": "string",
-              "enum": ["DAY", "WEEK", "MONTH"],
-              "default": "WEEK"
-            },
-            "description": "Group data by this time period."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "periodStart": {
-                        "type": "string",
-                        "description": "Date from which the metrics are aggregated.",
-                        "format": "date"
-                      },
-                      "uniqueUsers": {
-                        "type": "integer",
-                        "description": "Number of unique users who performed at least one activity in the application."
-                      },
-                      "uniqueRecurringUsers": {
-                        "type": "integer",
-                        "description": "Number of unique users who have been active for more than one day over the past 30 days."
-                      },
-                      "uniqueOrganizations": {
-                        "type": "integer",
-                        "description": "Number of unique company accounts that have installed the application."
-                      },
-                      "installations": {
-                        "type": "integer",
-                        "description": "Number of application installations for a team."
-                      },
-                      "uninstallations": {
-                        "type": "integer",
-                        "description": "Number of application uninstallations for a team."
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "App not found response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "App not found response",
-                  "properties": {
-                    "message": {
-                      "type": "string"
-                    },
-                    "status": {
-                      "type": "integer"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v2-experimental/apps/{app_id}/metrics-total": {
-      "get": {
-        "summary": "Get total app metrics",
-        "description": "Returns total usage metrics for a specific app since the app was created.\n\nThis endpoint requires an app management API token. It can be generated in <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">your apps</a> section of Developer Hub. \n",
-        "operationId": "get-metrics-total",
-        "tags": ["app-management"],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "app_id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "ID of the app to get total metrics for."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "uniqueUsers": {
-                      "type": "integer",
-                      "description": "Number of unique users who performed at least one activity in the application."
-                    },
-                    "uniqueRecurringUsers": {
-                      "type": "integer",
-                      "description": "Number of unique users who have been active for more than one day over the past 30 days."
-                    },
-                    "uniqueOrganizations": {
-                      "type": "integer",
-                      "description": "Number of unique company accounts that have installed the application."
-                    },
-                    "installations": {
-                      "type": "integer",
-                      "description": "Number of application installations for a team."
-                    },
-                    "uninstallations": {
-                      "type": "integer",
-                      "description": "Number of application uninstallations for a team."
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "App not found response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "description": "App not found response",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Description of the error."
-                    },
-                    "status": {
-                      "type": "integer",
-                      "description": "HTTP status code."
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/v2/audit/logs": {
       "get": {
-        "description": "Retrieves a page of audit events.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a>",
+        "description": "Retrieves a page of audit events from the last 90 days. If you want to retrieve data that is older than 90 days, you can use the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/360017571434-Audit-logs#h_01J7EY4E0F67EFTRQ7BT688HW0\">CSV export feature</a>.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a>",
         "operationId": "enterprise-get-audit-logs",
         "parameters": [
           {
@@ -1447,7 +1264,7 @@
         "tags": ["boards"]
       },
       "get": {
-        "description": "Retrieves a list of boards that the user associated with the access token  has access to. You can filter and sort the boards by specifying URL query parameter values. If you are an Enterprise customer and a Company Admin, you can retrieve all boards, including all private boards (boards that haven't been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins). Note that you only get results instantaneously when you filter by the `team_id`, `project_id`, or both the `team_id` and `project_id`. If you use any other filter,  you need to give a few seconds for the indexing of newly created boards before retrieving boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>",
+        "description": "Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters.\nCustomize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.\n\nIf you're an Enterprise customer with Company Admin permissions:\n  \n- Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).  \n- Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error.\n<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>\n",
         "operationId": "get-boards",
         "parameters": [
           {
@@ -5036,6 +4853,190 @@
         "tags": ["Bulk operations"]
       }
     },
+    "/v2-experimental/apps/{app_id}/metrics": {
+      "get": {
+        "summary": "Get app metrics",
+        "description": "Returns a list of usage metrics for a specific app for a given time range, grouped by requested time period.\n\nThis endpoint requires an app management API token. It can be generated in the <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">Your Apps</a> section of Developer Hub.<br/>\n<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a><br/>\n<h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>\n",
+        "operationId": "get-metrics",
+        "tags": ["App metrics (experimental)"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the app to get metrics for."
+          },
+          {
+            "in": "query",
+            "name": "startDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Start date of the period in UTC format. For example, 2024-12-31."
+          },
+          {
+            "in": "query",
+            "name": "endDate",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "End date of the period in UTC format. For example, 2024-12-31."
+          },
+          {
+            "in": "query",
+            "name": "period",
+            "schema": {
+              "type": "string",
+              "enum": ["DAY", "WEEK", "MONTH"],
+              "default": "WEEK"
+            },
+            "description": "Group data by this time period."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "periodStart": {
+                        "type": "string",
+                        "description": "Date from which the metrics are aggregated.",
+                        "format": "date"
+                      },
+                      "uniqueUsers": {
+                        "type": "integer",
+                        "description": "Number of unique users who performed at least one activity in the application."
+                      },
+                      "uniqueRecurringUsers": {
+                        "type": "integer",
+                        "description": "Number of unique users who have been active for more than one day over the past 30 days."
+                      },
+                      "uniqueOrganizations": {
+                        "type": "integer",
+                        "description": "Number of unique company accounts that have installed the application."
+                      },
+                      "installations": {
+                        "type": "integer",
+                        "description": "Number of application installations for a team."
+                      },
+                      "uninstallations": {
+                        "type": "integer",
+                        "description": "Number of application uninstallations for a team."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "App not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "App not found response",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2-experimental/apps/{app_id}/metrics-total": {
+      "get": {
+        "summary": "Get total app metrics",
+        "description": "Returns total usage metrics for a specific app since the app was created.\n\nThis endpoint requires an app management API token. It can be generated in <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">your apps</a> section of Developer Hub.<br/>\n<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a><br/>\n<h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>\n",
+        "operationId": "get-metrics-total",
+        "tags": ["App metrics (experimental)"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "app_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the app to get total metrics for."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "uniqueUsers": {
+                      "type": "integer",
+                      "description": "Number of unique users who performed at least one activity in the application."
+                    },
+                    "uniqueRecurringUsers": {
+                      "type": "integer",
+                      "description": "Number of unique users who have been active for more than one day over the past 30 days."
+                    },
+                    "uniqueOrganizations": {
+                      "type": "integer",
+                      "description": "Number of unique company accounts that have installed the application."
+                    },
+                    "installations": {
+                      "type": "integer",
+                      "description": "Number of application installations for a team."
+                    },
+                    "uninstallations": {
+                      "type": "integer",
+                      "description": "Number of application uninstallations for a team."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "App not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "App not found response",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error."
+                    },
+                    "status": {
+                      "type": "integer",
+                      "description": "HTTP status code."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/v2-experimental/webhooks/board_subscriptions": {
       "post": {
         "description": "Creates a webhook subscription to receive notifications when an item on a board is updated. Subscriptions are created per user, per board. You can create multiple subscriptions. We currently support all board items except tags, connectors, and comments.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>",
@@ -8603,6 +8604,39 @@
           }
         },
         "tags": ["groups"]
+      }
+    },
+    "/v2/oauth/revoke": {
+      "post": {
+        "summary": "Revoke token (v2)",
+        "description": "Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.",
+        "operationId": "revoke-token-v2",
+        "tags": ["OAuth"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevokeTokenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "Token revoked"
+          },
+          "404": {
+            "description": "Failed to revoke token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/v2/boards/{board_id}/items/{item_id}/tags": {
@@ -12376,6 +12410,11 @@
             "type": "string",
             "description": "Indicates the status of the individual board export task.\nPossible values:\n`SUCCESS`: the board export task was completed successfully and the results are available.\n`ERROR`: the board export task encountered an error and failed to complete. The `errorMessage` field provides more information on the error.",
             "example": "CREATED"
+          },
+          "errorType": {
+            "type": "string",
+            "description": "Indicates the type of error encountered during the board export task.\nPossible values:\n`TEMPORARY`: the board export task encountered a temporary error. Retry the board export task after some time.\n`FATAL`: the board export failed and cannot be retried. This export will never succeed due to issues such as board corruption, non-existence, or other unrecoverable errors. Please verify the board's state or contact support if assistance is needed.\n`UNKNOWN`: the board export task encountered an unexpected exception. Retry the board export task after some time.",
+            "example": "TEMPORARY"
           }
         },
         "description": "Board export task results."
@@ -12394,6 +12433,13 @@
               "description": "List of board IDs to be exported.",
               "example": "o9J_kzlUDmo="
             }
+          },
+          "boardFormat": {
+            "type": "string",
+            "enum": ["SVG", "HTML", "PDF"],
+            "default": "SVG",
+            "description": "Specifies the format of the file to which the board will be exported. Supported formats include SVG (default), HTML, and PDF.",
+            "example": "SVG"
           }
         },
         "description": "List of board IDs to be exported."
@@ -12443,99 +12489,68 @@
           "id": {
             "type": "string",
             "description": "Unique identifier of the content log.",
-            "example": 1
+            "example": "2dcf57ff-f12c-4fad-b708-c1642204b41b"
+          },
+          "contentId": {
+            "type": "string",
+            "description": "Unique identifier of the board where the action happened.",
+            "example": "o9J_kzlUDmo="
+          },
+          "actionType": {
+            "type": "string",
+            "enum": ["create", "update", "delete"],
+            "description": "Type of action within the board, such as creation of a widget, update of a comment message, and so on.",
+            "example": "update"
+          },
+          "actionTime": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2023-06-24T17:32:28Z",
+            "description": "Date and time when the action happened.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/Actor"
+          },
+          "itemType": {
+            "type": "string",
+            "enum": ["widget", "comment_thread", "comment_message"],
+            "description": "Type of the board item on which the action happened.",
+            "example": "widget"
           },
           "itemId": {
             "type": "string",
-            "description": "Unique identifier of the board item.",
+            "description": "Unique identifier of the board item on which the action happened. For example, the widget ID.",
             "example": "3458764549483493025"
           },
-          "type": {
-            "format": "string",
-            "description": "Type of the board item.",
-            "example": "sticker"
-          },
-          "action": {
-            "type": "string",
-            "description": "User action in the form of insert, update, or delete.",
-            "example": "update"
-          },
-          "boardKey": {
-            "type": "string",
-            "description": "Unique identification of the board to which the item belongs.",
-            "example": "o9J_kzlUDmo="
-          },
-          "hidden": {
-            "type": "boolean",
-            "description": "Indicates if the board is a hidden board. Returns `true` if board item is hidden.",
-            "example": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2023-06-24T17:32:28Z",
-            "description": "Date and time when the board item was created.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n"
-          },
-          "createdBy": {
-            "$ref": "#/components/schemas/User"
-          },
-          "modifiedAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2023-06-24T17:32:28Z",
-            "description": "Date and time when the board item was last modified.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n"
-          },
-          "modifiedBy": {
-            "$ref": "#/components/schemas/User"
-          },
-          "logData": {
-            "$ref": "#/components/schemas/BoardContentLogData"
+          "state": {
+            "$ref": "#/components/schemas/State"
           }
         }
       },
-      "User": {
+      "Actor": {
         "type": "object",
-        "description": "Contains user information.",
+        "description": "Contains information about the user who performed the action.",
         "properties": {
           "id": {
             "type": "string",
-            "description": "Unique identifier of the user.",
+            "description": "Unique identifier of the user who performed the action.",
             "example": "3458764517517852417"
           },
           "email": {
             "type": "string",
-            "description": "Email of the user.",
+            "description": "Email of the user who performed the action.",
             "example": "john.smith.demo@miro.com"
           },
-          "firstName": {
+          "name": {
             "type": "string",
-            "description": "First name of the user.",
-            "example": "John"
-          },
-          "lastName": {
-            "type": "string",
-            "description": "Last name of the user.",
-            "example": "Smith"
+            "description": "Name of the user who performed the action.",
+            "example": "John Smith"
           }
         }
       },
-      "BoardContentLogData": {
+      "State": {
         "type": "object",
-        "description": "Content log object representing the current state of the board item at the `modifiedAt` time.",
-        "properties": {
-          "text": {
-            "type": "string",
-            "description": "Text extracted from the board item.",
-            "example": "<p>data sample</p>"
-          },
-          "metadata": {
-            "type": "object",
-            "description": "Metadata representing more information that might be relevant for a specific board item.",
-            "additionalProperties": {
-              "type": "string"
-            }
-          }
-        }
+        "description": "Object that contains information about the state of the board item after the action was performed."
       },
       "BasicErrorOrganizationsEnterprisePlan": {
         "type": "object",
@@ -17585,6 +17600,46 @@
           },
           "links": {
             "$ref": "#/components/schemas/PageLinks"
+          }
+        }
+      },
+      "RevokeTokenRequest": {
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string",
+            "description": "The access token to be revoked."
+          },
+          "clientId": {
+            "type": "string",
+            "description": "The client ID associated with the access token."
+          },
+          "clientSecret": {
+            "type": "string",
+            "description": "The client secret associated with the access token."
+          }
+        },
+        "required": ["accessToken", "clientId", "clientSecret"]
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code."
+          },
+          "code": {
+            "type": "string",
+            "description": "Description of the status code."
+          },
+          "message": {
+            "type": "string",
+            "description": "Explanation for the error."
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the object returned.",
+            "default": "error"
           }
         }
       },

@@ -1,5 +1,6 @@
 api.ts
 api/apis.ts
+model/actor.ts
 model/addProjectMemberRequest.ts
 model/adminRole.ts
 model/appCardCreateRequest.ts
@@ -21,7 +22,6 @@ model/basicError.ts
 model/basicErrorOrganizationsEnterprisePlan.ts
 model/board.ts
 model/boardChanges.ts
-model/boardContentLogData.ts
 model/boardDataClassificationLabel.ts
 model/boardExportJobId.ts
 model/boardExportJobStatus.ts
@@ -108,6 +108,7 @@ model/error403.ts
 model/error404.ts
 model/error409.ts
 model/error429.ts
+model/errorResponse.ts
 model/fixedRatioGeometry.ts
 model/fixedRatioGeometryPlatformFileUpload.ts
 model/fixedRatioNoRotationGeometry.ts
@@ -220,6 +221,7 @@ model/projectRole.ts
 model/projectRoleToAdd.ts
 model/projectSettings.ts
 model/relativeOffset.ts
+model/revokeTokenRequest.ts
 model/selfLink.ts
 model/selfLinkPlatformFileUpload.ts
 model/selfLinkPlatformTags.ts
@@ -296,7 +298,6 @@ model/updateStickyNoteStyle.ts
 model/updateTeamSettingsRequest.ts
 model/updateTextStyle.ts
 model/uploadFileFromDeviceData.ts
-model/user.ts
 model/userInfoLastOpenedBy.ts
 model/userInfoShort.ts
 model/userInformation.ts

@@ -12,25 +12,21 @@
 
 /**
  * @internal
- * Contains user information.
+ * Contains information about the user who performed the action.
  */
-export class User {
+export class Actor {
   /**
-   * Unique identifier of the user.
+   * Unique identifier of the user who performed the action.
    */
   'id'?: string
   /**
-   * Email of the user.
+   * Email of the user who performed the action.
    */
   'email'?: string
   /**
-   * First name of the user.
+   * Name of the user who performed the action.
    */
-  'firstName'?: string
-  /**
-   * Last name of the user.
-   */
-  'lastName'?: string
+  'name'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -48,19 +44,14 @@ export class User {
       type: 'string',
     },
     {
-      name: 'firstName',
-      baseName: 'firstName',
-      type: 'string',
-    },
-    {
-      name: 'lastName',
-      baseName: 'lastName',
+      name: 'name',
+      baseName: 'name',
       type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return User.attributeTypeMap
+    return Actor.attributeTypeMap
   }
 }

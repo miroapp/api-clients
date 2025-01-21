@@ -10,19 +10,23 @@
  * Do not edit the class manually.
  */
 
-/**
- * @internal
- * Content log object representing the current state of the board item at the `modifiedAt` time.
- */
-export class BoardContentLogData {
+export class ErrorResponse {
   /**
-   * Text extracted from the board item.
+   * HTTP status code.
    */
-  'text'?: string
+  'status'?: number
   /**
-   * Metadata representing more information that might be relevant for a specific board item.
+   * Description of the status code.
    */
-  'metadata'?: {[key: string]: string}
+  'code'?: string
+  /**
+   * Explanation for the error.
+   */
+  'message'?: string
+  /**
+   * Type of the object returned.
+   */
+  'type'?: string = 'error'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -30,19 +34,29 @@ export class BoardContentLogData {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'text',
-      baseName: 'text',
+      name: 'status',
+      baseName: 'status',
+      type: 'number',
+    },
+    {
+      name: 'code',
+      baseName: 'code',
       type: 'string',
     },
     {
-      name: 'metadata',
-      baseName: 'metadata',
-      type: '{ [key: string]: string; }',
+      name: 'message',
+      baseName: 'message',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return BoardContentLogData.attributeTypeMap
+    return ErrorResponse.attributeTypeMap
   }
 }
