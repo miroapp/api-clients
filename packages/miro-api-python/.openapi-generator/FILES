@@ -1,6 +1,6 @@
 miro_api/api/__init__.py
 miro_api/api/app_cards_api.py
-miro_api/api/app_management_api.py
+miro_api/api/app_metrics_experimental_api.py
 miro_api/api/audit_logs_api.py
 miro_api/api/board_classification_board_level_api.py
 miro_api/api/board_classification_organization_level_api.py
@@ -20,6 +20,7 @@ miro_api/api/groups_api.py
 miro_api/api/images_api.py
 miro_api/api/items_api.py
 miro_api/api/mind_map_nodes_experimental_api.py
+miro_api/api/o_auth_api.py
 miro_api/api/organization_members_api.py
 miro_api/api/organizations_api.py
 miro_api/api/project_members_api.py
@@ -38,6 +39,7 @@ miro_api/api/webhooks_experimental_api.py
 miro_api/api_client.py
 miro_api/api_response.py
 miro_api/configuration.py
+miro_api/docs/Actor.md
 miro_api/docs/AddProjectMemberRequest.md
 miro_api/docs/AdminRole.md
 miro_api/docs/AppCardCreateRequest.md
@@ -49,7 +51,7 @@ miro_api/docs/AppCardStyle.md
 miro_api/docs/AppCardStylePlatformbulkcreateoperation.md
 miro_api/docs/AppCardUpdateRequest.md
 miro_api/docs/AppCardsApi.md
-miro_api/docs/AppManagementApi.md
+miro_api/docs/AppMetricsExperimentalApi.md
 miro_api/docs/AuditContext.md
 miro_api/docs/AuditCreatedBy.md
 miro_api/docs/AuditEvent.md
@@ -65,7 +67,6 @@ miro_api/docs/BoardChanges.md
 miro_api/docs/BoardClassificationBoardLevelApi.md
 miro_api/docs/BoardClassificationOrganizationLevelApi.md
 miro_api/docs/BoardClassificationTeamLevelApi.md
-miro_api/docs/BoardContentLogData.md
 miro_api/docs/BoardContentLogsApi.md
 miro_api/docs/BoardDataClassificationLabel.md
 miro_api/docs/BoardExportJobApi.md
@@ -162,6 +163,7 @@ miro_api/docs/Error403.md
 miro_api/docs/Error404.md
 miro_api/docs/Error409.md
 miro_api/docs/Error429.md
+miro_api/docs/ErrorResponse.md
 miro_api/docs/FixedRatioGeometry.md
 miro_api/docs/FixedRatioGeometryPlatformFileUpload.md
 miro_api/docs/FixedRatioNoRotationGeometry.md
@@ -256,6 +258,7 @@ miro_api/docs/ModifiedByPlatformFileUpload.md
 miro_api/docs/ModifiedByPlatformTags.md
 miro_api/docs/ModifiedByPlatformcreateitemsinbulkusingfilefromdevice.md
 miro_api/docs/ModifiedByPlatformgroups.md
+miro_api/docs/OAuthApi.md
 miro_api/docs/Organization.md
 miro_api/docs/OrganizationInformation.md
 miro_api/docs/OrganizationMember.md
@@ -284,6 +287,7 @@ miro_api/docs/ProjectSettingsApi.md
 miro_api/docs/ProjectsApi.md
 miro_api/docs/RelativeOffset.md
 miro_api/docs/ResetAllSessionsOfAUserApi.md
+miro_api/docs/RevokeTokenRequest.md
 miro_api/docs/SelfLink.md
 miro_api/docs/SelfLinkPlatformFileUpload.md
 miro_api/docs/SelfLinkPlatformTags.md
@@ -368,7 +372,6 @@ miro_api/docs/UpdateStickyNoteStyle.md
 miro_api/docs/UpdateTeamSettingsRequest.md
 miro_api/docs/UpdateTextStyle.md
 miro_api/docs/UploadFileFromDeviceData.md
-miro_api/docs/User.md
 miro_api/docs/UserInfoLastOpenedBy.md
 miro_api/docs/UserInfoShort.md
 miro_api/docs/UserInformation.md
@@ -381,6 +384,7 @@ miro_api/docs/WidgetLinksPlatformFileUpload.md
 miro_api/docs/WidthOnlyAdjustableGeometry.md
 miro_api/exceptions.py
 miro_api/models/__init__.py
+miro_api/models/actor.py
 miro_api/models/add_project_member_request.py
 miro_api/models/admin_role.py
 miro_api/models/app_card_create_request.py
@@ -402,7 +406,6 @@ miro_api/models/basic_error.py
 miro_api/models/basic_error_organizations_enterprise_plan.py
 miro_api/models/board.py
 miro_api/models/board_changes.py
-miro_api/models/board_content_log_data.py
 miro_api/models/board_data_classification_label.py
 miro_api/models/board_export_job_id.py
 miro_api/models/board_export_job_status.py
@@ -490,6 +493,7 @@ miro_api/models/error403.py
 miro_api/models/error404.py
 miro_api/models/error409.py
 miro_api/models/error429.py
+miro_api/models/error_response.py
 miro_api/models/fixed_ratio_geometry.py
 miro_api/models/fixed_ratio_geometry_platform_file_upload.py
 miro_api/models/fixed_ratio_no_rotation_geometry.py
@@ -600,6 +604,7 @@ miro_api/models/project_role.py
 miro_api/models/project_role_to_add.py
 miro_api/models/project_settings.py
 miro_api/models/relative_offset.py
+miro_api/models/revoke_token_request.py
 miro_api/models/self_link.py
 miro_api/models/self_link_platform_file_upload.py
 miro_api/models/self_link_platform_tags.py
@@ -676,7 +681,6 @@ miro_api/models/update_sticky_note_style.py
 miro_api/models/update_team_settings_request.py
 miro_api/models/update_text_style.py
 miro_api/models/upload_file_from_device_data.py
-miro_api/models/user.py
 miro_api/models/user_info_last_opened_by.py
 miro_api/models/user_info_short.py
 miro_api/models/user_information.py
@@ -688,6 +692,7 @@ miro_api/models/widget_links_platform_file_upload.py
 miro_api/models/width_only_adjustable_geometry.py
 miro_api/rest.py
 miro_api/test/__init__.py
+miro_api/test/test_actor.py
 miro_api/test/test_add_project_member_request.py
 miro_api/test/test_admin_role.py
 miro_api/test/test_app_card_create_request.py
@@ -699,7 +704,7 @@ miro_api/test/test_app_card_style.py
 miro_api/test/test_app_card_style_platformbulkcreateoperation.py
 miro_api/test/test_app_card_update_request.py
 miro_api/test/test_app_cards_api.py
-miro_api/test/test_app_management_api.py
+miro_api/test/test_app_metrics_experimental_api.py
 miro_api/test/test_audit_context.py
 miro_api/test/test_audit_created_by.py
 miro_api/test/test_audit_event.py
@@ -715,7 +720,6 @@ miro_api/test/test_board_changes.py
 miro_api/test/test_board_classification_board_level_api.py
 miro_api/test/test_board_classification_organization_level_api.py
 miro_api/test/test_board_classification_team_level_api.py
-miro_api/test/test_board_content_log_data.py
 miro_api/test/test_board_content_logs_api.py
 miro_api/test/test_board_data_classification_label.py
 miro_api/test/test_board_export_job_api.py
@@ -812,6 +816,7 @@ miro_api/test/test_error403.py
 miro_api/test/test_error404.py
 miro_api/test/test_error409.py
 miro_api/test/test_error429.py
+miro_api/test/test_error_response.py
 miro_api/test/test_fixed_ratio_geometry.py
 miro_api/test/test_fixed_ratio_geometry_platform_file_upload.py
 miro_api/test/test_fixed_ratio_no_rotation_geometry.py
@@ -906,6 +911,7 @@ miro_api/test/test_modified_by_platform_file_upload.py
 miro_api/test/test_modified_by_platform_tags.py
 miro_api/test/test_modified_by_platformcreateitemsinbulkusingfilefromdevice.py
 miro_api/test/test_modified_by_platformgroups.py
+miro_api/test/test_o_auth_api.py
 miro_api/test/test_organization.py
 miro_api/test/test_organization_information.py
 miro_api/test/test_organization_member.py
@@ -934,6 +940,7 @@ miro_api/test/test_project_settings_api.py
 miro_api/test/test_projects_api.py
 miro_api/test/test_relative_offset.py
 miro_api/test/test_reset_all_sessions_of_a_user_api.py
+miro_api/test/test_revoke_token_request.py
 miro_api/test/test_self_link.py
 miro_api/test/test_self_link_platform_file_upload.py
 miro_api/test/test_self_link_platform_tags.py
@@ -1018,7 +1025,6 @@ miro_api/test/test_update_sticky_note_style.py
 miro_api/test/test_update_team_settings_request.py
 miro_api/test/test_update_text_style.py
 miro_api/test/test_upload_file_from_device_data.py
-miro_api/test/test_user.py
 miro_api/test/test_user_info_last_opened_by.py
 miro_api/test/test_user_info_short.py
 miro_api/test/test_user_information.py

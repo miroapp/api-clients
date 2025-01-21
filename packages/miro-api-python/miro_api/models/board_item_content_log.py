@@ -18,10 +18,9 @@ import re  # noqa: F401
 import json
 
 from datetime import datetime
-from pydantic import BaseModel, Field, StrictBool, StrictStr
+from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from miro_api.models.board_content_log_data import BoardContentLogData
-from miro_api.models.user import User
+from miro_api.models.actor import Actor
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,46 +31,63 @@ class BoardItemContentLog(BaseModel):
     """  # noqa: E501
 
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the content log.")
+    content_id: Optional[StrictStr] = Field(
+        default=None, description="Unique identifier of the board where the action happened.", alias="contentId"
+    )
+    action_type: Optional[StrictStr] = Field(
+        default=None,
+        description="Type of action within the board, such as creation of a widget, update of a comment message, and so on.",
+        alias="actionType",
+    )
+    action_time: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the action happened.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ",
+        alias="actionTime",
+    )
+    actor: Optional[Actor] = None
+    item_type: Optional[StrictStr] = Field(
+        default=None, description="Type of the board item on which the action happened.", alias="itemType"
+    )
     item_id: Optional[StrictStr] = Field(
-        default=None, description="Unique identifier of the board item.", alias="itemId"
-    )
-    type: Optional[Any] = Field(default=None, description="Type of the board item.")
-    action: Optional[StrictStr] = Field(
-        default=None, description="User action in the form of insert, update, or delete."
-    )
-    board_key: Optional[StrictStr] = Field(
-        default=None, description="Unique identification of the board to which the item belongs.", alias="boardKey"
-    )
-    hidden: Optional[StrictBool] = Field(
-        default=None, description="Indicates if the board is a hidden board. Returns `true` if board item is hidden."
-    )
-    created_at: Optional[datetime] = Field(
         default=None,
-        description="Date and time when the board item was created.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ",
-        alias="createdAt",
+        description="Unique identifier of the board item on which the action happened. For example, the widget ID.",
+        alias="itemId",
     )
-    created_by: Optional[User] = Field(default=None, alias="createdBy")
-    modified_at: Optional[datetime] = Field(
+    state: Optional[Dict[str, Any]] = Field(
         default=None,
-        description="Date and time when the board item was last modified.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ",
-        alias="modifiedAt",
+        description="Object that contains information about the state of the board item after the action was performed.",
     )
-    modified_by: Optional[User] = Field(default=None, alias="modifiedBy")
-    log_data: Optional[BoardContentLogData] = Field(default=None, alias="logData")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "id",
+        "contentId",
+        "actionType",
+        "actionTime",
+        "actor",
+        "itemType",
         "itemId",
-        "type",
-        "action",
-        "boardKey",
-        "hidden",
-        "createdAt",
-        "createdBy",
-        "modifiedAt",
-        "modifiedBy",
-        "logData",
+        "state",
     ]
+
+    @field_validator("action_type")
+    def action_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["create", "update", "delete"]):
+            raise ValueError("must be one of enum values ('create', 'update', 'delete')")
+        return value
+
+    @field_validator("item_type")
+    def item_type_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(["widget", "comment_thread", "comment_message"]):
+            raise ValueError("must be one of enum values ('widget', 'comment_thread', 'comment_message')")
+        return value
 
     model_config = {
         "populate_by_name": True,
@@ -115,24 +131,13 @@ class BoardItemContentLog(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of created_by
-        if self.created_by:
-            _dict["createdBy"] = self.created_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of modified_by
-        if self.modified_by:
-            _dict["modifiedBy"] = self.modified_by.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of log_data
-        if self.log_data:
-            _dict["logData"] = self.log_data.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of actor
+        if self.actor:
+            _dict["actor"] = self.actor.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
                 _dict[_key] = _value
-
-        # set to None if type (nullable) is None
-        # and model_fields_set contains the field
-        if self.type is None and "type" in self.model_fields_set:
-            _dict["type"] = None
 
         return _dict
 
@@ -148,16 +153,13 @@ class BoardItemContentLog(BaseModel):
         _obj = cls.model_validate(
             {
                 "id": obj.get("id"),
+                "contentId": obj.get("contentId"),
+                "actionType": obj.get("actionType"),
+                "actionTime": obj.get("actionTime"),
+                "actor": Actor.from_dict(obj["actor"]) if obj.get("actor") is not None else None,
+                "itemType": obj.get("itemType"),
                 "itemId": obj.get("itemId"),
-                "type": obj.get("type"),
-                "action": obj.get("action"),
-                "boardKey": obj.get("boardKey"),
-                "hidden": obj.get("hidden"),
-                "createdAt": obj.get("createdAt"),
-                "createdBy": User.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
-                "modifiedAt": obj.get("modifiedAt"),
-                "modifiedBy": User.from_dict(obj["modifiedBy"]) if obj.get("modifiedBy") is not None else None,
-                "logData": BoardContentLogData.from_dict(obj["logData"]) if obj.get("logData") is not None else None,
+                "state": obj.get("state"),
             }
         )
         # store additional fields in additional_properties

@@ -10,22 +10,19 @@
  * Do not edit the class manually.
  */
 
-/**
- * @internal
- * List of board IDs to be exported.
- */
-export class CreateBoardExportRequest {
+export class RevokeTokenRequest {
   /**
-   * List of board IDs to be exported.
+   * The access token to be revoked.
    */
-  'boardIds'?: Array<string>
+  'accessToken': string
   /**
-   * Specifies the format of the file to which the board will be exported. Supported formats include SVG (default), HTML, and PDF.
+   * The client ID associated with the access token.
    */
-  'boardFormat'?:
-    | string
-    | (typeof CreateBoardExportRequest.BoardFormatEnum)[keyof typeof CreateBoardExportRequest.BoardFormatEnum] =
-    CreateBoardExportRequest.BoardFormatEnum.Svg
+  'clientId': string
+  /**
+   * The client secret associated with the access token.
+   */
+  'clientSecret': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -33,27 +30,24 @@ export class CreateBoardExportRequest {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'boardIds',
-      baseName: 'boardIds',
-      type: 'Array<string>',
+      name: 'accessToken',
+      baseName: 'accessToken',
+      type: 'string',
     },
     {
-      name: 'boardFormat',
-      baseName: 'boardFormat',
-      type: 'CreateBoardExportRequest.BoardFormatEnum',
+      name: 'clientId',
+      baseName: 'clientId',
+      type: 'string',
+    },
+    {
+      name: 'clientSecret',
+      baseName: 'clientSecret',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return CreateBoardExportRequest.attributeTypeMap
+    return RevokeTokenRequest.attributeTypeMap
   }
-}
-
-export namespace CreateBoardExportRequest {
-  export const BoardFormatEnum = {
-    Svg: 'SVG',
-    Html: 'HTML',
-    Pdf: 'PDF',
-  } as const
 }

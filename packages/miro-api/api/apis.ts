@@ -99,6 +99,9 @@ import {MindmapCreateRequest} from '../model/mindmapCreateRequest'
 import {MindmapCursorPaged} from '../model/mindmapCursorPaged'
 import {MindmapItem} from '../model/mindmapItem'
 
+import {ErrorResponse} from '../model/errorResponse'
+import {RevokeTokenRequest} from '../model/revokeTokenRequest'
+
 import {EnterpriseGetOrganizationMembers200Response} from '../model/enterpriseGetOrganizationMembers200Response'
 import {OrganizationMember} from '../model/organizationMember'
 
@@ -338,7 +341,7 @@ export class MiroApi {
   }
 
   /**
-   * Returns a list of usage metrics for a specific app for a given time range, grouped by requested time period.  This endpoint requires an app management API token. It can be generated in the <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">Your Apps</a> section of Developer Hub.
+   * Returns a list of usage metrics for a specific app for a given time range, grouped by requested time period.  This endpoint requires an app management API token. It can be generated in the <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">Your Apps</a> section of Developer Hub.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
    * @summary Get app metrics
    * @param appId ID of the app to get metrics for.
    * @param startDate Start date of the period in UTC format. For example, 2024-12-31.
@@ -403,7 +406,7 @@ export class MiroApi {
   }
 
   /**
-   * Returns total usage metrics for a specific app since the app was created.  This endpoint requires an app management API token. It can be generated in <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">your apps</a> section of Developer Hub.
+   * Returns total usage metrics for a specific app since the app was created.  This endpoint requires an app management API token. It can be generated in <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">your apps</a> section of Developer Hub.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
    * @summary Get total app metrics
    * @param appId ID of the app to get total metrics for.
    */
@@ -436,7 +439,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a page of audit events.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a>
+   * Retrieves a page of audit events from the last 90 days. If you want to retrieve data that is older than 90 days, you can use the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/360017571434-Audit-logs#h_01J7EY4E0F67EFTRQ7BT688HW0\">CSV export feature</a>.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a>
    * @summary Get audit logs
    * @param createdAfter Retrieve audit logs created after the date and time provided. This is the start date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between &#x60;2023-03-30T17:26:50.000Z&#x60; and &#x60;2023-04-30T17:26:50.000Z&#x60;, provide &#x60;2023-03-30T17:26:50.000Z&#x60; as the value for the &#x60;createdAfter&#x60; parameter.&lt;br&gt;Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\&quot;
    * @param createdBefore Retrieve audit logs created before the date and time provided. This is the end date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between &#x60;2023-03-30T17:26:50.000Z&#x60; and &#x60;2023-04-30T17:26:50.000Z&#x60;, provide &#x60;2023-04-30T17:26:50.000Z&#x60; as the value for the &#x60;createdBefore&#x60; parameter.&lt;br&gt;Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
@@ -1317,7 +1320,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of boards that the user associated with the access token  has access to. You can filter and sort the boards by specifying URL query parameter values. If you are an Enterprise customer and a Company Admin, you can retrieve all boards, including all private boards (boards that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins). Note that you only get results instantaneously when you filter by the `team_id`, `project_id`, or both the `team_id` and `project_id`. If you use any other filter,  you need to give a few seconds for the indexing of newly created boards before retrieving boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters. Customize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.  If you\'re an Enterprise customer with Company Admin permissions:    - Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).   - Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error. <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
    * @summary Get boards
    * @param teamId
    * @param projectId
@@ -3788,6 +3791,32 @@ export class MiroApi {
   }
 
   /**
+   * Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
+   * @summary Revoke token (v2)
+   * @param revokeTokenRequest
+   */
+  async revokeTokenV2(revokeTokenRequest: RevokeTokenRequest): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/oauth/revoke'
+    let localVarQueryParameters = new URLSearchParams()
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(revokeTokenRequest, 'RevokeTokenRequest')),
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
    * Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization member
    * @param orgId id of the organization
@@ -6023,8 +6052,8 @@ export class MiroApi {
   }
 
   /**
-   * Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
-   * @summary Revoke token
+   * <p><b>Please use the new revoke endpoint <code>/v2/oauth/revoke</code>. This endpoint is considered vulnerable and deprecated due to access token passed publicly in the URL.</b></p> Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
+   * @summary Revoke token (v1)
    * @param accessToken Access token that you want to revoke
    */
   async revokeToken(accessToken: string): Promise<{response: Response; body?: any}> {

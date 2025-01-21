@@ -14,6 +14,7 @@
 
 
 # import models into model package
+from miro_api.models.actor import Actor
 from miro_api.models.add_project_member_request import AddProjectMemberRequest
 from miro_api.models.admin_role import AdminRole
 from miro_api.models.app_card_create_request import AppCardCreateRequest
@@ -35,7 +36,6 @@ from miro_api.models.basic_error import BasicError
 from miro_api.models.basic_error_organizations_enterprise_plan import BasicErrorOrganizationsEnterprisePlan
 from miro_api.models.board import Board
 from miro_api.models.board_changes import BoardChanges
-from miro_api.models.board_content_log_data import BoardContentLogData
 from miro_api.models.board_data_classification_label import BoardDataClassificationLabel
 from miro_api.models.board_export_job_id import BoardExportJobId
 from miro_api.models.board_export_job_status import BoardExportJobStatus
@@ -129,6 +129,7 @@ from miro_api.models.error403 import Error403
 from miro_api.models.error404 import Error404
 from miro_api.models.error409 import Error409
 from miro_api.models.error429 import Error429
+from miro_api.models.error_response import ErrorResponse
 from miro_api.models.fixed_ratio_geometry import FixedRatioGeometry
 from miro_api.models.fixed_ratio_geometry_platform_file_upload import FixedRatioGeometryPlatformFileUpload
 from miro_api.models.fixed_ratio_no_rotation_geometry import FixedRatioNoRotationGeometry
@@ -247,6 +248,7 @@ from miro_api.models.project_role import ProjectRole
 from miro_api.models.project_role_to_add import ProjectRoleToAdd
 from miro_api.models.project_settings import ProjectSettings
 from miro_api.models.relative_offset import RelativeOffset
+from miro_api.models.revoke_token_request import RevokeTokenRequest
 from miro_api.models.self_link import SelfLink
 from miro_api.models.self_link_platform_file_upload import SelfLinkPlatformFileUpload
 from miro_api.models.self_link_platform_tags import SelfLinkPlatformTags
@@ -323,7 +325,6 @@ from miro_api.models.update_sticky_note_style import UpdateStickyNoteStyle
 from miro_api.models.update_team_settings_request import UpdateTeamSettingsRequest
 from miro_api.models.update_text_style import UpdateTextStyle
 from miro_api.models.upload_file_from_device_data import UploadFileFromDeviceData
-from miro_api.models.user import User
 from miro_api.models.user_info_last_opened_by import UserInfoLastOpenedBy
 from miro_api.models.user_info_short import UserInfoShort
 from miro_api.models.user_information import UserInformation

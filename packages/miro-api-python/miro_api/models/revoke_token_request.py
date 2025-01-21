@@ -18,35 +18,23 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class BoardExportTaskResult(BaseModel):
+class RevokeTokenRequest(BaseModel):
     """
-    Board export task results.
+    RevokeTokenRequest
     """  # noqa: E501
 
-    board_id: StrictStr = Field(description="Unique identifier of the board.", alias="boardId")
-    error_message: Optional[StrictStr] = Field(
-        default=None,
-        description="Contains the description of the error that occurred during a board export task.",
-        alias="errorMessage",
-    )
-    export_link: Optional[StrictStr] = Field(
-        default=None, description="URL of the S3 bucket that contains the exported files.", alias="exportLink"
-    )
-    status: StrictStr = Field(
-        description="Indicates the status of the individual board export task. Possible values: `SUCCESS`: the board export task was completed successfully and the results are available. `ERROR`: the board export task encountered an error and failed to complete. The `errorMessage` field provides more information on the error."
-    )
-    error_type: Optional[StrictStr] = Field(
-        default=None,
-        description="Indicates the type of error encountered during the board export task. Possible values: `TEMPORARY`: the board export task encountered a temporary error. Retry the board export task after some time. `FATAL`: the board export failed and cannot be retried. This export will never succeed due to issues such as board corruption, non-existence, or other unrecoverable errors. Please verify the board's state or contact support if assistance is needed. `UNKNOWN`: the board export task encountered an unexpected exception. Retry the board export task after some time.",
-        alias="errorType",
+    access_token: StrictStr = Field(description="The access token to be revoked.", alias="accessToken")
+    client_id: StrictStr = Field(description="The client ID associated with the access token.", alias="clientId")
+    client_secret: StrictStr = Field(
+        description="The client secret associated with the access token.", alias="clientSecret"
     )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["boardId", "errorMessage", "exportLink", "status", "errorType"]
+    __properties: ClassVar[List[str]] = ["accessToken", "clientId", "clientSecret"]
 
     model_config = {
         "populate_by_name": True,
@@ -65,7 +53,7 @@ class BoardExportTaskResult(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of BoardExportTaskResult from a JSON string"""
+        """Create an instance of RevokeTokenRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -99,7 +87,7 @@ class BoardExportTaskResult(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of BoardExportTaskResult from a dict"""
+        """Create an instance of RevokeTokenRequest from a dict"""
         if obj is None:
             return None
 
@@ -108,11 +96,9 @@ class BoardExportTaskResult(BaseModel):
 
         _obj = cls.model_validate(
             {
-                "boardId": obj.get("boardId"),
-                "errorMessage": obj.get("errorMessage"),
-                "exportLink": obj.get("exportLink"),
-                "status": obj.get("status"),
-                "errorType": obj.get("errorType"),
+                "accessToken": obj.get("accessToken"),
+                "clientId": obj.get("clientId"),
+                "clientSecret": obj.get("clientSecret"),
             }
         )
         # store additional fields in additional_properties
