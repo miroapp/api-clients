@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "miro_api"
-version = "2.2.3"
+version = "2.2.4"
 description = "Miro API client"
 authors = ["Josip Janzic <josip@miro.com>"]
 readme = "README.md"
