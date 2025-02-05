@@ -95,6 +95,12 @@ import {ImageUpdateRequest} from '../model/imageUpdateRequest'
 
 import {GenericItemUpdate} from '../model/genericItemUpdate'
 
+import {CaseResponse} from '../model/caseResponse'
+import {LegalHoldResponse} from '../model/legalHoldResponse'
+import {PaginatedCaseResponse} from '../model/paginatedCaseResponse'
+import {PaginatedLegalHoldContentItemsResponse} from '../model/paginatedLegalHoldContentItemsResponse'
+import {PaginatedLegalHoldResponse} from '../model/paginatedLegalHoldResponse'
+
 import {MindmapCreateRequest} from '../model/mindmapCreateRequest'
 import {MindmapCursorPaged} from '../model/mindmapCursorPaged'
 import {MindmapItem} from '../model/mindmapItem'
@@ -509,7 +515,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get board classification
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -562,7 +568,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update board classification
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -617,7 +623,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves board classification settings for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves board classification settings for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization settings
    * @param orgId id of the organization
    */
@@ -654,7 +660,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Bulk update boards classification
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -705,7 +711,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get team settings
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -749,7 +755,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update team settings
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -890,7 +896,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the result of the board export job. The response provides more information about the board export job, such as the S3 link to the files created.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the result of the board export job. The response provides more information about the board export job, such as the S3 link to the files created.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get results for board export job
    * @param orgId Unique identifier of the organization.
    * @param jobId Unique identifier of the job.
@@ -930,7 +936,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the status of the board export job.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the status of the board export job.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get board export job status
    * @param orgId Unique identifier of the organization.
    * @param jobId Unique identifier of the board export job.
@@ -970,7 +976,7 @@ export class MiroApi {
   }
 
   /**
-   * Creates an export job for one or more boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Creates an export job for one or more boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Create board export job
    * @param orgId Unique identifier of the organization.
    * @param requestId Unique identifier of the board export job.
@@ -3630,6 +3636,266 @@ export class MiroApi {
   }
 
   /**
+   * Retrieves the list of eDiscovery cases in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Get all cases
+   * @param limit The maximum number of items in the result list.
+   * @param orgId The ID of the organization for which you want to retrieve the list of cases.
+   * @param cursor An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.
+   */
+  async getAllCases(
+    limit: number,
+    orgId: string,
+    query?: {
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: PaginatedCaseResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases'.replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling getAllCases.')
+    }
+
+    // verify required parameter 'limit' is not null or undefined
+    if (limit === null || limit === undefined) {
+      throw new Error('Required parameter limit was null or undefined when calling getAllCases.')
+    }
+
+    if (limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, 'number'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'PaginatedCaseResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves the list of all legal holds within a case for an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Get all legal holds within a case
+   * @param limit The maximum number of items in the result list.
+   * @param orgId The ID of the organization for which you want to retrieve the list of legal holds within a case.
+   * @param caseId The ID of the case for which you want to retrieve the list of legal holds.
+   * @param cursor An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.
+   */
+  async getAllLegalHolds(
+    limit: number,
+    orgId: string,
+    caseId: string,
+    query?: {
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: PaginatedLegalHoldResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}/legal-holds'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling getAllLegalHolds.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling getAllLegalHolds.')
+    }
+
+    // verify required parameter 'limit' is not null or undefined
+    if (limit === null || limit === undefined) {
+      throw new Error('Required parameter limit was null or undefined when calling getAllLegalHolds.')
+    }
+
+    if (limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, 'number'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'PaginatedLegalHoldResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information about a case in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Get case
+   * @param orgId The ID of the organization for which you want to retrieve the case information.
+   * @param caseId The ID of the case you want to retrieve.
+   */
+  async getCase(orgId: string, caseId: string): Promise<{response: Response; body: CaseResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling getCase.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling getCase.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'CaseResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information about a legal hold within a case for an organization. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Get legal hold information
+   * @param orgId The ID of the organization for which you want to retrieve the legal hold information.
+   * @param caseId The ID of the case for which you want to retrieve the legal hold information.
+   * @param legalHoldId The ID of the legal hold you want to retrieve.
+   */
+  async getLegalHold(
+    orgId: string,
+    caseId: string,
+    legalHoldId: string,
+  ): Promise<{response: Response; body: LegalHoldResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}/legal-holds/{legal_hold_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+      .replace('{' + 'legal_hold_id' + '}', encodeURIComponent(String(legalHoldId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling getLegalHold.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling getLegalHold.')
+    }
+    // verify required parameter 'legalHoldId' is not null or undefined
+    if (legalHoldId === null || legalHoldId === undefined) {
+      throw new Error('Required parameter legalHoldId was null or undefined when calling getLegalHold.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'LegalHoldResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Once a legal hold is in place you can review or explore the preserved Miro boards to ensure that all relevant data is intact and ready for legal proceedings or investigations. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/22120628583570-Review-boards-under-legal-hold\" target=_blank>Help Center page on reviewing boards under legal hold</a>. <br><br>This API lists all content items under a specific legal hold in a case for an organization. Please verify that the legal hold is in \'ACTIVE\' state to guarantee that the legal hold has finished processing the full list of content items under hold. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Get content items under legal hold
+   * @param orgId The ID of the organization for which you want to retrieve the list of content items under hold.
+   * @param caseId The ID of the case for which you want to retrieve the list of content items under hold.
+   * @param legalHoldId The ID of the legal hold for which you want to retrieve the list of content items under hold.
+   * @param limit The maximum number of items in the result list.
+   * @param cursor An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.
+   */
+  async getLegalHoldContentItems(
+    orgId: string,
+    caseId: string,
+    legalHoldId: string,
+    limit: number,
+    query?: {
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: PaginatedLegalHoldContentItemsResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}/legal-holds/{legal_hold_id}/content-items'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+      .replace('{' + 'legal_hold_id' + '}', encodeURIComponent(String(legalHoldId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling getLegalHoldContentItems.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling getLegalHoldContentItems.')
+    }
+    // verify required parameter 'legalHoldId' is not null or undefined
+    if (legalHoldId === null || legalHoldId === undefined) {
+      throw new Error('Required parameter legalHoldId was null or undefined when calling getLegalHoldContentItems.')
+    }
+
+    // verify required parameter 'limit' is not null or undefined
+    if (limit === null || limit === undefined) {
+      throw new Error('Required parameter limit was null or undefined when calling getLegalHoldContentItems.')
+    }
+
+    if (limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, 'number'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'PaginatedLegalHoldContentItemsResponse')
+
+    return {response, body}
+  }
+
+  /**
    * Adds a mind map node to a board. A root node is the starting point of a mind map. A node that is created under a root node is a child node. For information on mind maps, use cases, mind map structure, and more, see the <a href=\"https://developers.miro.com/docs/mind-maps\" target=_blank>Mind Map Overview</a> page. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/><br/> <b>Known limitations on node placement: </b> Currently, the create API supports explicit positions for nodes. This means that users can only place nodes based on the x, y coordinates provided in the position parameters. If the position is not provided in the request, nodes default to coordinates x=0, y=0, effectively placing them at the center of the board. <br /><br /><b>Upcoming changes:</b> We understand the importance of flexibility in node placement. We are actively working on implementing changes to support positioning nodes relative to their parent node as well. This enhancement offers a more dynamic and intuitive mind mapping experience. <br /><br />Additionally, we are actively working on providing the update API, further enhancing the functionality of mind map APIs.
    * @summary Create mind map node
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
@@ -3817,7 +4083,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization member
    * @param orgId id of the organization
    * @param memberId id of the organization member
@@ -3857,7 +4123,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization members
    * @param orgId id of the organization
    * @param emails
@@ -3949,7 +4215,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves organization information.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves organization information.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization info
    * @param orgId id of the organization
    */
@@ -3979,7 +4245,7 @@ export class MiroApi {
   }
 
   /**
-   * Add a Miro user to a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Add a Miro user to a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Add member in a project
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4028,7 +4294,7 @@ export class MiroApi {
   }
 
   /**
-   * Remove a member from a project. The user remains in the team even after the member is removed from a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Remove a member from a project. The user remains in the team even after the member is removed from a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Remove project member
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4082,7 +4348,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific project member.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves information for a specific project member.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get project member
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4136,7 +4402,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the list of members for a specific project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the list of members for a specific project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary List of project members
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4198,7 +4464,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates details of a project member, such as the member\'s role.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates details of a project member, such as the member\'s role.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update project member
    * @param orgId The ID of the organization to which the project member belongs.
    * @param teamId The ID of the team to which the project member belongs.
@@ -4254,7 +4520,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the project settings.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the project settings.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get project settings
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4301,7 +4567,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates the settings of a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates the settings of a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update project settings
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4352,7 +4618,7 @@ export class MiroApi {
   }
 
   /**
-   * Projects are essentially folders of boards with the option to manage user access for a smaller group of people within a team. Projects are here to help you organize your boards and make them easier to find and share. In other words, a project is a group of boards that you can share with your teammates all at once. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/360018262033-Projects\" target=_blank>Help Center page on Projects</a>. <br><br>This API creates a new project in an existing team of an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Projects are essentially folders of boards with the option to manage user access for a smaller group of people within a team. Projects are here to help you organize your boards and make them easier to find and share. In other words, a project is a group of boards that you can share with your teammates all at once. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/360018262033-Projects\" target=_blank>Help Center page on Projects</a>. <br><br>This API creates a new project in an existing team of an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Create project
    * @param orgId The ID of the organization within which you you want to create a project.
    * @param teamId The ID of the team within which you you want to create a project.
@@ -4394,7 +4660,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a project. After a project is deleted, all boards and users that belong to the project remain in the team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Deletes a project. After a project is deleted, all boards and users that belong to the project remain in the team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Delete project
    * @param orgId The ID of the organization from which you want to delete a project.
    * @param teamId The ID of the team from which you want to delete a project.
@@ -4441,7 +4707,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves project information, such as a name for an existing project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves project information, such as a name for an existing project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get project
    * @param orgId The ID of the organization from which you want to retrieve the project information.
    * @param teamId The ID of the team from which you want to retrieve the project information.
@@ -4488,7 +4754,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the list of projects in an existing team of an organization. You can retrieve all projects, including all private projects (projects that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the list of projects in an existing team of an organization. You can retrieve all projects, including all private projects (projects that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary List of projects
    * @param orgId The ID of the organization from which you want to retrieve the list of available projects.
    * @param teamId The ID of the team from which you want to retrieve the list of available projects.
@@ -4543,7 +4809,7 @@ export class MiroApi {
   }
 
   /**
-   * Update information about a project, such as the project name.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Update information about a project, such as the project name.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update project
    * @param orgId The ID of an Organization.
    * @param teamId The ID of a Team.
@@ -4592,7 +4858,7 @@ export class MiroApi {
   }
 
   /**
-   * Reset all sessions of a user.  Admins can now take immediate action to restrict user access to company data in case of security concerns. Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again. This is useful in situations where a user leaves the company, their credentials are compromised, or there\'s suspicious activity on their account.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Reset all sessions of a user.  Admins can now take immediate action to restrict user access to company data in case of security concerns. Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again. This is useful in situations where a user leaves the company, their credentials are compromised, or there\'s suspicious activity on their account.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Reset all sessions of a user
    * @param email Email ID of the user whose sessions you want to reset. Note that this user will be signed out from all devices.
    */
@@ -5336,7 +5602,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Delete team member from team
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5383,7 +5649,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves team member by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves team member by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get team member
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5430,7 +5696,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves team members by cursor.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves team members by cursor.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary List team members
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5492,7 +5758,7 @@ export class MiroApi {
   }
 
   /**
-   * Invites a new Miro user to an existing team. The user must exist in your Miro organization. Users who do not exist in your Miro organization can be invited to the team via [SCIM](https://developers.miro.com/docs/scim) and an external identity provider, such as Okta or Azure Active Directory.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Invites a new Miro user to an existing team. The user must exist in your Miro organization. Users who do not exist in your Miro organization can be invited to the team via [SCIM](https://developers.miro.com/docs/scim) and an external identity provider, such as Okta or Azure Active Directory.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Invite team members
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5534,7 +5800,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates team member role in team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates team member role in team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update team member
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5583,7 +5849,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves default team settings of an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves default team settings of an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get default team settings
    * @param orgId The id of an Organization.
    */
@@ -5616,7 +5882,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get team settings
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5653,7 +5919,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update team settings
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5695,7 +5961,7 @@ export class MiroApi {
   }
 
   /**
-   * Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Create team
    * @param orgId The id of the Organization.
    * @param createTeamRequest
@@ -5729,7 +5995,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Deletes an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Delete team
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5766,7 +6032,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get team
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5803,7 +6069,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary List teams
    * @param orgId The id of the Organization.
    * @param limit
@@ -5857,7 +6123,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://miro-survey.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update team
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.

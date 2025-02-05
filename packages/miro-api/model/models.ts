@@ -17,6 +17,7 @@ export * from './auditOrganization'
 export * from './auditPage'
 export * from './auditTeam'
 export * from './basicError'
+export * from './basicErrorEnterpriseUserSessionResetEnterprisePlan'
 export * from './basicErrorOrganizationsEnterprisePlan'
 export * from './board'
 export * from './boardChanges'
@@ -55,6 +56,8 @@ export * from './cardItem'
 export * from './cardStyle'
 export * from './cardStylePlatformbulkcreateoperation'
 export * from './cardUpdateRequest'
+export * from './caseRequest'
+export * from './caseResponse'
 export * from './connectorChangesData'
 export * from './connectorCreationData'
 export * from './connectorStyle'
@@ -176,6 +179,15 @@ export * from './itemStyle'
 export * from './itemTypeChange'
 export * from './items'
 export * from './itemsPage'
+export * from './legalHoldContentItemsResponse'
+export * from './legalHoldRequest'
+export * from './legalHoldRequestScope'
+export * from './legalHoldRequestScopeUsers'
+export * from './legalHoldRequestScopeUsersUsersInner'
+export * from './legalHoldResponse'
+export * from './legalHoldResponseScope'
+export * from './legalHoldResponseScopeUsers'
+export * from './legalHoldState'
 export * from './mindMapNodeGeometry'
 export * from './mindmapCreateRequest'
 export * from './mindmapCursorPaged'
@@ -202,6 +214,10 @@ export * from './organizationMember'
 export * from './organizationMembersSearchResponse'
 export * from './pageLinks'
 export * from './pageLinksPlatformExperimentalFeatures'
+export * from './paginatedCaseResponse'
+export * from './paginatedLegalHoldContentItemsResponse'
+export * from './paginatedLegalHoldResponse'
+export * from './pagination'
 export * from './parent'
 export * from './parentLinksEnvelope'
 export * from './parentLinksEnvelopePlatformContainers'
@@ -295,6 +311,7 @@ export * from './updateStickyNoteStyle'
 export * from './updateTeamSettingsRequest'
 export * from './updateTextStyle'
 export * from './uploadFileFromDeviceData'
+export * from './user'
 export * from './userInfoLastOpenedBy'
 export * from './userInfoShort'
 export * from './userInformation'
@@ -335,6 +352,7 @@ import {AuditOrganization} from './auditOrganization'
 import {AuditPage} from './auditPage'
 import {AuditTeam} from './auditTeam'
 import {BasicError} from './basicError'
+import {BasicErrorEnterpriseUserSessionResetEnterprisePlan} from './basicErrorEnterpriseUserSessionResetEnterprisePlan'
 import {BasicErrorOrganizationsEnterprisePlan} from './basicErrorOrganizationsEnterprisePlan'
 import {Board} from './board'
 import {BoardChanges} from './boardChanges'
@@ -373,6 +391,8 @@ import {CardItem} from './cardItem'
 import {CardStyle} from './cardStyle'
 import {CardStylePlatformbulkcreateoperation} from './cardStylePlatformbulkcreateoperation'
 import {CardUpdateRequest} from './cardUpdateRequest'
+import {CaseRequest} from './caseRequest'
+import {CaseResponse} from './caseResponse'
 import {ConnectorChangesData} from './connectorChangesData'
 import {ConnectorCreationData} from './connectorCreationData'
 import {ConnectorStyle} from './connectorStyle'
@@ -494,6 +514,15 @@ import {ItemStyle} from './itemStyle'
 import {ItemTypeChange} from './itemTypeChange'
 import {Items} from './items'
 import {ItemsPage} from './itemsPage'
+import {LegalHoldContentItemsResponse} from './legalHoldContentItemsResponse'
+import {LegalHoldRequest} from './legalHoldRequest'
+import {LegalHoldRequestScope} from './legalHoldRequestScope'
+import {LegalHoldRequestScopeUsers} from './legalHoldRequestScopeUsers'
+import {LegalHoldRequestScopeUsersUsersInner} from './legalHoldRequestScopeUsersUsersInner'
+import {LegalHoldResponse} from './legalHoldResponse'
+import {LegalHoldResponseScope} from './legalHoldResponseScope'
+import {LegalHoldResponseScopeUsers} from './legalHoldResponseScopeUsers'
+import {LegalHoldState} from './legalHoldState'
 import {MindMapNodeGeometry} from './mindMapNodeGeometry'
 import {MindmapCreateRequest} from './mindmapCreateRequest'
 import {MindmapCursorPaged} from './mindmapCursorPaged'
@@ -520,6 +549,10 @@ import {OrganizationMember} from './organizationMember'
 import {OrganizationMembersSearchResponse} from './organizationMembersSearchResponse'
 import {PageLinks} from './pageLinks'
 import {PageLinksPlatformExperimentalFeatures} from './pageLinksPlatformExperimentalFeatures'
+import {PaginatedCaseResponse} from './paginatedCaseResponse'
+import {PaginatedLegalHoldContentItemsResponse} from './paginatedLegalHoldContentItemsResponse'
+import {PaginatedLegalHoldResponse} from './paginatedLegalHoldResponse'
+import {Pagination} from './pagination'
 import {Parent} from './parent'
 import {ParentLinksEnvelope} from './parentLinksEnvelope'
 import {ParentLinksEnvelopePlatformContainers} from './parentLinksEnvelopePlatformContainers'
@@ -613,6 +646,7 @@ import {UpdateStickyNoteStyle} from './updateStickyNoteStyle'
 import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
 import {UpdateTextStyle} from './updateTextStyle'
 import {UploadFileFromDeviceData} from './uploadFileFromDeviceData'
+import {User} from './user'
 import {UserInfoLastOpenedBy} from './userInfoLastOpenedBy'
 import {UserInfoShort} from './userInfoShort'
 import {UserInformation} from './userInformation'
@@ -687,6 +721,7 @@ let enumsMap: {[index: string]: any} = {
   'ItemStyle.TextAlignEnum': ItemStyle.TextAlignEnum,
   'ItemStyle.TextAlignVerticalEnum': ItemStyle.TextAlignVerticalEnum,
   ItemTypeChange: ItemTypeChange,
+  LegalHoldState: LegalHoldState,
   'MindmapData.DirectionEnum': MindmapData.DirectionEnum,
   'MindmapStyle.ShapeEnum': MindmapStyle.ShapeEnum,
   'Organization.PlanEnum': Organization.PlanEnum,
@@ -812,6 +847,7 @@ let typeMap: {[index: string]: any} = {
   AuditPage: AuditPage,
   AuditTeam: AuditTeam,
   BasicError: BasicError,
+  BasicErrorEnterpriseUserSessionResetEnterprisePlan: BasicErrorEnterpriseUserSessionResetEnterprisePlan,
   BasicErrorOrganizationsEnterprisePlan: BasicErrorOrganizationsEnterprisePlan,
   Board: Board,
   BoardChanges: BoardChanges,
@@ -850,6 +886,8 @@ let typeMap: {[index: string]: any} = {
   CardStyle: CardStyle,
   CardStylePlatformbulkcreateoperation: CardStylePlatformbulkcreateoperation,
   CardUpdateRequest: CardUpdateRequest,
+  CaseRequest: CaseRequest,
+  CaseResponse: CaseResponse,
   ConnectorChangesData: ConnectorChangesData,
   ConnectorCreationData: ConnectorCreationData,
   ConnectorStyle: ConnectorStyle,
@@ -972,6 +1010,14 @@ let typeMap: {[index: string]: any} = {
   ItemStyle: ItemStyle,
   Items: Items,
   ItemsPage: ItemsPage,
+  LegalHoldContentItemsResponse: LegalHoldContentItemsResponse,
+  LegalHoldRequest: LegalHoldRequest,
+  LegalHoldRequestScope: LegalHoldRequestScope,
+  LegalHoldRequestScopeUsers: LegalHoldRequestScopeUsers,
+  LegalHoldRequestScopeUsersUsersInner: LegalHoldRequestScopeUsersUsersInner,
+  LegalHoldResponse: LegalHoldResponse,
+  LegalHoldResponseScope: LegalHoldResponseScope,
+  LegalHoldResponseScopeUsers: LegalHoldResponseScopeUsers,
   MindMapNodeGeometry: MindMapNodeGeometry,
   MindmapCreateRequest: MindmapCreateRequest,
   MindmapCursorPaged: MindmapCursorPaged,
@@ -998,6 +1044,10 @@ let typeMap: {[index: string]: any} = {
   OrganizationMembersSearchResponse: OrganizationMembersSearchResponse,
   PageLinks: PageLinks,
   PageLinksPlatformExperimentalFeatures: PageLinksPlatformExperimentalFeatures,
+  PaginatedCaseResponse: PaginatedCaseResponse,
+  PaginatedLegalHoldContentItemsResponse: PaginatedLegalHoldContentItemsResponse,
+  PaginatedLegalHoldResponse: PaginatedLegalHoldResponse,
+  Pagination: Pagination,
   Parent: Parent,
   ParentLinksEnvelope: ParentLinksEnvelope,
   ParentLinksEnvelopePlatformContainers: ParentLinksEnvelopePlatformContainers,
@@ -1089,6 +1139,7 @@ let typeMap: {[index: string]: any} = {
   UpdateTeamSettingsRequest: UpdateTeamSettingsRequest,
   UpdateTextStyle: UpdateTextStyle,
   UploadFileFromDeviceData: UploadFileFromDeviceData,
+  User: User,
   UserInfoLastOpenedBy: UserInfoLastOpenedBy,
   UserInfoShort: UserInfoShort,
   UserInformation: UserInformation,
