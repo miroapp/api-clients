@@ -19,6 +19,7 @@ model/auditOrganization.ts
 model/auditPage.ts
 model/auditTeam.ts
 model/basicError.ts
+model/basicErrorEnterpriseUserSessionResetEnterprisePlan.ts
 model/basicErrorOrganizationsEnterprisePlan.ts
 model/board.ts
 model/boardChanges.ts
@@ -57,6 +58,8 @@ model/cardItem.ts
 model/cardStyle.ts
 model/cardStylePlatformbulkcreateoperation.ts
 model/cardUpdateRequest.ts
+model/caseRequest.ts
+model/caseResponse.ts
 model/connectorChangesData.ts
 model/connectorCreationData.ts
 model/connectorStyle.ts
@@ -178,6 +181,15 @@ model/itemStyle.ts
 model/itemTypeChange.ts
 model/items.ts
 model/itemsPage.ts
+model/legalHoldContentItemsResponse.ts
+model/legalHoldRequest.ts
+model/legalHoldRequestScope.ts
+model/legalHoldRequestScopeUsers.ts
+model/legalHoldRequestScopeUsersUsersInner.ts
+model/legalHoldResponse.ts
+model/legalHoldResponseScope.ts
+model/legalHoldResponseScopeUsers.ts
+model/legalHoldState.ts
 model/mindMapNodeGeometry.ts
 model/mindmapCreateRequest.ts
 model/mindmapCursorPaged.ts
@@ -205,6 +217,10 @@ model/organizationMember.ts
 model/organizationMembersSearchResponse.ts
 model/pageLinks.ts
 model/pageLinksPlatformExperimentalFeatures.ts
+model/paginatedCaseResponse.ts
+model/paginatedLegalHoldContentItemsResponse.ts
+model/paginatedLegalHoldResponse.ts
+model/pagination.ts
 model/parent.ts
 model/parentLinksEnvelope.ts
 model/parentLinksEnvelopePlatformContainers.ts
@@ -298,6 +314,7 @@ model/updateStickyNoteStyle.ts
 model/updateTeamSettingsRequest.ts
 model/updateTextStyle.ts
 model/uploadFileFromDeviceData.ts
+model/user.ts
 model/userInfoLastOpenedBy.ts
 model/userInfoShort.ts
 model/userInformation.ts

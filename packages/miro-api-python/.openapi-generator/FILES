@@ -6,7 +6,7 @@ miro_api/api/board_classification_board_level_api.py
 miro_api/api/board_classification_organization_level_api.py
 miro_api/api/board_classification_team_level_api.py
 miro_api/api/board_content_logs_api.py
-miro_api/api/board_export_job_api.py
+miro_api/api/board_export_api.py
 miro_api/api/board_members_api.py
 miro_api/api/boards_api.py
 miro_api/api/bulk_operations_api.py
@@ -19,6 +19,7 @@ miro_api/api/frames_api.py
 miro_api/api/groups_api.py
 miro_api/api/images_api.py
 miro_api/api/items_api.py
+miro_api/api/legal_holds_api.py
 miro_api/api/mind_map_nodes_experimental_api.py
 miro_api/api/o_auth_api.py
 miro_api/api/organization_members_api.py
@@ -61,6 +62,7 @@ miro_api/docs/AuditOrganization.md
 miro_api/docs/AuditPage.md
 miro_api/docs/AuditTeam.md
 miro_api/docs/BasicError.md
+miro_api/docs/BasicErrorEnterpriseUserSessionResetEnterprisePlan.md
 miro_api/docs/BasicErrorOrganizationsEnterprisePlan.md
 miro_api/docs/Board.md
 miro_api/docs/BoardChanges.md
@@ -69,7 +71,7 @@ miro_api/docs/BoardClassificationOrganizationLevelApi.md
 miro_api/docs/BoardClassificationTeamLevelApi.md
 miro_api/docs/BoardContentLogsApi.md
 miro_api/docs/BoardDataClassificationLabel.md
-miro_api/docs/BoardExportJobApi.md
+miro_api/docs/BoardExportApi.md
 miro_api/docs/BoardExportJobId.md
 miro_api/docs/BoardExportJobStatus.md
 miro_api/docs/BoardExportResult.md
@@ -108,6 +110,8 @@ miro_api/docs/CardStyle.md
 miro_api/docs/CardStylePlatformbulkcreateoperation.md
 miro_api/docs/CardUpdateRequest.md
 miro_api/docs/CardsApi.md
+miro_api/docs/CaseRequest.md
+miro_api/docs/CaseResponse.md
 miro_api/docs/ConnectorChangesData.md
 miro_api/docs/ConnectorCreationData.md
 miro_api/docs/ConnectorStyle.md
@@ -238,6 +242,16 @@ miro_api/docs/ItemTypeChange.md
 miro_api/docs/Items.md
 miro_api/docs/ItemsApi.md
 miro_api/docs/ItemsPage.md
+miro_api/docs/LegalHoldContentItemsResponse.md
+miro_api/docs/LegalHoldRequest.md
+miro_api/docs/LegalHoldRequestScope.md
+miro_api/docs/LegalHoldRequestScopeUsers.md
+miro_api/docs/LegalHoldRequestScopeUsersUsersInner.md
+miro_api/docs/LegalHoldResponse.md
+miro_api/docs/LegalHoldResponseScope.md
+miro_api/docs/LegalHoldResponseScopeUsers.md
+miro_api/docs/LegalHoldState.md
+miro_api/docs/LegalHoldsApi.md
 miro_api/docs/MindMapNodeGeometry.md
 miro_api/docs/MindMapNodesExperimentalApi.md
 miro_api/docs/MindmapCreateRequest.md
@@ -267,6 +281,10 @@ miro_api/docs/OrganizationMembersSearchResponse.md
 miro_api/docs/OrganizationsApi.md
 miro_api/docs/PageLinks.md
 miro_api/docs/PageLinksPlatformExperimentalFeatures.md
+miro_api/docs/PaginatedCaseResponse.md
+miro_api/docs/PaginatedLegalHoldContentItemsResponse.md
+miro_api/docs/PaginatedLegalHoldResponse.md
+miro_api/docs/Pagination.md
 miro_api/docs/Parent.md
 miro_api/docs/ParentLinksEnvelope.md
 miro_api/docs/ParentLinksEnvelopePlatformContainers.md
@@ -372,6 +390,7 @@ miro_api/docs/UpdateStickyNoteStyle.md
 miro_api/docs/UpdateTeamSettingsRequest.md
 miro_api/docs/UpdateTextStyle.md
 miro_api/docs/UploadFileFromDeviceData.md
+miro_api/docs/User.md
 miro_api/docs/UserInfoLastOpenedBy.md
 miro_api/docs/UserInfoShort.md
 miro_api/docs/UserInformation.md
@@ -403,6 +422,7 @@ miro_api/models/audit_organization.py
 miro_api/models/audit_page.py
 miro_api/models/audit_team.py
 miro_api/models/basic_error.py
+miro_api/models/basic_error_enterprise_user_session_reset_enterprise_plan.py
 miro_api/models/basic_error_organizations_enterprise_plan.py
 miro_api/models/board.py
 miro_api/models/board_changes.py
@@ -441,6 +461,8 @@ miro_api/models/card_item.py
 miro_api/models/card_style.py
 miro_api/models/card_style_platformbulkcreateoperation.py
 miro_api/models/card_update_request.py
+miro_api/models/case_request.py
+miro_api/models/case_response.py
 miro_api/models/connector_changes_data.py
 miro_api/models/connector_creation_data.py
 miro_api/models/connector_style.py
@@ -563,6 +585,15 @@ miro_api/models/item_style.py
 miro_api/models/item_type_change.py
 miro_api/models/items.py
 miro_api/models/items_page.py
+miro_api/models/legal_hold_content_items_response.py
+miro_api/models/legal_hold_request.py
+miro_api/models/legal_hold_request_scope.py
+miro_api/models/legal_hold_request_scope_users.py
+miro_api/models/legal_hold_request_scope_users_users_inner.py
+miro_api/models/legal_hold_response.py
+miro_api/models/legal_hold_response_scope.py
+miro_api/models/legal_hold_response_scope_users.py
+miro_api/models/legal_hold_state.py
 miro_api/models/mind_map_node_geometry.py
 miro_api/models/mindmap_create_request.py
 miro_api/models/mindmap_cursor_paged.py
@@ -588,6 +619,10 @@ miro_api/models/organization_member.py
 miro_api/models/organization_members_search_response.py
 miro_api/models/page_links.py
 miro_api/models/page_links_platform_experimental_features.py
+miro_api/models/paginated_case_response.py
+miro_api/models/paginated_legal_hold_content_items_response.py
+miro_api/models/paginated_legal_hold_response.py
+miro_api/models/pagination.py
 miro_api/models/parent.py
 miro_api/models/parent_links_envelope.py
 miro_api/models/parent_links_envelope_platform_containers.py
@@ -681,6 +716,7 @@ miro_api/models/update_sticky_note_style.py
 miro_api/models/update_team_settings_request.py
 miro_api/models/update_text_style.py
 miro_api/models/upload_file_from_device_data.py
+miro_api/models/user.py
 miro_api/models/user_info_last_opened_by.py
 miro_api/models/user_info_short.py
 miro_api/models/user_information.py
@@ -714,6 +750,7 @@ miro_api/test/test_audit_organization.py
 miro_api/test/test_audit_page.py
 miro_api/test/test_audit_team.py
 miro_api/test/test_basic_error.py
+miro_api/test/test_basic_error_enterprise_user_session_reset_enterprise_plan.py
 miro_api/test/test_basic_error_organizations_enterprise_plan.py
 miro_api/test/test_board.py
 miro_api/test/test_board_changes.py
@@ -722,7 +759,7 @@ miro_api/test/test_board_classification_organization_level_api.py
 miro_api/test/test_board_classification_team_level_api.py
 miro_api/test/test_board_content_logs_api.py
 miro_api/test/test_board_data_classification_label.py
-miro_api/test/test_board_export_job_api.py
+miro_api/test/test_board_export_api.py
 miro_api/test/test_board_export_job_id.py
 miro_api/test/test_board_export_job_status.py
 miro_api/test/test_board_export_result.py
@@ -761,6 +798,8 @@ miro_api/test/test_card_style.py
 miro_api/test/test_card_style_platformbulkcreateoperation.py
 miro_api/test/test_card_update_request.py
 miro_api/test/test_cards_api.py
+miro_api/test/test_case_request.py
+miro_api/test/test_case_response.py
 miro_api/test/test_connector_changes_data.py
 miro_api/test/test_connector_creation_data.py
 miro_api/test/test_connector_style.py
@@ -891,6 +930,16 @@ miro_api/test/test_item_type_change.py
 miro_api/test/test_items.py
 miro_api/test/test_items_api.py
 miro_api/test/test_items_page.py
+miro_api/test/test_legal_hold_content_items_response.py
+miro_api/test/test_legal_hold_request.py
+miro_api/test/test_legal_hold_request_scope.py
+miro_api/test/test_legal_hold_request_scope_users.py
+miro_api/test/test_legal_hold_request_scope_users_users_inner.py
+miro_api/test/test_legal_hold_response.py
+miro_api/test/test_legal_hold_response_scope.py
+miro_api/test/test_legal_hold_response_scope_users.py
+miro_api/test/test_legal_hold_state.py
+miro_api/test/test_legal_holds_api.py
 miro_api/test/test_mind_map_node_geometry.py
 miro_api/test/test_mind_map_nodes_experimental_api.py
 miro_api/test/test_mindmap_create_request.py
@@ -920,6 +969,10 @@ miro_api/test/test_organization_members_search_response.py
 miro_api/test/test_organizations_api.py
 miro_api/test/test_page_links.py
 miro_api/test/test_page_links_platform_experimental_features.py
+miro_api/test/test_paginated_case_response.py
+miro_api/test/test_paginated_legal_hold_content_items_response.py
+miro_api/test/test_paginated_legal_hold_response.py
+miro_api/test/test_pagination.py
 miro_api/test/test_parent.py
 miro_api/test/test_parent_links_envelope.py
 miro_api/test/test_parent_links_envelope_platform_containers.py
@@ -1025,6 +1078,7 @@ miro_api/test/test_update_sticky_note_style.py
 miro_api/test/test_update_team_settings_request.py
 miro_api/test/test_update_text_style.py
 miro_api/test/test_upload_file_from_device_data.py
+miro_api/test/test_user.py
 miro_api/test/test_user_info_last_opened_by.py
 miro_api/test/test_user_info_short.py
 miro_api/test/test_user_information.py

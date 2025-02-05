@@ -107,6 +107,7 @@ export namespace ConnectorStyle {
   export const EndStrokeCapEnum = {
     None: 'none',
     Stealth: 'stealth',
+    RoundedStealth: 'rounded_stealth',
     Diamond: 'diamond',
     FilledDiamond: 'filled_diamond',
     Oval: 'oval',
@@ -125,6 +126,7 @@ export namespace ConnectorStyle {
   export const StartStrokeCapEnum = {
     None: 'none',
     Stealth: 'stealth',
+    RoundedStealth: 'rounded_stealth',
     Diamond: 'diamond',
     FilledDiamond: 'filled_diamond',
     Oval: 'oval',
