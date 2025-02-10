@@ -14,7 +14,7 @@ metadata:
 
 spec:
   type: library
-  owner: partner-enablement
+  owner: dev-ecosystem
   criticality: low
   lifecycle: production
   operations:
