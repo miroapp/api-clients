@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/api_client.py,37,4
+/miroapp/api-clients,36,25
+/miroapp/api-clients/tree/main/packages/miro-api-python/example,27,17
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/api/__init__.py,27,2
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/rest.py,14,3
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/api_extended.py,13,2
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/configuration.py,12,1
+/miroapp/api-clients/blob/main/packages/miro-api-python/example/app.py,9,6
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/api_response.py,8,2
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/miro_api_wrapper.py,7,2
