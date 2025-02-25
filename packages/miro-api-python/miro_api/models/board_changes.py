@@ -42,7 +42,7 @@ class BoardChanges(BaseModel):
     )
     project_id: Optional[StrictStr] = Field(
         default=None,
-        description="Unique identifier (ID) of the project to which the board must be added.",
+        description="Unique identifier (ID) of the project to which the board must be added. Note that Projects have been renamed to Spaces. Use this parameter to update the space.",
         alias="projectId",
     )
     additional_properties: Dict[str, Any] = {}
