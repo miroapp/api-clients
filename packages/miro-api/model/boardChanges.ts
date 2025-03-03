@@ -27,7 +27,7 @@ export class BoardChanges {
    */
   'teamId'?: string
   /**
-   * Unique identifier (ID) of the project to which the board must be added.
+   * Unique identifier (ID) of the project to which the board must be added. Note that Projects have been renamed to Spaces. Use this parameter to update the space.
    */
   'projectId'?: string
 
