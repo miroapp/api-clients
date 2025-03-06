@@ -1023,6 +1023,9 @@
           "404": {
             "$ref": "#/components/responses/404"
           },
+          "425": {
+            "$ref": "#/components/responses/425"
+          },
           "429": {
             "$ref": "#/components/responses/429"
           }
@@ -1624,7 +1627,7 @@
             "name": "project_id",
             "schema": {
               "type": "string",
-              "description": "The `project_id` for which you want to retrieve the list of boards. If this parameter is sent in the request, the `query` and `owner` parameters are ignored."
+              "description": "The `project_id` for which you want to retrieve the list of boards. Note that Projects have been renamed to Spaces. Use this as the unique identifier (ID) of the space. If this parameter is included in the request, the `query` and `owner` parameters are ignored."
             }
           },
           {
@@ -13660,7 +13663,7 @@
           },
           "projectId": {
             "type": "string",
-            "description": "Unique identifier (ID) of the project to which the board must be added."
+            "description": "Unique identifier (ID) of the project to which the board must be added. Note that Projects have been renamed to Spaces. Use this parameter to update the space."
           }
         }
       },
