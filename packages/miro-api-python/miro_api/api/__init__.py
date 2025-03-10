@@ -1151,6 +1151,7 @@ class MiroApiEndpoints:
             "401": None,
             "403": None,
             "404": None,
+            "425": None,
             "429": None,
         }
         response_data = self.api_client.call_api(*_param, _request_timeout=_request_timeout)
