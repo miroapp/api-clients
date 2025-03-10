@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,36,28
+/miroapp/api-clients/tree/main/packages/miro-api-python/example,27,19
+/miroapp/api-clients/blob/main/packages/miro-api-python/example/app.py,19,10
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/api_client.py,14,6
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/models/generic_item_cursor_paged.py,10,2
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/api_extended.py,8,2
+/miroapp/api-clients/tree/main/apps,5,5
+/miroapp/api-clients/tree/main/packages/miro-api-python,5,5
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/models/generic_item.py,5,2
+/miroapp/api-clients/blob/main/packages/miro-api-python/example/.sample.env,4,4
