@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,36,26
+/miroapp/api-clients/tree/main/packages/miro-api-python/example,31,16
+/miroapp/api-clients/blob/041de24ebf7955432b447d887ede066ad4c7e2c7/packages/generator/spec.json,12,9
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/models/geometry_no_rotation.py,11,1
+/miroapp/api-clients/blob/main/packages/miro-api-python/example/app.py,10,6
+/miroapp/api-clients/tree/main/packages/miro-api-python,8,8
+/miroapp/api-clients/tree/main,5,4
+/miroapp/api-clients/blob/main/packages/miro-api/api/apis.ts,3,3
+/miroapp/api-clients/blob/main/packages/miro-api/highlevel/FrameItem.ts,3,3
+/miroapp/api-clients/blob/main/packages/miro-api/highlevel/Api.ts,3,2
