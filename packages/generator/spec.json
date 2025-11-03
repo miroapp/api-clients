@@ -6,12 +6,16 @@
   "info": {
     "title": "Miro Developer Platform",
     "version": "v2.0",
+    "license": { "name": "Apache-2.0", "url": "https://www.apache.org/licenses/LICENSE-2.0" },
     "description": "<img src=\"https://content.pstmn.io/47449ea6-0ef7-4af2-bac1-e58a70e61c58/aW1hZ2UucG5n\" width=\"1685\" height=\"593\">\n\n### Miro Developer Platform concepts\n\n- New to the Miro Developer Platform? Interested in learning more about platform concepts??\n[Read our introduction page](https://beta.developers.miro.com/docs/introduction) and familiarize yourself with the Miro Developer Platform capabilities in a few minutes.\n\n\n### Getting started with the Miro REST API\n\n- [Quickstart (video):](https://beta.developers.miro.com/docs/try-out-the-rest-api-in-less-than-3-minutes) try the REST API in less than 3 minutes.\n- [Quickstart (article):](https://beta.developers.miro.com/docs/build-your-first-hello-world-app-1) get started and try the REST API in less than 3 minutes.\n\n\n### Miro REST API tutorials\n\nCheck out our how-to articles with step-by-step instructions and code examples so you can:\n\n- [Get started with OAuth 2.0 and Miro](https://beta.developers.miro.com/docs/getting-started-with-oauth)\n\n\n### Miro App Examples\n\nClone our [Miro App Examples repository](https://github.com/miroapp/app-examples) to get inspiration, customize, and explore apps built on top of Miro's Developer Platform 2.0.\n"
   },
   "servers": [
     {
-      "url": "https://api.miro.com/"
+      "url": "https://api.miro.com"
     }
+  ],
+  "security": [
+    { "oAuth2AuthCode": [] }
   ],
   "paths": {
     "/v1/oauth/revoke": {
@@ -4360,13 +4364,7 @@
         "tags": ["Bulk operations"]
       }
     },
-    "/v2/boards/{board_id_Platformbulkcreateoperation}/items": {
-      "parameters": [
-        {
-          "$ref": "#/components/parameters/boardId"
-        }
-      ]
-    },
+    
     "/v2/boards/{board_id}/frames": {
       "post": {
         "description": "Adds a frame to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>",
@@ -4976,7 +4974,7 @@
         "tags": ["frames"]
       }
     },
-    "/v2/boards/{board_id_PlatformContainers}/items": {
+    "x-removed-/v2/boards/{board_id_PlatformContainers}/items": {
       "get": {
         "description": "Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>",
         "operationId": "get-items-within-frame",
@@ -5146,7 +5144,7 @@
         "tags": ["items"]
       }
     },
-    "/v2/boards/{board_id_Platformcreateitemsinbulkusingfilefromdevice}/items/bulk": {
+    "x-removed-/v2/boards/{board_id_Platformcreateitemsinbulkusingfilefromdevice}/items/bulk": {
       "parameters": [
         {
           "$ref": "#/components/parameters/boardId"
@@ -6098,7 +6096,9 @@
                 }
               }
             }
-          }
+          },
+          "400": { "$ref": "#/components/responses/400" },
+          "404": { "$ref": "#/components/responses/404" }
         },
         "summary": "Get specific mind map node",
         "tags": ["Mind map nodes (experimental)"]
@@ -6269,7 +6269,8 @@
                 }
               }
             }
-          }
+          },
+          "400": { "$ref": "#/components/responses/400" }
         },
         "operationId": "get-mindmap-nodes-experimental",
         "description": "Retrieves a list of mind map nodes for a specific board.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>",
@@ -7451,7 +7452,7 @@
         "tags": ["Flowchart shapes (experimental)"]
       }
     },
-    "/v2/boards/{board_id_PlatformFileUpload}/documents": {
+    "x-removed-/v2/boards/{board_id_PlatformFileUpload}/documents": {
       "post": {
         "x-readme": {
           "explorer-enabled": false,
@@ -7566,7 +7567,7 @@
         "tags": ["documents"]
       }
     },
-    "/v2/boards/{board_id_PlatformFileUpload}/documents/{item_id}": {
+    "x-removed-/v2/boards/{board_id_PlatformFileUpload}/documents/{item_id}": {
       "patch": {
         "x-readme": {
           "explorer-enabled": false,
@@ -7664,7 +7665,7 @@
         "tags": ["documents"]
       }
     },
-    "/v2/boards/{board_id_PlatformFileUpload}/images": {
+    "x-removed-/v2/boards/{board_id_PlatformFileUpload}/images": {
       "post": {
         "x-readme": {
           "explorer-enabled": false,
@@ -7756,7 +7757,7 @@
         "tags": ["images"]
       }
     },
-    "/v2/boards/{board_id_PlatformFileUpload}/images/{item_id}": {
+    "x-removed-/v2/boards/{board_id_PlatformFileUpload}/images/{item_id}": {
       "patch": {
         "x-readme": {
           "explorer-enabled": false,
@@ -8364,7 +8365,7 @@
         "tags": ["groups"]
       }
     },
-    "/v2/boards/{board_id}/groups/{group_id}": {
+    "x-removed-/v2/boards/{board_id}/groups/{group_id}": {
       "get": {
         "description": "Returns a list of items in a specific group. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> per item ID",
         "operationId": "getGroupById",
@@ -8799,7 +8800,7 @@
         "tags": ["groups"]
       }
     },
-    "/v2/boards/{board_id}/groups/{group_id}?": {
+    "/v2/boards/{board_id}/groups/{group_id}": {
       "delete": {
         "description": "Deletes a group from a board. All the items in the groups are deleted along with the group.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>",
         "operationId": "deleteGroup",
@@ -9831,7 +9832,7 @@
         "tags": ["tags"]
       }
     },
-    "/v2/boards/{board_id_PlatformTags}/items": {
+    "x-removed-/v2/boards/tags/{board_id_PlatformTags}/items": {
       "get": {
         "description": "Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>",
         "operationId": "get-items-by-tag",
@@ -9988,7 +9989,7 @@
         "tags": ["tags"]
       }
     },
-    "/v2/boards/{board_id_PlatformTags}/items/{item_id}": {
+    "x-removed-/v2/boards/{board_id_PlatformTags}/items/{item_id}": {
       "post": {
         "description": "Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:   [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>",
         "operationId": "attach-tag-to-item",
@@ -12335,6 +12336,14 @@
     }
   },
   "components": {
+    "responses": {
+      "400": { "description": "Bad Request" },
+      "401": { "description": "Unauthorized" },
+      "403": { "description": "Forbidden" },
+      "404": { "description": "Not Found" },
+      "409": { "description": "Conflict" },
+      "429": { "description": "Too Many Requests" }
+    },
     "schemas": {
       "AuditPage": {
         "type": "object",
@@ -12391,7 +12400,7 @@
           "details": {
             "type": "object",
             "description": "Details json related to the audit event",
-            "example": "{ \"authType\": \"SSO\", \"mfaFactorType\": \"NONE\" }"
+            "example": { "authType": "SSO", "mfaFactorType": "NONE" }
           },
           "createdBy": {
             "$ref": "#/components/schemas/AuditCreatedBy"
@@ -12793,7 +12802,7 @@
             }
           }
         },
-        "required": ["user"]
+        "required": ["users"]
       },
       "LegalHoldResponse": {
         "type": "object",
@@ -12853,7 +12862,6 @@
           "name",
           "organizationId",
           "scope",
-          "scopeValue",
           "state"
         ]
       },
@@ -12912,6 +12920,10 @@
             "type": "string",
             "description": "Identifier for the piece of content referenced by a content item. In the case of a board, this represents the `boardKey` and can be used to export a board using the Discovery APIs.",
             "example": "uXjVOD6LSME="
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the content item."
           },
           "type": {
             "type": "string",
@@ -13097,7 +13109,7 @@
             "minItems": 1,
             "type": "array",
             "description": "List of board IDs to be exported.",
-            "example": "o9J_kzlUDmo=",
+            "example": ["o9J_kzlUDmo="],
             "items": {
               "type": "string",
               "description": "List of board IDs to be exported.",
@@ -14902,7 +14914,7 @@
           "successful": {
             "type": "array",
             "description": "Contains information about the invites that were successfully sent.",
-            "example": 3074457350804038700,
+            "example": [3074457350804038700],
             "items": {
               "type": "integer",
               "format": "int64",
@@ -16126,7 +16138,7 @@
           "code": {
             "type": "string",
             "description": "Code of the error",
-            "example": 2.074
+            "example": "2.074"
           },
           "message": {
             "type": "string",
@@ -16162,7 +16174,7 @@
           "code": {
             "type": "string",
             "description": "Code of the error",
-            "example": 2.074
+            "example": "2.074"
           },
           "message": {
             "type": "string",
@@ -18196,12 +18208,12 @@
       "WidgetId": {
         "type": "string",
         "description": "Unique identifier (ID) of the item on board",
-        "example": 3458764584681774600
+        "example": "3458764584681774600"
       },
       "GroupId": {
         "type": "string",
         "description": "Unique identifier (ID) of the Group",
-        "example": 3858764584681774600
+        "example": "3858764584681774600"
       },
       "GeometryPlatformgroups": {
         "type": "object",
@@ -20255,15 +20267,7 @@
         },
         "example": "MTY2OTg4NTIwMDAwMHwxMjM="
       },
-      "boardIdPlatformcreateitemsinbulkusingfilefromdevice": {
-        "description": "Unique identifier (ID) of the board where you want to create the item.",
-        "required": true,
-        "in": "path",
-        "name": "board_id",
-        "schema": {
-          "type": "string"
-        }
-      },
+      
       "boardId": {
         "description": "Unique identifier (ID) of the board where you want to create the item.",
         "required": true,
