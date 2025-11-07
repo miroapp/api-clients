@@ -20229,6 +20229,33 @@
             "$ref": "#/components/schemas/PageType"
           }
         }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "description": "Error response structure",
+        "properties": {
+          "status": {
+            "type": "integer",
+            "description": "HTTP status code"
+          },
+          "code": {
+            "type": "string",
+            "description": "Error code"
+          },
+          "message": {
+            "type": "string",
+            "description": "Error message"
+          },
+          "context": {
+            "type": "object",
+            "properties": {
+              "error": {
+                "type": "string",
+                "description": "Additional error context"
+              }
+            }
+          }
+        }
       }
     },
     "responses": {
@@ -20237,29 +20264,12 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 400
-                },
-                "code": {
-                  "type": "string",
-                  "example": "badRequest"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Bad request"
-                },
-                "context": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": 400,
+              "code": "badRequest",
+              "message": "Bad request"
             }
           }
         }
@@ -20269,29 +20279,12 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 401
-                },
-                "code": {
-                  "type": "string",
-                  "example": "unauthorized"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Unauthorized"
-                },
-                "context": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": 401,
+              "code": "unauthorized",
+              "message": "Unauthorized"
             }
           }
         }
@@ -20301,29 +20294,12 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 403
-                },
-                "code": {
-                  "type": "string",
-                  "example": "forbidden"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Forbidden"
-                },
-                "context": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": 403,
+              "code": "forbidden",
+              "message": "Forbidden"
             }
           }
         }
@@ -20333,29 +20309,12 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 404
-                },
-                "code": {
-                  "type": "string",
-                  "example": "notFound"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Not found"
-                },
-                "context": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": 404,
+              "code": "notFound",
+              "message": "Not found"
             }
           }
         }
@@ -20365,29 +20324,12 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 409
-                },
-                "code": {
-                  "type": "string",
-                  "example": "conflict"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Conflict"
-                },
-                "context": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": 409,
+              "code": "conflict",
+              "message": "Conflict"
             }
           }
         }
@@ -20397,29 +20339,12 @@
         "content": {
           "application/json": {
             "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "integer",
-                  "example": 429
-                },
-                "code": {
-                  "type": "string",
-                  "example": "tooManyRequests"
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Too many requests"
-                },
-                "context": {
-                  "type": "object",
-                  "properties": {
-                    "error": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
+              "$ref": "#/components/schemas/ErrorResponse"
+            },
+            "example": {
+              "status": 429,
+              "code": "tooManyRequests",
+              "message": "Too many requests"
             }
           }
         }
