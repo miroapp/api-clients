@@ -30,7 +30,7 @@ class TeamMemberChanges(BaseModel):
 
     role: Optional[StrictStr] = Field(
         default=None,
-        description=' Role of the team member. * "member":     Team member with full member permissions. * "admin":      Admin of a team. Team member with permission to manage team. * "team_guest": Team-guest user, user with access only to a team without access to organization. ',
+        description=' Role of the team member. * "member":     Team member with full member permissions. * "admin":      Admin of a team. Team member with permission to manage team. ',
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["role"]
@@ -41,8 +41,8 @@ class TeamMemberChanges(BaseModel):
         if value is None:
             return value
 
-        if value not in set(["member", "admin", "team_guest"]):
-            raise ValueError("must be one of enum values ('member', 'admin', 'team_guest')")
+        if value not in set(["member", "admin"]):
+            raise ValueError("must be one of enum values ('member', 'admin')")
         return value
 
     model_config = {

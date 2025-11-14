@@ -38,7 +38,7 @@ class BoardExportTaskResult(BaseModel):
         default=None, description="URL of the S3 bucket that contains the exported files.", alias="exportLink"
     )
     status: StrictStr = Field(
-        description="Indicates the status of the individual board export task. Possible values: `SUCCESS`: the board export task was completed successfully and the results are available. `ERROR`: the board export task encountered an error and failed to complete. The `errorMessage` field provides more information on the error."
+        description="Indicates the status of the individual board export task. Possible values: `SUCCESS`: the board export task was completed successfully and the results are available. `ERROR`: the board export task encountered an error and failed to complete. The `errorMessage` field provides more information on the error. `CANCELLED`: the board export task was cancelled. `SCHEDULED`: the board export task has been scheduled and is waiting to be processed. `CREATED`: the board export task was created."
     )
     error_type: Optional[StrictStr] = Field(
         default=None,
