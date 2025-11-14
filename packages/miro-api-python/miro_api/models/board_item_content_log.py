@@ -21,6 +21,7 @@ from datetime import datetime
 from pydantic import BaseModel, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from miro_api.models.actor import Actor
+from miro_api.models.relationship import Relationship
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -57,6 +58,9 @@ class BoardItemContentLog(BaseModel):
         default=None,
         description="Object that contains information about the state of the board item after the action was performed.",
     )
+    relationships: Optional[List[Relationship]] = Field(
+        default=None, description="Contains the list of items related to the current board item."
+    )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "id",
@@ -67,6 +71,7 @@ class BoardItemContentLog(BaseModel):
         "itemType",
         "itemId",
         "state",
+        "relationships",
     ]
 
     @field_validator("action_type")
@@ -134,6 +139,13 @@ class BoardItemContentLog(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of actor
         if self.actor:
             _dict["actor"] = self.actor.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in relationships (list)
+        _items = []
+        if self.relationships:
+            for _item in self.relationships:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["relationships"] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -160,6 +172,11 @@ class BoardItemContentLog(BaseModel):
                 "itemType": obj.get("itemType"),
                 "itemId": obj.get("itemId"),
                 "state": obj.get("state"),
+                "relationships": (
+                    [Relationship.from_dict(_item) for _item in obj["relationships"]]
+                    if obj.get("relationships") is not None
+                    else None
+                ),
             }
         )
         # store additional fields in additional_properties

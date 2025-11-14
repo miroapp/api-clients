@@ -63,7 +63,7 @@ class TeamSharingPolicySettingsChanges(BaseModel):
     )
     restrict_allowed_domains: Optional[StrictStr] = Field(
         default=None,
-        description=' * "enabled": Enabled. Restrict to listed domain. * "disabled": Disabled. No domain restriction. * "enabled_with_external_users_access": Enabled. Restrict to listed domain but allows external users to access. ',
+        description=' * "enabled": Enabled. Restrict to listed domain. * "disabled": Disabled. No domain restriction. * "enabled_with_external_user_access": Enabled. Restrict to listed domain but allows external users to access. ',
         alias="restrictAllowedDomains",
     )
     sharing_on_account: Optional[StrictStr] = Field(

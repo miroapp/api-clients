@@ -12,10 +12,6 @@
 
 export class LegalHoldContentItemsResponse {
   /**
-   * Unique identifier of the content item.
-   */
-  'id': string
-  /**
    * Identifier for the piece of content referenced by a content item. In the case of a board, this represents the `boardKey` and can be used to export a board using the Discovery APIs.
    */
   'contentId'?: string
@@ -29,11 +25,6 @@ export class LegalHoldContentItemsResponse {
 
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
-    {
-      name: 'id',
-      baseName: 'id',
-      type: 'string',
-    },
     {
       name: 'contentId',
       baseName: 'contentId',
