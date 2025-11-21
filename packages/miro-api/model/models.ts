@@ -17,15 +17,23 @@ export * from './auditOrganization'
 export * from './auditPage'
 export * from './auditTeam'
 export * from './basicError'
-export * from './basicErrorEnterpriseUserSessionResetEnterprisePlan'
 export * from './basicErrorOrganizationsEnterprisePlan'
 export * from './board'
 export * from './boardChanges'
 export * from './boardDataClassificationLabel'
+export * from './boardExportJob'
+export * from './boardExportJobCreator'
 export * from './boardExportJobId'
 export * from './boardExportJobStatus'
+export * from './boardExportJobTasksCount'
+export * from './boardExportJobTasksList'
+export * from './boardExportJobsList'
 export * from './boardExportResult'
+export * from './boardExportTask'
+export * from './boardExportTaskBoard'
+export * from './boardExportTaskExportLink'
 export * from './boardExportTaskResult'
+export * from './boardFormat'
 export * from './boardItemContentLog'
 export * from './boardLinks'
 export * from './boardMember'
@@ -41,6 +49,8 @@ export * from './boardSharingPolicy'
 export * from './boardSharingPolicyChange'
 export * from './boardSubscription'
 export * from './boardSubscriptionData'
+export * from './boardUserGroup'
+export * from './boardUserGroupsPage'
 export * from './boardWithLinks'
 export * from './boardWithLinksAndLastOpened'
 export * from './boardWithLinksAndWithoutProject'
@@ -66,9 +76,13 @@ export * from './connectorsCursorPaged'
 export * from './copyBoardChanges'
 export * from './createBoardExportRequest'
 export * from './createBoardSubscriptionRequest'
+export * from './createBoardUserGroupsRequest'
 export * from './createDocumentItemUsingFileFromDeviceRequestData'
 export * from './createFrameItem400Response'
+export * from './createGroupMemberRequest'
+export * from './createGroupRequest'
 export * from './createProjectRequest'
+export * from './createTeamGroupRequest'
 export * from './createTeamRequest'
 export * from './createdBy'
 export * from './createdByPlatformContainers'
@@ -103,6 +117,9 @@ export * from './embedUrlData'
 export * from './embedUrlDataChanges'
 export * from './embedUrlDataPlatformbulkcreateoperation'
 export * from './enterpriseGetOrganizationMembers200Response'
+export * from './enterpriseUpdateBoardExportJob200Response'
+export * from './enterpriseUpdateBoardExportJob200ResponseStatus'
+export * from './enterpriseUpdateBoardExportJobRequest'
 export * from './error400'
 export * from './error401'
 export * from './error403'
@@ -110,6 +127,7 @@ export * from './error404'
 export * from './error409'
 export * from './error429'
 export * from './errorResponse'
+export * from './exportJobStatus'
 export * from './fixedRatioGeometry'
 export * from './fixedRatioGeometryPlatformFileUpload'
 export * from './fixedRatioNoRotationGeometry'
@@ -152,7 +170,12 @@ export * from './getTagsFromItem400Response'
 export * from './getTagsResponse'
 export * from './group'
 export * from './groupData'
+export * from './groupMember'
+export * from './groupMembersPage'
 export * from './groupResponseShort'
+export * from './groupTeam'
+export * from './groupTeamsPage'
+export * from './groupsPage'
 export * from './imageCreateRequest'
 export * from './imageData'
 export * from './imageDataResponse'
@@ -214,6 +237,8 @@ export * from './organizationMember'
 export * from './organizationMembersSearchResponse'
 export * from './pageLinks'
 export * from './pageLinksPlatformExperimentalFeatures'
+export * from './paginatedCaseExportJobsResponse'
+export * from './paginatedCaseExportJobsResponseDataInner'
 export * from './paginatedCaseResponse'
 export * from './paginatedLegalHoldContentItemsResponse'
 export * from './paginatedLegalHoldResponse'
@@ -233,6 +258,7 @@ export * from './projectPage'
 export * from './projectRole'
 export * from './projectRoleToAdd'
 export * from './projectSettings'
+export * from './relationship'
 export * from './relativeOffset'
 export * from './revokeTokenRequest'
 export * from './selfLink'
@@ -272,6 +298,8 @@ export * from './teamCollaborationSettings'
 export * from './teamCollaborationSettingsChanges'
 export * from './teamCopyAccessLevelSettings'
 export * from './teamCopyAccessLevelSettingsChanges'
+export * from './teamGroup'
+export * from './teamGroupsPage'
 export * from './teamInformation'
 export * from './teamInvitationSettings'
 export * from './teamInvitationSettingsChanges'
@@ -303,6 +331,7 @@ export * from './updateCardStyle'
 export * from './updateConnectorStyle'
 export * from './updateFrameItem409Response'
 export * from './updateFrameStyle'
+export * from './updateGroupRequest'
 export * from './updateProjectMemberRequest'
 export * from './updateProjectRequest'
 export * from './updateProjectSettingsRequest'
@@ -310,6 +339,12 @@ export * from './updateShapeStyle'
 export * from './updateStickyNoteStyle'
 export * from './updateTeamSettingsRequest'
 export * from './updateTextStyle'
+export * from './updateUserGroupMembersRequest'
+export * from './updateUserGroupMembersResultError'
+export * from './updateUserGroupMembersResultErrorError'
+export * from './updateUserGroupMembersResultInner'
+export * from './updateUserGroupMembersResultOperation'
+export * from './updateUserGroupMembersResultSuccess'
 export * from './uploadFileFromDeviceData'
 export * from './user'
 export * from './userInfoLastOpenedBy'
@@ -352,15 +387,23 @@ import {AuditOrganization} from './auditOrganization'
 import {AuditPage} from './auditPage'
 import {AuditTeam} from './auditTeam'
 import {BasicError} from './basicError'
-import {BasicErrorEnterpriseUserSessionResetEnterprisePlan} from './basicErrorEnterpriseUserSessionResetEnterprisePlan'
 import {BasicErrorOrganizationsEnterprisePlan} from './basicErrorOrganizationsEnterprisePlan'
 import {Board} from './board'
 import {BoardChanges} from './boardChanges'
 import {BoardDataClassificationLabel} from './boardDataClassificationLabel'
+import {BoardExportJob} from './boardExportJob'
+import {BoardExportJobCreator} from './boardExportJobCreator'
 import {BoardExportJobId} from './boardExportJobId'
 import {BoardExportJobStatus} from './boardExportJobStatus'
+import {BoardExportJobTasksCount} from './boardExportJobTasksCount'
+import {BoardExportJobTasksList} from './boardExportJobTasksList'
+import {BoardExportJobsList} from './boardExportJobsList'
 import {BoardExportResult} from './boardExportResult'
+import {BoardExportTask} from './boardExportTask'
+import {BoardExportTaskBoard} from './boardExportTaskBoard'
+import {BoardExportTaskExportLink} from './boardExportTaskExportLink'
 import {BoardExportTaskResult} from './boardExportTaskResult'
+import {BoardFormat} from './boardFormat'
 import {BoardItemContentLog} from './boardItemContentLog'
 import {BoardLinks} from './boardLinks'
 import {BoardMember} from './boardMember'
@@ -376,6 +419,8 @@ import {BoardSharingPolicy} from './boardSharingPolicy'
 import {BoardSharingPolicyChange} from './boardSharingPolicyChange'
 import {BoardSubscription} from './boardSubscription'
 import {BoardSubscriptionData} from './boardSubscriptionData'
+import {BoardUserGroup} from './boardUserGroup'
+import {BoardUserGroupsPage} from './boardUserGroupsPage'
 import {BoardWithLinks} from './boardWithLinks'
 import {BoardWithLinksAndLastOpened} from './boardWithLinksAndLastOpened'
 import {BoardWithLinksAndWithoutProject} from './boardWithLinksAndWithoutProject'
@@ -401,9 +446,13 @@ import {ConnectorsCursorPaged} from './connectorsCursorPaged'
 import {CopyBoardChanges} from './copyBoardChanges'
 import {CreateBoardExportRequest} from './createBoardExportRequest'
 import {CreateBoardSubscriptionRequest} from './createBoardSubscriptionRequest'
+import {CreateBoardUserGroupsRequest} from './createBoardUserGroupsRequest'
 import {CreateDocumentItemUsingFileFromDeviceRequestData} from './createDocumentItemUsingFileFromDeviceRequestData'
 import {CreateFrameItem400Response} from './createFrameItem400Response'
+import {CreateGroupMemberRequest} from './createGroupMemberRequest'
+import {CreateGroupRequest} from './createGroupRequest'
 import {CreateProjectRequest} from './createProjectRequest'
+import {CreateTeamGroupRequest} from './createTeamGroupRequest'
 import {CreateTeamRequest} from './createTeamRequest'
 import {CreatedBy} from './createdBy'
 import {CreatedByPlatformContainers} from './createdByPlatformContainers'
@@ -438,6 +487,9 @@ import {EmbedUrlData} from './embedUrlData'
 import {EmbedUrlDataChanges} from './embedUrlDataChanges'
 import {EmbedUrlDataPlatformbulkcreateoperation} from './embedUrlDataPlatformbulkcreateoperation'
 import {EnterpriseGetOrganizationMembers200Response} from './enterpriseGetOrganizationMembers200Response'
+import {EnterpriseUpdateBoardExportJob200Response} from './enterpriseUpdateBoardExportJob200Response'
+import {EnterpriseUpdateBoardExportJob200ResponseStatus} from './enterpriseUpdateBoardExportJob200ResponseStatus'
+import {EnterpriseUpdateBoardExportJobRequest} from './enterpriseUpdateBoardExportJobRequest'
 import {Error400} from './error400'
 import {Error401} from './error401'
 import {Error403} from './error403'
@@ -445,6 +497,7 @@ import {Error404} from './error404'
 import {Error409} from './error409'
 import {Error429} from './error429'
 import {ErrorResponse} from './errorResponse'
+import {ExportJobStatus} from './exportJobStatus'
 import {FixedRatioGeometry} from './fixedRatioGeometry'
 import {FixedRatioGeometryPlatformFileUpload} from './fixedRatioGeometryPlatformFileUpload'
 import {FixedRatioNoRotationGeometry} from './fixedRatioNoRotationGeometry'
@@ -487,7 +540,12 @@ import {GetTagsFromItem400Response} from './getTagsFromItem400Response'
 import {GetTagsResponse} from './getTagsResponse'
 import {Group} from './group'
 import {GroupData} from './groupData'
+import {GroupMember} from './groupMember'
+import {GroupMembersPage} from './groupMembersPage'
 import {GroupResponseShort} from './groupResponseShort'
+import {GroupTeam} from './groupTeam'
+import {GroupTeamsPage} from './groupTeamsPage'
+import {GroupsPage} from './groupsPage'
 import {ImageCreateRequest} from './imageCreateRequest'
 import {ImageData} from './imageData'
 import {ImageDataResponse} from './imageDataResponse'
@@ -549,6 +607,8 @@ import {OrganizationMember} from './organizationMember'
 import {OrganizationMembersSearchResponse} from './organizationMembersSearchResponse'
 import {PageLinks} from './pageLinks'
 import {PageLinksPlatformExperimentalFeatures} from './pageLinksPlatformExperimentalFeatures'
+import {PaginatedCaseExportJobsResponse} from './paginatedCaseExportJobsResponse'
+import {PaginatedCaseExportJobsResponseDataInner} from './paginatedCaseExportJobsResponseDataInner'
 import {PaginatedCaseResponse} from './paginatedCaseResponse'
 import {PaginatedLegalHoldContentItemsResponse} from './paginatedLegalHoldContentItemsResponse'
 import {PaginatedLegalHoldResponse} from './paginatedLegalHoldResponse'
@@ -568,6 +628,7 @@ import {ProjectPage} from './projectPage'
 import {ProjectRole} from './projectRole'
 import {ProjectRoleToAdd} from './projectRoleToAdd'
 import {ProjectSettings} from './projectSettings'
+import {Relationship} from './relationship'
 import {RelativeOffset} from './relativeOffset'
 import {RevokeTokenRequest} from './revokeTokenRequest'
 import {SelfLink} from './selfLink'
@@ -607,6 +668,8 @@ import {TeamCollaborationSettings} from './teamCollaborationSettings'
 import {TeamCollaborationSettingsChanges} from './teamCollaborationSettingsChanges'
 import {TeamCopyAccessLevelSettings} from './teamCopyAccessLevelSettings'
 import {TeamCopyAccessLevelSettingsChanges} from './teamCopyAccessLevelSettingsChanges'
+import {TeamGroup} from './teamGroup'
+import {TeamGroupsPage} from './teamGroupsPage'
 import {TeamInformation} from './teamInformation'
 import {TeamInvitationSettings} from './teamInvitationSettings'
 import {TeamInvitationSettingsChanges} from './teamInvitationSettingsChanges'
@@ -638,6 +701,7 @@ import {UpdateCardStyle} from './updateCardStyle'
 import {UpdateConnectorStyle} from './updateConnectorStyle'
 import {UpdateFrameItem409Response} from './updateFrameItem409Response'
 import {UpdateFrameStyle} from './updateFrameStyle'
+import {UpdateGroupRequest} from './updateGroupRequest'
 import {UpdateProjectMemberRequest} from './updateProjectMemberRequest'
 import {UpdateProjectRequest} from './updateProjectRequest'
 import {UpdateProjectSettingsRequest} from './updateProjectSettingsRequest'
@@ -645,6 +709,12 @@ import {UpdateShapeStyle} from './updateShapeStyle'
 import {UpdateStickyNoteStyle} from './updateStickyNoteStyle'
 import {UpdateTeamSettingsRequest} from './updateTeamSettingsRequest'
 import {UpdateTextStyle} from './updateTextStyle'
+import {UpdateUserGroupMembersRequest} from './updateUserGroupMembersRequest'
+import {UpdateUserGroupMembersResultError} from './updateUserGroupMembersResultError'
+import {UpdateUserGroupMembersResultErrorError} from './updateUserGroupMembersResultErrorError'
+import {UpdateUserGroupMembersResultInner} from './updateUserGroupMembersResultInner'
+import {UpdateUserGroupMembersResultOperation} from './updateUserGroupMembersResultOperation'
+import {UpdateUserGroupMembersResultSuccess} from './updateUserGroupMembersResultSuccess'
 import {UploadFileFromDeviceData} from './uploadFileFromDeviceData'
 import {User} from './user'
 import {UserInfoLastOpenedBy} from './userInfoLastOpenedBy'
@@ -666,6 +736,7 @@ let enumsMap: {[index: string]: any} = {
   'AppCardDataChanges.StatusEnum': AppCardDataChanges.StatusEnum,
   'AppCardDataResponse.StatusEnum': AppCardDataResponse.StatusEnum,
   'AuditCreatedBy.TypeEnum': AuditCreatedBy.TypeEnum,
+  BoardFormat: BoardFormat,
   'BoardItemContentLog.ActionTypeEnum': BoardItemContentLog.ActionTypeEnum,
   'BoardItemContentLog.ItemTypeEnum': BoardItemContentLog.ItemTypeEnum,
   'BoardMember.RoleEnum': BoardMember.RoleEnum,
@@ -685,6 +756,7 @@ let enumsMap: {[index: string]: any} = {
   'BoardSharingPolicyChange.OrganizationAccessEnum': BoardSharingPolicyChange.OrganizationAccessEnum,
   'BoardSharingPolicyChange.TeamAccessEnum': BoardSharingPolicyChange.TeamAccessEnum,
   'BoardSubscription.StatusEnum': BoardSubscription.StatusEnum,
+  'BoardUserGroup.RoleEnum': BoardUserGroup.RoleEnum,
   'Caption.TextAlignVerticalEnum': Caption.TextAlignVerticalEnum,
   'ConnectorChangesData.ShapeEnum': ConnectorChangesData.ShapeEnum,
   'ConnectorCreationData.ShapeEnum': ConnectorCreationData.ShapeEnum,
@@ -693,8 +765,9 @@ let enumsMap: {[index: string]: any} = {
   'ConnectorStyle.StrokeStyleEnum': ConnectorStyle.StrokeStyleEnum,
   'ConnectorStyle.TextOrientationEnum': ConnectorStyle.TextOrientationEnum,
   'ConnectorWithLinks.ShapeEnum': ConnectorWithLinks.ShapeEnum,
-  'CreateBoardExportRequest.BoardFormatEnum': CreateBoardExportRequest.BoardFormatEnum,
   'CreateBoardSubscriptionRequest.StatusEnum': CreateBoardSubscriptionRequest.StatusEnum,
+  'CreateBoardUserGroupsRequest.RoleEnum': CreateBoardUserGroupsRequest.RoleEnum,
+  'CreateTeamGroupRequest.RoleEnum': CreateTeamGroupRequest.RoleEnum,
   'CustomField.IconShapeEnum': CustomField.IconShapeEnum,
   'CustomFieldPlatformTags.IconShapeEnum': CustomFieldPlatformTags.IconShapeEnum,
   'CustomFieldPlatformbulkcreateoperation.IconShapeEnum': CustomFieldPlatformbulkcreateoperation.IconShapeEnum,
@@ -703,6 +776,8 @@ let enumsMap: {[index: string]: any} = {
   'EmbedUrlData.ModeEnum': EmbedUrlData.ModeEnum,
   'EmbedUrlDataChanges.ModeEnum': EmbedUrlDataChanges.ModeEnum,
   'EmbedUrlDataPlatformbulkcreateoperation.ModeEnum': EmbedUrlDataPlatformbulkcreateoperation.ModeEnum,
+  'EnterpriseUpdateBoardExportJobRequest.StatusEnum': EnterpriseUpdateBoardExportJobRequest.StatusEnum,
+  ExportJobStatus: ExportJobStatus,
   'FrameChanges.FormatEnum': FrameChanges.FormatEnum,
   'FrameChanges.TypeEnum': FrameChanges.TypeEnum,
   'FrameData.FormatEnum': FrameData.FormatEnum,
@@ -710,6 +785,7 @@ let enumsMap: {[index: string]: any} = {
   'FrameDataPlatformContainers.FormatEnum': FrameDataPlatformContainers.FormatEnum,
   'FrameDataPlatformContainers.TypeEnum': FrameDataPlatformContainers.TypeEnum,
   'GenericSubscription.StatusEnum': GenericSubscription.StatusEnum,
+  'GroupTeam.RoleEnum': GroupTeam.RoleEnum,
   'ItemConnectionChangesData.SnapToEnum': ItemConnectionChangesData.SnapToEnum,
   'ItemConnectionCreationData.SnapToEnum': ItemConnectionCreationData.SnapToEnum,
   'ItemDataChanges.StatusEnum': ItemDataChanges.StatusEnum,
@@ -770,6 +846,7 @@ let enumsMap: {[index: string]: any} = {
   'TeamCopyAccessLevelSettingsChanges.CopyAccessLevelEnum': TeamCopyAccessLevelSettingsChanges.CopyAccessLevelEnum,
   'TeamCopyAccessLevelSettingsChanges.CopyAccessLevelLimitationEnum':
     TeamCopyAccessLevelSettingsChanges.CopyAccessLevelLimitationEnum,
+  'TeamGroup.RoleEnum': TeamGroup.RoleEnum,
   'TeamInvitationSettings.InviteExternalUsersEnum': TeamInvitationSettings.InviteExternalUsersEnum,
   'TeamInvitationSettings.WhoCanInviteEnum': TeamInvitationSettings.WhoCanInviteEnum,
   'TeamInvitationSettingsChanges.InviteExternalUsersEnum': TeamInvitationSettingsChanges.InviteExternalUsersEnum,
@@ -820,6 +897,7 @@ let enumsMap: {[index: string]: any} = {
   'UpdateStickyNoteStyle.TextAlignVerticalEnum': UpdateStickyNoteStyle.TextAlignVerticalEnum,
   'UpdateTextStyle.FontFamilyEnum': UpdateTextStyle.FontFamilyEnum,
   'UpdateTextStyle.TextAlignEnum': UpdateTextStyle.TextAlignEnum,
+  UpdateUserGroupMembersResultOperation: UpdateUserGroupMembersResultOperation,
   'WidgetDataOutput.ModeEnum': WidgetDataOutput.ModeEnum,
   'WidgetDataOutput.StatusEnum': WidgetDataOutput.StatusEnum,
   'WidgetDataOutput.ShapeEnum': WidgetDataOutput.ShapeEnum,
@@ -847,14 +925,21 @@ let typeMap: {[index: string]: any} = {
   AuditPage: AuditPage,
   AuditTeam: AuditTeam,
   BasicError: BasicError,
-  BasicErrorEnterpriseUserSessionResetEnterprisePlan: BasicErrorEnterpriseUserSessionResetEnterprisePlan,
   BasicErrorOrganizationsEnterprisePlan: BasicErrorOrganizationsEnterprisePlan,
   Board: Board,
   BoardChanges: BoardChanges,
   BoardDataClassificationLabel: BoardDataClassificationLabel,
+  BoardExportJob: BoardExportJob,
+  BoardExportJobCreator: BoardExportJobCreator,
   BoardExportJobId: BoardExportJobId,
   BoardExportJobStatus: BoardExportJobStatus,
+  BoardExportJobTasksCount: BoardExportJobTasksCount,
+  BoardExportJobTasksList: BoardExportJobTasksList,
+  BoardExportJobsList: BoardExportJobsList,
   BoardExportResult: BoardExportResult,
+  BoardExportTask: BoardExportTask,
+  BoardExportTaskBoard: BoardExportTaskBoard,
+  BoardExportTaskExportLink: BoardExportTaskExportLink,
   BoardExportTaskResult: BoardExportTaskResult,
   BoardItemContentLog: BoardItemContentLog,
   BoardLinks: BoardLinks,
@@ -871,6 +956,8 @@ let typeMap: {[index: string]: any} = {
   BoardSharingPolicyChange: BoardSharingPolicyChange,
   BoardSubscription: BoardSubscription,
   BoardSubscriptionData: BoardSubscriptionData,
+  BoardUserGroup: BoardUserGroup,
+  BoardUserGroupsPage: BoardUserGroupsPage,
   BoardWithLinks: BoardWithLinks,
   BoardWithLinksAndLastOpened: BoardWithLinksAndLastOpened,
   BoardWithLinksAndWithoutProject: BoardWithLinksAndWithoutProject,
@@ -896,9 +983,13 @@ let typeMap: {[index: string]: any} = {
   CopyBoardChanges: CopyBoardChanges,
   CreateBoardExportRequest: CreateBoardExportRequest,
   CreateBoardSubscriptionRequest: CreateBoardSubscriptionRequest,
+  CreateBoardUserGroupsRequest: CreateBoardUserGroupsRequest,
   CreateDocumentItemUsingFileFromDeviceRequestData: CreateDocumentItemUsingFileFromDeviceRequestData,
   CreateFrameItem400Response: CreateFrameItem400Response,
+  CreateGroupMemberRequest: CreateGroupMemberRequest,
+  CreateGroupRequest: CreateGroupRequest,
   CreateProjectRequest: CreateProjectRequest,
+  CreateTeamGroupRequest: CreateTeamGroupRequest,
   CreateTeamRequest: CreateTeamRequest,
   CreatedBy: CreatedBy,
   CreatedByPlatformContainers: CreatedByPlatformContainers,
@@ -934,6 +1025,9 @@ let typeMap: {[index: string]: any} = {
   EmbedUrlDataChanges: EmbedUrlDataChanges,
   EmbedUrlDataPlatformbulkcreateoperation: EmbedUrlDataPlatformbulkcreateoperation,
   EnterpriseGetOrganizationMembers200Response: EnterpriseGetOrganizationMembers200Response,
+  EnterpriseUpdateBoardExportJob200Response: EnterpriseUpdateBoardExportJob200Response,
+  EnterpriseUpdateBoardExportJob200ResponseStatus: EnterpriseUpdateBoardExportJob200ResponseStatus,
+  EnterpriseUpdateBoardExportJobRequest: EnterpriseUpdateBoardExportJobRequest,
   Error400: Error400,
   Error401: Error401,
   Error403: Error403,
@@ -983,7 +1077,12 @@ let typeMap: {[index: string]: any} = {
   GetTagsResponse: GetTagsResponse,
   Group: Group,
   GroupData: GroupData,
+  GroupMember: GroupMember,
+  GroupMembersPage: GroupMembersPage,
   GroupResponseShort: GroupResponseShort,
+  GroupTeam: GroupTeam,
+  GroupTeamsPage: GroupTeamsPage,
+  GroupsPage: GroupsPage,
   ImageCreateRequest: ImageCreateRequest,
   ImageData: ImageData,
   ImageDataResponse: ImageDataResponse,
@@ -1044,6 +1143,8 @@ let typeMap: {[index: string]: any} = {
   OrganizationMembersSearchResponse: OrganizationMembersSearchResponse,
   PageLinks: PageLinks,
   PageLinksPlatformExperimentalFeatures: PageLinksPlatformExperimentalFeatures,
+  PaginatedCaseExportJobsResponse: PaginatedCaseExportJobsResponse,
+  PaginatedCaseExportJobsResponseDataInner: PaginatedCaseExportJobsResponseDataInner,
   PaginatedCaseResponse: PaginatedCaseResponse,
   PaginatedLegalHoldContentItemsResponse: PaginatedLegalHoldContentItemsResponse,
   PaginatedLegalHoldResponse: PaginatedLegalHoldResponse,
@@ -1062,6 +1163,7 @@ let typeMap: {[index: string]: any} = {
   ProjectMemberPage: ProjectMemberPage,
   ProjectPage: ProjectPage,
   ProjectSettings: ProjectSettings,
+  Relationship: Relationship,
   RelativeOffset: RelativeOffset,
   RevokeTokenRequest: RevokeTokenRequest,
   SelfLink: SelfLink,
@@ -1100,6 +1202,8 @@ let typeMap: {[index: string]: any} = {
   TeamCollaborationSettingsChanges: TeamCollaborationSettingsChanges,
   TeamCopyAccessLevelSettings: TeamCopyAccessLevelSettings,
   TeamCopyAccessLevelSettingsChanges: TeamCopyAccessLevelSettingsChanges,
+  TeamGroup: TeamGroup,
+  TeamGroupsPage: TeamGroupsPage,
   TeamInformation: TeamInformation,
   TeamInvitationSettings: TeamInvitationSettings,
   TeamInvitationSettingsChanges: TeamInvitationSettingsChanges,
@@ -1131,6 +1235,7 @@ let typeMap: {[index: string]: any} = {
   UpdateConnectorStyle: UpdateConnectorStyle,
   UpdateFrameItem409Response: UpdateFrameItem409Response,
   UpdateFrameStyle: UpdateFrameStyle,
+  UpdateGroupRequest: UpdateGroupRequest,
   UpdateProjectMemberRequest: UpdateProjectMemberRequest,
   UpdateProjectRequest: UpdateProjectRequest,
   UpdateProjectSettingsRequest: UpdateProjectSettingsRequest,
@@ -1138,6 +1243,11 @@ let typeMap: {[index: string]: any} = {
   UpdateStickyNoteStyle: UpdateStickyNoteStyle,
   UpdateTeamSettingsRequest: UpdateTeamSettingsRequest,
   UpdateTextStyle: UpdateTextStyle,
+  UpdateUserGroupMembersRequest: UpdateUserGroupMembersRequest,
+  UpdateUserGroupMembersResultError: UpdateUserGroupMembersResultError,
+  UpdateUserGroupMembersResultErrorError: UpdateUserGroupMembersResultErrorError,
+  UpdateUserGroupMembersResultInner: UpdateUserGroupMembersResultInner,
+  UpdateUserGroupMembersResultSuccess: UpdateUserGroupMembersResultSuccess,
   UploadFileFromDeviceData: UploadFileFromDeviceData,
   User: User,
   UserInfoLastOpenedBy: UserInfoLastOpenedBy,
