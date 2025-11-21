@@ -23,11 +23,11 @@ export class BoardChanges {
   'name'?: string = 'Untitled'
   'policy'?: BoardPolicyChange
   /**
-   * Unique identifier (ID) of the team where the board must be placed.
+   * Unique identifier (ID) of the team where the board must be placed.  **Note**: On Enterprise plan, boards can be moved via API by Board Owners, Co-Owners, and Content Admins. This behavior differs from the Miro UI, where only Board Owners can move boards. This difference is **intentional** and works as designed. On non-Enterprise plans, only Board Owners can move boards between teams—both via the API and the Miro UI.
    */
   'teamId'?: string
   /**
-   * Unique identifier (ID) of the project to which the board must be added.
+   * Unique identifier (ID) of the project to which the board must be added.  **Note**: Projects have been renamed to Spaces. Use this parameter to update the space. For Starter and Edu plans, Team Admins looking to move boards between Spaces/Projects of the same team would need to be direct Board Editors on the boards to move.
    */
   'projectId'?: string
 

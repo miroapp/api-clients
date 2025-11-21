@@ -28,8 +28,8 @@ class CaseRequest(BaseModel):
     CaseRequest
     """  # noqa: E501
 
-    name: StrictStr = Field(description="The name of the case")
-    description: Optional[StrictStr] = Field(default=None, description="The description of the case")
+    name: StrictStr = Field(description="The name of the case.")
+    description: Optional[StrictStr] = Field(default=None, description="The description of the case.")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["name", "description"]
 

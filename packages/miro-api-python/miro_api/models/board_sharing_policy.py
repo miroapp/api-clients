@@ -17,7 +17,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr, field_validator
+from pydantic import BaseModel, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,6 +29,11 @@ class BoardSharingPolicy(BaseModel):
     """  # noqa: E501
 
     access: Optional[StrictStr] = Field(default=None, description="Defines the public-level access to the board.")
+    access_password_required: Optional[StrictBool] = Field(
+        default=False,
+        description="Defines if a password is required to access the board.",
+        alias="accessPasswordRequired",
+    )
     invite_to_account_and_board_link_access: Optional[StrictStr] = Field(
         default="no_access",
         description="Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.",
@@ -45,6 +50,7 @@ class BoardSharingPolicy(BaseModel):
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "access",
+        "accessPasswordRequired",
         "inviteToAccountAndBoardLinkAccess",
         "organizationAccess",
         "teamAccess",
@@ -153,6 +159,9 @@ class BoardSharingPolicy(BaseModel):
         _obj = cls.model_validate(
             {
                 "access": obj.get("access"),
+                "accessPasswordRequired": (
+                    obj.get("accessPasswordRequired") if obj.get("accessPasswordRequired") is not None else False
+                ),
                 "inviteToAccountAndBoardLinkAccess": (
                     obj.get("inviteToAccountAndBoardLinkAccess")
                     if obj.get("inviteToAccountAndBoardLinkAccess") is not None
