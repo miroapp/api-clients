@@ -17,9 +17,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr, field_validator
+from pydantic import BaseModel, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,7 +28,6 @@ class LegalHoldContentItemsResponse(BaseModel):
     LegalHoldContentItemsResponse
     """  # noqa: E501
 
-    id: Annotated[str, Field(strict=True)] = Field(description="Unique identifier of the content item.")
     content_id: Optional[StrictStr] = Field(
         default=None,
         description="Identifier for the piece of content referenced by a content item. In the case of a board, this represents the `boardKey` and can be used to export a board using the Discovery APIs.",
@@ -37,14 +35,7 @@ class LegalHoldContentItemsResponse(BaseModel):
     )
     type: StrictStr = Field(description="Type of the content item that is returned. ")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "contentId", "type"]
-
-    @field_validator("id")
-    def id_validate_regular_expression(cls, value):
-        """Validates the regular expression"""
-        if not re.match(r"^[0-9]+$", value):
-            raise ValueError(r"must validate the regular expression /^[0-9]+$/")
-        return value
+    __properties: ClassVar[List[str]] = ["contentId", "type"]
 
     model_config = {
         "populate_by_name": True,
@@ -104,7 +95,7 @@ class LegalHoldContentItemsResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"id": obj.get("id"), "contentId": obj.get("contentId"), "type": obj.get("type")})
+        _obj = cls.model_validate({"contentId": obj.get("contentId"), "type": obj.get("type")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

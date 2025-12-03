@@ -16,7 +16,7 @@ export class TeamMember {
    */
   'id': string
   /**
-   *  Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"non_team\":   External user, non-team user. * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
+   *  Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"non_team\":   External user, non-team user. * \"team_guest\": (Deprecated) Team-guest user, user with access only to a team without access to organization.
    */
   'role': string | (typeof TeamMember.RoleEnum)[keyof typeof TeamMember.RoleEnum]
   /**
@@ -102,6 +102,5 @@ export namespace TeamMember {
     NonTeam: 'non_team',
     Member: 'member',
     Admin: 'admin',
-    TeamGuest: 'team_guest',
   } as const
 }

@@ -15,7 +15,7 @@ import {LegalHoldRequestScopeUsersUsersInner} from './legalHoldRequestScopeUsers
 
 /**
  * @internal
- * The legal hold scope determines the criteria used to put content items under hold. The variants of this field might get extended in the future, although the most common use case is to put users under hold. Currently only the `users` scope is supported. However, the parsing of this field must ignore unexpected variants.
+ * The legal hold scope determines the criteria used to put content items under hold. The variants of this field might get extended in the future, although the most common use case is to put users under hold. Currently only the `users` scope is supported. However, the parsing of this field must ignore unexpected variants. The request must always include a list of all users to be placed under hold, whether it\'s for a new legal hold or an update to an existing one. You can have up to 200 users per legal hold, including users added in legal hold updates.
  */
 export class LegalHoldRequestScope {
   'users'?: Array<LegalHoldRequestScopeUsersUsersInner>

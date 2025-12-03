@@ -27,8 +27,13 @@ import {GetBoardItemContentLogsResponse} from '../model/getBoardItemContentLogsR
 
 import {BoardExportJobId} from '../model/boardExportJobId'
 import {BoardExportJobStatus} from '../model/boardExportJobStatus'
+import {BoardExportJobTasksList} from '../model/boardExportJobTasksList'
+import {BoardExportJobsList} from '../model/boardExportJobsList'
 import {BoardExportResult} from '../model/boardExportResult'
+import {BoardExportTaskExportLink} from '../model/boardExportTaskExportLink'
 import {CreateBoardExportRequest} from '../model/createBoardExportRequest'
+import {EnterpriseUpdateBoardExportJob200Response} from '../model/enterpriseUpdateBoardExportJob200Response'
+import {EnterpriseUpdateBoardExportJobRequest} from '../model/enterpriseUpdateBoardExportJobRequest'
 
 import {BoardMemberChanges} from '../model/boardMemberChanges'
 import {BoardMemberWithLinks} from '../model/boardMemberWithLinks'
@@ -95,8 +100,11 @@ import {ImageUpdateRequest} from '../model/imageUpdateRequest'
 
 import {GenericItemUpdate} from '../model/genericItemUpdate'
 
+import {CaseRequest} from '../model/caseRequest'
 import {CaseResponse} from '../model/caseResponse'
+import {LegalHoldRequest} from '../model/legalHoldRequest'
 import {LegalHoldResponse} from '../model/legalHoldResponse'
+import {PaginatedCaseExportJobsResponse} from '../model/paginatedCaseExportJobsResponse'
 import {PaginatedCaseResponse} from '../model/paginatedCaseResponse'
 import {PaginatedLegalHoldContentItemsResponse} from '../model/paginatedLegalHoldContentItemsResponse'
 import {PaginatedLegalHoldResponse} from '../model/paginatedLegalHoldResponse'
@@ -132,6 +140,10 @@ import {Project} from '../model/project'
 import {ProjectPage} from '../model/projectPage'
 import {UpdateProjectRequest} from '../model/updateProjectRequest'
 
+import {BoardUserGroup} from '../model/boardUserGroup'
+import {BoardUserGroupsPage} from '../model/boardUserGroupsPage'
+import {CreateBoardUserGroupsRequest} from '../model/createBoardUserGroupsRequest'
+
 import {StickyNoteCreateRequest} from '../model/stickyNoteCreateRequest'
 import {StickyNoteItem} from '../model/stickyNoteItem'
 import {StickyNoteUpdateRequest} from '../model/stickyNoteUpdateRequest'
@@ -152,6 +164,10 @@ import {TeamMembersPage} from '../model/teamMembersPage'
 import {TeamSettings} from '../model/teamSettings'
 import {TeamSettingsChanges} from '../model/teamSettingsChanges'
 
+import {CreateTeamGroupRequest} from '../model/createTeamGroupRequest'
+import {TeamGroup} from '../model/teamGroup'
+import {TeamGroupsPage} from '../model/teamGroupsPage'
+
 import {CreateTeamRequest} from '../model/createTeamRequest'
 import {Team} from '../model/team'
 import {TeamChanges} from '../model/teamChanges'
@@ -163,11 +179,18 @@ import {TextUpdateRequest} from '../model/textUpdateRequest'
 
 import {TokenInformation} from '../model/tokenInformation'
 
-import {BoardSubscription} from '../model/boardSubscription'
-import {CreateBoardSubscriptionRequest} from '../model/createBoardSubscriptionRequest'
-import {GenericSubscription} from '../model/genericSubscription'
-import {GenericSubscriptionsCursorPaged} from '../model/genericSubscriptionsCursorPaged'
-import {UpdateBoardSubscriptionRequest} from '../model/updateBoardSubscriptionRequest'
+import {CreateGroupMemberRequest} from '../model/createGroupMemberRequest'
+import {GroupMember} from '../model/groupMember'
+import {GroupMembersPage} from '../model/groupMembersPage'
+import {UpdateUserGroupMembersRequest} from '../model/updateUserGroupMembersRequest'
+import {UpdateUserGroupMembersResultInner} from '../model/updateUserGroupMembersResultInner'
+
+import {GroupTeam} from '../model/groupTeam'
+import {GroupTeamsPage} from '../model/groupTeamsPage'
+
+import {CreateGroupRequest} from '../model/createGroupRequest'
+import {GroupsPage} from '../model/groupsPage'
+import {UpdateGroupRequest} from '../model/updateGroupRequest'
 
 import {ObjectSerializer, RequestFile} from '../model/models'
 
@@ -194,7 +217,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds an app card item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds an app card item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create app card item
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param appCardCreateRequest
@@ -231,7 +254,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes an app card item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes an app card item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete app card item
    * @param boardId Unique identifier (ID) of the board from which you want to delete an item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -268,7 +291,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific app card item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific app card item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get app card item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -305,7 +328,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates an app card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates an app card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update app card item
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -347,7 +370,7 @@ export class MiroApi {
   }
 
   /**
-   * Returns a list of usage metrics for a specific app for a given time range, grouped by requested time period.  This endpoint requires an app management API token. It can be generated in the <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">Your Apps</a> section of Developer Hub.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Returns a list of usage metrics for a specific app for a given time range, grouped by requested time period.  This endpoint requires an app management API token. It can be generated in the <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">Your Apps</a> section of Developer Hub.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get app metrics
    * @param appId ID of the app to get metrics for.
    * @param startDate Start date of the period in UTC format. For example, 2024-12-31.
@@ -412,7 +435,7 @@ export class MiroApi {
   }
 
   /**
-   * Returns total usage metrics for a specific app since the app was created.  This endpoint requires an app management API token. It can be generated in <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">your apps</a> section of Developer Hub.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Returns total usage metrics for a specific app since the app was created.  This endpoint requires an app management API token. It can be generated in <a href=\"https://developers.miro.com/?features=appMetricsToken#your-apps\">your apps</a> section of Developer Hub.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get total app metrics
    * @param appId ID of the app to get total metrics for.
    */
@@ -445,7 +468,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a page of audit events from the last 90 days. If you want to retrieve data that is older than 90 days, you can use the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/360017571434-Audit-logs#h_01J7EY4E0F67EFTRQ7BT688HW0\">CSV export feature</a>.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a>
+   * Retrieves a page of audit events from the last 90 days. If you want to retrieve data that is older than 90 days, you can use the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/360017571434-Audit-logs#h_01J7EY4E0F67EFTRQ7BT688HW0\">CSV export feature</a>.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a>
    * @summary Get audit logs
    * @param createdAfter Retrieve audit logs created after the date and time provided. This is the start date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between &#x60;2023-03-30T17:26:50.000Z&#x60; and &#x60;2023-04-30T17:26:50.000Z&#x60;, provide &#x60;2023-03-30T17:26:50.000Z&#x60; as the value for the &#x60;createdAfter&#x60; parameter.&lt;br&gt;Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\&quot;
    * @param createdBefore Retrieve audit logs created before the date and time provided. This is the end date of the duration for which you want to retrieve audit logs. For example, if you want to retrieve audit logs between &#x60;2023-03-30T17:26:50.000Z&#x60; and &#x60;2023-04-30T17:26:50.000Z&#x60;, provide &#x60;2023-04-30T17:26:50.000Z&#x60; as the value for the &#x60;createdBefore&#x60; parameter.&lt;br&gt;Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), including milliseconds and a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
@@ -515,7 +538,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves board classification for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get board classification
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -568,7 +591,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates board classification for an existing board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update board classification
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -623,7 +646,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves board classification settings for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves board classification settings for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization settings
    * @param orgId id of the organization
    */
@@ -660,7 +683,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates board classification for not-classified only or all boards in an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Bulk update boards classification
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -711,7 +734,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get team settings
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -755,7 +778,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates board classification settings for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update team settings
    * @param orgId id of the organization
    * @param teamId id of the team
@@ -801,7 +824,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves content changes for board items within your organization. Content changes are actions that users can perform on board items, such as updating a sticky note\'s text. You can retrieve results for a specific time period. You can also filter results based on the board IDs and the emails of users who created, modified, or deleted a board item. Additionally, results can be paginated for easier viewing and processing. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>contentlogs:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * Retrieves content changes for board items within your organization. Content changes are actions that users can perform on board items, such as updating a sticky note\'s text. You can retrieve results for a specific time period. You can also filter results based on the board IDs and the emails of users who created, modified, or deleted a board item. Additionally, results can be paginated for easier viewing and processing. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>contentlogs:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
    * @summary Retrieve content change logs of board items
    * @param orgId Unique identifier of the organization.
    * @param from Filter content logs based on the date and time when the board item was last modified. This is the start date and time for the modified date duration. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).
@@ -896,7 +919,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the result of the board export job. The response provides more information about the board export job, such as the S3 link to the files created.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the result of the board export job. The response provides more information about the board export job, such as the S3 link to the files created.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get results for board export job
    * @param orgId Unique identifier of the organization.
    * @param jobId Unique identifier of the job.
@@ -936,7 +959,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the status of the board export job.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the status of the board export job.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get board export job status
    * @param orgId Unique identifier of the organization.
    * @param jobId Unique identifier of the board export job.
@@ -976,7 +999,133 @@ export class MiroApi {
   }
 
   /**
-   * Creates an export job for one or more boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the list of tasks for the board export job.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * @summary Get board export job tasks list (Beta)
+   * @param orgId Unique identifier of the organization.
+   * @param jobId Unique identifier of the board export job.
+   * @param status Filters the list of board export tasks by their status. Accepts an array of statuses such as TASK_STATUS_CREATED, TASK_STATUS_CANCELLED, TASK_STATUS_SCHEDULED, TASK_STATUS_SUCCESS or TASK_STATUS_ERROR.
+   * @param cursor A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request.
+   * @param limit The maximum number of results to return per call. If the number of tasks in the response is greater than the limit specified, the response returns the cursor parameter with a value.
+   */
+  async enterpriseBoardExportJobTasks(
+    orgId: string,
+    jobId: string,
+    query?: {
+      status?: Array<string>
+
+      cursor?: string
+
+      limit?: number
+    },
+  ): Promise<{response: Response; body: BoardExportJobTasksList}> {
+    const localVarPath = '/v2/orgs/{org_id}/boards/export/jobs/{job_id}/tasks'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'job_id' + '}', encodeURIComponent(String(jobId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseBoardExportJobTasks.')
+    }
+    // verify required parameter 'jobId' is not null or undefined
+    if (jobId === null || jobId === undefined) {
+      throw new Error('Required parameter jobId was null or undefined when calling enterpriseBoardExportJobTasks.')
+    }
+
+    if (query?.status !== undefined) {
+      localVarQueryParameters.append('status', ObjectSerializer.serialize(query?.status, 'Array<string>'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardExportJobTasksList')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves the list of board export jobs based on the filters provided in the request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * @summary Get board export jobs list (Beta)
+   * @param orgId Unique identifier of the organization.
+   * @param status Status of the board export jobs that you want to retrieve, such as JOB_STATUS_CREATED, JOB_STATUS_IN_PROGRESS, JOB_STATUS_CANCELLED or JOB_STATUS_FINISHED.
+   * @param creatorId Unique identifier of the board export job creator.
+   * @param cursor A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request.
+   * @param limit The maximum number of results to return per call. If the number of jobs in the response is greater than the limit specified, the response returns the cursor parameter with a value.
+   */
+  async enterpriseBoardExportJobs(
+    orgId: string,
+    query?: {
+      status?: Array<string>
+
+      creatorId?: Array<number>
+
+      cursor?: string
+
+      limit?: number
+    },
+  ): Promise<{response: Response; body: BoardExportJobsList}> {
+    const localVarPath = '/v2/orgs/{org_id}/boards/export/jobs'.replace(
+      '{' + 'org_id' + '}',
+      encodeURIComponent(String(orgId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseBoardExportJobs.')
+    }
+
+    if (query?.status !== undefined) {
+      localVarQueryParameters.append('status', ObjectSerializer.serialize(query?.status, 'Array<string>'))
+    }
+
+    if (query?.creatorId !== undefined) {
+      localVarQueryParameters.append('creatorId', ObjectSerializer.serialize(query?.creatorId, 'Array<number>'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardExportJobsList')
+
+    return {response, body}
+  }
+
+  /**
+   * Creates an export job for one or more boards.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Create board export job
    * @param orgId Unique identifier of the organization.
    * @param requestId Unique identifier of the board export job.
@@ -1024,7 +1173,105 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Creates a link to download the results of a board export task.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * @summary Create task export link (Beta)
+   * @param orgId Unique identifier of the organization.
+   * @param jobId Unique identifier of the board export job.
+   * @param taskId Unique identifier of the board export task.
+   */
+  async enterpriseCreateBoardExportTaskExportLink(
+    orgId: string,
+    jobId: string,
+    taskId: string,
+  ): Promise<{response: Response; body: BoardExportTaskExportLink}> {
+    const localVarPath = '/v2/orgs/{org_id}/boards/export/jobs/{job_id}/tasks/{task_id}/export-link'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'job_id' + '}', encodeURIComponent(String(jobId)))
+      .replace('{' + 'task_id' + '}', encodeURIComponent(String(taskId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error(
+        'Required parameter orgId was null or undefined when calling enterpriseCreateBoardExportTaskExportLink.',
+      )
+    }
+    // verify required parameter 'jobId' is not null or undefined
+    if (jobId === null || jobId === undefined) {
+      throw new Error(
+        'Required parameter jobId was null or undefined when calling enterpriseCreateBoardExportTaskExportLink.',
+      )
+    }
+    // verify required parameter 'taskId' is not null or undefined
+    if (taskId === null || taskId === undefined) {
+      throw new Error(
+        'Required parameter taskId was null or undefined when calling enterpriseCreateBoardExportTaskExportLink.',
+      )
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardExportTaskExportLink')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates the status of the board export job.<br/>Currently, only the cancellation of an ongoing export job is supported.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:export</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin and eDiscovery is enabled in the Settings. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * @summary Update board export job status (Beta)
+   * @param orgId Unique identifier of the organization.
+   * @param jobId Unique identifier of the board export job.
+   * @param enterpriseUpdateBoardExportJobRequest
+   */
+  async enterpriseUpdateBoardExportJob(
+    orgId: string,
+    jobId: string,
+
+    enterpriseUpdateBoardExportJobRequest?: EnterpriseUpdateBoardExportJobRequest,
+  ): Promise<{response: Response; body: EnterpriseUpdateBoardExportJob200Response}> {
+    const localVarPath = '/v2/orgs/{org_id}/boards/export/jobs/{job_id}/status'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'job_id' + '}', encodeURIComponent(String(jobId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseUpdateBoardExportJob.')
+    }
+    // verify required parameter 'jobId' is not null or undefined
+    if (jobId === null || jobId === undefined) {
+      throw new Error('Required parameter jobId was null or undefined when calling enterpriseUpdateBoardExportJob.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PUT',
+      urlResource,
+      JSON.stringify(
+        ObjectSerializer.serialize(enterpriseUpdateBoardExportJobRequest, 'EnterpriseUpdateBoardExportJobRequest'),
+      ),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'EnterpriseUpdateBoardExportJob200Response')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get all board members
    * @param boardId Unique identifier (ID) of the board to which the board member belongs.
    * @param limit
@@ -1074,7 +1321,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a board member.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a board member.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get specific board member
    * @param boardId Unique identifier (ID) of the board to which the board member belongs.
    * @param boardMemberId Unique identifier (ID) of the board member whose role you want to retrieve.
@@ -1114,7 +1361,7 @@ export class MiroApi {
   }
 
   /**
-   * Removes a board member from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Removes a board member from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Remove board member
    * @param boardId Unique identifier (ID) of the board from which you want to delete an item.
    * @param boardMemberId Unique identifier (ID) of the board member whose role you want to delete.
@@ -1151,7 +1398,7 @@ export class MiroApi {
   }
 
   /**
-   * Shares the board and Invites new members to collaborate on a board by sending an invitation email. Depending on the board\'s Sharing policy, there might be various scenarios where membership in the team is required in order to share the board with a user.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Shares the board and Invites new members to collaborate on a board by sending an invitation email. Depending on the board\'s Sharing policy, there might be various scenarios where membership in the team is required in order to share the board with a user.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Share board
    * @param boardId Unique identifier (ID) of the board to which the board member belongs.
    * @param boardMembersInvite
@@ -1188,7 +1435,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates the role of a board member.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates the role of a board member.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update board member
    * @param boardId Unique identifier (ID) of the board for which you want to update the role of the board member.
    * @param boardMemberId Unique identifier (ID) of the board member whose role you want to update.
@@ -1230,7 +1477,7 @@ export class MiroApi {
   }
 
   /**
-   * Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a><br/>
+   * Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a><br/>
    * @summary Copy board
    * @param copyFrom Unique identifier (ID) of the board that you want to copy.
    * @param copyBoardChanges
@@ -1270,7 +1517,7 @@ export class MiroApi {
   }
 
   /**
-   * Creates a board with the specified name and sharing policies.<br/><h4>Note</h4> You can only create up to 3 team boards with the free plan.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Creates a board with the specified name and sharing policies.<br/><h4>Note</h4> You can only create up to 3 team boards with the free plan.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Create board
    * @param boardChanges
    */
@@ -1296,7 +1543,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a board. Deleted boards go to Trash (on paid plans) and can be restored via UI within 90 days after deletion.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a board. Deleted boards go to Trash (on paid plans) and can be restored via UI within 90 days after deletion.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete board
    * @param boardId Unique identifier (ID) of the board that you want to delete.
    */
@@ -1326,7 +1573,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters. Customize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.  If you\'re an Enterprise customer with Company Admin permissions:    - Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).   - Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error. <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters. Customize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.  If you\'re an Enterprise customer with Company Admin permissions: - Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins). - Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error. <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get boards
    * @param teamId
    * @param projectId
@@ -1406,7 +1653,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information about a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information about a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get specific board
    * @param boardId Unique identifier (ID) of the board that you want to retrieve.
    */
@@ -1436,7 +1683,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a specific board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a specific board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update board
    * @param boardId Unique identifier (ID) of the board that you want to update.
    * @param boardChanges
@@ -1467,7 +1714,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds different types of items to a board. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
+   * Adds different types of items to a board. You can add up to 20 items of the same or different type per create call. For example, you can create 3 shape items, 4 card items, and 5 sticky notes in one create call. The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. <br/><br>To try out this API in our documentation:<br/><br>1. In the **BODY PARAMS** section, scroll down until you see **ADD OBJECT** (Figure 1).<br><br><img alt=“add src=\"https://files.readme.io/570dac1-small-add_object.png\"><br>Figure 1. Add object user interface in readme<br><br>2. Click **ADD OBJECT**, and then select or enter the appropriate values for parameters of the item that you want to add.<br><br>3. Repeat steps 1 and 2 for each item that you want to add.<br> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> per item. For example, if you want to create one sticky note, one card, and one shape item in one call, the rate limiting applicable will be 300 credits. This is because create item calls take Level 2 rate limiting of 100 credits each, 100 for sticky note, 100 for card, and 100 for shape item.
    * @summary Create items in bulk
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param itemCreate
@@ -1501,7 +1748,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds different types of items to a board using files from a device. You can add up to 20 items of the same or different type per create call. For example, you can create 5 document items and 5 images in one create call.  The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. To try out this API in our documentation: 1. In the **BODY PARAMS** section, select **ADD FILE**, and then upload a local file. Repeat for each item that you want to add. 2. Upload a JSON file that contains the bulk data for the items you want to create.  <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/> <h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> per item<br/>
+   * Adds different types of items to a board using files from a device. You can add up to 20 items of the same or different type per create call. For example, you can create 5 document items and 5 images in one create call.  The bulk create operation is transactional. If any item\'s create operation fails, the create operation for all the remaining items also fails, and none of the items will be created. To try out this API in our documentation: 1. In the **BODY PARAMS** section, select **ADD FILE**, and then upload a local file. Repeat for each item that you want to add. 2. Upload a JSON file that contains the bulk data for the items you want to create.  <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> per item<br/>
    * @summary Create items in bulk using file from device
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param data JSON file containing bulk data, where each object represents an item to be created. For details, see [JSON file example](https://developers.miro.com/reference/json-data-example).
@@ -1561,7 +1808,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds a card item to a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds a card item to a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create card item
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param cardCreateRequest
@@ -1598,7 +1845,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a card item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a card item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete card item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -1635,7 +1882,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific card item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific card item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get card item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -1672,7 +1919,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update card item
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -1714,7 +1961,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds a connector to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds a connector to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create connector
    * @param boardId Unique identifier (ID) of the board for which you want to create the connector.
    * @param connectorCreationData
@@ -1751,7 +1998,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes the specified connector from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes the specified connector from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete connector
    * @param boardId Unique identifier (ID) of the board from which you want to delete the connector.
    * @param connectorId Unique identifier (ID) of the connector that you want to delete.
@@ -1788,7 +2035,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific connector on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific connector on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get specific connector
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific connector.
    * @param connectorId Unique identifier (ID) of the connector that you want to retrieve.
@@ -1825,7 +2072,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of connectors for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Retrieves a list of connectors for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Get connectors
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a list of connectors.
    * @param limit
@@ -1875,7 +2122,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a connector on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a connector on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update connector
    * @param boardId Unique identifier (ID) of the board for which you want to update the connector.
    * @param connectorId Unique identifier (ID) of the connector that you want to update.
@@ -1917,7 +2164,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create document item using file from device
    * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
    * @param resource Select a file to upload. Maximum file size is 6 MB.
@@ -1976,7 +2223,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create document item using URL
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param documentCreateRequest
@@ -2013,7 +2260,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete document item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -2050,7 +2297,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get document item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -2087,7 +2334,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a document item on a board by using file from a device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a document item on a board by using file from a device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update document item using file from device
    * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -2150,7 +2397,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update document item using URL
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -2192,7 +2439,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds an embed item containing external content to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds an embed item containing external content to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create embed item
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param embedCreateRequest
@@ -2229,7 +2476,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes an embed item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes an embed item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete embed item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -2266,7 +2513,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific embed item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific embed item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get embed item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -2303,7 +2550,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates an embed item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates an embed item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update embed item
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -2345,7 +2592,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds a flowchart shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds a flowchart shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create shape item
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param shapeCreateRequest
@@ -2382,7 +2629,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a flowchart shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a flowchart shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete shape item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -2419,7 +2666,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Get items on board
    * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
    * @param limit
@@ -2476,7 +2723,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get shape item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -2513,7 +2760,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get specific item on board
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -2550,7 +2797,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a flowchart shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a flowchart shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update shape item
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -2592,7 +2839,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds a frame to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds a frame to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create frame
    * @param boardId Unique identifier (ID) of the board where you want to create a frame.
    * @param frameCreateRequest
@@ -2629,7 +2876,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a frame from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a frame from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete frame
    * @param boardId Unique identifier (ID) of the board from which you want to delete the frame.
    * @param itemId Unique identifier (ID) of the frame that you want to delete.
@@ -2666,7 +2913,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific frame on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific frame on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get frame
    * @param boardId Unique identifier (ID) of the board that contains the frame that you want to retrieve
    * @param itemId Unique identifier (ID) of the frame that you want to retrieve.
@@ -2703,7 +2950,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a frame on a board based on the data, style, or geometry properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a frame on a board based on the data, style, or geometry properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update frame
    * @param boardId Unique identifier (ID) of the board where you want to update the frame.
    * @param itemId Unique identifier (ID) of the frame that you want to update.
@@ -2745,7 +2992,7 @@ export class MiroApi {
   }
 
   /**
-   * Creates a group of items on a board. The group is created with the items that are passed in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Creates a group of items on a board. The group is created with the items that are passed in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create group
    * @param boardId
    * @param group
@@ -2779,7 +3026,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a group from a board. All the items in the groups are deleted along with the group.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a group from a board. All the items in the group are deleted along with the group.  <b>Note - this endpoint will delete items which are locked as well. </b> <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Deletes the group
    * @param boardId Unique identifier (ID) of the board.
    * @param groupId Unique identifier (ID) of the group.
@@ -2830,7 +3077,7 @@ export class MiroApi {
   }
 
   /**
-   * Returns all the groups and the items of the respective groups within a specific board.<br/> This method returns results using a cursor-based approach. A cursor-paginated  method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request.<br/> For example, if you set the `limit` query parameter to `10` and the board  contains 20 items that are a part of a group, the first call will return information about the first 10 items in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Returns all the groups and the items of the respective groups within a specific board.<br/> This method returns results using a cursor-based approach. A cursor-paginated  method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request.<br/> For example, if you set the `limit` query parameter to `10` and the board  contains 20 items that are a part of a group, the first call will return information about the first 10 items in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Get all groups on a board
    * @param boardId Unique identifier (ID) of the board.
    * @param limit The maximum number of items to return at one time, default is 10, maximum is 50.
@@ -2880,7 +3127,7 @@ export class MiroApi {
   }
 
   /**
-   * Returns a list of items in a specific group. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> per item ID
+   * Returns a list of items in a specific group. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> per item ID
    * @summary Get a group by its ID
    * @param boardId Unique identifier (ID) of the board.
    * @param groupId Unique identifier (ID) of the group.
@@ -2917,7 +3164,7 @@ export class MiroApi {
   }
 
   /**
-   * Returns a list of items that are a part of any group, within a specific board.<br/> This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request.<br/> For example, if you set the `limit` query parameter to `10` and the board  contains 20 items that are a part of a group, the first call will return information about the first 10 items (not 10 groups) in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Returns a list of items that are a part of any group, within a specific board.<br/> This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request.<br/> For example, if you set the `limit` query parameter to `10` and the board  contains 20 items that are a part of a group, the first call will return information about the first 10 items (not 10 groups) in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Get items of a group by ID
    * @param boardId Unique identifier (ID) of the board.
    * @param groupItemId The ID of the group item to retrieve.
@@ -2978,7 +3225,7 @@ export class MiroApi {
   }
 
   /**
-   * Ungroups items from a group.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Ungroups items from a group.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Ungroup items
    * @param boardId Unique identifier (ID) of the board.
    * @param groupId Unique identifier (ID) of the group.
@@ -3026,7 +3273,7 @@ export class MiroApi {
   }
 
   /**
-   * This endpoint updates an existing group by replacing it entirely with a new group.  When the update is made, the original group is completely replaced, and a new group ID is assigned. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * This endpoint updates an existing group by replacing it entirely with a new group.  When the update is made, the original group is completely replaced, and a new group ID is assigned. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Updates a group with new items
    * @param boardId Unique identifier (ID) of the board.
    * @param groupId Unique identifier (ID) of the group.
@@ -3068,7 +3315,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create image item using file from device
    * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
    * @param resource Select a file to upload. Maximum file size is 6 MB.
@@ -3124,7 +3371,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create image item using URL
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param imageCreateRequest
@@ -3161,7 +3408,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes an image item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete image item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -3198,7 +3445,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get image item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -3235,7 +3482,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update image item using file from device
    * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -3298,7 +3545,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update image item using URL
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -3340,7 +3587,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -3377,7 +3624,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -3414,7 +3661,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Retrieves a list of items for a specific board. You can retrieve all items on the board, a list of child items inside a parent item, or a list of specific types of items by specifying URL query parameter values.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Get items on board
    * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of available items.
    * @param limit
@@ -3437,6 +3684,8 @@ export class MiroApi {
         | 'preview'
         | 'frame'
         | 'embed'
+        | 'doc_format'
+        | 'data_table_format'
 
       cursor?: string
     },
@@ -3460,7 +3709,7 @@ export class MiroApi {
         'type',
         ObjectSerializer.serialize(
           query?.type,
-          "'text' | 'shape' | 'sticky_note' | 'image' | 'document' | 'card' | 'app_card' | 'preview' | 'frame' | 'embed'",
+          "'text' | 'shape' | 'sticky_note' | 'image' | 'document' | 'card' | 'app_card' | 'preview' | 'frame' | 'embed' | 'doc_format' | 'data_table_format'",
         ),
       )
     }
@@ -3487,7 +3736,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Retrieves a list of items within a specific frame. A frame is a parent item and all items within a frame are child items. This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Get items within frame
    * @param boardIdPlatformContainers Unique identifier (ID) of the board that contains the frame for which you want to retrieve the list of available items.
    * @param parentItemId ID of the frame for which you want to retrieve the list of available items.
@@ -3557,7 +3806,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get specific item on board
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -3594,7 +3843,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update item position or parent
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -3636,16 +3885,261 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the list of eDiscovery cases in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * Creating a case for legal hold is the first critical step in the eDiscovery process when litigation or an investigation is anticipated. One of the purposes of creating a case is that it acts as a container that allows admins to group multiple legal holds under one case. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/22120022370962-Create-a-case\" target=_blank>Help Center page on creating a case</a>. <br><br>This API creates a new case in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Create case
+   * @param orgId The ID of the organization in which you want to create a new case.
+   * @param caseRequest
+   */
+  async createCase(orgId: string, caseRequest: CaseRequest): Promise<{response: Response; body: CaseResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases'.replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling createCase.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(caseRequest, 'CaseRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'CaseResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * After creating a case it is possible to add one or multiple legal holds to the case. Creating a legal hold involves identifying the relevant users associated with a case and applying the hold to prevent permanent deletion of content that those users own, co-own, create, edit or access. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/22120471564946-Add-a-legal-hold-to-a-case\" target=_blank>Help Center page on adding a legal hold to a case</a>. <br><br>This API creates a new legal hold in a case for an organization. Newly created legal holds could take up to 24 hours to be processed.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Create legal hold
+   * @param orgId The ID of the organization in which you want to create a new legal hold.
+   * @param caseId The ID of the case in which you want to create a new legal hold.
+   * @param legalHoldRequest
+   */
+  async createLegalHold(
+    orgId: string,
+    caseId: string,
+    legalHoldRequest: LegalHoldRequest,
+  ): Promise<{response: Response; body: LegalHoldResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}/legal-holds'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling createLegalHold.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling createLegalHold.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(legalHoldRequest, 'LegalHoldRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'LegalHoldResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Closing a case is the final stage in the eDiscovery process, marking the conclusion of a legal matter or investigation. You must ensure that all associated legal holds within the case are closed before closing the case. Closing a case will permanently delete it. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/22138936297746-Close-a-case\" target=_blank>Help Center page on closing a case</a>. <br><br>This API closes a case in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Close case
+   * @param orgId The ID of the organization in which you want to close a case.
+   * @param caseId The ID of the case you want to close.
+   */
+  async deleteCase(orgId: string, caseId: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling deleteCase.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling deleteCase.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
+   * Closing a legal hold is one of the final steps in the eDiscovery process once the litigation or investigation has concluded. This process involves releasing the Miro boards and custodians that were under legal hold, allowing the preserved boards to return to normal operations. Closing a legal hold will permanently delete it. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/21922521629330-Close-a-legal-hold\" target=_blank>Help Center page on closing a legal hold</a>. <br><br>This API closes a legal hold in a case for an organization. Once a legal hold is closed, it can take up to 24 hours to release the content items from the legal hold. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Close legal hold
+   * @param orgId The ID of the organization in which you want to close a legal hold.
+   * @param caseId The ID of the case in which you want to close a legal hold.
+   * @param legalHoldId The ID of the legal hold you want to close.
+   */
+  async deleteLegalHold(orgId: string, caseId: string, legalHoldId: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}/legal-holds/{legal_hold_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+      .replace('{' + 'legal_hold_id' + '}', encodeURIComponent(String(legalHoldId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling deleteLegalHold.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling deleteLegalHold.')
+    }
+    // verify required parameter 'legalHoldId' is not null or undefined
+    if (legalHoldId === null || legalHoldId === undefined) {
+      throw new Error('Required parameter legalHoldId was null or undefined when calling deleteLegalHold.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
+   * Editing a case allows eDiscovery Admins to keep case details accurate and aligned with the evolving scope of a legal matter. As investigations progress, it may be necessary to update the case name or description to reflect changes in focus, terminology, or internal documentation standards. Since a case serves as the central container for one or more legal holds, keeping its information up to date helps ensure clarity, consistency, and easier navigation for all stakeholders involved in the legal process.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Edit case
+   * @param orgId The ID of the organization for which you want to edit the case information.
+   * @param caseId The ID of the case you want to edit.
+   * @param caseRequest
+   */
+  async editCase(
+    orgId: string,
+    caseId: string,
+    caseRequest: CaseRequest,
+  ): Promise<{response: Response; body: CaseResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling editCase.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling editCase.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PUT',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(caseRequest, 'CaseRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'CaseResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Editing a legal hold allows eDiscovery Admins to adjust and refine ongoing legal preservation efforts as case requirements evolve. Whether new custodians are identified, additional Miro boards become relevant, or existing boards or users are no longer in scope, editing a legal hold ensures that the correct data remains preserved and defensible throughout the legal process. Admins can update the legal hold’s name or description and add or remove users and boards as needed. This flexibility supports dynamic legal workflows and ensures that preservation stays precise, up to date, and aligned with the scope of the legal matter—maintaining compliance while avoiding unnecessary data retention.<br/><br/>When a legal hold is edited, boards newly added to the hold will begin having their versions preserved from that point forward, boards or users removed from the hold will stop being preserved, and their versions will no longer be preserved as part of that legal hold, boards that remain under hold will continue to have all versions preserved, including any deletions that occur after the hold was applied. This approach ensures organizations can respond to legal demands with accuracy and accountability as a case evolves.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Edit legal hold
+   * @param orgId The ID of the organization for which you want to edit the legal hold information.
+   * @param caseId The ID of the case for which you want to edit the legal hold information.
+   * @param legalHoldId The ID of the legal hold you want to edit.
+   * @param legalHoldRequest
+   */
+  async editLegalHold(
+    orgId: string,
+    caseId: string,
+    legalHoldId: string,
+    legalHoldRequest: LegalHoldRequest,
+  ): Promise<{response: Response; body: LegalHoldResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}/legal-holds/{legal_hold_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+      .replace('{' + 'legal_hold_id' + '}', encodeURIComponent(String(legalHoldId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling editLegalHold.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling editLegalHold.')
+    }
+    // verify required parameter 'legalHoldId' is not null or undefined
+    if (legalHoldId === null || legalHoldId === undefined) {
+      throw new Error('Required parameter legalHoldId was null or undefined when calling editLegalHold.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PUT',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(legalHoldRequest, 'LegalHoldRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'LegalHoldResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves the list of eDiscovery cases in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
    * @summary Get all cases
-   * @param limit The maximum number of items in the result list.
    * @param orgId The ID of the organization for which you want to retrieve the list of cases.
+   * @param limit The maximum number of items in the result list.
    * @param cursor An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.
    */
   async getAllCases(
-    limit: number,
     orgId: string,
     query?: {
+      limit?: number
+
       cursor?: string
     },
   ): Promise<{response: Response; body: PaginatedCaseResponse}> {
@@ -3656,13 +4150,8 @@ export class MiroApi {
       throw new Error('Required parameter orgId was null or undefined when calling getAllCases.')
     }
 
-    // verify required parameter 'limit' is not null or undefined
-    if (limit === null || limit === undefined) {
-      throw new Error('Required parameter limit was null or undefined when calling getAllCases.')
-    }
-
-    if (limit !== undefined) {
-      localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, 'number'))
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
     }
 
     if (query?.cursor !== undefined) {
@@ -3687,18 +4176,19 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the list of all legal holds within a case for an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * Retrieves the list of all legal holds within a case for an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
    * @summary Get all legal holds within a case
-   * @param limit The maximum number of items in the result list.
    * @param orgId The ID of the organization for which you want to retrieve the list of legal holds within a case.
    * @param caseId The ID of the case for which you want to retrieve the list of legal holds.
+   * @param limit The maximum number of items in the result list.
    * @param cursor An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.
    */
   async getAllLegalHolds(
-    limit: number,
     orgId: string,
     caseId: string,
     query?: {
+      limit?: number
+
       cursor?: string
     },
   ): Promise<{response: Response; body: PaginatedLegalHoldResponse}> {
@@ -3715,13 +4205,8 @@ export class MiroApi {
       throw new Error('Required parameter caseId was null or undefined when calling getAllLegalHolds.')
     }
 
-    // verify required parameter 'limit' is not null or undefined
-    if (limit === null || limit === undefined) {
-      throw new Error('Required parameter limit was null or undefined when calling getAllLegalHolds.')
-    }
-
-    if (limit !== undefined) {
-      localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, 'number'))
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
     }
 
     if (query?.cursor !== undefined) {
@@ -3746,7 +4231,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information about a case in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * Retrieves information about a case in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
    * @summary Get case
    * @param orgId The ID of the organization for which you want to retrieve the case information.
    * @param caseId The ID of the case you want to retrieve.
@@ -3783,7 +4268,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information about a legal hold within a case for an organization. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * Retrieves information about a legal hold within a case for an organization. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
    * @summary Get legal hold information
    * @param orgId The ID of the organization for which you want to retrieve the legal hold information.
    * @param caseId The ID of the case for which you want to retrieve the legal hold information.
@@ -3830,7 +4315,7 @@ export class MiroApi {
   }
 
   /**
-   * Once a legal hold is in place you can review or explore the preserved Miro boards to ensure that all relevant data is intact and ready for legal proceedings or investigations. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/22120628583570-Review-boards-under-legal-hold\" target=_blank>Help Center page on reviewing boards under legal hold</a>. <br><br>This API lists all content items under a specific legal hold in a case for an organization. Please verify that the legal hold is in \'ACTIVE\' state to guarantee that the legal hold has finished processing the full list of content items under hold. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * Once a legal hold is in place you can review or explore the preserved Miro boards to ensure that all relevant data is intact and ready for legal proceedings or investigations. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/22120628583570-Review-boards-under-legal-hold\" target=_blank>Help Center page on reviewing boards under legal hold</a>. <br><br>This API lists all content items under a specific legal hold in a case for an organization. Please verify that the legal hold is in \'ACTIVE\' state to guarantee that the legal hold has finished processing the full list of content items under hold. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
    * @summary Get content items under legal hold
    * @param orgId The ID of the organization for which you want to retrieve the list of content items under hold.
    * @param caseId The ID of the case for which you want to retrieve the list of content items under hold.
@@ -3842,8 +4327,9 @@ export class MiroApi {
     orgId: string,
     caseId: string,
     legalHoldId: string,
-    limit: number,
     query?: {
+      limit?: number
+
       cursor?: string
     },
   ): Promise<{response: Response; body: PaginatedLegalHoldContentItemsResponse}> {
@@ -3865,13 +4351,8 @@ export class MiroApi {
       throw new Error('Required parameter legalHoldId was null or undefined when calling getLegalHoldContentItems.')
     }
 
-    // verify required parameter 'limit' is not null or undefined
-    if (limit === null || limit === undefined) {
-      throw new Error('Required parameter limit was null or undefined when calling getLegalHoldContentItems.')
-    }
-
-    if (limit !== undefined) {
-      localVarQueryParameters.append('limit', ObjectSerializer.serialize(limit, 'number'))
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
     }
 
     if (query?.cursor !== undefined) {
@@ -3896,7 +4377,62 @@ export class MiroApi {
   }
 
   /**
-   * Adds a mind map node to a board. A root node is the starting point of a mind map. A node that is created under a root node is a child node. For information on mind maps, use cases, mind map structure, and more, see the <a href=\"https://developers.miro.com/docs/mind-maps\" target=_blank>Mind Map Overview</a> page. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/><br/> <b>Known limitations on node placement: </b> Currently, the create API supports explicit positions for nodes. This means that users can only place nodes based on the x, y coordinates provided in the position parameters. If the position is not provided in the request, nodes default to coordinates x=0, y=0, effectively placing them at the center of the board. <br /><br /><b>Upcoming changes:</b> We understand the importance of flexibility in node placement. We are actively working on implementing changes to support positioning nodes relative to their parent node as well. This enhancement offers a more dynamic and intuitive mind mapping experience. <br /><br />Additionally, we are actively working on providing the update API, further enhancing the functionality of mind map APIs.
+   * Retrieves board export jobs for a case.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organization:cases:management</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>. You can only use this endpoint if you have both the Company Admin and <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15695755655954-Understand-admin-roles-and-their-privileges-Beta#01JARF6KM8ATNT6YDMGD7GMYJN\">eDiscovery Admin</a> roles.
+   * @summary Get board export jobs of a case (Beta)
+   * @param orgId The ID of the organization for which you want to retrieve the list of export jobs within a case.
+   * @param caseId The ID of the case for which you want to retrieve the list of export jobs.
+   * @param limit The maximum number of items in the result list.
+   * @param cursor An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.
+   */
+  async getLegalHoldExportJobs(
+    orgId: string,
+    caseId: string,
+    query?: {
+      limit?: number
+
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: PaginatedCaseExportJobsResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/cases/{case_id}/export-jobs'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'case_id' + '}', encodeURIComponent(String(caseId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling getLegalHoldExportJobs.')
+    }
+    // verify required parameter 'caseId' is not null or undefined
+    if (caseId === null || caseId === undefined) {
+      throw new Error('Required parameter caseId was null or undefined when calling getLegalHoldExportJobs.')
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'PaginatedCaseExportJobsResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds a mind map node to a board. A root node is the starting point of a mind map. A node that is created under a root node is a child node. For information on mind maps, use cases, mind map structure, and more, see the <a href=\"https://developers.miro.com/docs/mind-maps\" target=_blank>Mind Map Overview</a> page. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/><br/> <b>Known limitations on node placement: </b> Currently, the create API supports explicit positions for nodes. This means that users can only place nodes based on the x, y coordinates provided in the position parameters. If the position is not provided in the request, nodes default to coordinates x=0, y=0, effectively placing them at the center of the board. <br /><br /><b>Upcoming changes:</b> We understand the importance of flexibility in node placement. We are actively working on implementing changes to support positioning nodes relative to their parent node as well. This enhancement offers a more dynamic and intuitive mind mapping experience. <br /><br />Additionally, we are actively working on providing the update API, further enhancing the functionality of mind map APIs.
    * @summary Create mind map node
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param mindmapCreateRequest
@@ -3933,7 +4469,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a mind map node item and its child nodes from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a mind map node item and its child nodes from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete mind map node
    * @param boardId Unique identifier (ID) of the board from which you want to delete the mind map node.
    * @param itemId Unique identifier (ID) of the mind map node that you want to delete.
@@ -3970,7 +4506,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific mind map node on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific mind map node on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get specific mind map node
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a mind map node.
    * @param itemId Unique identifier (ID) of the mind map node that you want to retrieve.
@@ -4007,7 +4543,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of mind map nodes for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Retrieves a list of mind map nodes for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let\'s say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Get mind map nodes
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve mind map nodes.
    * @param limit Maximum number of results returned
@@ -4083,7 +4619,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves organization member information for an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization member
    * @param orgId id of the organization
    * @param memberId id of the organization member
@@ -4123,7 +4659,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves organization members based on the organization ID and the cursor, or based on the user emails provided in the request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization members
    * @param orgId id of the organization
    * @param emails
@@ -4215,7 +4751,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves organization information.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves organization information.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get organization info
    * @param orgId id of the organization
    */
@@ -4245,7 +4781,7 @@ export class MiroApi {
   }
 
   /**
-   * Add a Miro user to a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Add a Miro user to a project.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Add member in a project
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4294,7 +4830,7 @@ export class MiroApi {
   }
 
   /**
-   * Remove a member from a project. The user remains in the team even after the member is removed from a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Remove a member from a project. The user remains in the team even after the member is removed from a project.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Remove project member
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4348,7 +4884,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific project member.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves information for a specific project member.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get project member
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4402,7 +4938,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the list of members for a specific project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the list of members for a specific project.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary List of project members
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4464,7 +5000,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates details of a project member, such as the member\'s role.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates details of a project member, such as the member\'s role.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update project member
    * @param orgId The ID of the organization to which the project member belongs.
    * @param teamId The ID of the team to which the project member belongs.
@@ -4520,7 +5056,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the project settings.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the project settings.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get project settings
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4567,7 +5103,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates the settings of a project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates the settings of a project.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update project settings
    * @param orgId The ID of the organization to which the project belongs.
    * @param teamId The ID of the team to which the project belongs.
@@ -4618,7 +5154,7 @@ export class MiroApi {
   }
 
   /**
-   * Projects are essentially folders of boards with the option to manage user access for a smaller group of people within a team. Projects are here to help you organize your boards and make them easier to find and share. In other words, a project is a group of boards that you can share with your teammates all at once. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/360018262033-Projects\" target=_blank>Help Center page on Projects</a>. <br><br>This API creates a new project in an existing team of an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Projects are essentially folders of boards with the option to manage user access for a smaller group of people within a team. Projects are here to help you organize your boards and make them easier to find and share. In other words, a project is a group of boards that you can share with your teammates all at once. For more information, see our <a href=\"https://help.miro.com/hc/en-us/articles/360018262033-Projects\" target=_blank>Help Center page on Projects</a>. <br><br>This API creates a new project in an existing team of an organization.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Create project
    * @param orgId The ID of the organization within which you you want to create a project.
    * @param teamId The ID of the team within which you you want to create a project.
@@ -4660,7 +5196,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a project. After a project is deleted, all boards and users that belong to the project remain in the team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Deletes a project. After a project is deleted, all boards and users that belong to the project remain in the team.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Delete project
    * @param orgId The ID of the organization from which you want to delete a project.
    * @param teamId The ID of the team from which you want to delete a project.
@@ -4707,7 +5243,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves project information, such as a name for an existing project.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves project information, such as a name for an existing project.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get project
    * @param orgId The ID of the organization from which you want to retrieve the project information.
    * @param teamId The ID of the team from which you want to retrieve the project information.
@@ -4754,7 +5290,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the list of projects in an existing team of an organization. You can retrieve all projects, including all private projects (projects that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves the list of projects in an existing team of an organization. You can retrieve all projects, including all private projects (projects that haven\'t been specifically shared with you) by enabling Content Admin permissions. To enable Content Admin permissions, see [Content Admin permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary List of projects
    * @param orgId The ID of the organization from which you want to retrieve the list of available projects.
    * @param teamId The ID of the team from which you want to retrieve the list of available projects.
@@ -4809,7 +5345,7 @@ export class MiroApi {
   }
 
   /**
-   * Update information about a project, such as the project name.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Update information about a project, such as the project name.<h4>Note</h4> <em>Projects</em> have been renamed to <em>Spaces</em>, and the terms can be used interchangeably.<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>projects:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update project
    * @param orgId The ID of an Organization.
    * @param teamId The ID of a Team.
@@ -4858,7 +5394,7 @@ export class MiroApi {
   }
 
   /**
-   * Reset all sessions of a user.  Admins can now take immediate action to restrict user access to company data in case of security concerns. Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again. This is useful in situations where a user leaves the company, their credentials are compromised, or there\'s suspicious activity on their account.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Reset all sessions of a user.  Admins can now take immediate action to restrict user access to company data in case of security concerns. Calling this API ends all active Miro sessions across devices for a particular user, requiring the user to sign in again. This is useful in situations where a user leaves the company, their credentials are compromised, or there\'s suspicious activity on their account.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>sessions:delete</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Reset all sessions of a user
    * @param email Email ID of the user whose sessions you want to reset. Note that this user will be signed out from all devices.
    */
@@ -4893,7 +5429,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds a shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds a shape item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create shape item
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param shapeCreateRequest
@@ -4930,7 +5466,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete shape item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -4967,7 +5503,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific shape item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get shape item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -5004,7 +5540,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update shape item
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -5046,7 +5582,151 @@ export class MiroApi {
   }
 
   /**
-   * Adds a sticky note item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Shares a board with user groups with a specified role.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a><br/> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Create board user group assignments
+   * @param orgId The id of the Organization.
+   * @param boardId The ID of the board.
+   * @param createBoardUserGroupsRequest
+   */
+  async enterpriseBoardsCreateGroup(
+    orgId: string,
+    boardId: string,
+    createBoardUserGroupsRequest: CreateBoardUserGroupsRequest,
+  ): Promise<{response: Response; body: BoardUserGroup}> {
+    const localVarPath = '/v2/orgs/{org_id}/boards/{board_id}/groups'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseBoardsCreateGroup.')
+    }
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling enterpriseBoardsCreateGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(createBoardUserGroupsRequest, 'CreateBoardUserGroupsRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardUserGroup')
+
+    return {response, body}
+  }
+
+  /**
+   * Removes a user group from the specified board.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Delete board user group assignment
+   * @param orgId The id of the Organization.
+   * @param boardId The ID of the board.
+   * @param groupId The ID of a user group.
+   */
+  async enterpriseBoardsDeleteGroups(
+    orgId: string,
+    boardId: string,
+    groupId: string,
+  ): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/orgs/{org_id}/boards/{board_id}/groups/{group_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseBoardsDeleteGroups.')
+    }
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling enterpriseBoardsDeleteGroups.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseBoardsDeleteGroups.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information about user groups invited to the specified board.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Get board user group assignments
+   * @param orgId The id of the Organization.
+   * @param boardId The ID of the board.
+   * @param limit The maximum number of user groups in the result list.
+   * @param cursor A representation of the position of a user group in the full set of results. It is used to determine the first item of the resulting set. Leave empty to retrieve items from the beginning.
+   */
+  async enterpriseBoardsGetGroups(
+    orgId: string,
+    boardId: string,
+    query?: {
+      limit?: number
+
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: BoardUserGroupsPage}> {
+    const localVarPath = '/v2/orgs/{org_id}/boards/{board_id}/groups'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseBoardsGetGroups.')
+    }
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling enterpriseBoardsGetGroups.')
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardUserGroupsPage')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds a sticky note item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create sticky note item
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param stickyNoteCreateRequest
@@ -5083,7 +5763,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a sticky note item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a sticky note item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete sticky note item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -5120,7 +5800,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific sticky note item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific sticky note item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get sticky note item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -5157,7 +5837,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a sticky note item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a sticky note item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update sticky note item
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -5199,7 +5879,7 @@ export class MiroApi {
   }
 
   /**
-   * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:   [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Attach an existing tag to the specified item. Card and sticky note items can have up to 8 tags. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:   [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Attach tag to item
    * @param boardIdPlatformTags Unique identifier (ID) of the board with the item that you want to add a tag to.
    * @param itemId Unique identifier (ID) of the item to which you want to add a tag.
@@ -5250,7 +5930,7 @@ export class MiroApi {
   }
 
   /**
-   * Creates a tag on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Creates a tag on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Create tag
    * @param boardId Unique identifier (ID) of the board where you want to create the tag.
    * @param tagCreateRequest
@@ -5287,7 +5967,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes the specified tag from the board. The tag is also removed from all cards and sticky notes on the board. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),  [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Deletes the specified tag from the board. The tag is also removed from all cards and sticky notes on the board. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),  [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),  [Update tag](https://developers.miro.com/reference/update-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Delete tag
    * @param boardId Unique identifier (ID) of the board where you want to delete a specific tag.
    * @param tagId Unique identifier (ID) of the tag that you want to delete.
@@ -5324,7 +6004,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves all the items that have the specified tag.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get items by tag
    * @param boardIdPlatformTags Unique identifier (ID) of the board where you want to retrieve a specific tag.
    * @param tagId Unique identifier (ID) of the tag that you want to retrieve.
@@ -5385,7 +6065,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific tag.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific tag.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get tag
    * @param boardId Unique identifier (ID) of the board where you want to retrieve a specific tag.
    * @param tagId Unique identifier (ID) of the tag that you want to retrieve.
@@ -5422,7 +6102,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves all the tags from the specified board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get tags from board
    * @param boardId Unique identifier (ID) of the board whose tags you want to retrieve.
    * @param limit
@@ -5472,7 +6152,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves all the tags from the specified item.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves all the tags from the specified item.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get tags from item
    * @param boardId Unique identifier (ID) of the board with the item whose tags you want to retrieve.
    * @param itemId Unique identifier (ID) of the item whose tags you want to retrieve.
@@ -5509,7 +6189,7 @@ export class MiroApi {
   }
 
   /**
-   * Removes the specified tag from the specified item. The tag still exists on the board. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),   [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Removes the specified tag from the specified item. The tag still exists on the board. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),   [Update tag](https://developers.miro.com/reference/update-tag),  [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Remove tag from item
    * @param boardIdPlatformTags Unique identifier (ID) of the board with the item that you want to remove a tag from.
    * @param itemId Unique identifier (ID) of the item that you want to remove the tag from.
@@ -5560,7 +6240,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a tag based on the data properties provided in the request body. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),  [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),   [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Updates a tag based on the data properties provided in the request body. <br><blockquote><strong>Note:</strong> Updates to tags made via the REST API  will not be reflected on the board in realtime. To see REST API updates to tags on a board,  you need to refresh the board. This applies to the following endpoints:  [Attach tag to item](https://developers.miro.com/reference/attach-tag-to-item),  [Remove tag from item](https://developers.miro.com/reference/remove-tag-from-item),   [Delete tag](https://developers.miro.com/reference/delete-tag).</blockquote><br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Update tag
    * @param boardId Unique identifier (ID) of the board where you want to update a specific tag.
    * @param tagId Unique identifier (ID) of the tag that you want to update.
@@ -5602,7 +6282,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Deletes team member from team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Delete team member from team
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5649,7 +6329,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves team member by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves team member by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get team member
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5696,13 +6376,13 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves team members by cursor.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves team members by cursor.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary List team members
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
    * @param limit
    * @param cursor An indicator of the position of a page in the full set of results. To obtain the first page leave it empty. To obtain subsequent pages set it to the value returned in the cursor field of the previous request.
-   * @param role  Role query. Filters members by role using full word match. Accepted values are: * \&quot;member\&quot;:     Team member with full member permissions. * \&quot;admin\&quot;:      Admin of a team. Team member with permission to manage team. * \&quot;non_team\&quot;:   External user, non-team user. * \&quot;team_guest\&quot;: Team-guest user, user with access only to a team without access to organization.
+   * @param role  Role query. Filters members by role using full word match. Accepted values are: * \&quot;member\&quot;:     Team member with full member permissions. * \&quot;admin\&quot;:      Admin of a team. Team member with permission to manage team. * \&quot;non_team\&quot;:   External user, non-team user. * \&quot;team_guest\&quot;: (Deprecated) Team-guest user, user with access only to a team without access to organization.
    */
   async enterpriseGetTeamMembers(
     orgId: string,
@@ -5758,7 +6438,7 @@ export class MiroApi {
   }
 
   /**
-   * Invites a new Miro user to an existing team. The user must exist in your Miro organization. Users who do not exist in your Miro organization can be invited to the team via [SCIM](https://developers.miro.com/docs/scim) and an external identity provider, such as Okta or Azure Active Directory.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Invites a new Miro user to an existing team. The user must exist in your Miro organization. Users who do not exist in your Miro organization can be invited to the team via [SCIM](https://developers.miro.com/docs/scim) and an external identity provider, such as Okta or Azure Active Directory.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Invite team members
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5800,7 +6480,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates team member role in team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates team member role in team by id.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update team member
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5849,7 +6529,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves default team settings of an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves default team settings of an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get default team settings
    * @param orgId The id of an Organization.
    */
@@ -5882,7 +6562,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get team settings
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5919,7 +6599,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates team settings of an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update team settings
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -5961,7 +6641,198 @@ export class MiroApi {
   }
 
   /**
-   * Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Adds a user group to a team in an organization.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a><br/> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>\'
+   * @summary Create user group to team connection
+   * @param orgId The id of the Organization.
+   * @param teamId The id of the Team.
+   * @param createTeamGroupRequest
+   */
+  async enterpriseTeamsCreateGroup(
+    orgId: string,
+    teamId: string,
+    createTeamGroupRequest: CreateTeamGroupRequest,
+  ): Promise<{response: Response; body: TeamGroup}> {
+    const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/groups'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseTeamsCreateGroup.')
+    }
+    // verify required parameter 'teamId' is not null or undefined
+    if (teamId === null || teamId === undefined) {
+      throw new Error('Required parameter teamId was null or undefined when calling enterpriseTeamsCreateGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(createTeamGroupRequest, 'CreateTeamGroupRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamGroup')
+
+    return {response, body}
+  }
+
+  /**
+   * Removes a user group from a team in an existing organization.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Delete user group to team connection
+   * @param orgId The id of the Organization.
+   * @param teamId The id of the Team.
+   * @param groupId The ID of a user group.
+   */
+  async enterpriseTeamsDeleteGroup(
+    orgId: string,
+    teamId: string,
+    groupId: string,
+  ): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/groups/{group_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseTeamsDeleteGroup.')
+    }
+    // verify required parameter 'teamId' is not null or undefined
+    if (teamId === null || teamId === undefined) {
+      throw new Error('Required parameter teamId was null or undefined when calling enterpriseTeamsDeleteGroup.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseTeamsDeleteGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information about a specific user group of a team.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Get user group of a team
+   * @param orgId The id of the Organization.
+   * @param teamId The id of the Team.
+   * @param groupId The ID of a user group.
+   */
+  async enterpriseTeamsGetGroup(
+    orgId: string,
+    teamId: string,
+    groupId: string,
+  ): Promise<{response: Response; body: TeamGroup}> {
+    const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/groups/{group_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseTeamsGetGroup.')
+    }
+    // verify required parameter 'teamId' is not null or undefined
+    if (teamId === null || teamId === undefined) {
+      throw new Error('Required parameter teamId was null or undefined when calling enterpriseTeamsGetGroup.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseTeamsGetGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamGroup')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves the list of user groups that are part of a team in an organization.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary List of user group to team connections
+   * @param orgId The id of the Organization.
+   * @param teamId The id of the Team.
+   * @param limit The maximum number of user groups in the result list.
+   * @param cursor A representation of the position of a user group in the full set of results. It is used to determine the first item of the resulting set. Leave empty to retrieve items from the beginning.
+   */
+  async enterpriseTeamsGetGroups(
+    orgId: string,
+    teamId: string,
+    query?: {
+      limit?: number
+
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: TeamGroupsPage}> {
+    const localVarPath = '/v2/orgs/{org_id}/teams/{team_id}/groups'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseTeamsGetGroups.')
+    }
+    // verify required parameter 'teamId' is not null or undefined
+    if (teamId === null || teamId === undefined) {
+      throw new Error('Required parameter teamId was null or undefined when calling enterpriseTeamsGetGroups.')
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TeamGroupsPage')
+
+    return {response, body}
+  }
+
+  /**
+   * Creates a new team in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Create team
    * @param orgId The id of the Organization.
    * @param createTeamRequest
@@ -5995,7 +6866,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Deletes an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Delete team
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -6032,7 +6903,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves team information for an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Get team
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -6069,7 +6940,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Retrieves list of teams in an existing organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary List teams
    * @param orgId The id of the Organization.
    * @param limit
@@ -6123,7 +6994,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Updates an existing team.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Update team
    * @param orgId The id of the Organization.
    * @param teamId The id of the Team.
@@ -6165,7 +7036,7 @@ export class MiroApi {
   }
 
   /**
-   * Adds a text item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Adds a text item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create text item
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
    * @param textCreateRequest
@@ -6202,7 +7073,7 @@ export class MiroApi {
   }
 
   /**
-   * Deletes a text item from the board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 3</a><br/>
+   * Deletes a text item from the board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
    * @summary Delete text item
    * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
    * @param itemId Unique identifier (ID) of the item that you want to delete.
@@ -6239,7 +7110,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves information for a specific text item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 1</a><br/>
+   * Retrieves information for a specific text item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get text item
    * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
    * @param itemId Unique identifier (ID) of the item that you want to retrieve.
@@ -6276,7 +7147,7 @@ export class MiroApi {
   }
 
   /**
-   * Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
+   * Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update text item
    * @param boardId Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -6378,15 +7249,29 @@ export class MiroApi {
   }
 
   /**
-   * Creates a webhook subscription to receive notifications when an item on a board is updated. Subscriptions are created per user, per board. You can create multiple subscriptions. We currently support all board items except tags, connectors, and comments.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
-   * @summary Create webhook subscription
-   * @param createBoardSubscriptionRequest
+   * Adds a member to a user group in an organization.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Create user group member
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   * @param createGroupMemberRequest
    */
-  async createBoardSubscription(
-    createBoardSubscriptionRequest: CreateBoardSubscriptionRequest,
-  ): Promise<{response: Response; body: BoardSubscription}> {
-    const localVarPath = '/v2-experimental/webhooks/board_subscriptions'
+  async enterpriseCreateGroupMember(
+    orgId: string,
+    groupId: string,
+    createGroupMemberRequest: CreateGroupMemberRequest,
+  ): Promise<{response: Response; body: GroupMember}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}/members'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
     let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseCreateGroupMember.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseCreateGroupMember.')
+    }
 
     const urlResource = new URL(localVarPath, this.basePath)
     urlResource.search = localVarQueryParameters.toString()
@@ -6395,30 +7280,44 @@ export class MiroApi {
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'POST',
       urlResource,
-      JSON.stringify(ObjectSerializer.serialize(createBoardSubscriptionRequest, 'CreateBoardSubscriptionRequest')),
+      JSON.stringify(ObjectSerializer.serialize(createGroupMemberRequest, 'CreateGroupMemberRequest')),
 
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardSubscription')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GroupMember')
 
     return {response, body}
   }
 
   /**
-   * Deletes the specified webhook subscription.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
-   * @summary Delete webhook subscription
-   * @param subscriptionId Unique identifier (ID) of the subscription that you want to delete
+   * Removes a member from a user group in an organization.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a><br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Delete user group member
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   * @param memberId The ID of a group member.
    */
-  async deleteSubscriptionById(subscriptionId: string): Promise<{response: Response; body: object}> {
-    const localVarPath = '/v2-experimental/webhooks/subscriptions/{subscription_id}'.replace(
-      '{' + 'subscription_id' + '}',
-      encodeURIComponent(String(subscriptionId)),
-    )
+  async enterpriseDeleteGroupMember(
+    orgId: string,
+    groupId: string,
+    memberId: string,
+  ): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}/members/{member_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+      .replace('{' + 'member_id' + '}', encodeURIComponent(String(memberId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'subscriptionId' is not null or undefined
-    if (subscriptionId === null || subscriptionId === undefined) {
-      throw new Error('Required parameter subscriptionId was null or undefined when calling deleteSubscriptionById.')
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseDeleteGroupMember.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseDeleteGroupMember.')
+    }
+    // verify required parameter 'memberId' is not null or undefined
+    if (memberId === null || memberId === undefined) {
+      throw new Error('Required parameter memberId was null or undefined when calling enterpriseDeleteGroupMember.')
     }
 
     const urlResource = new URL(localVarPath, this.basePath)
@@ -6433,25 +7332,39 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
+    const body = bodyAsJson
 
     return {response, body}
   }
 
   /**
-   * Retrieves information for a specific webhook subscription.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
-   * @summary Get specific webhook subscription
-   * @param subscriptionId Unique identifier (ID) of the subscription that you want to retrieve
+   * Retrieves information about a user group member in an organization.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Get user group member
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   * @param memberId The ID of a group member.
    */
-  async getSubscriptionById(subscriptionId: string): Promise<{response: Response; body: GenericSubscription}> {
-    const localVarPath = '/v2-experimental/webhooks/subscriptions/{subscription_id}'.replace(
-      '{' + 'subscription_id' + '}',
-      encodeURIComponent(String(subscriptionId)),
-    )
+  async enterpriseGetGroupMember(
+    orgId: string,
+    groupId: string,
+    memberId: string,
+  ): Promise<{response: Response; body: GroupMember}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}/members/{member_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+      .replace('{' + 'member_id' + '}', encodeURIComponent(String(memberId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'subscriptionId' is not null or undefined
-    if (subscriptionId === null || subscriptionId === undefined) {
-      throw new Error('Required parameter subscriptionId was null or undefined when calling getSubscriptionById.')
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetGroupMember.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseGetGroupMember.')
+    }
+    // verify required parameter 'memberId' is not null or undefined
+    if (memberId === null || memberId === undefined) {
+      throw new Error('Required parameter memberId was null or undefined when calling enterpriseGetGroupMember.')
     }
 
     const urlResource = new URL(localVarPath, this.basePath)
@@ -6466,27 +7379,43 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericSubscription')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GroupMember')
 
     return {response, body}
   }
 
   /**
-   * Retrieves information about all webhook subscriptions for a specific user.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 4</a><br/>
-   * @summary Get webhook subscriptions
-   * @param limit
-   * @param cursor
+   * Retrieves the list of members who are part of a team in an existing organization.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary List of user group members
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   * @param limit The maximum number of members in the result list.
+   * @param cursor A representation of the position of a member in the full set of results. It is used to determine the first item of the resulting set. Leave empty to retrieve items from the beginning.
    */
-  async getUserSubscriptions(query?: {
-    limit?: string
+  async enterpriseGetGroupMembers(
+    orgId: string,
+    groupId: string,
+    query?: {
+      limit?: number
 
-    cursor?: string
-  }): Promise<{response: Response; body: GenericSubscriptionsCursorPaged}> {
-    const localVarPath = '/v2-experimental/webhooks/subscriptions'
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: GroupMembersPage}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}/members'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
     let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetGroupMembers.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseGetGroupMembers.')
+    }
 
     if (query?.limit !== undefined) {
-      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'string'))
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
     }
 
     if (query?.cursor !== undefined) {
@@ -6505,29 +7434,34 @@ export class MiroApi {
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'GenericSubscriptionsCursorPaged')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GroupMembersPage')
 
     return {response, body}
   }
 
   /**
-   * Updates the status or the callback URL of an existing webhook subscription.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/docs/miro-rest-api-introduction#rate-limiting\">Level 2</a><br/>
-   * @summary Update webhook subscription
-   * @param subscriptionId
-   * @param updateBoardSubscriptionRequest
+   * Add and remove members in one request. For example, remove user A and add user B.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Bulk edit of membership in user group
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   * @param updateUserGroupMembersRequest
    */
-  async updateBoardSubscription(
-    subscriptionId: string,
-    updateBoardSubscriptionRequest: UpdateBoardSubscriptionRequest,
-  ): Promise<{response: Response; body: BoardSubscription}> {
-    const localVarPath = '/v2-experimental/webhooks/board_subscriptions/{subscription_id}'.replace(
-      '{' + 'subscription_id' + '}',
-      encodeURIComponent(String(subscriptionId)),
-    )
+  async enterpriseUpdateGroupMembers(
+    orgId: string,
+    groupId: string,
+    updateUserGroupMembersRequest: UpdateUserGroupMembersRequest,
+  ): Promise<{response: Response; body: Array<UpdateUserGroupMembersResultInner>}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}/members'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
     let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'subscriptionId' is not null or undefined
-    if (subscriptionId === null || subscriptionId === undefined) {
-      throw new Error('Required parameter subscriptionId was null or undefined when calling updateBoardSubscription.')
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseUpdateGroupMembers.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseUpdateGroupMembers.')
     }
 
     const urlResource = new URL(localVarPath, this.basePath)
@@ -6537,12 +7471,311 @@ export class MiroApi {
       typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
       'PATCH',
       urlResource,
-      JSON.stringify(ObjectSerializer.serialize(updateBoardSubscriptionRequest, 'UpdateBoardSubscriptionRequest')),
+      JSON.stringify(ObjectSerializer.serialize(updateUserGroupMembersRequest, 'UpdateUserGroupMembersRequest')),
 
       this.logger,
     )
 
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'BoardSubscription')
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'Array<UpdateUserGroupMembersResultInner>')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information of a team that the user group is a part of in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/><a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Get user group team
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   * @param teamId The id of the Team.
+   */
+  async enterpriseGroupsGetTeam(
+    orgId: string,
+    groupId: string,
+    teamId: string,
+  ): Promise<{response: Response; body: GroupTeam}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}/teams/{team_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+      .replace('{' + 'team_id' + '}', encodeURIComponent(String(teamId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseGroupsGetTeam.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseGroupsGetTeam.')
+    }
+    // verify required parameter 'teamId' is not null or undefined
+    if (teamId === null || teamId === undefined) {
+      throw new Error('Required parameter teamId was null or undefined when calling enterpriseGroupsGetTeam.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GroupTeam')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves the list of teams that the user group is a part of.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/><a target=_blank href=https://developers.miro.com/reference/scopes>organizations:teams:read</a><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Get teams of a user group
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   * @param limit The maximum number of teams in the result list.
+   * @param cursor A representation of the position of a team in the full set of results. It is used to determine the first item of the resulting set. Leave empty to retrieve items from the beginning.
+   */
+  async enterpriseGroupsGetTeams(
+    orgId: string,
+    groupId: string,
+    query?: {
+      limit?: number
+
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: GroupTeamsPage}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}/teams'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseGroupsGetTeams.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseGroupsGetTeams.')
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GroupTeamsPage')
+
+    return {response, body}
+  }
+
+  /**
+   * Creates a new user group in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Create user group
+   * @param orgId The id of the Organization.
+   * @param createGroupRequest
+   */
+  async enterpriseCreateGroup(
+    orgId: string,
+    createGroupRequest: CreateGroupRequest,
+  ): Promise<{response: Response; body: Group}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups'.replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseCreateGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(createGroupRequest, 'CreateGroupRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'Group')
+
+    return {response, body}
+  }
+
+  /**
+   * Deletes a user group from an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Delete user group
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   */
+  async enterpriseDeleteGroup(orgId: string, groupId: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseDeleteGroup.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseDeleteGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves a user group in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Get user group
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   */
+  async enterpriseGetGroup(orgId: string, groupId: string): Promise<{response: Response; body: Group}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetGroup.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseGetGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'Group')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves the list of user groups in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary List of user groups
+   * @param orgId The id of the Organization.
+   * @param limit The maximum number of user groups in the result list.
+   * @param cursor A representation of the position of a user group in the full set of results. It is used to determine the first item of the resulting set. Leave empty to retrieve items from the beginning.
+   */
+  async enterpriseGetGroups(
+    orgId: string,
+    query?: {
+      limit?: number
+
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: GroupsPage}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups'.replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetGroups.')
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GroupsPage')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates a user group in an organization.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> <br/><h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin.</p>
+   * @summary Update user group
+   * @param orgId The id of the Organization.
+   * @param groupId The ID of a user group.
+   * @param updateGroupRequest
+   */
+  async enterpriseUpdateGroup(
+    orgId: string,
+    groupId: string,
+    updateGroupRequest: UpdateGroupRequest,
+  ): Promise<{response: Response; body: Group}> {
+    const localVarPath = '/v2/orgs/{org_id}/groups/{group_id}'
+      .replace('{' + 'org_id' + '}', encodeURIComponent(String(orgId)))
+      .replace('{' + 'group_id' + '}', encodeURIComponent(String(groupId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseUpdateGroup.')
+    }
+    // verify required parameter 'groupId' is not null or undefined
+    if (groupId === null || groupId === undefined) {
+      throw new Error('Required parameter groupId was null or undefined when calling enterpriseUpdateGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(updateGroupRequest, 'UpdateGroupRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'Group')
 
     return {response, body}
   }

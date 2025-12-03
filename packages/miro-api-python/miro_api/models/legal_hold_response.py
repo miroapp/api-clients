@@ -43,6 +43,7 @@ class LegalHoldResponse(BaseModel):
     state: LegalHoldState
     scope: LegalHoldResponseScope
     created_by: User = Field(alias="createdBy")
+    last_modified_by: Optional[User] = Field(default=None, alias="lastModifiedBy")
     created_at: datetime = Field(alias="createdAt")
     last_modified_at: datetime = Field(alias="lastModifiedAt")
     additional_properties: Dict[str, Any] = {}
@@ -55,6 +56,7 @@ class LegalHoldResponse(BaseModel):
         "state",
         "scope",
         "createdBy",
+        "lastModifiedBy",
         "createdAt",
         "lastModifiedAt",
     ]
@@ -128,6 +130,9 @@ class LegalHoldResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict["createdBy"] = self.created_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of last_modified_by
+        if self.last_modified_by:
+            _dict["lastModifiedBy"] = self.last_modified_by.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -154,6 +159,9 @@ class LegalHoldResponse(BaseModel):
                 "state": obj.get("state"),
                 "scope": LegalHoldResponseScope.from_dict(obj["scope"]) if obj.get("scope") is not None else None,
                 "createdBy": User.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
+                "lastModifiedBy": (
+                    User.from_dict(obj["lastModifiedBy"]) if obj.get("lastModifiedBy") is not None else None
+                ),
                 "createdAt": obj.get("createdAt"),
                 "lastModifiedAt": obj.get("lastModifiedAt"),
             }

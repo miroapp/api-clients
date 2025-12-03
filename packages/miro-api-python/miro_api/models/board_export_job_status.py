@@ -17,8 +17,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field
 from typing import Any, ClassVar, Dict, List
+from miro_api.models.export_job_status import ExportJobStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,10 +29,7 @@ class BoardExportJobStatus(BaseModel):
     BoardExportJobStatus
     """  # noqa: E501
 
-    job_status: StrictStr = Field(
-        description="Indicates the current state of the board export job. Possible values: `CREATED`: the job has been created but not yet started. Retry the status call after some time. `IN_PROGRESS`: the job is in progress, and the results are not ready yet. Retry the status call after some time. `FINISHED`: the job is complete. You can now get results for the board export job.",
-        alias="jobStatus",
-    )
+    job_status: ExportJobStatus = Field(alias="jobStatus")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["jobStatus"]
 

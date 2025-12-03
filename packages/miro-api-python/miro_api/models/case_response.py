@@ -38,6 +38,7 @@ class CaseResponse(BaseModel):
     name: StrictStr = Field(description="The name of the case.")
     description: Optional[StrictStr] = Field(default=None, description="The description of the case.")
     created_by: User = Field(alias="createdBy")
+    last_modified_by: Optional[User] = Field(default=None, alias="lastModifiedBy")
     created_at: datetime = Field(alias="createdAt")
     last_modified_at: datetime = Field(alias="lastModifiedAt")
     additional_properties: Dict[str, Any] = {}
@@ -47,6 +48,7 @@ class CaseResponse(BaseModel):
         "name",
         "description",
         "createdBy",
+        "lastModifiedBy",
         "createdAt",
         "lastModifiedAt",
     ]
@@ -110,6 +112,9 @@ class CaseResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of created_by
         if self.created_by:
             _dict["createdBy"] = self.created_by.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of last_modified_by
+        if self.last_modified_by:
+            _dict["lastModifiedBy"] = self.last_modified_by.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -133,6 +138,9 @@ class CaseResponse(BaseModel):
                 "name": obj.get("name"),
                 "description": obj.get("description"),
                 "createdBy": User.from_dict(obj["createdBy"]) if obj.get("createdBy") is not None else None,
+                "lastModifiedBy": (
+                    User.from_dict(obj["lastModifiedBy"]) if obj.get("lastModifiedBy") is not None else None
+                ),
                 "createdAt": obj.get("createdAt"),
                 "lastModifiedAt": obj.get("lastModifiedAt"),
             }

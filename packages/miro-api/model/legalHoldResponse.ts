@@ -38,6 +38,7 @@ export class LegalHoldResponse {
   'state': LegalHoldState
   'scope': LegalHoldResponseScope
   'createdBy': User
+  'lastModifiedBy'?: User
   'createdAt': Date
   'lastModifiedAt': Date
 
@@ -84,6 +85,11 @@ export class LegalHoldResponse {
     {
       name: 'createdBy',
       baseName: 'createdBy',
+      type: 'User',
+    },
+    {
+      name: 'lastModifiedBy',
+      baseName: 'lastModifiedBy',
       type: 'User',
     },
     {

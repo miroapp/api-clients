@@ -31,7 +31,7 @@ class TeamMember(BaseModel):
 
     id: StrictStr = Field(description="Team member id.")
     role: StrictStr = Field(
-        description=' Role of the team member. * "member":     Team member with full member permissions. * "admin":      Admin of a team. Team member with permission to manage team. * "non_team":   External user, non-team user. * "team_guest": Team-guest user, user with access only to a team without access to organization. '
+        description=' Role of the team member. * "member":     Team member with full member permissions. * "admin":      Admin of a team. Team member with permission to manage team. * "non_team":   External user, non-team user. * "team_guest": (Deprecated) Team-guest user, user with access only to a team without access to organization. '
     )
     created_at: Optional[datetime] = Field(
         default=None, description="Date and time when member was invited to the team.", alias="createdAt"
@@ -62,8 +62,8 @@ class TeamMember(BaseModel):
     @field_validator("role")
     def role_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(["non_team", "member", "admin", "team_guest"]):
-            raise ValueError("must be one of enum values ('non_team', 'member', 'admin', 'team_guest')")
+        if value not in set(["non_team", "member", "admin"]):
+            raise ValueError("must be one of enum values ('non_team', 'member', 'admin')")
         return value
 
     model_config = {

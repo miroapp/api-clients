@@ -57,7 +57,7 @@ export class TeamSharingPolicySettingsChanges {
     | string
     | (typeof TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum)[keyof typeof TeamSharingPolicySettingsChanges.MoveBoardToAccountEnum]
   /**
-   *  * \"enabled\": Enabled. Restrict to listed domain. * \"disabled\": Disabled. No domain restriction. * \"enabled_with_external_users_access\": Enabled. Restrict to listed domain but allows external users to access.
+   *  * \"enabled\": Enabled. Restrict to listed domain. * \"disabled\": Disabled. No domain restriction. * \"enabled_with_external_user_access\": Enabled. Restrict to listed domain but allows external users to access.
    */
   'restrictAllowedDomains'?:
     | string

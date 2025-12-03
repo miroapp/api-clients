@@ -10,23 +10,33 @@
  * Do not edit the class manually.
  */
 
-export class BasicErrorEnterpriseUserSessionResetEnterprisePlan {
+import {GroupTeam} from './groupTeam'
+
+/**
+ * @internal
+ * Page of teams that match the search query.
+ */
+export class GroupTeamsPage {
   /**
-   * HTTP status code.
+   * The maximum number of results to return per call. If the number of project in the response is greater than the limit specified, the response returns the cursor parameter with a value.
    */
-  'status'?: number
+  'limit': number = 100
   /**
-   * Description of the status code.
+   * Number of results returned in the response considering the cursor and the limit values sent in the request. For example, if there are 20 results, the request does not have a cursor value, and the limit set to 10, the size of the results will be 10. In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.
    */
-  'code'?: string
+  'size': number = 100
   /**
-   * Explanation for the error
+   * List of teams.
    */
-  'message'?: string
+  'data': Array<GroupTeam>
+  /**
+   * Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.
+   */
+  'cursor'?: string
   /**
    * Type of the object returned.
    */
-  'type'?: string = 'error'
+  'type'?: string = 'cursor-list'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -34,18 +44,23 @@ export class BasicErrorEnterpriseUserSessionResetEnterprisePlan {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'status',
-      baseName: 'status',
+      name: 'limit',
+      baseName: 'limit',
       type: 'number',
     },
     {
-      name: 'code',
-      baseName: 'code',
-      type: 'string',
+      name: 'size',
+      baseName: 'size',
+      type: 'number',
     },
     {
-      name: 'message',
-      baseName: 'message',
+      name: 'data',
+      baseName: 'data',
+      type: 'Array<GroupTeam>',
+    },
+    {
+      name: 'cursor',
+      baseName: 'cursor',
       type: 'string',
     },
     {
@@ -57,6 +72,6 @@ export class BasicErrorEnterpriseUserSessionResetEnterprisePlan {
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return BasicErrorEnterpriseUserSessionResetEnterprisePlan.attributeTypeMap
+    return GroupTeamsPage.attributeTypeMap
   }
 }

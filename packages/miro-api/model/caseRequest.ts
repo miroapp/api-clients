@@ -12,11 +12,11 @@
 
 export class CaseRequest {
   /**
-   * The name of the case
+   * The name of the case.
    */
   'name': string
   /**
-   * The description of the case
+   * The description of the case.
    */
   'description'?: string
 

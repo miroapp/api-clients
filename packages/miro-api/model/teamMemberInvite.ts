@@ -16,7 +16,7 @@ export class TeamMemberInvite {
    */
   'email': string
   /**
-   *  Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team. * \"team_guest\": Team-guest user, user with access only to a team without access to organization.
+   *  Role of the team member. * \"member\":     Team member with full member permissions. * \"admin\":      Admin of a team. Team member with permission to manage team.
    */
   'role'?: string | (typeof TeamMemberInvite.RoleEnum)[keyof typeof TeamMemberInvite.RoleEnum]
 
@@ -47,6 +47,5 @@ export namespace TeamMemberInvite {
   export const RoleEnum = {
     Member: 'member',
     Admin: 'admin',
-    TeamGuest: 'team_guest',
   } as const
 }
