@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize, reopened]
     paths:
       - 'packages/miro-api/**'
+      - 'packages/miro-api-python/**'
 
 permissions:
   contents: read
@@ -120,6 +121,143 @@ jobs:
             const botComment = comments.find(comment =>
               comment.user.type === 'Bot' &&
               comment.body.includes('Preview Package Published')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
+
+  publish-python-preview:
+    runs-on: ubuntu-latest
+    # Only run for non-fork PRs
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Configure Poetry for GitHub Packages
+        run: |
+          poetry config repositories.github https://pypi.pkg.github.com/${{ github.repository_owner }}
+          poetry config http-basic.github ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }}
+        working-directory: packages/miro-api-python
+
+      - name: Calculate preview version
+        id: version
+        run: |
+          BASE_VERSION=$(poetry version -s)
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          PREVIEW_VERSION="${BASE_VERSION}.dev${{ github.event.pull_request.number }}+${SHORT_SHA}"
+          echo "preview_version=${PREVIEW_VERSION}" >> $GITHUB_OUTPUT
+          echo "Preview version: ${PREVIEW_VERSION}"
+        working-directory: packages/miro-api-python
+
+      - name: Update version in pyproject.toml
+        run: poetry version ${{ steps.version.outputs.preview_version }}
+        working-directory: packages/miro-api-python
+
+      - name: Build package
+        run: poetry build
+        working-directory: packages/miro-api-python
+
+      - name: Publish to GitHub Packages
+        run: poetry publish -r github
+        working-directory: packages/miro-api-python
+        env:
+          POETRY_HTTP_BASIC_GITHUB_USERNAME: ${{ github.actor }}
+          POETRY_HTTP_BASIC_GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            const previewVersion = '${{ steps.version.outputs.preview_version }}';
+            const commentBody = `## 🐍 Python Preview Package Published
+
+            A preview version of \`miro-api\` Python package has been published to GitHub Packages for testing.
+
+            **Preview Version:** \`${previewVersion}\`
+
+            ### Installation Instructions
+
+            1. **Configure pip to use GitHub Packages:**
+
+               Create or update your \`~/.pypirc\` file:
+               \`\`\`ini
+               [distutils]
+               index-servers =
+                   github
+
+               [github]
+               repository = https://pypi.pkg.github.com/${{ github.repository_owner }}
+               username = YOUR_GITHUB_USERNAME
+               password = YOUR_GITHUB_TOKEN
+               \`\`\`
+
+               Or use pip directly with authentication:
+               \`\`\`bash
+               pip install miro-api==${previewVersion} \\
+                 --index-url https://YOUR_GITHUB_USERNAME:YOUR_GITHUB_TOKEN@pypi.pkg.github.com/${{ github.repository_owner }}/simple/
+               \`\`\`
+
+            2. **Generate a Personal Access Token (PAT):**
+               - Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)
+               - Click "Generate new token (classic)"
+               - Select the \`read:packages\` scope
+               - Generate and copy the token
+
+            3. **Install the preview package:**
+               \`\`\`bash
+               pip install miro-api==${previewVersion} \\
+                 --index-url https://YOUR_GITHUB_USERNAME:YOUR_GITHUB_TOKEN@pypi.pkg.github.com/${{ github.repository_owner }}/simple/
+               \`\`\`
+
+               Or with Poetry:
+               \`\`\`bash
+               poetry source add github https://pypi.pkg.github.com/${{ github.repository_owner }}/simple/
+               poetry config http-basic.github YOUR_GITHUB_USERNAME YOUR_GITHUB_TOKEN
+               poetry add miro-api==${previewVersion}
+               \`\`\`
+
+            ---
+
+            ⚠️ **This is a preview package for testing purposes only.** It will not affect the production package on PyPI.
+
+            You can view this package in [GitHub Packages](https://github.com/${{ github.repository }}/pkgs/pypi/miro-api).`;
+
+            // Find existing Python comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' &&
+              comment.body.includes('Python Preview Package Published')
             );
 
             if (botComment) {
