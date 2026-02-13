@@ -7,3 +7,4 @@ Thumbs.db
 build/**
 dist/**
 yarn-error.log
+.npmrc
