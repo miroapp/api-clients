@@ -35,127 +35,73 @@ poetry add miro_api
 
 ## Testing Preview Packages
 
-When a pull request is opened with changes to this library, a preview version is automatically published to GitHub Packages. This allows you to test changes before they're merged and released to PyPI.
+When a pull request is opened with changes to this library, a preview version is automatically built and made available as a workflow artifact. This allows you to test changes before they're merged and released to PyPI.
 
-### Prerequisites
+### How to Test a Preview Package
 
-To install packages from GitHub Packages, you'll need:
-- A GitHub account with access to the repository
-- A GitHub Personal Access Token (PAT) with `read:packages` scope
+1. **Find the preview package:**
+   - Navigate to the pull request you want to test
+   - Look for the bot comment titled **"🐍 Python Preview Package Built"**
+   - Note the preview version number (format: `2.2.4.dev123+abc1234`)
+   - Click the workflow artifacts link in the comment
 
-### Step 1: Create a GitHub Personal Access Token
+2. **Download the package:**
+   - Click on the artifact name to download it (e.g., `python-preview-package-pr123`)
+   - Extract the ZIP file to get the `.whl` (wheel) and `.tar.gz` (source) files
 
-1. Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)
-2. Click **"Generate new token (classic)"**
-3. Give it a descriptive name (e.g., "GitHub Packages Read")
-4. Select the **`read:packages`** scope
-5. Click **"Generate token"**
-6. **Copy the token** (you won't be able to see it again)
+3. **Install the package:**
 
-### Step 2: Configure Package Installation
+   **Using pip with wheel file (recommended):**
+   ```bash
+   pip install miro_api-2.2.4.dev123+abc1234-py3-none-any.whl
+   ```
 
-#### Option A: Using pip with environment variables
+   **Using pip with source distribution:**
+   ```bash
+   pip install miro_api-2.2.4.dev123+abc1234.tar.gz
+   ```
 
-Set your GitHub credentials as environment variables:
+   **Using Poetry:**
+   ```bash
+   poetry add ./miro_api-2.2.4.dev123+abc1234-py3-none-any.whl
+   ```
 
-```bash
-export GITHUB_USERNAME="your-github-username"
-export GITHUB_TOKEN="your-personal-access-token"
-```
+### Alternative: Using GitHub CLI
 
-Then install the preview package:
-
-```bash
-pip install miro-api==2.2.4.dev123+abc1234 \
-  --index-url https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@pypi.pkg.github.com/miroapp/simple/
-```
-
-#### Option B: Using pip with inline credentials
+If you have the [GitHub CLI](https://cli.github.com/) installed, you can download artifacts directly:
 
 ```bash
-pip install miro-api==2.2.4.dev123+abc1234 \
-  --index-url https://your-username:your-token@pypi.pkg.github.com/miroapp/simple/
+# Download the artifact (replace RUN_ID and ARTIFACT_NAME from the PR comment)
+gh run download RUN_ID -n ARTIFACT_NAME
+
+# Install the wheel
+pip install miro_api-2.2.4.dev123+abc1234-py3-none-any.whl
 ```
 
-#### Option C: Using Poetry
+### Testing in a Virtual Environment
 
-Add the GitHub Packages repository to your project:
+It's recommended to test preview packages in an isolated environment:
 
 ```bash
-poetry source add --priority=supplemental github https://pypi.pkg.github.com/miroapp/simple/
-poetry config http-basic.github your-username your-token
+# Create a virtual environment
+python -m venv test-env
+source test-env/bin/activate  # On Windows: test-env\Scripts\activate
+
+# Install the preview package
+pip install miro_api-2.2.4.dev123+abc1234-py3-none-any.whl
+
+# Test your code
+python your_test_script.py
+
+# Deactivate when done
+deactivate
 ```
 
-Then add the preview package:
+### Notes
 
-```bash
-poetry add miro-api==2.2.4.dev123+abc1234
-```
-
-Or add to `pyproject.toml`:
-
-```toml
-[[tool.poetry.source]]
-name = "github"
-url = "https://pypi.pkg.github.com/miroapp/simple/"
-priority = "supplemental"
-
-[tool.poetry.dependencies]
-miro-api = {version = "2.2.4.dev123+abc1234", source = "github"}
-```
-
-#### Option D: Using pip with configuration file
-
-Create or update `~/.pip/pip.conf` (Linux/macOS) or `%APPDATA%\pip\pip.ini` (Windows):
-
-```ini
-[global]
-extra-index-url = https://your-username:your-token@pypi.pkg.github.com/miroapp/simple/
-```
-
-Then install normally:
-
-```bash
-pip install miro-api==2.2.4.dev123+abc1234
-```
-
-### Step 3: Finding Preview Package Versions
-
-1. Navigate to the pull request you want to test
-2. Look for the bot comment titled **"🐍 Python Preview Package Published"**
-3. Note the preview version number (format: `2.2.4.dev123+abc1234`)
-4. Use the version in the installation commands above
-
-### Security Best Practices
-
-- ⚠️ **Never commit tokens to version control**
-- Use environment variables or secure credential storage
-- Keep your `pip.conf` or `.pypirc` files private
-- Add these files to `.gitignore`:
-  ```
-  .pypirc
-  pip.conf
-  pip.ini
-  ```
-- Rotate tokens periodically
-- Use tokens with minimal required scopes (`read:packages` only)
-
-### Troubleshooting
-
-**401 Unauthorized Error:**
-- Verify your GitHub token has `read:packages` scope
-- Check that your username and token are correct
-- Ensure the token hasn't expired
-
-**404 Package Not Found:**
-- Verify the package version exists in the PR comment
-- Ensure you have access to the repository
-- Check that the workflow has completed successfully
-
-**Connection Issues:**
-- Ensure you're using `https://` in the index URL
-- Verify your network allows connections to `pypi.pkg.github.com`
-- Try using a VPN if behind a corporate firewall
+- ⚠️ Preview packages are for testing only and should not be used in production
+- Artifacts are retained for 30 days
+- Each PR gets its own artifact with a unique name
 
 ## Configuration
 

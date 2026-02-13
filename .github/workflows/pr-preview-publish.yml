@@ -158,12 +158,6 @@ jobs:
           curl -sSL https://install.python-poetry.org | python3 -
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Configure Poetry for GitHub Packages
-        run: |
-          poetry config repositories.github https://pypi.pkg.github.com/${{ github.repository_owner }}
-          poetry config http-basic.github ${{ github.actor }} ${{ secrets.GITHUB_TOKEN }}
-        working-directory: packages/miro-api-python
-
       - name: Calculate preview version
         id: version
         run: |
@@ -182,12 +176,12 @@ jobs:
         run: poetry build
         working-directory: packages/miro-api-python
 
-      - name: Publish to GitHub Packages
-        run: poetry publish -r github
-        working-directory: packages/miro-api-python
-        env:
-          POETRY_HTTP_BASIC_GITHUB_USERNAME: ${{ github.actor }}
-          POETRY_HTTP_BASIC_GITHUB_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-preview-package-pr${{ github.event.pull_request.number }}
+          path: packages/miro-api-python/dist/*
+          retention-days: 30
 
       - name: Comment on PR
         uses: actions/github-script@v7
@@ -195,58 +189,59 @@ jobs:
         with:
           script: |
             const previewVersion = '${{ steps.version.outputs.preview_version }}';
-            const commentBody = `## 🐍 Python Preview Package Published
+            const runId = '${{ github.run_id }}';
+            const artifactName = 'python-preview-package-pr${{ github.event.pull_request.number }}';
 
-            A preview version of \`miro-api\` Python package has been published to GitHub Packages for testing.
+            const commentBody = `## 🐍 Python Preview Package Built
+
+            A preview version of \`miro-api\` Python package has been built and is available for testing.
 
             **Preview Version:** \`${previewVersion}\`
 
             ### Installation Instructions
 
-            1. **Configure pip to use GitHub Packages:**
+            #### Option 1: Download and Install from Artifacts (Recommended)
 
-               Create or update your \`~/.pypirc\` file:
-               \`\`\`ini
-               [distutils]
-               index-servers =
-                   github
+            1. **Download the package files:**
+               - Go to the [workflow run artifacts](https://github.com/${{ github.repository }}/actions/runs/${runId})
+               - Download the \`${artifactName}\` artifact
+               - Extract the ZIP file to get the \`.whl\` and \`.tar.gz\` files
 
-               [github]
-               repository = https://pypi.pkg.github.com/${{ github.repository_owner }}
-               username = YOUR_GITHUB_USERNAME
-               password = YOUR_GITHUB_TOKEN
-               \`\`\`
-
-               Or use pip directly with authentication:
+            2. **Install the wheel file:**
                \`\`\`bash
-               pip install miro-api==${previewVersion} \\
-                 --index-url https://YOUR_GITHUB_USERNAME:YOUR_GITHUB_TOKEN@pypi.pkg.github.com/${{ github.repository_owner }}/simple/
+               pip install miro_api-${previewVersion}-py3-none-any.whl
                \`\`\`
 
-            2. **Generate a Personal Access Token (PAT):**
-               - Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)
-               - Click "Generate new token (classic)"
-               - Select the \`read:packages\` scope
-               - Generate and copy the token
-
-            3. **Install the preview package:**
+               Or install from the source distribution:
                \`\`\`bash
-               pip install miro-api==${previewVersion} \\
-                 --index-url https://YOUR_GITHUB_USERNAME:YOUR_GITHUB_TOKEN@pypi.pkg.github.com/${{ github.repository_owner }}/simple/
+               pip install miro_api-${previewVersion}.tar.gz
                \`\`\`
 
-               Or with Poetry:
-               \`\`\`bash
-               poetry source add github https://pypi.pkg.github.com/${{ github.repository_owner }}/simple/
-               poetry config http-basic.github YOUR_GITHUB_USERNAME YOUR_GITHUB_TOKEN
-               poetry add miro-api==${previewVersion}
-               \`\`\`
+            #### Option 2: Direct Installation with GitHub CLI
+
+            If you have GitHub CLI installed:
+
+            \`\`\`bash
+            # Download artifact
+            gh run download ${runId} -n ${artifactName}
+
+            # Install the wheel
+            pip install miro_api-${previewVersion}-py3-none-any.whl
+            \`\`\`
+
+            #### Option 3: Install with Poetry
+
+            \`\`\`bash
+            # Download the wheel file first, then:
+            poetry add ./miro_api-${previewVersion}-py3-none-any.whl
+            \`\`\`
 
             ---
 
             ⚠️ **This is a preview package for testing purposes only.** It will not affect the production package on PyPI.
 
-            You can view this package in [GitHub Packages](https://github.com/${{ github.repository }}/pkgs/pypi/miro-api).`;
+            📦 **Artifact Name:** \`${artifactName}\`
+            🔗 **Download:** [View workflow artifacts](https://github.com/${{ github.repository }}/actions/runs/${runId})`;
 
             // Find existing Python comment
             const { data: comments } = await github.rest.issues.listComments({
