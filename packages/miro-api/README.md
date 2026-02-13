@@ -19,6 +19,68 @@ To install the Miro Node.js API client and its dependencies, run the following c
 npm install @mirohq/miro-api
 ```
 
+## Testing Preview Packages
+
+When a pull request is opened with changes to this library, a preview version is automatically published to GitHub Packages. This allows you to test changes before they're merged and released to npm.
+
+### Finding Preview Packages
+
+1. Navigate to the pull request you want to test
+2. Look for the bot comment titled "📦 Preview Package Published"
+3. Note the preview version number (format: `2.2.4-pr123.a1cf07f`)
+
+### Setting Up Access to GitHub Packages
+
+To install preview packages, you need to configure npm to use GitHub Packages for the `@miroapp` scope:
+
+1. **Create a `.npmrc` file** in your project root (or update an existing one):
+
+   ```
+   @miroapp:registry=https://npm.pkg.github.com
+   ```
+
+2. **Generate a GitHub Personal Access Token:**
+
+   - Go to [GitHub Settings → Developer Settings → Personal Access Tokens → Tokens (classic)](https://github.com/settings/tokens)
+   - Click "Generate new token (classic)"
+   - Give it a name like "GitHub Packages - Read Access"
+   - Set an expiration period
+   - Select the `read:packages` scope (this is the only permission needed)
+   - Click "Generate token" and copy it
+
+3. **Add your token to `.npmrc`:**
+
+   ```
+   //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+   ```
+
+   Replace `YOUR_GITHUB_TOKEN` with the token you just generated.
+
+4. **Keep your `.npmrc` secure:**
+
+   - Add `.npmrc` to your `.gitignore` file to avoid committing your token
+   - Never share your token publicly
+
+### Installing a Preview Package
+
+Once you've configured access, install the preview version:
+
+```bash
+npm install @miroapp/miro-api@2.2.4-pr123.a1cf07f
+```
+
+Replace `2.2.4-pr123.a1cf07f` with the actual version from the PR comment.
+
+**Important Notes:**
+
+- Preview packages are published as `@miroapp/miro-api` on GitHub Packages (not `@mirohq/miro-api`)
+- Preview packages are for testing only and should not be used in production
+- The production package remains available on npm as `@mirohq/miro-api`
+- You can switch back to the production package by removing the `.npmrc` configuration and running:
+  ```bash
+  npm install @mirohq/miro-api
+  ```
+
 ## Import the clients
 
 The Miro Node.js library makes a stateful high-level client, and stateless low-level client available:
