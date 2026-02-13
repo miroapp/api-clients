@@ -45,6 +45,10 @@
           "format": "cjs"
         }
       ]
-    }
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/"
+    ]
   }
 }
