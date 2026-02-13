@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 20
           registry-url: 'https://npm.pkg.github.com'
-          scope: '@mirohq'
+          scope: '@miroapp'
           cache: 'yarn'
 
       - name: Install dependencies
@@ -48,6 +48,11 @@ jobs:
         run: npm version ${{ steps.version.outputs.preview_version }} --no-git-tag-version
         working-directory: packages/miro-api
 
+      - name: Update package scope for GitHub Packages
+        run: |
+          node -e "const pkg = require('./package.json'); pkg.name = '@miroapp/miro-api'; require('fs').writeFileSync('package.json', JSON.stringify(pkg, null, 2));"
+        working-directory: packages/miro-api
+
       - name: Publish to GitHub Packages
         run: npm publish --registry https://npm.pkg.github.com
         working-directory: packages/miro-api
@@ -62,7 +67,7 @@ jobs:
             const previewVersion = '${{ steps.version.outputs.preview_version }}';
             const commentBody = `## 📦 Preview Package Published
 
-            A preview version of \`@mirohq/miro-api\` has been published to GitHub Packages for testing.
+            A preview version of \`@mirohq/miro-api\` has been published to GitHub Packages for testing as \`@miroapp/miro-api\`.
 
             **Preview Version:** \`${previewVersion}\`
 
@@ -70,7 +75,7 @@ jobs:
 
             1. **Create or update your \`.npmrc\` file** in your project root:
                \`\`\`
-               @mirohq:registry=https://npm.pkg.github.com
+               @miroapp:registry=https://npm.pkg.github.com
                \`\`\`
 
             2. **Authenticate with GitHub Packages:**
@@ -90,12 +95,12 @@ jobs:
 
             3. **Install the preview package:**
                \`\`\`bash
-               npm install @mirohq/miro-api@${previewVersion}
+               npm install @miroapp/miro-api@${previewVersion}
                \`\`\`
 
                Or with yarn:
                \`\`\`bash
-               yarn add @mirohq/miro-api@${previewVersion}
+               yarn add @miroapp/miro-api@${previewVersion}
                \`\`\`
 
             ---
