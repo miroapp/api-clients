@@ -39,7 +39,8 @@ jobs:
         id: version
         run: |
           BASE_VERSION=$(node -p "require('./package.json').version")
-          PREVIEW_VERSION="${BASE_VERSION}-pr${{ github.event.pull_request.number }}.${{ github.run_attempt }}"
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          PREVIEW_VERSION="${BASE_VERSION}-pr${{ github.event.pull_request.number }}.${SHORT_SHA}"
           echo "preview_version=${PREVIEW_VERSION}" >> $GITHUB_OUTPUT
           echo "Preview version: ${PREVIEW_VERSION}"
         working-directory: packages/miro-api

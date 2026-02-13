@@ -27,7 +27,7 @@ When a pull request is opened with changes to this library, a preview version is
 
 1. Navigate to the pull request you want to test
 2. Look for the bot comment titled "📦 Preview Package Published"
-3. Note the preview version number (format: `2.2.4-pr123.1`)
+3. Note the preview version number (format: `2.2.4-pr123.a1cf07f`)
 
 ### Setting Up Access to GitHub Packages
 
@@ -66,10 +66,10 @@ To install preview packages, you need to configure npm to use GitHub Packages fo
 Once you've configured access, install the preview version:
 
 ```bash
-npm install @miroapp/miro-api@2.2.4-pr123.1
+npm install @miroapp/miro-api@2.2.4-pr123.a1cf07f
 ```
 
-Replace `2.2.4-pr123.1` with the actual version from the PR comment.
+Replace `2.2.4-pr123.a1cf07f` with the actual version from the PR comment.
 
 **Important Notes:**
 
