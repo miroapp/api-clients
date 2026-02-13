@@ -10,11 +10,10 @@
  * Do not edit the class manually.
  */
 
+import {ExportJobStatus} from './exportJobStatus'
+
 export class BoardExportJobStatus {
-  /**
-   * Indicates the current state of the board export job. Possible values: `CREATED`: the job has been created but not yet started. Retry the status call after some time. `IN_PROGRESS`: the job is in progress, and the results are not ready yet. Retry the status call after some time. `FINISHED`: the job is complete. You can now get results for the board export job.
-   */
-  'jobStatus': string
+  'jobStatus': ExportJobStatus
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -24,7 +23,7 @@ export class BoardExportJobStatus {
     {
       name: 'jobStatus',
       baseName: 'jobStatus',
-      type: 'string',
+      type: 'ExportJobStatus',
     },
   ]
 
@@ -33,3 +32,5 @@ export class BoardExportJobStatus {
     return BoardExportJobStatus.attributeTypeMap
   }
 }
+
+export namespace BoardExportJobStatus {}

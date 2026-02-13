@@ -20,6 +20,10 @@ export class BoardSharingPolicy {
    */
   'access'?: string | (typeof BoardSharingPolicy.AccessEnum)[keyof typeof BoardSharingPolicy.AccessEnum]
   /**
+   * Defines if a password is required to access the board.
+   */
+  'accessPasswordRequired'?: boolean = false
+  /**
    * Defines the user role when inviting a user via the invite to team and board link. For Enterprise users, the `inviteToAccountAndBoardLinkAccess` parameter is always set to `no_access`.
    */
   'inviteToAccountAndBoardLinkAccess'?:
@@ -47,6 +51,11 @@ export class BoardSharingPolicy {
       name: 'access',
       baseName: 'access',
       type: 'BoardSharingPolicy.AccessEnum',
+    },
+    {
+      name: 'accessPasswordRequired',
+      baseName: 'accessPasswordRequired',
+      type: 'boolean',
     },
     {
       name: 'inviteToAccountAndBoardLinkAccess',

@@ -20,12 +20,9 @@ export class BasicError {
    */
   'code'?: string
   /**
-   * Explanation for the error
+   * Explanation for the error.
    */
   'message'?: string
-  /**
-   * Type of the object returned.
-   */
   'type'?: string = 'error'
 
   /** @ignore */

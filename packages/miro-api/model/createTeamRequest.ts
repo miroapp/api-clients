@@ -14,7 +14,7 @@ export class CreateTeamRequest {
   /**
    * Team name.
    */
-  'name'?: string
+  'name': string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
