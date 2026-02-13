@@ -11,6 +11,7 @@
  */
 
 import {Actor} from './actor'
+import {Relationship} from './relationship'
 
 /**
  * @internal
@@ -46,6 +47,10 @@ export class BoardItemContentLog {
    * Object that contains information about the state of the board item after the action was performed.
    */
   'state'?: object
+  /**
+   * Contains the list of items related to the current board item.
+   */
+  'relationships'?: Array<Relationship>
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -91,6 +96,11 @@ export class BoardItemContentLog {
       name: 'state',
       baseName: 'state',
       type: 'object',
+    },
+    {
+      name: 'relationships',
+      baseName: 'relationships',
+      type: 'Array<Relationship>',
     },
   ]
 

@@ -10,14 +10,23 @@
  * Do not edit the class manually.
  */
 
-import {GroupData} from './groupData'
-
-/**
- * @internal
- * Contains the result data.
- */
 export class Group {
-  'data'?: GroupData
+  /**
+   * User group ID
+   */
+  'id': string
+  /**
+   * User group name
+   */
+  'name': string
+  /**
+   * User group description
+   */
+  'description'?: string
+  /**
+   * Object type
+   */
+  'type': string = 'user-group'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -25,9 +34,24 @@ export class Group {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'data',
-      baseName: 'data',
-      type: 'GroupData',
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
+    },
+    {
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
+    },
+    {
+      name: 'description',
+      baseName: 'description',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
     },
   ]
 

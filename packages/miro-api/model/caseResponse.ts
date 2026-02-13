@@ -30,6 +30,7 @@ export class CaseResponse {
    */
   'description'?: string
   'createdBy': User
+  'lastModifiedBy'?: User
   'createdAt': Date
   'lastModifiedAt': Date
 
@@ -61,6 +62,11 @@ export class CaseResponse {
     {
       name: 'createdBy',
       baseName: 'createdBy',
+      type: 'User',
+    },
+    {
+      name: 'lastModifiedBy',
+      baseName: 'lastModifiedBy',
       type: 'User',
     },
     {

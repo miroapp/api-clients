@@ -11,14 +11,12 @@
  */
 
 import {DocumentUrlData} from './documentUrlData'
-import {FixedRatioGeometry} from './fixedRatioGeometry'
 import {Parent} from './parent'
 import {PositionChange} from './positionChange'
 
 export class DocumentCreateRequest {
   'data': DocumentUrlData
   'position'?: PositionChange
-  'geometry'?: FixedRatioGeometry
   'parent'?: Parent
 
   /** @ignore */
@@ -35,11 +33,6 @@ export class DocumentCreateRequest {
       name: 'position',
       baseName: 'position',
       type: 'PositionChange',
-    },
-    {
-      name: 'geometry',
-      baseName: 'geometry',
-      type: 'FixedRatioGeometry',
     },
     {
       name: 'parent',
