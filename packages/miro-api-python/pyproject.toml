@@ -27,7 +27,7 @@ flask = "^3.0.3"
 [tool.poetry.group.docs.dependencies]
 pdoc = "^14.4.0"
 
-[project.urls]
+[tool.poetry.urls]
 Homepage = "https://github.com/miroapp/api-clients"
 Issues = "https://github.com/miroapp/api-clients/issues"
 
