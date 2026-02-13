@@ -2,6 +2,7 @@
 
 ## Miro Node.js API client library
 
+
 The Miro Node.js API client is a JavaScript library that enables Miro REST API functionality in Miro apps based on Node.js.
 You can use Node.js and JavaScript to send requests to and handle responses from the Miro REST API.
 

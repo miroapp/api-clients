@@ -1,0 +1,135 @@
+name: PR Preview Publish
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'packages/miro-api/**'
+
+permissions:
+  contents: read
+  packages: write
+  pull-requests: write
+
+jobs:
+  publish-preview:
+    runs-on: ubuntu-latest
+    # Only run for non-fork PRs
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@mirohq'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn
+        working-directory: packages/miro-api
+
+      - name: Build package
+        run: yarn build
+        working-directory: packages/miro-api
+
+      - name: Calculate preview version
+        id: version
+        run: |
+          BASE_VERSION=$(node -p "require('./package.json').version")
+          PREVIEW_VERSION="${BASE_VERSION}-pr${{ github.event.pull_request.number }}.${{ github.run_attempt }}"
+          echo "preview_version=${PREVIEW_VERSION}" >> $GITHUB_OUTPUT
+          echo "Preview version: ${PREVIEW_VERSION}"
+        working-directory: packages/miro-api
+
+      - name: Update package.json version
+        run: npm version ${{ steps.version.outputs.preview_version }} --no-git-tag-version
+        working-directory: packages/miro-api
+
+      - name: Publish to GitHub Packages
+        run: npm publish --registry https://npm.pkg.github.com
+        working-directory: packages/miro-api
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            const previewVersion = '${{ steps.version.outputs.preview_version }}';
+            const commentBody = `## 📦 Preview Package Published
+
+            A preview version of \`@mirohq/miro-api\` has been published to GitHub Packages for testing.
+
+            **Preview Version:** \`${previewVersion}\`
+
+            ### Installation Instructions
+
+            1. **Create or update your \`.npmrc\` file** in your project root:
+               \`\`\`
+               @mirohq:registry=https://npm.pkg.github.com
+               \`\`\`
+
+            2. **Authenticate with GitHub Packages:**
+
+               Generate a Personal Access Token (PAT) with \`read:packages\` scope:
+               - Go to [GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)](https://github.com/settings/tokens)
+               - Click "Generate new token (classic)"
+               - Select the \`read:packages\` scope
+               - Generate and copy the token
+
+               Add to your \`.npmrc\` file:
+               \`\`\`
+               //npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+               \`\`\`
+
+               **Note:** Keep your \`.npmrc\` file private and don't commit it to version control.
+
+            3. **Install the preview package:**
+               \`\`\`bash
+               npm install @mirohq/miro-api@${previewVersion}
+               \`\`\`
+
+               Or with yarn:
+               \`\`\`bash
+               yarn add @mirohq/miro-api@${previewVersion}
+               \`\`\`
+
+            ---
+
+            ⚠️ **This is a preview package for testing purposes only.** It will not affect the production package on npm.
+
+            You can view this package in [GitHub Packages](https://github.com/miroapp/api-clients/pkgs/npm/miro-api).`;
+
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' &&
+              comment.body.includes('Preview Package Published')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
