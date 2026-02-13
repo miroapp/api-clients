@@ -33,6 +33,17 @@ pip install miro_api
 poetry add miro_api
 ```
 
+## Testing Preview Packages
+
+When a pull request is opened with changes to this library, a preview version is automatically published to GitHub Packages. This allows you to test changes before they're merged and released to PyPI.
+
+### Finding Preview Packages
+
+1. Navigate to the pull request you want to test
+2. Look for the bot comment titled "🐍 Python Preview Package Published"
+3. Note the preview version number (format: `2.2.4.dev123+abc1234`)
+4. Follow the installation instructions in the PR comment
+
 ## Configuration
 
 The high-level client (`Miro`) automatically loads app configuration from the following environment variables:
