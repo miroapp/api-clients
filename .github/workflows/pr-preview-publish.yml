@@ -177,7 +177,7 @@ jobs:
         working-directory: packages/miro-api-python
 
       - name: Upload package artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-preview-package-pr${{ github.event.pull_request.number }}
           path: packages/miro-api-python/dist/*
