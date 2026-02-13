@@ -7,7 +7,8 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "nodemon -e js,ejs index.js"
+    "dev": "nodemon -e js,ejs index.js",
+    "test": "echo \"No tests for client-test-app\" && exit 0"
   },
   "dependencies": {
     "dotenv": "^16.4.5",

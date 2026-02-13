@@ -5,5 +5,8 @@
   "type": "module",
   "dependencies": {
     "fastify": "^4.27.0"
+  },
+  "scripts": {
+    "test": "echo \"No tests for fastify\" && exit 0"
   }
 }
