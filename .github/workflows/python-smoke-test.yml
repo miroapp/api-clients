@@ -1,0 +1,83 @@
+name: Python SDK Smoke Test
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'packages/miro-api-python/**'
+      - '.github/workflows/python-smoke-test.yml'
+      - '.github/workflows/publish.yml'
+
+jobs:
+  smoke-test:
+    name: Build, install, and verify Python SDK
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.9', '3.12']
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install poetry
+        run: pip install poetry~=1.8.5
+
+      - name: Build the package
+        working-directory: packages/miro-api-python
+        run: poetry build
+
+      - name: Install from built wheel in isolated venv
+        working-directory: packages/miro-api-python
+        run: |
+          python -m venv /tmp/smoke-venv
+          /tmp/smoke-venv/bin/pip install dist/*.whl
+
+      - name: Verify core imports
+        run: |
+          /tmp/smoke-venv/bin/python -c "
+          from miro_api import MiroApi, Miro
+          from miro_api.api_client import ApiClient
+          from miro_api.configuration import Configuration
+          from miro_api.exceptions import (
+              ApiException,
+              UnauthorizedException,
+              ForbiddenException,
+              NotFoundException,
+          )
+          from miro_api.storage import Storage, InMemoryStorage
+
+          print('All core imports OK')
+          "
+
+      - name: Verify MiroApi is instantiable
+        run: |
+          /tmp/smoke-venv/bin/python -c "
+          from miro_api import MiroApi
+
+          # MiroApi accepts an access token string
+          api = MiroApi('test-token-placeholder')
+          print(f'MiroApi instantiated: {type(api).__name__}')
+
+          # Verify key API method groups exist
+          assert hasattr(api, 'get_all_boards'), 'Missing get_all_boards'
+          assert hasattr(api, 'create_board'), 'Missing create_board'
+          assert callable(api.get_all_boards), 'get_all_boards not callable'
+          print('Key API methods present')
+          "
+
+      - name: Verify package metadata
+        run: |
+          /tmp/smoke-venv/bin/python -c "
+          import importlib.metadata
+
+          installed_version = importlib.metadata.version('miro_api')
+          print(f'Installed version: {installed_version}')
+
+          assert installed_version, 'Installed version is empty'
+          assert installed_version != '0.0.0', 'Version is placeholder 0.0.0'
+          print('Package metadata OK')
+          "
