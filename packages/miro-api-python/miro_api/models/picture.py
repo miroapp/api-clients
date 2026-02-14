@@ -16,8 +16,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictFloat, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
+from pydantic import BaseModel, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +27,7 @@ class Picture(BaseModel):
     Picture
     """  # noqa: E501
 
-    id: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="Id of the picture")
+    id: Optional[StrictStr] = Field(default=None, description="Id of the picture")
     image_url: Optional[StrictStr] = Field(default=None, description="Url of the picture", alias="imageURL")
     original_url: Optional[StrictStr] = Field(
         default=None, description="Original team picture url for icon generation", alias="originalUrl"

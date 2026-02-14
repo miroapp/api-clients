@@ -24249,10 +24249,9 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "number",
-            "format": "int64",
+            "type": "string",
             "description": "Id of the picture",
-            "example": 3074457345618261500
+            "example": "3074457345618261500"
           },
           "imageURL": {
             "type": "string",
