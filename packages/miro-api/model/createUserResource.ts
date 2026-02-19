@@ -30,7 +30,7 @@ export class CreateUserResource {
    */
   'displayName'?: string
   /**
-   * Free-form string to indicate the user license type in the organization. <br><br> Only supported values for licenses are allowed. Supported licences for organizations can vary. They can potentially have the following values: Full, Free, Free Restricted, Full (Trial), Basic. <br><br> Note: When `userType` is specified, the `userType` license is set per the value provided. When `userType` is not specified, the user license is set according to internal Miro logic, which depends on the organization plan.
+   * Free-form string to indicate the user license type in the organization. <br><br> Only supported values for license types are allowed. Supported license types can vary per organization. An organization can have one or more of the following license type values: Full, Free, Free Restricted, Full (Trial), Basic, Standard, Advanced. <br><br> Note: When `userType` is specified, the `userType` license is set per the value provided. When `userType` is not specified, the user license is set according to internal Miro logic, which depends on the organization plan.
    */
   'userType'?: string
   /**
