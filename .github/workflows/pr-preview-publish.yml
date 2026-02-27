@@ -5,6 +5,7 @@ on:
     types: [opened, synchronize, reopened]
     paths:
       - 'packages/miro-api/**'
+      - 'packages/miro-api-python/**'
 
 permissions:
   contents: read
@@ -120,6 +121,138 @@ jobs:
             const botComment = comments.find(comment =>
               comment.user.type === 'Bot' &&
               comment.body.includes('Preview Package Published')
+            );
+
+            if (botComment) {
+              // Update existing comment
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: commentBody
+              });
+            } else {
+              // Create new comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
+
+  publish-python-preview:
+    runs-on: ubuntu-latest
+    # Only run for non-fork PRs
+    if: github.event.pull_request.head.repo.full_name == github.repository
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Calculate preview version
+        id: version
+        run: |
+          BASE_VERSION=$(poetry version -s)
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          PREVIEW_VERSION="${BASE_VERSION}.dev${{ github.event.pull_request.number }}+${SHORT_SHA}"
+          echo "preview_version=${PREVIEW_VERSION}" >> $GITHUB_OUTPUT
+          echo "Preview version: ${PREVIEW_VERSION}"
+        working-directory: packages/miro-api-python
+
+      - name: Update version in pyproject.toml
+        run: poetry version ${{ steps.version.outputs.preview_version }}
+        working-directory: packages/miro-api-python
+
+      - name: Build package
+        run: poetry build
+        working-directory: packages/miro-api-python
+
+      - name: Upload package artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-preview-package-pr${{ github.event.pull_request.number }}
+          path: packages/miro-api-python/dist/*
+          retention-days: 30
+
+      - name: Comment on PR
+        uses: actions/github-script@v7
+        continue-on-error: true
+        with:
+          script: |
+            const previewVersion = '${{ steps.version.outputs.preview_version }}';
+            const runId = '${{ github.run_id }}';
+            const artifactName = 'python-preview-package-pr${{ github.event.pull_request.number }}';
+
+            const commentBody = `## 🐍 Python Preview Package Built
+
+            A preview version of \`miro-api\` Python package has been built and is available for testing.
+
+            **Preview Version:** \`${previewVersion}\`
+
+            ### Installation Instructions
+
+            #### Option 1: Download and Install from Artifacts (Recommended)
+
+            1. **Download the package files:**
+               - Go to the [workflow run artifacts](https://github.com/${{ github.repository }}/actions/runs/${runId})
+               - Download the \`${artifactName}\` artifact
+               - Extract the ZIP file to get the \`.whl\` and \`.tar.gz\` files
+
+            2. **Install the wheel file:**
+               \`\`\`bash
+               pip install miro_api-${previewVersion}-py3-none-any.whl
+               \`\`\`
+
+               Or install from the source distribution:
+               \`\`\`bash
+               pip install miro_api-${previewVersion}.tar.gz
+               \`\`\`
+
+            #### Option 2: Direct Installation with GitHub CLI
+
+            If you have GitHub CLI installed:
+
+            \`\`\`bash
+            # Download artifact
+            gh run download ${runId} -n ${artifactName}
+
+            # Install the wheel
+            pip install miro_api-${previewVersion}-py3-none-any.whl
+            \`\`\`
+
+            #### Option 3: Install with Poetry
+
+            \`\`\`bash
+            # Download the wheel file first, then:
+            poetry add ./miro_api-${previewVersion}-py3-none-any.whl
+            \`\`\`
+
+            ---
+
+            ⚠️ **This is a preview package for testing purposes only.** It will not affect the production package on PyPI.
+
+            📦 **Artifact Name:** \`${artifactName}\`
+            🔗 **Download:** [View workflow artifacts](https://github.com/${{ github.repository }}/actions/runs/${runId})`;
+
+            // Find existing Python comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' &&
+              comment.body.includes('Python Preview Package Published')
             );
 
             if (botComment) {

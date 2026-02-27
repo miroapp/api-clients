@@ -33,6 +33,76 @@ pip install miro_api
 poetry add miro_api
 ```
 
+## Testing Preview Packages
+
+When a pull request is opened with changes to this library, a preview version is automatically built and made available as a workflow artifact. This allows you to test changes before they're merged and released to PyPI.
+
+### How to Test a Preview Package
+
+1. **Find the preview package:**
+   - Navigate to the pull request you want to test
+   - Look for the bot comment titled **"🐍 Python Preview Package Built"**
+   - Note the preview version number (format: `2.2.4.dev123+abc1234`)
+   - Click the workflow artifacts link in the comment
+
+2. **Download the package:**
+   - Click on the artifact name to download it (e.g., `python-preview-package-pr123`)
+   - Extract the ZIP file to get the `.whl` (wheel) and `.tar.gz` (source) files
+
+3. **Install the package:**
+
+   **Using pip with wheel file (recommended):**
+   ```bash
+   pip install miro_api-2.2.4.dev123+abc1234-py3-none-any.whl
+   ```
+
+   **Using pip with source distribution:**
+   ```bash
+   pip install miro_api-2.2.4.dev123+abc1234.tar.gz
+   ```
+
+   **Using Poetry:**
+   ```bash
+   poetry add ./miro_api-2.2.4.dev123+abc1234-py3-none-any.whl
+   ```
+
+### Alternative: Using GitHub CLI
+
+If you have the [GitHub CLI](https://cli.github.com/) installed, you can download artifacts directly:
+
+```bash
+# Download the artifact (replace RUN_ID and ARTIFACT_NAME from the PR comment)
+gh run download RUN_ID -n ARTIFACT_NAME
+
+# Install the wheel
+pip install miro_api-2.2.4.dev123+abc1234-py3-none-any.whl
+```
+
+### Testing in a Virtual Environment
+
+It's recommended to test preview packages in an isolated environment:
+
+```bash
+# Create a virtual environment
+python -m venv test-env
+source test-env/bin/activate  # On Windows: test-env\Scripts\activate
+
+# Install the preview package
+pip install miro_api-2.2.4.dev123+abc1234-py3-none-any.whl
+
+# Test your code
+python your_test_script.py
+
+# Deactivate when done
+deactivate
+```
+
+### Notes
+
+- ⚠️ Preview packages are for testing only and should not be used in production
+- Artifacts are retained for 30 days
+- Each PR gets its own artifact with a unique name
+
 ## Configuration
 
 The high-level client (`Miro`) automatically loads app configuration from the following environment variables:
