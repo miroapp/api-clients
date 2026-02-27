@@ -70,10 +70,11 @@ import {ServiceProviderConfigResponse} from '../model/serviceProviderConfigRespo
 import {DocFormatCreateRequest} from '../model/docFormatCreateRequest'
 import {DocFormatItem} from '../model/docFormatItem'
 
-import {CreateDocumentItemUsingFileFromDeviceRequestData} from '../model/createDocumentItemUsingFileFromDeviceRequestData'
 import {DocumentCreateRequest} from '../model/documentCreateRequest'
 import {DocumentItem} from '../model/documentItem'
 import {DocumentUpdateRequest} from '../model/documentUpdateRequest'
+
+import {CreateDocumentItemUsingFileFromDeviceRequestData} from '../model/createDocumentItemUsingFileFromDeviceRequestData'
 import {UploadFileFromDeviceData} from '../model/uploadFileFromDeviceData'
 
 import {EmbedCreateRequest} from '../model/embedCreateRequest'
@@ -2454,65 +2455,6 @@ export class MiroApi {
   }
 
   /**
-   * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
-   * @summary Create document item using file from device
-   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
-   * @param resource Select a file to upload. Maximum file size is 6 MB.
-   * @param data
-   */
-  async createDocumentItemUsingFileFromDevice(
-    boardIdPlatformFileUpload: string,
-    resource: RequestFile,
-
-    data?: CreateDocumentItemUsingFileFromDeviceRequestData,
-  ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/documents'.replace(
-      '{' + 'board_id_PlatformFileUpload' + '}',
-      encodeURIComponent(String(boardIdPlatformFileUpload)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
-    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createDocumentItemUsingFileFromDevice.',
-      )
-    }
-
-    const formData = new FormData()
-    let extension = ''
-    if (data) {
-      formData.append(
-        'data',
-        JSON.stringify(ObjectSerializer.serialize(data, 'CreateDocumentItemUsingFileFromDeviceRequestData')),
-      )
-    }
-    if (resource) {
-      if ('createDocumentItemUsingFileFromDevice'.includes('Image')) {
-        extension = '.png'
-      } else if ('createDocumentItemUsingFileFromDevice'.includes('Document')) {
-        extension = '.pdf'
-      }
-      formData.append('resource', resource, 'file' + extension)
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'POST',
-      urlResource,
-      formData,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
-
-    return {response, body}
-  }
-
-  /**
    * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create document item using URL
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
@@ -2624,6 +2566,107 @@ export class MiroApi {
   }
 
   /**
+   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Update document item using URL
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param documentUpdateRequest
+   */
+  async updateDocumentItemUsingUrl(
+    boardId: string,
+    itemId: string,
+    documentUpdateRequest: DocumentUpdateRequest,
+  ): Promise<{response: Response; body: DocumentItem}> {
+    const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateDocumentItemUsingUrl.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling updateDocumentItemUsingUrl.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(documentUpdateRequest, 'DocumentUpdateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Create document item using file from device
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
+   * @param resource Select a file to upload. Maximum file size is 6 MB.
+   * @param data
+   */
+  async createDocumentItemUsingFileFromDevice(
+    boardIdPlatformFileUpload: string,
+    resource: RequestFile,
+
+    data?: CreateDocumentItemUsingFileFromDeviceRequestData,
+  ): Promise<{response: Response; body: DocumentItem}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/documents'.replace(
+      '{' + 'board_id_PlatformFileUpload' + '}',
+      encodeURIComponent(String(boardIdPlatformFileUpload)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createDocumentItemUsingFileFromDevice.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      formData.append(
+        'data',
+        JSON.stringify(ObjectSerializer.serialize(data, 'CreateDocumentItemUsingFileFromDeviceRequestData')),
+      )
+    }
+    if (resource) {
+      if ('createDocumentItemUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('createDocumentItemUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resource', resource, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      formData,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
+
+    return {response, body}
+  }
+
+  /**
    * Updates a document item on a board by using file from a device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update document item using file from device
    * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
@@ -2677,48 +2720,6 @@ export class MiroApi {
       'PATCH',
       urlResource,
       formData,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
-
-    return {response, body}
-  }
-
-  /**
-   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
-   * @summary Update document item using URL
-   * @param boardId Unique identifier (ID) of the board where you want to update the item.
-   * @param itemId Unique identifier (ID) of the item that you want to update.
-   * @param documentUpdateRequest
-   */
-  async updateDocumentItemUsingUrl(
-    boardId: string,
-    itemId: string,
-    documentUpdateRequest: DocumentUpdateRequest,
-  ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
-      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling updateDocumentItemUsingUrl.')
-    }
-    // verify required parameter 'itemId' is not null or undefined
-    if (itemId === null || itemId === undefined) {
-      throw new Error('Required parameter itemId was null or undefined when calling updateDocumentItemUsingUrl.')
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'PATCH',
-      urlResource,
-      JSON.stringify(ObjectSerializer.serialize(documentUpdateRequest, 'DocumentUpdateRequest')),
 
       this.logger,
     )
@@ -3757,62 +3758,6 @@ export class MiroApi {
   }
 
   /**
-   * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
-   * @summary Create image item using file from device
-   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
-   * @param resource Select a file to upload. Maximum file size is 6 MB.
-   * @param data
-   */
-  async createImageItemUsingLocalFile(
-    boardIdPlatformFileUpload: string,
-    resource: RequestFile,
-
-    data?: UploadFileFromDeviceData,
-  ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/images'.replace(
-      '{' + 'board_id_PlatformFileUpload' + '}',
-      encodeURIComponent(String(boardIdPlatformFileUpload)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
-    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createImageItemUsingLocalFile.',
-      )
-    }
-
-    const formData = new FormData()
-    let extension = ''
-    if (data) {
-      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
-    }
-    if (resource) {
-      if ('createImageItemUsingLocalFile'.includes('Image')) {
-        extension = '.png'
-      } else if ('createImageItemUsingLocalFile'.includes('Document')) {
-        extension = '.pdf'
-      }
-      formData.append('resource', resource, 'file' + extension)
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'POST',
-      urlResource,
-      formData,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
-
-    return {response, body}
-  }
-
-  /**
    * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create image item using URL
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
@@ -3925,6 +3870,104 @@ export class MiroApi {
 
   /**
    * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Update image item using URL
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param imageUpdateRequest
+   */
+  async updateImageItemUsingUrl(
+    boardId: string,
+    itemId: string,
+    imageUpdateRequest: ImageUpdateRequest,
+  ): Promise<{response: Response; body: ImageItem}> {
+    const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateImageItemUsingUrl.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling updateImageItemUsingUrl.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(imageUpdateRequest, 'ImageUpdateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Create image item using file from device
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
+   * @param resource Select a file to upload. Maximum file size is 6 MB.
+   * @param data
+   */
+  async createImageItemUsingLocalFile(
+    boardIdPlatformFileUpload: string,
+    resource: RequestFile,
+
+    data?: UploadFileFromDeviceData,
+  ): Promise<{response: Response; body: ImageItem}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/images'.replace(
+      '{' + 'board_id_PlatformFileUpload' + '}',
+      encodeURIComponent(String(boardIdPlatformFileUpload)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createImageItemUsingLocalFile.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
+    }
+    if (resource) {
+      if ('createImageItemUsingLocalFile'.includes('Image')) {
+        extension = '.png'
+      } else if ('createImageItemUsingLocalFile'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resource', resource, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      formData,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update image item using file from device
    * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -3977,48 +4020,6 @@ export class MiroApi {
       'PATCH',
       urlResource,
       formData,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
-
-    return {response, body}
-  }
-
-  /**
-   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
-   * @summary Update image item using URL
-   * @param boardId Unique identifier (ID) of the board where you want to update the item.
-   * @param itemId Unique identifier (ID) of the item that you want to update.
-   * @param imageUpdateRequest
-   */
-  async updateImageItemUsingUrl(
-    boardId: string,
-    itemId: string,
-    imageUpdateRequest: ImageUpdateRequest,
-  ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
-      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling updateImageItemUsingUrl.')
-    }
-    // verify required parameter 'itemId' is not null or undefined
-    if (itemId === null || itemId === undefined) {
-      throw new Error('Required parameter itemId was null or undefined when calling updateImageItemUsingUrl.')
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'PATCH',
-      urlResource,
-      JSON.stringify(ObjectSerializer.serialize(imageUpdateRequest, 'ImageUpdateRequest')),
 
       this.logger,
     )
@@ -5123,7 +5124,16 @@ export class MiroApi {
         | 'organization_team_guest_user'
         | 'unknown'
 
-      license?: 'full' | 'occasional' | 'free' | 'free_restricted' | 'full_trial' | 'unknown'
+      license?:
+        | 'advanced'
+        | 'standard'
+        | 'basic'
+        | 'full'
+        | 'occasional'
+        | 'free'
+        | 'free_restricted'
+        | 'full_trial'
+        | 'unknown'
 
       active?: boolean
 
@@ -5158,7 +5168,7 @@ export class MiroApi {
         'license',
         ObjectSerializer.serialize(
           query?.license,
-          "'full' | 'occasional' | 'free' | 'free_restricted' | 'full_trial' | 'unknown'",
+          "'advanced' | 'standard' | 'basic' | 'full' | 'occasional' | 'free' | 'free_restricted' | 'full_trial' | 'unknown'",
         ),
       )
     }
@@ -8254,7 +8264,7 @@ export class MiroApi {
   }
 
   /**
-   * Add and remove members in one request. For example, remove user A and add user B.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Add and remove members in one request. For example, remove user A and add user B. You can add or remove up to 500 users at a time.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Bulk edit of membership in user group
    * @param orgId The ID of an organization.
    * @param groupId The ID of a user group.

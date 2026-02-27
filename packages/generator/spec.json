@@ -4058,7 +4058,17 @@
             "schema": {
               "type": "string",
               "description": "Filter organization members by license",
-              "enum": ["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
+              "enum": [
+                "advanced",
+                "standard",
+                "basic",
+                "full",
+                "occasional",
+                "free",
+                "free_restricted",
+                "full_trial",
+                "unknown"
+              ]
             }
           },
           {
@@ -4241,7 +4251,7 @@
           }
         },
         "summary": "Create board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       },
       "get": {
         "description": "Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters.\nCustomize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.\n\nIf you're an Enterprise customer with Company Admin permissions:\n- Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).\n- Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error.\n<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>\n",
@@ -4331,7 +4341,7 @@
           }
         },
         "summary": "Get boards",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       },
       "put": {
         "description": "Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a><br/>",
@@ -4381,7 +4391,7 @@
           }
         },
         "summary": "Copy board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       }
     },
     "/v2/boards/{board_id}": {
@@ -4421,7 +4431,7 @@
           }
         },
         "summary": "Get specific board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       },
       "patch": {
         "description": "Updates a specific board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -4475,7 +4485,7 @@
           }
         },
         "summary": "Update board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       },
       "delete": {
         "description": "Deletes a board. Deleted boards go to Trash (on paid plans) and can be restored via UI within 90 days after deletion.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -4516,7 +4526,7 @@
           }
         },
         "summary": "Delete board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       }
     },
     "/v2/boards/{board_id}/app_cards": {
@@ -4566,7 +4576,7 @@
           }
         },
         "summary": "Create app card item",
-        "tags": ["app_cards"]
+        "tags": ["App card items"]
       }
     },
     "/v2/boards/{board_id}/app_cards/{item_id}": {
@@ -4615,7 +4625,7 @@
           }
         },
         "summary": "Get app card item",
-        "tags": ["app_cards"]
+        "tags": ["App card items"]
       },
       "patch": {
         "description": "Updates an app card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -4675,7 +4685,7 @@
           }
         },
         "summary": "Update app card item",
-        "tags": ["app_cards"]
+        "tags": ["App card items"]
       },
       "delete": {
         "description": "Deletes an app card item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -4722,7 +4732,7 @@
           }
         },
         "summary": "Delete app card item",
-        "tags": ["app_cards"]
+        "tags": ["App card items"]
       }
     },
     "/v2/boards/{board_id}/cards": {
@@ -4775,7 +4785,7 @@
           }
         },
         "summary": "Create card item",
-        "tags": ["cards"]
+        "tags": ["Card items"]
       }
     },
     "/v2/boards/{board_id}/cards/{item_id}": {
@@ -4827,7 +4837,7 @@
           }
         },
         "summary": "Get card item",
-        "tags": ["cards"]
+        "tags": ["Card items"]
       },
       "patch": {
         "x-settings": {
@@ -4890,7 +4900,7 @@
           }
         },
         "summary": "Update card item",
-        "tags": ["cards"]
+        "tags": ["Card items"]
       },
       "delete": {
         "x-settings": {
@@ -4940,7 +4950,7 @@
           }
         },
         "summary": "Delete card item",
-        "tags": ["cards"]
+        "tags": ["Card items"]
       }
     },
     "/v2/boards/{board_id}/connectors": {
@@ -4990,7 +5000,7 @@
           }
         },
         "summary": "Create connector",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       },
       "get": {
         "description": "Retrieves a list of connectors for a specific board.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -5047,7 +5057,7 @@
           }
         },
         "summary": "Get connectors",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       }
     },
     "/v2/boards/{board_id}/connectors/{connector_id}": {
@@ -5096,7 +5106,7 @@
           }
         },
         "summary": "Get specific connector",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       },
       "patch": {
         "description": "Updates a connector on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -5156,7 +5166,7 @@
           }
         },
         "summary": "Update connector",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       },
       "delete": {
         "description": "Deletes the specified connector from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -5203,7 +5213,7 @@
           }
         },
         "summary": "Delete connector",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       }
     },
     "/v2/boards/{board_id}/documents": {
@@ -5253,7 +5263,7 @@
           }
         },
         "summary": "Create document item using URL",
-        "tags": ["documents"]
+        "tags": ["Document items"]
       }
     },
     "/v2/boards/{board_id}/documents/{item_id}": {
@@ -5302,7 +5312,7 @@
           }
         },
         "summary": "Get document item",
-        "tags": ["documents"]
+        "tags": ["Document items"]
       },
       "patch": {
         "description": "Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -5362,7 +5372,7 @@
           }
         },
         "summary": "Update document item using URL",
-        "tags": ["documents"]
+        "tags": ["Document items"]
       },
       "delete": {
         "description": "Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -5409,7 +5419,7 @@
           }
         },
         "summary": "Delete document item",
-        "tags": ["documents"]
+        "tags": ["Document items"]
       }
     },
     "/v2/boards/{board_id}/embeds": {
@@ -5459,7 +5469,7 @@
           }
         },
         "summary": "Create embed item",
-        "tags": ["embeds"]
+        "tags": ["Embed items"]
       }
     },
     "/v2/boards/{board_id}/embeds/{item_id}": {
@@ -5508,7 +5518,7 @@
           }
         },
         "summary": "Get embed item",
-        "tags": ["embeds"]
+        "tags": ["Embed items"]
       },
       "patch": {
         "description": "Updates an embed item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -5568,7 +5578,7 @@
           }
         },
         "summary": "Update embed item",
-        "tags": ["embeds"]
+        "tags": ["Embed items"]
       },
       "delete": {
         "description": "Deletes an embed item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -5615,7 +5625,7 @@
           }
         },
         "summary": "Delete embed item",
-        "tags": ["embeds"]
+        "tags": ["Embed items"]
       }
     },
     "/v2/boards/{board_id}/images": {
@@ -5668,7 +5678,7 @@
           }
         },
         "summary": "Create image item using URL",
-        "tags": ["images"]
+        "tags": ["Image items"]
       }
     },
     "/v2/boards/{board_id}/images/{item_id}": {
@@ -5720,7 +5730,7 @@
           }
         },
         "summary": "Get image item",
-        "tags": ["images"]
+        "tags": ["Image items"]
       },
       "patch": {
         "x-settings": {
@@ -5783,7 +5793,7 @@
           }
         },
         "summary": "Update image item using URL",
-        "tags": ["images"]
+        "tags": ["Image items"]
       },
       "delete": {
         "x-settings": {
@@ -5833,7 +5843,7 @@
           }
         },
         "summary": "Delete image item",
-        "tags": ["images"]
+        "tags": ["Image items"]
       }
     },
     "/v2/boards/{board_id}/items": {
@@ -5914,7 +5924,7 @@
           }
         },
         "summary": "Get items on board",
-        "tags": ["items"]
+        "tags": ["Items"]
       }
     },
     "/v2/boards/{board_id}/items/{item_id}": {
@@ -5963,7 +5973,7 @@
           }
         },
         "summary": "Get specific item on board",
-        "tags": ["items"]
+        "tags": ["Items"]
       },
       "patch": {
         "description": "Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -6020,7 +6030,7 @@
           }
         },
         "summary": "Update item position or parent",
-        "tags": ["items"]
+        "tags": ["Items"]
       },
       "delete": {
         "description": "Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -6067,7 +6077,7 @@
           }
         },
         "summary": "Delete item",
-        "tags": ["items"]
+        "tags": ["Items"]
       }
     },
     "/v2/boards/{board_id}/members": {
@@ -6120,7 +6130,7 @@
           }
         },
         "summary": "Share board",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       },
       "get": {
         "description": "Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>",
@@ -6176,7 +6186,7 @@
           }
         },
         "summary": "Get all board members",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       }
     },
     "/v2/boards/{board_id}/members/{board_member_id}": {
@@ -6228,7 +6238,7 @@
           }
         },
         "summary": "Get specific board member",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       },
       "patch": {
         "x-settings": {
@@ -6288,7 +6298,7 @@
           }
         },
         "summary": "Update board member",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       },
       "delete": {
         "x-settings": {
@@ -6338,7 +6348,7 @@
           }
         },
         "summary": "Remove board member",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       }
     },
     "/v2/boards/{board_id}/shapes": {
@@ -6388,7 +6398,7 @@
           }
         },
         "summary": "Create shape item",
-        "tags": ["shapes"]
+        "tags": ["Shape items"]
       }
     },
     "/v2/boards/{board_id}/shapes/{item_id}": {
@@ -6437,7 +6447,7 @@
           }
         },
         "summary": "Get shape item",
-        "tags": ["shapes"]
+        "tags": ["Shape items"]
       },
       "patch": {
         "description": "Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -6497,7 +6507,7 @@
           }
         },
         "summary": "Update shape item",
-        "tags": ["shapes"]
+        "tags": ["Shape items"]
       },
       "delete": {
         "description": "Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -6544,7 +6554,7 @@
           }
         },
         "summary": "Delete shape item",
-        "tags": ["shapes"]
+        "tags": ["Shape items"]
       }
     },
     "/v2/boards/{board_id}/sticky_notes": {
@@ -6594,7 +6604,7 @@
           }
         },
         "summary": "Create sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": ["Sticky note items"]
       }
     },
     "/v2/boards/{board_id}/sticky_notes/{item_id}": {
@@ -6643,7 +6653,7 @@
           }
         },
         "summary": "Get sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": ["Sticky note items"]
       },
       "patch": {
         "description": "Updates a sticky note item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -6703,7 +6713,7 @@
           }
         },
         "summary": "Update sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": ["Sticky note items"]
       },
       "delete": {
         "description": "Deletes a sticky note item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -6750,7 +6760,7 @@
           }
         },
         "summary": "Delete sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": ["Sticky note items"]
       }
     },
     "/v2/boards/{board_id}/texts": {
@@ -6800,7 +6810,7 @@
           }
         },
         "summary": "Create text item",
-        "tags": ["texts"]
+        "tags": ["Text items"]
       }
     },
     "/v2/boards/{board_id}/texts/{item_id}": {
@@ -6849,7 +6859,7 @@
           }
         },
         "summary": "Get text item",
-        "tags": ["texts"]
+        "tags": ["Text items"]
       },
       "patch": {
         "description": "Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -6909,7 +6919,7 @@
           }
         },
         "summary": "Update text item",
-        "tags": ["texts"]
+        "tags": ["Text items"]
       },
       "delete": {
         "description": "Deletes a text item from the board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -6956,7 +6966,7 @@
           }
         },
         "summary": "Delete text item",
-        "tags": ["texts"]
+        "tags": ["Text items"]
       }
     },
     "/v2/boards/{board_id}/items/bulk": {
@@ -14631,7 +14641,7 @@
         "tags": ["User group members"]
       },
       "patch": {
-        "description": "Add and remove members in one request. For example, remove user A and add user B.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
+        "description": "Add and remove members in one request. For example, remove user A and add user B. You can add or remove up to 500 users at a time.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
         "operationId": "enterprise-update-group-members",
         "parameters": [
           {
@@ -14660,7 +14670,7 @@
                 }
               }
             },
-            "description": "Status codes for adding or removing members of a user group."
+            "description": "Results for adding or removing members of a user group. <br/> <small>Note that adding users might succeed partially. In this case, the array of responses contains two objects with operation set to \"addMembers\": one for the successfully added members, and one explaining why the operation failed for the remaining members.</small>"
           },
           "400": {
             "$ref": "#/components/responses/400"
@@ -16351,14 +16361,14 @@
         "type": "object",
         "properties": {
           "boardIds": {
-            "maxItems": 50,
+            "maxItems": 1000,
             "minItems": 1,
             "type": "array",
-            "description": "List of board IDs to be exported.",
+            "description": "List of board IDs to be exported. Each export job can contain up to 1,000 boards.",
             "example": "o9J_kzlUDmo=",
             "items": {
               "type": "string",
-              "description": "List of board IDs to be exported.",
+              "description": "List of board IDs to be exported. Each export job can contain up to 1,000 boards.",
               "example": "o9J_kzlUDmo="
             }
           },
@@ -16366,7 +16376,7 @@
             "$ref": "#/components/schemas/BoardFormat"
           }
         },
-        "description": "List of board IDs to be exported."
+        "description": "List of board IDs to be exported. Each export job can contain up to 1,000 boards."
       },
       "GetBoardItemContentLogsResponse": {
         "type": "object",
@@ -16617,7 +16627,7 @@
           },
           "userType": {
             "type": "string",
-            "description": "Free-form string to indicate the user license type in the organization. <br><br> Only supported values for licenses are allowed. Supported licences for organizations can vary. They can potentially have the following values: Full, Free, Free Restricted, Full (Trial), Basic. <br><br> Note: When `userType` is specified, the `userType` license is set per the value provided. When `userType` is not specified, the user license is set according to internal Miro logic, which depends on the organization plan.",
+            "description": "Free-form string to indicate the user license type in the organization. <br><br> Only supported values for license types are allowed. Supported license types can vary per organization. An organization can have one or more of the following license type values: Full, Free, Free Restricted, Full (Trial), Basic, Standard, Advanced. <br><br> Note: When `userType` is specified, the `userType` license is set per the value provided. When `userType` is not specified, the user license is set according to internal Miro logic, which depends on the organization plan.",
             "example": "Full"
           },
           "active": {
@@ -17782,7 +17792,17 @@
             "type": "string",
             "description": "Name of the current user license in the organization",
             "example": "full",
-            "enum": ["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
+            "enum": [
+              "advanced",
+              "standard",
+              "basic",
+              "full",
+              "occasional",
+              "free",
+              "free_restricted",
+              "full_trial",
+              "unknown"
+            ]
           },
           "licenseAssignedAt": {
             "type": "string",
@@ -24931,7 +24951,7 @@
           "email": {
             "type": "string",
             "description": "User email",
-            "example": "user@mail.com0"
+            "example": "user@mail.com"
           }
         }
       },
@@ -24940,21 +24960,21 @@
         "properties": {
           "membersToAdd": {
             "type": "array",
-            "description": "List of user emails to add to the user group.",
+            "description": "List of user identifiers (can be email or ID) to add to the user group.",
             "items": {
               "type": "string",
-              "description": "User email",
-              "example": "user1@mail.com"
-            }
+              "description": "User ID or user email."
+            },
+            "example": ["3074457345618265000", "user0@example.com"]
           },
           "membersToRemove": {
             "type": "array",
-            "description": "List of user emails to remove from the user group.",
+            "description": "List of user identifiers (can be email or ID) to remove from the user group.",
             "items": {
               "type": "string",
-              "description": "User email",
-              "example": "user2@mail.com"
-            }
+              "description": "User ID or user email."
+            },
+            "example": ["3074457345618265001", "user1@example.com"]
           }
         }
       },
@@ -24979,7 +24999,7 @@
           },
           "status": {
             "type": "integer",
-            "description": "The HTTP status code for the successful operation.",
+            "description": "The HTTP status code for a successful operation.",
             "example": 200
           },
           "affectedUsers": {
@@ -24998,7 +25018,7 @@
           },
           "status": {
             "type": "integer",
-            "description": "The HTTP status code for the successful operation.",
+            "description": "The HTTP status code for an unsuccessful operation.",
             "example": 400
           },
           "error": {

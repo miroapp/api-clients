@@ -28,10 +28,14 @@ class UpdateUserGroupMembersRequest(BaseModel):
     """  # noqa: E501
 
     members_to_add: Optional[List[StrictStr]] = Field(
-        default=None, description="List of user emails to add to the user group.", alias="membersToAdd"
+        default=None,
+        description="List of user identifiers (can be email or ID) to add to the user group.",
+        alias="membersToAdd",
     )
     members_to_remove: Optional[List[StrictStr]] = Field(
-        default=None, description="List of user emails to remove from the user group.", alias="membersToRemove"
+        default=None,
+        description="List of user identifiers (can be email or ID) to remove from the user group.",
+        alias="membersToRemove",
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["membersToAdd", "membersToRemove"]
