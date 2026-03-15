@@ -16,27 +16,36 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from miro_api.models.board_format import BoardFormat
+from miro_api.models.ai_interaction_log import AiInteractionLog
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class CreateBoardExportRequest(BaseModel):
+class GetAiInteractionLogsResponse(BaseModel):
     """
-    List of board IDs to be exported. Each export job can contain up to 1,000 boards.
+    Response for query using cursor and filter parameters.
     """  # noqa: E501
 
-    board_ids: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=1000)]] = Field(
+    limit: Optional[StrictInt] = Field(
         default=None,
-        description="List of board IDs to be exported. Each export job can contain up to 1,000 boards.",
-        alias="boardIds",
+        description="The maximum number of results to return per call. If the number of logs in the response is greater than the limit specified, the response returns the cursor parameter with a value. ",
     )
-    board_format: Optional[BoardFormat] = Field(default=None, alias="boardFormat")
+    size: Optional[StrictInt] = Field(
+        default=None,
+        description="Number of results returned in the response considering the cursor and the limit values sent in the request. For example, if there are 20 results, the request does not have a cursor value, and the limit set to 10, the size of the results will be 10. In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection. ",
+    )
+    data: Optional[List[AiInteractionLog]] = Field(
+        default=None, description="Contains the list of AI interaction logs."
+    )
+    cursor: Optional[StrictStr] = Field(
+        default=None,
+        description="Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch. ",
+    )
+    type: Optional[StrictStr] = Field(default="cursor-list", description="Type of the object returned.")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["boardIds", "boardFormat"]
+    __properties: ClassVar[List[str]] = ["limit", "size", "data", "cursor", "type"]
 
     model_config = {
         "populate_by_name": True,
@@ -55,7 +64,7 @@ class CreateBoardExportRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateBoardExportRequest from a JSON string"""
+        """Create an instance of GetAiInteractionLogsResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,6 +89,13 @@ class CreateBoardExportRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
+        _items = []
+        if self.data:
+            for _item in self.data:
+                if _item:
+                    _items.append(_item.to_dict())
+            _dict["data"] = _items
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -89,14 +105,26 @@ class CreateBoardExportRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateBoardExportRequest from a dict"""
+        """Create an instance of GetAiInteractionLogsResponse from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"boardIds": obj.get("boardIds"), "boardFormat": obj.get("boardFormat")})
+        _obj = cls.model_validate(
+            {
+                "limit": obj.get("limit"),
+                "size": obj.get("size"),
+                "data": (
+                    [AiInteractionLog.from_dict(_item) for _item in obj["data"]]
+                    if obj.get("data") is not None
+                    else None
+                ),
+                "cursor": obj.get("cursor"),
+                "type": obj.get("type") if obj.get("type") is not None else "cursor-list",
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

@@ -12,11 +12,11 @@
 
 export class UpdateUserGroupMembersRequest {
   /**
-   * List of user emails to add to the user group.
+   * List of user identifiers (can be email or ID) to add to the user group.
    */
   'membersToAdd'?: Array<string>
   /**
-   * List of user emails to remove from the user group.
+   * List of user identifiers (can be email or ID) to remove from the user group.
    */
   'membersToRemove'?: Array<string>
 

@@ -16,27 +16,66 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from miro_api.models.board_format import BoardFormat
+from miro_api.models.ai_interaction_log_actor import AiInteractionLogActor
+from miro_api.models.ai_interaction_log_object import AiInteractionLogObject
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class CreateBoardExportRequest(BaseModel):
+class AiInteractionLog(BaseModel):
     """
-    List of board IDs to be exported. Each export job can contain up to 1,000 boards.
+    Contains information about a single AI interaction log entry.
     """  # noqa: E501
 
-    board_ids: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=1000)]] = Field(
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the AI interaction log entry.")
+    created_at: Optional[datetime] = Field(
         default=None,
-        description="List of board IDs to be exported. Each export job can contain up to 1,000 boards.",
-        alias="boardIds",
+        description="Date and time when the AI interaction occurred.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ",
+        alias="createdAt",
     )
-    board_format: Optional[BoardFormat] = Field(default=None, alias="boardFormat")
+    stored_at: Optional[datetime] = Field(
+        default=None,
+        description="Date and time when the AI interaction log was stored.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). ",
+        alias="storedAt",
+    )
+    session_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier of the session during which the AI interaction occurred.",
+        alias="sessionId",
+    )
+    message_id: Optional[StrictStr] = Field(
+        default=None,
+        description="Unique identifier of the message associated with the AI interaction.",
+        alias="messageId",
+    )
+    object: Optional[AiInteractionLogObject] = None
+    ai_feature_name: Optional[StrictStr] = Field(
+        default=None, description="Name of the AI feature that was used during the interaction.", alias="aiFeatureName"
+    )
+    actor: Optional[AiInteractionLogActor] = None
+    log_type: Optional[StrictStr] = Field(
+        default=None, description="Type of the AI interaction log entry.", alias="logType"
+    )
+    details: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Additional details about the AI interaction. The structure of this object varies depending on the AI feature used. The text may contain unstructured data that could reveal information used in interactions with the LLM.",
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["boardIds", "boardFormat"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "createdAt",
+        "storedAt",
+        "sessionId",
+        "messageId",
+        "object",
+        "aiFeatureName",
+        "actor",
+        "logType",
+        "details",
+    ]
 
     model_config = {
         "populate_by_name": True,
@@ -55,7 +94,7 @@ class CreateBoardExportRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateBoardExportRequest from a JSON string"""
+        """Create an instance of AiInteractionLog from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,6 +119,12 @@ class CreateBoardExportRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of object
+        if self.object:
+            _dict["object"] = self.object.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of actor
+        if self.actor:
+            _dict["actor"] = self.actor.to_dict()
         # puts key-value pairs in additional_properties in the top level
         if self.additional_properties is not None:
             for _key, _value in self.additional_properties.items():
@@ -89,14 +134,27 @@ class CreateBoardExportRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateBoardExportRequest from a dict"""
+        """Create an instance of AiInteractionLog from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"boardIds": obj.get("boardIds"), "boardFormat": obj.get("boardFormat")})
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "createdAt": obj.get("createdAt"),
+                "storedAt": obj.get("storedAt"),
+                "sessionId": obj.get("sessionId"),
+                "messageId": obj.get("messageId"),
+                "object": AiInteractionLogObject.from_dict(obj["object"]) if obj.get("object") is not None else None,
+                "aiFeatureName": obj.get("aiFeatureName"),
+                "actor": AiInteractionLogActor.from_dict(obj["actor"]) if obj.get("actor") is not None else None,
+                "logType": obj.get("logType"),
+                "details": obj.get("details"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

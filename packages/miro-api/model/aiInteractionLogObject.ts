@@ -10,16 +10,19 @@
  * Do not edit the class manually.
  */
 
-import {UpdateUserGroupMembersResultErrorError} from './updateUserGroupMembersResultErrorError'
-import {UpdateUserGroupMembersResultOperation} from './updateUserGroupMembersResultOperation'
-
-export class UpdateUserGroupMembersResultError {
-  'operation'?: UpdateUserGroupMembersResultOperation
+/**
+ * @internal
+ * Contains information about the Miro object involved in the AI interaction.
+ */
+export class AiInteractionLogObject {
   /**
-   * The HTTP status code for an unsuccessful operation.
+   * Unique identifier of the Miro object involved in the AI interaction, e.g., Board ID or Organization ID.
    */
-  'status'?: number
-  'error'?: UpdateUserGroupMembersResultErrorError
+  'id'?: string
+  /**
+   * Type of the Miro object involved in the AI interaction, e.g., \"board, \"organization\".
+   */
+  'type'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -27,26 +30,19 @@ export class UpdateUserGroupMembersResultError {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'operation',
-      baseName: 'operation',
-      type: 'UpdateUserGroupMembersResultOperation',
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
     },
     {
-      name: 'status',
-      baseName: 'status',
-      type: 'number',
-    },
-    {
-      name: 'error',
-      baseName: 'error',
-      type: 'UpdateUserGroupMembersResultErrorError',
+      name: 'type',
+      baseName: 'type',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return UpdateUserGroupMembersResultError.attributeTypeMap
+    return AiInteractionLogObject.attributeTypeMap
   }
 }
-
-export namespace UpdateUserGroupMembersResultError {}

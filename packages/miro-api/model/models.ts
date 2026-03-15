@@ -1,6 +1,9 @@
 export * from './actor'
 export * from './addProjectMemberRequest'
 export * from './adminRole'
+export * from './aiInteractionLog'
+export * from './aiInteractionLogActor'
+export * from './aiInteractionLogObject'
 export * from './appCardCreateRequest'
 export * from './appCardData'
 export * from './appCardDataChanges'
@@ -169,6 +172,7 @@ export * from './geometryPlatformTags'
 export * from './geometryPlatformbulkcreateoperation'
 export * from './geometryPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './geometryPlatformgroups'
+export * from './getAiInteractionLogsResponse'
 export * from './getAllGroups200Response'
 export * from './getAllGroups400Response'
 export * from './getAllGroups404Response'
@@ -430,6 +434,9 @@ export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile
 import {Actor} from './actor'
 import {AddProjectMemberRequest} from './addProjectMemberRequest'
 import {AdminRole} from './adminRole'
+import {AiInteractionLog} from './aiInteractionLog'
+import {AiInteractionLogActor} from './aiInteractionLogActor'
+import {AiInteractionLogObject} from './aiInteractionLogObject'
 import {AppCardCreateRequest} from './appCardCreateRequest'
 import {AppCardData} from './appCardData'
 import {AppCardDataChanges} from './appCardDataChanges'
@@ -598,6 +605,7 @@ import {GeometryPlatformTags} from './geometryPlatformTags'
 import {GeometryPlatformbulkcreateoperation} from './geometryPlatformbulkcreateoperation'
 import {GeometryPlatformcreateitemsinbulkusingfilefromdevice} from './geometryPlatformcreateitemsinbulkusingfilefromdevice'
 import {GeometryPlatformgroups} from './geometryPlatformgroups'
+import {GetAiInteractionLogsResponse} from './getAiInteractionLogsResponse'
 import {GetAllGroups200Response} from './getAllGroups200Response'
 import {GetAllGroups400Response} from './getAllGroups400Response'
 import {GetAllGroups404Response} from './getAllGroups404Response'
@@ -1041,6 +1049,9 @@ let typeMap: {[index: string]: any} = {
   Actor: Actor,
   AddProjectMemberRequest: AddProjectMemberRequest,
   AdminRole: AdminRole,
+  AiInteractionLog: AiInteractionLog,
+  AiInteractionLogActor: AiInteractionLogActor,
+  AiInteractionLogObject: AiInteractionLogObject,
   AppCardCreateRequest: AppCardCreateRequest,
   AppCardData: AppCardData,
   AppCardDataChanges: AppCardDataChanges,
@@ -1210,6 +1221,7 @@ let typeMap: {[index: string]: any} = {
   GeometryPlatformbulkcreateoperation: GeometryPlatformbulkcreateoperation,
   GeometryPlatformcreateitemsinbulkusingfilefromdevice: GeometryPlatformcreateitemsinbulkusingfilefromdevice,
   GeometryPlatformgroups: GeometryPlatformgroups,
+  GetAiInteractionLogsResponse: GetAiInteractionLogsResponse,
   GetAllGroups200Response: GetAllGroups200Response,
   GetAllGroups400Response: GetAllGroups400Response,
   GetAllGroups404Response: GetAllGroups404Response,
