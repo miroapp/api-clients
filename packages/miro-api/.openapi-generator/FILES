@@ -3,6 +3,9 @@ api/apis.ts
 model/actor.ts
 model/addProjectMemberRequest.ts
 model/adminRole.ts
+model/aiInteractionLog.ts
+model/aiInteractionLogActor.ts
+model/aiInteractionLogObject.ts
 model/appCardCreateRequest.ts
 model/appCardData.ts
 model/appCardDataChanges.ts
@@ -171,6 +174,7 @@ model/geometryPlatformTags.ts
 model/geometryPlatformbulkcreateoperation.ts
 model/geometryPlatformcreateitemsinbulkusingfilefromdevice.ts
 model/geometryPlatformgroups.ts
+model/getAiInteractionLogsResponse.ts
 model/getAllGroups200Response.ts
 model/getAllGroups400Response.ts
 model/getAllGroups404Response.ts

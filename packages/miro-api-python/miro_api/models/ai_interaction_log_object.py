@@ -18,25 +18,25 @@ import json
 
 from pydantic import BaseModel, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
-from miro_api.models.board_format import BoardFormat
 from typing import Optional, Set
 from typing_extensions import Self
 
 
-class CreateBoardExportRequest(BaseModel):
+class AiInteractionLogObject(BaseModel):
     """
-    List of board IDs to be exported. Each export job can contain up to 1,000 boards.
+    Contains information about the Miro object involved in the AI interaction.
     """  # noqa: E501
 
-    board_ids: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=1000)]] = Field(
+    id: Optional[StrictStr] = Field(
         default=None,
-        description="List of board IDs to be exported. Each export job can contain up to 1,000 boards.",
-        alias="boardIds",
+        description="Unique identifier of the Miro object involved in the AI interaction, e.g., Board ID or Organization ID. ",
     )
-    board_format: Optional[BoardFormat] = Field(default=None, alias="boardFormat")
+    type: Optional[StrictStr] = Field(
+        default=None,
+        description='Type of the Miro object involved in the AI interaction, e.g., "board, "organization".',
+    )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["boardIds", "boardFormat"]
+    __properties: ClassVar[List[str]] = ["id", "type"]
 
     model_config = {
         "populate_by_name": True,
@@ -55,7 +55,7 @@ class CreateBoardExportRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CreateBoardExportRequest from a JSON string"""
+        """Create an instance of AiInteractionLogObject from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -89,14 +89,14 @@ class CreateBoardExportRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CreateBoardExportRequest from a dict"""
+        """Create an instance of AiInteractionLogObject from a dict"""
         if obj is None:
             return None
 
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"boardIds": obj.get("boardIds"), "boardFormat": obj.get("boardFormat")})
+        _obj = cls.model_validate({"id": obj.get("id"), "type": obj.get("type")})
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

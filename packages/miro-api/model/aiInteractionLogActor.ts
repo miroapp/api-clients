@@ -10,16 +10,23 @@
  * Do not edit the class manually.
  */
 
-import {UpdateUserGroupMembersResultErrorError} from './updateUserGroupMembersResultErrorError'
-import {UpdateUserGroupMembersResultOperation} from './updateUserGroupMembersResultOperation'
-
-export class UpdateUserGroupMembersResultError {
-  'operation'?: UpdateUserGroupMembersResultOperation
+/**
+ * @internal
+ * Contains information about the user who performed the AI interaction.
+ */
+export class AiInteractionLogActor {
   /**
-   * The HTTP status code for an unsuccessful operation.
+   * Unique identifier of the user who performed the AI interaction.
    */
-  'status'?: number
-  'error'?: UpdateUserGroupMembersResultErrorError
+  'id'?: string
+  /**
+   * Email of the user who performed the AI interaction.
+   */
+  'email'?: string
+  /**
+   * Name of the user who performed the AI interaction.
+   */
+  'name'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -27,26 +34,24 @@ export class UpdateUserGroupMembersResultError {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'operation',
-      baseName: 'operation',
-      type: 'UpdateUserGroupMembersResultOperation',
+      name: 'id',
+      baseName: 'id',
+      type: 'string',
     },
     {
-      name: 'status',
-      baseName: 'status',
-      type: 'number',
+      name: 'email',
+      baseName: 'email',
+      type: 'string',
     },
     {
-      name: 'error',
-      baseName: 'error',
-      type: 'UpdateUserGroupMembersResultErrorError',
+      name: 'name',
+      baseName: 'name',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return UpdateUserGroupMembersResultError.attributeTypeMap
+    return AiInteractionLogActor.attributeTypeMap
   }
 }
-
-export namespace UpdateUserGroupMembersResultError {}

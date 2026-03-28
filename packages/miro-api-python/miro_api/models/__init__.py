@@ -16,6 +16,9 @@ Do not edit the class manually.
 from miro_api.models.actor import Actor
 from miro_api.models.add_project_member_request import AddProjectMemberRequest
 from miro_api.models.admin_role import AdminRole
+from miro_api.models.ai_interaction_log import AiInteractionLog
+from miro_api.models.ai_interaction_log_actor import AiInteractionLogActor
+from miro_api.models.ai_interaction_log_object import AiInteractionLogObject
 from miro_api.models.app_card_create_request import AppCardCreateRequest
 from miro_api.models.app_card_data import AppCardData
 from miro_api.models.app_card_data_changes import AppCardDataChanges
@@ -201,6 +204,7 @@ from miro_api.models.geometry_platformcreateitemsinbulkusingfilefromdevice impor
     GeometryPlatformcreateitemsinbulkusingfilefromdevice,
 )
 from miro_api.models.geometry_platformgroups import GeometryPlatformgroups
+from miro_api.models.get_ai_interaction_logs_response import GetAiInteractionLogsResponse
 from miro_api.models.get_all_groups200_response import GetAllGroups200Response
 from miro_api.models.get_all_groups400_response import GetAllGroups400Response
 from miro_api.models.get_all_groups404_response import GetAllGroups404Response
