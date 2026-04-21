@@ -142,6 +142,147 @@
         }
       }
     },
+    "/v2/orgs/{org_id}/ai-interaction-logs": {
+      "get": {
+        "x-settings": {
+          "publish": true,
+          "skip-tests": true
+        },
+        "description": "Retrieves AI interaction logs for your organization. AI interaction logs capture user interactions with AI features in Miro. You can retrieve results for a specific time period. You can also filter results based on object IDs and the emails of users who interacted with AI features. Additionally, results can be paginated for easier viewing and processing.\n<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>aiinteractionlogs:read</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a>\n<br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>.</p>\n",
+        "operationId": "enterprise-get-ai-interaction-logs",
+        "parameters": [
+          {
+            "name": "org_id",
+            "description": "Unique identifier of the organization.",
+            "example": "3074457345821141000",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "object_ids",
+            "description": "List of object IDs used to retrieve AI interaction logs. \nCurrently, supported object types include board IDs and organization IDs. \nYou can obtain object IDs from the response of this endpoint (the <code>object.id</code> field), \nfrom other Platform API endpoints (for example, [Get boards API](https://developers.miro.com/reference/get-boards)), \nor from Miro UI URLs (board ID and organization ID from the URLs).\n",
+            "example": ["3458764549483493025", "u8J_kllZmDk="],
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "maxItems": 15,
+              "items": {
+                "description": "Unique identifier of the object (organization, board) where AI interaction happened for the User.",
+                "type": "string",
+                "example": "3458764549483493025"
+              }
+            }
+          },
+          {
+            "name": "emails",
+            "description": "Filters AI interaction logs using a list of user emails. Only AI interactions associated with the provided emails will be included in the response.",
+            "example": ["someone@domain.com", "someoneelse@domain.com"],
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "maxItems": 15,
+              "items": {
+                "description": "Email address of the user whose AI interaction logs you want to retrieve. Only interactions associated with the specified emails are returned.",
+                "type": "string",
+                "example": "someone@domain.com"
+              }
+            }
+          },
+          {
+            "name": "from",
+            "description": "Start date and time of the time range used to filter AI interaction logs. Only interactions that were stored within the specified <code>from</code> - <code>to</code> time range are returned.\nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
+            "example": "2026-01-30T17:26:50Z",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "description": "End date and time of the time range used to filter AI interaction logs. Only interactions that were stored within the specified <code>from</code> - <code>to</code> time range are returned.\nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
+            "example": "2036-03-30T17:26:50Z",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "cursor",
+            "description": "A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request.\n",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "MTY2OTg4NTIwMDAwMHwxMjM="
+          },
+          {
+            "name": "limit",
+            "description": "The maximum number of results to return per call. If the number of logs in the response is greater than the limit specified, the response returns the cursor parameter with a value.\n",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 100
+            },
+            "example": 100
+          },
+          {
+            "name": "sorting",
+            "description": "Sort order in which you want to view the result set based on the interaction date. To sort by an ascending date, specify `asc`. To sort by a descending date, specify `desc`.\n",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "asc",
+              "enum": ["asc", "desc"]
+            },
+            "example": "asc"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAiInteractionLogsResponse"
+                }
+              }
+            },
+            "description": "Response from the API that includes AI interaction logs, size of the data list, pagination cursor, and pagination limit.\n"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "429": {
+            "$ref": "#/components/responses/429"
+          }
+        },
+        "summary": "Get AI interaction logs (Beta)",
+        "tags": ["AI Interaction Logs"]
+      }
+    },
     "/v2/audit/logs": {
       "get": {
         "description": "Retrieves a page of audit events from the last 90 days. If you want to retrieve data that is older than 90 days, you can use the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/360017571434-Audit-logs#h_01J7EY4E0F67EFTRQ7BT688HW0\">CSV export feature</a>.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>auditlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a>",
@@ -4058,7 +4199,17 @@
             "schema": {
               "type": "string",
               "description": "Filter organization members by license",
-              "enum": ["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
+              "enum": [
+                "advanced",
+                "standard",
+                "basic",
+                "full",
+                "occasional",
+                "free",
+                "free_restricted",
+                "full_trial",
+                "unknown"
+              ]
             }
           },
           {
@@ -4241,7 +4392,7 @@
           }
         },
         "summary": "Create board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       },
       "get": {
         "description": "Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters.\nCustomize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.\n\nIf you're an Enterprise customer with Company Admin permissions:\n- Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).\n- Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error.\n<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>\n",
@@ -4331,7 +4482,7 @@
           }
         },
         "summary": "Get boards",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       },
       "put": {
         "description": "Creates a copy of an existing board. You can also update the name, description, sharing policy, and permissions policy for the new board in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a><br/>",
@@ -4381,7 +4532,7 @@
           }
         },
         "summary": "Copy board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       }
     },
     "/v2/boards/{board_id}": {
@@ -4421,7 +4572,7 @@
           }
         },
         "summary": "Get specific board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       },
       "patch": {
         "description": "Updates a specific board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -4475,7 +4626,7 @@
           }
         },
         "summary": "Update board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       },
       "delete": {
         "description": "Deletes a board. Deleted boards go to Trash (on paid plans) and can be restored via UI within 90 days after deletion.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -4516,7 +4667,7 @@
           }
         },
         "summary": "Delete board",
-        "tags": ["boards"]
+        "tags": ["Boards"]
       }
     },
     "/v2/boards/{board_id}/app_cards": {
@@ -4566,7 +4717,7 @@
           }
         },
         "summary": "Create app card item",
-        "tags": ["app_cards"]
+        "tags": ["App card items"]
       }
     },
     "/v2/boards/{board_id}/app_cards/{item_id}": {
@@ -4615,7 +4766,7 @@
           }
         },
         "summary": "Get app card item",
-        "tags": ["app_cards"]
+        "tags": ["App card items"]
       },
       "patch": {
         "description": "Updates an app card item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -4675,7 +4826,7 @@
           }
         },
         "summary": "Update app card item",
-        "tags": ["app_cards"]
+        "tags": ["App card items"]
       },
       "delete": {
         "description": "Deletes an app card item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -4722,7 +4873,7 @@
           }
         },
         "summary": "Delete app card item",
-        "tags": ["app_cards"]
+        "tags": ["App card items"]
       }
     },
     "/v2/boards/{board_id}/cards": {
@@ -4775,7 +4926,7 @@
           }
         },
         "summary": "Create card item",
-        "tags": ["cards"]
+        "tags": ["Card items"]
       }
     },
     "/v2/boards/{board_id}/cards/{item_id}": {
@@ -4827,7 +4978,7 @@
           }
         },
         "summary": "Get card item",
-        "tags": ["cards"]
+        "tags": ["Card items"]
       },
       "patch": {
         "x-settings": {
@@ -4890,7 +5041,7 @@
           }
         },
         "summary": "Update card item",
-        "tags": ["cards"]
+        "tags": ["Card items"]
       },
       "delete": {
         "x-settings": {
@@ -4940,7 +5091,7 @@
           }
         },
         "summary": "Delete card item",
-        "tags": ["cards"]
+        "tags": ["Card items"]
       }
     },
     "/v2/boards/{board_id}/connectors": {
@@ -4990,7 +5141,7 @@
           }
         },
         "summary": "Create connector",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       },
       "get": {
         "description": "Retrieves a list of connectors for a specific board.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request. For example, if you set the `limit` query parameter to `10` and the board contains 20 objects, the first call will return information about the first 10 objects in the response along with a cursor parameter and value. In this example, let's say the cursor parameter value returned in the response is `foo`. If you want to retrieve the next set of objects, on your next call to the same method, set the cursor parameter value to `foo`.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -5047,7 +5198,7 @@
           }
         },
         "summary": "Get connectors",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       }
     },
     "/v2/boards/{board_id}/connectors/{connector_id}": {
@@ -5096,7 +5247,7 @@
           }
         },
         "summary": "Get specific connector",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       },
       "patch": {
         "description": "Updates a connector on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -5156,7 +5307,7 @@
           }
         },
         "summary": "Update connector",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       },
       "delete": {
         "description": "Deletes the specified connector from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -5203,7 +5354,7 @@
           }
         },
         "summary": "Delete connector",
-        "tags": ["connectors"]
+        "tags": ["Connectors"]
       }
     },
     "/v2/boards/{board_id}/documents": {
@@ -5253,7 +5404,7 @@
           }
         },
         "summary": "Create document item using URL",
-        "tags": ["documents"]
+        "tags": ["Document items"]
       }
     },
     "/v2/boards/{board_id}/documents/{item_id}": {
@@ -5302,7 +5453,7 @@
           }
         },
         "summary": "Get document item",
-        "tags": ["documents"]
+        "tags": ["Document items"]
       },
       "patch": {
         "description": "Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -5362,7 +5513,7 @@
           }
         },
         "summary": "Update document item using URL",
-        "tags": ["documents"]
+        "tags": ["Document items"]
       },
       "delete": {
         "description": "Deletes a document item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -5409,7 +5560,7 @@
           }
         },
         "summary": "Delete document item",
-        "tags": ["documents"]
+        "tags": ["Document items"]
       }
     },
     "/v2/boards/{board_id}/embeds": {
@@ -5459,7 +5610,7 @@
           }
         },
         "summary": "Create embed item",
-        "tags": ["embeds"]
+        "tags": ["Embed items"]
       }
     },
     "/v2/boards/{board_id}/embeds/{item_id}": {
@@ -5508,7 +5659,7 @@
           }
         },
         "summary": "Get embed item",
-        "tags": ["embeds"]
+        "tags": ["Embed items"]
       },
       "patch": {
         "description": "Updates an embed item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -5568,7 +5719,7 @@
           }
         },
         "summary": "Update embed item",
-        "tags": ["embeds"]
+        "tags": ["Embed items"]
       },
       "delete": {
         "description": "Deletes an embed item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -5615,7 +5766,7 @@
           }
         },
         "summary": "Delete embed item",
-        "tags": ["embeds"]
+        "tags": ["Embed items"]
       }
     },
     "/v2/boards/{board_id}/images": {
@@ -5668,7 +5819,7 @@
           }
         },
         "summary": "Create image item using URL",
-        "tags": ["images"]
+        "tags": ["Image items"]
       }
     },
     "/v2/boards/{board_id}/images/{item_id}": {
@@ -5720,7 +5871,7 @@
           }
         },
         "summary": "Get image item",
-        "tags": ["images"]
+        "tags": ["Image items"]
       },
       "patch": {
         "x-settings": {
@@ -5783,7 +5934,7 @@
           }
         },
         "summary": "Update image item using URL",
-        "tags": ["images"]
+        "tags": ["Image items"]
       },
       "delete": {
         "x-settings": {
@@ -5833,7 +5984,7 @@
           }
         },
         "summary": "Delete image item",
-        "tags": ["images"]
+        "tags": ["Image items"]
       }
     },
     "/v2/boards/{board_id}/items": {
@@ -5914,7 +6065,7 @@
           }
         },
         "summary": "Get items on board",
-        "tags": ["items"]
+        "tags": ["Items"]
       }
     },
     "/v2/boards/{board_id}/items/{item_id}": {
@@ -5963,7 +6114,7 @@
           }
         },
         "summary": "Get specific item on board",
-        "tags": ["items"]
+        "tags": ["Items"]
       },
       "patch": {
         "description": "Updates the position or the parent of an item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -6020,7 +6171,7 @@
           }
         },
         "summary": "Update item position or parent",
-        "tags": ["items"]
+        "tags": ["Items"]
       },
       "delete": {
         "description": "Deletes an item from a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -6067,7 +6218,7 @@
           }
         },
         "summary": "Delete item",
-        "tags": ["items"]
+        "tags": ["Items"]
       }
     },
     "/v2/boards/{board_id}/members": {
@@ -6120,7 +6271,7 @@
           }
         },
         "summary": "Share board",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       },
       "get": {
         "description": "Retrieves a pageable list of members for a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>",
@@ -6176,7 +6327,7 @@
           }
         },
         "summary": "Get all board members",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       }
     },
     "/v2/boards/{board_id}/members/{board_member_id}": {
@@ -6228,7 +6379,7 @@
           }
         },
         "summary": "Get specific board member",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       },
       "patch": {
         "x-settings": {
@@ -6288,7 +6439,7 @@
           }
         },
         "summary": "Update board member",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       },
       "delete": {
         "x-settings": {
@@ -6338,7 +6489,7 @@
           }
         },
         "summary": "Remove board member",
-        "tags": ["board_members"]
+        "tags": ["Board members"]
       }
     },
     "/v2/boards/{board_id}/shapes": {
@@ -6388,7 +6539,7 @@
           }
         },
         "summary": "Create shape item",
-        "tags": ["shapes"]
+        "tags": ["Shape items"]
       }
     },
     "/v2/boards/{board_id}/shapes/{item_id}": {
@@ -6437,7 +6588,7 @@
           }
         },
         "summary": "Get shape item",
-        "tags": ["shapes"]
+        "tags": ["Shape items"]
       },
       "patch": {
         "description": "Updates a shape item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -6497,7 +6648,7 @@
           }
         },
         "summary": "Update shape item",
-        "tags": ["shapes"]
+        "tags": ["Shape items"]
       },
       "delete": {
         "description": "Deletes a shape item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -6544,7 +6695,7 @@
           }
         },
         "summary": "Delete shape item",
-        "tags": ["shapes"]
+        "tags": ["Shape items"]
       }
     },
     "/v2/boards/{board_id}/sticky_notes": {
@@ -6594,7 +6745,7 @@
           }
         },
         "summary": "Create sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": ["Sticky note items"]
       }
     },
     "/v2/boards/{board_id}/sticky_notes/{item_id}": {
@@ -6643,7 +6794,7 @@
           }
         },
         "summary": "Get sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": ["Sticky note items"]
       },
       "patch": {
         "description": "Updates a sticky note item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -6703,7 +6854,7 @@
           }
         },
         "summary": "Update sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": ["Sticky note items"]
       },
       "delete": {
         "description": "Deletes a sticky note item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -6750,7 +6901,7 @@
           }
         },
         "summary": "Delete sticky note item",
-        "tags": ["sticky_notes"]
+        "tags": ["Sticky note items"]
       }
     },
     "/v2/boards/{board_id}/texts": {
@@ -6800,7 +6951,7 @@
           }
         },
         "summary": "Create text item",
-        "tags": ["texts"]
+        "tags": ["Text items"]
       }
     },
     "/v2/boards/{board_id}/texts/{item_id}": {
@@ -6849,7 +7000,7 @@
           }
         },
         "summary": "Get text item",
-        "tags": ["texts"]
+        "tags": ["Text items"]
       },
       "patch": {
         "description": "Updates a text item on a board based on the data and style properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
@@ -6909,7 +7060,7 @@
           }
         },
         "summary": "Update text item",
-        "tags": ["texts"]
+        "tags": ["Text items"]
       },
       "delete": {
         "description": "Deletes a text item from the board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
@@ -6956,7 +7107,7 @@
           }
         },
         "summary": "Delete text item",
-        "tags": ["texts"]
+        "tags": ["Text items"]
       }
     },
     "/v2/boards/{board_id}/items/bulk": {
@@ -9428,6 +9579,883 @@
         },
         "summary": "Delete shape item",
         "tags": ["Flowchart shapes (experimental)"]
+      }
+    },
+    "/v2-experimental/boards/{board_id}/code_widgets": {
+      "get": {
+        "description": "Retrieves a list of code widget items for a specific board.\n\nThis method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
+        "operationId": "get-code-widget-items",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "string",
+              "default": "10",
+              "description": "The maximum number of results to return per call. If the number of items in the response is greater than the limit specified, the response returns the cursor parameter with a value.",
+              "maximum": 50,
+              "minimum": 10
+            }
+          },
+          {
+            "in": "query",
+            "name": "cursor",
+            "schema": {
+              "type": "string",
+              "description": "A cursor-paginated method returns a portion of the total set of results based on the limit specified and a `cursor` that points to the next portion of the results. To retrieve the next portion of the collection, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request."
+            }
+          },
+          {
+            "description": "Unique identifier (ID) of the board for which you want to retrieve the list of code widget items.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeWidgetCursorPaged"
+                }
+              }
+            },
+            "description": "Code widget items retrieved"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get code widget items",
+        "tags": ["Code widget items (experimental)"]
+      },
+      "post": {
+        "description": "Adds a code widget item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
+        "operationId": "create-code-widget-item",
+        "parameters": [
+          {
+            "description": "Unique identifier (ID) of the board where you want to create the item.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeWidgetCreateRequest"
+              }
+            }
+          },
+          "required": false
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeWidgetItem"
+                }
+              }
+            },
+            "description": "Code widget item created"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Create code widget item",
+        "tags": ["Code widget items (experimental)"]
+      }
+    },
+    "/v2-experimental/boards/{board_id}/code_widgets/{item_id}": {
+      "get": {
+        "description": "Retrieves information for a specific code widget item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>",
+        "operationId": "get-code-widget-item",
+        "parameters": [
+          {
+            "description": "Unique identifier (ID) of the board from which you want to retrieve a specific item.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier (ID) of the item that you want to retrieve.",
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeWidgetItem"
+                }
+              }
+            },
+            "description": "Code widget item retrieved"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Get code widget item",
+        "tags": ["Code widget items (experimental)"]
+      },
+      "patch": {
+        "description": "Updates a code widget item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
+        "operationId": "update-code-widget-item",
+        "parameters": [
+          {
+            "description": "Unique identifier (ID) of the board where you want to update the item.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier (ID) of the item that you want to update.",
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CodeWidgetUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeWidgetItem"
+                }
+              }
+            },
+            "description": "Code widget item updated"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Update code widget item",
+        "tags": ["Code widget items (experimental)"]
+      },
+      "delete": {
+        "description": "Deletes a code widget item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>",
+        "operationId": "delete-code-widget-item",
+        "parameters": [
+          {
+            "description": "Unique identifier (ID) of the board from which you want to delete the item.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier (ID) of the item that you want to delete.",
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Code widget item deleted"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Delete code widget item",
+        "tags": ["Code widget items (experimental)"]
+      }
+    },
+    "/v2-experimental/boards/{board_id}/code_widgets/{item_id}/position": {
+      "patch": {
+        "description": "Updates the position of a code widget item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>",
+        "operationId": "move-code-widget-item",
+        "parameters": [
+          {
+            "description": "Unique identifier (ID) of the board where you want to move the item.",
+            "in": "path",
+            "name": "board_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Unique identifier (ID) of the item that you want to move.",
+            "in": "path",
+            "name": "item_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PositionChange"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CodeWidgetItem"
+                }
+              }
+            },
+            "description": "Code widget item moved"
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Malformed request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "description": "Test error obj",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "description": "Code of the error",
+                      "example": "error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "description": "Description of the error",
+                      "example": "Error message"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32",
+                      "description": "Status code of the error",
+                      "example": 400
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Type of the error",
+                      "example": "error"
+                    }
+                  }
+                }
+              }
+            },
+            "description": "Too many requests"
+          }
+        },
+        "summary": "Move code widget item",
+        "tags": ["Code widget items (experimental)"]
       }
     },
     "/v2/boards/{board_id_PlatformFileUpload}/documents": {
@@ -14631,7 +15659,7 @@
         "tags": ["User group members"]
       },
       "patch": {
-        "description": "Add and remove members in one request. For example, remove user A and add user B.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
+        "description": "Add and remove members in one request. For example, remove user A and add user B. You can add or remove up to 500 users at a time.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>",
         "operationId": "enterprise-update-group-members",
         "parameters": [
           {
@@ -14660,7 +15688,7 @@
                 }
               }
             },
-            "description": "Status codes for adding or removing members of a user group."
+            "description": "Results for adding or removing members of a user group. <br/> <small>Note that adding users might succeed partially. In this case, the array of responses contains two objects with operation set to \"addMembers\": one for the successfully added members, and one explaining why the operation failed for the remaining members.</small>"
           },
           "400": {
             "$ref": "#/components/responses/400"
@@ -15330,6 +16358,138 @@
   },
   "components": {
     "schemas": {
+      "GetAiInteractionLogsResponse": {
+        "type": "object",
+        "description": "Response for query using cursor and filter parameters.",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "The maximum number of results to return per call. If the number of logs in the response is\ngreater than the limit specified, the response returns the cursor parameter with a value.\n",
+            "format": "int32",
+            "example": 100
+          },
+          "size": {
+            "type": "integer",
+            "description": "Number of results returned in the response considering the cursor and the limit values sent in the request. For example, if there are 20 results, the request does not have a cursor value, and the limit set to 10, the size of the results will be 10. In this example, the response will also return a cursor value that can be used to retrieve the next set of 10 remaining results in the collection.\n",
+            "format": "int32",
+            "example": 1
+          },
+          "data": {
+            "$ref": "#/components/schemas/AiInteractionLogList"
+          },
+          "cursor": {
+            "type": "string",
+            "description": "Indicator of the position of the next page of the result. To retrieve the next page, make another query setting its cursor field to the value returned by the current query. If the value is empty, there are no more pages to fetch.\n",
+            "example": "MTY2OTg4NTIwMDAwMHwxMjM="
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the object returned.",
+            "default": "cursor-list"
+          }
+        }
+      },
+      "AiInteractionLogList": {
+        "type": "array",
+        "description": "Contains the list of AI interaction logs.",
+        "items": {
+          "$ref": "#/components/schemas/AiInteractionLog"
+        }
+      },
+      "AiInteractionLog": {
+        "type": "object",
+        "description": "Contains information about a single AI interaction log entry.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the AI interaction log entry.",
+            "example": "2dcf57ff-f12c-4fad-b708-c1642204b41b"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the AI interaction occurred.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
+            "example": "2023-06-24T17:32:28Z"
+          },
+          "storedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the AI interaction log was stored.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
+            "example": "2023-06-24T17:32:30Z"
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "Unique identifier of the session during which the AI interaction occurred.",
+            "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          },
+          "messageId": {
+            "type": "string",
+            "description": "Unique identifier of the message associated with the AI interaction.",
+            "example": "b2c3d4e5-f6a7-8901-bcde-f12345678901"
+          },
+          "object": {
+            "$ref": "#/components/schemas/AiInteractionLogObject"
+          },
+          "aiFeatureName": {
+            "type": "string",
+            "description": "Name of the AI feature that was used during the interaction.",
+            "example": "ai_generate_sticky_notes"
+          },
+          "actor": {
+            "$ref": "#/components/schemas/AiInteractionLogActor"
+          },
+          "logType": {
+            "type": "string",
+            "description": "Type of the AI interaction log entry.",
+            "example": "request"
+          },
+          "details": {
+            "type": "object",
+            "description": "Additional details about the AI interaction. The structure of this object varies depending on the AI feature used. The text may contain unstructured data that could reveal information used in interactions with the LLM.",
+            "additionalProperties": true,
+            "example": {
+              "text": "{\\\"text\\\":\\\"Generate me 1 sticker with the text \\\\\\\"AI generates content\\\\\\\"\\\",\\\"board_context\\\":{\\\"selection\\\":{\\\"selected_nodes\\\":[],\\\"reference_images\\\":[],\\\"design_reference_images\\\":[],\\\"comments\\\":[]},\\\"talktracks\\\":[],\\\"config\\\":{\\\"processing_method\\\":\\\"none\\\",\\\"ai_feature\\\":\\\"ai_generate_sticky_notes\\\"},\\\"context_prototype\\\":null,\\\"prototype_description\\\":null,\\\"screens\\\":null}}"
+            }
+          }
+        }
+      },
+      "AiInteractionLogObject": {
+        "type": "object",
+        "description": "Contains information about the Miro object involved in the AI interaction.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the Miro object involved in the AI interaction, e.g., Board ID or Organization ID.\n",
+            "example": "3458764549483493025"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the Miro object involved in the AI interaction, e.g., \"board, \"organization\".",
+            "example": "board"
+          }
+        }
+      },
+      "AiInteractionLogActor": {
+        "type": "object",
+        "description": "Contains information about the user who performed the AI interaction.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the user who performed the AI interaction.",
+            "example": "3458764517517852417"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the user who performed the AI interaction.",
+            "example": "john.smith.demo@miro.com"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the user who performed the AI interaction.",
+            "example": "John Smith"
+          }
+        }
+      },
       "AuditPage": {
         "type": "object",
         "properties": {
@@ -16351,14 +17511,14 @@
         "type": "object",
         "properties": {
           "boardIds": {
-            "maxItems": 50,
+            "maxItems": 1000,
             "minItems": 1,
             "type": "array",
-            "description": "List of board IDs to be exported.",
+            "description": "List of board IDs to be exported. Each export job can contain up to 1,000 boards.",
             "example": "o9J_kzlUDmo=",
             "items": {
               "type": "string",
-              "description": "List of board IDs to be exported.",
+              "description": "List of board IDs to be exported. Each export job can contain up to 1,000 boards.",
               "example": "o9J_kzlUDmo="
             }
           },
@@ -16366,7 +17526,7 @@
             "$ref": "#/components/schemas/BoardFormat"
           }
         },
-        "description": "List of board IDs to be exported."
+        "description": "List of board IDs to be exported. Each export job can contain up to 1,000 boards."
       },
       "GetBoardItemContentLogsResponse": {
         "type": "object",
@@ -16617,7 +17777,7 @@
           },
           "userType": {
             "type": "string",
-            "description": "Free-form string to indicate the user license type in the organization. <br><br> Only supported values for licenses are allowed. Supported licences for organizations can vary. They can potentially have the following values: Full, Free, Free Restricted, Full (Trial), Basic. <br><br> Note: When `userType` is specified, the `userType` license is set per the value provided. When `userType` is not specified, the user license is set according to internal Miro logic, which depends on the organization plan.",
+            "description": "Free-form string to indicate the user license type in the organization. <br><br> Only supported values for license types are allowed. Supported license types can vary per organization. An organization can have one or more of the following license type values: Full, Free, Free Restricted, Full (Trial), Basic, Standard, Advanced. <br><br> Note: When `userType` is specified, the `userType` license is set per the value provided. When `userType` is not specified, the user license is set according to internal Miro logic, which depends on the organization plan.",
             "example": "Full"
           },
           "active": {
@@ -17782,7 +18942,17 @@
             "type": "string",
             "description": "Name of the current user license in the organization",
             "example": "full",
-            "enum": ["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
+            "enum": [
+              "advanced",
+              "standard",
+              "basic",
+              "full",
+              "occasional",
+              "free",
+              "free_restricted",
+              "full_trial",
+              "unknown"
+            ]
           },
           "licenseAssignedAt": {
             "type": "string",
@@ -22326,6 +23496,151 @@
           }
         }
       },
+      "CodeWidgetData": {
+        "type": "object",
+        "description": "Contains the data properties of a code widget item, such as the code content, programming language, and display settings.",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "The code content of the widget.",
+            "maxLength": 6000,
+            "example": "console.log(\"Hello, World!\");"
+          },
+          "language": {
+            "type": "string",
+            "description": "The programming language of the code content. Used for syntax highlighting.",
+            "example": "javascript"
+          },
+          "lineNumbersVisible": {
+            "type": "boolean",
+            "description": "Indicates whether line numbers are visible in the code widget.",
+            "example": true
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the code widget.",
+            "maxLength": 100,
+            "example": "My Code Snippet"
+          }
+        }
+      },
+      "CodeWidgetItem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier (ID) of an item.",
+            "example": "3458764517517819000"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CodeWidgetData"
+          },
+          "position": {
+            "$ref": "#/components/schemas/Position"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the item was created. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+            "example": "2022-03-30T17:26:50.000Z"
+          },
+          "createdBy": {
+            "$ref": "#/components/schemas/CreatedBy"
+          },
+          "modifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the item was last modified. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+            "example": "2022-03-30T17:26:50.000Z"
+          },
+          "modifiedBy": {
+            "$ref": "#/components/schemas/ModifiedBy"
+          },
+          "links": {
+            "$ref": "#/components/schemas/WidgetLinks"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of item that is returned.",
+            "example": "code"
+          }
+        },
+        "required": ["id", "type"]
+      },
+      "CodeWidgetCreateRequest": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/CodeWidgetData"
+          },
+          "position": {
+            "$ref": "#/components/schemas/PositionChange"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Parent"
+          }
+        }
+      },
+      "CodeWidgetUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/CodeWidgetData"
+          },
+          "position": {
+            "$ref": "#/components/schemas/PositionChange"
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/Geometry"
+          },
+          "parent": {
+            "$ref": "#/components/schemas/Parent"
+          }
+        }
+      },
+      "CodeWidgetCursorPaged": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "description": "Contains the result data.",
+            "items": {
+              "$ref": "#/components/schemas/CodeWidgetItem"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of results available. If the value of the `total` parameter is higher than the value of the `size` parameter, this means that there are more results that you can retrieve. To retrieve more results, you can make another request and set the `offset` value accordingly."
+          },
+          "size": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of results returned in the response considering the `cursor` and the `limit` values sent in the request.",
+            "example": 1
+          },
+          "cursor": {
+            "type": "string",
+            "description": "A cursor-paginated method returns a portion of the total set of results based on the `limit` specified and a `cursor` that points to the next portion of the results. To retrieve the next set of results of the collection, set the `cursor` parameter in your next request to the value returned in this parameter.",
+            "example": "MzQ1ODc2NDUyMjQ5MDA4Mjg5NX4="
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Maximum number of results returned based on the `limit` specified in the request.",
+            "example": 10
+          },
+          "links": {
+            "$ref": "#/components/schemas/PageLinks"
+          }
+        }
+      },
       "CreatedBy": {
         "type": "object",
         "description": "Contains information about the user who created the item.",
@@ -24931,7 +26246,7 @@
           "email": {
             "type": "string",
             "description": "User email",
-            "example": "user@mail.com0"
+            "example": "user@mail.com"
           }
         }
       },
@@ -24940,21 +26255,21 @@
         "properties": {
           "membersToAdd": {
             "type": "array",
-            "description": "List of user emails to add to the user group.",
+            "description": "List of user identifiers (can be email or ID) to add to the user group.",
             "items": {
               "type": "string",
-              "description": "User email",
-              "example": "user1@mail.com"
-            }
+              "description": "User ID or user email."
+            },
+            "example": ["3074457345618265000", "user0@example.com"]
           },
           "membersToRemove": {
             "type": "array",
-            "description": "List of user emails to remove from the user group.",
+            "description": "List of user identifiers (can be email or ID) to remove from the user group.",
             "items": {
               "type": "string",
-              "description": "User email",
-              "example": "user2@mail.com"
-            }
+              "description": "User ID or user email."
+            },
+            "example": ["3074457345618265001", "user1@example.com"]
           }
         }
       },
@@ -24979,7 +26294,7 @@
           },
           "status": {
             "type": "integer",
-            "description": "The HTTP status code for the successful operation.",
+            "description": "The HTTP status code for a successful operation.",
             "example": 200
           },
           "affectedUsers": {
@@ -24998,7 +26313,7 @@
           },
           "status": {
             "type": "integer",
-            "description": "The HTTP status code for the successful operation.",
+            "description": "The HTTP status code for an unsuccessful operation.",
             "example": 400
           },
           "error": {
