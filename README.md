@@ -2,7 +2,7 @@
 
 > **⚠️ Retirement Notice**
 >
-> The Miro API client libraries in this repository are being retired. **No new versions of these clients will be published after November 1, 2026.**
+> The Miro API client libraries in this repository are being retired. **No new versions of these clients will be published after November 1, 2025.**
 >
 > Given the rapidly changing AI landscape, we believe it is better for every organization to implement their own clients tailored to their specific needs, rather than maintaining a single public client library.
 >
