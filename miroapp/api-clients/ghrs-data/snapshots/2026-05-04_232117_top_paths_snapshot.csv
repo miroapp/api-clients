@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,55,44
+/miroapp/api-clients/blob/main/packages/generator/spec.json,27,25
+/miroapp/api-clients/pulls,25,10
+/miroapp/api-clients/issues,12,7
+/miroapp/api-clients/pull/476,11,2
+/miroapp/api-clients/pull/476/changes,11,1
+/miroapp/api-clients/pull/492,10,5
+/miroapp/api-clients/tree/main/apps,6,5
+/miroapp/api-clients/tree/main/packages,5,5
+/miroapp/api-clients/tree/main/packages/miro-api,5,4
