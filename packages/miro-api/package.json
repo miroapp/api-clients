@@ -22,7 +22,7 @@
   "author": "Miro",
   "license": "MIT",
   "dependencies": {
-    "form-data": "^4.0.0",
+    "form-data": "^4.0.6",
     "node-fetch": "^2.7.0"
   },
   "devDependencies": {
