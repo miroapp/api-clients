@@ -13,15 +13,20 @@ const MODELS = {
         alias: 'getOrganization',
         returns: 'Organization',
       },
-      {method: 'tokenInfo', returns: 'TokenInformation'},
+      {method: 'getAccessTokenContext', alias: 'tokenInfo', returns: 'TokenInformation'},
     ],
   },
 
+  // The OAuth token-context operation was renamed in the spec from `token-info`
+  // to `get-access-token-context` (and its schema from `TokenInformation` to
+  // `TokenContext`). Keep the public high-level surface (`api.tokenInfo()`
+  // returning `TokenInformation`) backward-compatible via the method alias and
+  // by extending the regenerated low-level `TokenContext` model.
   TokenInformation: {
     props: [],
     extendedModel: {
-      name: 'TokenInformation',
-      path: '../model/tokenInformation',
+      name: 'TokenContext',
+      path: '../model/tokenContext',
     },
     methods: [],
   },
