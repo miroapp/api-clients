@@ -1,0 +1,11 @@
+url_path,views_total,views_unique
+/miroapp/api-clients,31,24
+/miroapp/api-clients/blob/main/packages/generator/spec.json,20,13
+/miroapp/api-clients/commit/485f5d589e7b6637e0a0ea1922c0a2ebea5b4b33,8,1
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/rest.py,7,1
+/miroapp/api-clients/tree/main/packages/miro-api-python/miro_api,6,1
+/miroapp/api-clients/blob/432cf3f81168942ec570c2893a6467cc6107d5e6/packages/miro-api-python/miro_api/miro_api_wrapper.py,5,1
+/miroapp/api-clients/blob/main/packages/miro-api-python/miro_api/configuration.py,5,1
+/miroapp/api-clients/pulls,4,3
+/miroapp/api-clients/issues,3,3
+/miroapp/api-clients/tree/main/apps,2,2
