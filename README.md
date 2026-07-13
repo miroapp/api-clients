@@ -8,7 +8,7 @@
 >
 > **What this means for you:**
 > - The existing published packages will remain available but will receive no further updates.
-> - We will continue to maintain and update the [OpenAPI specification](./spec.json), so you can generate your own clients using tools like [OpenAPI Generator](https://openapi-generator.tech/) or [openapi-ts](https://github.com/hey-api/openapi-ts).
+> - We will continue to maintain and update the [OpenAPI specification](./packages/generator/spec.json), so you can generate your own clients using tools like [OpenAPI Generator](https://openapi-generator.tech/) or [openapi-ts](https://github.com/hey-api/openapi-ts).
 > - We recommend migrating to a self-generated or custom client before the retirement date.
 > - If you are an enterprise customer and you have additional questions please reach out to your Customer Support Representive
 > 
