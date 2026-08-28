@@ -14,141 +14,13 @@
     }
   ],
   "paths": {
-    "/v1/oauth/revoke": {
-      "post": {
-        "tags": ["tokens"],
-        "summary": "Revoke token (v1)",
-        "description": "<p><b>Please use the new revoke endpoint <code>/v2/oauth/revoke</code>. This endpoint is considered vulnerable and deprecated due to access token passed publicly in the URL.</b></p> Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.",
-        "operationId": "revoke-token",
-        "deprecated": true,
-        "parameters": [
-          {
-            "description": "Access token that you want to revoke",
-            "in": "query",
-            "name": "access_token",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Token revoked"
-          },
-          "400": {
-            "description": "Failed to revoke token"
-          }
-        }
-      }
-    },
-    "/v1/oauth-token": {
-      "get": {
-        "tags": ["tokens"],
-        "summary": "Get access token information",
-        "description": "Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.",
-        "operationId": "token-info",
-        "responses": {
-          "200": {
-            "description": "Token information",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "title": "Token information",
-                  "type": "object",
-                  "required": ["type", "organization", "team", "createdBy", "user"],
-                  "properties": {
-                    "type": {
-                      "type": "string"
-                    },
-                    "organization": {
-                      "title": "Organization information",
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "id": {
-                          "type": "string"
-                        }
-                      },
-                      "required": ["type", "name", "id"]
-                    },
-                    "team": {
-                      "title": "Team information",
-                      "type": "object",
-                      "properties": {
-                        "type": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "id": {
-                          "type": "string"
-                        }
-                      },
-                      "required": ["type", "name", "id"]
-                    },
-                    "createdBy": {
-                      "type": "object",
-                      "title": "User information",
-                      "properties": {
-                        "type": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "id": {
-                          "type": "string"
-                        }
-                      },
-                      "required": ["type", "name", "id"]
-                    },
-                    "user": {
-                      "type": "object",
-                      "title": "User information",
-                      "properties": {
-                        "type": {
-                          "type": "string"
-                        },
-                        "name": {
-                          "type": "string"
-                        },
-                        "id": {
-                          "type": "string"
-                        }
-                      },
-                      "required": ["type", "name", "id"]
-                    },
-                    "scopes": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Invalid token provided"
-          }
-        }
-      }
-    },
     "/v2/orgs/{org_id}/ai-interaction-logs": {
       "get": {
         "x-settings": {
           "publish": true,
           "skip-tests": true
         },
-        "description": "Retrieves AI interaction logs for your organization. AI interaction logs capture user interactions with AI features in Miro. You can retrieve results for a specific time period. You can also filter results based on object IDs and the emails of users who interacted with AI features. Additionally, results can be paginated for easier viewing and processing.\n<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>aiinteractionlogs:read</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a>\n<br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>.</p>\n",
+        "description": "Retrieves AI interaction logs for your organization. AI interaction logs capture user interactions with AI features in Miro: the prompt received from the user, the response returned to them, and the model and tool calls made in between. You can retrieve results for a specific time period, and filter them by session, actor, affected object, or event type. Results are paginated: when more logs match than the page holds, the response carries a <code>cursor</code> you pass to the next request.\n<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>aiinteractionlogs:read</a>\n<br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a>\n<br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>.</p>\n",
         "operationId": "enterprise-get-ai-interaction-logs",
         "parameters": [
           {
@@ -159,6 +31,54 @@
             "required": true,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "session_ids",
+            "description": "Filters AI interaction logs using a list of session IDs. A session groups the events of one\nconversation, so filtering by session ID returns every event of that conversation.\nYou can obtain session IDs from the response of this endpoint (the <code>session.id</code> field).\n",
+            "example": ["a1b2c3d4-e5f6-7890-abcd-ef1234567890"],
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "maxItems": 15,
+              "items": {
+                "description": "Unique identifier of the session during which the AI interaction happened.",
+                "type": "string",
+                "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+              }
+            }
+          },
+          {
+            "name": "actor_ids",
+            "description": "Filters AI interaction logs using a list of actor IDs. An actor is the user, or the Miro agent\nacting on a user's behalf, that produced the interaction.\nYou can obtain actor IDs from the response of this endpoint (the <code>actor.id</code> field).\n",
+            "example": ["3458764517517852417"],
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "maxItems": 15,
+              "items": {
+                "description": "Unique identifier of the actor that produced the AI interaction.",
+                "type": "string",
+                "example": "3458764517517852417"
+              }
+            }
+          },
+          {
+            "name": "actor_emails",
+            "description": "Filters AI interaction logs using a list of actor emails. Only interactions associated with the\nprovided emails are included in the response.\n",
+            "example": ["someone@domain.com", "someoneelse@domain.com"],
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "maxItems": 15,
+              "items": {
+                "description": "Email address of the actor whose AI interaction logs you want to retrieve.",
+                "type": "string",
+                "example": "someone@domain.com"
+              }
             }
           },
           {
@@ -178,25 +98,32 @@
             }
           },
           {
-            "name": "emails",
-            "description": "Filters AI interaction logs using a list of user emails. Only AI interactions associated with the provided emails will be included in the response.",
-            "example": ["someone@domain.com", "someoneelse@domain.com"],
+            "name": "event_types",
+            "description": "Filters AI interaction logs using a list of event types. Each event records one step of an\ninteraction, so filtering by event type narrows the response to those steps.\n",
+            "example": ["model_invocation_request", "model_invocation_response"],
             "in": "query",
             "required": false,
             "schema": {
               "type": "array",
               "maxItems": 15,
               "items": {
-                "description": "Email address of the user whose AI interaction logs you want to retrieve. Only interactions associated with the specified emails are returned.",
                 "type": "string",
-                "example": "someone@domain.com"
+                "enum": [
+                  "input",
+                  "output",
+                  "tool_invocation_request",
+                  "tool_invocation_response",
+                  "model_invocation_request",
+                  "model_invocation_response"
+                ],
+                "example": "model_invocation_request"
               }
             }
           },
           {
             "name": "from",
-            "description": "Start date and time of the time range used to filter AI interaction logs. Only interactions that were stored within the specified <code>from</code> - <code>to</code> time range are returned.\nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
-            "example": "2026-01-30T17:26:50Z",
+            "description": "Start date and time of the time range used to filter AI interaction logs. Only interactions that were stored within the specified <code>from</code> - <code>to</code> time range are returned. The range must cover a period of at most 1 month.\nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). Milliseconds are optional.\n",
+            "example": "2026-07-30T17:26:50Z",
             "in": "query",
             "required": true,
             "schema": {
@@ -206,8 +133,8 @@
           },
           {
             "name": "to",
-            "description": "End date and time of the time range used to filter AI interaction logs. Only interactions that were stored within the specified <code>from</code> - <code>to</code> time range are returned.\nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
-            "example": "2036-03-30T17:26:50Z",
+            "description": "End date and time of the time range used to filter AI interaction logs. Only interactions that were stored within the specified <code>from</code> - <code>to</code> time range are returned. The range must cover a period of at most 1 month.\nFormat: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). Milliseconds are optional.\n",
+            "example": "2026-08-30T17:26:50Z",
             "in": "query",
             "required": true,
             "schema": {
@@ -2479,6 +2406,92 @@
         "tags": ["Reset all sessions of a user"]
       }
     },
+    "/oembed": {
+      "get": {
+        "tags": ["oembed"],
+        "summary": "Get oEmbed data",
+        "description": "Retrieves information to embed a Miro board as a [live embed](doc:oembed-live-embed).",
+        "operationId": "getEmbedData",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "description": "The URL pointing to the resource to return as oEmbed data.\nCurrently, it supports only URLs pointing to Miro boards.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "Specifies the return format of the response.\nIt complies with the [oEmbed standard](https://oembed.com/).\nAllowed formats: either \"json\", or \"xml\".",
+            "schema": {
+              "type": "string",
+              "enum": ["json", "xml"]
+            }
+          },
+          {
+            "name": "referrer",
+            "in": "query",
+            "description": "The URL pointing to the source of the request.\nService providers such as Embedly use it to forward the initial site that triggered the oEmbed request.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxwidth",
+            "in": "query",
+            "description": "The maximum width available to the embed, in pixels.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "maxheight",
+            "in": "query",
+            "description": "The maximum height available to the embed, in pixels.",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK Successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OEmbedData"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/OEmbedData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request. The original input data is malformed, incorrect, or invalid."
+          },
+          "404": {
+            "description": "Not found. The target resource couldn't be found; it doesn't exist, or it has been deleted."
+          },
+          "405": {
+            "description": "Method not allowed. The target resource API doesn't support the HTTP method used in the request."
+          },
+          "406": {
+            "description": "Not acceptable. The target resource API doesn't support the response format specified in the request. Supported formats: json, xml."
+          },
+          "429": {
+            "description": "Too many requests. Rate limiting: you exceeded the amount of requests that you can make to this API in a given amount of time. Try again later."
+          }
+        }
+      }
+    },
     "/Users": {
       "get": {
         "tags": ["User"],
@@ -2497,7 +2510,7 @@
             "name": "filter",
             "in": "query",
             "required": false,
-            "description": "You can request a subset of resources by specifying the filter query parameter containing a filter expression. Attribute names and attribute operators used in filters are not case sensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value. <br>eq = equal<br> ne = not equal<br> co = contains<br> sw = starts with<br> ew = ends with<br> pr = preset (has value)<br> gt = greater than<br> ge = greater than or equal to<br> lt = less than<br> le = less than or equal to<br> and = Logical \"and\"<br> or = Logical \"or\"<br> not = \"Not\" function<br> () = Precedence grouping <br>The value must be passed within parenthesis. <br><br> <u>Example filters</u>:<br><br> For fetching  users with user name as user@miro.com: userName eq \"user@miro.com\" <br><br> For fetching all active users in the organization: active eq true <br><br> For fetching users with \"user\" in their displayName: displayName co \"user\" <br><br> For fetching users that are member of a specific group (team): groups.value eq \"3458764577585056871\" <br><br> For fetching users that are not of userType Full: userType ne \"Full\"",
+            "description": "You can request a subset of resources by specifying the filter query parameter containing a filter expression. Attribute names and attribute operators used in filters are not case sensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value. <br>eq = equal<br> ne = not equal<br> co = contains<br> sw = starts with<br> ew = ends with<br> pr = preset (has value)<br> gt = greater than<br> ge = greater than or equal to<br> lt = less than<br> le = less than or equal to<br> and = Logical \"and\"<br> or = Logical \"or\"<br> not = \"Not\" function<br> () = Precedence grouping <br>The value must be passed within parenthesis. <br><br> <u>Example filters</u>:<br><br> For fetching  users with user name as user@miro.com: userName eq \"user@miro.com\" <br><br> For fetching all active users in the organization: active eq true <br><br> For fetching users with \"user\" in their displayName: displayName co \"user\" <br><br> For fetching users that are member of a specific group (user group): groups.value eq \"3458764577585056871\" <br><br> For fetching users that are not of userType Full: userType ne \"Full\"",
             "schema": {
               "type": "string"
             }
@@ -3193,7 +3206,7 @@
     "/Groups": {
       "get": {
         "tags": ["Group"],
-        "description": "Retrieves the list of groups (teams) in the organization.<br><br> Note: Along with groups (teams), the users that are part of those groups (teams) are also retrieved. Only users that have member role in the organization are fetched.",
+        "description": "Retrieves the list of groups (user groups) in the organization.<br><br> Note: Along with groups (user groups), the users that are part of those groups (user groups) are also retrieved.",
         "parameters": [
           {
             "name": "attributes",
@@ -3208,7 +3221,7 @@
             "name": "filter",
             "in": "query",
             "required": false,
-            "description": "You can request a subset of resources by specifying the filter query parameter containing a filter expression. Attribute names and attribute operators used in filters are not case sensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value. <br>eq = equal<br> ne = not equal<br> co = contains<br> sw = starts with<br> ew = ends with<br> pr = preset (has value)<br> gt = greater than<br> ge = greater than or equal to<br> lt = less than<br> le = less than or equal to<br> and = Logical \"and\"<br> or = Logical \"or\"<br> not = \"Not\" function<br> () = Precedence grouping <br>The value must be passed within parenthesis. <br><br>For Example: displayName eq \"Product Team\" will fetch information related to team matching the display name \"Product Team\". <br>Note</b>: Filtering on complex attributes is not supported",
+            "description": "You can request a subset of resources by specifying the filter query parameter containing a filter expression. Attribute names and attribute operators used in filters are not case sensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value. <br>eq = equal<br> ne = not equal<br> co = contains<br> sw = starts with<br> ew = ends with<br> pr = preset (has value)<br> gt = greater than<br> ge = greater than or equal to<br> lt = less than<br> le = less than or equal to<br> and = Logical \"and\"<br> or = Logical \"or\"<br> not = \"Not\" function<br> () = Precedence grouping <br>The value must be passed within parenthesis. <br><br>For Example: displayName eq \"Product Team\" will fetch information related to the user group matching the display name \"Product Team\". <br>Note</b>: Filtering on complex attributes is not supported",
             "schema": {
               "type": "string"
             }
@@ -3348,17 +3361,133 @@
             "source": "const res = await fetch(\n  'https://api.miro.com/api/v1/scim/Groups',\n  {\n    method: 'GET',\n    headers: {\n      'Authorization': 'Bearer <token>',\n      'Content-Type': 'application/scim+json'\n    },\n    // no body\n  }\n);\nconst data = await res.json();\nconsole.log(data);"
           }
         ]
+      },
+      "post": {
+        "tags": ["Group"],
+        "description": "Creates a new Miro user group in the organization. <br><br> Note: The displayName must be unique within the organization. The maximum length of the displayName is 60 characters; longer values are truncated. <br><br> You can optionally provide an initial list of members. Adding members follows the same rules as the add operation in Patch group.",
+        "requestBody": {
+          "description": "Payload to create a new Miro user group.",
+          "content": {
+            "application/scim+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGroupResource"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGroupResource"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Operation",
+            "content": {
+              "application/scim+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupResource"
+                },
+                "example": {
+                  "schemas": ["urn:ietf:params:scim:schemas:core:2.0:Group"],
+                  "id": "a9e4bf9e-3f67-4a22-9a12-9a0522c88c5d",
+                  "displayName": "Sales Ops",
+                  "members": [
+                    {
+                      "value": "2819c223-7f76-453a-919d-413861904646",
+                      "ref": "/Users/2819c223-7f76-453a-919d-413861904646",
+                      "type": "User"
+                    }
+                  ],
+                  "meta": {
+                    "resourceType": "Group",
+                    "location": "/Groups/a9e4bf9e-3f67-4a22-9a12-9a0522c88c5d"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GroupResource"
+                },
+                "example": {
+                  "schemas": ["urn:ietf:params:scim:schemas:core:2.0:Group"],
+                  "id": "a9e4bf9e-3f67-4a22-9a12-9a0522c88c5d",
+                  "displayName": "Sales Ops",
+                  "members": [
+                    {
+                      "value": "2819c223-7f76-453a-919d-413861904646",
+                      "ref": "/Users/2819c223-7f76-453a-919d-413861904646",
+                      "type": "User"
+                    }
+                  ],
+                  "meta": {
+                    "resourceType": "Group",
+                    "location": "/Groups/a9e4bf9e-3f67-4a22-9a12-9a0522c88c5d"
+                  }
+                }
+              }
+            },
+            "headers": {
+              "Location": {
+                "description": "URL of the created resource.",
+                "schema": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/createGroup400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "409": {
+            "$ref": "#/components/responses/createGroup409"
+          },
+          "413": {
+            "$ref": "#/components/responses/413"
+          },
+          "429": {
+            "$ref": "#/components/responses/429"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "operationId": "createScimGroup",
+        "summary": "Create group",
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "Create group",
+            "source": "curl -X POST 'https://api.miro.com/api/v1/scim/Groups' \\\n  -H 'Authorization: Bearer <token>' \\\n  -H 'Content-Type: application/scim+json'\n  -d '{\n  \"schemas\": [\n    \"urn:ietf:params:scim:schemas:core:2.0:Group\"\n  ],\n  \"displayName\": \"Sales Ops\"\n}'"
+          },
+          {
+            "lang": "javascript",
+            "label": "Create group (fetch)",
+            "source": "const res = await fetch(\n  'https://api.miro.com/api/v1/scim/Groups',\n  {\n    method: 'POST',\n    headers: {\n      'Authorization': 'Bearer <token>',\n      'Content-Type': 'application/scim+json'\n    },\n    body: JSON.stringify({\n  \"schemas\": [\n    \"urn:ietf:params:scim:schemas:core:2.0:Group\"\n  ],\n  \"displayName\": \"Sales Ops\"\n})\n  }\n);\nconst data = await res.json();\nconsole.log(data);"
+          }
+        ]
       }
     },
     "/Groups/{id}": {
       "get": {
         "tags": ["Group"],
-        "description": "Retrieves a single Group resource.<br><b> Note</b>: Along with groups (teams), the users that are part of those groups (teams) are also retrieved. Only users that have member role in the organization are fetched.",
+        "description": "Retrieves a single Group resource.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "A server-assigned, unique identifier for this Group (team).",
+            "description": "A server-assigned, unique identifier for this Group (user group).",
             "required": true,
             "schema": {
               "type": "string"
@@ -3472,12 +3601,12 @@
       },
       "patch": {
         "tags": ["Group"],
-        "description": "Updates an existing group resource, i.e. a team, overwriting values for specified attributes. Patch operation for group can be used to add, remove, or replace team members and to update the display name of the group (team). <br><br> To add a user to the group (team), use add operation. <br> To remove a user from a group (team), use remove operation. <br> To update a user resource, use the replace operation. <br> The last team admin cannot be removed from the team. <br><br> Note: Attributes that are not provided will remain unchanged. PATCH operation only updates the fields provided. <br><br> Team members removal specifics: <br> For remove or replace operations, the team member is removed from the team and from all team boards. The ownership of boards that belong to the removed team member is transferred to the oldest team member who currently has an admin role. After you remove a team member, adding the team member again to the team does not automatically restore their previous ownership of the boards. If the user is not registered fully in Miro and is not assigned to any other team, the user is also removed from the organization. <br><br> Add team members specifics: <br> All added team members are reactivated or recreated if they were deactivated or deleted earlier. <br><br> External users specifics: <br> When adding existing users with the role ORGANIZATION_EXTERNAL_USER or ORGANIZATION_TEAM_GUEST_USER to a team, we set FULL license and ORGANIZATION_INTERNAL_USER roles. ",
+        "description": "Updates an existing group resource, i.e. a Miro user group, overwriting values for the specified attributes. Patch operation for group can be used to add, remove, or replace user group members and to update the display name of the group (user group). <br><br> To add a user to the group (user group), use the add operation. <br> To remove a user from a group (user group), use the remove operation. <br> To update the display name, use the replace operation. The maximum length of the displayName is 60 characters; longer values are truncated. <br><br> Note: Attributes that are not provided will remain unchanged. The patch operation only updates the fields provided. <br><br> User group members removal specifics: <br> For remove or replace operations, the user is removed from the user group only. This does not remove the user from any team or from the organization, does not transfer board ownership, and does not change the user license. There is no last-admin restriction for user groups. Removing a user who is not a member of the user group is a no-op. <br><br> Add user group members specifics: <br> All added members are reactivated or recreated if they were deactivated or deleted earlier, and their license is upgraded to FULL. On organizations with verified SAML domains, the email of the added user is confirmed. Adding a user that is already a member of the user group is a no-op. <br><br> External users specifics: <br> When adding existing users with the role ORGANIZATION_EXTERNAL_USER or ORGANIZATION_TEAM_GUEST_USER to a user group, we set FULL license and ORGANIZATION_INTERNAL_USER roles. ",
         "parameters": [
           {
             "name": "id",
             "in": "path",
-            "description": "Group (Team) ID. A server-assigned, unique identifier for this Group (team).",
+            "description": "Group (user group) ID. A server-assigned, unique identifier for this Group (user group).",
             "required": true,
             "schema": {
               "type": "string"
@@ -3494,7 +3623,7 @@
           }
         ],
         "requestBody": {
-          "description": "Payload to add, replace, remove members in the specified group (team). <br><br> The body of a PATCH request must contain the attribute `Operations` and its value is an array of one or more PATCH operations. Each PATCH operation object must have exactly one `op` member. ",
+          "description": "Payload to add, replace, remove members in the specified group (user group). <br><br> The body of a PATCH request must contain the attribute `Operations` and its value is an array of one or more PATCH operations. Each PATCH operation object must have exactly one `op` member. ",
           "content": {
             "application/scim+json": {
               "schema": {
@@ -3654,6 +3783,58 @@
             "lang": "javascript",
             "label": "Patch group (fetch)",
             "source": "const res = await fetch(\n  'https://api.miro.com/api/v1/scim/Groups/{id}',\n  {\n    method: 'PATCH',\n    headers: {\n      'Authorization': 'Bearer <token>',\n      'Content-Type': 'application/scim+json'\n    },\n    body: JSON.stringify({\n  \"schemas\": [\n    \"urn:ietf:params:scim:api:messages:2.0:PatchOp\"\n  ],\n  \"Operations\": [\n    {\n      \"op\": \"add\",\n      \"path\": \"members\",\n      \"value\": [\n        {\n          \"value\": \"<userId>\"\n        }\n      ]\n    }\n  ]\n})\n  }\n);\nconst data = await res.json();\nconsole.log(data);"
+          }
+        ]
+      },
+      "delete": {
+        "tags": ["Group"],
+        "operationId": "deleteScimGroup",
+        "summary": "Delete group",
+        "description": "Deletes a single group (user group) from the organization.<br><br> Note: Deleting a Miro user group removes the group and its memberships only. It does NOT delete the member users or remove them from the organization.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Group (user group) ID. A server-assigned, unique identifier for this Group (user group).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successful Operation - No content"
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/403"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "429": {
+            "$ref": "#/components/responses/429"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "curl",
+            "label": "Delete group",
+            "source": "curl -X DELETE 'https://api.miro.com/api/v1/scim/Groups/{id}' \\\n  -H 'Authorization: Bearer <token>' \\\n  -H 'Content-Type: application/scim+json'"
+          },
+          {
+            "lang": "javascript",
+            "label": "Delete group (fetch)",
+            "source": "const res = await fetch(\n  'https://api.miro.com/api/v1/scim/Groups/{id}',\n  {\n    method: 'DELETE',\n    headers: {\n      'Authorization': 'Bearer <token>',\n      'Content-Type': 'application/scim+json'\n    },\n    // no body\n  }\n);"
           }
         ]
       }
@@ -4395,7 +4576,7 @@
         "tags": ["Boards"]
       },
       "get": {
-        "description": "Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters.\nCustomize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.\n\nIf you're an Enterprise customer with Company Admin permissions:\n- Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).\n- Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error.\n<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>\n",
+        "description": "Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters.\nCustomize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.\n\nWhen the `query` parameter is provided, results are capped at the first 10,000 matching boards (`offset` + `limit` must not exceed 10,000). To page through more boards, narrow the result set with `team_id`, `project_id`, or `owner` instead of relying on a higher `offset`.\n\nIf you're an Enterprise customer with Company Admin permissions:\n- Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins).\n- Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error.\n<h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>\n",
         "operationId": "get-boards",
         "parameters": [
           {
@@ -4419,7 +4600,7 @@
             "name": "query",
             "schema": {
               "type": "string",
-              "description": "Retrieves a list of boards that contain the query string provided in the board name or board description. For example, if you want to retrieve a list of boards that have the word `beta` in the board name or description, add `beta` as the `query` parameter value. You can use the `query` parameter with the owner parameter to narrow down the board search results.",
+              "description": "Retrieves a list of boards that contain the query string provided in the board name or board description. For example, if you want to retrieve a list of boards that have the word `beta` in the board name or description, add `beta` as the `query` parameter value. You can use the `query` parameter with the owner parameter to narrow down the board search results.\n**Note:** When `query` is set, results are limited to the first 10,000 matching boards (`offset` + `limit` must not exceed 10,000).",
               "maxLength": 500
             }
           },
@@ -4446,7 +4627,7 @@
             "name": "offset",
             "schema": {
               "type": "string",
-              "description": "The (zero-based) offset of the first item in the collection to return.\nDefault: `0`."
+              "description": "The (zero-based) offset of the first item in the collection to return.\nDefault: `0`.\n**Note:** When the `query` parameter is set, `offset` + `limit` must not exceed 10,000."
             }
           },
           {
@@ -11957,6 +12138,129 @@
         "tags": ["groups"]
       }
     },
+    "/v1/oauth/token": {
+      "post": {
+        "summary": "Step 3: Exchange authorization code with access token",
+        "description": "Exchange the authorization code returned to your redirect URI for an access token and a refresh token.",
+        "operationId": "exchange-authorization-code-with-access-token",
+        "tags": ["OAuth"],
+        "security": [],
+        "parameters": [
+          {
+            "name": "grant_type",
+            "in": "query",
+            "description": "Always set the value for this parameter to `authorization_code`.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "default": "authorization_code"
+            }
+          },
+          {
+            "name": "client_id",
+            "in": "query",
+            "description": "The Client ID of the app that is requesting user authorization.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "client_secret",
+            "in": "query",
+            "description": "App client secret. **The client secret must be kept confidential.**",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "code",
+            "in": "query",
+            "description": "Paste the authorization code that was provided as the `code` parameter value in the redirect URI.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "redirect_uri",
+            "in": "query",
+            "description": "Paste the redirect URI. The URI must match the original redirect URI that was used when requesting the authorization (including the trailing slash).",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Access token issued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccessTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Failed to exchange the authorization code"
+          }
+        }
+      }
+    },
+    "/v1/oauth-token": {
+      "get": {
+        "summary": "Get access token context",
+        "description": "Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.",
+        "operationId": "get-access-token-context",
+        "tags": ["OAuth"],
+        "responses": {
+          "200": {
+            "description": "Token context",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenContext"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid token provided"
+          }
+        }
+      }
+    },
+    "/v1/oauth/revoke": {
+      "post": {
+        "summary": "Revoke token (v1)",
+        "description": "<p><b>Please use the new revoke endpoint <code>/v2/oauth/revoke</code>. This endpoint is considered vulnerable and deprecated because the access token is passed publicly in the URL.</b></p> Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.",
+        "operationId": "revoke-token",
+        "deprecated": true,
+        "tags": ["OAuth"],
+        "parameters": [
+          {
+            "name": "access_token",
+            "in": "query",
+            "description": "Paste the access token that you want to revoke.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Token revoked"
+          },
+          "400": {
+            "description": "Failed to revoke token"
+          }
+        }
+      }
+    },
     "/v2/oauth/revoke": {
       "post": {
         "summary": "Revoke token (v2)",
@@ -16398,7 +16702,7 @@
       },
       "AiInteractionLog": {
         "type": "object",
-        "description": "Contains information about a single AI interaction log entry.",
+        "description": "Contains information about a single AI interaction event. One conversation produces several events that share the same <code>session.id</code>, and one request together with its response share the same <code>turnId</code>.\n",
         "properties": {
           "id": {
             "type": "string",
@@ -16409,47 +16713,79 @@
             "type": "string",
             "format": "date-time",
             "description": "Date and time when the AI interaction occurred.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
-            "example": "2023-06-24T17:32:28Z"
+            "example": "2023-06-24T17:32:28.123Z"
           },
           "storedAt": {
             "type": "string",
             "format": "date-time",
             "description": "Date and time when the AI interaction log was stored.<br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).\n",
-            "example": "2023-06-24T17:32:30Z"
+            "example": "2023-06-24T17:32:30.123Z"
           },
-          "sessionId": {
+          "session": {
+            "$ref": "#/components/schemas/AiInteractionLogSession"
+          },
+          "surface": {
             "type": "string",
-            "description": "Unique identifier of the session during which the AI interaction occurred.",
-            "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
-          },
-          "messageId": {
-            "type": "string",
-            "description": "Unique identifier of the message associated with the AI interaction.",
-            "example": "b2c3d4e5-f6a7-8901-bcde-f12345678901"
-          },
-          "object": {
-            "$ref": "#/components/schemas/AiInteractionLogObject"
-          },
-          "aiFeatureName": {
-            "type": "string",
-            "description": "Name of the AI feature that was used during the interaction.",
-            "example": "ai_generate_sticky_notes"
+            "description": "Where in Miro the interaction started: the entry point the user acted through, for example Sidekick chat, an AI Flow, or an MCP call. It is not the AI capability that ran, since one surface can invoke many features. Events not yet attributed to a specific surface arrive as <code>unspecified</code>. Read it as a string rather than a fixed list, because values are added as more entry points are covered.\n",
+            "example": "sidekicks"
           },
           "actor": {
             "$ref": "#/components/schemas/AiInteractionLogActor"
           },
-          "logType": {
+          "object": {
+            "$ref": "#/components/schemas/AiInteractionLogObject"
+          },
+          "eventType": {
             "type": "string",
-            "description": "Type of the AI interaction log entry.",
-            "example": "request"
+            "description": "Step of the interaction this entry records:\n<ul>\n<li><code>input</code>: the request that opened the turn, as received, before any processing. In a conversation this is the person's prompt; for automated features it is the request that triggered the work.</li>\n<li><code>model_invocation_request</code>: what was sent to the model, including context and conversation history the AI added.</li>\n<li><code>model_invocation_response</code>: what the model returned.</li>\n<li><code>tool_invocation_request</code>: a tool the AI decided to call, and the arguments it passed.</li>\n<li><code>tool_invocation_response</code>: the outcome of that tool call.</li>\n<li><code>output</code>: the final response returned for that request. In a conversation this is what the person was shown.</li>\n</ul>\nNot all events are produced for every interaction: some carry only model events, some only tool events. New event types may be added, so ignore a type you do not recognise rather than treating it as an error.\n",
+            "example": "input"
+          },
+          "turnId": {
+            "type": "string",
+            "description": "Groups the events of one exchange: a single user request, everything the AI did to handle it (model calls and tool calls), and the response returned to the user. A conversation is a sequence of turns; every event of one turn shares a <code>turnId</code>.\n",
+            "example": "b2c3d4e5-f6a7-8901-bcde-f12345678901"
           },
           "details": {
             "type": "object",
-            "description": "Additional details about the AI interaction. The structure of this object varies depending on the AI feature used. The text may contain unstructured data that could reveal information used in interactions with the LLM.",
+            "description": "Additional details about the AI interaction. The structure of this object varies depending on the event type. The text may contain unstructured data that could reveal information used in interactions with the LLM. The example below is a <code>model_invocation_response</code>.",
             "additionalProperties": true,
             "example": {
-              "text": "{\\\"text\\\":\\\"Generate me 1 sticker with the text \\\\\\\"AI generates content\\\\\\\"\\\",\\\"board_context\\\":{\\\"selection\\\":{\\\"selected_nodes\\\":[],\\\"reference_images\\\":[],\\\"design_reference_images\\\":[],\\\"comments\\\":[]},\\\"talktracks\\\":[],\\\"config\\\":{\\\"processing_method\\\":\\\"none\\\",\\\"ai_feature\\\":\\\"ai_generate_sticky_notes\\\"},\\\"context_prototype\\\":null,\\\"prototype_description\\\":null,\\\"screens\\\":null}}"
+              "modelCallId": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+              "status": "success",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Here is a sticker with the text \"AI generates content\"."
+                }
+              ]
             }
+          },
+          "model": {
+            "$ref": "#/components/schemas/AiInteractionLogModel"
+          },
+          "tool": {
+            "$ref": "#/components/schemas/AiInteractionLogTool"
+          }
+        }
+      },
+      "AiInteractionLogSession": {
+        "type": "object",
+        "description": "Contains information about the session the AI interaction belongs to. A session groups the events of one conversation.\n",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier of the session during which the AI interaction occurred.",
+            "example": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+          },
+          "seededFromSessionId": {
+            "type": "string",
+            "description": "Unique identifier of the session this one was seeded from, when the conversation started by carrying over the context of an earlier one. Absent otherwise.\n",
+            "example": "c3d4e5f6-a7b8-9012-cdef-123456789012"
+          },
+          "parentSessionId": {
+            "type": "string",
+            "description": "Unique identifier of the parent session, when this session was started from within another one. Absent otherwise.\n",
+            "example": "d4e5f6a7-b8c9-0123-defa-234567890123"
           }
         }
       },
@@ -16466,27 +16802,79 @@
             "type": "string",
             "description": "Type of the Miro object involved in the AI interaction, e.g., \"board, \"organization\".",
             "example": "board"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the Miro object involved in the AI interaction.",
+            "example": "Product roadmap"
           }
         }
       },
       "AiInteractionLogActor": {
         "type": "object",
-        "description": "Contains information about the user who performed the AI interaction.",
+        "description": "Contains information about the actor that produced the AI interaction.",
         "properties": {
           "id": {
             "type": "string",
-            "description": "Unique identifier of the user who performed the AI interaction.",
+            "description": "Unique identifier of the actor that produced the AI interaction.",
             "example": "3458764517517852417"
           },
-          "email": {
+          "type": {
             "type": "string",
-            "description": "Email of the user who performed the AI interaction.",
-            "example": "john.smith.demo@miro.com"
+            "description": "Type of the actor. Currently every interaction is produced by a user.",
+            "example": "user"
           },
           "name": {
             "type": "string",
-            "description": "Name of the user who performed the AI interaction.",
+            "description": "Name of the actor. Absent when it could not be resolved.",
             "example": "John Smith"
+          },
+          "email": {
+            "type": "string",
+            "description": "Email of the actor. Absent for actors that are not users, and when it could not be resolved.",
+            "example": "john.smith.demo@miro.com"
+          }
+        }
+      },
+      "AiInteractionLogModel": {
+        "type": "object",
+        "description": "Contains information about the AI model involved in the event. Present for model invocation events only.\n",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the model.",
+            "example": "bedrock-claude-opus-4-6"
+          },
+          "provider": {
+            "type": "string",
+            "description": "Company that developed the model.",
+            "example": "anthropic"
+          },
+          "platform": {
+            "type": "string",
+            "description": "Platform that hosts the model and provides the API to call it.",
+            "example": "bedrock"
+          },
+          "byoai": {
+            "type": "boolean",
+            "description": "Whether the model was accessed with the organization's own AI provider credentials.\n",
+            "example": false
+          }
+        }
+      },
+      "AiInteractionLogTool": {
+        "type": "object",
+        "description": "Contains information about the tool involved in the event. Present for tool invocation events only.\n",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the tool.",
+            "example": "generate_stickies"
+          },
+          "type": {
+            "type": "string",
+            "description": "Group that clusters related tools. Not a fixed list: each tool declares its own group.\n",
+            "example": "whiteboarding"
           }
         }
       },
@@ -16540,7 +16928,7 @@
             "type": "string",
             "description": "Time when the audit event has been created",
             "format": "date-time",
-            "example": "2023-09-01T09:30:10.840+0000"
+            "example": "2023-03-30T17:26:50.000Z"
           },
           "details": {
             "type": "object",
@@ -16557,7 +16945,7 @@
           },
           "category": {
             "type": "string",
-            "description": "Event category of the audit event.",
+            "description": "Event category of the audit event",
             "example": "authentication"
           }
         }
@@ -17615,6 +18003,20 @@
             "items": {
               "$ref": "#/components/schemas/Relationship"
             }
+          },
+          "ai": {
+            "$ref": "#/components/schemas/BoardItemContentLogAI"
+          }
+        }
+      },
+      "BoardItemContentLogAI": {
+        "type": "object",
+        "description": "Contains AI-related information about the board content action.",
+        "properties": {
+          "assisted": {
+            "type": "boolean",
+            "description": "Indicates whether the content log was performed with AI assistance.",
+            "example": true
           }
         }
       },
@@ -17686,6 +18088,66 @@
           }
         }
       },
+      "OEmbedData": {
+        "type": "object",
+        "description": "Data used to embed a Miro board.",
+        "properties": {
+          "html": {
+            "type": "string",
+            "description": "HTML code to embed the board."
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the board, if the board is publicly available.\nOtherwise, it displays a placeholder."
+          },
+          "author": {
+            "type": "string",
+            "description": "The user who owns the board, if the board is publicly available.\nOtherwise, the field is empty."
+          },
+          "version": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "description": "The embed type.\nFor this endpoint, the embed type is always `rich`."
+          },
+          "thumbnail_url": {
+            "type": "string",
+            "description": "The URL pointing to a thumbnail image of the board."
+          },
+          "thumbnail_width": {
+            "type": "integer",
+            "description": "The width of the thumbnail image of the board in pixels, if the thumbnail is available.",
+            "format": "int32"
+          },
+          "thumbnail_height": {
+            "type": "integer",
+            "description": "The height of the thumbnail image of the board in pixels, if the thumbnail is available.",
+            "format": "int32"
+          },
+          "width": {
+            "type": "integer",
+            "description": "The explicit width of the embed, in pixels.\nIf you want the iframe containing the embed to use all the available width, you can ignore this field.",
+            "format": "int32"
+          },
+          "height": {
+            "type": "integer",
+            "description": "The explicit height of the embed, in pixels.\nIf you want the iframe containing the embed to use all the available height, you can ignore this field.",
+            "format": "int32"
+          },
+          "provider_name": {
+            "type": "string",
+            "description": "The name of the oEmbed provider.\nFor this endpoint, the provider name is always 'Miro'."
+          },
+          "provider_url": {
+            "type": "string",
+            "description": "The URL of the oEmbed provider.\nFor this endpoint, the URL always points to a Miro domain."
+          }
+        },
+        "xml": {
+          "name": "oembed"
+        }
+      },
       "PatchUserResource": {
         "type": "object",
         "required": ["schemas", "Operations"],
@@ -17701,7 +18163,7 @@
           },
           "Operations": {
             "type": "array",
-            "description": "A list of patch operations. <br><br>\nUpdating the user to deactivated/reactivated, <br> { \"op\": \"Replace\", \"path\": \"active\", \"value\": \"true/false\" } must be provided in the Operations array.<br><br> Renaming the user, <br> { \"op\": \"Replace\", \"path\": \"displayName\", \"value\": \"New displayName\" } must be provided in the Operations array.<br><br> Upgrading userType (license) to Full, <br> { \"op\": \"Replace\", \"path\": \"userType\", \"value\": \"Full\" } must be provided in the Operations array. Note that userType (license) cannot be downgraded using this operation.<br><br> Updating userName of the user, <br> { \"op\": \"Replace\", \"path\": \"userName\", \"value\": \"oleg@test.com\" } must be provided in the Operations array. <br><br> Updating userRole of the user, { \"op\": \"Replace\", <br> \"path\": \"roles[primary eq true].value\", \"value\": \"ORGANIZATION_INTERNAL_ADMIN\" must be provided in the Operations array. Note that ORGANIZATION_INTERNAL_ADMIN and ORGANIZATION_INTERNAL_USER are the only supported primary user roles and guest roles are not supported. <br><br> Adding an admin role, <br> { \"op\": \"Add\", \"path\": \"roles\", \"value\": [{\"value\": \"Content Admin\", \"type\": \"organization_admin_role\", \"primary\": false}]} must be provided in the Operations array. <br><br> Removing an admin role, <br> { \"op\": \"Remove\", \"path\":\"roles[value eq \\\"Content Admin\\\"]\" } must be provided in the Operations array. <br><br> Updating department of the user, <br> { \"op\": \"Replace\", \"path\": \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:department\", \"value\": \"IT\" } must be provided in the Operations array. Similarly, attributes such as employeeNumber, costCentre, organization, division, manager (displayName and value) can also be updated. ",
+            "description": "A list of patch operations. <br><br>\nUpdating the user to deactivated/reactivated, <br> { \"op\": \"Replace\", \"path\": \"active\", \"value\": \"true/false\" } must be provided in the Operations array.<br><br> Renaming the user, <br> { \"op\": \"Replace\", \"path\": \"displayName\", \"value\": \"New displayName\" } must be provided in the Operations array.<br><br> Upgrading userType (license) of the user, <br> { \"op\": \"Replace\", \"path\": \"userType\", \"value\": \"Full\" } must be provided in the Operations array. Full, Collaborate and Accelerate are the supported license values. Note that userType (license) cannot be downgraded using this operation.<br><br> Updating userName of the user, <br> { \"op\": \"Replace\", \"path\": \"userName\", \"value\": \"oleg@test.com\" } must be provided in the Operations array. <br><br> Updating userRole of the user, { \"op\": \"Replace\", <br> \"path\": \"roles[primary eq true].value\", \"value\": \"ORGANIZATION_INTERNAL_ADMIN\" must be provided in the Operations array. Note that ORGANIZATION_INTERNAL_ADMIN and ORGANIZATION_INTERNAL_USER are the only supported primary user roles and guest roles are not supported. <br><br> Adding an admin role, <br> { \"op\": \"Add\", \"path\": \"roles\", \"value\": [{\"value\": \"Content Admin\", \"type\": \"organization_admin_role\", \"primary\": false}]} must be provided in the Operations array. <br><br> Removing an admin role, <br> { \"op\": \"Remove\", \"path\":\"roles[value eq \\\"Content Admin\\\"]\" } must be provided in the Operations array. <br><br> Updating department of the user, <br> { \"op\": \"Replace\", \"path\": \"urn:ietf:params:scim:schemas:extension:enterprise:2.0:User:department\", \"value\": \"IT\" } must be provided in the Operations array. Similarly, attributes such as employeeNumber, costCentre, organization, division, manager (displayName and value) can also be updated. ",
             "items": {
               "type": "object",
               "required": ["op", "path", "value"],
@@ -17777,7 +18239,7 @@
           },
           "userType": {
             "type": "string",
-            "description": "Free-form string to indicate the user license type in the organization. <br><br> Only supported values for license types are allowed. Supported license types can vary per organization. An organization can have one or more of the following license type values: Full, Free, Free Restricted, Full (Trial), Basic, Standard, Advanced. <br><br> Note: When `userType` is specified, the `userType` license is set per the value provided. When `userType` is not specified, the user license is set according to internal Miro logic, which depends on the organization plan.",
+            "description": "Free-form string to indicate the user license type in the organization. <br><br> Only supported values for license types are allowed. Supported license types can vary per organization. An organization can have one or more of the following license type values: Full, Free, Free Restricted, Full (Trial), Basic, Collaborate, Accelerate. <br><br> Note: When `userType` is specified, the `userType` license is set per the value provided. When `userType` is not specified, the user license is set according to internal Miro logic, which depends on the organization plan.",
             "example": "Full"
           },
           "active": {
@@ -17999,7 +18461,7 @@
           },
           "groups": {
             "type": "array",
-            "description": "An array of groups (teams) the user belongs to in the organization. Contains id and display name of the team.",
+            "description": "An array of groups (user groups) the user belongs to in the organization. Contains the id and display name of the user group.",
             "items": {
               "type": "object",
               "properties": {
@@ -18145,7 +18607,7 @@
           },
           "Operations": {
             "type": "array",
-            "description": "A list of patch operations. <br><br> Multiple users can be added or removed from the group (team) in one request. use the array to add or remove multiple users.<br><br> For updating security group name: <br> \"op\"=\"replace\", \"value\"={\"id\":\"13266533725732\", \"displayName\":\"New group name\"} must be provided in the Operations array.",
+            "description": "A list of patch operations. <br><br> Multiple users can be added or removed from the group (user group) in one request. Use the array to add or remove multiple users.<br><br> For updating the user group name: <br> \"op\"=\"replace\", \"path\"=\"displayName\", \"value\"=\"New group name\" must be provided in the Operations array.",
             "items": {
               "type": "object",
               "required": ["op"],
@@ -18187,6 +18649,41 @@
           }
         }
       },
+      "CreateGroupResource": {
+        "type": "object",
+        "required": ["displayName"],
+        "properties": {
+          "schemas": {
+            "type": "array",
+            "description": "Identifies which schema(s) this resource uses. In this case, it is the SCIM core Group schema.",
+            "items": {
+              "type": "string",
+              "enum": ["urn:ietf:params:scim:schemas:core:2.0:Group"],
+              "example": "urn:ietf:params:scim:schemas:core:2.0:Group"
+            }
+          },
+          "displayName": {
+            "type": "string",
+            "description": "A human-readable name for the group (user group). Must be unique within the organization. <br><br> Maximum length: 60 characters. Longer values are truncated.",
+            "example": "Sales Ops"
+          },
+          "members": {
+            "type": "array",
+            "description": "An optional list of users to add as initial members of the user group. <br><br> Adding members follows the same rules as the Patch group add members operation.",
+            "items": {
+              "type": "object",
+              "required": ["value"],
+              "properties": {
+                "value": {
+                  "type": "string",
+                  "description": "A server-assigned, unique identifier for the user to be added as a member.",
+                  "example": "3074457365265951581"
+                }
+              }
+            }
+          }
+        }
+      },
       "GroupResource": {
         "type": "object",
         "properties": {
@@ -18200,7 +18697,7 @@
           },
           "id": {
             "type": "string",
-            "description": "A server-assigned, unique identifier for this Group (team).",
+            "description": "A server-assigned, unique identifier for this Group (user group).",
             "example": "3074457365836251622"
           },
           "meta": {
@@ -18221,12 +18718,12 @@
           },
           "displayName": {
             "type": "string",
-            "description": "A human readable name for the Group (team).",
+            "description": "A human readable name for the Group (user group).",
             "example": "Product"
           },
           "members": {
             "type": "array",
-            "description": "A list of all members that are part of the Group (team).",
+            "description": "A list of all members that are part of the Group (user group).",
             "items": {
               "type": "object",
               "properties": {
@@ -18291,17 +18788,17 @@
                 },
                 "id": {
                   "type": "string",
-                  "description": "A server-assigned, unique identifier for this Group (team).",
+                  "description": "A server-assigned, unique identifier for this Group (user group).",
                   "example": "3074457365836251622"
                 },
                 "displayName": {
                   "type": "string",
-                  "description": "A human readable name for the Group (team).",
+                  "description": "A human readable name for the Group (user group).",
                   "example": "Product"
                 },
                 "members": {
                   "type": "array",
-                  "description": "A list of all members that are part of the Group (team).",
+                  "description": "A list of all members that are part of the Group (user group).",
                   "items": {
                     "type": "object",
                     "properties": {
@@ -18343,7 +18840,7 @@
             }
           }
         },
-        "description": "list of groups (teams)"
+        "description": "list of groups (user groups)"
       },
       "ServiceProviderConfigResponse": {
         "type": "object",
@@ -18866,50 +19363,6 @@
             "type": "string",
             "description": "Type of the object returned.",
             "default": "error"
-          }
-        }
-      },
-      "Organization": {
-        "required": ["fullLicensesPurchased", "id", "name", "plan"],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Id of the organization",
-            "example": "3074457345821140946"
-          },
-          "fullLicensesPurchased": {
-            "type": "integer",
-            "description": "Purchased FULL licenses",
-            "format": "int32"
-          },
-          "name": {
-            "type": "string",
-            "description": "Name of the organization",
-            "example": "Miro company"
-          },
-          "plan": {
-            "type": "string",
-            "description": "Organization plan type",
-            "example": "company",
-            "enum": [
-              "company",
-              "consultant",
-              "consultant_slf",
-              "business",
-              "paid_team_org",
-              "integration_org",
-              "professional_2022",
-              "edu_team_org",
-              "free_team_org",
-              "dev_team_org",
-              "unknown"
-            ]
-          },
-          "type": {
-            "type": "string",
-            "description": "Type of the object returned.",
-            "default": "organization"
           }
         }
       },
@@ -19586,6 +20039,9 @@
           "team": {
             "$ref": "#/components/schemas/Team"
           },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
+          },
           "project": {
             "$ref": "#/components/schemas/BoardProject"
           },
@@ -19653,6 +20109,9 @@
           },
           "team": {
             "$ref": "#/components/schemas/Team"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
           },
           "project": {
             "$ref": "#/components/schemas/BoardProject"
@@ -19729,6 +20188,9 @@
           },
           "team": {
             "$ref": "#/components/schemas/Team"
+          },
+          "organization": {
+            "$ref": "#/components/schemas/Organization"
           },
           "picture": {
             "$ref": "#/components/schemas/Picture"
@@ -20692,6 +21154,36 @@
           },
           "position": {
             "$ref": "#/components/schemas/RelativeOffset"
+          }
+        }
+      },
+      "MiroAi": {
+        "type": "object",
+        "description": "Contains information about whether the item was created or modified with AI assistance.",
+        "properties": {
+          "createdWithAi": {
+            "type": "boolean",
+            "description": "Indicates whether the item was created with AI assistance.",
+            "example": true
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Date and time when the item was last modified using AI. <br>Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)).",
+            "example": "2022-03-30T17:26:50.000Z"
+          }
+        }
+      },
+      "Organization": {
+        "required": ["id"],
+        "type": "object",
+        "description": "Contains information about the organization with which the board is associated.",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "int64",
+            "description": "Unique identifier (ID) of the organization.",
+            "example": "3074457345616890134"
           }
         }
       },
@@ -23503,7 +23995,7 @@
           "code": {
             "type": "string",
             "description": "The code content of the widget.",
-            "maxLength": 6000,
+            "maxLength": 30000,
             "example": "console.log(\"Hello, World!\");"
           },
           "language": {
@@ -24168,6 +24660,129 @@
           },
           "links": {
             "$ref": "#/components/schemas/PageLinks"
+          }
+        }
+      },
+      "AccessTokenResponse": {
+        "title": "Access token",
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "example": "3074457362577955221"
+          },
+          "expires_in": {
+            "type": "integer",
+            "example": 3599
+          },
+          "team_id": {
+            "type": "string",
+            "example": "3074457362577833142"
+          },
+          "access_token": {
+            "type": "string",
+            "example": "eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_o-P91OccaII0A63CDSK--x21xiI"
+          },
+          "scope": {
+            "type": "string",
+            "example": "boards:write boards:read"
+          },
+          "refresh_token": {
+            "type": "string",
+            "example": "eyJtaXJvLm9yaWdpbiI6ImV1MDEifQ_-PIBKmE9rzQuL3bUeAvUEGFEhLk"
+          },
+          "token_type": {
+            "type": "string",
+            "example": "bearer"
+          }
+        }
+      },
+      "TokenContext": {
+        "title": "Token context",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "oAuthToken"
+          },
+          "team": {
+            "title": "Team information",
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "team"
+              },
+              "name": {
+                "type": "string",
+                "example": "Doc sample team"
+              },
+              "id": {
+                "type": "string",
+                "example": "3074457362577833142"
+              }
+            }
+          },
+          "createdBy": {
+            "title": "User information",
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "user"
+              },
+              "name": {
+                "type": "string",
+                "example": "John Smith"
+              },
+              "id": {
+                "type": "string",
+                "example": "3074457362577955221"
+              }
+            }
+          },
+          "scopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": ["boards:write", "boards:read"]
+          },
+          "organization": {
+            "title": "Organization information",
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "organization"
+              },
+              "name": {
+                "type": "string",
+                "example": "Doc sample team"
+              },
+              "id": {
+                "type": "string",
+                "example": "3074457363786315310"
+              }
+            }
+          },
+          "user": {
+            "title": "User information",
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "example": "user"
+              },
+              "name": {
+                "type": "string",
+                "example": "John Smith"
+              },
+              "id": {
+                "type": "string",
+                "example": "3974457362577957221"
+              }
+            }
           }
         }
       },

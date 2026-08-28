@@ -14,7 +14,7 @@ import {GroupListResponseResourcesInner} from './groupListResponseResourcesInner
 
 /**
  * @internal
- * list of groups (teams)
+ * list of groups (user groups)
  */
 export class GroupListResponse {
   /**

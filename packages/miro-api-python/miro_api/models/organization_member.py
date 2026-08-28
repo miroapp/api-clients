@@ -64,9 +64,11 @@ class OrganizationMember(BaseModel):
     @field_validator("license")
     def license_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(["full", "occasional", "free", "free_restricted", "full_trial", "unknown"]):
+        if value not in set(
+            ["advanced", "standard", "basic", "full", "occasional", "free", "free_restricted", "full_trial", "unknown"]
+        ):
             raise ValueError(
-                "must be one of enum values ('full', 'occasional', 'free', 'free_restricted', 'full_trial', 'unknown')"
+                "must be one of enum values ('advanced', 'standard', 'basic', 'full', 'occasional', 'free', 'free_restricted', 'full_trial', 'unknown')"
             )
         return value
 

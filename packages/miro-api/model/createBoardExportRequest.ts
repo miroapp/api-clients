@@ -14,11 +14,11 @@ import {BoardFormat} from './boardFormat'
 
 /**
  * @internal
- * List of board IDs to be exported.
+ * List of board IDs to be exported. Each export job can contain up to 1,000 boards.
  */
 export class CreateBoardExportRequest {
   /**
-   * List of board IDs to be exported.
+   * List of board IDs to be exported. Each export job can contain up to 1,000 boards.
    */
   'boardIds'?: Array<string>
   'boardFormat'?: BoardFormat
