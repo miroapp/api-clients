@@ -114,6 +114,9 @@ export class OrganizationMember {
 
 export namespace OrganizationMember {
   export const LicenseEnum = {
+    Advanced: 'advanced',
+    Standard: 'standard',
+    Basic: 'basic',
     Full: 'full',
     Occasional: 'occasional',
     Free: 'free',

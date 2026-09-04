@@ -30,7 +30,7 @@ class UpdateUserGroupMembersResultSuccess(BaseModel):
     """  # noqa: E501
 
     operation: Optional[UpdateUserGroupMembersResultOperation] = None
-    status: Optional[StrictInt] = Field(default=None, description="The HTTP status code for the successful operation.")
+    status: Optional[StrictInt] = Field(default=None, description="The HTTP status code for a successful operation.")
     affected_users: Optional[List[GroupMember]] = Field(default=None, alias="affectedUsers")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["operation", "status", "affectedUsers"]
