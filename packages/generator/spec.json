@@ -2730,7 +2730,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/createUser400"
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -2742,7 +2742,7 @@
             "$ref": "#/components/responses/404"
           },
           "409": {
-            "$ref": "#/components/responses/createUser409"
+            "$ref": "#/components/responses/409"
           },
           "413": {
             "$ref": "#/components/responses/413"
@@ -2860,7 +2860,7 @@
             "$ref": "#/components/responses/403"
           },
           "404": {
-            "$ref": "#/components/responses/getUser404"
+            "$ref": "#/components/responses/404"
           },
           "429": {
             "$ref": "#/components/responses/429"
@@ -2979,7 +2979,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/updateUser400"
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -2988,10 +2988,10 @@
             "$ref": "#/components/responses/403"
           },
           "404": {
-            "$ref": "#/components/responses/updateUser404"
+            "$ref": "#/components/responses/404"
           },
           "409": {
-            "$ref": "#/components/responses/updateUser409"
+            "$ref": "#/components/responses/409"
           },
           "429": {
             "$ref": "#/components/responses/429"
@@ -3618,7 +3618,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/updateGroup400"
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -3630,7 +3630,7 @@
             "$ref": "#/components/responses/404"
           },
           "409": {
-            "$ref": "#/components/responses/updateGroup409"
+            "$ref": "#/components/responses/409"
           },
           "413": {
             "$ref": "#/components/responses/413"
