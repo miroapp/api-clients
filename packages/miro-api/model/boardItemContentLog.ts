@@ -11,6 +11,7 @@
  */
 
 import {Actor} from './actor'
+import {BoardItemContentLogAI} from './boardItemContentLogAI'
 import {Relationship} from './relationship'
 
 /**
@@ -51,6 +52,7 @@ export class BoardItemContentLog {
    * Contains the list of items related to the current board item.
    */
   'relationships'?: Array<Relationship>
+  'ai'?: BoardItemContentLogAI
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -101,6 +103,11 @@ export class BoardItemContentLog {
       name: 'relationships',
       baseName: 'relationships',
       type: 'Array<Relationship>',
+    },
+    {
+      name: 'ai',
+      baseName: 'ai',
+      type: 'BoardItemContentLogAI',
     },
   ]
 

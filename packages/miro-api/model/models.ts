@@ -1,6 +1,13 @@
+export * from './accessTokenResponse'
 export * from './actor'
 export * from './addProjectMemberRequest'
 export * from './adminRole'
+export * from './aiInteractionLog'
+export * from './aiInteractionLogActor'
+export * from './aiInteractionLogModel'
+export * from './aiInteractionLogObject'
+export * from './aiInteractionLogSession'
+export * from './aiInteractionLogTool'
 export * from './appCardCreateRequest'
 export * from './appCardData'
 export * from './appCardDataChanges'
@@ -37,6 +44,7 @@ export * from './boardExportTaskExportLink'
 export * from './boardExportTaskResult'
 export * from './boardFormat'
 export * from './boardItemContentLog'
+export * from './boardItemContentLogAI'
 export * from './boardLinks'
 export * from './boardMember'
 export * from './boardMemberChanges'
@@ -70,6 +78,11 @@ export * from './cardStylePlatformbulkcreateoperation'
 export * from './cardUpdateRequest'
 export * from './caseRequest'
 export * from './caseResponse'
+export * from './codeWidgetCreateRequest'
+export * from './codeWidgetCursorPaged'
+export * from './codeWidgetData'
+export * from './codeWidgetItem'
+export * from './codeWidgetUpdateRequest'
 export * from './connectorChangesData'
 export * from './connectorCreationData'
 export * from './connectorStyle'
@@ -83,6 +96,8 @@ export * from './createDocumentItemUsingFileFromDeviceRequestData'
 export * from './createFrameItem400Response'
 export * from './createGroupMemberRequest'
 export * from './createGroupRequest'
+export * from './createGroupResource'
+export * from './createGroupResourceMembersInner'
 export * from './createProjectRequest'
 export * from './createProjectUserGroupsRequest'
 export * from './createTeamGroupRequest'
@@ -169,6 +184,7 @@ export * from './geometryPlatformTags'
 export * from './geometryPlatformbulkcreateoperation'
 export * from './geometryPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './geometryPlatformgroups'
+export * from './getAiInteractionLogsResponse'
 export * from './getAllGroups200Response'
 export * from './getAllGroups400Response'
 export * from './getAllGroups404Response'
@@ -244,6 +260,7 @@ export * from './mindmapNodeTextData'
 export * from './mindmapNodeView'
 export * from './mindmapStyle'
 export * from './mindmapWidgetDataOutput'
+export * from './miroAi'
 export * from './modelError'
 export * from './modifiedBy'
 export * from './modifiedByPlatformContainers'
@@ -252,6 +269,7 @@ export * from './modifiedByPlatformFileUpload'
 export * from './modifiedByPlatformTags'
 export * from './modifiedByPlatformcreateitemsinbulkusingfilefromdevice'
 export * from './modifiedByPlatformgroups'
+export * from './oEmbedData'
 export * from './organization'
 export * from './organizationInformation'
 export * from './organizationMember'
@@ -368,7 +386,7 @@ export * from './textDataPlatformbulkcreateoperation'
 export * from './textItem'
 export * from './textStyle'
 export * from './textUpdateRequest'
-export * from './tokenInformation'
+export * from './tokenContext'
 export * from './unGroup400Response'
 export * from './unGroup404Response'
 export * from './unGroup429Response'
@@ -399,6 +417,7 @@ export * from './user'
 export * from './userInfoLastOpenedBy'
 export * from './userInfoShort'
 export * from './userInformation'
+export * from './userInformation1'
 export * from './userListResponse'
 export * from './userResource'
 export * from './userResourceEmailsInner'
@@ -427,9 +446,16 @@ export interface RequestDetailedFile {
 }
 export type RequestFile = string | Buffer | fs.ReadStream | RequestDetailedFile
 
+import {AccessTokenResponse} from './accessTokenResponse'
 import {Actor} from './actor'
 import {AddProjectMemberRequest} from './addProjectMemberRequest'
 import {AdminRole} from './adminRole'
+import {AiInteractionLog} from './aiInteractionLog'
+import {AiInteractionLogActor} from './aiInteractionLogActor'
+import {AiInteractionLogModel} from './aiInteractionLogModel'
+import {AiInteractionLogObject} from './aiInteractionLogObject'
+import {AiInteractionLogSession} from './aiInteractionLogSession'
+import {AiInteractionLogTool} from './aiInteractionLogTool'
 import {AppCardCreateRequest} from './appCardCreateRequest'
 import {AppCardData} from './appCardData'
 import {AppCardDataChanges} from './appCardDataChanges'
@@ -466,6 +492,7 @@ import {BoardExportTaskExportLink} from './boardExportTaskExportLink'
 import {BoardExportTaskResult} from './boardExportTaskResult'
 import {BoardFormat} from './boardFormat'
 import {BoardItemContentLog} from './boardItemContentLog'
+import {BoardItemContentLogAI} from './boardItemContentLogAI'
 import {BoardLinks} from './boardLinks'
 import {BoardMember} from './boardMember'
 import {BoardMemberChanges} from './boardMemberChanges'
@@ -499,6 +526,11 @@ import {CardStylePlatformbulkcreateoperation} from './cardStylePlatformbulkcreat
 import {CardUpdateRequest} from './cardUpdateRequest'
 import {CaseRequest} from './caseRequest'
 import {CaseResponse} from './caseResponse'
+import {CodeWidgetCreateRequest} from './codeWidgetCreateRequest'
+import {CodeWidgetCursorPaged} from './codeWidgetCursorPaged'
+import {CodeWidgetData} from './codeWidgetData'
+import {CodeWidgetItem} from './codeWidgetItem'
+import {CodeWidgetUpdateRequest} from './codeWidgetUpdateRequest'
 import {ConnectorChangesData} from './connectorChangesData'
 import {ConnectorCreationData} from './connectorCreationData'
 import {ConnectorStyle} from './connectorStyle'
@@ -512,6 +544,8 @@ import {CreateDocumentItemUsingFileFromDeviceRequestData} from './createDocument
 import {CreateFrameItem400Response} from './createFrameItem400Response'
 import {CreateGroupMemberRequest} from './createGroupMemberRequest'
 import {CreateGroupRequest} from './createGroupRequest'
+import {CreateGroupResource} from './createGroupResource'
+import {CreateGroupResourceMembersInner} from './createGroupResourceMembersInner'
 import {CreateProjectRequest} from './createProjectRequest'
 import {CreateProjectUserGroupsRequest} from './createProjectUserGroupsRequest'
 import {CreateTeamGroupRequest} from './createTeamGroupRequest'
@@ -598,6 +632,7 @@ import {GeometryPlatformTags} from './geometryPlatformTags'
 import {GeometryPlatformbulkcreateoperation} from './geometryPlatformbulkcreateoperation'
 import {GeometryPlatformcreateitemsinbulkusingfilefromdevice} from './geometryPlatformcreateitemsinbulkusingfilefromdevice'
 import {GeometryPlatformgroups} from './geometryPlatformgroups'
+import {GetAiInteractionLogsResponse} from './getAiInteractionLogsResponse'
 import {GetAllGroups200Response} from './getAllGroups200Response'
 import {GetAllGroups400Response} from './getAllGroups400Response'
 import {GetAllGroups404Response} from './getAllGroups404Response'
@@ -673,6 +708,7 @@ import {MindmapNodeTextData} from './mindmapNodeTextData'
 import {MindmapNodeView} from './mindmapNodeView'
 import {MindmapStyle} from './mindmapStyle'
 import {MindmapWidgetDataOutput} from './mindmapWidgetDataOutput'
+import {MiroAi} from './miroAi'
 import {ModelError} from './modelError'
 import {ModifiedBy} from './modifiedBy'
 import {ModifiedByPlatformContainers} from './modifiedByPlatformContainers'
@@ -681,6 +717,7 @@ import {ModifiedByPlatformFileUpload} from './modifiedByPlatformFileUpload'
 import {ModifiedByPlatformTags} from './modifiedByPlatformTags'
 import {ModifiedByPlatformcreateitemsinbulkusingfilefromdevice} from './modifiedByPlatformcreateitemsinbulkusingfilefromdevice'
 import {ModifiedByPlatformgroups} from './modifiedByPlatformgroups'
+import {OEmbedData} from './oEmbedData'
 import {Organization} from './organization'
 import {OrganizationInformation} from './organizationInformation'
 import {OrganizationMember} from './organizationMember'
@@ -797,7 +834,7 @@ import {TextDataPlatformbulkcreateoperation} from './textDataPlatformbulkcreateo
 import {TextItem} from './textItem'
 import {TextStyle} from './textStyle'
 import {TextUpdateRequest} from './textUpdateRequest'
-import {TokenInformation} from './tokenInformation'
+import {TokenContext} from './tokenContext'
 import {UnGroup400Response} from './unGroup400Response'
 import {UnGroup404Response} from './unGroup404Response'
 import {UnGroup429Response} from './unGroup429Response'
@@ -828,6 +865,7 @@ import {User} from './user'
 import {UserInfoLastOpenedBy} from './userInfoLastOpenedBy'
 import {UserInfoShort} from './userInfoShort'
 import {UserInformation} from './userInformation'
+import {UserInformation1} from './userInformation1'
 import {UserListResponse} from './userListResponse'
 import {UserResource} from './userResource'
 import {UserResourceEmailsInner} from './userResourceEmailsInner'
@@ -885,6 +923,7 @@ let enumsMap: {[index: string]: any} = {
   'ConnectorWithLinks.ShapeEnum': ConnectorWithLinks.ShapeEnum,
   'CreateBoardSubscriptionRequest.StatusEnum': CreateBoardSubscriptionRequest.StatusEnum,
   'CreateBoardUserGroupsRequest.RoleEnum': CreateBoardUserGroupsRequest.RoleEnum,
+  'CreateGroupResource.SchemasEnum': CreateGroupResource.SchemasEnum,
   'CreateProjectUserGroupsRequest.RoleEnum': CreateProjectUserGroupsRequest.RoleEnum,
   'CreateTeamGroupRequest.RoleEnum': CreateTeamGroupRequest.RoleEnum,
   'CreateUserResource.SchemasEnum': CreateUserResource.SchemasEnum,
@@ -924,7 +963,6 @@ let enumsMap: {[index: string]: any} = {
   LegalHoldState: LegalHoldState,
   'MindmapData.DirectionEnum': MindmapData.DirectionEnum,
   'MindmapStyle.ShapeEnum': MindmapStyle.ShapeEnum,
-  'Organization.PlanEnum': Organization.PlanEnum,
   'OrganizationMember.LicenseEnum': OrganizationMember.LicenseEnum,
   'OrganizationMember.RoleEnum': OrganizationMember.RoleEnum,
   'PatchGroupResource.SchemasEnum': PatchGroupResource.SchemasEnum,
@@ -1038,9 +1076,16 @@ let enumsMap: {[index: string]: any} = {
 }
 
 let typeMap: {[index: string]: any} = {
+  AccessTokenResponse: AccessTokenResponse,
   Actor: Actor,
   AddProjectMemberRequest: AddProjectMemberRequest,
   AdminRole: AdminRole,
+  AiInteractionLog: AiInteractionLog,
+  AiInteractionLogActor: AiInteractionLogActor,
+  AiInteractionLogModel: AiInteractionLogModel,
+  AiInteractionLogObject: AiInteractionLogObject,
+  AiInteractionLogSession: AiInteractionLogSession,
+  AiInteractionLogTool: AiInteractionLogTool,
   AppCardCreateRequest: AppCardCreateRequest,
   AppCardData: AppCardData,
   AppCardDataChanges: AppCardDataChanges,
@@ -1076,6 +1121,7 @@ let typeMap: {[index: string]: any} = {
   BoardExportTaskExportLink: BoardExportTaskExportLink,
   BoardExportTaskResult: BoardExportTaskResult,
   BoardItemContentLog: BoardItemContentLog,
+  BoardItemContentLogAI: BoardItemContentLogAI,
   BoardLinks: BoardLinks,
   BoardMember: BoardMember,
   BoardMemberChanges: BoardMemberChanges,
@@ -1109,6 +1155,11 @@ let typeMap: {[index: string]: any} = {
   CardUpdateRequest: CardUpdateRequest,
   CaseRequest: CaseRequest,
   CaseResponse: CaseResponse,
+  CodeWidgetCreateRequest: CodeWidgetCreateRequest,
+  CodeWidgetCursorPaged: CodeWidgetCursorPaged,
+  CodeWidgetData: CodeWidgetData,
+  CodeWidgetItem: CodeWidgetItem,
+  CodeWidgetUpdateRequest: CodeWidgetUpdateRequest,
   ConnectorChangesData: ConnectorChangesData,
   ConnectorCreationData: ConnectorCreationData,
   ConnectorStyle: ConnectorStyle,
@@ -1122,6 +1173,8 @@ let typeMap: {[index: string]: any} = {
   CreateFrameItem400Response: CreateFrameItem400Response,
   CreateGroupMemberRequest: CreateGroupMemberRequest,
   CreateGroupRequest: CreateGroupRequest,
+  CreateGroupResource: CreateGroupResource,
+  CreateGroupResourceMembersInner: CreateGroupResourceMembersInner,
   CreateProjectRequest: CreateProjectRequest,
   CreateProjectUserGroupsRequest: CreateProjectUserGroupsRequest,
   CreateTeamGroupRequest: CreateTeamGroupRequest,
@@ -1210,6 +1263,7 @@ let typeMap: {[index: string]: any} = {
   GeometryPlatformbulkcreateoperation: GeometryPlatformbulkcreateoperation,
   GeometryPlatformcreateitemsinbulkusingfilefromdevice: GeometryPlatformcreateitemsinbulkusingfilefromdevice,
   GeometryPlatformgroups: GeometryPlatformgroups,
+  GetAiInteractionLogsResponse: GetAiInteractionLogsResponse,
   GetAllGroups200Response: GetAllGroups200Response,
   GetAllGroups400Response: GetAllGroups400Response,
   GetAllGroups404Response: GetAllGroups404Response,
@@ -1284,6 +1338,7 @@ let typeMap: {[index: string]: any} = {
   MindmapNodeView: MindmapNodeView,
   MindmapStyle: MindmapStyle,
   MindmapWidgetDataOutput: MindmapWidgetDataOutput,
+  MiroAi: MiroAi,
   ModelError: ModelError,
   ModifiedBy: ModifiedBy,
   ModifiedByPlatformContainers: ModifiedByPlatformContainers,
@@ -1292,6 +1347,7 @@ let typeMap: {[index: string]: any} = {
   ModifiedByPlatformTags: ModifiedByPlatformTags,
   ModifiedByPlatformcreateitemsinbulkusingfilefromdevice: ModifiedByPlatformcreateitemsinbulkusingfilefromdevice,
   ModifiedByPlatformgroups: ModifiedByPlatformgroups,
+  OEmbedData: OEmbedData,
   Organization: Organization,
   OrganizationInformation: OrganizationInformation,
   OrganizationMember: OrganizationMember,
@@ -1407,7 +1463,7 @@ let typeMap: {[index: string]: any} = {
   TextItem: TextItem,
   TextStyle: TextStyle,
   TextUpdateRequest: TextUpdateRequest,
-  TokenInformation: TokenInformation,
+  TokenContext: TokenContext,
   UnGroup400Response: UnGroup400Response,
   UnGroup404Response: UnGroup404Response,
   UnGroup429Response: UnGroup429Response,
@@ -1437,6 +1493,7 @@ let typeMap: {[index: string]: any} = {
   UserInfoLastOpenedBy: UserInfoLastOpenedBy,
   UserInfoShort: UserInfoShort,
   UserInformation: UserInformation,
+  UserInformation1: UserInformation1,
   UserListResponse: UserListResponse,
   UserResource: UserResource,
   UserResourceEmailsInner: UserResourceEmailsInner,

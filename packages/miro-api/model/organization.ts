@@ -10,27 +10,15 @@
  * Do not edit the class manually.
  */
 
+/**
+ * @internal
+ * Contains information about the organization with which the board is associated.
+ */
 export class Organization {
   /**
-   * Id of the organization
+   * Unique identifier (ID) of the organization.
    */
   'id': string
-  /**
-   * Purchased FULL licenses
-   */
-  'fullLicensesPurchased': number
-  /**
-   * Name of the organization
-   */
-  'name': string
-  /**
-   * Organization plan type
-   */
-  'plan': string | (typeof Organization.PlanEnum)[keyof typeof Organization.PlanEnum]
-  /**
-   * Type of the object returned.
-   */
-  'type'?: string = 'organization'
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -42,46 +30,10 @@ export class Organization {
       baseName: 'id',
       type: 'string',
     },
-    {
-      name: 'fullLicensesPurchased',
-      baseName: 'fullLicensesPurchased',
-      type: 'number',
-    },
-    {
-      name: 'name',
-      baseName: 'name',
-      type: 'string',
-    },
-    {
-      name: 'plan',
-      baseName: 'plan',
-      type: 'Organization.PlanEnum',
-    },
-    {
-      name: 'type',
-      baseName: 'type',
-      type: 'string',
-    },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
     return Organization.attributeTypeMap
   }
-}
-
-export namespace Organization {
-  export const PlanEnum = {
-    Company: 'company',
-    Consultant: 'consultant',
-    ConsultantSlf: 'consultant_slf',
-    Business: 'business',
-    PaidTeamOrg: 'paid_team_org',
-    IntegrationOrg: 'integration_org',
-    Professional2022: 'professional_2022',
-    EduTeamOrg: 'edu_team_org',
-    FreeTeamOrg: 'free_team_org',
-    DevTeamOrg: 'dev_team_org',
-    Unknown: 'unknown',
-  } as const
 }
