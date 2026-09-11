@@ -35,7 +35,7 @@ export class AuditEvent {
    */
   'event'?: string
   /**
-   * Event category of the audit event.
+   * Event category of the audit event
    */
   'category'?: string
 

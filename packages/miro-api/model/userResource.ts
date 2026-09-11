@@ -54,7 +54,7 @@ export class UserResource {
    */
   'photos'?: Array<UserResourcePhotosInner>
   /**
-   * An array of groups (teams) the user belongs to in the organization. Contains id and display name of the team.
+   * An array of groups (user groups) the user belongs to in the organization. Contains the id and display name of the user group.
    */
   'groups'?: Array<UserResourceGroupsInner>
   /**

@@ -2,6 +2,8 @@ import fetch, {Response, RequestInit} from 'node-fetch'
 import {version} from '../package.json'
 import FormData = require('form-data')
 
+import {GetAiInteractionLogsResponse} from '../model/getAiInteractionLogsResponse'
+
 import {AppCardCreateRequest} from '../model/appCardCreateRequest'
 import {AppCardItem} from '../model/appCardItem'
 import {AppCardUpdateRequest} from '../model/appCardUpdateRequest'
@@ -56,6 +58,13 @@ import {CardCreateRequest} from '../model/cardCreateRequest'
 import {CardItem} from '../model/cardItem'
 import {CardUpdateRequest} from '../model/cardUpdateRequest'
 
+import {CodeWidgetCreateRequest} from '../model/codeWidgetCreateRequest'
+import {CodeWidgetCursorPaged} from '../model/codeWidgetCursorPaged'
+import {CodeWidgetItem} from '../model/codeWidgetItem'
+import {CodeWidgetUpdateRequest} from '../model/codeWidgetUpdateRequest'
+import {CreateFrameItem400Response} from '../model/createFrameItem400Response'
+import {PositionChange} from '../model/positionChange'
+
 import {ConnectorChangesData} from '../model/connectorChangesData'
 import {ConnectorCreationData} from '../model/connectorCreationData'
 import {ConnectorWithLinks} from '../model/connectorWithLinks'
@@ -70,17 +79,17 @@ import {ServiceProviderConfigResponse} from '../model/serviceProviderConfigRespo
 import {DocFormatCreateRequest} from '../model/docFormatCreateRequest'
 import {DocFormatItem} from '../model/docFormatItem'
 
-import {CreateDocumentItemUsingFileFromDeviceRequestData} from '../model/createDocumentItemUsingFileFromDeviceRequestData'
 import {DocumentCreateRequest} from '../model/documentCreateRequest'
 import {DocumentItem} from '../model/documentItem'
 import {DocumentUpdateRequest} from '../model/documentUpdateRequest'
+
+import {CreateDocumentItemUsingFileFromDeviceRequestData} from '../model/createDocumentItemUsingFileFromDeviceRequestData'
 import {UploadFileFromDeviceData} from '../model/uploadFileFromDeviceData'
 
 import {EmbedCreateRequest} from '../model/embedCreateRequest'
 import {EmbedItem} from '../model/embedItem'
 import {EmbedUpdateRequest} from '../model/embedUpdateRequest'
 
-import {CreateFrameItem400Response} from '../model/createFrameItem400Response'
 import {GenericItem} from '../model/genericItem'
 import {GenericItemCursorPaged} from '../model/genericItemCursorPaged'
 import {ShapeCreateRequest} from '../model/shapeCreateRequest'
@@ -92,6 +101,7 @@ import {FrameItem} from '../model/frameItem'
 import {FrameUpdateRequest} from '../model/frameUpdateRequest'
 import {UpdateFrameItem409Response} from '../model/updateFrameItem409Response'
 
+import {CreateGroupResource} from '../model/createGroupResource'
 import {GroupListResponse} from '../model/groupListResponse'
 import {GroupResource} from '../model/groupResource'
 import {PatchGroupResource} from '../model/patchGroupResource'
@@ -126,8 +136,12 @@ import {MindmapCreateRequest} from '../model/mindmapCreateRequest'
 import {MindmapCursorPaged} from '../model/mindmapCursorPaged'
 import {MindmapItem} from '../model/mindmapItem'
 
+import {AccessTokenResponse} from '../model/accessTokenResponse'
 import {ErrorResponse} from '../model/errorResponse'
 import {RevokeTokenRequest} from '../model/revokeTokenRequest'
+import {TokenContext} from '../model/tokenContext'
+
+import {OEmbedData} from '../model/oEmbedData'
 
 import {EnterpriseGetOrganizationMembers200Response} from '../model/enterpriseGetOrganizationMembers200Response'
 import {OrganizationMember} from '../model/organizationMember'
@@ -194,8 +208,6 @@ import {TextCreateRequest} from '../model/textCreateRequest'
 import {TextItem} from '../model/textItem'
 import {TextUpdateRequest} from '../model/textUpdateRequest'
 
-import {TokenInformation} from '../model/tokenInformation'
-
 import {CreateUserResource} from '../model/createUserResource'
 import {PatchUserResource} from '../model/patchUserResource'
 import {UserListResponse} from '../model/userListResponse'
@@ -236,6 +248,133 @@ export class MiroApi {
     this.basePath = basePath
     this.logger = logger
     this.httpTimeout = httpTimeout
+  }
+
+  /**
+   * Retrieves AI interaction logs for your organization. AI interaction logs capture user interactions with AI features in Miro: the prompt received from the user, the response returned to them, and the model and tool calls made in between. You can retrieve results for a specific time period, and filter them by session, actor, affected object, or event type. Results are paginated: when more logs match than the page holds, the response carries a <code>cursor</code> you pass to the next request. <br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>aiinteractionlogs:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 4</a> <br/><h3>Enterprise Guard only</h3> <p>This API is available only for Enterprise plan users with the <a target=_blank href=\"https://help.miro.com/hc/en-us/articles/15699815402514-Enterprise-Guard-overview\">Enterprise Guard add-on</a>.</p>
+   * @summary Get AI interaction logs (Beta)
+   * @param orgId Unique identifier of the organization.
+   * @param from Start date and time of the time range used to filter AI interaction logs. Only interactions that were stored within the specified &lt;code&gt;from&lt;/code&gt; - &lt;code&gt;to&lt;/code&gt; time range are returned. The range must cover a period of at most 1 month. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). Milliseconds are optional.
+   * @param to End date and time of the time range used to filter AI interaction logs. Only interactions that were stored within the specified &lt;code&gt;from&lt;/code&gt; - &lt;code&gt;to&lt;/code&gt; time range are returned. The range must cover a period of at most 1 month. Format: UTC, adheres to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601), includes a [trailing Z offset](https://en.wikipedia.org/wiki/ISO_8601#Coordinated_Universal_Time_(UTC)). Milliseconds are optional.
+   * @param sessionIds Filters AI interaction logs using a list of session IDs. A session groups the events of one conversation, so filtering by session ID returns every event of that conversation. You can obtain session IDs from the response of this endpoint (the &lt;code&gt;session.id&lt;/code&gt; field).
+   * @param actorIds Filters AI interaction logs using a list of actor IDs. An actor is the user, or the Miro agent acting on a user\&#39;s behalf, that produced the interaction. You can obtain actor IDs from the response of this endpoint (the &lt;code&gt;actor.id&lt;/code&gt; field).
+   * @param actorEmails Filters AI interaction logs using a list of actor emails. Only interactions associated with the provided emails are included in the response.
+   * @param objectIds List of object IDs used to retrieve AI interaction logs.  Currently, supported object types include board IDs and organization IDs.  You can obtain object IDs from the response of this endpoint (the &lt;code&gt;object.id&lt;/code&gt; field),  from other Platform API endpoints (for example, [Get boards API](https://developers.miro.com/reference/get-boards)),  or from Miro UI URLs (board ID and organization ID from the URLs).
+   * @param eventTypes Filters AI interaction logs using a list of event types. Each event records one step of an interaction, so filtering by event type narrows the response to those steps.
+   * @param cursor A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, set the cursor parameter equal to the cursor value you received in the response of the previous request.
+   * @param limit The maximum number of results to return per call. If the number of logs in the response is greater than the limit specified, the response returns the cursor parameter with a value.
+   * @param sorting Sort order in which you want to view the result set based on the interaction date. To sort by an ascending date, specify &#x60;asc&#x60;. To sort by a descending date, specify &#x60;desc&#x60;.
+   */
+  async enterpriseGetAiInteractionLogs(
+    orgId: string,
+    from: Date,
+    to: Date,
+    query?: {
+      sessionIds?: Array<string>
+
+      actorIds?: Array<string>
+
+      actorEmails?: Array<string>
+
+      objectIds?: Array<string>
+
+      eventTypes?: Array<
+        | 'input'
+        | 'output'
+        | 'tool_invocation_request'
+        | 'tool_invocation_response'
+        | 'model_invocation_request'
+        | 'model_invocation_response'
+      >
+
+      cursor?: string
+
+      limit?: number
+
+      sorting?: 'asc' | 'desc'
+    },
+  ): Promise<{response: Response; body: GetAiInteractionLogsResponse}> {
+    const localVarPath = '/v2/orgs/{org_id}/ai-interaction-logs'.replace(
+      '{' + 'org_id' + '}',
+      encodeURIComponent(String(orgId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'orgId' is not null or undefined
+    if (orgId === null || orgId === undefined) {
+      throw new Error('Required parameter orgId was null or undefined when calling enterpriseGetAiInteractionLogs.')
+    }
+
+    if (query?.sessionIds !== undefined) {
+      localVarQueryParameters.append('session_ids', ObjectSerializer.serialize(query?.sessionIds, 'Array<string>'))
+    }
+
+    if (query?.actorIds !== undefined) {
+      localVarQueryParameters.append('actor_ids', ObjectSerializer.serialize(query?.actorIds, 'Array<string>'))
+    }
+
+    if (query?.actorEmails !== undefined) {
+      localVarQueryParameters.append('actor_emails', ObjectSerializer.serialize(query?.actorEmails, 'Array<string>'))
+    }
+
+    if (query?.objectIds !== undefined) {
+      localVarQueryParameters.append('object_ids', ObjectSerializer.serialize(query?.objectIds, 'Array<string>'))
+    }
+
+    if (query?.eventTypes !== undefined) {
+      localVarQueryParameters.append(
+        'event_types',
+        ObjectSerializer.serialize(
+          query?.eventTypes,
+          "Array<'input' | 'output' | 'tool_invocation_request' | 'tool_invocation_response' | 'model_invocation_request' | 'model_invocation_response'>",
+        ),
+      )
+    }
+
+    // verify required parameter 'from' is not null or undefined
+    if (from === null || from === undefined) {
+      throw new Error('Required parameter from was null or undefined when calling enterpriseGetAiInteractionLogs.')
+    }
+
+    if (from !== undefined) {
+      localVarQueryParameters.append('from', ObjectSerializer.serialize(from, 'Date'))
+    }
+
+    // verify required parameter 'to' is not null or undefined
+    if (to === null || to === undefined) {
+      throw new Error('Required parameter to was null or undefined when calling enterpriseGetAiInteractionLogs.')
+    }
+
+    if (to !== undefined) {
+      localVarQueryParameters.append('to', ObjectSerializer.serialize(to, 'Date'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'number'))
+    }
+
+    if (query?.sorting !== undefined) {
+      localVarQueryParameters.append('sorting', ObjectSerializer.serialize(query?.sorting, "'asc' | 'desc'"))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GetAiInteractionLogsResponse')
+
+    return {response, body}
   }
 
   /**
@@ -1595,7 +1734,7 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters. Customize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.  If you\'re an Enterprise customer with Company Admin permissions: - Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins). - Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error. <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
+   * Retrieves a list of boards accessible to the user associated with the provided access token. This endpoint supports filtering and sorting through URL query parameters. Customize the response by specifying `team_id`, `project_id`, or other query parameters. Filtering by `team_id` or `project_id` (or both) returns results instantly. For other filters, allow a few seconds for indexing of newly created boards.  When the `query` parameter is provided, results are capped at the first 10,000 matching boards (`offset` + `limit` must not exceed 10,000). To page through more boards, narrow the result set with `team_id`, `project_id`, or `owner` instead of relying on a higher `offset`.  If you\'re an Enterprise customer with Company Admin permissions: - Enable **Content Admin** permissions to retrieve all boards, including private boards (those not explicitly shared with you). For details, see the [Content Admin Permissions for Company Admins](https://help.miro.com/hc/en-us/articles/360012777280-Content-Admin-permissions-for-Company-Admins). - Note that **Private board contents remain inaccessible**. The API allows you to verify their existence but prevents viewing their contents to uphold security best practices. Unauthorized access attempts will return an error. <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
    * @summary Get boards
    * @param teamId
    * @param projectId
@@ -1978,6 +2117,252 @@ export class MiroApi {
     )
 
     const body = ObjectSerializer.deserialize(bodyAsJson, 'CardItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds a code widget item to a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Create code widget item
+   * @param boardId Unique identifier (ID) of the board where you want to create the item.
+   * @param codeWidgetCreateRequest
+   */
+  async createCodeWidgetItem(
+    boardId: string,
+
+    codeWidgetCreateRequest?: CodeWidgetCreateRequest,
+  ): Promise<{response: Response; body: CodeWidgetItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/code_widgets'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling createCodeWidgetItem.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(codeWidgetCreateRequest, 'CodeWidgetCreateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'CodeWidgetItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Deletes a code widget item from the board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 3</a><br/>
+   * @summary Delete code widget item
+   * @param boardId Unique identifier (ID) of the board from which you want to delete the item.
+   * @param itemId Unique identifier (ID) of the item that you want to delete.
+   */
+  async deleteCodeWidgetItem(boardId: string, itemId: string): Promise<{response: Response; body: object}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/code_widgets/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling deleteCodeWidgetItem.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling deleteCodeWidgetItem.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'object')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information for a specific code widget item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a><br/>
+   * @summary Get code widget item
+   * @param boardId Unique identifier (ID) of the board from which you want to retrieve a specific item.
+   * @param itemId Unique identifier (ID) of the item that you want to retrieve.
+   */
+  async getCodeWidgetItem(boardId: string, itemId: string): Promise<{response: Response; body: CodeWidgetItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/code_widgets/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getCodeWidgetItem.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling getCodeWidgetItem.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'CodeWidgetItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves a list of code widget items for a specific board.  This method returns results using a cursor-based approach. A cursor-paginated method returns a portion of the total set of results based on the limit specified and a cursor that points to the next portion of the results. To retrieve the next portion of the collection, on your next call to the same method, set the `cursor` parameter equal to the `cursor` value you received in the response of the previous request.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:read</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Get code widget items
+   * @param boardId Unique identifier (ID) of the board for which you want to retrieve the list of code widget items.
+   * @param limit
+   * @param cursor
+   */
+  async getCodeWidgetItems(
+    boardId: string,
+    query?: {
+      limit?: string
+
+      cursor?: string
+    },
+  ): Promise<{response: Response; body: CodeWidgetCursorPaged}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/code_widgets'.replace(
+      '{' + 'board_id' + '}',
+      encodeURIComponent(String(boardId)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling getCodeWidgetItems.')
+    }
+
+    if (query?.limit !== undefined) {
+      localVarQueryParameters.append('limit', ObjectSerializer.serialize(query?.limit, 'string'))
+    }
+
+    if (query?.cursor !== undefined) {
+      localVarQueryParameters.append('cursor', ObjectSerializer.serialize(query?.cursor, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'CodeWidgetCursorPaged')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates the position of a code widget item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Move code widget item
+   * @param boardId Unique identifier (ID) of the board where you want to move the item.
+   * @param itemId Unique identifier (ID) of the item that you want to move.
+   * @param positionChange
+   */
+  async moveCodeWidgetItem(
+    boardId: string,
+    itemId: string,
+    positionChange: PositionChange,
+  ): Promise<{response: Response; body: CodeWidgetItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/code_widgets/{item_id}/position'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling moveCodeWidgetItem.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling moveCodeWidgetItem.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(positionChange, 'PositionChange')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'CodeWidgetItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates a code widget item on a board based on the data properties provided in the request body.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Update code widget item
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param codeWidgetUpdateRequest
+   */
+  async updateCodeWidgetItem(
+    boardId: string,
+    itemId: string,
+    codeWidgetUpdateRequest: CodeWidgetUpdateRequest,
+  ): Promise<{response: Response; body: CodeWidgetItem}> {
+    const localVarPath = '/v2-experimental/boards/{board_id}/code_widgets/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateCodeWidgetItem.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling updateCodeWidgetItem.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(codeWidgetUpdateRequest, 'CodeWidgetUpdateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'CodeWidgetItem')
 
     return {response, body}
   }
@@ -2454,65 +2839,6 @@ export class MiroApi {
   }
 
   /**
-   * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
-   * @summary Create document item using file from device
-   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
-   * @param resource Select a file to upload. Maximum file size is 6 MB.
-   * @param data
-   */
-  async createDocumentItemUsingFileFromDevice(
-    boardIdPlatformFileUpload: string,
-    resource: RequestFile,
-
-    data?: CreateDocumentItemUsingFileFromDeviceRequestData,
-  ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/documents'.replace(
-      '{' + 'board_id_PlatformFileUpload' + '}',
-      encodeURIComponent(String(boardIdPlatformFileUpload)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
-    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createDocumentItemUsingFileFromDevice.',
-      )
-    }
-
-    const formData = new FormData()
-    let extension = ''
-    if (data) {
-      formData.append(
-        'data',
-        JSON.stringify(ObjectSerializer.serialize(data, 'CreateDocumentItemUsingFileFromDeviceRequestData')),
-      )
-    }
-    if (resource) {
-      if ('createDocumentItemUsingFileFromDevice'.includes('Image')) {
-        extension = '.png'
-      } else if ('createDocumentItemUsingFileFromDevice'.includes('Document')) {
-        extension = '.pdf'
-      }
-      formData.append('resource', resource, 'file' + extension)
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'POST',
-      urlResource,
-      formData,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
-
-    return {response, body}
-  }
-
-  /**
    * Adds a document item to a board by specifying the URL where the document is hosted.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create document item using URL
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
@@ -2624,6 +2950,107 @@ export class MiroApi {
   }
 
   /**
+   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Update document item using URL
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param documentUpdateRequest
+   */
+  async updateDocumentItemUsingUrl(
+    boardId: string,
+    itemId: string,
+    documentUpdateRequest: DocumentUpdateRequest,
+  ): Promise<{response: Response; body: DocumentItem}> {
+    const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateDocumentItemUsingUrl.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling updateDocumentItemUsingUrl.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(documentUpdateRequest, 'DocumentUpdateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds a document item to a board by selecting file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Create document item using file from device
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
+   * @param resource Select a file to upload. Maximum file size is 6 MB.
+   * @param data
+   */
+  async createDocumentItemUsingFileFromDevice(
+    boardIdPlatformFileUpload: string,
+    resource: RequestFile,
+
+    data?: CreateDocumentItemUsingFileFromDeviceRequestData,
+  ): Promise<{response: Response; body: DocumentItem}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/documents'.replace(
+      '{' + 'board_id_PlatformFileUpload' + '}',
+      encodeURIComponent(String(boardIdPlatformFileUpload)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createDocumentItemUsingFileFromDevice.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      formData.append(
+        'data',
+        JSON.stringify(ObjectSerializer.serialize(data, 'CreateDocumentItemUsingFileFromDeviceRequestData')),
+      )
+    }
+    if (resource) {
+      if ('createDocumentItemUsingFileFromDevice'.includes('Image')) {
+        extension = '.png'
+      } else if ('createDocumentItemUsingFileFromDevice'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resource', resource, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      formData,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
+
+    return {response, body}
+  }
+
+  /**
    * Updates a document item on a board by using file from a device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update document item using file from device
    * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
@@ -2677,48 +3104,6 @@ export class MiroApi {
       'PATCH',
       urlResource,
       formData,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'DocumentItem')
-
-    return {response, body}
-  }
-
-  /**
-   * Updates a document item on a board<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
-   * @summary Update document item using URL
-   * @param boardId Unique identifier (ID) of the board where you want to update the item.
-   * @param itemId Unique identifier (ID) of the item that you want to update.
-   * @param documentUpdateRequest
-   */
-  async updateDocumentItemUsingUrl(
-    boardId: string,
-    itemId: string,
-    documentUpdateRequest: DocumentUpdateRequest,
-  ): Promise<{response: Response; body: DocumentItem}> {
-    const localVarPath = '/v2/boards/{board_id}/documents/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
-      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling updateDocumentItemUsingUrl.')
-    }
-    // verify required parameter 'itemId' is not null or undefined
-    if (itemId === null || itemId === undefined) {
-      throw new Error('Required parameter itemId was null or undefined when calling updateDocumentItemUsingUrl.')
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'PATCH',
-      urlResource,
-      JSON.stringify(ObjectSerializer.serialize(documentUpdateRequest, 'DocumentUpdateRequest')),
 
       this.logger,
     )
@@ -3282,9 +3667,65 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves a single Group resource.<br><b> Note</b>: Along with groups (teams), the users that are part of those groups (teams) are also retrieved. Only users that have member role in the organization are fetched.
+   * Creates a new Miro user group in the organization. <br><br> Note: The displayName must be unique within the organization. The maximum length of the displayName is 60 characters; longer values are truncated. <br><br> You can optionally provide an initial list of members. Adding members follows the same rules as the add operation in Patch group.
+   * @summary Create group
+   * @param createGroupResource Payload to create a new Miro user group.
+   */
+  async createScimGroup(createGroupResource: CreateGroupResource): Promise<{response: Response; body: GroupResource}> {
+    const localVarPath = '/Groups'
+    let localVarQueryParameters = new URLSearchParams()
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(createGroupResource, 'CreateGroupResource')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'GroupResource')
+
+    return {response, body}
+  }
+
+  /**
+   * Deletes a single group (user group) from the organization.<br><br> Note: Deleting a Miro user group removes the group and its memberships only. It does NOT delete the member users or remove them from the organization.
+   * @summary Delete group
+   * @param id Group (user group) ID. A server-assigned, unique identifier for this Group (user group).
+   */
+  async deleteScimGroup(id: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/Groups/{id}'.replace('{' + 'id' + '}', encodeURIComponent(String(id)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'id' is not null or undefined
+    if (id === null || id === undefined) {
+      throw new Error('Required parameter id was null or undefined when calling deleteScimGroup.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'DELETE',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves a single Group resource.
    * @summary Get group
-   * @param id A server-assigned, unique identifier for this Group (team).
+   * @param id A server-assigned, unique identifier for this Group (user group).
    * @param attributes A comma-separated list of attribute names to return in the response. &lt;br&gt;&lt;br&gt; Example attributes: id,displayName &lt;br&gt; Note&lt;/b&gt;: It is also possible to retrieve attributes within complex attributes. For example: members.display
    */
   async getGroup(
@@ -3322,10 +3763,10 @@ export class MiroApi {
   }
 
   /**
-   * Retrieves the list of groups (teams) in the organization.<br><br> Note: Along with groups (teams), the users that are part of those groups (teams) are also retrieved. Only users that have member role in the organization are fetched.
+   * Retrieves the list of groups (user groups) in the organization.<br><br> Note: Along with groups (user groups), the users that are part of those groups (user groups) are also retrieved.
    * @summary List groups
    * @param attributes A comma-separated list of attribute names to return in the response. &lt;br&gt;&lt;br&gt; Example attributes: id,displayName &lt;br&gt; Note&lt;/b&gt;: It is also possible to fetch attributes within complex attributes, for Example: members.display.
-   * @param filter You can request a subset of resources by specifying the filter query parameter containing a filter expression. Attribute names and attribute operators used in filters are not case sensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value. &lt;br&gt;eq &#x3D; equal&lt;br&gt; ne &#x3D; not equal&lt;br&gt; co &#x3D; contains&lt;br&gt; sw &#x3D; starts with&lt;br&gt; ew &#x3D; ends with&lt;br&gt; pr &#x3D; preset (has value)&lt;br&gt; gt &#x3D; greater than&lt;br&gt; ge &#x3D; greater than or equal to&lt;br&gt; lt &#x3D; less than&lt;br&gt; le &#x3D; less than or equal to&lt;br&gt; and &#x3D; Logical \&quot;and\&quot;&lt;br&gt; or &#x3D; Logical \&quot;or\&quot;&lt;br&gt; not &#x3D; \&quot;Not\&quot; function&lt;br&gt; () &#x3D; Precedence grouping &lt;br&gt;The value must be passed within parenthesis. &lt;br&gt;&lt;br&gt;For Example: displayName eq \&quot;Product Team\&quot; will fetch information related to team matching the display name \&quot;Product Team\&quot;. &lt;br&gt;Note&lt;/b&gt;: Filtering on complex attributes is not supported
+   * @param filter You can request a subset of resources by specifying the filter query parameter containing a filter expression. Attribute names and attribute operators used in filters are not case sensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value. &lt;br&gt;eq &#x3D; equal&lt;br&gt; ne &#x3D; not equal&lt;br&gt; co &#x3D; contains&lt;br&gt; sw &#x3D; starts with&lt;br&gt; ew &#x3D; ends with&lt;br&gt; pr &#x3D; preset (has value)&lt;br&gt; gt &#x3D; greater than&lt;br&gt; ge &#x3D; greater than or equal to&lt;br&gt; lt &#x3D; less than&lt;br&gt; le &#x3D; less than or equal to&lt;br&gt; and &#x3D; Logical \&quot;and\&quot;&lt;br&gt; or &#x3D; Logical \&quot;or\&quot;&lt;br&gt; not &#x3D; \&quot;Not\&quot; function&lt;br&gt; () &#x3D; Precedence grouping &lt;br&gt;The value must be passed within parenthesis. &lt;br&gt;&lt;br&gt;For Example: displayName eq \&quot;Product Team\&quot; will fetch information related to the user group matching the display name \&quot;Product Team\&quot;. &lt;br&gt;Note&lt;/b&gt;: Filtering on complex attributes is not supported
    * @param startIndex Use startIndex in combination with count query parameters to receive paginated results. &lt;br&gt;&lt;br&gt; start index is 1-based. &lt;br&gt;&lt;br&gt; Example: startIndex&#x3D;1
    * @param count Specifies the maximum number of query results per page. &lt;br&gt;&lt;br&gt; Use count in combination with startIndex query parameters to receive paginated results. &lt;br&gt;&lt;br&gt; The count query parameter is set to 100 by default and the maximum value allowed for this parameter is 1000. &lt;br&gt;&lt;br&gt; Example: count&#x3D;12
    * @param sortBy Specifies the attribute whose value will be used to order the response. Example sortBy&#x3D;displayName
@@ -3392,10 +3833,10 @@ export class MiroApi {
   }
 
   /**
-   * Updates an existing group resource, i.e. a team, overwriting values for specified attributes. Patch operation for group can be used to add, remove, or replace team members and to update the display name of the group (team). <br><br> To add a user to the group (team), use add operation. <br> To remove a user from a group (team), use remove operation. <br> To update a user resource, use the replace operation. <br> The last team admin cannot be removed from the team. <br><br> Note: Attributes that are not provided will remain unchanged. PATCH operation only updates the fields provided. <br><br> Team members removal specifics: <br> For remove or replace operations, the team member is removed from the team and from all team boards. The ownership of boards that belong to the removed team member is transferred to the oldest team member who currently has an admin role. After you remove a team member, adding the team member again to the team does not automatically restore their previous ownership of the boards. If the user is not registered fully in Miro and is not assigned to any other team, the user is also removed from the organization. <br><br> Add team members specifics: <br> All added team members are reactivated or recreated if they were deactivated or deleted earlier. <br><br> External users specifics: <br> When adding existing users with the role ORGANIZATION_EXTERNAL_USER or ORGANIZATION_TEAM_GUEST_USER to a team, we set FULL license and ORGANIZATION_INTERNAL_USER roles.
+   * Updates an existing group resource, i.e. a Miro user group, overwriting values for the specified attributes. Patch operation for group can be used to add, remove, or replace user group members and to update the display name of the group (user group). <br><br> To add a user to the group (user group), use the add operation. <br> To remove a user from a group (user group), use the remove operation. <br> To update the display name, use the replace operation. The maximum length of the displayName is 60 characters; longer values are truncated. <br><br> Note: Attributes that are not provided will remain unchanged. The patch operation only updates the fields provided. <br><br> User group members removal specifics: <br> For remove or replace operations, the user is removed from the user group only. This does not remove the user from any team or from the organization, does not transfer board ownership, and does not change the user license. There is no last-admin restriction for user groups. Removing a user who is not a member of the user group is a no-op. <br><br> Add user group members specifics: <br> All added members are reactivated or recreated if they were deactivated or deleted earlier, and their license is upgraded to FULL. On organizations with verified SAML domains, the email of the added user is confirmed. Adding a user that is already a member of the user group is a no-op. <br><br> External users specifics: <br> When adding existing users with the role ORGANIZATION_EXTERNAL_USER or ORGANIZATION_TEAM_GUEST_USER to a user group, we set FULL license and ORGANIZATION_INTERNAL_USER roles.
    * @summary Patch group
-   * @param id Group (Team) ID. A server-assigned, unique identifier for this Group (team).
-   * @param patchGroupResource Payload to add, replace, remove members in the specified group (team). &lt;br&gt;&lt;br&gt; The body of a PATCH request must contain the attribute &#x60;Operations&#x60; and its value is an array of one or more PATCH operations. Each PATCH operation object must have exactly one &#x60;op&#x60; member.
+   * @param id Group (user group) ID. A server-assigned, unique identifier for this Group (user group).
+   * @param patchGroupResource Payload to add, replace, remove members in the specified group (user group). &lt;br&gt;&lt;br&gt; The body of a PATCH request must contain the attribute &#x60;Operations&#x60; and its value is an array of one or more PATCH operations. Each PATCH operation object must have exactly one &#x60;op&#x60; member.
    * @param attributes A comma-separated list of attribute names to return in the response. &lt;br&gt;&lt;br&gt; Example attributes: id,displayName &lt;br&gt; It is also possible to fetch attributes within complex attributes, for Example: members.display
    */
   async patchGroup(
@@ -3757,62 +4198,6 @@ export class MiroApi {
   }
 
   /**
-   * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
-   * @summary Create image item using file from device
-   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
-   * @param resource Select a file to upload. Maximum file size is 6 MB.
-   * @param data
-   */
-  async createImageItemUsingLocalFile(
-    boardIdPlatformFileUpload: string,
-    resource: RequestFile,
-
-    data?: UploadFileFromDeviceData,
-  ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/images'.replace(
-      '{' + 'board_id_PlatformFileUpload' + '}',
-      encodeURIComponent(String(boardIdPlatformFileUpload)),
-    )
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
-    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
-      throw new Error(
-        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createImageItemUsingLocalFile.',
-      )
-    }
-
-    const formData = new FormData()
-    let extension = ''
-    if (data) {
-      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
-    }
-    if (resource) {
-      if ('createImageItemUsingLocalFile'.includes('Image')) {
-        extension = '.png'
-      } else if ('createImageItemUsingLocalFile'.includes('Document')) {
-        extension = '.pdf'
-      }
-      formData.append('resource', resource, 'file' + extension)
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'POST',
-      urlResource,
-      formData,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
-
-    return {response, body}
-  }
-
-  /**
    * Adds an image item to a board by specifying an image URL.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Create image item using URL
    * @param boardId Unique identifier (ID) of the board where you want to create the item.
@@ -3925,6 +4310,104 @@ export class MiroApi {
 
   /**
    * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Update image item using URL
+   * @param boardId Unique identifier (ID) of the board where you want to update the item.
+   * @param itemId Unique identifier (ID) of the item that you want to update.
+   * @param imageUpdateRequest
+   */
+  async updateImageItemUsingUrl(
+    boardId: string,
+    itemId: string,
+    imageUpdateRequest: ImageUpdateRequest,
+  ): Promise<{response: Response; body: ImageItem}> {
+    const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
+      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
+      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardId' is not null or undefined
+    if (boardId === null || boardId === undefined) {
+      throw new Error('Required parameter boardId was null or undefined when calling updateImageItemUsingUrl.')
+    }
+    // verify required parameter 'itemId' is not null or undefined
+    if (itemId === null || itemId === undefined) {
+      throw new Error('Required parameter itemId was null or undefined when calling updateImageItemUsingUrl.')
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'PATCH',
+      urlResource,
+      JSON.stringify(ObjectSerializer.serialize(imageUpdateRequest, 'ImageUpdateRequest')),
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Adds an image item to a board by specifying a file from device.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
+   * @summary Create image item using file from device
+   * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to create the item.
+   * @param resource Select a file to upload. Maximum file size is 6 MB.
+   * @param data
+   */
+  async createImageItemUsingLocalFile(
+    boardIdPlatformFileUpload: string,
+    resource: RequestFile,
+
+    data?: UploadFileFromDeviceData,
+  ): Promise<{response: Response; body: ImageItem}> {
+    const localVarPath = '/v2/boards/{board_id_PlatformFileUpload}/images'.replace(
+      '{' + 'board_id_PlatformFileUpload' + '}',
+      encodeURIComponent(String(boardIdPlatformFileUpload)),
+    )
+    let localVarQueryParameters = new URLSearchParams()
+    // verify required parameter 'boardIdPlatformFileUpload' is not null or undefined
+    if (boardIdPlatformFileUpload === null || boardIdPlatformFileUpload === undefined) {
+      throw new Error(
+        'Required parameter boardIdPlatformFileUpload was null or undefined when calling createImageItemUsingLocalFile.',
+      )
+    }
+
+    const formData = new FormData()
+    let extension = ''
+    if (data) {
+      formData.append('data', JSON.stringify(ObjectSerializer.serialize(data, 'UploadFileFromDeviceData')))
+    }
+    if (resource) {
+      if ('createImageItemUsingLocalFile'.includes('Image')) {
+        extension = '.png'
+      } else if ('createImageItemUsingLocalFile'.includes('Document')) {
+        extension = '.pdf'
+      }
+      formData.append('resource', resource, 'file' + extension)
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      formData,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
+
+    return {response, body}
+  }
+
+  /**
+   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
    * @summary Update image item using file from device
    * @param boardIdPlatformFileUpload Unique identifier (ID) of the board where you want to update the item.
    * @param itemId Unique identifier (ID) of the item that you want to update.
@@ -3977,48 +4460,6 @@ export class MiroApi {
       'PATCH',
       urlResource,
       formData,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'ImageItem')
-
-    return {response, body}
-  }
-
-  /**
-   * Updates an image item on a board.<br/><h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>boards:write</a> <br/><h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 2</a><br/>
-   * @summary Update image item using URL
-   * @param boardId Unique identifier (ID) of the board where you want to update the item.
-   * @param itemId Unique identifier (ID) of the item that you want to update.
-   * @param imageUpdateRequest
-   */
-  async updateImageItemUsingUrl(
-    boardId: string,
-    itemId: string,
-    imageUpdateRequest: ImageUpdateRequest,
-  ): Promise<{response: Response; body: ImageItem}> {
-    const localVarPath = '/v2/boards/{board_id}/images/{item_id}'
-      .replace('{' + 'board_id' + '}', encodeURIComponent(String(boardId)))
-      .replace('{' + 'item_id' + '}', encodeURIComponent(String(itemId)))
-    let localVarQueryParameters = new URLSearchParams()
-    // verify required parameter 'boardId' is not null or undefined
-    if (boardId === null || boardId === undefined) {
-      throw new Error('Required parameter boardId was null or undefined when calling updateImageItemUsingUrl.')
-    }
-    // verify required parameter 'itemId' is not null or undefined
-    if (itemId === null || itemId === undefined) {
-      throw new Error('Required parameter itemId was null or undefined when calling updateImageItemUsingUrl.')
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'PATCH',
-      urlResource,
-      JSON.stringify(ObjectSerializer.serialize(imageUpdateRequest, 'ImageUpdateRequest')),
 
       this.logger,
     )
@@ -5035,6 +5476,157 @@ export class MiroApi {
   }
 
   /**
+   * Exchange the authorization code returned to your redirect URI for an access token and a refresh token.
+   * @summary Step 3: Exchange authorization code with access token
+   * @param grantType Always set the value for this parameter to &#x60;authorization_code&#x60;.
+   * @param clientId The Client ID of the app that is requesting user authorization.
+   * @param clientSecret App client secret. **The client secret must be kept confidential.**
+   * @param code Paste the authorization code that was provided as the &#x60;code&#x60; parameter value in the redirect URI.
+   * @param redirectUri Paste the redirect URI. The URI must match the original redirect URI that was used when requesting the authorization (including the trailing slash).
+   */
+  async exchangeAuthorizationCodeWithAccessToken(
+    grantType: string,
+    clientId: string,
+    clientSecret: string,
+    code: string,
+    redirectUri: string,
+  ): Promise<{response: Response; body: AccessTokenResponse}> {
+    const localVarPath = '/v1/oauth/token'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'grantType' is not null or undefined
+    if (grantType === null || grantType === undefined) {
+      throw new Error(
+        'Required parameter grantType was null or undefined when calling exchangeAuthorizationCodeWithAccessToken.',
+      )
+    }
+
+    if (grantType !== undefined) {
+      localVarQueryParameters.append('grant_type', ObjectSerializer.serialize(grantType, 'string'))
+    }
+
+    // verify required parameter 'clientId' is not null or undefined
+    if (clientId === null || clientId === undefined) {
+      throw new Error(
+        'Required parameter clientId was null or undefined when calling exchangeAuthorizationCodeWithAccessToken.',
+      )
+    }
+
+    if (clientId !== undefined) {
+      localVarQueryParameters.append('client_id', ObjectSerializer.serialize(clientId, 'string'))
+    }
+
+    // verify required parameter 'clientSecret' is not null or undefined
+    if (clientSecret === null || clientSecret === undefined) {
+      throw new Error(
+        'Required parameter clientSecret was null or undefined when calling exchangeAuthorizationCodeWithAccessToken.',
+      )
+    }
+
+    if (clientSecret !== undefined) {
+      localVarQueryParameters.append('client_secret', ObjectSerializer.serialize(clientSecret, 'string'))
+    }
+
+    // verify required parameter 'code' is not null or undefined
+    if (code === null || code === undefined) {
+      throw new Error(
+        'Required parameter code was null or undefined when calling exchangeAuthorizationCodeWithAccessToken.',
+      )
+    }
+
+    if (code !== undefined) {
+      localVarQueryParameters.append('code', ObjectSerializer.serialize(code, 'string'))
+    }
+
+    // verify required parameter 'redirectUri' is not null or undefined
+    if (redirectUri === null || redirectUri === undefined) {
+      throw new Error(
+        'Required parameter redirectUri was null or undefined when calling exchangeAuthorizationCodeWithAccessToken.',
+      )
+    }
+
+    if (redirectUri !== undefined) {
+      localVarQueryParameters.append('redirect_uri', ObjectSerializer.serialize(redirectUri, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'AccessTokenResponse')
+
+    return {response, body}
+  }
+
+  /**
+   * Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.
+   * @summary Get access token context
+   */
+  async getAccessTokenContext(): Promise<{response: Response; body: TokenContext}> {
+    const localVarPath = '/v1/oauth-token'
+    let localVarQueryParameters = new URLSearchParams()
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'TokenContext')
+
+    return {response, body}
+  }
+
+  /**
+   * <p><b>Please use the new revoke endpoint <code>/v2/oauth/revoke</code>. This endpoint is considered vulnerable and deprecated because the access token is passed publicly in the URL.</b></p> Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
+   * @summary Revoke token (v1)
+   * @param accessToken Paste the access token that you want to revoke.
+   */
+  async revokeToken(accessToken: string): Promise<{response: Response; body?: any}> {
+    const localVarPath = '/v1/oauth/revoke'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'accessToken' is not null or undefined
+    if (accessToken === null || accessToken === undefined) {
+      throw new Error('Required parameter accessToken was null or undefined when calling revokeToken.')
+    }
+
+    if (accessToken !== undefined) {
+      localVarQueryParameters.append('access_token', ObjectSerializer.serialize(accessToken, 'string'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'POST',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
    * Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
    * @summary Revoke token (v2)
    * @param revokeTokenRequest
@@ -5056,6 +5648,72 @@ export class MiroApi {
     )
 
     const body = bodyAsJson
+
+    return {response, body}
+  }
+
+  /**
+   * Retrieves information to embed a Miro board as a [live embed](doc:oembed-live-embed).
+   * @summary Get oEmbed data
+   * @param url The URL pointing to the resource to return as oEmbed data. Currently, it supports only URLs pointing to Miro boards.
+   * @param format Specifies the return format of the response. It complies with the [oEmbed standard](https://oembed.com/). Allowed formats: either \&quot;json\&quot;, or \&quot;xml\&quot;.
+   * @param referrer The URL pointing to the source of the request. Service providers such as Embedly use it to forward the initial site that triggered the oEmbed request.
+   * @param maxwidth The maximum width available to the embed, in pixels.
+   * @param maxheight The maximum height available to the embed, in pixels.
+   */
+  async getEmbedData(
+    url: string,
+    query?: {
+      format?: 'json' | 'xml'
+
+      referrer?: string
+
+      maxwidth?: number
+
+      maxheight?: number
+    },
+  ): Promise<{response: Response; body: OEmbedData}> {
+    const localVarPath = '/oembed'
+    let localVarQueryParameters = new URLSearchParams()
+
+    // verify required parameter 'url' is not null or undefined
+    if (url === null || url === undefined) {
+      throw new Error('Required parameter url was null or undefined when calling getEmbedData.')
+    }
+
+    if (url !== undefined) {
+      localVarQueryParameters.append('url', ObjectSerializer.serialize(url, 'string'))
+    }
+
+    if (query?.format !== undefined) {
+      localVarQueryParameters.append('format', ObjectSerializer.serialize(query?.format, "'json' | 'xml'"))
+    }
+
+    if (query?.referrer !== undefined) {
+      localVarQueryParameters.append('referrer', ObjectSerializer.serialize(query?.referrer, 'string'))
+    }
+
+    if (query?.maxwidth !== undefined) {
+      localVarQueryParameters.append('maxwidth', ObjectSerializer.serialize(query?.maxwidth, 'number'))
+    }
+
+    if (query?.maxheight !== undefined) {
+      localVarQueryParameters.append('maxheight', ObjectSerializer.serialize(query?.maxheight, 'number'))
+    }
+
+    const urlResource = new URL(localVarPath, this.basePath)
+    urlResource.search = localVarQueryParameters.toString()
+
+    const {response, bodyAsJson} = await makeJsonRequest(
+      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
+      'GET',
+      urlResource,
+      undefined,
+
+      this.logger,
+    )
+
+    const body = ObjectSerializer.deserialize(bodyAsJson, 'OEmbedData')
 
     return {response, body}
   }
@@ -5123,7 +5781,16 @@ export class MiroApi {
         | 'organization_team_guest_user'
         | 'unknown'
 
-      license?: 'full' | 'occasional' | 'free' | 'free_restricted' | 'full_trial' | 'unknown'
+      license?:
+        | 'advanced'
+        | 'standard'
+        | 'basic'
+        | 'full'
+        | 'occasional'
+        | 'free'
+        | 'free_restricted'
+        | 'full_trial'
+        | 'unknown'
 
       active?: boolean
 
@@ -5158,7 +5825,7 @@ export class MiroApi {
         'license',
         ObjectSerializer.serialize(
           query?.license,
-          "'full' | 'occasional' | 'free' | 'free_restricted' | 'full_trial' | 'unknown'",
+          "'advanced' | 'standard' | 'basic' | 'full' | 'occasional' | 'free' | 'free_restricted' | 'full_trial' | 'unknown'",
         ),
       )
     }
@@ -7775,66 +8442,6 @@ export class MiroApi {
   }
 
   /**
-   * <p><b>Please use the new revoke endpoint <code>/v2/oauth/revoke</code>. This endpoint is considered vulnerable and deprecated due to access token passed publicly in the URL.</b></p> Revoke the current access token. Revoking an access token means that the access token will no longer work. When an access token is revoked, the refresh token is also revoked and no longer valid. This does not uninstall the application for the user.
-   * @summary Revoke token (v1)
-   * @param accessToken Access token that you want to revoke
-   */
-  async revokeToken(accessToken: string): Promise<{response: Response; body?: any}> {
-    const localVarPath = '/v1/oauth/revoke'
-    let localVarQueryParameters = new URLSearchParams()
-
-    // verify required parameter 'accessToken' is not null or undefined
-    if (accessToken === null || accessToken === undefined) {
-      throw new Error('Required parameter accessToken was null or undefined when calling revokeToken.')
-    }
-
-    if (accessToken !== undefined) {
-      localVarQueryParameters.append('access_token', ObjectSerializer.serialize(accessToken, 'string'))
-    }
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'POST',
-      urlResource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = bodyAsJson
-
-    return {response, body}
-  }
-
-  /**
-   * Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.
-   * @summary Get access token information
-   */
-  async tokenInfo(): Promise<{response: Response; body: TokenInformation}> {
-    const localVarPath = '/v1/oauth-token'
-    let localVarQueryParameters = new URLSearchParams()
-
-    const urlResource = new URL(localVarPath, this.basePath)
-    urlResource.search = localVarQueryParameters.toString()
-
-    const {response, bodyAsJson} = await makeJsonRequest(
-      typeof this.accessToken === 'function' ? await this.accessToken() : this.accessToken,
-      'GET',
-      urlResource,
-      undefined,
-
-      this.logger,
-    )
-
-    const body = ObjectSerializer.deserialize(bodyAsJson, 'TokenInformation')
-
-    return {response, body}
-  }
-
-  /**
    * Creates a new user in the organization. <br><br> <br>Note</b>: All newly provisioned users are added to the default team.
    * @summary Create user
    * @param createUserResource
@@ -7934,7 +8541,7 @@ export class MiroApi {
    * Retrieves the list of users in your organization. <br><b> <br>Note</b>: The API returns users that are members in the organization, it does not return users that are added in the organization as guests.
    * @summary List users
    * @param attributes A comma-separated list of attribute names to return in the response. &lt;br&gt;&lt;br&gt; Example attributes: id, userName, displayName, name, userType, active, emails, photos, groups, roles. You can also retrieve attributes within complex attributes, for Example: emails.value. The API also supports sorting and the filter parameter.
-   * @param filter You can request a subset of resources by specifying the filter query parameter containing a filter expression. Attribute names and attribute operators used in filters are not case sensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value. &lt;br&gt;eq &#x3D; equal&lt;br&gt; ne &#x3D; not equal&lt;br&gt; co &#x3D; contains&lt;br&gt; sw &#x3D; starts with&lt;br&gt; ew &#x3D; ends with&lt;br&gt; pr &#x3D; preset (has value)&lt;br&gt; gt &#x3D; greater than&lt;br&gt; ge &#x3D; greater than or equal to&lt;br&gt; lt &#x3D; less than&lt;br&gt; le &#x3D; less than or equal to&lt;br&gt; and &#x3D; Logical \&quot;and\&quot;&lt;br&gt; or &#x3D; Logical \&quot;or\&quot;&lt;br&gt; not &#x3D; \&quot;Not\&quot; function&lt;br&gt; () &#x3D; Precedence grouping &lt;br&gt;The value must be passed within parenthesis. &lt;br&gt;&lt;br&gt; &lt;u&gt;Example filters&lt;/u&gt;:&lt;br&gt;&lt;br&gt; For fetching  users with user name as user@miro.com: userName eq \&quot;user@miro.com\&quot; &lt;br&gt;&lt;br&gt; For fetching all active users in the organization: active eq true &lt;br&gt;&lt;br&gt; For fetching users with \&quot;user\&quot; in their displayName: displayName co \&quot;user\&quot; &lt;br&gt;&lt;br&gt; For fetching users that are member of a specific group (team): groups.value eq \&quot;3458764577585056871\&quot; &lt;br&gt;&lt;br&gt; For fetching users that are not of userType Full: userType ne \&quot;Full\&quot;
+   * @param filter You can request a subset of resources by specifying the filter query parameter containing a filter expression. Attribute names and attribute operators used in filters are not case sensitive. The filter parameter must contain at least one valid expression. Each expression must contain an attribute name followed by an attribute operator and an optional value. &lt;br&gt;eq &#x3D; equal&lt;br&gt; ne &#x3D; not equal&lt;br&gt; co &#x3D; contains&lt;br&gt; sw &#x3D; starts with&lt;br&gt; ew &#x3D; ends with&lt;br&gt; pr &#x3D; preset (has value)&lt;br&gt; gt &#x3D; greater than&lt;br&gt; ge &#x3D; greater than or equal to&lt;br&gt; lt &#x3D; less than&lt;br&gt; le &#x3D; less than or equal to&lt;br&gt; and &#x3D; Logical \&quot;and\&quot;&lt;br&gt; or &#x3D; Logical \&quot;or\&quot;&lt;br&gt; not &#x3D; \&quot;Not\&quot; function&lt;br&gt; () &#x3D; Precedence grouping &lt;br&gt;The value must be passed within parenthesis. &lt;br&gt;&lt;br&gt; &lt;u&gt;Example filters&lt;/u&gt;:&lt;br&gt;&lt;br&gt; For fetching  users with user name as user@miro.com: userName eq \&quot;user@miro.com\&quot; &lt;br&gt;&lt;br&gt; For fetching all active users in the organization: active eq true &lt;br&gt;&lt;br&gt; For fetching users with \&quot;user\&quot; in their displayName: displayName co \&quot;user\&quot; &lt;br&gt;&lt;br&gt; For fetching users that are member of a specific group (user group): groups.value eq \&quot;3458764577585056871\&quot; &lt;br&gt;&lt;br&gt; For fetching users that are not of userType Full: userType ne \&quot;Full\&quot;
    * @param startIndex Use startIndex in combination with count query parameters to receive paginated results. &lt;br&gt;&lt;br&gt; start index is 1-based. &lt;br&gt;&lt;br&gt; Example: startIndex&#x3D;1
    * @param count Specifies the maximum number of query results per page. &lt;br&gt;&lt;br&gt; Use count in combination with startIndex query parameters to receive paginated results. &lt;br&gt;&lt;br&gt; The count query parameter is set to 100 by default and the maximum value allowed for this parameter is 1000. &lt;br&gt;&lt;br&gt; Example: count&#x3D;12
    * @param sortBy Specifies the attribute whose value will be used to order the response. &lt;br&gt;&lt;br&gt; Example: sortBy&#x3D;userName, sortBy&#x3D;emails.value
@@ -8254,7 +8861,7 @@ export class MiroApi {
   }
 
   /**
-   * Add and remove members in one request. For example, remove user A and add user B.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
+   * Add and remove members in one request. For example, remove user A and add user B. You can add or remove up to 500 users at a time.<br/> <h3>Required scope</h3> <a target=_blank href=https://developers.miro.com/reference/scopes>organizations:groups:write</a><br/> <h3>Rate limiting</h3> <a target=_blank href=\"/reference/rate-limiting#rate-limit-tiers\">Level 1</a> per item. For example, if you want to add 10 users and remove 5, the rate limiting applicable will be 750 credits. This is because each user addition or deletion takes Level 1 rate limiting of 50 credits, so 15 * 50 = 750.<br/> <h3>Enterprise only</h3> <p>This API is available only for <a target=_blank href=\"/reference/api-reference#enterprise-plan\">Enterprise plan</a> users. You can only use this endpoint if you have the role of a Company Admin. You can request temporary access to Enterprise APIs using <a target=_blank href=\"https://q2oeb0jrhgi.typeform.com/to/BVPTNWJ9\">this form</a>.</p>
    * @summary Bulk edit of membership in user group
    * @param orgId The ID of an organization.
    * @param groupId The ID of a user group.

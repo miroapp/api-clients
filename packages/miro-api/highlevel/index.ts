@@ -2,7 +2,7 @@ import {MiroApi} from '../api'
 import {KeepBase} from './helpers'
 
 import {BaseApi} from './../highlevel/Api'
-import {TokenInformation as BaseTokenInformation} from './../model/tokenInformation'
+import {TokenContext as BaseTokenInformation} from './../model/tokenContext'
 import {BaseOrganization} from './Organization'
 import {OrganizationMember as BaseOrganizationMember} from './../model/organizationMember'
 import {BaseTeam} from './Team'
@@ -72,10 +72,10 @@ export class Api extends BaseApi {
 
   /**
    * Get information about an access token, such as the token type, scopes, team, user, token creation date and time, and the user who created the token.
-   * @summary Get access token information
+   * @summary Get access token context
    */
   async tokenInfo(): Promise<TokenInformation> {
-    const result = (await this._api.tokenInfo()).body
+    const result = (await this._api.getAccessTokenContext()).body
 
     return new TokenInformation(this._api, result)
   }
