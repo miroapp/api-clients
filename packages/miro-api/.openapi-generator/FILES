@@ -1,8 +1,15 @@
 api.ts
 api/apis.ts
+model/accessTokenResponse.ts
 model/actor.ts
 model/addProjectMemberRequest.ts
 model/adminRole.ts
+model/aiInteractionLog.ts
+model/aiInteractionLogActor.ts
+model/aiInteractionLogModel.ts
+model/aiInteractionLogObject.ts
+model/aiInteractionLogSession.ts
+model/aiInteractionLogTool.ts
 model/appCardCreateRequest.ts
 model/appCardData.ts
 model/appCardDataChanges.ts
@@ -39,6 +46,7 @@ model/boardExportTaskExportLink.ts
 model/boardExportTaskResult.ts
 model/boardFormat.ts
 model/boardItemContentLog.ts
+model/boardItemContentLogAI.ts
 model/boardLinks.ts
 model/boardMember.ts
 model/boardMemberChanges.ts
@@ -72,6 +80,11 @@ model/cardStylePlatformbulkcreateoperation.ts
 model/cardUpdateRequest.ts
 model/caseRequest.ts
 model/caseResponse.ts
+model/codeWidgetCreateRequest.ts
+model/codeWidgetCursorPaged.ts
+model/codeWidgetData.ts
+model/codeWidgetItem.ts
+model/codeWidgetUpdateRequest.ts
 model/connectorChangesData.ts
 model/connectorCreationData.ts
 model/connectorStyle.ts
@@ -85,6 +98,8 @@ model/createDocumentItemUsingFileFromDeviceRequestData.ts
 model/createFrameItem400Response.ts
 model/createGroupMemberRequest.ts
 model/createGroupRequest.ts
+model/createGroupResource.ts
+model/createGroupResourceMembersInner.ts
 model/createProjectRequest.ts
 model/createProjectUserGroupsRequest.ts
 model/createTeamGroupRequest.ts
@@ -171,6 +186,7 @@ model/geometryPlatformTags.ts
 model/geometryPlatformbulkcreateoperation.ts
 model/geometryPlatformcreateitemsinbulkusingfilefromdevice.ts
 model/geometryPlatformgroups.ts
+model/getAiInteractionLogsResponse.ts
 model/getAllGroups200Response.ts
 model/getAllGroups400Response.ts
 model/getAllGroups404Response.ts
@@ -246,6 +262,7 @@ model/mindmapNodeTextData.ts
 model/mindmapNodeView.ts
 model/mindmapStyle.ts
 model/mindmapWidgetDataOutput.ts
+model/miroAi.ts
 model/modelError.ts
 model/models.ts
 model/modifiedBy.ts
@@ -255,6 +272,7 @@ model/modifiedByPlatformFileUpload.ts
 model/modifiedByPlatformTags.ts
 model/modifiedByPlatformcreateitemsinbulkusingfilefromdevice.ts
 model/modifiedByPlatformgroups.ts
+model/oEmbedData.ts
 model/organization.ts
 model/organizationInformation.ts
 model/organizationMember.ts
@@ -371,7 +389,7 @@ model/textDataPlatformbulkcreateoperation.ts
 model/textItem.ts
 model/textStyle.ts
 model/textUpdateRequest.ts
-model/tokenInformation.ts
+model/tokenContext.ts
 model/unGroup400Response.ts
 model/unGroup404Response.ts
 model/unGroup429Response.ts
@@ -402,6 +420,7 @@ model/user.ts
 model/userInfoLastOpenedBy.ts
 model/userInfoShort.ts
 model/userInformation.ts
+model/userInformation1.ts
 model/userListResponse.ts
 model/userResource.ts
 model/userResourceEmailsInner.ts
