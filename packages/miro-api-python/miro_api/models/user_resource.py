@@ -67,7 +67,7 @@ class UserResource(BaseModel):
     )
     groups: Optional[List[UserResourceGroupsInner]] = Field(
         default=None,
-        description="An array of groups (teams) the user belongs to in the organization. Contains id and display name of the team.",
+        description="An array of groups (user groups) the user belongs to in the organization. Contains the id and display name of the user group.",
     )
     roles: Optional[List[UserResourceRolesInner]] = Field(
         default=None,
