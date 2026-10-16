@@ -19,7 +19,7 @@ import {UpdateUserGroupMembersResultSuccess} from './updateUserGroupMembersResul
 export class UpdateUserGroupMembersResultInner {
   'operation'?: UpdateUserGroupMembersResultOperation
   /**
-   * The HTTP status code for the successful operation.
+   * The HTTP status code for an unsuccessful operation.
    */
   'status'?: number
   'affectedUsers'?: Array<GroupMember>

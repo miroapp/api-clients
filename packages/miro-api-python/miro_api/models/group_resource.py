@@ -34,14 +34,14 @@ class GroupResource(BaseModel):
         description="Identifies which schema(s) this resource uses. In this case it is the SCIM core Groups schema.",
     )
     id: Optional[StrictStr] = Field(
-        default=None, description="A server-assigned, unique identifier for this Group (team)."
+        default=None, description="A server-assigned, unique identifier for this Group (user group)."
     )
     meta: Optional[GroupResourceMeta] = None
     display_name: Optional[StrictStr] = Field(
-        default=None, description="A human readable name for the Group (team).", alias="displayName"
+        default=None, description="A human readable name for the Group (user group).", alias="displayName"
     )
     members: Optional[List[GroupResourceMembersInner]] = Field(
-        default=None, description="A list of all members that are part of the Group (team)."
+        default=None, description="A list of all members that are part of the Group (user group)."
     )
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["schemas", "id", "meta", "displayName", "members"]

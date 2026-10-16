@@ -40,7 +40,7 @@ class AuditEvent(BaseModel):
     details: Optional[Dict[str, Any]] = Field(default=None, description="Details json related to the audit event")
     created_by: Optional[AuditCreatedBy] = Field(default=None, alias="createdBy")
     event: Optional[StrictStr] = Field(default=None, description="Event type of the audit event")
-    category: Optional[StrictStr] = Field(default=None, description="Event category of the audit event.")
+    category: Optional[StrictStr] = Field(default=None, description="Event category of the audit event")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = [
         "id",

@@ -15,6 +15,7 @@ import {BoardMember} from './boardMember'
 import {BoardPolicy} from './boardPolicy'
 import {BoardProject} from './boardProject'
 import {GetBoardUserInfoLastOpenedBy} from './getBoardUserInfoLastOpenedBy'
+import {Organization} from './organization'
 import {Picture} from './picture'
 import {Team} from './team'
 import {UserInfoShort} from './userInfoShort'
@@ -33,6 +34,7 @@ export class BoardWithLinksAndLastOpened {
    */
   'description': string
   'team'?: Team
+  'organization'?: Organization
   'project'?: BoardProject
   'picture'?: Picture
   'policy'?: BoardPolicy
@@ -87,6 +89,11 @@ export class BoardWithLinksAndLastOpened {
       name: 'team',
       baseName: 'team',
       type: 'Team',
+    },
+    {
+      name: 'organization',
+      baseName: 'organization',
+      type: 'Organization',
     },
     {
       name: 'project',

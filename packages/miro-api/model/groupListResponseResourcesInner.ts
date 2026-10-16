@@ -19,15 +19,15 @@ export class GroupListResponseResourcesInner {
    */
   'schemas'?: Array<string>
   /**
-   * A server-assigned, unique identifier for this Group (team).
+   * A server-assigned, unique identifier for this Group (user group).
    */
   'id'?: string
   /**
-   * A human readable name for the Group (team).
+   * A human readable name for the Group (user group).
    */
   'displayName'?: string
   /**
-   * A list of all members that are part of the Group (team).
+   * A list of all members that are part of the Group (user group).
    */
   'members'?: Array<GroupListResponseResourcesInnerMembersInner>
   'meta'?: GroupListResponseResourcesInnerMeta
