@@ -28,6 +28,7 @@ When a pull request is opened with changes to this library, a preview version is
 1. Navigate to the pull request you want to test
 2. Look for the bot comment titled "📦 Preview Package Published"
 3. Note the preview version number (format: `2.2.4-pr123.a1cf07f`)
+4. Follow the installation instructions in the PR comment
 
 ### Setting Up Access to GitHub Packages
 
