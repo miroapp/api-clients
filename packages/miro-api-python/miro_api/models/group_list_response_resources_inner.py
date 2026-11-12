@@ -36,13 +36,13 @@ class GroupListResponseResourcesInner(BaseModel):
         description="Identifies which schema(s) this resource uses. In this case it is the SCIM core Groups schema.",
     )
     id: Optional[StrictStr] = Field(
-        default=None, description="A server-assigned, unique identifier for this Group (team)."
+        default=None, description="A server-assigned, unique identifier for this Group (user group)."
     )
     display_name: Optional[StrictStr] = Field(
-        default=None, description="A human readable name for the Group (team).", alias="displayName"
+        default=None, description="A human readable name for the Group (user group).", alias="displayName"
     )
     members: Optional[List[GroupListResponseResourcesInnerMembersInner]] = Field(
-        default=None, description="A list of all members that are part of the Group (team)."
+        default=None, description="A list of all members that are part of the Group (user group)."
     )
     meta: Optional[GroupListResponseResourcesInnerMeta] = None
     additional_properties: Dict[str, Any] = {}

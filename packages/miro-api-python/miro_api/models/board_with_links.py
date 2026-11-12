@@ -23,6 +23,7 @@ from miro_api.models.board_links import BoardLinks
 from miro_api.models.board_member import BoardMember
 from miro_api.models.board_policy import BoardPolicy
 from miro_api.models.board_project import BoardProject
+from miro_api.models.organization import Organization
 from miro_api.models.picture import Picture
 from miro_api.models.team import Team
 from miro_api.models.user_info_short import UserInfoShort
@@ -39,6 +40,7 @@ class BoardWithLinks(BaseModel):
     name: StrictStr = Field(description="Name of the board.")
     description: StrictStr = Field(description="Description of the board.")
     team: Optional[Team] = None
+    organization: Optional[Organization] = None
     project: Optional[BoardProject] = None
     picture: Optional[Picture] = None
     policy: Optional[BoardPolicy] = None
@@ -65,6 +67,7 @@ class BoardWithLinks(BaseModel):
         "name",
         "description",
         "team",
+        "organization",
         "project",
         "picture",
         "policy",
@@ -124,6 +127,9 @@ class BoardWithLinks(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of team
         if self.team:
             _dict["team"] = self.team.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of organization
+        if self.organization:
+            _dict["organization"] = self.organization.to_dict()
         # override the default output from pydantic by calling `to_dict()` of project
         if self.project:
             _dict["project"] = self.project.to_dict()
@@ -170,6 +176,9 @@ class BoardWithLinks(BaseModel):
                 "name": obj.get("name"),
                 "description": obj.get("description"),
                 "team": Team.from_dict(obj["team"]) if obj.get("team") is not None else None,
+                "organization": (
+                    Organization.from_dict(obj["organization"]) if obj.get("organization") is not None else None
+                ),
                 "project": BoardProject.from_dict(obj["project"]) if obj.get("project") is not None else None,
                 "picture": Picture.from_dict(obj["picture"]) if obj.get("picture") is not None else None,
                 "policy": BoardPolicy.from_dict(obj["policy"]) if obj.get("policy") is not None else None,

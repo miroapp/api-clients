@@ -11,9 +11,9 @@
  */
 
 export class TeamInformation {
-  'type': string
-  'name': string
-  'id': string
+  'type'?: string
+  'name'?: string
+  'id'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
