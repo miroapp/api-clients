@@ -18,7 +18,7 @@ export class PatchGroupResource {
    */
   'schemas': Array<string>
   /**
-   * A list of patch operations. <br><br> Multiple users can be added or removed from the group (team) in one request. use the array to add or remove multiple users.<br><br> For updating security group name: <br> \"op\"=\"replace\", \"value\"={\"id\":\"13266533725732\", \"displayName\":\"New group name\"} must be provided in the Operations array.
+   * A list of patch operations. <br><br> Multiple users can be added or removed from the group (user group) in one request. Use the array to add or remove multiple users.<br><br> For updating the user group name: <br> \"op\"=\"replace\", \"path\"=\"displayName\", \"value\"=\"New group name\" must be provided in the Operations array.
    */
   'operations': Array<PatchGroupResourceOperationsInner>
 

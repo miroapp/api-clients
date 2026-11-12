@@ -25,7 +25,7 @@ from typing_extensions import Self
 
 class GroupListResponse(BaseModel):
     """
-    list of groups (teams)
+    list of groups (user groups)
     """  # noqa: E501
 
     schemas: Optional[List[StrictStr]] = Field(
