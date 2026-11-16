@@ -16,7 +16,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, StrictBool
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from typing import Optional, Set
@@ -29,13 +29,20 @@ class UpdateGroupRequest(BaseModel):
     """  # noqa: E501
 
     name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=60)]] = Field(
-        default=None, description="New name for the user group being updated."
+        default=None,
+        description="New name for the user group being updated. For user groups that are managed externally, the name can be changed only when `externalNameSynced` is `false`.",
     )
     description: Optional[Annotated[str, Field(min_length=0, strict=True, max_length=300)]] = Field(
-        default=None, description="New description of the user group."
+        default=None,
+        description="New description of the user group. The description cannot be changed for user groups that are managed externally.",
+    )
+    external_name_synced: Optional[StrictBool] = Field(
+        default=None,
+        description="Set to `true` to keep the Miro name of the user group synchronized with its external (IdP) name, or `false` to manage the name in Miro independently. Can be set only for externally-managed user groups.",
+        alias="externalNameSynced",
     )
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["name", "description"]
+    __properties: ClassVar[List[str]] = ["name", "description", "externalNameSynced"]
 
     model_config = {
         "populate_by_name": True,
@@ -95,7 +102,13 @@ class UpdateGroupRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"name": obj.get("name"), "description": obj.get("description")})
+        _obj = cls.model_validate(
+            {
+                "name": obj.get("name"),
+                "description": obj.get("description"),
+                "externalNameSynced": obj.get("externalNameSynced"),
+            }
+        )
         # store additional fields in additional_properties
         for _key in obj.keys():
             if _key not in cls.__properties:

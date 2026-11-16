@@ -26,11 +26,13 @@ from typing_extensions import Self
 
 class CreateBoardExportRequest(BaseModel):
     """
-    List of board IDs to be exported.
+    List of board IDs to be exported. Each export job can contain up to 1,000 boards.
     """  # noqa: E501
 
-    board_ids: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=50)]] = Field(
-        default=None, description="List of board IDs to be exported.", alias="boardIds"
+    board_ids: Optional[Annotated[List[StrictStr], Field(min_length=1, max_length=1000)]] = Field(
+        default=None,
+        description="List of board IDs to be exported. Each export job can contain up to 1,000 boards.",
+        alias="boardIds",
     )
     board_format: Optional[BoardFormat] = Field(default=None, alias="boardFormat")
     additional_properties: Dict[str, Any] = {}

@@ -12,13 +12,17 @@
 
 export class UpdateGroupRequest {
   /**
-   * New name for the user group being updated.
+   * New name for the user group being updated. For user groups that are managed externally, the name can be changed only when `externalNameSynced` is `false`.
    */
   'name'?: string
   /**
-   * New description of the user group.
+   * New description of the user group. The description cannot be changed for user groups that are managed externally.
    */
   'description'?: string
+  /**
+   * Set to `true` to keep the Miro name of the user group synchronized with its external (IdP) name, or `false` to manage the name in Miro independently. Can be set only for externally-managed user groups.
+   */
+  'externalNameSynced'?: boolean
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -34,6 +38,11 @@ export class UpdateGroupRequest {
       name: 'description',
       baseName: 'description',
       type: 'string',
+    },
+    {
+      name: 'externalNameSynced',
+      baseName: 'externalNameSynced',
+      type: 'boolean',
     },
   ]
 
