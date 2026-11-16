@@ -10,17 +10,27 @@
  * Do not edit the class manually.
  */
 
-import {OrganizationInformation} from './organizationInformation'
-import {TeamInformation} from './teamInformation'
-import {UserInformation} from './userInformation'
-
-export class TokenInformation {
-  'type': string
-  'organization': OrganizationInformation
-  'team': TeamInformation
-  'createdBy': UserInformation
-  'user': UserInformation
-  'scopes'?: Array<string>
+/**
+ * @internal
+ * Contains the data properties of a code widget item, such as the code content, programming language, and display settings.
+ */
+export class CodeWidgetData {
+  /**
+   * The code content of the widget.
+   */
+  'code'?: string
+  /**
+   * The programming language of the code content. Used for syntax highlighting.
+   */
+  'language'?: string
+  /**
+   * Indicates whether line numbers are visible in the code widget.
+   */
+  'lineNumbersVisible'?: boolean
+  /**
+   * The title of the code widget.
+   */
+  'title'?: string
 
   /** @ignore */
   static discriminator: string | undefined = undefined
@@ -28,39 +38,29 @@ export class TokenInformation {
   /** @ignore */
   static attributeTypeMap: Array<{name: string; baseName: string; type: string}> = [
     {
-      name: 'type',
-      baseName: 'type',
+      name: 'code',
+      baseName: 'code',
       type: 'string',
     },
     {
-      name: 'organization',
-      baseName: 'organization',
-      type: 'OrganizationInformation',
+      name: 'language',
+      baseName: 'language',
+      type: 'string',
     },
     {
-      name: 'team',
-      baseName: 'team',
-      type: 'TeamInformation',
+      name: 'lineNumbersVisible',
+      baseName: 'lineNumbersVisible',
+      type: 'boolean',
     },
     {
-      name: 'createdBy',
-      baseName: 'createdBy',
-      type: 'UserInformation',
-    },
-    {
-      name: 'user',
-      baseName: 'user',
-      type: 'UserInformation',
-    },
-    {
-      name: 'scopes',
-      baseName: 'scopes',
-      type: 'Array<string>',
+      name: 'title',
+      baseName: 'title',
+      type: 'string',
     },
   ]
 
   /** @ignore */
   static getAttributeTypeMap() {
-    return TokenInformation.attributeTypeMap
+    return CodeWidgetData.attributeTypeMap
   }
 }

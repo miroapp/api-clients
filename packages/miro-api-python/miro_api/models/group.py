@@ -16,7 +16,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, Field, StrictStr
+from pydantic import BaseModel, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,9 +30,19 @@ class Group(BaseModel):
     id: StrictStr = Field(description="User group ID")
     name: StrictStr = Field(description="User group name")
     description: Optional[StrictStr] = Field(default=None, description="User group description")
+    external_name: Optional[StrictStr] = Field(
+        default=None,
+        description="Name of the user group in the external identity provider. Returned only for user groups that are managed externally.",
+        alias="externalName",
+    )
+    external_name_synced: Optional[StrictBool] = Field(
+        default=None,
+        description="Indicates whether the Miro name of the user group is synchronized with its external name. When `true`, the `name` is kept in sync with `externalName`. When `false`, the `name` is managed in Miro independently and can differ from `externalName`. Returned only for user groups that are managed externally.",
+        alias="externalNameSynced",
+    )
     type: StrictStr = Field(description="Object type")
     additional_properties: Dict[str, Any] = {}
-    __properties: ClassVar[List[str]] = ["id", "name", "description", "type"]
+    __properties: ClassVar[List[str]] = ["id", "name", "description", "externalName", "externalNameSynced", "type"]
 
     model_config = {
         "populate_by_name": True,
@@ -97,6 +107,8 @@ class Group(BaseModel):
                 "id": obj.get("id"),
                 "name": obj.get("name"),
                 "description": obj.get("description"),
+                "externalName": obj.get("externalName"),
+                "externalNameSynced": obj.get("externalNameSynced"),
                 "type": obj.get("type") if obj.get("type") is not None else "user-group",
             }
         )

@@ -13,9 +13,16 @@ Do not edit the class manually.
 """  # noqa: E501
 
 # import models into model package
+from miro_api.models.access_token_response import AccessTokenResponse
 from miro_api.models.actor import Actor
 from miro_api.models.add_project_member_request import AddProjectMemberRequest
 from miro_api.models.admin_role import AdminRole
+from miro_api.models.ai_interaction_log import AiInteractionLog
+from miro_api.models.ai_interaction_log_actor import AiInteractionLogActor
+from miro_api.models.ai_interaction_log_model import AiInteractionLogModel
+from miro_api.models.ai_interaction_log_object import AiInteractionLogObject
+from miro_api.models.ai_interaction_log_session import AiInteractionLogSession
+from miro_api.models.ai_interaction_log_tool import AiInteractionLogTool
 from miro_api.models.app_card_create_request import AppCardCreateRequest
 from miro_api.models.app_card_data import AppCardData
 from miro_api.models.app_card_data_changes import AppCardDataChanges
@@ -54,6 +61,7 @@ from miro_api.models.board_export_task_export_link import BoardExportTaskExportL
 from miro_api.models.board_export_task_result import BoardExportTaskResult
 from miro_api.models.board_format import BoardFormat
 from miro_api.models.board_item_content_log import BoardItemContentLog
+from miro_api.models.board_item_content_log_ai import BoardItemContentLogAI
 from miro_api.models.board_links import BoardLinks
 from miro_api.models.board_member import BoardMember
 from miro_api.models.board_member_changes import BoardMemberChanges
@@ -87,6 +95,11 @@ from miro_api.models.card_style_platformbulkcreateoperation import CardStylePlat
 from miro_api.models.card_update_request import CardUpdateRequest
 from miro_api.models.case_request import CaseRequest
 from miro_api.models.case_response import CaseResponse
+from miro_api.models.code_widget_create_request import CodeWidgetCreateRequest
+from miro_api.models.code_widget_cursor_paged import CodeWidgetCursorPaged
+from miro_api.models.code_widget_data import CodeWidgetData
+from miro_api.models.code_widget_item import CodeWidgetItem
+from miro_api.models.code_widget_update_request import CodeWidgetUpdateRequest
 from miro_api.models.connector_changes_data import ConnectorChangesData
 from miro_api.models.connector_creation_data import ConnectorCreationData
 from miro_api.models.connector_style import ConnectorStyle
@@ -102,6 +115,8 @@ from miro_api.models.create_document_item_using_file_from_device_request_data im
 from miro_api.models.create_frame_item400_response import CreateFrameItem400Response
 from miro_api.models.create_group_member_request import CreateGroupMemberRequest
 from miro_api.models.create_group_request import CreateGroupRequest
+from miro_api.models.create_group_resource import CreateGroupResource
+from miro_api.models.create_group_resource_members_inner import CreateGroupResourceMembersInner
 from miro_api.models.create_project_request import CreateProjectRequest
 from miro_api.models.create_project_user_groups_request import CreateProjectUserGroupsRequest
 from miro_api.models.create_team_group_request import CreateTeamGroupRequest
@@ -201,6 +216,7 @@ from miro_api.models.geometry_platformcreateitemsinbulkusingfilefromdevice impor
     GeometryPlatformcreateitemsinbulkusingfilefromdevice,
 )
 from miro_api.models.geometry_platformgroups import GeometryPlatformgroups
+from miro_api.models.get_ai_interaction_logs_response import GetAiInteractionLogsResponse
 from miro_api.models.get_all_groups200_response import GetAllGroups200Response
 from miro_api.models.get_all_groups400_response import GetAllGroups400Response
 from miro_api.models.get_all_groups404_response import GetAllGroups404Response
@@ -280,6 +296,7 @@ from miro_api.models.mindmap_node_text_data import MindmapNodeTextData
 from miro_api.models.mindmap_node_view import MindmapNodeView
 from miro_api.models.mindmap_style import MindmapStyle
 from miro_api.models.mindmap_widget_data_output import MindmapWidgetDataOutput
+from miro_api.models.miro_ai import MiroAi
 from miro_api.models.modified_by import ModifiedBy
 from miro_api.models.modified_by_platform_containers import ModifiedByPlatformContainers
 from miro_api.models.modified_by_platform_experimental_features import ModifiedByPlatformExperimentalFeatures
@@ -289,6 +306,7 @@ from miro_api.models.modified_by_platformcreateitemsinbulkusingfilefromdevice im
     ModifiedByPlatformcreateitemsinbulkusingfilefromdevice,
 )
 from miro_api.models.modified_by_platformgroups import ModifiedByPlatformgroups
+from miro_api.models.o_embed_data import OEmbedData
 from miro_api.models.organization import Organization
 from miro_api.models.organization_information import OrganizationInformation
 from miro_api.models.organization_member import OrganizationMember
@@ -415,7 +433,7 @@ from miro_api.models.text_data_platformbulkcreateoperation import TextDataPlatfo
 from miro_api.models.text_item import TextItem
 from miro_api.models.text_style import TextStyle
 from miro_api.models.text_update_request import TextUpdateRequest
-from miro_api.models.token_information import TokenInformation
+from miro_api.models.token_context import TokenContext
 from miro_api.models.un_group400_response import UnGroup400Response
 from miro_api.models.un_group404_response import UnGroup404Response
 from miro_api.models.un_group429_response import UnGroup429Response
@@ -446,6 +464,7 @@ from miro_api.models.user import User
 from miro_api.models.user_info_last_opened_by import UserInfoLastOpenedBy
 from miro_api.models.user_info_short import UserInfoShort
 from miro_api.models.user_information import UserInformation
+from miro_api.models.user_information1 import UserInformation1
 from miro_api.models.user_list_response import UserListResponse
 from miro_api.models.user_resource import UserResource
 from miro_api.models.user_resource_emails_inner import UserResourceEmailsInner

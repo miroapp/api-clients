@@ -24,6 +24,14 @@ export class Group {
    */
   'description'?: string
   /**
+   * Name of the user group in the external identity provider. Returned only for user groups that are managed externally.
+   */
+  'externalName'?: string
+  /**
+   * Indicates whether the Miro name of the user group is synchronized with its external name. When `true`, the `name` is kept in sync with `externalName`. When `false`, the `name` is managed in Miro independently and can differ from `externalName`. Returned only for user groups that are managed externally.
+   */
+  'externalNameSynced'?: boolean
+  /**
    * Object type
    */
   'type': string = 'user-group'
@@ -47,6 +55,16 @@ export class Group {
       name: 'description',
       baseName: 'description',
       type: 'string',
+    },
+    {
+      name: 'externalName',
+      baseName: 'externalName',
+      type: 'string',
+    },
+    {
+      name: 'externalNameSynced',
+      baseName: 'externalNameSynced',
+      type: 'boolean',
     },
     {
       name: 'type',
