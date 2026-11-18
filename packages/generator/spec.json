@@ -2979,7 +2979,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/updateUser400"
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -2988,10 +2988,10 @@
             "$ref": "#/components/responses/403"
           },
           "404": {
-            "$ref": "#/components/responses/updateUser404"
+            "$ref": "#/components/responses/404"
           },
           "409": {
-            "$ref": "#/components/responses/updateUser409"
+            "$ref": "#/components/responses/409"
           },
           "429": {
             "$ref": "#/components/responses/429"
@@ -3110,7 +3110,7 @@
             }
           },
           "400": {
-            "$ref": "#/components/responses/updateUser400"
+            "$ref": "#/components/responses/400"
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -3119,10 +3119,10 @@
             "$ref": "#/components/responses/403"
           },
           "404": {
-            "$ref": "#/components/responses/updateUser404"
+            "$ref": "#/components/responses/404"
           },
           "409": {
-            "$ref": "#/components/responses/updateUser409"
+            "$ref": "#/components/responses/409"
           },
           "429": {
             "$ref": "#/components/responses/429"
@@ -3176,10 +3176,10 @@
             "$ref": "#/components/responses/403"
           },
           "404": {
-            "$ref": "#/components/responses/deleteUser404"
+            "$ref": "#/components/responses/404"
           },
           "409": {
-            "$ref": "#/components/responses/deleteUser409"
+            "$ref": "#/components/responses/409"
           },
           "429": {
             "$ref": "#/components/responses/429"
